@@ -1,0 +1,160 @@
+local map = vim.keymap.set
+local cmd = vim.cmd
+
+--ZenMode
+map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
+
+--PackerSync
+map("n", "<Space>ps", ":PackerSync<CR>", { noremap = true, silent = true })
+
+--Harpoon
+-- map("n", "<Space>m", ":lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>h", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
+
+--Window
+-- map("n", "<Space>w", ":lua require('nvim-window').pick()<CR>", { silent = true })
+
+--Neogen
+-- map("n", "<Space>gf", ":lua require('neogen').generate({ type = 'func' })<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>gc", ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
+
+--Goto-preview
+map(
+  "n",
+  "<Space>d",
+  "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+  { noremap = true, silent = true }
+)
+map(
+  "n",
+  "<Space>r",
+  "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+  { noremap = true, silent = true }
+)
+map("n", "<Space>q", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true, silent = true })
+
+--Cheatsheet
+-- map("n", "<F12>", ":Cheatsheet<CR>", { noremap = truen, silent = true })
+
+--Treesj
+-- map("n", "<C-j>", function()
+--   require("treesj").toggle { split = { recursive = true } }
+-- end)
+
+--Neotree
+map("n", "<Bslash>f", ":NeoTreeRevealToggle<CR>", { noremap = true, silent = true })
+map("n", "<Bslash>g", ":Neotree float git_status<CR>", { noremap = true, silent = true })
+map("n", "<Tab><Tab>", ":Neotree float buffers<CR>", { noremap = true, silent = true })
+
+--Alter-toggle false -> true, 1 -> 0, !== -> ===
+map("n", "<S-i>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
+
+--Toggle-checkbox
+map("n", "<Space>tt", ":ToggleCheckbox<CR>", { noremap = true, silent = true })
+
+--Gitsigns toggle
+map("n", "<Space>gs", ":Gitsigns toggle_signs<CR>", { noremap = true, silent = true })
+
+--Hop
+local hop = require "hop"
+local directions = require("hop.hint").HintDirection
+map("", "f", function()
+  hop.hint_char1 { direction = directions.AFTER_CURSOR, current_line_only = false }
+end, { remap = true })
+map("", "F", function()
+  hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = false }
+end, { remap = true })
+map("", "t", function()
+  hop.hint_char1 { direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }
+end, { remap = true })
+map("", "T", function()
+  hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }
+end, { remap = true })
+
+--Floaterm
+map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
+map("n", "<F5>", ":FloatermNew! node %<CR>", { noremap = true, silent = true })
+
+--Iron
+-- map("n", "<Space>rs", ":IronRepl<CR>")
+-- map("n", "<Space>rf", ":IronFocus<CR>")
+
+--Trouble
+-- map("n", "<Space>p", ":TroubleToggle<CR>")
+
+--Hop
+map("n", "ff", ":HopChar2<CR>")
+
+--Mov to start/end of line
+map("i", "<C-s>", "<ESC>I")
+map("i", "<C-e>", "<ESC>A")
+
+--No highlight
+-- map("n", "<Space>h", ":noh<CR>", { noremap = true, silent = true })
+
+-- Always use very magic mode for searching
+map("n", "/", [[/\v]])
+
+--Escape -> jj
+map("i", "jj", "<Esc>", { nowait = true })
+map("i", "kk", "<Esc>", { nowait = true })
+map("t", "jj", "<C-Bslash><C-n>", { nowait = true })
+map("t", "kk", "<C-Bslash><C-n>", { nowait = true })
+map("t", "<Esc>", "<C-Bslash><C-n>", { nowait = true })
+
+--Open URL in browser (Windows
+-- vnoremap <silent> <C-F5> :<C-U>let old_reg=@"<CR>gvy:silent!!cmd /cstart <C-R><C-R>"<CR><CR>:let @"=old_reg<CR>
+map("n", "gx", ":silent !xdg-open <cfile><CR>", { noremap = true, silent = true }) -- Not work properly
+
+-- Linux https://www.reddit.com/r/neovim/comments/ro6oye/comment/hq2o7rc/?utm_source=share&utm_medium=web2x&context=3
+-- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
+
+--Plugins file
+map("n", "<F3>", ":tabnew ~/.config/nvim/lua/plugins.lua<CR>", { noremap = true, silent = true })
+
+--Source current file
+map("n", "<F4>", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true })
+
+--Tab navigation
+map("n", "<A-Left>", ":bprevious<CR>", { silent = true })
+map("n", "<A-Right>", ":bnext<CR>", { silent = true })
+-- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
+map("n", "<A-d>", "<cmd>bprevious <bar> bdelete #<cr>", { silent = true })
+map("n", "<A-q>", ":wqa<CR>", { silent = true })
+map("n", "<C-s>", "<cmd>w<CR><cmd>echo 'Saved'<CR>")
+map("n", "<A-w>", ":q<CR>", { silent = true })
+map("n", "<A-c>", ":bdelete<CR>", { silent = true })
+-- map("n", "<A-c>", ":BufferClose<CR>", { silent = true })
+-- map("n", "<A-d>", ":w <Bar> bdelete<CR>", { silent = true })
+
+--Resize tab
+map("n", "<C-Left>", ":vertical resize -10<CR>", { silent = true })
+map("n", "<C-Right>", ":vertical resize +10<CR>", { silent = true })
+
+--Move lines up and down
+map("n", "<S-Up>", ":m-2<CR>", { noremap = true, silent = true })
+map("n", "<S-Down>", ":m+<CR>", { noremap = true, silent = true })
+
+--Add lines above and below
+map("n", "<A-Up>", ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', { noremap = true, silent = true })
+map("n", "<A-Down>", ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { noremap = true, silent = true })
+
+-- Change current working directory locally and print cwd after that,
+-- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
+map("n", "<Space>cd", "<cmd>lcd %:p:h<CR><cmd>pwd<CR>")
+
+-- Copy entire buffer.
+map("n", "<Space>y", "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
+
+-- Do not move my cursor when joining lines.
+map("n", "J", function()
+  vim.cmd [[
+      normal! mzJ`z
+      delmarks z
+    ]]
+end, {
+  desc = "join line",
+})
+
+-- insert semicolon in the end
+map("i", "<A-;>", "<Esc>miA;<Esc>`ii")
