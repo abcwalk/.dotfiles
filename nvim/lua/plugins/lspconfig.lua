@@ -12,6 +12,8 @@ local servers = {
   "emmet_ls",
   "lua_ls",
   "bashls",
+  "clangd",
+  "taplo",
 }
 
 for _, lsp in ipairs(servers) do
@@ -24,6 +26,10 @@ for _, lsp in ipairs(servers) do
           },
         },
       },
+    })
+  elseif lsp == "clangd" then
+    lspconfig.clangd.setup(coq.lsp_ensure_capabilities {
+      cmd = { "clangd-14" },
     })
   else
     lspconfig[lsp].setup(coq.lsp_ensure_capabilities())

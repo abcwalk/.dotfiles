@@ -14,5 +14,6 @@ todo:
 - [x] session highlighting (grey)
 - [x] Mason problem
 - [ ] highlight html properly
-- [ ] signcolumn?
+- [x] signcolumn?
+- [x] brackets problem (<CR>)
 - [ ] migrate from packer to lazy

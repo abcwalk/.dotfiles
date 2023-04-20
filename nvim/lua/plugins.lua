@@ -17,9 +17,9 @@ return require("packer").startup(function(use)
 
   use {
     "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
+    -- config = function()
+    --   require("mason").setup()
+    -- end,
   }
 
   use { "nvim-tree/nvim-web-devicons" }
@@ -61,6 +61,18 @@ return require("packer").startup(function(use)
   --   end,
   -- }
   --
+
+  -- use {
+  --   "kosayoda/nvim-lightbulb",
+  --   requires = "antoinemadec/FixCursorHold.nvim",
+  --   config = function()
+  --     require("nvim-lightbulb").setup {
+  --       autocmd = { enabled = true, pattern = "*", events = { "CursorHold", "CursorHoldI" } },
+  --     }
+  --     vim.fn.sign_define("LightBulbSign", { text = "" })
+  --   end,
+  -- }
+
   use {
     "rmagatti/goto-preview",
     config = function()
@@ -136,9 +148,9 @@ return require("packer").startup(function(use)
 
   use {
     "windwp/nvim-autopairs",
-    config = function()
-      require "plugins.autopairs"
-    end,
+    -- config = function()
+    --   require "plugins.autopairs"
+    -- end,
   }
 
   --   "sudormrfbin/cheatsheet.nvim",
@@ -233,6 +245,7 @@ return require("packer").startup(function(use)
           "diagnosticls",
           "emmet_ls",
           "eslint",
+          "clangd",
           "html",
           "jsonls",
           "lua_ls",

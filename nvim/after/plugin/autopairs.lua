@@ -34,3 +34,4 @@ MUtils.BS = function()
   end
 end
 remap("i", "<bs>", "v:lua.MUtils.BS()", { expr = true, noremap = true })
+

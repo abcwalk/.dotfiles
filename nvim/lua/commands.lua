@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 --One statusline for split Terminal and buffer
-cmd "autocmd TermOpen * setlocal nonumber norelativenumber | set laststatus=3"
+-- cmd "autocmd TermOpen * setlocal nonumber norelativenumber | set laststatus=3"
 
 --Toggle-checkbox
 local checked_character = "x"
