@@ -57,6 +57,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --One statusline for split Terminal and buffer
 -- cmd "autocmd TermOpen * setlocal nonumber norelativenumber | set laststatus=3"
 
+--BUG Why signcolumn dont work properly?
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  callback = function()
+    vim.opt.signcolumn = "number"
+  end
+})
+
 --Toggle-checkbox
 local checked_character = "x"
 

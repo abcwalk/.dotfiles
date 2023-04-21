@@ -13,7 +13,7 @@ todo:
 - [x] hover.nvim
 - [x] session highlighting (grey)
 - [x] Mason problem
-- [ ] highlight html properly
 - [x] signcolumn?
 - [x] brackets problem (<CR>)
+- [ ] highlight html properly
 - [ ] migrate from packer to lazy

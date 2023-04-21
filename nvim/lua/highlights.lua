@@ -15,12 +15,13 @@ vim.api.nvim_set_hl(0, "NormalNC", { bg = "black" })
 vim.api.nvim_set_hl(0, "LineNr", { bg = "black", fg = "#A5A5A5" })
 vim.api.nvim_set_hl(0, "CursorLineNR", { fg = "#454545" })
 vim.api.nvim_set_hl(0, "CursorLineNR", { fg = "#454545" })
-vim.api.nvim_set_hl(0, "NonText", { bg = "black" })
+vim.api.nvim_set_hl(0, "NonText", { bg = "black", fg = Gray_color })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "black" })
 vim.api.nvim_set_hl(0, "StatusLine", { fg = "#c6c6c6" })
 vim.api.nvim_set_hl(0, "MsgArea", { fg = Gray_color })
 vim.api.nvim_set_hl(0, "Visual", { bg = "#0b1e33" })
-vim.api.nvim_set_hl(0, "IncSearch", { link = "Visual" })
+vim.api.nvim_set_hl(0, "IncSearch", { link = "@text.todo" })
+vim.api.nvim_set_hl(0, "Substitute", { link = "@text.todo" })
 vim.api.nvim_set_hl(0, "Search", { link = "@text.todo" })
 vim.api.nvim_set_hl(0, "NormalFloat", { fg = Main_color, bg = "black" })
 vim.api.nvim_set_hl(0, "Pmenu", { fg = Main_color, bg = "black" })
@@ -133,6 +134,9 @@ vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { fg = "#785705" })
 
 -- .zshrc >> export FZF_DEFAULT_OPTS="--color=bg+:#0b1e33,fg+:#4BA8FF,gutter:-1"
 vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { link = "@text.todo" })
+
+--Scheme icon
+vim.api.nvim_set_hl(0, "DevIconScheme", { fg = Red_color })
 
 --TreeSitter CSS
 --WARNING i dont know how it works
