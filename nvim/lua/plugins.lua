@@ -15,12 +15,12 @@ local packer_bootstrap = ensure_packer()
 return require("packer").startup(function(use)
   use { "wbthomason/packer.nvim" }
 
-  use {
-    "williamboman/mason.nvim",
+  -- use {
+  --   "williamboman/mason.nvim",
     -- config = function()
     --   require("mason").setup()
     -- end,
-  }
+  -- }
 
   use { "nvim-tree/nvim-web-devicons" }
 
@@ -62,16 +62,13 @@ return require("packer").startup(function(use)
   -- }
   --
 
-  -- use {
-  --   "kosayoda/nvim-lightbulb",
-  --   requires = "antoinemadec/FixCursorHold.nvim",
-  --   config = function()
-  --     require("nvim-lightbulb").setup {
-  --       autocmd = { enabled = true, pattern = "*", events = { "CursorHold", "CursorHoldI" } },
-  --     }
-  --     vim.fn.sign_define("LightBulbSign", { text = "" })
-  --   end,
-  -- }
+  use {
+    "kosayoda/nvim-lightbulb",
+    requires = "antoinemadec/FixCursorHold.nvim",
+    config = function()
+      require("plugins.lightbulb")
+    end,
+  }
 
   use {
     "rmagatti/goto-preview",
@@ -235,27 +232,27 @@ return require("packer").startup(function(use)
   -- typescript-language-server tsserver, tsserver
   -- yaml-language-server yamlls, yamlls
 
-  use {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup {
-        ensure_installed = {
-          "tsserver",
-          "cssls",
-          "diagnosticls",
-          "emmet_ls",
-          "eslint",
-          "clangd",
-          "html",
-          "jsonls",
-          "lua_ls",
-          "pyright",
-          "bashls",
-          "yamlls",
-        },
-      }
-    end,
-  }
+  -- use {
+  --   "williamboman/mason-lspconfig.nvim",
+  --   config = function()
+  --     require("mason-lspconfig").setup {
+  --       ensure_installed = {
+  --         "tsserver",
+  --         "cssls",
+  --         "diagnosticls",
+  --         "emmet_ls",
+  --         "eslint",
+  --         -- "clangd",
+  --         "html",
+  --         "jsonls",
+  --         "lua_ls",
+  --         "pyright",
+  --         "bashls",
+  --         "yamlls",
+  --       },
+  --     }
+  --   end,
+  -- }
 
   use {
     "neovim/nvim-lspconfig",
@@ -263,6 +260,21 @@ return require("packer").startup(function(use)
       require "plugins.lspconfig"
     end,
   }
+
+  -- bash-language-server bashls
+  -- clang-format
+  -- cpplint
+  -- css-lsp cssls
+  -- diagnostic-languageserver diagnosticls
+  -- emmet-ls emmet_ls
+  -- eslint-lsp eslint
+  -- html-lsp html
+  -- json-lsp jsonls
+  -- lua-language-server lua_ls
+  -- pyright
+  -- typescript-language-server tsserver
+  -- yaml-language-server yamlls
+
 
   use { "ms-jpq/coq_nvim", branch = "coq", run = "python3 -m coq deps" }
 
@@ -289,6 +301,7 @@ return require("packer").startup(function(use)
           "comment",
           "regex",
         },
+        auto_install = true,
         highlight = {
           enable = true,
         },
@@ -325,7 +338,7 @@ return require("packer").startup(function(use)
             end
           end)
         )
-        table.insert(segments, " [%{&ff}] %p%%")
+        -- table.insert(segments, " [%{&ff}] %p%%")
         return segments
       end
       require("el").setup { generator = generator }

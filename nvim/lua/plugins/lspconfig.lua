@@ -74,14 +74,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
---Disable inline error text
-vim.diagnostic.config {
-  virtual_text = false,
-  underline = false,
-}
-
 --Enable borders in floating windows (diagnostics)
-
 local _border = "single"
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -92,6 +85,14 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
   border = _border,
 })
 
+--Disable inline error text
 vim.diagnostic.config {
+  virtual_text = false,
+  underline = false,
   float = { border = _border },
+  signs = true,
+  update_in_insert = false,
 }
+
+--Auto open float diagnostics
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]

@@ -125,3 +125,4 @@ export PATH="$HOME/.cargo/bin:$PATH"
 . "$HOME/.cargo/env"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"
