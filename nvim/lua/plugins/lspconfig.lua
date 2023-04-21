@@ -85,6 +85,13 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
   border = _border,
 })
 
+--DiagnosticSign's priority
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    severity_sort = true
+  }
+)
+
 --Disable inline error text
 vim.diagnostic.config {
   virtual_text = false,
@@ -93,6 +100,16 @@ vim.diagnostic.config {
   signs = true,
   update_in_insert = false,
 }
+
+--Clang
+local notify = vim.notify
+vim.notify = function(msg, ...)
+  if msg:match("warning: multiple different client offset_encodings") then
+    return
+  end
+
+  notify(msg, ...)
+end
 
 --Auto open float diagnostics
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]

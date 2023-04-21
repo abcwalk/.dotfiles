@@ -47,7 +47,7 @@ map("n", "<Bslash>g", ":Neotree float git_status<CR>", { noremap = true, silent 
 map("n", "<Tab><Tab>", ":Neotree float buffers<CR>", { noremap = true, silent = true })
 
 --Alter-toggle false -> true, 1 -> 0, !== -> ===
-map("n", "<S-i>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
+map("n", "<C-i>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
 
 --Toggle-checkbox
 map("n", "<Space>tt", ":ToggleCheckbox<CR>", { noremap = true, silent = true })
