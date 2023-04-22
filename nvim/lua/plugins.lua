@@ -66,7 +66,7 @@ return require("packer").startup(function(use)
     "kosayoda/nvim-lightbulb",
     requires = "antoinemadec/FixCursorHold.nvim",
     config = function()
-      require("plugins.lightbulb")
+      require("config.lightbulb")
     end,
   }
 
@@ -146,7 +146,7 @@ return require("packer").startup(function(use)
   use {
     "windwp/nvim-autopairs",
     -- config = function()
-    --   require "plugins.autopairs"
+    --   require "config.autopairs"
     -- end,
   }
 
@@ -172,7 +172,7 @@ return require("packer").startup(function(use)
   use {
     "brenoprata10/nvim-highlight-colors",
     config = function()
-      require "plugins.colors"
+      require "config.colors"
     end,
   }
 
@@ -232,33 +232,21 @@ return require("packer").startup(function(use)
   -- typescript-language-server tsserver, tsserver
   -- yaml-language-server yamlls, yamlls
 
-  -- use {
-  --   "williamboman/mason-lspconfig.nvim",
-  --   config = function()
-  --     require("mason-lspconfig").setup {
-  --       ensure_installed = {
-  --         "tsserver",
-  --         "cssls",
-  --         "diagnosticls",
-  --         "emmet_ls",
-  --         "eslint",
-  --         -- "clangd",
-  --         "html",
-  --         "jsonls",
-  --         "lua_ls",
-  --         "pyright",
-  --         "bashls",
-  --         "yamlls",
-  --       },
-  --     }
-  --   end,
-  -- }
-
   use {
     "neovim/nvim-lspconfig",
+    wants = {
+      "mason.nvim",
+      "mason-lspconfig.nvim",
+      "mason-tool-installer.nvim",
+    },
     config = function()
-      require "plugins.lspconfig"
+      require("config.lsp.init").setup()
     end,
+    requires = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    }
   }
 
   -- bash-language-server bashls
@@ -317,7 +305,31 @@ return require("packer").startup(function(use)
   use {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
-      require "plugins.null_ls"
+      require "config.null_ls"
+    end,
+  }
+
+  use {
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+  }
+
+  use { 'mfussenegger/nvim-dap' }
+
+  use {
+    "rcarriga/nvim-dap-ui",
+    requires = { "mfussenegger/nvim-dap" },
+    config = function()
+      require("dapui").setup()
+    end
+  }
+
+  use {
+    "mxsdev/nvim-dap-vscode-js",
+    requires = { "mfussenegger/nvim-dap" },
+    config = function()
+      require('config.dap.init')
     end,
   }
 
@@ -348,7 +360,7 @@ return require("packer").startup(function(use)
 
   --   "nvim-lualine/lualine.nvim",
   --   config = function()
-  --     require "plugins.lualine"
+  --     require "config.lualine"
   --   end,
   -- }
 
@@ -357,7 +369,7 @@ return require("packer").startup(function(use)
   -- use {
   --   "hkupty/iron.nvim",
   --   config = function()
-  --     require "plugins.iron"
+  --     require "config.iron"
   --   end,
   -- }
 
@@ -466,18 +478,18 @@ return require("packer").startup(function(use)
   use {
     "lewis6991/gitsigns.nvim",
     config = function()
-      require "plugins.gitsigns"
+      require "config.gitsigns"
     end,
   }
 
-  -- use {
-  --   "danymat/neogen",
-  --   config = function()
-  --     require("neogen").setup {
-  --       enabled = true,
-  --     }
-  --   end,
-  -- }
+  use {
+    "danymat/neogen",
+    config = function()
+      require("neogen").setup {
+        enabled = true,
+      }
+    end,
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -15,8 +15,8 @@ map("n", "<Space>ps", ":PackerSync<CR>", { noremap = true, silent = true })
 -- map("n", "<Space>w", ":lua require('nvim-window').pick()<CR>", { silent = true })
 
 --Neogen
--- map("n", "<Space>gf", ":lua require('neogen').generate({ type = 'func' })<CR>", { noremap = true, silent = true })
--- map("n", "<Space>gc", ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
+map("n", "<Space>gf", ":lua require('neogen').generate({ type = 'func' })<CR>", { noremap = true, silent = true })
+map("n", "<Space>gc", ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
 
 --Goto-preview
 map(
