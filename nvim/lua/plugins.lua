@@ -17,9 +17,9 @@ return require("packer").startup(function(use)
 
   -- use {
   --   "williamboman/mason.nvim",
-    -- config = function()
-    --   require("mason").setup()
-    -- end,
+  -- config = function()
+  --   require("mason").setup()
+  -- end,
   -- }
 
   use { "nvim-tree/nvim-web-devicons" }
@@ -329,16 +329,17 @@ return require("packer").startup(function(use)
       local generator = function(_window, buffer)
         local segments = {}
         table.insert(segments, extensions.mode)
+        table.insert(segments, "%=")
         table.insert(
           segments,
           subscribe.buf_autocmd("el_git_branch", "BufEnter", function(window, buffer)
             local branch = extensions.git_branch(window, buffer)
             if branch then
-              return "%=" .. branch
+              return "" .. branch
             end
           end)
         )
-        -- table.insert(segments, " [%{&ff}] %p%%")
+        table.insert(segments, " [%{&ff}]")
         return segments
       end
       require("el").setup { generator = generator }

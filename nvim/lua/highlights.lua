@@ -99,10 +99,14 @@ vim.api.nvim_set_hl(0, "@c.function_identifier", { link = "@function" })
 --   Debug    debugging statements
 
 --Diagnostic
-vim.api.nvim_set_hl(0, "DiagnosticError", { fg = Red_color })
-vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = Yellow_color })
-vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = Gray_color })
-vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = Main_color })
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = Red_color })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = Yellow_color })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = Gray_color })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = Main_color })
+vim.api.nvim_set_hl(0, "DiagnosticError", { link = "DiagnosticSignError" })
+vim.api.nvim_set_hl(0, "DiagnosticWarn", { link = "DiagnosticSignWarn" })
+vim.api.nvim_set_hl(0, "DiagnosticHint", { link = "DiagnosticSignHint" })
+vim.api.nvim_set_hl(0, "DiagnosticInfo", { link = "DiagnosticSignInfo" })
 vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#122f2f" })
 vim.api.nvim_set_hl(0, "DiffAdded", { link = "@text.todo" })
 vim.api.nvim_set_hl(0, "DiffChange", { bg = "#222a39" })

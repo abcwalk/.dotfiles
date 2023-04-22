@@ -47,7 +47,7 @@ map("n", "<Bslash>g", ":Neotree float git_status<CR>", { noremap = true, silent 
 map("n", "<Tab><Tab>", ":Neotree float buffers<CR>", { noremap = true, silent = true })
 
 --Alter-toggle false -> true, 1 -> 0, !== -> ===
-map("n", "<C-i>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
+map("n", "<M-r>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
 
 --Toggle-checkbox
 map("n", "<Space>tt", ":ToggleCheckbox<CR>", { noremap = true, silent = true })
@@ -73,7 +73,7 @@ end, { remap = true })
 
 --Floaterm
 map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
-map("n", "<F5>", ":FloatermNew! node %<CR>", { noremap = true, silent = true })
+map("n", "<F5>", "<cmd>w<CR><cmd>echo 'Saved'<CR><cmd>FloatermNew! node %<CR>", { noremap = true, silent = true })
 
 --Iron
 -- map("n", "<Space>rs", ":IronRepl<CR>")
@@ -157,4 +157,4 @@ end, {
 })
 
 -- insert semicolon in the end
-map("i", "<A-;>", "<Esc>miA;<Esc>`ii")
+map("i", "<A-;>", "<Esc>A;<Esc>i");

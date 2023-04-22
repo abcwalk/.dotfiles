@@ -85,13 +85,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
   border = _border,
 })
 
---DiagnosticSign's priority
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    severity_sort = true
-  }
-)
-
 --Disable inline error text
 vim.diagnostic.config {
   virtual_text = false,
@@ -99,6 +92,7 @@ vim.diagnostic.config {
   float = { border = _border },
   signs = true,
   update_in_insert = false,
+    severity_sort = true
 }
 
 --Clang
