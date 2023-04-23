@@ -1,7 +1,11 @@
-local dap, dapui = require("dap"), require("dapui")
+local dap, dapui, dap_vscode_js = require("dap"), require("dapui"), require("dap-vscode-js")
+
+dap.set_log_level('INFO')
+
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
+--WARNING Autoclose prevent
 -- dap.listeners.before.event_terminated["dapui_config"] = function()
 --   dapui.close()
 -- end
@@ -9,8 +13,8 @@ end
 --   dapui.close()
 -- end
 
-require("dap-vscode-js").setup({
-  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+dap_vscode_js.setup({
+  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
 })
 
 for _, language in ipairs({ "typescript", "javascript" }) do
@@ -31,3 +35,12 @@ for _, language in ipairs({ "typescript", "javascript" }) do
     },
   }
 end
+
+-- dap.adapters.go = {
+--   type = "server",
+--   port = "${port}",
+--   executable = {
+--     command = vim.fn.stdpath("data") .. '/mason/bin/dlv',
+--     args = { "dap", "-l", "127.0.0.1:${port}" },
+--   },
+-- }

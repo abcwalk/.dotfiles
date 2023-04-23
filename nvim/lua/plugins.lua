@@ -347,7 +347,7 @@ return require("packer").startup(function(use)
           subscribe.buf_autocmd("el_git_branch", "BufEnter", function(window, buffer)
             local branch = extensions.git_branch(window, buffer)
             if branch then
-              return "" .. branch
+              return " " .. branch
             end
           end)
         )
