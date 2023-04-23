@@ -1,11 +1,13 @@
 local map = vim.keymap.set
 local cmd = vim.cmd
+local dap = require("dap")
+local dapui = require("dapui")
 
 --ZenMode
 map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
 
 --PackerSync
-map("n", "<Space>ps", ":PackerSync<CR>", { noremap = true, silent = true })
+map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
 
 --Harpoon
 -- map("n", "<Space>m", ":lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
@@ -73,7 +75,7 @@ end, { remap = true })
 
 --Floaterm
 map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
-map("n", "<F5>", "<cmd>w<CR><cmd>echo 'Saved'<CR><cmd>FloatermNew! node %<CR>", { noremap = true, silent = true })
+-- map("n", "<F5>", "<cmd>w<CR><cmd>echo 'Saved'<CR><cmd>FloatermNew! node %<CR>", { noremap = true, silent = true })
 
 --Iron
 -- map("n", "<Space>rs", ":IronRepl<CR>")
@@ -113,7 +115,7 @@ map("n", "gx", ":silent !xdg-open <cfile><CR>", { noremap = true, silent = true 
 map("n", "<F3>", ":tabnew ~/.config/nvim/lua/plugins.lua<CR>", { noremap = true, silent = true })
 
 --Source current file
-map("n", "<F12>", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true })
+map("n", "<Space>s", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
 --Tab navigation
 map("n", "<A-Left>", ":bprevious<CR>", { silent = true })
@@ -158,3 +160,15 @@ end, {
 
 -- insert semicolon in the end
 map("i", "<A-;>", "<Esc>A;<Esc>i");
+
+--Dap
+map('n', '<F5>', dap.continue)
+map('n', '<F10>', dap.step_over)
+map('n', '<F11>', dap.step_into)
+map('n', '<F12>', dap.step_out)
+map('n', '<Space>b', dap.toggle_breakpoint)
+map("n", "<Space>cb", dap.clear_breakpoints)
+map("n", "<Space>dd", dap.disconnect)
+
+--Dapui
+map('n', "<Space>du", dapui.toggle)

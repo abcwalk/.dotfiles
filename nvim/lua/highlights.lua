@@ -142,10 +142,9 @@ vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { link = "@text.todo" })
 --Scheme icon
 vim.api.nvim_set_hl(0, "DevIconScheme", { fg = Red_color })
 
---DAP-UI
-vim.fn.sign_define('DapBreakpoint', { text = '•', texthl = "#960019", linehl = '', numhl = '' })
-vim.fn.sign_define('DapStopped', { text = '▶️', texthl = "#369432", linehl = '', numhl = '' })
-
+--Dapui
+vim.fn.sign_define('DapBreakpoint', { text = '', texthl = "Error", linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '▶️', texthl = "String", linehl = '', numhl = '' })
 
 --TreeSitter CSS
 --WARNING i dont know how it works

@@ -42,7 +42,7 @@ function M.setup()
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
   vim.keymap.set("n", "<Space>of", vim.diagnostic.open_float)
-  vim.keymap.set("n", "<Space>p", vim.diagnostic.setloclist)
+  -- vim.keymap.set("n", "<Space>p", vim.diagnostic.setloclist)
 
   vim.keymap.set("n", "<Space>e", function()
     vim.diagnostic.setloclist { open = false } -- don't open and focus
