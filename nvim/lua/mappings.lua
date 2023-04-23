@@ -163,18 +163,22 @@ map("i", "<A-;>", "<Esc>A;<Esc>i");
 
 --Dap
 map('n', '<F5>', function()
-  cmd("w")
+  cmd("silent w")
   dap.continue()
 end)
 map('n', '<F10>', dap.step_over)
 map('n', '<F11>', dap.step_into)
 map('n', '<F12>', dap.step_out)
 map('n', '<Space>b', dap.toggle_breakpoint)
-map("n", "<Space>cb", dap.clear_breakpoints)
+map("n", "<Space>cb", function()
+  dap.clear_breakpoints()
+  cmd("echo 'Breakpoints cleared'")
+end)
 map("n", "<Space>dd", dap.terminate)
 map("n", "<Space>dl", function()
-  cmd("w")
+  cmd("silent w")
   dap.run_last()
+  cmd("echo 'Running last session'")
 end)
 
 --Dapui

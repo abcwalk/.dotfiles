@@ -144,8 +144,7 @@ vim.api.nvim_set_hl(0, "DevIconScheme", { fg = Red_color })
 
 --Dapui
 vim.fn.sign_define('DapBreakpoint', { text = '', texthl = "Error", linehl = '', numhl = '' })
-vim.fn.sign_define('DapStopped', { text = '', texthl = "String", linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '', texthl = "@text.warning", linehl = '', numhl = '' })
 
---TreeSitter CSS
 --WARNING i dont know how it works
 -- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")-- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")
