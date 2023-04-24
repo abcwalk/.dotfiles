@@ -115,7 +115,7 @@ map("n", "gx", ":silent !xdg-open <cfile><CR>", { noremap = true, silent = true 
 map("n", "<F3>", ":tabnew ~/.config/nvim/lua/plugins.lua<CR>", { noremap = true, silent = true })
 
 --Source current file
-map("n", "<Space>s", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
+map("n", "<Space>ss", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
 --Tab navigation
 map("n", "<A-Left>", ":bprevious<CR>", { silent = true })

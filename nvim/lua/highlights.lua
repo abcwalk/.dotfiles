@@ -146,5 +146,10 @@ vim.api.nvim_set_hl(0, "DevIconScheme", { fg = Red_color })
 vim.fn.sign_define('DapBreakpoint', { text = '', texthl = "Error", linehl = '', numhl = '' })
 vim.fn.sign_define('DapStopped', { text = '', texthl = "@text.warning", linehl = '', numhl = '' })
 
+--Illuminate
+vim.api.nvim_set_hl(0, "IlluminatedWordText", { underline = false })
+vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { underline = false })
+vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#081421", underline = false })
+
 --WARNING i dont know how it works
 -- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")-- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")

@@ -447,13 +447,15 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use {
-    "echasnovski/mini.cursorword",
-    branch = "stable",
-    config = function()
-      require("mini.cursorword").setup()
-    end,
-  }
+  use { "RRethy/vim-illuminate" }
+
+  -- use {
+  --   "echasnovski/mini.cursorword",
+  --   branch = "stable",
+  --   config = function()
+  --     require("mini.cursorword").setup()
+  --   end,
+  -- }
 
   -- use {
   --   "lukas-reineke/indent-blankline.nvim",
