@@ -1,4 +1,4 @@
-vim.cmd "colorscheme coal"
+vim.cmd [[colorscheme coal]]
 
 local Main_color = "#80a6ed"
 local Type_color = "#4EC9B0"
@@ -29,11 +29,12 @@ vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#0b1e33" })
 vim.api.nvim_set_hl(0, "PmenuThumb", { bg = Gray_color })
 vim.api.nvim_set_hl(0, "ModeMsg", { fg = Main_color, bg = "black" })
 vim.api.nvim_set_hl(0, "TabLineSel", { fg = Main_color, bg = "black" })
-vim.api.nvim_set_hl(0, "WarningMsg", { fg = Main_color, bg = "black" })
+vim.api.nvim_set_hl(0, "WarningMsg", { fg = Yellow_color, bg = "black" })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = Function_color, bg = "black" })
 vim.api.nvim_set_hl(0, "MatchParen", { bg = "black", fg = Red_color, underline = true })
 vim.api.nvim_set_hl(0, "Title", { link = "Pmenu" })
 vim.api.nvim_set_hl(0, "Comment", { fg = "#454545", italic = true })
+vim.api.nvim_set_hl(0, "Directory", { fg = "#c6c6c6" })
 
 --To-do
 vim.api.nvim_set_hl(0, "Todo", { fg = "#4BA8FF", bg = "#0b1e33" })
@@ -60,10 +61,12 @@ vim.api.nvim_set_hl(0, "@text.todo.checked", { link = "@checked_list_item" })
 vim.api.nvim_set_hl(0, "@keyword", { fg = Main_color })
 vim.api.nvim_set_hl(0, "@function", { fg = Function_color })
 vim.api.nvim_set_hl(0, "@method", { link = "@function" })
+-- vim.api.nvim_set_hl(0, "@field", { link = "@function" }) -- links to Identifier
+vim.api.nvim_set_hl(0, "Identifier", { fg = "#c6c6c6" })
 vim.api.nvim_set_hl(0, "@constructor", { link = "@function" })
 vim.api.nvim_set_hl(0, "@property", { fg = Main_color })
 vim.api.nvim_set_hl(0, "@conditional", { fg = Gray_color })
-vim.api.nvim_set_hl(0, "@exception", { fg = "#1c497a" })
+vim.api.nvim_set_hl(0, "@exception", { fg = Red_color })
 vim.api.nvim_set_hl(0, "@repeat", { link = "@conditional" })
 vim.api.nvim_set_hl(0, "@type", { fg = Type_color })
 vim.api.nvim_set_hl(0, "@label", { link = "@keyword" })
@@ -72,6 +75,8 @@ vim.api.nvim_set_hl(0, "@variable.builtin", { fg = Gray_color })
 vim.api.nvim_set_hl(0, "Number", { fg = "#225a99" })
 vim.api.nvim_set_hl(0, "String", { fg = Green_color })
 vim.api.nvim_set_hl(0, "Error", { fg = Red_color })
+vim.api.nvim_set_hl(0, "ErrorMsg", { link = "Error" })
+vim.api.nvim_set_hl(0, "@operator", { link = "@variable" })
 vim.api.nvim_set_hl(0, "Boolean", { link = "String" })
 vim.api.nvim_set_hl(0, "Float", { link = "Number" })
 vim.api.nvim_set_hl(0, "SpecialChar", { fg = "#967bb6" })          --\n \r RegExp
@@ -131,7 +136,8 @@ vim.api.nvim_set_hl(0, "NeoTreeModified", { fg = Main_color })
 vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { fg = Main_color })
 vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = "#7a7a7a" })
 vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { fg = "black" })
-vim.api.nvim_set_hl(0, "NeoTreeRootName", { fg = "#4BA8FF", bold = true, italic = true })
+vim.api.nvim_set_hl(0, "NeoTreeRootName", { fg = Green_color, bold = true, italic = true })
+vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#c6c6c6" })
 
 vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", { fg = Yellow_color })
 vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { fg = "#785705" })
@@ -145,11 +151,13 @@ vim.api.nvim_set_hl(0, "DevIconScheme", { fg = Red_color })
 --Dapui
 vim.fn.sign_define('DapBreakpoint', { text = '', texthl = "Error", linehl = '', numhl = '' })
 vim.fn.sign_define('DapStopped', { text = '', texthl = "@text.warning", linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = "Error", linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = '', texthl = "Error", linehl = '', numhl = '' })
 
 --Illuminate
-vim.api.nvim_set_hl(0, "IlluminatedWordText", { underline = false })
-vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { underline = false })
-vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#081421", underline = false })
+vim.cmd "hi IlluminatedWordText term=NONE gui=NONE"
+vim.cmd "hi IlluminatedWordWrite term=NONE gui=NONE"
+vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#0d2538", underline = false })
 
 --WARNING i dont know how it works
 -- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")-- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")

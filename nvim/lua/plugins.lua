@@ -48,8 +48,6 @@ return require("packer").startup(function(use)
 
   use { "nvim-treesitter/playground" }
 
-  -- use { "ThePrimeagen/harpoon" }
-
   use { "nvim-telescope/telescope.nvim" }
 
   -- use {
@@ -417,6 +415,8 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- use { "ThePrimeagen/harpoon" }
+
   use { "ibhagwan/fzf-lua" }
 
   use {
@@ -447,7 +447,11 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use { "RRethy/vim-illuminate" }
+  use { "RRethy/vim-illuminate",
+    require('illuminate').configure {
+      min_count_to_highlight = 2,
+    }
+  }
 
   -- use {
   --   "echasnovski/mini.cursorword",
@@ -484,15 +488,15 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use {
-    "danymat/neogen",
-    config = function()
-      require("neogen").setup {
-        enabled = true,
-      }
-    end,
-  }
-
+  -- use {
+  --   "danymat/neogen",
+  --   config = function()
+  --     require("neogen").setup {
+  --       enabled = true,
+  --     }
+  --   end,
+  -- }
+  --
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

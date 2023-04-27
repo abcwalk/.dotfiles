@@ -10,8 +10,9 @@ map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
 map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
 
 --Harpoon
--- map("n", "<Space>m", ":lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
--- map("n", "<Space>h", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
+map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
+  { noremap = true, silent = true })
+map("n", "<Bslash><Bslash>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
 
 --Window
 -- map("n", "<Space>w", ":lua require('nvim-window').pick()<CR>", { silent = true })
@@ -112,7 +113,7 @@ map("n", "gx", ":silent !xdg-open <cfile><CR>", { noremap = true, silent = true 
 -- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
 
 --Plugins file
-map("n", "<F3>", ":tabnew ~/.config/nvim/lua/plugins.lua<CR>", { noremap = true, silent = true })
+map("n", "<F3>", ":e ~/.config/nvim/lua/plugins.lua<CR>", { noremap = true, silent = true })
 
 --Source current file
 map("n", "<Space>ss", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
@@ -163,6 +164,7 @@ map("i", "<A-;>", "<Esc>A;<Esc>i");
 
 --Dap
 map('n', '<F5>', function()
+  cmd("Neotree close")
   cmd("silent w")
   dap.continue()
 end)
@@ -180,6 +182,7 @@ map("n", "<Space>dl", function()
   dap.run_last()
   cmd("echo 'Running last session'")
 end)
+map('n', '<Space>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 
 --Dapui
 map('n', "<Space>du", dapui.toggle)

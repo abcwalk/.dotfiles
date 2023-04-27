@@ -18,14 +18,22 @@ dap_vscode_js.setup({
 })
 
 for _, language in ipairs({ "typescript", "javascript" }) do
-  require("dap").configurations[language] = {
+  dap.configurations[language] = {
     {
-      type = "pwa-node",
-      request = "launch",
       name = "Launch file",
+      request = "launch",
+      type = "pwa-node",
       program = "${file}",
       cwd = "${workspaceFolder}",
     },
+    {
+      name = "Launch file (with Logger)",
+      type = "pwa-node",
+      request = "launch",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+    },
+
     -- {
     --   type = "pwa-node",
     --   request = "attach",

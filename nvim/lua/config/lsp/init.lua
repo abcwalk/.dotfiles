@@ -15,8 +15,8 @@ function M.setup()
     "emmet_ls",
     "lua_ls",
     "bashls",
-    -- "clangd",
     "taplo",
+    "clangd",
   }
 
   for _, lsp in ipairs(servers) do
