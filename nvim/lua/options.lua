@@ -37,7 +37,21 @@ opt.grepprg = "rg --vimgrep"
 opt.autoindent = true
 opt.splitright = true
 opt.splitbelow = true
+
+vim.g.clipboard = {
+ name = "xsel",
+ copy = {
+  ["+"] = "xsel --nodetach -i -b",
+  ["*"] = "xsel --nodetach -i -p",
+ },
+ paste = {
+  ["+"] = "xsel  -o -b",
+  ["*"] = "xsel  -o -b",
+ },
+ cache_enabled = 1,
+}
 opt.clipboard = "unnamedplus"
+
 opt.wildmenu = true
 opt.wildignorecase = true --Show matching brackets
 opt.showmatch = true

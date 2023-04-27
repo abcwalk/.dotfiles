@@ -1,6 +1,6 @@
--- local M = {}
+local M = {}
 
--- function M.setup()
+function M.setup()
 local lspconfig = require "lspconfig"
 
 -- vim.g.coq_settings = { auto_start = "shut-up" }
@@ -121,7 +121,7 @@ vim.notify = function(msg, ...)
   notify(msg, ...)
 end
 
---   require("config.lsp.installer").setup(servers)
--- end
---
--- return M
+  require("config.lsp.installer").setup(servers)
+end
+
+return M

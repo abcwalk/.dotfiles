@@ -39,7 +39,8 @@ return require("packer").startup(function(use)
 
   -- use { "kkga/vim-envy" }
 
-  use { "nvim-treesitter/playground" }
+  -- use { "nvim-treesitter/playground" }
+
 
   use { "nvim-telescope/telescope.nvim" }
 
@@ -232,19 +233,19 @@ return require("packer").startup(function(use)
 
   use {
     "neovim/nvim-lspconfig",
-    -- wants = {
-    --   "mason.nvim",
-    --   "mason-lspconfig.nvim",
-    --   "mason-tool-installer.nvim",
-    -- },
+    wants = {
+      "mason.nvim",
+      "mason-lspconfig.nvim",
+      "mason-tool-installer.nvim",
+    },
     config = function()
-      require("config.lsp.init")
+      require("config.lsp.init").setup()
     end,
-    -- requires = {
-    --   "williamboman/mason.nvim",
-    --   "williamboman/mason-lspconfig.nvim",
-    --   "WhoIsSethDaniel/mason-tool-installer.nvim",
-    -- }
+    requires = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    }
   }
 
   -- bash-language-server bashls
