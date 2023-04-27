@@ -15,13 +15,6 @@ local packer_bootstrap = ensure_packer()
 return require("packer").startup(function(use)
   use { "wbthomason/packer.nvim" }
 
-  -- use {
-  --   "williamboman/mason.nvim",
-  -- config = function()
-  --   require("mason").setup()
-  -- end,
-  -- }
-
   use { "nvim-tree/nvim-web-devicons" }
 
   use { "nvim-lua/plenary.nvim" }
@@ -239,19 +232,19 @@ return require("packer").startup(function(use)
 
   use {
     "neovim/nvim-lspconfig",
-    wants = {
-      "mason.nvim",
-      "mason-lspconfig.nvim",
-      "mason-tool-installer.nvim",
-    },
+    -- wants = {
+    --   "mason.nvim",
+    --   "mason-lspconfig.nvim",
+    --   "mason-tool-installer.nvim",
+    -- },
     config = function()
-      require("config.lsp.init").setup()
+      require("config.lsp.init")
     end,
-    requires = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-    }
+    -- requires = {
+    --   "williamboman/mason.nvim",
+    --   "williamboman/mason-lspconfig.nvim",
+    --   "WhoIsSethDaniel/mason-tool-installer.nvim",
+    -- }
   }
 
   -- bash-language-server bashls
