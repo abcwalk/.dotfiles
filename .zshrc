@@ -79,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
@@ -110,3 +110,12 @@ export EDITOR="$VISUAL"
 export FZF_DEFAULT_OPTS="--color=bg+:#0b1e33,fg+:#4BA8FF,gutter:-1"
 alias luamake=/home/nonh/Загрузки/lua-language-server/3rd/luamake/luamake
 export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"
+
+keep_current_path() {
+  printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
+}
+precmd_functions+=(keep_current_path)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

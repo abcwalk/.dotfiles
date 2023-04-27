@@ -35,11 +35,7 @@ function M.setup()
         cmd = { "clangd-14" },
       }
     else
-      lspconfig[lsp].setup {
-        flags = {
-          debounce_text_changes = 150,
-        }
-      }
+      lspconfig[lsp].setup({})
     end
   end
 
@@ -51,8 +47,8 @@ function M.setup()
   vim.keymap.set("n", "<Space>e", function()
     vim.diagnostic.setloclist { open = false } -- don't open and focus
     local window = vim.api.nvim_get_current_win()
-    vim.cmd.lwindow()                        -- open+focus loclist if has entries, else close -- this is the magic toggle command
-    vim.api.nvim_set_current_win(window)     -- restore focus to window you were editing (delete this if you want to stay in loclist)
+    vim.cmd.lwindow()                          -- open+focus loclist if has entries, else close -- this is the magic toggle command
+    vim.api.nvim_set_current_win(window)       -- restore focus to window you were editing (delete this if you want to stay in loclist)
   end, { buffer = bunr })
 
   -- Use LspAttach autocommand to only map the following keys
@@ -96,6 +92,7 @@ function M.setup()
   vim.diagnostic.config {
     virtual_text = false,
     underline = false,
+    signs = true,
     float = { border = _border },
     update_in_insert = false,
     severity_sort = true
@@ -123,9 +120,6 @@ function M.setup()
 
     notify(msg, ...)
   end
-
-  --Auto open float diagnostics
-  vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
   require("config.lsp.installer").setup(servers)
 end
