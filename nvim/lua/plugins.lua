@@ -28,7 +28,7 @@ return require("packer").startup(function(use)
 
   use { "stevearc/dressing.nvim" }
 
-  use { "sindrets/diffview.nvim" }
+  -- use { "sindrets/diffview.nvim" }
 
   use { "tpope/vim-surround" }
 
@@ -40,13 +40,13 @@ return require("packer").startup(function(use)
 
   -- use { "romgrk/barbar.nvim" }
 
-  use { "voldikss/vim-floaterm" }
+  -- use { "voldikss/vim-floaterm" }
 
   -- use { "dstein64/vim-startuptime" }
 
   -- use { "kkga/vim-envy" }
 
-  use { "nvim-treesitter/playground" }
+  -- use { "nvim-treesitter/playground" }
 
   use { "nvim-telescope/telescope.nvim" }
 
@@ -60,20 +60,20 @@ return require("packer").startup(function(use)
   -- }
   --
 
-  use {
-    "kosayoda/nvim-lightbulb",
-    requires = "antoinemadec/FixCursorHold.nvim",
-    config = function()
-      require("config.lightbulb")
-    end,
-  }
+  -- use {
+  --   "kosayoda/nvim-lightbulb",
+  --   requires = "antoinemadec/FixCursorHold.nvim",
+  --   config = function()
+  --     require("config.lightbulb")
+  --   end,
+  -- }
 
-  use {
-    "rmagatti/goto-preview",
-    config = function()
-      require("goto-preview").setup()
-    end,
-  }
+  -- use {
+  --   "rmagatti/goto-preview",
+  --   config = function()
+  --     require("goto-preview").setup()
+  --   end,
+  -- }
 
   -- use {
   --   "rmagatti/auto-session",
@@ -85,68 +85,75 @@ return require("packer").startup(function(use)
   --   end,
   -- }
 
-  use {
-    "rmagatti/alternate-toggler",
-    config = function()
-      require("alternate-toggler").setup {
-        alternates = {
-          ["=="] = "!=",
-        },
-      }
-    end,
-    event = { "BufReadPost" },
-  }
+  -- use {
+  --   "rmagatti/alternate-toggler",
+  --   config = function()
+  --     require("alternate-toggler").setup {
+  --       alternates = {
+  --         ["=="] = "!=",
+  --       },
+  --     }
+  --   end,
+  --   event = { "BufReadPost" },
+  -- }
 
   use { "cranberry-clockworks/coal.nvim" }
 
   -- use { "itchyny/vim-highlighturl" }
 
-  use {
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup {
-        window = {
-          width = 120,
-        },
-      }
-    end,
-  }
+  -- use {
+  --   "folke/zen-mode.nvim",
+  --   config = function()
+  --     require("zen-mode").setup {
+  --       window = {
+  --         width = 120,
+  --       },
+  --     }
+  --   end,
+  -- }
 
-  use {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-
-      require("neo-tree").setup {
-        default_component_configs = {
-          icon = {
-            folder_empty = "",
-          },
-        },
-
-        filesystem = {
-          filtered_items = {
-            hide_dotfiles = false,
-            hide_gitignored = false,
-            hide_hidden = false, -- Windows
-          },
-        },
-      }
-    end,
-  }
+  -- use {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   branch = "v2.x",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   config = function()
+  --     vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+  --
+  --     require("neo-tree").setup {
+  --       default_component_configs = {
+  --         icon = {
+  --           folder_empty = "",
+  --         },
+  --       },
+  --
+  --       filesystem = {
+  --         filtered_items = {
+  --           hide_dotfiles = false,
+  --           hide_gitignored = false,
+  --           hide_hidden = false, -- Windows
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- }
 
   use {
     "windwp/nvim-autopairs",
-    -- config = function()
-    --   require "config.autopairs"
-    -- end,
+    config = function()
+      require("nvim-autopairs")
+    end,
   }
+
+  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup {
+      size = 100,
+      direction = 'vertical',
+    }
+  end }
 
   --   "sudormrfbin/cheatsheet.nvim",
   --   requires = {
@@ -262,9 +269,9 @@ return require("packer").startup(function(use)
   -- yaml-language-server yamlls
 
 
-  use { "ms-jpq/coq_nvim", branch = "coq", run = "python3 -m coq deps" }
-
-  use { "ms-jpq/coq.artifacts", branch = "artifacts" }
+  -- use { "ms-jpq/coq_nvim", branch = "coq", run = "python3 -m coq deps" }
+  --
+  -- use { "ms-jpq/coq.artifacts", branch = "artifacts" }
 
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -308,6 +315,10 @@ return require("packer").startup(function(use)
   }
 
   use {
+    'stevearc/oil.nvim',
+    config = function() require('config.oil') end }
+
+  use {
     "microsoft/vscode-js-debug",
     opt = true,
     run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
@@ -331,30 +342,30 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use {
-    "tjdevries/express_line.nvim",
-    config = function()
-      local extensions = require "el.extensions"
-      local subscribe = require "el.subscribe"
-      local generator = function(_window, buffer)
-        local segments = {}
-        table.insert(segments, extensions.mode)
-        table.insert(segments, "%=")
-        table.insert(
-          segments,
-          subscribe.buf_autocmd("el_git_branch", "BufEnter", function(window, buffer)
-            local branch = extensions.git_branch(window, buffer)
-            if branch then
-              return " " .. branch
-            end
-          end)
-        )
-        table.insert(segments, " [%{&ff}]")
-        return segments
-      end
-      require("el").setup { generator = generator }
-    end,
-  }
+  -- use {
+  --   "tjdevries/express_line.nvim",
+  --   config = function()
+  --     local extensions = require "el.extensions"
+  --     local subscribe = require "el.subscribe"
+  --     local generator = function(_window, buffer)
+  --       local segments = {}
+  --       table.insert(segments, extensions.mode)
+  --       table.insert(segments, "%=")
+  --       table.insert(
+  --         segments,
+  --         subscribe.buf_autocmd("el_git_branch", "BufEnter", function(window, buffer)
+  --           local branch = extensions.git_branch(window, buffer)
+  --           if branch then
+  --             return " " .. branch
+  --           end
+  --         end)
+  --       )
+  --       table.insert(segments, " [%{&ff}]")
+  --       return segments
+  --     end
+  --     require("el").setup { generator = generator }
+  --   end,
+  -- }
 
   --   "nvim-lualine/lualine.nvim",
   --   config = function()
@@ -373,47 +384,47 @@ return require("packer").startup(function(use)
 
   -- use { "yorickpeterse/nvim-window" }
 
-  use {
-    "echasnovski/mini.indentscope",
-    branch = "stable",
-    config = function()
-      local MiniIndent = require "mini.indentscope"
-      MiniIndent.setup {
-        draw = {
-          delay = 0,
-          animation = MiniIndent.gen_animation.none(),
-        },
-      }
-    end,
-  }
+  -- use {
+  --   "echasnovski/mini.indentscope",
+  --   branch = "stable",
+  --   config = function()
+  --     local MiniIndent = require "mini.indentscope"
+  --     MiniIndent.setup {
+  --       draw = {
+  --         delay = 0,
+  --         animation = MiniIndent.gen_animation.none(),
+  --       },
+  --     }
+  --   end,
+  -- }
 
-  use {
-    "lewis6991/hover.nvim",
-    config = function()
-      require("hover").setup {
-        init = function()
-          -- Require providers
-          require "hover.providers.lsp"
-          -- require('hover.providers.gh')
-          -- require('hover.providers.gh_user')
-          -- require('hover.providers.jira')
-          -- require('hover.providers.man')
-          -- require('hover.providers.dictionary')
-        end,
-        preview_opts = {
-          border = nil,
-        },
-        -- Whether the contents of a currently open hover window should be moved
-        -- to a :h preview-window when pressing the hover keymap.
-        preview_window = false,
-        title = true,
-      }
-
-      -- Setup keymaps
-      vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
-      vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
-    end,
-  }
+  -- use {
+  --   "lewis6991/hover.nvim",
+  --   config = function()
+  --     require("hover").setup {
+  --       init = function()
+  --         -- Require providers
+  --         require "hover.providers.lsp"
+  --         -- require('hover.providers.gh')
+  --         -- require('hover.providers.gh_user')
+  --         -- require('hover.providers.jira')
+  --         -- require('hover.providers.man')
+  --         -- require('hover.providers.dictionary')
+  --       end,
+  --       preview_opts = {
+  --         border = nil,
+  --       },
+  --       -- Whether the contents of a currently open hover window should be moved
+  --       -- to a :h preview-window when pressing the hover keymap.
+  --       preview_window = false,
+  --       title = true,
+  --     }
+  --
+  --     -- Setup keymaps
+  --     vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
+  --     vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
+  --   end,
+  -- }
 
   -- use { "ThePrimeagen/harpoon" }
 
@@ -447,11 +458,11 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use { "RRethy/vim-illuminate",
-    require('illuminate').configure {
-      min_count_to_highlight = 2,
-    }
-  }
+  -- use { "RRethy/vim-illuminate",
+  --   require('illuminate').configure {
+  --     min_count_to_highlight = 2,
+  --   }
+  -- }
 
   -- use {
   --   "echasnovski/mini.cursorword",

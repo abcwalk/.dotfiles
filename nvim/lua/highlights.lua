@@ -62,7 +62,7 @@ vim.api.nvim_set_hl(0, "@keyword", { fg = Main_color })
 vim.api.nvim_set_hl(0, "@function", { fg = Function_color })
 vim.api.nvim_set_hl(0, "@method", { link = "@function" })
 -- vim.api.nvim_set_hl(0, "@field", { link = "@function" }) -- links to Identifier
-vim.api.nvim_set_hl(0, "Identifier", { fg = "#c6c6c6" })
+vim.api.nvim_set_hl(0, "Identifier", { fg = "#d3d3d3" })
 vim.api.nvim_set_hl(0, "@constructor", { link = "@function" })
 vim.api.nvim_set_hl(0, "@property", { fg = Main_color })
 vim.api.nvim_set_hl(0, "@conditional", { fg = Gray_color })
@@ -84,6 +84,8 @@ vim.api.nvim_set_hl(0, "Tag", { link = "SpecialChar" })
 vim.api.nvim_set_hl(0, "SpecialComment", { link = "SpecialChar" }) --?
 vim.api.nvim_set_hl(0, "StorageClass", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "Function", { link = "@function" })
+vim.api.nvim_set_hl(0, "@punctuation.special", { link = "SpecialChar" })
+vim.api.nvim_set_hl(0, "Special", { link = "Function" })
 
 --Languanges
 vim.api.nvim_set_hl(0, "@css.property_name", { fg = Gray_color })
@@ -126,24 +128,24 @@ vim.api.nvim_set_hl(0, "GitSignsChange", { fg = Yellow_color })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = Red_color })
 
 --Plugins
-vim.api.nvim_set_hl(0, "ZenBg", { bg = "black" })
-
-vim.api.nvim_set_hl(0, "FloatermBorder", { link = "FloatBorder" })
-
-vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = Main_color })
-vim.api.nvim_set_hl(0, "NeoTreeGitUnstaged", { fg = Main_color })
-vim.api.nvim_set_hl(0, "NeoTreeModified", { fg = Main_color })
-vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { fg = Main_color })
-vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = "#7a7a7a" })
-vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { fg = "black" })
-vim.api.nvim_set_hl(0, "NeoTreeRootName", { fg = Green_color, bold = true, italic = true })
-vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#c6c6c6" })
+-- vim.api.nvim_set_hl(0, "ZenBg", { bg = "black" })
+--
+-- vim.api.nvim_set_hl(0, "FloatermBorder", { link = "FloatBorder" })
+--
+-- vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = Main_color })
+-- vim.api.nvim_set_hl(0, "NeoTreeGitUnstaged", { fg = Main_color })
+-- vim.api.nvim_set_hl(0, "NeoTreeModified", { fg = Main_color })
+-- vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { fg = Main_color })
+-- vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = "#7a7a7a" })
+-- vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { fg = "black" })
+-- vim.api.nvim_set_hl(0, "NeoTreeRootName", { fg = Green_color, bold = true, italic = true })
+-- vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#c6c6c6" })
 
 vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", { fg = Yellow_color })
 vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { fg = "#785705" })
 
 -- .zshrc >> export FZF_DEFAULT_OPTS="--color=bg+:#0b1e33,fg+:#4BA8FF,gutter:-1"
-vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { link = "@text.todo" })
+-- vim.api.nvim_set_hl(0, "FzfLuaCursorLine", { link = "@text.todo" })
 
 --Scheme icon
 vim.api.nvim_set_hl(0, "DevIconScheme", { fg = Red_color })
@@ -155,9 +157,9 @@ vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = "Error", l
 vim.fn.sign_define('DapLogPoint', { text = '', texthl = "Error", linehl = '', numhl = '' })
 
 --Illuminate
-vim.cmd "hi IlluminatedWordText term=NONE gui=NONE"
-vim.cmd "hi IlluminatedWordWrite term=NONE gui=NONE"
-vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#0d2538", underline = false })
+-- vim.cmd "hi IlluminatedWordText term=NONE gui=NONE"
+-- vim.cmd "hi IlluminatedWordWrite term=NONE gui=NONE"
+-- vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#0d2538", underline = false })
 
 --WARNING i dont know how it works
 -- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")-- require("vim.treesitter.query").set_query("css", "highlights", "(class_selector) @keyword")

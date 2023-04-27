@@ -3,9 +3,9 @@ local M = {}
 function M.setup()
   local lspconfig = require "lspconfig"
 
-  vim.g.coq_settings = { auto_start = "shut-up" }
-
-  local coq = require "coq"
+  -- vim.g.coq_settings = { auto_start = "shut-up" }
+  --
+  -- local coq = require "coq"
 
   local servers = {
     "tsserver",
@@ -21,7 +21,7 @@ function M.setup()
 
   for _, lsp in ipairs(servers) do
     if lsp == "lua_ls" then
-      lspconfig.lua_ls.setup(coq.lsp_ensure_capabilities {
+      lspconfig.lua_ls.setup {
         settings = {
           Lua = {
             diagnostics = {
@@ -29,13 +29,17 @@ function M.setup()
             },
           },
         },
-      })
+      }
     elseif lsp == "clangd" then
-      lspconfig.clangd.setup(coq.lsp_ensure_capabilities {
+      lspconfig.clangd.setup {
         cmd = { "clangd-14" },
-      })
+      }
     else
-      lspconfig[lsp].setup(coq.lsp_ensure_capabilities())
+      lspconfig[lsp].setup {
+        flags = {
+          debounce_text_changes = 150,
+        }
+      }
     end
   end
 
@@ -47,9 +51,9 @@ function M.setup()
   vim.keymap.set("n", "<Space>e", function()
     vim.diagnostic.setloclist { open = false } -- don't open and focus
     local window = vim.api.nvim_get_current_win()
-    vim.cmd.lwindow()                          -- open+focus loclist if has entries, else close -- this is the magic toggle command
-    vim.api.nvim_set_current_win(window)       -- restore focus to window you were editing (delete this if you want to stay in loclist)
-  end, { buffer = bufnr })
+    vim.cmd.lwindow()                        -- open+focus loclist if has entries, else close -- this is the magic toggle command
+    vim.api.nvim_set_current_win(window)     -- restore focus to window you were editing (delete this if you want to stay in loclist)
+  end, { buffer = bunr })
 
   -- Use LspAttach autocommand to only map the following keys
   -- after the language server attaches to the current buffer
@@ -93,10 +97,22 @@ function M.setup()
     virtual_text = false,
     underline = false,
     float = { border = _border },
-    signs = true,
     update_in_insert = false,
     severity_sort = true
   }
+
+  --Gutter icons
+  local signs = {
+    Error = "✘",
+    Warn = "",
+    Hint = "",
+    Information = "󰋼",
+  }
+
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
 
   --Clang
   local notify = vim.notify

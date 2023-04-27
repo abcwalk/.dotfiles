@@ -17,7 +17,7 @@ opt.ff = "unix"
 opt.laststatus = 3 -- statusline per neovim instance
 -- opt.statusline = "%=%t%=[%{&ff}] %p%%"
 -- opt.statusline = "%=%t%=[%{&ff}] %p%%"
--- opt.statusline = "%=[%{&ff}] %p%%"
+opt.statusline = "%=[%{&ff}] %p%%"
 opt.showtabline = 2 -- Tabs on/off
 -- opt.tabline = "" -- Only filename in tabs
 -- opt.pumblend = 10 -- Popup blend
@@ -79,15 +79,3 @@ vim.g.markdown_recommended_style = 0
 --Floaterm
 cmd "let g:floaterm_height = 0.9 | let g:floaterm_title = 'Terminal'"
 
---Gutter icons
-local signs = {
-  Error = "✘",
-  Warn = "",
-  Hint = "",
-  Information = "󰋼",
-}
-
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end

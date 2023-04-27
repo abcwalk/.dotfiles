@@ -4,38 +4,44 @@ local dap = require("dap")
 local dapui = require("dapui")
 
 --ZenMode
-map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
 
 --PackerSync
 map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
 
+--ToggleTerm
+map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
+
+--Oil
+map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
+
 --Harpoon
-map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
-  { noremap = true, silent = true })
-map("n", "<Bslash><Bslash>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
+--   { noremap = true, silent = true })
+-- map("n", "<Bslash><Bslash>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
 
 --Window
 -- map("n", "<Space>w", ":lua require('nvim-window').pick()<CR>", { silent = true })
 
 --Neogen
-map("n", "<Space>gf", ":lua require('neogen').generate({ type = 'func' })<CR>", { noremap = true, silent = true })
-map("n", "<Space>gc", ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>gf", ":lua require('neogen').generate({ type = 'func' })<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>gc", ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
 
---Goto-preview
-map(
-  "n",
-  "<Space>d",
-  "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-  { noremap = true, silent = true }
-)
-map(
-  "n",
-  "<Space>r",
-  "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
-  { noremap = true, silent = true }
-)
-map("n", "<Space>q", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true, silent = true })
-
+-- --Goto-preview
+-- map(
+--   "n",
+--   "<Space>d",
+--   "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+--   { noremap = true, silent = true }
+-- )
+-- map(
+--   "n",
+--   "<Space>r",
+--   "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+--   { noremap = true, silent = true }
+-- )
+-- map("n", "<Space>q", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true, silent = true })
+--
 --Cheatsheet
 -- map("n", "<F12>", ":Cheatsheet<CR>", { noremap = truen, silent = true })
 
@@ -45,12 +51,12 @@ map("n", "<Space>q", "<cmd>lua require('goto-preview').close_all_win()<CR>", { n
 -- end)
 
 --Neotree
-map("n", "<Bslash>f", ":NeoTreeRevealToggle<CR>", { noremap = true, silent = true })
-map("n", "<Bslash>g", ":Neotree float git_status<CR>", { noremap = true, silent = true })
-map("n", "<Tab><Tab>", ":Neotree float buffers<CR>", { noremap = true, silent = true })
+-- map("n", "<Bslash>f", ":NeoTreeRevealToggle<CR>", { noremap = true, silent = true })
+-- map("n", "<Bslash>g", ":Neotree float git_status<CR>", { noremap = true, silent = true })
+-- map("n", "<Tab><Tab>", ":Neotree float buffers<CR>", { noremap = true, silent = true })
 
 --Alter-toggle false -> true, 1 -> 0, !== -> ===
-map("n", "<M-r>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
+-- map("n", "<M-r>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
 
 --Toggle-checkbox
 map("n", "<Space>tt", ":ToggleCheckbox<CR>", { noremap = true, silent = true })
@@ -73,9 +79,10 @@ end, { remap = true })
 map("", "T", function()
   hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }
 end, { remap = true })
+map("n", "ff", ":HopChar2<CR>")
 
 --Floaterm
-map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
+-- map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
 -- map("n", "<F5>", "<cmd>w<CR><cmd>echo 'Saved'<CR><cmd>FloatermNew! node %<CR>", { noremap = true, silent = true })
 
 --Iron
@@ -84,9 +91,6 @@ map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
 
 --Trouble
 -- map("n", "<Space>p", ":TroubleToggle<CR>")
-
---Hop
-map("n", "ff", ":HopChar2<CR>")
 
 --Mov to start/end of line
 map("i", "<C-s>", "<ESC>I")
@@ -164,7 +168,6 @@ map("i", "<A-;>", "<Esc>A;<Esc>i");
 
 --Dap
 map('n', '<F5>', function()
-  cmd("Neotree close")
   cmd("silent w")
   dap.continue()
 end)
