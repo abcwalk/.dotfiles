@@ -30,27 +30,77 @@ return require("packer").startup(function(use)
   --     require('reach').setup({
   --       notifications = true
   --     })
-  --     require('reach').buffers({
+  --     local options = {
   --       handle = 'bufnr',
-  --     })
+  --       modified_icon = '•',
+  --       previous = {
+  --
+  --         depth = 1,
+  --       },
+  --       actions = {
+  --         split = 's',
+  --         vertsplit = 'v',
+  --         tabsplit = 't',
+  --         delete = '<Space>',
+  --         priority = '=',
+  --       },
+  --     }
+  --     -- require('reach').buffers(options)
+  --     vim.keymap.set('n', '<Tab><Tab>', function() require('reach').buffers(options) end, {})
   --   end,
   -- }
 
-  use { 'matbme/JABS.nvim', require 'jabs'.setup {
-    position = { "center", "center" },
-    border = "single",
-    preview = {
-      border = 'single', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default double
-    },
-    -- Keymaps
-    -- keymap = {
-    --     close = "<c-d>", -- Close buffer. Default D
-    --     jump = "<space>", -- Jump to buffer. Default <cr>
-    --     h_split = "h", -- Horizontally split buffer. Default s
-    --     v_split = "v", -- Vertically split buffer. Default v
-    --     preview = "p", -- Open buffer preview. Default P
-    -- },
-  } }
+  -- use { 'matbme/JABS.nvim',
+  --
+  --   config = function()
+  --     require 'jabs'.setup {
+  --       position = { "center", "center" },
+  --       border = "single",
+  --       preview = {
+  --         border = 'single', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default double
+  --       },
+  --       -- Keymaps
+  --       -- keymap = {
+  --       --     close = "<c-d>", -- Close buffer. Default D
+  --       --     jump = "<space>", -- Jump to buffer. Default <cr>
+  --       --     h_split = "h", -- Horizontally split buffer. Default s
+  --       --     v_split = "v", -- Vertically split buffer. Default v
+  --       --     preview = "p", -- Open buffer preview. Default P
+  --       -- },
+  --     }
+  --   end,
+  -- }
+
+  use { 'shadowofseaice/yabs.nvim',
+    config = function()
+      require 'yabs'.setup {
+        position = { 'C' },
+        keymap = {
+          close    = "D",   -- Close buffer. Default D
+          jump     = "<CR>", -- Jump to buffer. Default <cr>
+          h_split  = "s",       -- Horizontally split buffer. Default s
+          v_split  = "v",       -- Vertically split buffer. Default v
+          pinning  = "p",       -- Open buffer preview. Default p
+          cycset   = ">",       -- Cycle through settings, Default ]
+          rcycset  = "<",       -- Reverse cycle through settings, Default [
+          cycpos   = "}",       -- Cycle through settings, Default >
+          rcycpos  = "{",       -- Reverse cycle through panel placement, Default <
+          cycname  = "]",       -- Cycle through file name type, Default }
+          rcycname = "[",       -- Reverse cycle through file name type, Default {
+          cychdr   = "T",       -- Cycle through group header options, Default H
+          sortpath = "P",       -- Sort by file path. Default P
+          sortext  = "e",       -- Sort by file extension (type), Default t
+          sortused = "l",       -- Sort by last used, Default u
+          sortbuf  = "x",       -- Sort clear = sort by buffer #, default c
+          sortbase = "b",       -- Sort by file base name #, default f
+          sortfull = "f",       -- Sort by full file name #, default F
+          sortinit = "i",       -- Sort by file name initial #, default i
+        },
+        rnu = false,
+        border = "single",
+      }
+    end,
+  }
 
   -- https://github.com/jose-elias-alvarez/typescript.nvim
 
@@ -469,13 +519,13 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use {
-    "echasnovski/mini.tabline",
-    branch = "stable",
-    config = function()
-      require("mini.tabline").setup()
-    end,
-  }
+  -- use {
+  --   "echasnovski/mini.tabline",
+  --   branch = "stable",
+  --   config = function()
+  --     require("mini.tabline").setup()
+  --   end,
+  -- }
 
   -- use { "RRethy/vim-illuminate",
   --   require('illuminate').configure {

@@ -17,9 +17,8 @@ opt.ff = "unix"
 opt.laststatus = 3 -- statusline per neovim instance
 -- opt.statusline = "%=%t%=[%{&ff}] %p%%"
 -- opt.statusline = "%=%t%=[%{&ff}] %p%%"
--- opt.statusline = "%=[%{&ff}] %p%%"
-opt.statusline = " "
-opt.showtabline = 2 -- Tabs on/off
+opt.statusline = "%t"
+opt.showtabline = 0 -- Tabs on/off
 -- opt.tabline = "" -- Only filename in tabs
 -- opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10    -- Maximum number of entries in a popup

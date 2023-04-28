@@ -22,6 +22,17 @@ api.nvim_create_autocmd("BufRead", {
   end,
 })
 
+-- Add this autocmd to exit yabs when mouse click the main buffer.
+
+api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*" },
+  callback = function()
+    if vim.bo.buflisted then
+      require 'yabs'.leave()
+    end
+  end,
+})
+
 --Remove all trailing whitespaces on save for all filetypes
 --We can use .editorconfig to format
 api.nvim_create_autocmd({ "BufWritePre" }, {

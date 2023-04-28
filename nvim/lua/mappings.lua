@@ -15,8 +15,8 @@ map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 --Oil
 map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 
---Jabs
-map("n", "<Tab><Tab>", ":JABSOpen<CR>", { noremap = true, silent = true })
+--Jabs | Reach
+map("n", "<Tab><Tab>", ":YABSOpen<CR>", { noremap = true, silent = true })
 
 --Harpoon
 -- map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
