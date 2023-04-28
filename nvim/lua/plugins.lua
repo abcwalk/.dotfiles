@@ -25,6 +25,33 @@ return require("packer").startup(function(use)
 
   use { "tpope/vim-surround" }
 
+  -- use { 'toppair/reach.nvim',
+  --   config = function()
+  --     require('reach').setup({
+  --       notifications = true
+  --     })
+  --     require('reach').buffers({
+  --       handle = 'bufnr',
+  --     })
+  --   end,
+  -- }
+
+  use { 'matbme/JABS.nvim', require 'jabs'.setup {
+    position = { "center", "center" },
+    border = "single",
+    preview = {
+      border = 'single', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default double
+    },
+    -- Keymaps
+    -- keymap = {
+    --     close = "<c-d>", -- Close buffer. Default D
+    --     jump = "<space>", -- Jump to buffer. Default <cr>
+    --     h_split = "h", -- Horizontally split buffer. Default s
+    --     v_split = "v", -- Vertically split buffer. Default v
+    --     preview = "p", -- Open buffer preview. Default P
+    -- },
+  } }
+
   -- https://github.com/jose-elias-alvarez/typescript.nvim
 
   -- use { "tpope/vim-repeat" }
@@ -143,8 +170,7 @@ return require("packer").startup(function(use)
 
   use { "akinsho/toggleterm.nvim", tag = '*', config = function()
     require("toggleterm").setup {
-      size = 100,
-      direction = 'vertical',
+      direction = 'float',
     }
   end }
 

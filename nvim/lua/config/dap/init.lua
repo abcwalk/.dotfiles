@@ -26,14 +26,6 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       program = "${file}",
       cwd = "${workspaceFolder}",
     },
-    {
-      name = "Launch file (with Logger)",
-      type = "pwa-node",
-      request = "launch",
-      program = "${file}",
-      cwd = "${workspaceFolder}",
-    },
-
     -- {
     --   type = "pwa-node",
     --   request = "attach",
