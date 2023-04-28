@@ -40,7 +40,10 @@ return require("packer").startup(function(use)
   -- use { "kkga/vim-envy" }
 
   -- use { "nvim-treesitter/playground" }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 989d2f0 (update: test)
 
   use { "nvim-telescope/telescope.nvim" }
 
@@ -54,13 +57,13 @@ return require("packer").startup(function(use)
   -- }
   --
 
-  -- use {
-  --   "kosayoda/nvim-lightbulb",
-  --   requires = "antoinemadec/FixCursorHold.nvim",
-  --   config = function()
-  --     require("config.lightbulb")
-  --   end,
-  -- }
+  use {
+    "kosayoda/nvim-lightbulb",
+    requires = "antoinemadec/FixCursorHold.nvim",
+    config = function()
+      require("config.lightbulb")
+    end,
+  }
 
   -- use {
   --   "rmagatti/goto-preview",

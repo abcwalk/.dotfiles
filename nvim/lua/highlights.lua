@@ -10,6 +10,7 @@ local Gray_color = "#7a7a7a"
 
 --Main
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#121212" })
+vim.api.nvim_set_hl(0, "Cursor", { fg = Red_color })
 vim.api.nvim_set_hl(0, "Normal", { bg = "black" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "black" })
 vim.api.nvim_set_hl(0, "LineNr", { bg = "black", fg = "#A5A5A5" })
@@ -156,6 +157,8 @@ vim.fn.sign_define('DapStopped', { text = '', texthl = "@text.warning", lineh
 vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = "Error", linehl = '', numhl = '' })
 vim.fn.sign_define('DapLogPoint', { text = '', texthl = "Error", linehl = '', numhl = '' })
 
+--Lsp
+vim.fn.sign_define('LspInfoBorder', { fg = Function_color })
 --Illuminate
 -- vim.cmd "hi IlluminatedWordText term=NONE gui=NONE"
 -- vim.cmd "hi IlluminatedWordWrite term=NONE gui=NONE"

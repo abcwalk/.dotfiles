@@ -169,7 +169,7 @@ font:
   # If `true`, bold text is drawn using the bright color variants.
   #draw_bold_text_with_bright_colors: false
   # Colors (Tomorrow Night)
-  #colors:
+  colors:
   # Default colors
   #primary:
   #  background: '#1d1f21'
@@ -188,9 +188,16 @@ font:
   #
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  #cursor:
-  #  text: CellBackground
-  #  cursor: CellForeground
+cursor:
+    # If this is `false` the text cursor inverses
+    # the foreground and background colors.
+    custom_colors: false
+    # Text color when the cursor is above a character.
+    # Only used when `custom_colors` is `true`.
+    text: '0x000000'
+    # Cursor color.
+    # Only used when `custom_colors` is `true`.
+    cursor: '0xff00ff'
   # Vi mode cursor colors
   #
   # Colors for the cursor when the vi mode is active.
@@ -383,7 +390,7 @@ font:
   # from `0.0` to `1.0`.
   #thickness: 0.15
   # Live config reload (changes require restart)
-  #live_config_reload: true
+live_config_reload: true
   # Shell
   #
   # You can set `shell.program` to the path of your favorite shell, e.g.

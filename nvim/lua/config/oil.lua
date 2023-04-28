@@ -71,7 +71,7 @@ require("oil").setup({
     max_height = 15,
     border = "rounded",
     win_options = {
-      winblend = 10,
+      winblend = 0,
     },
   },
   -- Configuration for the actions floating preview window
