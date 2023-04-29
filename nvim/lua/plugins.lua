@@ -74,7 +74,7 @@ return require("packer").startup(function(use)
   use { 'shadowofseaice/yabs.nvim',
     config = function()
       require 'yabs'.setup {
-        position = { 'C' },
+        position = { 'NE' },
         keymap = {
           close    = "D",   -- Close buffer. Default D
           jump     = "<CR>", -- Jump to buffer. Default <cr>
