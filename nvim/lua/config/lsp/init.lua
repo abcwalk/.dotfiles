@@ -14,6 +14,7 @@ local servers = {
   "bashls",
   "taplo",
   "clangd",
+  "jdtls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -144,6 +145,7 @@ mason_tool_installer.setup {
     "shfmt",
     "stylua",
     "taplo",
+    "xmlformatter",
   },
   auto_update = false,
   run_on_start = true,

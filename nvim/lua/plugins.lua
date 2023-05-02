@@ -358,6 +358,7 @@ return require("packer").startup(function(use)
           "markdown",
           "json5",
           "jsdoc",
+          "java",
           "lua",
           "vimdoc",
           "vim",

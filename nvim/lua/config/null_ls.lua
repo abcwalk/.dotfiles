@@ -17,6 +17,7 @@ null_ls.setup {
         update_in_insert = false,
         severity_sort = true,
       }
-    })
+    }),
+    null_ls.builtins.formatting.xmlformat,
   },
 }
