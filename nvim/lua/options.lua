@@ -17,7 +17,7 @@ opt.ff = "unix"
 opt.laststatus = 3 -- statusline per neovim instance
 -- opt.statusline = "%=%t%=[%{&ff}] %p%%"
 -- opt.statusline = "%=%t%=[%{&ff}] %p%%"
-opt.statusline = "%t"
+opt.statusline = "%t  %{get(b:, 'branch_name', '')}"
 opt.showtabline = 0 -- Tabs on/off
 -- opt.tabline = "" -- Only filename in tabs
 -- opt.pumblend = 10 -- Popup blend
@@ -26,7 +26,7 @@ opt.scrolloff = 4     -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2    -- Size of an indent
-opt.mouse = "nvc"       -- Enable mouse mode("a") or disable
+opt.mouse = "nvc"     -- Enable mouse mode("a") or disable
 opt.smartindent = true
 opt.spelllang = { "en" }
 opt.tabstop = 2
@@ -38,18 +38,18 @@ opt.autoindent = true
 opt.splitright = true
 opt.splitbelow = true
 
-vim.g.clipboard = {
- name = "xsel",
- copy = {
-  ["+"] = "xsel --nodetach -i -b",
-  ["*"] = "xsel --nodetach -i -p",
- },
- paste = {
-  ["+"] = "xsel  -o -b",
-  ["*"] = "xsel  -o -b",
- },
- cache_enabled = 1,
-}
+-- vim.g.clipboard = {
+--   name = 'win32yank',
+--   copy = {
+--      ["+"] = 'win32yank.exe -i --crlf',
+--      ["*"] = 'win32yank.exe -i --crlf',
+--    },
+--   paste = {
+--      ["+"] = 'win32yank.exe -o --lf',
+--      ["*"] = 'win32yank.exe -o --lf',
+--   },
+--   cache_enabled = 0,
+-- }
 opt.clipboard = "unnamedplus"
 
 opt.wildmenu = true
@@ -91,5 +91,4 @@ opt.undodir = vim.fn.expand "~/.config/nvim/undo"
 vim.g.markdown_recommended_style = 0
 
 --Floaterm
-cmd "let g:floaterm_height = 0.9 | let g:floaterm_title = 'Terminal'"
-
+-- cmd "let g:floaterm_height = 0.9 | let g:floaterm_title = 'Terminal'"

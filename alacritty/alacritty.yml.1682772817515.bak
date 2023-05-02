@@ -118,11 +118,12 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: IosevkaTerm Nerd Font Mono
+    family: Iosevka Nerd Font Mono
     style: Regular
+
     # Bold font face
   bold:
-    family: IosevkaTerm Nerd Font Mono
+    family: Iosevka Nerd Font Mono
     style: Bold
     # Italic font face
   italic:
@@ -130,7 +131,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: IosevkaTerm Nerd Font Mono
+    family: Iosevka Nerd Font Mono
     # The `style` can be specified to pick a specific face.
     style: Italic
     # Bold italic font face
@@ -163,54 +164,35 @@ font:
   # characters (Unicode points 2500 - 259f).
   #
   #builtin_box_drawing: true
-cursor:
-  style:
-    # Cursor shape
-    #
-    # Values for `shape`:
-    #   - ▇ Block
-    #   - _ Underline
-    #   - | Beam
-    shape: Block
-
-    # Cursor blinking state
-    #
-    # Values for `blinking`:
-    #   - Never: Prevent the cursor from ever blinking
-    #   - Off: Disable blinking by default
-    #   - On: Enable blinking by default
-    #   - Always: Force the cursor to always blink
-    blinking: Always
-  blink_interval: 500
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 # Colors (Tomorrow Night)
 colors:
-  name: Dark Ocean
-  author: DOOMICIDE
+  name: FarSide
+  author: Baskerville
   primary:
     background: "#000000"
-    foreground: "#ffffff"
+    foreground: "#919191"
   cursor:
     text: "#000000"
-    cursor: "#ffdd33"
+    cursor: "#919191"
   normal:
-    black: "#000000"
-    red: "#571dc2"
-    green: "#14db49"
-    yellow: "#403d70"
-    blue: "#385a70"
-    magenta: "#384894"
-    cyan: "#4f3a5e"
-    white: "#999999"
+    black: "#303030"
+    red: "#a43261"
+    green: "#006ca5"
+    yellow: "#007086"
+    blue: "#6751a6"
+    magenta: "#913e88"
+    cyan: "#0061b1"
+    white: "#c6c6c6"
   bright:
-    black: "#38372c"
-    red: "#7c54b0"
-    green: "#a2e655"
-    yellow: "#9c6f59"
-    blue: "#323f5c"
-    magenta: "#5e6c99"
-    cyan: "#667d77"
+    black: "#5e5e5e"
+    red: "#ff9fc9"
+    green: "#3bd6ff"
+    yellow: "#00ddf4"
+    blue: "#d5b8ff"
+    magenta: "#ffa7f6"
+    cyan: "#93c9ff"
     white: "#ffffff"
-theme: DOOMICIDE darkocean
+theme: Baskerville - FarSide

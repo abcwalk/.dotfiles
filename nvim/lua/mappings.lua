@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 local cmd = vim.cmd
-local dap = require("dap")
-local dapui = require("dapui")
+-- local dap = require("dap")
+-- local dapui = require("dapui")
 
 --ZenMode
 -- map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
@@ -10,12 +10,12 @@ local dapui = require("dapui")
 map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
 
 --ToggleTerm
-map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
+-- map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 --Oil
 map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 
---Jabs | Reach
+--Yabs
 map("n", "<Tab><Tab>", ":YABSOpen<CR>", { noremap = true, silent = true })
 
 --Harpoon
@@ -107,9 +107,7 @@ map("n", "/", [[/\v]])
 
 --Escape -> jj
 map("i", "jj", "<Esc>", { nowait = true })
-map("i", "kk", "<Esc>", { nowait = true })
 map("t", "jj", "<C-Bslash><C-n>", { nowait = true })
-map("t", "kk", "<C-Bslash><C-n>", { nowait = true })
 map("t", "<Esc>", "<C-Bslash><C-n>", { nowait = true })
 
 --Open URL in browser (Windows
@@ -151,7 +149,7 @@ map("n", "<A-Down>", ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { nor
 
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map("n", "<Space>cd", "<cmd>lcd %:p:h<CR><cmd>pwd<CR>")
+map("n", "<Space><Space>", "<cmd>lcd %:p:h<CR><cmd>pwd<CR>", { noremap = true, silent = false})
 
 -- Copy entire buffer.
 map("n", "<Space>y", "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
@@ -170,25 +168,25 @@ end, {
 map("i", "<A-;>", "<Esc>A;<Esc>i");
 
 --Dap
-map('n', '<F5>', function()
-  cmd("silent w")
-  dap.continue()
-end)
-map('n', '<F10>', dap.step_over)
-map('n', '<F11>', dap.step_into)
-map('n', '<F12>', dap.step_out)
-map('n', '<Space>b', dap.toggle_breakpoint)
-map("n", "<Space>cb", function()
-  dap.clear_breakpoints()
-  cmd("echo 'Breakpoints cleared'")
-end)
-map("n", "<Space>dd", dap.terminate)
-map("n", "<Space>dl", function()
-  cmd("silent w")
-  dap.run_last()
-  cmd("echo 'Running last session'")
-end)
-map('n', '<Space>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+-- map('n', '<F5>', function()
+--   cmd("silent w")
+--   dap.continue()
+-- end)
+-- map('n', '<F10>', dap.step_over)
+-- map('n', '<F11>', dap.step_into)
+-- map('n', '<F12>', dap.step_out)
+-- map('n', '<Space>b', dap.toggle_breakpoint)
+-- map("n", "<Space>cb", function()
+--   dap.clear_breakpoints()
+--   cmd("echo 'Breakpoints cleared'")
+-- end)
+-- map("n", "<Space>dd", dap.terminate)
+-- map("n", "<Space>dl", function()
+--   cmd("silent w")
+--   dap.run_last()
+--   cmd("echo 'Running last session'")
+-- end)
+-- map('n', '<Space>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 
 --Dapui
-map('n', "<Space>du", dapui.toggle)
+-- map('n', "<Space>du", dapui.toggle)

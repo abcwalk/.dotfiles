@@ -21,9 +21,16 @@ return require("packer").startup(function(use)
 
   use { "stevearc/dressing.nvim" }
 
-  -- use { "sindrets/diffview.nvim" }
+  use { "sindrets/diffview.nvim" }
 
   use { "tpope/vim-surround" }
+
+  use {
+    'behemothbucket/gruber-darker-theme.nvim',
+    config = function()
+      require('gruber-darker').setup()
+    end
+  }
 
   -- use { 'toppair/reach.nvim',
   --   config = function()
@@ -74,30 +81,53 @@ return require("packer").startup(function(use)
   use { 'shadowofseaice/yabs.nvim',
     config = function()
       require 'yabs'.setup {
-        position = { 'NE' },
+        position = { 'C' }, -- {'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N', 'C'}
+        settings = {
+          { 'name' },
+          { 'icon', 'bufnr', 'bufname', 'lnum', 'line' },
+          { 'path', 'name',  'bufid' },
+        },
         keymap = {
-          close    = "D",   -- Close buffer. Default D
+          close    = "D",    -- Close buffer. Default D
           jump     = "<CR>", -- Jump to buffer. Default <cr>
-          h_split  = "s",       -- Horizontally split buffer. Default s
-          v_split  = "v",       -- Vertically split buffer. Default v
-          pinning  = "p",       -- Open buffer preview. Default p
-          cycset   = ">",       -- Cycle through settings, Default ]
-          rcycset  = "<",       -- Reverse cycle through settings, Default [
-          cycpos   = "}",       -- Cycle through settings, Default >
-          rcycpos  = "{",       -- Reverse cycle through panel placement, Default <
-          cycname  = "]",       -- Cycle through file name type, Default }
-          rcycname = "[",       -- Reverse cycle through file name type, Default {
-          cychdr   = "T",       -- Cycle through group header options, Default H
-          sortpath = "P",       -- Sort by file path. Default P
-          sortext  = "e",       -- Sort by file extension (type), Default t
-          sortused = "l",       -- Sort by last used, Default u
-          sortbuf  = "x",       -- Sort clear = sort by buffer #, default c
-          sortbase = "b",       -- Sort by file base name #, default f
-          sortfull = "f",       -- Sort by full file name #, default F
-          sortinit = "i",       -- Sort by file name initial #, default i
+          h_split  = "s",    -- Horizontally split buffer. Default s
+          v_split  = "v",    -- Vertically split buffer. Default v
+          pinning  = "p",    -- Open buffer preview. Default p
+          cycset   = ">",    -- Cycle through settings, Default ]
+          rcycset  = "<",    -- Reverse cycle through settings, Default [
+          cycpos   = "}",    -- Cycle through settings, Default >
+          rcycpos  = "{",    -- Reverse cycle through panel placement, Default <
+          cycname  = "]",    -- Cycle through file name type, Default }
+          rcycname = "[",    -- Reverse cycle through file name type, Default {
+          cychdr   = "T",    -- Cycle through group header options, Default H
+          sortpath = "P",    -- Sort by file path. Default P
+          sortext  = "e",    -- Sort by file extension (type), Default t
+          sortused = "l",    -- Sort by last used, Default u
+          sortbuf  = "x",    -- Sort clear = sort by buffer #, default c
+          sortbase = "b",    -- Sort by file base name #, default f
+          sortfull = "f",    -- Sort by full file name #, default F
+          sortinit = "i",    -- Sort by file name initial #, default i
         },
         rnu = false,
-        border = "single",
+        border = "rounded",
+        -- symbols = {
+        -- at most two of these icons can be shown for a given buffer
+        -- current   = "C", -- default 
+        -- split     = "S", -- default 
+        -- alternate = "A", -- default 
+        -- unloaded  = "H", -- default
+        -- locked    = "L", -- default 
+        -- ro        = "R", -- default 
+        -- edited    = "E", -- default 
+        -- terminal  = "T", -- default 
+        -- more      = ">", -- default "", when the panel size is too small for file name
+        -- grphead   = "-", -- default " ",
+        -- grptop    = "+", -- default "╭",
+        -- grpmid    = "|", -- default "│",
+        -- grpbot    = "+", -- default "╰",
+        -- pinned    = "P", -- default "",
+        -- filedef   = "D", -- Filetype icon if not present in nvim-web-devicons. Default 
+        -- }
       }
     end,
   }
@@ -116,7 +146,7 @@ return require("packer").startup(function(use)
 
   -- use { "kkga/vim-envy" }
 
-  -- use { "nvim-treesitter/playground" }
+  use { "nvim-treesitter/playground" }
   --
   use { "nvim-telescope/telescope.nvim" }
 
@@ -167,7 +197,7 @@ return require("packer").startup(function(use)
   --   event = { "BufReadPost" },
   -- }
 
-  use { "cranberry-clockworks/coal.nvim" }
+  -- use { "cranberry-clockworks/coal.nvim" }
 
   -- use { "itchyny/vim-highlighturl" }
 
@@ -218,11 +248,15 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-    require("toggleterm").setup {
-      direction = 'float',
-    }
-  end }
+  -- use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+  --   require("toggleterm").setup {
+  --     direction = 'float',
+  --     float_opts = {
+  --       width = 80,
+  --       height = 20,
+  --     }
+  --   }
+  -- end }
 
   --   "sudormrfbin/cheatsheet.nvim",
   --   requires = {
@@ -289,22 +323,6 @@ return require("packer").startup(function(use)
       require("Comment").setup()
     end,
   }
-  -- bash-language-server bashls, bashls
-  -- codespell
-  -- css-lsp cssls, cssls
-  -- diagnostic-languageserver diagnosticls, diagnosticls
-  -- emmet-ls emmet_ls, emmet_ls
-  -- eslint_d
-  -- html-lsp html, html
-  -- json-lsp jsonls, jsonls
-  -- jsonlint
-  -- lua-language-server lua_ls, lua_ls
-  -- pyright
-  -- shellcheck
-  -- stylua
-  -- taplo
-  -- typescript-language-server tsserver, tsserver
-  -- yaml-language-server yamlls, yamlls
 
   use {
     "neovim/nvim-lspconfig",
@@ -314,7 +332,7 @@ return require("packer").startup(function(use)
       "mason-tool-installer.nvim",
     },
     config = function()
-      require("config.lsp.init").setup()
+      require("config.lsp.init")
     end,
     requires = {
       "williamboman/mason.nvim",
@@ -322,21 +340,6 @@ return require("packer").startup(function(use)
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     }
   }
-
-  -- bash-language-server bashls
-  -- clang-format
-  -- cpplint
-  -- css-lsp cssls
-  -- diagnostic-languageserver diagnosticls
-  -- emmet-ls emmet_ls
-  -- eslint-lsp eslint
-  -- html-lsp html
-  -- json-lsp jsonls
-  -- lua-language-server lua_ls
-  -- pyright
-  -- typescript-language-server tsserver
-  -- yaml-language-server yamlls
-
 
   -- use { "ms-jpq/coq_nvim", branch = "coq", run = "python3 -m coq deps" }
   --
@@ -387,29 +390,29 @@ return require("packer").startup(function(use)
     'stevearc/oil.nvim',
     config = function() require('config.oil') end }
 
-  use {
-    "microsoft/vscode-js-debug",
-    opt = true,
-    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-  }
+  -- use {
+  --   "microsoft/vscode-js-debug",
+  --   opt = true,
+  --   run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+  -- }
 
-  use { 'mfussenegger/nvim-dap' }
-
-  use {
-    "rcarriga/nvim-dap-ui",
-    requires = { "mfussenegger/nvim-dap" },
-    config = function()
-      require("dapui").setup()
-    end
-  }
-
-  use {
-    "mxsdev/nvim-dap-vscode-js",
-    requires = { "mfussenegger/nvim-dap" },
-    config = function()
-      require('config.dap.init')
-    end,
-  }
+  -- use { 'mfussenegger/nvim-dap' }
+  --
+  -- use {
+  --   "rcarriga/nvim-dap-ui",
+  --   requires = { "mfussenegger/nvim-dap" },
+  --   config = function()
+  --     require("dapui").setup()
+  --   end
+  -- }
+  --
+  -- use {
+  --   "mxsdev/nvim-dap-vscode-js",
+  --   requires = { "mfussenegger/nvim-dap" },
+  --   config = function()
+  --     require('config.dap.init')
+  --   end,
+  -- }
 
   -- use {
   --   "tjdevries/express_line.nvim",
