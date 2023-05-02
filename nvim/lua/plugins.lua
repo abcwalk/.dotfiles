@@ -25,10 +25,17 @@ return require("packer").startup(function(use)
 
   use { "tpope/vim-surround" }
 
+  -- use {
+  --   'behemothbucket/gruber-darker-theme.nvim',
+  --   config = function()
+  --     require('gruber-darker').setup()
+  --   end
+  -- }
+
   use {
-    'behemothbucket/gruber-darker-theme.nvim',
+    'behemothbucket/dirty-ice-theme.nvim',
     config = function()
-      require('gruber-darker').setup()
+      require('dirty-ice').setup()
     end
   }
 
@@ -81,7 +88,7 @@ return require("packer").startup(function(use)
   use { 'shadowofseaice/yabs.nvim',
     config = function()
       require 'yabs'.setup {
-        position = { 'C' }, -- {'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N', 'C'}
+        position = { 'E' }, -- {'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N', 'C'}
         settings = {
           { 'name' },
           { 'icon', 'bufnr', 'bufname', 'lnum', 'line' },
