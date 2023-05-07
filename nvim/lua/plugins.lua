@@ -25,19 +25,19 @@ return require("packer").startup(function(use)
 
   use { "tpope/vim-surround" }
 
-  -- use {
-  --   'behemothbucket/gruber-darker-theme.nvim',
-  --   config = function()
-  --     require('gruber-darker').setup()
-  --   end
-  -- }
-
   use {
-    'behemothbucket/dirty-ice-theme.nvim',
+    'behemothbucket/gruber-darker-theme.nvim',
     config = function()
-      require('dirty-ice').setup()
+      require('gruber-darker').setup()
     end
   }
+
+  -- use {
+  --   'behemothbucket/dirty-ice-theme.nvim',
+  --   config = function()
+  --     require('dirty-ice').setup()
+  --   end
+  -- }
 
   -- use { 'toppair/reach.nvim',
   --   config = function()
