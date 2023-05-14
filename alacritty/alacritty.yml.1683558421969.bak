@@ -194,7 +194,7 @@ colors:
     foreground: "#ffffff"
   cursor:
     text: "#000000"
-    cursor: "#ffffff"
+    cursor: "#ffdd33"
   normal:
     black: "#000000"
     red: "#571dc2"
