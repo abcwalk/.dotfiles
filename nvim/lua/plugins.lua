@@ -153,7 +153,7 @@ return require("packer").startup(function(use)
 
   -- use { "kkga/vim-envy" }
 
-  use { "nvim-treesitter/playground" }
+  -- use { "nvim-treesitter/playground" }
   --
   use { "nvim-telescope/telescope.nvim" }
 
@@ -378,9 +378,6 @@ return require("packer").startup(function(use)
         highlight = {
           enable = true,
         },
-        -- matchup = {
-        --   enable = true,
-        -- },
       }
     end,
   }
