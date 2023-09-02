@@ -17,6 +17,8 @@ return require("packer").startup(function(use)
 
   use { "nvim-tree/nvim-web-devicons" }
 
+  use { "mfussenegger/nvim-jdtls" }
+
   use { "nvim-lua/plenary.nvim" }
 
   use { "stevearc/dressing.nvim" }
@@ -29,6 +31,21 @@ return require("packer").startup(function(use)
     'behemothbucket/gruber-darker-theme.nvim',
     config = function()
       require('gruber-darker').setup()
+    end
+  }
+
+  use { -- The task runner we use
+    'stevearc/overseer.nvim',
+    config = function()
+      require('overseer').setup({
+        templates = { "java_build" },
+        task_list = {
+          direction = "bottom",
+          max_height = 15,
+          default_detail = 1,
+          bindings = { ["q"] = function() vim.cmd("OverseerClose") end },
+        },
+      })
     end
   }
 
@@ -64,31 +81,11 @@ return require("packer").startup(function(use)
   --   end,
   -- }
 
-  -- use { 'matbme/JABS.nvim',
-  --
-  --   config = function()
-  --     require 'jabs'.setup {
-  --       position = { "center", "center" },
-  --       border = "single",
-  --       preview = {
-  --         border = 'single', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default double
-  --       },
-  --       -- Keymaps
-  --       -- keymap = {
-  --       --     close = "<c-d>", -- Close buffer. Default D
-  --       --     jump = "<space>", -- Jump to buffer. Default <cr>
-  --       --     h_split = "h", -- Horizontally split buffer. Default s
-  --       --     v_split = "v", -- Vertically split buffer. Default v
-  --       --     preview = "p", -- Open buffer preview. Default P
-  --       -- },
-  --     }
-  --   end,
-  -- }
-
-  use { 'shadowofseaice/yabs.nvim',
+  use {
+    'shadowofseaice/yabs.nvim',
     config = function()
       require 'yabs'.setup {
-        position = { 'E' }, -- {'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N', 'C'}
+        position = { 'C' }, -- {'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N', 'C'}
         settings = {
           { 'name' },
           { 'icon', 'bufnr', 'bufname', 'lnum', 'line' },
@@ -109,7 +106,6 @@ return require("packer").startup(function(use)
           cychdr   = "T",    -- Cycle through group header options, Default H
           sortpath = "P",    -- Sort by file path. Default P
           sortext  = "e",    -- Sort by file extension (type), Default t
-          sortused = "l",    -- Sort by last used, Default u
           sortbuf  = "x",    -- Sort clear = sort by buffer #, default c
           sortbase = "b",    -- Sort by file base name #, default f
           sortfull = "f",    -- Sort by full file name #, default F
@@ -169,10 +165,20 @@ return require("packer").startup(function(use)
 
   use {
     "kosayoda/nvim-lightbulb",
-    requires = "antoinemadec/FixCursorHold.nvim",
     config = function()
-      require("config.lightbulb")
-    end,
+      require("nvim-lightbulb").setup({
+        autocmd = { enabled = true },
+        link_highlights = false,
+        sign = {
+          enabled = true,
+          -- Text to show in the sign column.
+          -- Must be between 1-2 characters.
+          text = "",
+          -- Highlight group to highlight the sign column text.
+          hl = "DiagnosticSignHint",
+        },
+      })
+    end
   }
 
   -- use {
@@ -348,9 +354,9 @@ return require("packer").startup(function(use)
     }
   }
 
-  -- use { "ms-jpq/coq_nvim", branch = "coq", run = "python3 -m coq deps" }
-  --
-  -- use { "ms-jpq/coq.artifacts", branch = "artifacts" }
+  use { "ms-jpq/coq_nvim", branch = "coq", run = "python3 -m coq deps" }
+
+  use { "ms-jpq/coq.artifacts", branch = "artifacts" }
 
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -584,7 +590,7 @@ return require("packer").startup(function(use)
   --     }
   --   end,
   -- }
-  --
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

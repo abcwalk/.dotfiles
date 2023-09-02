@@ -1,8 +1,8 @@
 local lspconfig = require "lspconfig"
 
--- vim.g.coq_settings = { auto_start = "shut-up" }
---
--- local coq = require "coq"
+vim.g.coq_settings = { auto_start = "shut-up" }
+
+local coq = require "coq"
 
 local servers = {
   "tsserver",
@@ -15,11 +15,12 @@ local servers = {
   "taplo",
   "clangd",
   "jdtls",
+  "lemminx",
 }
 
 for _, lsp in ipairs(servers) do
   if lsp == "lua_ls" then
-    lspconfig.lua_ls.setup {
+    lspconfig.lua_ls.setup(coq.lsp_ensure_capabilities {
       settings = {
         Lua = {
           diagnostics = {
@@ -27,13 +28,15 @@ for _, lsp in ipairs(servers) do
           },
         },
       },
-    }
+    })
   elseif lsp == "clangd" then
-    lspconfig.clangd.setup {
+    lspconfig.clangd.setup(coq.lsp_ensure_capabilities {
       cmd = { "clangd-14" },
-    }
+    })
+  elseif lsp == "jdtls" then
+    print("Skipping jdtls...")
   else
-    lspconfig[lsp].setup({})
+    lspconfig[lsp].setup(coq.lsp_ensure_capabilities {})
   end
 end
 
@@ -140,12 +143,12 @@ mason_tool_installer.setup {
   ensure_installed = {
     "clang-format",
     "cpplint",
-    "jsonlint",
     "shellcheck",
     "shfmt",
     "stylua",
     "taplo",
     "xmlformatter",
+    "jdtls",
   },
   auto_update = false,
   run_on_start = true,
@@ -153,5 +156,5 @@ mason_tool_installer.setup {
 
 mason_lsp_config.setup {
   ensure_installed = servers,
-  automatic_installation = false,
+  automatic_installation = true,
 }

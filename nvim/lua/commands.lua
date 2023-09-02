@@ -22,15 +22,14 @@ api.nvim_create_autocmd("BufRead", {
 })
 
 -- Add this autocmd to exit yabs when mouse click the main buffer.
-
-api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*" },
-  callback = function()
-    if vim.bo.buflisted then
-      require 'yabs'.leave()
-    end
-  end,
-})
+-- api.nvim_create_autocmd("BufEnter", {
+--   pattern = { "*" },
+--   callback = function()
+--     if vim.bo.buflisted then
+--       require 'yabs'.leave()
+--     end
+--   end,
+-- })
 
 -- Function to check if a floating dialog exists and if not
 -- then check for diagnostics under the cursor
@@ -72,6 +71,16 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.setpos(".", save_cursor)
   end,
 })
+
+-- JAVA
+-- local _jdtls, jdtls = pcall(require, "lsp.jdtls")
+-- if _jdtls and type(jdtls) ~= "boolean" then
+-- 	vim.api.nvim_create_autocmd({ "FileType" }, {
+-- 		pattern = "java",
+-- 		callback = jdtls.start,
+-- 		desc = "Starting Java language server",
+-- 	})
+-- end
 
 --Highlight on yank
 api.nvim_create_augroup("YankHighlightGrp", {})

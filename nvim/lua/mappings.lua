@@ -1,5 +1,5 @@
 local map = vim.keymap.set
-local cmd = vim.cmd
+local jdtls = require "jdtls"
 -- local dap = require("dap")
 -- local dapui = require("dapui")
 
@@ -16,7 +16,7 @@ map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait 
 map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 
 --Yabs
-map("n", "<Tab><Tab>", ":YABSOpen<CR>", { noremap = true, silent = true })
+map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
 
 --Harpoon
 -- map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
@@ -149,7 +149,7 @@ map("n", "<A-Down>", ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { nor
 
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map("n", "<Space><Space>", "<cmd>lcd %:p:h<CR><cmd>pwd<CR>", { noremap = true, silent = false})
+map("n", "<Space><Space>", "<cmd>lcd %:p:h<CR><cmd>pwd<CR>", { noremap = true, silent = false })
 
 -- Copy entire buffer.
 map("n", "<Space>y", "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
@@ -163,6 +163,17 @@ map("n", "J", function()
 end, {
   desc = "join line",
 })
+
+-- Overseer
+map("n", '<F5>', ":w | OverseerRun<CR>", { noremap = true, silent = true })
+
+-- Close quickfix list
+map("n", "<Space>q", ":cclose<CR>", { noremap = true })
+
+-- Java
+map("n", "<Space>tc", jdtls.test_class)
+map("n", "<Space>tm", jdtls.test_nearest_method)
+-- map("n", "<Space>c", )
 
 -- insert semicolon in the end
 map("i", "<A-;>", "<Esc>A;<Esc>i");

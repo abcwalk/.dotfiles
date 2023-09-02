@@ -53,7 +53,6 @@ opt.splitbelow = true
 --   cache_enabled = 0,
 -- }
 opt.clipboard = "unnamedplus"
-
 opt.wildmenu = true
 opt.wildignorecase = true --Show matching brackets
 opt.showmatch = true
