@@ -1,0 +1,69 @@
+snippet main
+alias main
+  public static void main (String[] args) {
+    ${0}
+  }
+
+snippet for
+  for (int i = $1; i < $2.length; i++) {
+    $0
+  }
+
+snippet private_static_final_String
+alias spfs
+  public static final String ${1:var} = "${2}";$0
+
+snippet public_static_void
+alias psv
+  public static void ${1:index}(${2:args}) {
+    $0
+  }
+
+snippet public_void_test
+alias pvt
+  public void test${1:Name}() throws Exception {
+    $0
+  }
+
+snippet private_method
+alias prm
+  private ${1:void} ${2:name}($3) {
+    $0
+  }
+
+snippet public_static_method
+alias psm
+  public static ${1:void} ${2:name}(${3}) {
+    $0
+  }
+
+snippet public_class
+alias pcl
+  public class ${TM_FILENAME_BASE} {
+    $0
+  }
+
+snippet public_constructor
+alias pco
+  public ${TM_FILENAME_BASE}($1) {
+    super();
+    $0
+  }
+
+snippet setter
+alias setter
+  public void set${1:Name}(${2:String} ${3:name}) {
+    this.$3 = $3;
+  }
+
+snippet getter
+alias getter
+  public ${1:String} get${2:Name}() {
+    return $2;
+  }
+
+snippet constructor
+alias constructor
+  ${TM_FILENAME_BASE}($2) {
+    $0
+  }
