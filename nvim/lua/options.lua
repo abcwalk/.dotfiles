@@ -5,6 +5,8 @@ local g = vim.g
 g.loaded_netrwPlugin = 1 -- Don't load netrw
 g.loaded_netrw = 1       -- gx won't work
 
+g.vimShotSavePath = "~/Документы/" -- Screenshot
+
 g.gist_is_private = true
 
 opt.number = true

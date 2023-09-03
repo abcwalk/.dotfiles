@@ -359,6 +359,11 @@ return require("packer").startup(function(use)
   use { "ms-jpq/coq.artifacts", branch = "artifacts" }
 
   use {
+    "SergioRibera/vim-screenshot",
+    run = "npm install --prefix Renderize",
+  }
+
+  use {
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup {

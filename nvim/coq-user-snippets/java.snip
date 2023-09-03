@@ -4,14 +4,25 @@ alias main
     ${0}
   }
 
-snippet for
+snippet for_i
   for (int i = $1; i < $2.length; i++) {
     $0
   }
 
+snippet for_each
+  for ($1 $2: $3){
+    $0
+  }
+
 snippet private_static_final_String
-alias spfs
+alias psfs
   public static final String ${1:var} = "${2}";$0
+
+snippet private_static_method
+alias prsm
+  private static ${1:void} ${2:name}($3) {
+    $0
+  }
 
 snippet public_static_void
 alias psv
@@ -22,12 +33,6 @@ alias psv
 snippet public_void_test
 alias pvt
   public void test${1:Name}() throws Exception {
-    $0
-  }
-
-snippet private_method
-alias prm
-  private ${1:void} ${2:name}($3) {
     $0
   }
 
@@ -54,6 +59,7 @@ snippet setter
 alias setter
   public void set${1:Name}(${2:String} ${3:name}) {
     this.$3 = $3;
+    $0;
   }
 
 snippet getter
@@ -64,6 +70,6 @@ alias getter
 
 snippet constructor
 alias constructor
-  ${TM_FILENAME_BASE}($2) {
+  ${TM_FILENAME_BASE}($1) {
     $0
   }

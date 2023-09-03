@@ -129,7 +129,7 @@ map("n", "<A-Right>", ":bnext<CR>", { silent = true })
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
 map("n", "<A-d>", "<cmd>bprevious <bar> bdelete #<cr>", { silent = true })
 map("n", "<A-q>", ":wqa<CR>", { silent = true })
-map("n", "<C-s>", "<cmd>w<CR><cmd>echo 'Saved'<CR>")
+map("n", "<C-s>", ":w<CR>:echo 'Saved'<CR>")
 map("n", "<A-w>", ":q<CR>", { silent = true })
 map("n", "<A-c>", ":bdelete<CR>", { silent = true })
 -- map("n", "<A-c>", ":BufferClose<CR>", { silent = true })
@@ -165,7 +165,7 @@ end, {
 })
 
 -- Overseer
-map("n", '<F5>', ":w | OverseerRun<CR>", { noremap = true, silent = true })
+map("n", '<F5>', ":w<CR>:echo 'Saved'<CR>:OverseerRun<CR>", { noremap = true, silent = true })
 
 -- Close quickfix list
 map("n", "<Space>q", ":cclose<CR>", { noremap = true })
