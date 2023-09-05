@@ -2,6 +2,9 @@ local opt = vim.opt
 local cmd = vim.cmd
 local g = vim.g
 
+-- Coq
+g.coq_settings = { auto_start = "shut-up" }
+
 g.loaded_netrwPlugin = 1 -- Don't load netrw
 g.loaded_netrw = 1       -- gx won't work
 

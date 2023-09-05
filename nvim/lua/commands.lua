@@ -130,7 +130,7 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "FocusGained" }, {
   end
 })
 
---Toggle-checkbox
+--Toggle-checkbox Markdown
 local checked_character = "x"
 
 local checked_checkbox = "%[" .. checked_character .. "%]"

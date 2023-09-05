@@ -1,6 +1,6 @@
 snippet main
 alias main
-  public static void main (String[] args) {
+  public static void main(String[] args) {
     ${0}
   }
 
@@ -73,3 +73,6 @@ alias constructor
   ${TM_FILENAME_BASE}($1) {
     $0
   }
+
+snippet array_to_string
+  Arrays.toString($0);

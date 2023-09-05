@@ -13,10 +13,13 @@ map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait 
 -- map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 --Oil
-map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
+map("n", "<Tab><Tab>", ":Oil --float .<CR>", { noremap = true, silent = true })
+
+--Mini.files
+-- map("n", "<Tab><Tab>", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
 
 --Yabs
-map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
+-- map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
 
 --Harpoon
 -- map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
@@ -61,7 +64,7 @@ map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, 
 --Alter-toggle false -> true, 1 -> 0, !== -> ===
 -- map("n", "<M-r>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
 
---Toggle-checkbox
+--Toggle-checkbox Markdown
 map("n", "<Space>tt", ":ToggleCheckbox<CR>", { noremap = true, silent = true })
 
 --Gitsigns toggle
@@ -168,7 +171,7 @@ end, {
 map("n", '<F5>', ":w<CR>:echo 'Saved'<CR>:OverseerRun<CR>", { noremap = true, silent = true })
 
 -- Close quickfix list
-map("n", "<Space>q", ":cclose<CR>", { noremap = true })
+map("n", "<Space>q", ":cclose<CR>:echo 'Quickfix closed'<CR>", { noremap = true })
 
 -- Java
 map("n", "<Space>tc", jdtls.test_class)

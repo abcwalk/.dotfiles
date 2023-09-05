@@ -1,7 +1,4 @@
 local lspconfig = require "lspconfig"
-
-vim.g.coq_settings = { auto_start = "shut-up" }
-
 local coq = require "coq"
 
 local servers = {
