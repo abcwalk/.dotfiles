@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  event = { 'BufRead', 'BufNewFile' },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -54,8 +55,8 @@ return {
     vim.keymap.set("n", "<Space>e", function()
       vim.diagnostic.setloclist { open = false } -- don't open and focus
       local window = vim.api.nvim_get_current_win()
-      vim.cmd.lwindow()                      -- open+focus loclist if has entries, else close -- this is the magic toggle command
-      vim.api.nvim_set_current_win(window)   -- restore focus to window you were editing (delete this if you want to stay in loclist)
+      vim.cmd.lwindow()                          -- open+focus loclist if has entries, else close -- this is the magic toggle command
+      vim.api.nvim_set_current_win(window)       -- restore focus to window you were editing (delete this if you want to stay in loclist)
     end, { buffer = bunr })
 
     -- Use LspAttach autocommand to only map the following keys
