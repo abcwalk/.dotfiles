@@ -16,13 +16,13 @@ map("n", "<Space>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait =
 -- map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 --Oil
-map("n", "<Tab><Tab>", ":Oil --float .<CR>", { noremap = true, silent = true })
+map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 
 --Mini.files
 -- map("n", "<Tab><Tab>", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
 
 --Yabs
--- map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
+map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
 
 --Harpoon
 -- map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
@@ -124,7 +124,7 @@ map("n", "gx", ":silent !xdg-open <cfile><CR>", { noremap = true, silent = true 
 -- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
 
 --Plugins file
-map("n", "<F3>", ":e ~/.config/nvim/lua/plugins.lua<CR>", { noremap = true, silent = true })
+map("n", "<F3>", ":e ~/.config/nvim/lua/lazy-setup.lua<CR>", { noremap = true, silent = true })
 
 --Source current file
 map("n", "<Space>ss", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
