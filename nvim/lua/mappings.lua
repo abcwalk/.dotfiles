@@ -7,7 +7,10 @@ local jdtls = require "jdtls"
 -- map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
 
 --PackerSync
-map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
+-- map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
+
+--Lazy
+map("n", "<Space>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait = true })
 
 --ToggleTerm
 -- map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
