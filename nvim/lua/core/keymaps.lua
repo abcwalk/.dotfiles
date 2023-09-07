@@ -1,7 +1,14 @@
 local map = vim.keymap.set
-local jdtls = require "jdtls"
+local buffalo = require("buffalo.ui")
 -- local dap = require("dap")
 -- local dapui = require("dapui")
+
+-- Buffalo
+map({ "t", "n" }, "<Tab><Tab>", buffalo.toggle_buf_menu, { noremap = true })
+map({ 't', 'n' }, '<C-t>', buffalo.toggle_tab_menu, { noremap = true })
+
+-- Trouble
+map("n", "<Space>d", function() require("trouble").open() end)
 
 --ZenMode
 -- map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
@@ -22,7 +29,7 @@ map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 -- map("n", "<Tab><Tab>", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
 
 --Yabs
-map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
+-- map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
 
 --Harpoon
 -- map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
@@ -175,11 +182,6 @@ map("n", '<F5>', ":w<CR>:echo 'Saved'<CR>:OverseerRun<CR>", { noremap = true, si
 
 -- Close quickfix list
 map("n", "<Space>q", ":cclose<CR>:echo 'Quickfix closed'<CR>", { noremap = true })
-
--- Java
-map("n", "<Space>tc", jdtls.test_class)
-map("n", "<Space>tm", jdtls.test_nearest_method)
--- map("n", "<Space>c", )
 
 -- insert semicolon in the end
 map("i", "<A-;>", "<Esc>A;<Esc>i");

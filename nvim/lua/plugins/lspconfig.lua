@@ -42,19 +42,19 @@ return {
           },
         })
       elseif lsp == "jdtls" then
-        print("Skipping jdtls...")
+        -- Skipping jdtls...
       else
         lspconfig[lsp].setup(coq.lsp_ensure_capabilities {})
       end
     end
 
     -- Diagnostic list
-    vim.keymap.set("n", "<Space>e", function()
-      vim.diagnostic.setloclist { open = false } -- don't open and focus
-      local window = vim.api.nvim_get_current_win()
-      vim.cmd.lwindow()                          -- open+focus loclist if has entries, else close -- this is the magic toggle command
-      vim.api.nvim_set_current_win(window)       -- restore focus to window you were editing (delete this if you want to stay in loclist)
-    end, { buffer = bunr })
+    -- vim.keymap.set("n", "<Space>e", function()
+    --   vim.diagnostic.setloclist { open = false } -- don't open and focus
+    --   local window = vim.api.nvim_get_current_win()
+    --   vim.cmd.lwindow()                          -- open+focus loclist if has entries, else close -- this is the magic toggle command
+    --   vim.api.nvim_set_current_win(window)       -- restore focus to window you were editing (delete this if you want to stay in loclist)
+    -- end, { buffer = bunr })
 
     -- Use LspAttach autocommand to only map the following keys
     -- after the language server attaches to the current buffer
@@ -78,7 +78,7 @@ return {
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-        vim.keymap.set("n", "<Space>of", vim.diagnostic.open_float)
+        -- vim.keymap.set("n", "<Space>d", vim.diagnostic.open_float)
         -- vim.keymap.set("n", "<Space>p", vim.diagnostic.setloclist)
         vim.keymap.set("n", "<Space>f", function()
           vim.lsp.buf.format { async = true }
@@ -103,6 +103,7 @@ return {
       Warn = "",
       Hint = "",
       Info = "",
+      Question = "",
     }
 
     for type, icon in pairs(signs) do
