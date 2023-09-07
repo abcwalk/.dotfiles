@@ -1,7 +1,9 @@
 return {
-  'behemothbucket/gruber-darker-theme.nvim',
-  config = function()
-    require('gruber-darker').setup()
-  end
+  "behemothbucket/gruber-darker.nvim",
+  opts = {
+    bold = false,
+    italic = {
+      strings = false,
+    },
+  },
 }
-

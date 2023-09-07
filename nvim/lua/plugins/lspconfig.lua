@@ -1,10 +1,11 @@
 return {
+    {
+  -- lspconfig
   "neovim/nvim-lspconfig",
-  event = { 'BufRead', 'BufNewFile' },
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
       "ms-jpq/coq_nvim",
       branch = "coq",
@@ -25,7 +26,6 @@ return {
       "lua_ls",
       "bashls",
       "taplo",
-      "clangd",
       "jdtls",
       "lemminx",
     }
@@ -41,10 +41,6 @@ return {
             },
           },
         })
-      elseif lsp == "clangd" then
-        lspconfig.clangd.setup(coq.lsp_ensure_capabilities {
-          cmd = { "clangd-14" },
-        })
       elseif lsp == "jdtls" then
         print("Skipping jdtls...")
       else
@@ -52,6 +48,7 @@ return {
       end
     end
 
+    -- Diagnostic list
     vim.keymap.set("n", "<Space>e", function()
       vim.diagnostic.setloclist { open = false } -- don't open and focus
       local window = vim.api.nvim_get_current_win()
@@ -127,48 +124,85 @@ return {
 
     require('lspconfig.ui.windows').default_options.border = 'rounded'
 
-    --Clang
-    local notify = vim.notify
-    vim.notify = function(msg, ...)
-      if msg:match("warning: multiple different client offset_encodings") then
-        return
-      end
-
-      notify(msg, ...)
-    end
-
-    local mason, mason_tool_installer, mason_lsp_config = require("mason"), require("mason-tool-installer"),
-        require("mason-lspconfig")
-
-    --Mason
-    mason.setup({
-      ui = {
-        icons = {
-          package_installed = "󰄳",
-          package_pending = "󱑤",
-          package_uninstalled = "󰏔"
-        }
-      }
+    require("mason-lspconfig").setup({
+      ensure_installed = servers,
+      automatic_installation = true,
     })
-
-    mason_tool_installer.setup {
+  end,
+    },
+  -- formatters
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.eslint_d,
+          null_ls.builtins.code_actions.eslint_d,
+          null_ls.builtins.formatting.stylua.with {
+            extra_args = { "--config-path", vim.fn.expand "~/.config/stylua.toml" },
+          },
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.code_actions.shellcheck,
+          null_ls.builtins.formatting.shfmt,
+          -- null_ls.builtins.formatting.clang_format,
+          -- null_ls.builtins.diagnostics.cpplint.with({
+          --   diagnostic_config = {
+          --     signs = true,
+          --     update_in_insert = false,
+          --     severity_sort = true,
+          --   }
+          -- }),
+          -- null_ls.builtins.formatting.xmlformat,
+        },
+      })
+    end,
+  },
+  -- Mason
+  {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    build = ":MasonUpdate",
+    opts = {
       ensure_installed = {
-        "clang-format",
-        "cpplint",
+        "pyright",
+        "bash-language-server",
+        "css-lsp",
+        "emmet-ls",
+        "eslint_d",
+        "html-lsp",
+        "java-debug-adapter",
+        "jdtls",
+        "json-lsp",
+        "jsonlint",
+        "lemminx",
+        "lua-language-server",
+        "markdownlint",
         "shellcheck",
         "shfmt",
         "stylua",
         "taplo",
+        "typescript-language-server",
         "xmlformatter",
-        "jdtls",
+        "yaml-language-server",
       },
-      auto_update = false,
-      run_on_start = true,
-    }
-
-    mason_lsp_config.setup {
-      ensure_installed = servers,
-      automatic_installation = true,
-    }
-  end,
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      local mr = require("mason-registry")
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
+      end
+    end,
+  }
 }

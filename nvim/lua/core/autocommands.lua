@@ -21,6 +21,16 @@ api.nvim_create_autocmd("BufRead", {
   end,
 })
 
+-- Delete [No Name] buffers.
+api.nvim_create_autocmd("BufHidden", {
+  desc = "Delete [No Name] buffers",
+  callback = function(event)
+    if event.file == "" and vim.bo[event.buf].buftype == "" and not vim.bo[event.buf].modified then
+      vim.schedule(function() pcall(vim.api.nvim_buf_delete, event.buf, {}) end)
+    end
+  end,
+})
+
 -- Add this autocmd to exit yabs when mouse click the main buffer.
 -- api.nvim_create_autocmd("BufEnter", {
 --   pattern = { "*" },
