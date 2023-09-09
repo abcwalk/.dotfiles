@@ -8,7 +8,7 @@ map({ "t", "n" }, "<Tab><Tab>", buffalo.toggle_buf_menu, { noremap = true })
 map({ 't', 'n' }, '<C-t>', buffalo.toggle_tab_menu, { noremap = true })
 
 -- Trouble
-map("n", "<Space>d", function() require("trouble").open() end)
+-- map("n", "<Space>d", function() require("trouble").open() end)
 
 -- NoNeckPain
 map("n", "<Space>z", ":NoNeckPain<CR>", { noremap = true, silent = true })
@@ -20,7 +20,7 @@ map("n", "<Space>z", ":NoNeckPain<CR>", { noremap = true, silent = true })
 map("n", "<Space>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait = true })
 
 --ToggleTerm
--- map("n", "<Bslash>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
+-- map("n", "<C-Bslash>", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 --Oil
 map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
