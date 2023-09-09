@@ -1,136 +1,139 @@
 return {
-    {
-  -- lspconfig
-  "neovim/nvim-lspconfig",
-  event = { 'BufReadPre', 'BufNewFile' },
-  dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    {
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-      build = "python3 -m coq deps"
+  {
+    -- lspconfig
+    "neovim/nvim-lspconfig",
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      {
+        "ms-jpq/coq_nvim",
+        branch = "coq",
+        build = "python3 -m coq deps"
+      },
+      { "ms-jpq/coq.artifacts", branch = "artifacts" },
     },
-    { "ms-jpq/coq.artifacts", branch = "artifacts" },
-  },
-  config = function()
-    local lspconfig = require "lspconfig"
-    local coq = require "coq"
+    config = function()
+      local lspconfig = require "lspconfig"
+      local coq = require "coq"
 
-    local servers = {
-      "tsserver",
-      "jsonls",
-      "cssls",
-      "html",
-      "emmet_ls",
-      "lua_ls",
-      "bashls",
-      "taplo",
-      "jdtls",
-      "lemminx",
-    }
+      local servers = {
+        "tsserver",
+        "jsonls",
+        "cssls",
+        "html",
+        "emmet_ls",
+        "lua_ls",
+        "bashls",
+        "taplo",
+        "marksman",
+        "groovyls",
+        "jdtls",
+        "lemminx",
+        "yamlls",
+      }
 
-    for _, lsp in ipairs(servers) do
-      if lsp == "lua_ls" then
-        lspconfig.lua_ls.setup(coq.lsp_ensure_capabilities {
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" }, -- "Global vim" warning
+      for _, lsp in ipairs(servers) do
+        if lsp == "lua_ls" then
+          lspconfig.lua_ls.setup(coq.lsp_ensure_capabilities {
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = { "vim" }, -- "Global vim" warning
+                },
               },
             },
-          },
-        })
-      elseif lsp == "jdtls" then
-        -- Skipping jdtls...
-      else
-        lspconfig[lsp].setup(coq.lsp_ensure_capabilities {})
+          })
+        elseif lsp == "jdtls" then
+          -- Skipping jdtls...
+        else
+          lspconfig[lsp].setup(coq.lsp_ensure_capabilities {})
+        end
       end
-    end
 
-    -- Diagnostic list
-    -- vim.keymap.set("n", "<Space>e", function()
-    --   vim.diagnostic.setloclist { open = false } -- don't open and focus
-    --   local window = vim.api.nvim_get_current_win()
-    --   vim.cmd.lwindow()                          -- open+focus loclist if has entries, else close -- this is the magic toggle command
-    --   vim.api.nvim_set_current_win(window)       -- restore focus to window you were editing (delete this if you want to stay in loclist)
-    -- end, { buffer = bunr })
+      -- Diagnostic list
+      -- vim.keymap.set("n", "<Space>e", function()
+      --   vim.diagnostic.setloclist { open = false } -- don't open and focus
+      --   local window = vim.api.nvim_get_current_win()
+      --   vim.cmd.lwindow()                          -- open+focus loclist if has entries, else close -- this is the magic toggle command
+      --   vim.api.nvim_set_current_win(window)       -- restore focus to window you were editing (delete this if you want to stay in loclist)
+      -- end, { buffer = bunr })
 
-    -- Use LspAttach autocommand to only map the following keys
-    -- after the language server attaches to the current buffer
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-      callback = function(ev)
-        -- Enable completion triggered by <C-x><c-o>
-        vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+      -- Use LspAttach autocommand to only map the following keys
+      -- after the language server attaches to the current buffer
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(ev)
+          -- Enable completion triggered by <C-x><c-o>
+          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-        -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local opts = { buffer = ev.buf }
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-        vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<Space>ca", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-        -- vim.keymap.set("n", "<Space>d", vim.diagnostic.open_float)
-        -- vim.keymap.set("n", "<Space>p", vim.diagnostic.setloclist)
-        vim.keymap.set("n", "<Space>f", function()
-          vim.lsp.buf.format { async = true }
-        end, opts)
-      end,
-    })
+          -- Buffer local mappings.
+          -- See `:help vim.lsp.*` for documentation on any of the below functions
+          local opts = { buffer = ev.buf }
+          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+          vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+          vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, opts)
+          vim.keymap.set("n", "<Space>ca", vim.lsp.buf.code_action, opts)
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+          vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+          -- vim.keymap.set("n", "<Space>d", vim.diagnostic.open_float)
+          -- vim.keymap.set("n", "<Space>p", vim.diagnostic.setloclist)
+          vim.keymap.set("n", "<Space>f", function()
+            vim.lsp.buf.format { async = true }
+          end, opts)
+        end,
+      })
 
-    --Enable borders in floating windows (diagnostics)
-    local _border = "rounded"
+      --Enable borders in floating windows (diagnostics)
+      local _border = "rounded"
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = _border,
-    })
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = _border,
+      })
 
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = _border,
-    })
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = _border,
+      })
 
-    --Gutter icons
-    local signs = {
-      Error = "",
-      Warn = "",
-      Hint = "",
-      Info = "",
-      Question = "",
-    }
+      --Gutter icons
+      local signs = {
+        Error = "",
+        Warn = "",
+        Hint = "",
+        Info = "",
+        Question = "",
+      }
 
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-    end
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
 
-    --Disable inline error text
-    vim.diagnostic.config {
-      virtual_text = false,
-      underline = false,
-      signs = {
-        active = signs,
-      },
-      float = { border = _border },
-      update_in_insert = false,
-      severity_sort = true
-    }
+      --Disable inline error text
+      vim.diagnostic.config {
+        virtual_text = false,
+        underline = false,
+        signs = {
+          active = signs,
+        },
+        float = { border = _border },
+        update_in_insert = false,
+        severity_sort = true
+      }
 
-    require('lspconfig.ui.windows').default_options.border = 'rounded'
+      require('lspconfig.ui.windows').default_options.border = 'rounded'
 
-    require("mason-lspconfig").setup({
-      ensure_installed = servers,
-      automatic_installation = true,
-    })
-  end,
-    },
+      require("mason-lspconfig").setup({
+        ensure_installed = servers,
+        automatic_installation = true,
+      })
+    end,
+  },
   -- formatters
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -146,6 +149,11 @@ return {
           null_ls.builtins.diagnostics.shellcheck,
           null_ls.builtins.code_actions.shellcheck,
           null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.formatting.markdownlint,
+          null_ls.builtins.diagnostics.markdownlint,
+          null_ls.builtins.formatting.xmlformat,
+          null_ls.builtins.formatting.yamlfix,
+          null_ls.builtins.diagnostics.yamllint,
           -- null_ls.builtins.formatting.clang_format,
           -- null_ls.builtins.diagnostics.cpplint.with({
           --   diagnostic_config = {
@@ -154,7 +162,6 @@ return {
           --     severity_sort = true,
           --   }
           -- }),
-          -- null_ls.builtins.formatting.xmlformat,
         },
       })
     end,
@@ -178,6 +185,9 @@ return {
         "jsonlint",
         "lemminx",
         "lua-language-server",
+        "groovy-language-server",
+        "cbfmt",
+        "marksman",
         "markdownlint",
         "shellcheck",
         "shfmt",
@@ -185,25 +195,7 @@ return {
         "taplo",
         "typescript-language-server",
         "xmlformatter",
-        "yaml-language-server",
       },
     },
-    config = function(_, opts)
-      require("mason").setup(opts)
-      local mr = require("mason-registry")
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
-      end
-    end,
   }
 }

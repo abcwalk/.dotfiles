@@ -10,8 +10,8 @@ map({ 't', 'n' }, '<C-t>', buffalo.toggle_tab_menu, { noremap = true })
 -- Trouble
 map("n", "<Space>d", function() require("trouble").open() end)
 
---ZenMode
--- map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
+-- NoNeckPain
+map("n", "<Space>z", ":NoNeckPain<CR>", { noremap = true, silent = true })
 
 --PackerSync
 -- map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
