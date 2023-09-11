@@ -1,8 +1,8 @@
 return {
   "behemothbucket/gruber-darker.nvim",
   opts = {
-    bold = false,
-    italic = {
+    bold = true,
+   italic = {
       strings = false,
     },
   },
