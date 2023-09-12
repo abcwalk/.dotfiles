@@ -1,7 +1,7 @@
 ;; extends
-((type_identifier) @type) @java.method_type_identifier
+(method_declaration (type_identifier)) @java.method_type_identifier
 
-([
+[
   "abstract"
   "final"
   "native"
@@ -14,5 +14,5 @@
   "static"
   "strictfp"
   "transitive"
-] @type.qualifier) @java.type_qualifier
+] @type.qualifier @java.type_qualifier
 

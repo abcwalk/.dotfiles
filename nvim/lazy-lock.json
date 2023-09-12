@@ -7,7 +7,7 @@
   "dressing.nvim": { "branch": "master", "commit": "c1e1d5fa44fe08811b6ef4aadac2b50e602f9504" },
   "fzf-lua": { "branch": "main", "commit": "2a00373bd60245a1397bdf010bd23b2b51b2a25a" },
   "gitsigns.nvim": { "branch": "main", "commit": "907ae8636016aab2f283576fc60d46ca3427e579" },
-  "gruber-darker-theme.nvim": { "branch": "main", "commit": "25e1e64f44e2bc0e4ee1d05031acc31ebd04c93c" },
+  "gruber-darker-theme.nvim": { "branch": "main", "commit": "67ad0b327022060a38daf1a3f01b3432664fa414" },
   "hop.nvim": { "branch": "v2", "commit": "90db1b2c61b820e230599a04fedcd2679e64bd07" },
   "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "01b4b6724ebcf5b43fc021486f6a260f1d09311e" },
