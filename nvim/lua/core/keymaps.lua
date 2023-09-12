@@ -131,7 +131,14 @@ map("n", "gx", ":silent !xdg-open <cfile><CR>", { noremap = true, silent = true 
 -- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
 
 --Plugins file
-map("n", "<F3>", ":e ~/.config/nvim/lua/lazy-setup.lua<CR>", { noremap = true, silent = true })
+if vim.fn.has("unix") then
+  map("n", "<F3>", ":e ~/.config/nvim/lua/<CR>", { noremap = true, silent = true })
+elseif vim.fn.has("win32") or vim.fn.has("win64") then
+  map("n", "<F3>", ":e ~/cculpc/AppData/Local/nvim<CR>", { noremap = true, silent = true })
+end
+
+-- Telescope live_grep
+map("n", "fw", ":Telescope live_grep<CR>", { noremap = true, silent = true })
 
 --Source current file
 map("n", "<Space>ss", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })

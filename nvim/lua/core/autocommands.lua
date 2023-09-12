@@ -126,7 +126,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- Git branch
 local function branch_name()
-  local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+  local branch = ""
+  if vim.fn.has('win64') or vim.fn.has('win32') then
+    branch = vim.fn.system("git branch --show-current 2>&1 | grep -v 'fatal'"):match("[^\n]*")
+  elseif vim.fn.has('unix') then
+    branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+  end
   if branch ~= "" then
     return " " .. branch
   else

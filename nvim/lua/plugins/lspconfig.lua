@@ -27,7 +27,6 @@ return {
         "bashls",
         "taplo",
         "marksman",
-        "groovyls",
         "jdtls",
         "lemminx",
         "yamlls",
