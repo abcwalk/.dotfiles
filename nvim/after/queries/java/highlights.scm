@@ -1,4 +1,0 @@
-;; extends
-[
-  "new"
-] @keyword
