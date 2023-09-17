@@ -3,10 +3,22 @@ return {
   version = "*",
   config = function()
     require("no-neck-pain").setup({
-      width = 80,
+      autocmds = {
+        enableOnVimEnter = true,
+        enableOnTabEnter = true,
+      },
       buffers = {
         right = {
-          enabled = false,
+          colors = {
+            blend = -0.2,
+          },
+          scratchPad = {
+            enabled = true,
+            location = nil,
+          },
+          bo = {
+            filetype = "md"
+          },
         },
         left = {
           colors = {

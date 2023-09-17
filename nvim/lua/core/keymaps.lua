@@ -137,6 +137,9 @@ elseif vim.fn.has("win32") or vim.fn.has("win64") then
   map("n", "<F3>", ":e ~/cculpc/AppData/Local/nvim<CR>", { noremap = true, silent = true })
 end
 
+-- nvim-toggler emacs
+map("n", '<c-i>', require('nvim-toggler').toggle, { noremap = true, silent = true, nowait = true })
+
 -- Telescope live_grep
 map("n", "fw", ":Telescope live_grep<CR>", { noremap = true, silent = true })
 

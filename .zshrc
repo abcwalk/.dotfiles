@@ -100,6 +100,7 @@ fi
 
 alias n="nvim"
 alias n.="nvim ."
+alias e="emacs -nw"
 alias r="ranger"
 alias cd..="cd .."
 alias disable_webcam="sudo modprobe -r uvcvideo"
@@ -110,6 +111,7 @@ export EDITOR="$VISUAL"
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 alias luamake=/home/nonh/Загрузки/lua-language-server/3rd/luamake/luamake
 export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"
+export PATH="$HOME/.config/emacs/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

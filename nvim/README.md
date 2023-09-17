@@ -15,5 +15,4 @@ todo:
 - [x] Mason problem
 - [x] signcolumn?
 - [x] brackets problem (<CR>)
-- [ ] highlight html properly
-- [ ] migrate from packer to lazy
+- [x] migrate from packer to lazy
