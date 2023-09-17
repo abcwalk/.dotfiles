@@ -118,28 +118,21 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: JetBrainsMono Nerd Font
+    family: Iosevka Comfy
     style: Regular
-
-    italic: JetBrainsMono Nerd Font Mono
     # Bold font face
-    #bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
+  bold:
+    family: Iosevka Comfy
+    style: Bold
     # Italic font face
-    #italic:
+  italic:
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
+    family: Iosevka Comfy
     # The `style` can be specified to pick a specific face.
-    #style: Italic
+    style: Italic
     # Bold italic font face
     #bold_italic:
     # Font family
@@ -170,35 +163,54 @@ font:
   # characters (Unicode points 2500 - 259f).
   #
   #builtin_box_drawing: true
+cursor:
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: Always
+  blink_interval: 500
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 # Colors (Tomorrow Night)
 colors:
-  name: astromouse
-  author: ""
+  name: Dark Ocean
+  author: DOOMICIDE
   primary:
     background: "#000000"
     foreground: "#ffffff"
   cursor:
-    text: "#000000"
-    cursor: "#ffffff"
+    text: "#ffffff"
+    cursor: "#000000"
   normal:
-    black: "#1c1c1c"
-    red: "#d770af"
-    green: "#9acc79"
-    yellow: "#d0d26b"
-    blue: "#77b6c5"
-    magenta: "#a488d9"
-    cyan: "#7fcab3"
-    white: "#8d8d8d"
+    black: "#000000"
+    red: "#571dc2"
+    green: "#14db49"
+    yellow: "#403d70"
+    blue: "#385a70"
+    magenta: "#384894"
+    cyan: "#4f3a5e"
+    white: "#999999"
   bright:
-    black: "#3d3a3a"
-    red: "#d28abf"
-    green: "#8fb676"
-    yellow: "#c8bc45"
-    blue: "#8fa7b9"
-    magenta: "#bd89de"
-    cyan: "#6ec2a8"
-    white: "#dad3d3"
-theme: Astromouse
+    black: "#38372c"
+    red: "#7c54b0"
+    green: "#a2e655"
+    yellow: "#9c6f59"
+    blue: "#323f5c"
+    magenta: "#5e6c99"
+    cyan: "#667d77"
+    white: "#ffffff"
+theme: DOOMICIDE darkocean

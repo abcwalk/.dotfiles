@@ -311,7 +311,7 @@
 
 (use-package undo-fu-session
   :config
-  (setq undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'"))
+  (setq undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'" "/git;-rebase-todo\\'"))
   (undo-fu-session-global-mode))
 
 (use-package undo-fu
@@ -326,6 +326,13 @@
   :ensure t
   :init
   (global-git-gutter-mode +1))
+
+(set-face-foreground 'git-gutter:modified "purple") ;; background color
+(set-face-background 'git-gutter:modified "black")
+(set-face-foreground 'git-gutter:added "green")
+(set-face-background 'git-gutter:added "black")
+(set-face-background 'git-gutter:deleted "black")
+(set-face-foreground 'git-gutter:deleted "red")
 
 ;; Git integration
 
@@ -408,8 +415,13 @@
   (setq ivy-prescient-retain-classic-highlighting t)
   (ivy-prescient-mode +1))
 
-;; Theme
-(load-theme 'gruber-darker t)
+;; Counsel
+(use-package counsel
+  :hook (ivy-mode . counsel-mode)
+  :config
+  (setq counsel-rg-base-command "rg --vimgrep %s")
+  (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
+  (global-set-key (kbd "C-S-p") #'counsel-M-x))
 
 ;; Keybindings
 
