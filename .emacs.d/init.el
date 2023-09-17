@@ -11,7 +11,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-            '("melpa" . "https://melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;; Bootstrap 'use-package'
@@ -37,7 +37,8 @@
       '(
         (?\" . ?\")
  	(?{ . ?\})))
-(global-display-line-numbers-mode 1)
+
+;; (global-display-line-numbers-mode 1)
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers
@@ -83,6 +84,12 @@
 
 ;;(setq org-clock-sound "~/Documents/emacs/ding.wav")
 
+(use-package display-line-numbers
+  :ensure nil
+  :hook (prog-mode . display-line-numbers-mode)
+  :config
+  (setq-default display-line-numbers-width 1))
+
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
@@ -96,8 +103,8 @@
   :commands lsp
   :config
   (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
-  (global-unset-key (kbd "<f2>"))
-  (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
+  (global-unset-key (kbd "<f4>"))
+  (define-key global-map (kbd "<f4>") 'lsp-rename)
   (setq lsp-auto-guess-root t)
   (setq lsp-log-io nil)
   (setq lsp-restart 'auto-restart)
@@ -285,7 +292,7 @@
          (org-mode . auto-fill-mode)
          (org-mode . org-indent-mode)
          (org-mode . (lambda ()
-                                              (setq-local olivetti-body-width (+ fill-column 5)))))
+                       (setq-local olivetti-body-width (+ fill-column 5)))))
   :config
   (require 'org-tempo)
   (setq org-link-descriptive nil)
@@ -337,19 +344,19 @@
   (defun format-code ()
     "Auto-format whole buffer."
     (interactive)
-    (let ((windowstart (window-start)))
-      (if (derived-mode-p 'prolog-mode)
-          (prolog-indent-buffer)
-        (format-all-buffer))
-      (set-window-start (selected-window) windowstart)))
-  (defalias 'format-document #'format-code)
+    (if (derived-mode-p 'prolog-mode)
+        (prolog-indent-buffer)
+      (format-all-buffer))
+    (save-buffer))
   :config
   (global-set-key (kbd "C-f") #'format-code)
-  (add-hook 'prog-mode-hook #'format-all-ensure-formatter)
-  (add-hook 'python-mode-hook #'(lambda ()
-                                  (setq-local format-all-formatters '(("Python" yapf)))))
-  (add-hook 'sql-mode-hook #'(lambda ()
-                               (setq-local format-all-formatters '(("SQL" pgformatter))))))
+  (add-hook 'prog-mode-hook 'format-all-ensure-formatter))
+
+;; Compile
+(add-hook 'java-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command)
+                 (concat "java " buffer-file-name))))
 
 ;; ivy
 (use-package ivy
@@ -408,9 +415,11 @@
 
 ;; C-M-x eval-defun
 
-;; Move start/end of document
-(global-set-key (kbd "S-<up>") #'beginning-of-buffer)
-(global-set-key (kbd "S-<down>") #'end-of-buffer)
+(define-key global-map (kbd "<f2>") 'save-buffer)
+(define-key global-map (kbd "<f5>") 'lsp-ececute-code-actions)
+
+(define-key global-map (kbd "C-d") 'scroll-up-command)
+(define-key global-map (kbd "C-u") 'scroll-down-command)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -426,6 +435,7 @@
 
 (global-set-key (kbd "<M-up>") 'move-line-up)
 (global-set-key (kbd "<M-down>") 'move-line-down)
+(global-set-key (kbd "<f12>") 'save-buffers-kill-emacs)
 
 ;; Copy line
 (defun copy-line (arg)
@@ -435,3 +445,7 @@
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 (global-set-key "\C-c\C-c" 'copy-line)
+
+(provide 'init)
+
+;;;init.el ends here
