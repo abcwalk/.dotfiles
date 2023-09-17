@@ -56,7 +56,13 @@ flycheck_*.el
 .emacs.d/straight/modified/
 .emacs.d/straight/repos/
 .emacs.d/straight/build-cache.el
+.cache/
+.lsp-session-v1
+eclipse.jdt.ls/
+var/
+workspace/
 eln-cache/
+transient/
 
 ; Fonts
 
