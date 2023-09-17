@@ -63,7 +63,7 @@ var/
 workspace/
 eln-cache/
 transient/
-
+*.*bak
 ; Fonts
 
 fonts/.uuid
