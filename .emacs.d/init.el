@@ -7,12 +7,13 @@
 (setq custom-file "~/.emacs.d/emacs-custom.el")
 (load custom-file)
 
-;; Set up package and use-package
-
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+(package-install-selected-packages)
 
 ;; Bootstrap 'use-package'
 (unless (package-installed-p 'use-package)
@@ -25,7 +26,6 @@
 ;; {{{
 ;; Bootstrap 'straight'
 (setq straight-repository-branch "develop")
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -57,7 +57,66 @@
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)
 (save-place-mode 1)
-(menu-bar-mode -1)
+
+
+;; Control buffer placement
+(setq display-buffer-base-action
+      '(display-buffer-reuse-mode-window
+        display-buffer-reuse-window
+        display-buffer-same-window))
+
+;; If a popup does happen, don't resize windows to be equal-sized
+(setq even-window-sizes nil)
+
+;; Open files externally
+(use-package openwith
+  ;; :if (not dw/is-termux)
+  :config
+  (setq openwith-associations
+        (list
+         (list (openwith-make-extension-regexp
+                '("mpg" "mpeg" "mp3" "mp4"
+                  "avi" "wmv" "wav" "mov" "flv"
+                  "ogm" "ogg" "mkv"))
+               "mpv"
+               '(file))
+         (list (openwith-make-extension-regexp
+                '("xbm" "pbm" "pgm" "ppm" "pnm"
+                  "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
+               ;; causing feh to be opened...
+               "feh"
+               '(file))
+         (list (openwith-make-extension-regexp
+                '("pdf"))
+               "zathura"
+               '(file)))))
+
+
+;; Block templates
+;; This is needed as of Org 9.2
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src sh"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("sc" . "src scheme"))
+(add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+(add-to-list 'org-structure-template-alist '("go" . "src go"))
+(add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
+(add-to-list 'org-structure-template-alist '("json" . "src json"))
+
+;; Pomodoro
+;; (use-package org-pomodoro
+;;   :after org
+;;   :config
+;;   (setq org-pomodoro-start-sound "~/.dotfiles/.emacs.d/sounds/focus_bell.wav")
+;;   (setq org-pomodoro-short-break-sound "~/.dotfiles/.emacs.d/sounds/three_beeps.wav")
+;;   (setq org-pomodoro-long-break-sound "~/.dotfiles/.emacs.d/sounds/three_beeps.wav")
+;;   (setq org-pomodoro-finished-sound "~/.dotfiles/.emacs.d/sounds/meditation_bell.wav")
+
+;;   (dw/leader-key-def
+;;     "op"  '(org-pomodoro :which-key "pomodoro")))
+
 ;; auto close bracket insertion. New in emacs 24
 (electric-pair-mode 1)
 ;; make electric-pair-mode work on more brackets
@@ -78,7 +137,7 @@
 
 ;; gcmh
 (use-package gcmh
-  ;; :hook (emacs-startup-hook . gcmh-mode)
+  :hook (emacs-startup-hook . gcmh-mode)
   :demand t
   :config
   (setq gcmh-low-cons-threshold (* 16 1024 1024))
@@ -93,37 +152,37 @@
 ;; (setq mood-line-glyph-alist mood-line-glyphs-unicode)
 
 ;; vertico
-(use-package vertico
-  :init
-  (vertico-mode)
-  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  (setq vertico-cycle t)
-  )
+;; (use-package vertico
+;;   :init
+;;   (vertico-mode)
+;;   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+;;   (setq vertico-cycle t)
+;;   )
 
 ;; lambda-line
-(use-package lambda-line
-  :straight (:type git :host github :repo "lambda-emacs/lambda-line")
-  :custom
-  (lambda-line-position 'bottom) ;; Set position of status-line
-  (lambda-line-abbrev t) ;; abbreviate major modes
-  (lambda-line-hspace "  ")  ;; add some cushion
-  (lambda-line-prefix t) ;; use a prefix symbol
-  (lambda-line-prefix-padding nil) ;; no extra space for prefix
-  (lambda-line-status-invert nil)  ;; no invert colors
-  (lambda-line-gui-ro-symbol  " ") ;; symbols
-  (lambda-line-gui-mod-symbol " ⬤")
-  (lambda-line-gui-rw-symbol  " ◯")
-  (lambda-line-vc-symbol " ")
-  (lambda-line-space-top +.50)  ;; padding on top and bottom of line
-  (lambda-line-space-bottom -.50)
-  (lambda-line-symbol-position 0.1) ;; adjust the vertical placement of symbol
-  :config
-  ;; activate lambda-line
-  (lambda-line-mode)
-  ;; set divider line in footer
-  (when (eq lambda-line-position 'top)
-    (setq-default mode-line-format (list "%_"))
-    (setq mode-line-format (list "%_"))))
+;; (use-package lambda-line
+;;   :straight (:type git :host github :repo "lambda-emacs/lambda-line")
+;;   :custom
+;;   (lambda-line-position 'bottom) ;; Set position of status-line
+;;   (lambda-line-abbrev t) ;; abbreviate major modes
+;;   (lambda-line-hspace "  ")  ;; add some cushion
+;;   (lambda-line-prefix t) ;; use a prefix symbol
+;;   (lambda-line-prefix-padding nil) ;; no extra space for prefix
+;;   (lambda-line-status-invert nil)  ;; no invert colors
+;;   (lambda-line-gui-ro-symbol  " ") ;; symbols
+;;   (lambda-line-gui-mod-symbol " ⬤")
+;;   (lambda-line-gui-rw-symbol  " ◯")
+;;   (lambda-line-vc-symbol " ")
+;;   (lambda-line-space-top +.50)  ;; padding on top and bottom of line
+;;   (lambda-line-space-bottom -.50)
+;;   (lambda-line-symbol-position 0.1) ;; adjust the vertical placement of symbol
+;;   :config
+;;   ;; activate lambda-line
+;;   (lambda-line-mode)
+;;   ;; set divider line in footer
+;;   (when (eq lambda-line-position 'top)
+;;     (setq-default mode-line-format (list "%_"))
+;;     (setq mode-line-format (list "%_"))))
 
 ;; (use-package lambda-themes
 ;;   :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
@@ -217,6 +276,11 @@
   (setq lsp-ui-peek-always-show t)
   (setq lsp-ui-sideline-delay 0.05))
 
+(use-package prescient
+  :after counsel
+  :config
+  (prescient-persist-mode 1))
+
 ;; Python
 (use-package lsp-pyright
   :hook (python-mode . (lambda () (require 'lsp-pyright)))
@@ -298,8 +362,31 @@
 
 (use-package vimrc-mode)
 
-(use-package yaml-mode)
+;; YAML
+(use-package yaml-mode
+  :mode "\\.ya?ml\\'")
 
+;; Compile
+(use-package compile
+  :straight nil
+  :custom
+  (compilation-scroll-output t))
+
+(defun auto-recompile-buffer ()
+  (interactive)
+  (if (member #'recompile after-save-hook)
+      (remove-hook 'after-save-hook #'recompile t)
+    (add-hook 'after-save-hook #'recompile nil t)))
+
+;; Snippets
+;; M-x package-install RET yasnippet-snippets
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode)
+  :config
+  (yas-reload-all))
+
+(use-package smartparens
+  :hook (prog-mode . smartparens-mode))
 ;; icons
 (use-package all-the-icons
   :ensure t
@@ -336,7 +423,14 @@
                                                   (interactive)
                                                   (dashboard-refresh-buffer)
                                                   (message "Refreshing Dashboard...done"))))
-
+(use-package ace-window
+  :bind (("M-o" . ace-window))
+  :custom
+  (aw-scope 'frame)
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (aw-minibuffer-flag t)
+  :config
+  (ace-window-display-mode 1))
 
 ;; Evil-Nerd2-commenter
 (use-package evil-nerd-commenter
@@ -348,7 +442,6 @@
   :config
   (setq minions-mode-line-lighter "")
   (setq minions-mode-line-delimiters '("" . ""))
-  (setq-default mode-line-buffer-identification '("%b // " (:eval (projectile-project-name))))
   (minions-mode +1))
 
 (use-package org
@@ -409,6 +502,15 @@
                                               (magit-refresh)
                                               (message "Refreshing Magit...done"))))
 
+;; Markdown
+(use-package markdown-mode
+  :straight t
+  :mode "\\.md\\'"
+  :config
+  (setq markdown-command "marked"))
+  ;; (set-face-attribute (car face) nil :weight 'normal :height (cdr face)))
+;; (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
+
 ;; format
 (use-package format-all
   :preface
@@ -429,34 +531,98 @@
 	    (set (make-local-variable 'compile-command)
                  (concat "java " buffer-file-name))))
 
+;; HTML
+(use-package web-mode
+  :mode "(\\.\\(html?\\|ejs\\|tsx\\|jsx\\)\\'"
+  :config
+  (setq-default web-mode-code-indent-offset 2)
+  (setq-default web-mode-markup-indent-offset 2)
+  (setq-default web-mode-attribute-indent-offset 2))
+
+;; 1. Start the server with `httpd-start'
+;; 2. Use `impatient-mode' on any buffer
+(use-package impatient-mode
+  :straight t)
+
+(use-package skewer-mode
+  :straight t)
+
+
 ;; ivy
 (use-package ivy
-  :hook (after-init . ivy-mode)
+  :diminish
+  :bind (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-f" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :init
+  (ivy-mode 1)
   :config
-  (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line)
-  (setq ivy-height 15)
-  (setq ivy-display-style nil)
-  (setq ivy-re-builders-alist
-	'((counsel-rg            . ivy--regex-plus)
-          (counsel-projectile-rg . ivy--regex-plus)
-          (swiper                . ivy--regex-plus)
-          (t                     . ivy--regex-fuzzy)))
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-wrap t)
   (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-initial-inputs-alist nil)
-  (if (display-graphic-p)
-      (progn
-        (define-key ivy-minibuffer-map (kbd "<tab>") #'ivy-next-line)
-	(define-key ivy-minibuffer-map (kbd "<return>") #'ivy-alt-done)
-        (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done))
-    (progn
-      (define-key ivy-minibuffer-map (kbd "TAB") #'ivy-next-line)
-      (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-      (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)))
-  (define-key ivy-minibuffer-map (kbd "<backtab>") #'ivy-previous-line)
-  (define-key ivy-minibuffer-map (kbd "C-c m") #'ivy-mark)
-  (define-key ivy-minibuffer-map (kbd "C-c u") #'ivy-unmark))
+  (setq enable-recursive-minibuffers t)
 
+  ;; Use different regex strategies per completion command
+  (push '(completion-at-point . ivy--regex-fuzzy) ivy-re-builders-alist) ;; This doesn't seem to work...
+  (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
+  (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist)
+
+  ;; Set minibuffer height for different commands
+  (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
+  (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
+  (setf (alist-get 'swiper ivy-height-alist) 15)
+  (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7))
+
+(use-package ivy-hydra
+  :defer t
+  :after hydra)
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1)
+  :after counsel
+  :config
+  (setq ivy-format-function #'ivy-format-function-line)
+  (setq ivy-rich-display-transformers-list
+        (plist-put ivy-rich-display-transformers-list
+                   'ivy-switch-buffer
+                   '(:columns
+                     ((ivy-rich-candidate (:width 40))
+                      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
+                      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
+                      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
+                      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
+                     :predicate
+                     (lambda (cand)
+                       (if-let ((buffer (get-buffer cand)))
+                           ;; Don't mess with EXWM buffers
+                           (with-current-buffer buffer
+                             (not (derived-mode-p 'exwm-mode)))))))))
+
+(use-package ivy-posframe
+  :disabled
+  :custom
+  (ivy-posframe-width      115)
+  (ivy-posframe-min-width  115)
+  (ivy-posframe-height     10)
+  (ivy-posframe-min-height 10)
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (setq ivy-posframe-parameters '((parent-frame . nil)
+                                  (left-fringe . 8)
+                                  (right-fringe . 8)))
+  (ivy-posframe-mode 1))
 
 ;; swiper
 (use-package swiper
@@ -467,25 +633,58 @@
 
 ;; ivy-prescient
 (use-package ivy-prescient
-  :after (prescient ivy counsel)
+  :after prescient
   :config
-  (setq ivy-prescient-sort-commands
-	'(:not swiper
-               counsel-grep
-               counsel-rg
-               counsel-projectile-rg
-               ivy-switch-buffer
-               counsel-switch-buffer))
-  (setq ivy-prescient-retain-classic-highlighting t)
-  (ivy-prescient-mode +1))
+  (ivy-prescient-mode 1))
 
 ;; Counsel
 (use-package counsel
-  :hook (ivy-mode . counsel-mode)
+  :demand t
+  :bind (("M-x" . counsel-M-x)
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         ;; ("C-M-j" . counsel-switch-buffer)
+         ("C-M-l" . counsel-imenu)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
+  :custom
+  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
-  (setq counsel-rg-base-command "rg --vimgrep %s")
-  (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
-  (global-set-key (kbd "C-S-p") #'counsel-M-x))
+  (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
+
+;; (use-package general
+;;   :config
+;;   (general-evil-setup t)
+
+;;   (general-create-definer dw/leader-key-def
+;;     :keymaps '(normal insert visual emacs)
+;;     :prefix "SPC"
+;;     :global-prefix "C-SPC")
+
+;;   (general-create-definer dw/ctrl-c-keys
+;;     :prefix "C-c"))
+
+;; (dw/leader-key-def
+;;   "r"   '(ivy-resume :which-key "ivy resume")
+;;   "f"   '(:ignore t :which-key "files")
+;;   "ff"  '(counsel-find-file :which-key "open file")
+;;   "C-f" 'counsel-find-file
+;;   "fr"  '(counsel-recentf :which-key "recent files")
+;;   "fR"  '(revert-buffer :which-key "revert file")
+;;   "fj"  '(counsel-file-jump :which-key "jump to file"))
+
+(use-package avy
+  :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
+
+(global-set-key (kbd "C-.") 'avy-goto-char-2)
+
+(use-package flx  ;; Improves sorting for fuzzy-matched results
+  :after ivy
+  :defer t
+  :init
+  (setq ivy-flx-limit 10000))
+
+(use-package wgrep)
 
 ;; Keybindings
 
@@ -493,7 +692,6 @@
 
 (define-key global-map (kbd "<f2>") 'save-buffer)
 (define-key global-map (kbd "<f5>") 'lsp-ececute-code-actions)
-
 
 (define-key global-map (kbd "C-d") 'scroll-up-command)
 (define-key global-map (kbd "C-u") 'scroll-down-command)
