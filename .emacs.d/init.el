@@ -4,15 +4,19 @@
 ;;  This is my personal Emacs configuration
 	 ;;; Code:
 
-(setq custom-file "~/.emacs.d/emacs-custom.el")
+(setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/emacs-custom.el")
 (load custom-file)
 
-;; Set up package and use-package
+;; Font
+(set-face-attribute 'default nil :font "IosevkaTerm NFM" :height 160)
 
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+(package-install-selected-packages)
 
 ;; Bootstrap 'use-package'
 (unless (package-installed-p 'use-package)
@@ -78,7 +82,7 @@
 
 ;; gcmh
 (use-package gcmh
-  ;; :hook (emacs-startup-hook . gcmh-mode)
+  :hook (emacs-startup-hook . gcmh-mode)
   :demand t
   :config
   (setq gcmh-low-cons-threshold (* 16 1024 1024))
@@ -216,6 +220,11 @@
   (setq lsp-ui-sideline-diagnostic-max-lines 2)
   (setq lsp-ui-peek-always-show t)
   (setq lsp-ui-sideline-delay 0.05))
+
+(use-package prescient
+  :after counsel
+  :config
+  (prescient-persist-mode 1))
 
 ;; Python
 (use-package lsp-pyright
@@ -431,32 +440,79 @@
 
 ;; ivy
 (use-package ivy
-  :hook (after-init . ivy-mode)
+  :diminish
+  :bind (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-f" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :init
+  (ivy-mode 1)
   :config
-  (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line)
-  (setq ivy-height 15)
-  (setq ivy-display-style nil)
-  (setq ivy-re-builders-alist
-	'((counsel-rg            . ivy--regex-plus)
-          (counsel-projectile-rg . ivy--regex-plus)
-          (swiper                . ivy--regex-plus)
-          (t                     . ivy--regex-fuzzy)))
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-wrap t)
   (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-initial-inputs-alist nil)
-  (if (display-graphic-p)
-      (progn
-        (define-key ivy-minibuffer-map (kbd "<tab>") #'ivy-next-line)
-	(define-key ivy-minibuffer-map (kbd "<return>") #'ivy-alt-done)
-        (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done))
-    (progn
-      (define-key ivy-minibuffer-map (kbd "TAB") #'ivy-next-line)
-      (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-      (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)))
-  (define-key ivy-minibuffer-map (kbd "<backtab>") #'ivy-previous-line)
-  (define-key ivy-minibuffer-map (kbd "C-c m") #'ivy-mark)
-  (define-key ivy-minibuffer-map (kbd "C-c u") #'ivy-unmark))
+  (setq enable-recursive-minibuffers t)
 
+  ;; Use different regex strategies per completion command
+  (push '(completion-at-point . ivy--regex-fuzzy) ivy-re-builders-alist) ;; This doesn't seem to work...
+  (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
+  (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist)
+
+  ;; Set minibuffer height for different commands
+  (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
+  (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
+  (setf (alist-get 'swiper ivy-height-alist) 15)
+  (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7))
+
+(use-package ivy-hydra
+  :defer t
+  :after hydra)
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1)
+  :after counsel
+  :config
+  (setq ivy-format-function #'ivy-format-function-line)
+  (setq ivy-rich-display-transformers-list
+        (plist-put ivy-rich-display-transformers-list
+                   'ivy-switch-buffer
+                   '(:columns
+                     ((ivy-rich-candidate (:width 40))
+                      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
+                      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
+                      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
+                      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
+                     :predicate
+                     (lambda (cand)
+                       (if-let ((buffer (get-buffer cand)))
+                           ;; Don't mess with EXWM buffers
+                           (with-current-buffer buffer
+                             (not (derived-mode-p 'exwm-mode)))))))))
+
+(use-package ivy-posframe
+  :disabled
+  :custom
+  (ivy-posframe-width      115)
+  (ivy-posframe-min-width  115)
+  (ivy-posframe-height     10)
+  (ivy-posframe-min-height 10)
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (setq ivy-posframe-parameters '((parent-frame . nil)
+                                  (left-fringe . 8)
+                                  (right-fringe . 8)))
+  (ivy-posframe-mode 1))
 
 ;; swiper
 (use-package swiper
@@ -467,25 +523,53 @@
 
 ;; ivy-prescient
 (use-package ivy-prescient
-  :after (prescient ivy counsel)
+  :after prescient
   :config
-  (setq ivy-prescient-sort-commands
-	'(:not swiper
-               counsel-grep
-               counsel-rg
-               counsel-projectile-rg
-               ivy-switch-buffer
-               counsel-switch-buffer))
-  (setq ivy-prescient-retain-classic-highlighting t)
-  (ivy-prescient-mode +1))
+  (ivy-prescient-mode 1))
 
 ;; Counsel
 (use-package counsel
-  :hook (ivy-mode . counsel-mode)
+  :demand t
+  :bind (("M-x" . counsel-M-x)
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         ;; ("C-M-j" . counsel-switch-buffer)
+         ("C-M-l" . counsel-imenu)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
+  :custom
+  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
-  (setq counsel-rg-base-command "rg --vimgrep %s")
-  (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
-  (global-set-key (kbd "C-S-p") #'counsel-M-x))
+  (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
+
+(use-package general
+  :config
+  (general-evil-setup t)
+
+  (general-create-definer dw/leader-key-def
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+
+  (general-create-definer dw/ctrl-c-keys
+    :prefix "C-c"))
+
+(dw/leader-key-def
+ "r"   '(ivy-resume :which-key "ivy resume")
+ "f"   '(:ignore t :which-key "files")
+ "ff"  '(counsel-find-file :which-key "open file")
+ "C-f" 'counsel-find-file
+ "fr"  '(counsel-recentf :which-key "recent files")
+ "fR"  '(revert-buffer :which-key "revert file")
+ "fj"  '(counsel-file-jump :which-key "jump to file"))
+
+(use-package flx  ;; Improves sorting for fuzzy-matched results
+  :after ivy
+  :defer t
+  :init
+  (setq ivy-flx-limit 10000))
+
+(use-package wgrep)
 
 ;; Keybindings
 
