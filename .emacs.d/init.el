@@ -22,6 +22,34 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
+;; {{{
+;; Bootstrap 'straight'
+(setq straight-repository-branch "develop")
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
+
+;; automatically ensure every package exists (like :ensure or :straight)
+;; (setq straight-use-package-by-default t)
+
+;; Configure use-package to use straight.el by default
+;; (use-package straight
+;;   :custom
+;;   (straight-use-package-by-default t))
+
+;;}}}
+
 ;; Options
 
 ;; Minimize garbage collection during startup
@@ -72,15 +100,46 @@
   (setq vertico-cycle t)
   )
 
-;; Optionally use the `orderless' completion style.
-;; (use-package orderless
-;; :init
-;; Configure a custom style dispatcher (see the Consult wiki)
-;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
-;;       orderless-component-separator #'orderless-escapable-split-on-space)
-;; (setq completion-styles '(orderless basic)
-;; completion-category-defaults nil
-;; completion-category-overrides '((file (styles partial-completion)))))
+;; lambda-line
+(use-package lambda-line
+  :straight (:type git :host github :repo "lambda-emacs/lambda-line")
+  :custom
+  (lambda-line-position 'bottom) ;; Set position of status-line
+  (lambda-line-abbrev t) ;; abbreviate major modes
+  (lambda-line-hspace "  ")  ;; add some cushion
+  (lambda-line-prefix t) ;; use a prefix symbol
+  (lambda-line-prefix-padding nil) ;; no extra space for prefix
+  (lambda-line-status-invert nil)  ;; no invert colors
+  (lambda-line-gui-ro-symbol  " ") ;; symbols
+  (lambda-line-gui-mod-symbol " ⬤")
+  (lambda-line-gui-rw-symbol  " ◯")
+  (lambda-line-vc-symbol " ")
+  (lambda-line-space-top +.50)  ;; padding on top and bottom of line
+  (lambda-line-space-bottom -.50)
+  (lambda-line-symbol-position 0.1) ;; adjust the vertical placement of symbol
+  :config
+  ;; activate lambda-line
+  (lambda-line-mode)
+  ;; set divider line in footer
+  (when (eq lambda-line-position 'top)
+    (setq-default mode-line-format (list "%_"))
+    (setq mode-line-format (list "%_"))))
+
+;; (use-package lambda-themes
+;;   :straight (:type git :host github :repo "lambda-emacs/lambda-themes") 
+;;   :custom
+;;   (lambda-themes-set-italic-comments t)
+;;   (lambda-themes-set-italic-keywords t)
+;;   (lambda-themes-set-variable-pitch t) 
+;;   :config
+;;   ;; load preferred theme 
+;;   (load-theme 'lambda-light))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;;(setq org-clock-sound "~/Documents/emacs/ding.wav")
 
@@ -332,11 +391,11 @@
   :init
   (global-git-gutter-mode +1))
 
-(set-face-background 'git-gutter:modified "#ffffff")
+(set-face-background 'git-gutter:modified "purple")
 (set-face-foreground 'git-gutter:modified "purple")
-(set-face-background 'git-gutter:added "#ffffff")
+(set-face-background 'git-gutter:added "green")
 (set-face-foreground 'git-gutter:added "green")
-(set-face-background 'git-gutter:deleted "#ffffff")
+(set-face-background 'git-gutter:deleted "red")
 (set-face-foreground 'git-gutter:deleted "red")
 
 ;; Git integration
@@ -435,6 +494,7 @@
 (define-key global-map (kbd "<f2>") 'save-buffer)
 (define-key global-map (kbd "<f5>") 'lsp-ececute-code-actions)
 
+
 (define-key global-map (kbd "C-d") 'scroll-up-command)
 (define-key global-map (kbd "C-u") 'scroll-down-command)
 
@@ -462,6 +522,8 @@
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 (global-set-key "\C-c\C-c" 'copy-line)
+
+(message (emacs-init-time))
 
 (provide 'init)
 
