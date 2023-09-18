@@ -1,8 +1,8 @@
 ;;; init.el --- -*- lexical-binding: t -*-
 ;;  Author: Maksim Rozhkov
-;;; Commentary:
+	 ;;; Commentary:
 ;;  This is my personal Emacs configuration
-;;; Code:
+	 ;;; Code:
 
 (setq custom-file "~/.emacs.d/emacs-custom.el")
 (load custom-file)
@@ -11,7 +11,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+	     '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;; Bootstrap 'use-package'
@@ -63,7 +63,7 @@
 ;; make electric-pair-mode work on more brackets
 (setq electric-pair-pairs
       '(
-        (?\" . ?\")
+	(?\" . ?\")
  	(?{ . ?\})))
 
 ;; (global-display-line-numbers-mode 1)
@@ -126,13 +126,13 @@
     (setq mode-line-format (list "%_"))))
 
 ;; (use-package lambda-themes
-;;   :straight (:type git :host github :repo "lambda-emacs/lambda-themes") 
+;;   :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
 ;;   :custom
 ;;   (lambda-themes-set-italic-comments t)
 ;;   (lambda-themes-set-italic-keywords t)
-;;   (lambda-themes-set-variable-pitch t) 
+;;   (lambda-themes-set-variable-pitch t)
 ;;   :config
-;;   ;; load preferred theme 
+;;   ;; load preferred theme
 ;;   (load-theme 'lambda-light))
 
 (use-package orderless
@@ -353,10 +353,10 @@
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
-         (org-mode . auto-fill-mode)
-         (org-mode . org-indent-mode)
-         (org-mode . (lambda ()
-                       (setq-local olivetti-body-width (+ fill-column 5)))))
+	 (org-mode . auto-fill-mode)
+	 (org-mode . org-indent-mode)
+	 (org-mode . (lambda ()
+		       (setq-local olivetti-body-width (+ fill-column 5)))))
   :config
   (require 'org-tempo)
   (setq org-link-descriptive nil)
@@ -412,7 +412,7 @@
 ;; format
 (use-package format-all
   :preface
-  (defun format-code ()
+  (defun ian/format-code ()
     "Auto-format whole buffer."
     (interactive)
     (if (derived-mode-p 'prolog-mode)
@@ -420,13 +420,13 @@
       (format-all-buffer))
     (save-buffer))
   :config
-  (global-set-key (kbd "C-f") #'format-code)
-  (add-hook 'prog-mode-hook 'format-all-ensure-formatter))
+  (global-set-key (kbd "C-f") #'ian/format-code)
+  (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
 
 ;; Compile
 (add-hook 'java-mode-hook
-          (lambda ()
-            (set (make-local-variable 'compile-command)
+	  (lambda ()
+	    (set (make-local-variable 'compile-command)
                  (concat "java " buffer-file-name))))
 
 ;; ivy
@@ -437,7 +437,7 @@
   (setq ivy-height 15)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist
-        '((counsel-rg            . ivy--regex-plus)
+	'((counsel-rg            . ivy--regex-plus)
           (counsel-projectile-rg . ivy--regex-plus)
           (swiper                . ivy--regex-plus)
           (t                     . ivy--regex-fuzzy)))
@@ -447,7 +447,7 @@
   (if (display-graphic-p)
       (progn
         (define-key ivy-minibuffer-map (kbd "<tab>") #'ivy-next-line)
-        (define-key ivy-minibuffer-map (kbd "<return>") #'ivy-alt-done)
+	(define-key ivy-minibuffer-map (kbd "<return>") #'ivy-alt-done)
         (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done))
     (progn
       (define-key ivy-minibuffer-map (kbd "TAB") #'ivy-next-line)
@@ -470,7 +470,7 @@
   :after (prescient ivy counsel)
   :config
   (setq ivy-prescient-sort-commands
-        '(:not swiper
+	'(:not swiper
                counsel-grep
                counsel-rg
                counsel-projectile-rg
