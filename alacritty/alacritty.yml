@@ -193,8 +193,8 @@ colors:
     background: "#000000"
     foreground: "#ffffff"
   cursor:
-    text: "#000000"
-    cursor: "#ffffff"
+    text: "#ffffff"
+    cursor: "#000000"
   normal:
     black: "#000000"
     red: "#571dc2"

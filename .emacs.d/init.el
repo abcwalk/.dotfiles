@@ -84,11 +84,16 @@
 
 ;;(setq org-clock-sound "~/Documents/emacs/ding.wav")
 
-(use-package display-line-numbers
-  :ensure nil
-  :hook (prog-mode . display-line-numbers-mode)
+;; (use-package display-line-numbers
+;;   :ensure nil
+;;   :hook (prog-mode . display-line-numbers-mode)
+;;   :config
+;;   (setq-default display-line-numbers-width 1))
+
+;; DAP
+(use-package dap-mode
   :config
-  (setq-default display-line-numbers-width 1))
+  (require 'dap-java))
 
 (use-package lsp-mode
   :init
@@ -327,11 +332,11 @@
   :init
   (global-git-gutter-mode +1))
 
-(set-face-foreground 'git-gutter:modified "purple") ;; background color
-(set-face-background 'git-gutter:modified "black")
+(set-face-background 'git-gutter:modified "#ffffff")
+(set-face-foreground 'git-gutter:modified "purple")
+(set-face-background 'git-gutter:added "#ffffff")
 (set-face-foreground 'git-gutter:added "green")
-(set-face-background 'git-gutter:added "black")
-(set-face-background 'git-gutter:deleted "black")
+(set-face-background 'git-gutter:deleted "#ffffff")
 (set-face-foreground 'git-gutter:deleted "red")
 
 ;; Git integration
