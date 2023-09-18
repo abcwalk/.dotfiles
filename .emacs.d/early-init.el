@@ -4,6 +4,7 @@
 ;;  This is my personal Emacs configuration
 ;;; Code:
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 (menu-bar-mode -1)
 (unless (and (display-graphic-p) (eq system-type 'darwin))
   (push '(menu-bar-lines . 0) default-frame-alist))
