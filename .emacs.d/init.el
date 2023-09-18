@@ -1,11 +1,36 @@
 ;;; init.el --- -*- lexical-binding: t -*-
 ;;  Author: Maksim Rozhkov
-	 ;;; Commentary:
+;;; Commentary:
 ;;  This is my personal Emacs configuration
-	 ;;; Code:
+;;; Code:
 
-(setq custom-file "~/.emacs.d/emacs-custom.el")
-(load custom-file)
+;; The default is 800 kilobytes.  Measured in bytes.
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6
+      file-name-handler-alist nil
+      site-run-file nil
+      read-process-output-max (* 10 1024 1024)
+      bidi-inhibit-bpa t)
+
+;; OS
+(if (eq system-type 'windows-nt)
+    (progn
+      (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/emacs-custom.el")
+      (load custom-file)
+      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 160)
+      (setq visible-bell t)))
+
+(if (eq system-type 'gnu/linux)
+    (progn
+      (setq custom-file "~/.emacs.d/emacs-custom.el")
+      (load custom-file)
+      (set-face-attribute 'default :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
+      (scroll-bar-mode -1)
+      (tool-bar-mode -1)
+      (tooltip-mode -1)
+      (menu-bar-mode -1)))
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -49,15 +74,6 @@
 ;;   (straight-use-package-by-default t))
 
 ;;}}}
-
-;; Options
-
-;; Minimize garbage collection during startup
-(setq gc-cons-threshold most-positive-fixnum)
-(setq inhibit-startup-echo-area-message t)
-(setq inhibit-startup-message t)
-(save-place-mode 1)
-
 
 ;; Control buffer placement
 (setq display-buffer-base-action
@@ -508,7 +524,7 @@
   :mode "\\.md\\'"
   :config
   (setq markdown-command "marked"))
-  ;; (set-face-attribute (car face) nil :weight 'normal :height (cdr face)))
+;; (set-face-attribute (car face) nil :weight 'normal :height (cdr face)))
 ;; (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
 ;; format
@@ -721,7 +737,15 @@
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 (global-set-key "\C-c\C-c" 'copy-line)
 
-(message (emacs-init-time))
+
+;; Profile emacs startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "*** Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
 
 (provide 'init)
 
