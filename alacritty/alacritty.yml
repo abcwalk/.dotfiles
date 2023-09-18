@@ -187,30 +187,25 @@ cursor:
 #draw_bold_text_with_bright_colors: false
 # Colors (Tomorrow Night)
 colors:
-  name: Dark Ocean
-  author: DOOMICIDE
   primary:
-    background: "#000000"
-    foreground: "#ffffff"
-  cursor:
-    text: "#ffffff"
-    cursor: "#000000"
+    background: '#FFFFFF'
+    foreground: '#000000'
   normal:
-    black: "#000000"
-    red: "#571dc2"
-    green: "#14db49"
-    yellow: "#403d70"
-    blue: "#385a70"
-    magenta: "#384894"
-    cyan: "#4f3a5e"
-    white: "#999999"
+    black: '#000000'
+    red: '#990000'
+    green: '#00A600'
+    yellow: '#999900'
+    blue: '#0000B2'
+    magenta: '#B200B2'
+    cyan: '#00A6B2'
+    white: '#BFBFBF'
   bright:
-    black: "#38372c"
-    red: "#7c54b0"
-    green: "#a2e655"
-    yellow: "#9c6f59"
-    blue: "#323f5c"
-    magenta: "#5e6c99"
-    cyan: "#667d77"
-    white: "#ffffff"
-theme: DOOMICIDE darkocean
+    black: '#666666'
+    red: '#E50000'
+    green: '#00D900'
+    yellow: '#E5E500'
+    blue: '#0000FF'
+    magenta: '#E500E5'
+    cyan: '#00E5E5'
+    white: '#E5E5E5'
+theme: Terminal-app-Basic
