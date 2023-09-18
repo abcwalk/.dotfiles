@@ -24,7 +24,7 @@
     (progn
       (setq custom-file "~/.emacs.d/emacs-custom.el")
       (load custom-file)
-      (set-face-attribute 'default :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
+      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
       (scroll-bar-mode -1)
       (tool-bar-mode -1)
       (tooltip-mode -1)
