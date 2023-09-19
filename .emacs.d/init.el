@@ -12,27 +12,6 @@
       read-process-output-max (* 10 1024 1024)
       bidi-inhibit-bpa t)
 
-;; OS
-(if (eq system-type 'windows-nt)
-    (progn
-      (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/emacs-custom.el")
-      (load custom-file)
-      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 160)
-      (setq visible-bell t)))
-
-(if (eq system-type 'gnu/linux)
-    (if (not window-system)
-  (progn
-    (scroll-bar-mode -1)
-    (tool-bar-mode -1)
-    (tooltip-mode -1)
-    (menu-bar-mode -1))
-  (setq custom-file "~/.emacs.d/emacs-custom.el")
-  (load custom-file)
-  (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)))
-
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/") t)
@@ -75,6 +54,27 @@
 ;;   (straight-use-package-by-default t))
 
 ;;}}}
+
+;; OS
+(if (eq system-type 'windows-nt)
+    (progn
+      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 160)
+      (setq visible-bell t)
+      (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/emacs-custom.el")
+      (load custom-file)))
+
+(if (eq system-type 'gnu/linux)
+    (if (not window-system)
+	(progn
+	  (scroll-bar-mode -1)
+	  (tool-bar-mode -1)
+	  (tooltip-mode -1)
+	  (menu-bar-mode -1))
+          (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
+          (setq custom-file "~/.emacs.d/emacs-custom.el")
+          (load custom-file)))
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Control buffer placement
 (setq display-buffer-base-action
@@ -135,14 +135,13 @@
 ;;     "op"  '(org-pomodoro :which-key "pomodoro")))
 
 ;; auto close bracket insertion. New in emacs 24
-(electric-pair-mode 1)
+;; (electric-pair-mode 1)
 ;; make electric-pair-mode work on more brackets
-(setq electric-pair-pairs
-      '(
-	(?\" . ?\")
- 	(?{ . ?\})))
-
-;; (global-display-line-numbers-mode 1)
+;; (setq electric-pair-pairs
+;;       '(
+;; 	(?\" . ?\")
+;;  	(?{ . ?\})))
+;;(global-display-line-numbers-mode 1)
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers

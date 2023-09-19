@@ -24,7 +24,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ `(mode-line ((t (:background "#d7d7d7" :foreground "#0a0a0a" :box "#505050"))))
+ `(mode-line-active ((t (:background "#d7d7d7" :foreground "#0a0a0a" :box "#505050"))))
+ `(mode-line-inactive ((t (:background "#efefef" :foreground "#404148" :box "#505050"))))
+ `(mode-line-emphasis ((t (:background "#d7d7d7" :foreground "#5c2092" :weight bold))))
+ `(mode-line-buffer-id ((t (:weight bold))))
+ `(mode-line-highlight ((t (:inherit highlight))))
+ (set-cursor-color "black"))
 
 (provide 'emacs-custom)
 ;;; emacs-custom.el ends here
