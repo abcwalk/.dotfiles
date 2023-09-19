@@ -70,9 +70,9 @@
 	  (tool-bar-mode -1)
 	  (tooltip-mode -1)
 	  (menu-bar-mode -1))
-          (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
-          (setq custom-file "~/.emacs.d/emacs-custom.el")
-          (load custom-file)))
+      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
+      (setq custom-file "~/.emacs.d/emacs-custom.el")
+      (load custom-file)))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -498,7 +498,8 @@
   :hook (prog-mode . git-gutter-mode)
   :ensure t
   :init
-  (global-git-gutter-mode +1))
+  (global-git-gutter-mode -1)
+  (global-set-key (kbd "C-x C-g") 'git-gutter))
 
 (set-face-background 'git-gutter:modified "purple")
 (set-face-foreground 'git-gutter:modified "purple")

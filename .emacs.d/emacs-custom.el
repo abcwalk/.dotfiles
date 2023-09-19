@@ -30,7 +30,7 @@
  `(mode-line-emphasis ((t (:background "#d7d7d7" :foreground "#5c2092" :weight bold))))
  `(mode-line-buffer-id ((t (:weight bold))))
  `(mode-line-highlight ((t (:inherit highlight))))
- (set-cursor-color "black"))
+ `(cursor ((t(:background "black")))))
 
 (provide 'emacs-custom)
 ;;; emacs-custom.el ends here
