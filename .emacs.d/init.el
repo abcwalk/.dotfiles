@@ -21,14 +21,15 @@
       (setq visible-bell t)))
 
 (if (eq system-type 'gnu/linux)
-    (progn
-      (setq custom-file "~/.emacs.d/emacs-custom.el")
-      (load custom-file)
-      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
-      (scroll-bar-mode -1)
-      (tool-bar-mode -1)
-      (tooltip-mode -1)
-      (menu-bar-mode -1)))
+    (if (not window-system)
+  (progn
+    (scroll-bar-mode -1)
+    (tool-bar-mode -1)
+    (tooltip-mode -1)
+    (menu-bar-mode -1))
+  (setq custom-file "~/.emacs.d/emacs-custom.el")
+  (load custom-file)
+  (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
