@@ -146,7 +146,9 @@
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
-
+(save-place-mode 1)
+(setq window-combination-resize t
+      split-width-threshold 300)
 (require 'recentf)
 (recentf-mode 1)
 (global-set-key (kbd "\C-xf") 'recentf-open-files)
@@ -225,9 +227,7 @@
 ;;   (setq-default display-line-numbers-width 1))
 
 ;; DAP
-(use-package dap-mode
-  :config
-  (require 'dap-java))
+(use-package dap-mode)
 
 (use-package lsp-mode
   :init
@@ -247,10 +247,11 @@
   (setq lsp-auto-guess-root t)
   (setq lsp-log-io nil)
   (setq lsp-restart 'auto-restart)
+  (setq lsp-enable-indentation nil)
   (setq lsp-enable-links nil)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-lens-enable nil)
+  (setq lsp-lens-enable 1)
   (setq lsp-signature-auto-activate nil)
   (setq lsp-signature-render-documentation nil)
   (setq lsp-eldoc-enable-hover nil)
@@ -262,11 +263,13 @@
   (setq lsp-semantic-tokens-enable nil)
   (setq lsp-enable-folding nil)
   (setq lsp-enable-imenu nil)
-  (setq lsp-enable-snippet nil)
+  (setq lsp-completion-show-detail nil)
+  ;; (setq lsp-enable-snippet nil)
   (setq lsp-enable-file-watchers nil)
   (setq lsp-keep-workspace-alive nil)
-  (setq read-process-output-max (* 1024 1024)) ;; 1MB
-  (setq lsp-idle-delay 0.25)
+  (setq lsp-completion-show-kind nil)
+  ;; (setq read-process-output-max (* 1024 1024)) ;; 1MB
+  ;; (setq lsp-idle-delay 0.25)
   (setq lsp-auto-execute-action nil))
 
 (use-package lsp-ui
@@ -279,6 +282,7 @@
   (setq lsp-ui-doc-show-with-mouse nil)
   (setq lsp-ui-doc-enhanced-markdown nil)
   (setq lsp-ui-doc-delay 0.01)
+  (setq lsp-prefer-capf t)
   (when (display-graphic-p)
     (setq lsp-ui-doc-use-childframe t)
     (setq lsp-ui-doc-text-scale-level -1.0)
@@ -306,20 +310,24 @@
 (use-package lsp-java
   :after lsp)
 
-(use-package java
-  :ensure nil
-  :after lsp-java
-  :bind (:map java-mode-map ("C-c i" . lsp-java-add-import)))
+;; (use-package java-mode
+;;   :ensure nil
+;;   :after lsp-java)
 
 (use-package company
   :hook (prog-mode . company-mode)
   :config
-  (setq company-idle-delay 0.0)
+  (setq company-idle-delay 0)
+  (setq company-format-margin-function nil)
   (setq company-tooltip-minimum-width 60)
   (setq company-tooltip-maximum-width 60)
   (setq company-tooltip-limit 7)
-  (setq company-minimum-prefix-length 1)
+  (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t)
+  (setq company-require-match nil)
+  (setq company-dabbrev-ignore-case t)
+  (setq company-dabbrev-downcase t)
+  (setq company-text-icons-add-background t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
   (unless (display-graphic-p)
@@ -332,7 +340,7 @@
       (define-key company-active-map (kbd "<tab>") 'company-select-next)
     (define-key company-active-map (kbd "TAB") 'company-select-next))
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
-
+ 
 (use-package company-prescient
   :after (prescient company)
   :config
@@ -498,8 +506,7 @@
   :hook (prog-mode . git-gutter-mode)
   :ensure t
   :init
-  (global-git-gutter-mode -1)
-  (global-set-key (kbd "C-x C-g") 'git-gutter))
+  (global-git-gutter-mode nil))
 
 (set-face-background 'git-gutter:modified "purple")
 (set-face-foreground 'git-gutter:modified "purple")
@@ -751,3 +758,17 @@
 (provide 'init)
 
 ;;;init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(gandalf))
+ '(custom-safe-themes
+   '("e613c2ffe0d6c9463d67f37275566ab3c47bdd70114fc3387738a4eb292ea156" default)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
