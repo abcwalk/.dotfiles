@@ -132,6 +132,7 @@
       split-width-threshold 300)
 (require 'recentf)
 (recentf-mode 1)
+(set-fringe-mode 0)
 (global-set-key (kbd "\C-xf") 'recentf-open-files)
 
 ;; gcmh
