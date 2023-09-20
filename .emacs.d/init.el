@@ -55,25 +55,6 @@
 
 ;;}}}
 
-;; OS
-(if (eq system-type 'windows-nt)
-    (progn
-      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 160)
-      (setq visible-bell t)
-      (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/emacs-custom.el")
-      (load custom-file)))
-
-(if (eq system-type 'gnu/linux)
-    (if (not window-system)
-	(progn
-	  (scroll-bar-mode -1)
-	  (tool-bar-mode -1)
-	  (tooltip-mode -1)
-	  (menu-bar-mode -1))
-      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
-      (setq custom-file "~/.emacs.d/emacs-custom.el")
-      (load custom-file)))
-
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Control buffer placement
@@ -325,9 +306,11 @@
   (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t)
   (setq company-require-match nil)
+  ;; (setq company-format-margin-function #'company-vscode-light-icons-margin)
   (setq company-dabbrev-ignore-case t)
   (setq company-dabbrev-downcase t)
-  (setq company-text-icons-add-background t)
+  ;; (setq company-text-icons-add-background t)
+  ;; (setq company-text-icons-mapping t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
   (unless (display-graphic-p)
@@ -340,19 +323,19 @@
       (define-key company-active-map (kbd "<tab>") 'company-select-next)
     (define-key company-active-map (kbd "TAB") 'company-select-next))
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
- 
+
 (use-package company-prescient
   :after (prescient company)
   :config
   (company-prescient-mode +1))
 
-(use-package company-box
-  :if (display-graphic-p)
-  :hook (company-mode . company-box-mode)
-  :config
-  (setq company-box-doc-enable nil)
-  (setq company-box-scrollbar nil)
-  (setq company-box-frame-behavior 'default))
+;; (use-package company-box
+;;   :if (display-graphic-p)
+;;   :hook (company-mode . company-box-mode)
+;;   :config
+;;   (setq company-box-doc-enable nil)
+;;   (setq company-box-scrollbar nil)
+;;   (setq company-box-frame-behavior 'default))
 
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
@@ -502,18 +485,11 @@
   (global-set-key (kbd "C-S-z") 'undo-fu-only-redo))
 
 ;; Git
-(use-package git-gutter
-  :hook (prog-mode . git-gutter-mode)
-  :ensure t
-  :init
-  (global-git-gutter-mode nil))
-
-(set-face-background 'git-gutter:modified "purple")
-(set-face-foreground 'git-gutter:modified "purple")
-(set-face-background 'git-gutter:added "green")
-(set-face-foreground 'git-gutter:added "green")
-(set-face-background 'git-gutter:deleted "red")
-(set-face-foreground 'git-gutter:deleted "red")
+;; (use-package git-gutter
+;;   :hook (prog-mode . git-gutter-mode)
+;;   :ensure t
+;;   :init
+;;   (global-git-gutter-mode nil))
 
 ;; Git integration
 
@@ -745,30 +721,30 @@
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 (global-set-key "\C-c\C-c" 'copy-line)
 
+;; OS
 
-;; Profile emacs startup
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "*** Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
+;; Windows
+(if (eq system-type 'windows-nt)
+    (progn
+      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 160)
+      (setq visible-bell t)
+      (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/custom.el")
+      (load custom-file)))
+
+;; Linux
+(if (eq system-type 'gnu/linux)
+    (progn
+      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
+      (setq custom-file "~/.emacs.d/custom.el")
+      (load custom-file)))
+
+;; Terminal
+(if (not window-system)
+    (progn
+      (scroll-bar-mode -1)
+      (tool-bar-mode -1)
+      (tooltip-mode -1)
+      (menu-bar-mode -1)))
 
 (provide 'init)
-
 ;;;init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(gandalf))
- '(custom-safe-themes
-   '("e613c2ffe0d6c9463d67f37275566ab3c47bdd70114fc3387738a4eb292ea156" default)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
