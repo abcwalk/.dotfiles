@@ -13,7 +13,7 @@
       bidi-inhibit-bpa t)
 
 
-(setq package-list '
+(setq package-list
       '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient))
 
 (require 'package)
@@ -31,6 +31,11 @@
 (eval-and-compile
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
 ;; {{{
 ;; Bootstrap 'straight'
