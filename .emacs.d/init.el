@@ -727,7 +727,7 @@
 ;; Windows
 (if (eq system-type 'windows-nt)
     (progn
-      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 160)
+      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" ':weight 'regular :height 160)
       (setq visible-bell t)
       (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/custom.el")
       (load custom-file)))
@@ -735,7 +735,7 @@
 ;; Linux
 (if (eq system-type 'gnu/linux)
     (progn
-      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'light :height 160)
+      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'regular :height 160)
       (setq custom-file "~/.emacs.d/custom.el")
       (load custom-file)))
 
