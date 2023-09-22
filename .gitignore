@@ -65,6 +65,7 @@ eln-cache/
 transient/
 *.*bak
 ; Fonts
+*session*.*
 
 fonts/.uuid
 fonts/opentype/.uuid
