@@ -32,7 +32,7 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
-; install the missing packages
+					; install the missing packages
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
@@ -65,6 +65,7 @@
 ;;}}}
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq frame-resize-pixelwise nil)
 
 ;; Control buffer placement
 (setq display-buffer-base-action
@@ -305,22 +306,43 @@
 ;;   :ensure nil
 ;;   :after lsp-java)
 
+;; (use-package kind-icon
+;;   :after corfu
+;;   :custom
+;;   (kind-icon-use-icons t)
+;;   (kind-icon-default-face 'corfu-default) ; Have background color be the same as `corfu' face background
+;;   (kind-icon-blend-background nil)  ; Use midpoint color between foreground and background colors ("blended")?
+;;   (kind-icon-blend-frac 0.08)
+
+;;   ;; NOTE 2022-02-05: `kind-icon' depends `svg-lib' which creates a cache
+;;   ;; directory that defaults to the `user-emacs-directory'. Here, I change that
+;;   ;; directory to a location appropriate to `no-littering' conventions, a
+;;   ;; package which moves directories of other packages to sane locations.
+;;   :config
+;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter) ; Enable `kind-icon'
+
+;;   ;; Add hook to reset cache so the icon colors match my theme
+;;   ;; NOTE 2022-02-05: This is a hook which resets the cache whenever I switch
+;;   ;; the theme using my custom defined command for switching themes. If I don't
+;;   ;; do this, then the backgound color will remain the same, meaning it will not
+;;   ;; match the background color corresponding to the current theme. Important
+;;   ;; since I have a light theme and dark theme I switch between. This has no
+;;   ;; function unless you use something similar
+;;   (add-hook 'kb/themes-hooks #'(lambda () (interactive) (kind-icon-reset-cache))))
+
 (use-package company
   :hook (prog-mode . company-mode)
   :config
   (setq company-idle-delay 0)
   (setq company-format-margin-function nil)
-  (setq company-tooltip-minimum-width 60)
-  (setq company-tooltip-maximum-width 60)
-  (setq company-tooltip-limit 7)
-  (setq company-minimum-prefix-length 2)
+  (setq company-minimum-prefix-length 1)
   (setq company-tooltip-align-annotations t)
   (setq company-require-match nil)
-  ;; (setq company-format-margin-function #'company-vscode-light-icons-margin)
   (setq company-dabbrev-ignore-case t)
   (setq company-dabbrev-downcase t)
   ;; (setq company-text-icons-add-background t)
   ;; (setq company-text-icons-mapping t)
+  ;; (setq company-text-icons-margin t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
   (unless (display-graphic-p)
@@ -340,12 +362,7 @@
   (company-prescient-mode +1))
 
 ;; (use-package company-box
-;;   :if (display-graphic-p)
-;;   :hook (company-mode . company-box-mode)
-;;   :config
-;;   (setq company-box-doc-enable nil)
-;;   (setq company-box-scrollbar nil)
-;;   (setq company-box-frame-behavior 'default))
+;;   :hook (company-mode . company-box-mode))
 
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
@@ -403,26 +420,22 @@
   (yas-reload-all))
 
 (use-package smartparens
-  :hook (prog-mode . smartparens-mode))
-;; icons
-(use-package all-the-icons
-  :ensure t
   :config
-  (setq all-the-icons-scale-factor 0.8))
+  (smartparens-global-mode t)
+  (sp-pair "'" nil :actions nil)
+  (sp-pair "`" nil :actions nil)
+  (setq sp-highlight-pair-overlay nil))
 
-;; TODO WHY DOING
-(use-package hl-todo
-  :custom-face
-  (hl-todo                        ((t (:inverse-video nil :italic t :bold nil))))
-  :config
-  (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
-  (add-to-list 'hl-todo-keyword-faces '("WHY" . "#7cb8bb"))
-  (global-hl-todo-mode +1))
+;; Autoindent
+(defun indent-between-pair (&rest _ignored)
+  (newline)
+  (indent-according-to-mode)
+  (forward-line -1)
+  (indent-according-to-mode))
 
-(use-package xclip
-  :unless (display-graphic-p)
-  :config
-  (xclip-mode +1))
+(sp-local-pair 'prog-mode "{" nil :post-handlers '((indent-between-pair "RET")))
+(sp-local-pair 'prog-mode "[" nil :post-handlers '((indent-between-pair "RET")))
+(sp-local-pair 'prog-mode "(" nil :post-handlers '((indent-between-pair "RET")))
 
 ;; Dashboard
 (use-package dashboard
@@ -701,7 +714,7 @@
 ;; C-M-x eval-defun
 
 (define-key global-map (kbd "<f2>") 'save-buffer)
-(define-key global-map (kbd "<f5>") 'lsp-ececute-code-actions)
+(define-key global-map (kbd "<f5>") 'lsp-execute-code-actions)
 
 (define-key global-map (kbd "C-d") 'scroll-up-command)
 (define-key global-map (kbd "C-u") 'scroll-down-command)
@@ -720,7 +733,6 @@
 
 (global-set-key (kbd "<M-up>") 'move-line-up)
 (global-set-key (kbd "<M-down>") 'move-line-down)
-(global-set-key (kbd "<f12>") 'save-buffers-kill-emacs)
 
 ;; Copy line
 (defun copy-line (arg)
