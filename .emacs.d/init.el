@@ -758,7 +758,15 @@
     (progn
       (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'regular :height 160)
       (setq custom-file "~/.emacs.d/custom.el")
-      (load custom-file)))
+      (load custom-file)
+      (defun set-emacs-frames (variant)
+	(dolist (frame (frame-list))
+	  (let* ((window-id (frame-parameter frame 'outer-window-id))
+		 (id (string-to-number window-id))
+		 (cmd (format "xprop -id 0x%x -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT \"%s\""
+			      id variant)))
+	    (call-process-shell-command cmd))))
+      (set-emacs-frames "dark")))
 
 ;; Terminal
 ;; (if (not window-system)
