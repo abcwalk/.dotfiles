@@ -761,12 +761,12 @@
       (load custom-file)))
 
 ;; Terminal
-(if (not window-system)
-    (progn
-      (scroll-bar-mode -1)
-      (tool-bar-mode -1)
-      (tooltip-mode -1)
-      (menu-bar-mode -1)))
+;; (if (not window-system)
+;; (progn
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
