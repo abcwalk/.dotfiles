@@ -760,7 +760,7 @@
       (setq custom-file "~/.emacs.d/custom.el")
       (load custom-file)))
 
-;; Terminal
+;; GUI theme
 (if (window-system)
     (progn
       (defun set-emacs-frames (variant)
