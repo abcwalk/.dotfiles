@@ -118,11 +118,11 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Iosevka
+    family: Iosevka Comfy
     style: Regular
     # Bold font face
   bold:
-    family: Iosevka
+    family: Iosevka Comfy
     style: Bold
     # Italic font face
   italic:
@@ -130,7 +130,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Iosevka
+    family: Iosevka Comfy
     # The `style` can be specified to pick a specific face.
     style: Italic
     # Bold italic font face
@@ -189,30 +189,30 @@ cursor:
 import:
   - ~/.config/alacritty/themes/themes/alabaster_dark.yaml
 colors:
-  name: Digerati
-  author: ""
+  name: Alabaster
+  author: tonsky
   primary:
-    background: "#000000"
-    foreground: "#ffffff"
+    background: "#F7F7F7"
+    foreground: "#000000"
   cursor:
-    text: "#000000"
-    cursor: "#ffffff"
+    text: "#448C27"
+    cursor: "#000000"
   normal:
-    black: "#303030"
-    red: "#c03000"
-    green: "#b1d631"
-    yellow: "#fecf35"
-    blue: "#426870"
-    magenta: "#6d506d"
-    cyan: "#4bb5c1"
-    white: "#e2e2e5"
+    black: "#000000"
+    red: "#AA3731"
+    green: "#448C27"
+    yellow: "#CB9000"
+    blue: "#325CC0"
+    magenta: "#7A3E9D"
+    cyan: "#0083B2"
+    white: "#BBBBBB"
   bright:
-    black: "#5f5f5f"
-    red: "#ff3a78"
-    green: "#a6cd07"
-    yellow: "#b5c865"
-    blue: "#4a7781"
-    magenta: "#ff3b77"
-    cyan: "#4bb5c1"
-    white: "#e2e2e5"
-theme: Digerati
+    black: "#777777"
+    red: "#F05050"
+    green: "#60CB00"
+    yellow: "#FFBC5D"
+    blue: "#007ACC"
+    magenta: "#E64CE6"
+    cyan: "#00AACB"
+    white: "#FFFFFF"
+theme: Alabaster

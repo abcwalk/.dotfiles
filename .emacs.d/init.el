@@ -760,9 +760,11 @@
 ;; Linux
 (if (eq system-type 'gnu/linux)
     (progn
-      (set-face-attribute 'default nil :font "Iosevka" :weight 'regular :height 200)
+      (set-face-attribute 'default nil :font "Iosevka Comfy" :weight 'regular :height 170)
       (setq custom-file "~/.emacs.d/custom.el")
       (load custom-file)))
+
+(define-key global-map (kbd "<f12>") #'modus-themes-toggle)
 
 ;; GUI theme
 (if (window-system)
@@ -780,7 +782,7 @@
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-(tooltip-mode -1)
+(tooltip-mode t)
 (menu-bar-mode -1)
 
 ;; Pulsar
