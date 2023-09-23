@@ -8,7 +8,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+
+# Minimal theme
+# git clone https://github.com/subnixr/minimal.git  ${ZSH_CUSTOM}/themes/minimal
+# ln -s ${ZSH_CUSTOM}/themes/minimal/minimal.zsh ${ZSH_CUSTOM}/themes/minimal.zsh-theme
+# then update `ZSH_THEME` to `minimal` in your .zshrc 
+
+ZSH_THEME="minimal"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
