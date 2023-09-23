@@ -14,7 +14,8 @@
 
 
 (setq package-list
-      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar))
+      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar
+		 flx wgrep lin web-mode ivy-posframe amx))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -68,13 +69,13 @@
 (setq frame-resize-pixelwise nil)
 
 ;; Control buffer placement
-(setq display-buffer-base-action
-      '(display-buffer-reuse-mode-window
-        display-buffer-reuse-window
-        display-buffer-same-window))
+;; (setq display-buffer-base-action
+;;       '(display-buffer-reuse-mode-window
+;;         display-buffer-reuse-window
+;;         display-buffer-same-window))
 
 ;; If a popup does happen, don't resize windows to be equal-sized
-(setq even-window-sizes nil)
+;; (setq even-window-sizes nil)
 
 ;; Open files externally
 (use-package openwith
@@ -138,11 +139,12 @@
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
 (save-place-mode 1)
-(setq window-combination-resize t
-      split-width-threshold 300)
-(require 'recentf)
-(recentf-mode 1)
-(set-fringe-mode 0)
+;; (setq window-combination-resize t
+;;       split-width-threshold 300)
+;; (set-fringe-mode 0)
+(setq
+ split-width-threshold 0
+ split-height-threshold nil)
 (global-set-key (kbd "\C-xf") 'recentf-open-files)
 
 ;; gcmh
@@ -204,6 +206,14 @@
 ;;   ;; load preferred theme
 ;;   (load-theme 'lambda-light))
 
+(use-package recentf
+  :config
+  (recentf-mode 1)
+  ;; (setq recent-save-file "~/.emacs.d/recentf")
+  (setq recentf-max-menu-items 10)
+  (setq recentf-max-saved-items 100)
+  (setq recentf-show-file-shortcuts-flag nil))
+
 (use-package orderless
   :ensure t
   :custom
@@ -227,6 +237,7 @@
   :hook ((python-mode
 	  ;; java-mode
 	  js-mode
+	  c-mode
 	  js-jsx-mode
 	  typescript-mode
 	  web-mode
@@ -295,9 +306,10 @@
 
 ;; Python
 (use-package lsp-pyright
-  :hook (python-mode . (lambda () (require 'lsp-pyright)))
-  :init (when (executable-find "python3")
-          (setq lsp-pyright-python-executable-cmd "python3")))
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
 ;; Java
 (use-package lsp-java
   :after lsp)
@@ -581,7 +593,6 @@
 (use-package skewer-mode
   :straight t)
 
-
 ;; ivy
 (use-package ivy
   :diminish
@@ -627,45 +638,45 @@
   (ivy-rich-mode 1)
   :after counsel
   :config
-  (setq ivy-format-function #'ivy-format-function-line)
-  (setq ivy-rich-display-transformers-list
-        (plist-put ivy-rich-display-transformers-list
-                   'ivy-switch-buffer
-                   '(:columns
-                     ((ivy-rich-candidate (:width 40))
-		      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
-		      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
-		      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
-		      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
-                     :predicate
-                     (lambda (cand)
-		       (if-let ((buffer (get-buffer cand)))
-                           ;; Don't mess with EXWM buffers
-                           (with-current-buffer buffer
-                             (not (derived-mode-p 'exwm-mode)))))))))
-
-(use-package pulsar)
-
-(use-package ivy-posframe
-  :disabled
-  :custom
-  (ivy-posframe-width      115)
-  (ivy-posframe-min-width  115)
-  (ivy-posframe-height     10)
-  (ivy-posframe-min-height 10)
-  :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (setq ivy-posframe-parameters '((parent-frame . nil)
-                                  (left-fringe . 8)
-                                  (right-fringe . 8)))
-  (ivy-posframe-mode 1))
+  (setcdr (assq t ivy-format-functions-alist)
+	  #'ivy-format-function-line))
+;; (setq ivy-format-function #'ivy-format-function-line)
+;; (setq ivy-rich-display-transformers-list
+;;       (plist-put ivy-rich-display-transformers-list
+;;                  'ivy-switch-buffer
+;;                  '(:columns
+;;                    ((ivy-rich-candidate (:width 40))
+;; 		      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
+;; 		      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
+;; 		      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
+;; 		      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
+;;                    :predicate
+;;                    (lambda (cand)
+;; 		       (if-let ((buffer (get-buffer cand)))
+;;                          ;; Don't mess with EXWM buffers
+;;                          (with-current-buffer buffer
+;;                            (not (derived-mode-p 'exwm-mode)))))))))
 
 ;; swiper
 (use-package swiper
+  :ensure t
   :after ivy
+  :custom
+  (swiper-action-recenter t)
+  (swiper-goto-start-of-match t)
+  (swiper-include-line-number-in-search t))
+
+(use-package ivy-posframe
+  :demand t
+  :after ivy
+  :custom
+  (ivy-posframe-display-functions-alist
+   '((t . ivy-posframe-display-at-frame-center)
+     (swiper . ivy-posframe-display-at-frame-bottom-left)
+     (complete-symbol . ivy-posframe-display-at-point)
+     (counsel-M-x . ivy-posframe-display-at-frame-center)))
   :config
-  (setq swiper-action-recenter t)
-  (setq swiper-goto-start-of-match t))
+  (ivy-posframe-mode))
 
 ;; ivy-prescient
 (use-package ivy-prescient
@@ -687,6 +698,19 @@
   (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
   (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
+
+(use-package amx
+  :ensure t
+  :after ivy
+  :custom
+  (amx-backend 'auto)
+  ;; (amx-sava-file "~/.emacs.d/amx-items")
+  (amx-history-length 50)
+  (amx-show-key-bindings nil)
+  :config
+  (amx-mode 1))
+
+(use-package pulsar)
 
 ;; (use-package general
 ;;   :config
@@ -725,6 +749,12 @@
 ;; Keybindings
 
 ;; C-M-x eval-defun
+(winner-mode 1)
+;; (global-set-key (kbd "<s-right>") 'winner-redo)
+;; (global-set-key (kbd "<s-left>") 'winner-undo)
+
+(global-set-key (kbd "C-x v") 'ivy-push-view)
+(global-set-key (kbd "C-x V") 'ivy-switch-view)
 
 (define-key global-map (kbd "<f2>") 'save-buffer)
 (define-key global-map (kbd "<f5>") 'lsp-execute-code-actions)
@@ -805,6 +835,30 @@
 
 (advice-add 'projectile-kill-buffers :around #'yes-or-no-p->-y-or-n-p)
 (advice-add 'project-kill-buffers :around #'yes-or-no-p->-y-or-n-p)
+
+;; Lin
+;; (setq lin-face 'lin-blue) ; check doc string for alternative styles
+;; (setq lin-mode-hooks
+;;       '(bongo-mode-hook
+;;         dired-mode-hook
+;;         elfeed-search-mode-hook
+;;         git-rebase-mode-hook
+;;         grep-mode-hook
+;;         ibuffer-mode-hook
+;;         ilist-mode-hook
+;;         ledger-report-mode-hook
+;;         log-view-mode-hook
+;;         magit-log-mode-hook
+;;         mu4e-headers-mode-hook
+;;         notmuch-search-mode-hook
+;;         notmuch-tree-mode-hook
+;;         occur-mode-hook
+;;         org-agenda-mode-hook
+;;         pdf-outline-buffer-mode-hook
+;;         proced-mode-hook
+;; 	recentf-mode-hook
+;;         tabulated-list-mode-hook))
+;; (lin-global-mode 1)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook

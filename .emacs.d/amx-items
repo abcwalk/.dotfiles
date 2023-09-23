@@ -1,0 +1,60 @@
+
+;; ----- amx-history -----
+(
+ eval-buffer
+ package-install
+ cd
+ 5x5
+ amx
+ arp
+ dbx
+ dig
+ erc
+ ert
+ eww
+ ftp
+ gdb
+ irc
+ jdb
+ lsp
+ man
+ mpc
+ pdb
+ pwd
+ rsh
+ sdb
+ xdb
+ calc
+ diff
+ ffap
+ gnus
+ grep
+ help
+ ielm
+ info
+ life
+ mail
+ mpuz
+ ping
+ pong
+ talk
+ term
+ undo
+ yank
+ zone
+ align
+ chmod
+ debug
+ diary
+ dired
+ ediff
+ edirs
+ eldoc
+ hanoi
+)
+
+;; ----- amx-data -----
+(
+ (package-install . 1)
+ (eval-buffer . 33)
+)
