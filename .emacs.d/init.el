@@ -14,7 +14,7 @@
 
 
 (setq package-list
-      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient))
+      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -334,7 +334,6 @@
   :hook (prog-mode . company-mode)
   :config
   (setq company-idle-delay 0)
-  (setq company-format-margin-function nil)
   (setq company-minimum-prefix-length 1)
   (setq company-tooltip-align-annotations t)
   (setq company-require-match nil)
@@ -343,6 +342,7 @@
   ;; (setq company-text-icons-add-background t)
   ;; (setq company-text-icons-mapping t)
   ;; (setq company-text-icons-margin t)
+  (setq company-format-margin-function  #'company-text-icons-margin)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
   (unless (display-graphic-p)
@@ -534,6 +534,17 @@
 ;; (set-face-attribute (car face) nil :weight 'normal :height (cdr face)))
 ;; (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
+;; clang-format
+(use-package clang-format)
+(setq clang-format-style-option "llvm")
+
+(defun clang-format-buffer-llvm ()
+  (interactive)
+  (clang-format-buffer)
+  (save-buffer))
+
+(define-key java-mode-map (kbd "C-f") #'clang-format-buffer-llvm)
+
 ;; format
 (use-package format-all
   :preface
@@ -622,16 +633,18 @@
                    'ivy-switch-buffer
                    '(:columns
                      ((ivy-rich-candidate (:width 40))
-                      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
-                      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
-                      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
-                      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
+		      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
+		      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
+		      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
+		      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
                      :predicate
                      (lambda (cand)
-                       (if-let ((buffer (get-buffer cand)))
+		       (if-let ((buffer (get-buffer cand)))
                            ;; Don't mess with EXWM buffers
                            (with-current-buffer buffer
                              (not (derived-mode-p 'exwm-mode)))))))))
+
+(use-package pulsar)
 
 (use-package ivy-posframe
   :disabled
@@ -734,17 +747,8 @@
 (global-set-key (kbd "<M-up>") 'move-line-up)
 (global-set-key (kbd "<M-down>") 'move-line-down)
 
-;; Copy line
-(defun copy-line (arg)
-  "Copy lines (as many as prefix argument) in the kill ring"
-  (interactive "p")
-  (kill-ring-save (line-beginning-position)
-                  (line-beginning-position (+ 1 arg)))
-  (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
-(global-set-key "\C-c\C-c" 'copy-line)
 
-;; OS
-
+;; OS {{{
 ;; Windows
 (if (eq system-type 'windows-nt)
     (progn
@@ -756,7 +760,7 @@
 ;; Linux
 (if (eq system-type 'gnu/linux)
     (progn
-      (set-face-attribute 'default nil :font "Iosevka" :weight 'regular :height 160)
+      (set-face-attribute 'default nil :font "Iosevka" :weight 'regular :height 200)
       (setq custom-file "~/.emacs.d/custom.el")
       (load custom-file)))
 
@@ -772,10 +776,33 @@
 	    (call-process-shell-command cmd))))
       (set-emacs-frames "dark")))
 
+;;; }}}
+
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (menu-bar-mode -1)
+
+;; Pulsar
+(setq pulsar-delay 0.095)
+(setq pulsar-iterations 10)
+(setq pulsar-face 'pulsar-blue)
+(setq pulsar-highlight-face 'pulsar-yellow)
+(setq pulsar-pulse t)
+(pulsar-global-mode 1)
+(add-hook 'next-error-hook #'pulsar-pulse-line)
+(add-hook 'minibuffer-setup-hook #'pulsar-pulse-line)
+(add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
+(add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
+(define-key global-map (kbd "C-x l") #'pulsar-pulse-line-blue)
+
+;; Yes or No
+(defun yes-or-no-p->-y-or-n-p (orig-fun &rest r)
+  (cl-letf (((symbol-function 'yes-or-no-p) #'y-or-n-p))
+    (apply orig-fun r)))
+
+(advice-add 'projectile-kill-buffers :around #'yes-or-no-p->-y-or-n-p)
+(advice-add 'project-kill-buffers :around #'yes-or-no-p->-y-or-n-p)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
@@ -783,7 +810,7 @@
             (message "*** Emacs loaded in %s with %d garbage collections."
                      (format "%.2f seconds"
                              (float-time
-                              (time-subtract after-init-time before-init-time)))
+			      (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
 (provide 'init)
