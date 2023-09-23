@@ -118,11 +118,11 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: IosevkaTerm Nerd Font Mono
+    family: Iosevka
     style: Regular
     # Bold font face
   bold:
-    family: IosevkaTerm Nerd Font Mono
+    family: Iosevka
     style: Bold
     # Italic font face
   italic:
@@ -130,7 +130,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: IosevkaTerm Nerd Font Mono
+    family: Iosevka
     # The `style` can be specified to pick a specific face.
     style: Italic
     # Bold italic font face
@@ -189,30 +189,30 @@ cursor:
 import:
   - ~/.config/alacritty/themes/themes/alabaster_dark.yaml
 colors:
-  name: Alabaster
-  author: tonsky
+  name: Digerati
+  author: ""
   primary:
-    background: "#F7F7F7"
-    foreground: "#000000"
+    background: "#000000"
+    foreground: "#ffffff"
   cursor:
-    text: "#448C27"
-    cursor: "#000000"
+    text: "#000000"
+    cursor: "#ffffff"
   normal:
-    black: "#000000"
-    red: "#AA3731"
-    green: "#448C27"
-    yellow: "#CB9000"
-    blue: "#325CC0"
-    magenta: "#7A3E9D"
-    cyan: "#0083B2"
-    white: "#BBBBBB"
+    black: "#303030"
+    red: "#c03000"
+    green: "#b1d631"
+    yellow: "#fecf35"
+    blue: "#426870"
+    magenta: "#6d506d"
+    cyan: "#4bb5c1"
+    white: "#e2e2e5"
   bright:
-    black: "#777777"
-    red: "#F05050"
-    green: "#60CB00"
-    yellow: "#FFBC5D"
-    blue: "#007ACC"
-    magenta: "#E64CE6"
-    cyan: "#00AACB"
-    white: "#FFFFFF"
-theme: Alabaster
+    black: "#5f5f5f"
+    red: "#ff3a78"
+    green: "#a6cd07"
+    yellow: "#b5c865"
+    blue: "#4a7781"
+    magenta: "#ff3b77"
+    cyan: "#4bb5c1"
+    white: "#e2e2e5"
+theme: Digerati

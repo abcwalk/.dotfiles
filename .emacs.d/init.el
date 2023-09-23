@@ -756,9 +756,13 @@
 ;; Linux
 (if (eq system-type 'gnu/linux)
     (progn
-      (set-face-attribute 'default nil :font "IosevkaTerm Nerd Font Mono" :weight 'regular :height 160)
+      (set-face-attribute 'default nil :font "Iosevka" :weight 'regular :height 160)
       (setq custom-file "~/.emacs.d/custom.el")
-      (load custom-file)
+      (load custom-file)))
+
+;; Terminal
+(if (window-system)
+    (progn
       (defun set-emacs-frames (variant)
 	(dolist (frame (frame-list))
 	  (let* ((window-id (frame-parameter frame 'outer-window-id))
@@ -768,9 +772,6 @@
 	    (call-process-shell-command cmd))))
       (set-emacs-frames "dark")))
 
-;; Terminal
-;; (if (not window-system)
-;; (progn
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
