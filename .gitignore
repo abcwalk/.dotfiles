@@ -66,6 +66,7 @@ transient/
 *.*bak
 ; Fonts
 *session*.*
+amx-items
 
 fonts/.uuid
 fonts/opentype/.uuid
