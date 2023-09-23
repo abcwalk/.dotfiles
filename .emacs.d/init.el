@@ -132,7 +132,7 @@
 ;;       '(
 ;; 	(?\" . ?\")
 ;;  	(?{ . ?\})))
-;;(global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode 1)
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers
