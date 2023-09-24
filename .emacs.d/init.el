@@ -4,18 +4,8 @@
 ;;  This is my personal Emacs configuration
 ;;; Code:
 
-;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.6
-      file-name-handler-alist nil
-      site-run-file nil
-      read-process-output-max (* 10 1024 1024)
-      bidi-inhibit-bpa t)
-
-
 (setq package-list
-      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar
-		 flx wgrep lin web-mode ivy-posframe amx))
+      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar flx wgrep lin web-mode ivy-posframe amx modus-themes))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -33,7 +23,6 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
-					; install the missing packages
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
@@ -64,18 +53,6 @@
 ;;   (straight-use-package-by-default t))
 
 ;;}}}
-
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-(setq frame-resize-pixelwise nil)
-
-;; Control buffer placement
-;; (setq display-buffer-base-action
-;;       '(display-buffer-reuse-mode-window
-;;         display-buffer-reuse-window
-;;         display-buffer-same-window))
-
-;; If a popup does happen, don't resize windows to be equal-sized
-;; (setq even-window-sizes nil)
 
 ;; Open files externally
 (use-package openwith
@@ -114,38 +91,93 @@
 (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
 (add-to-list 'org-structure-template-alist '("json" . "src json"))
 
-;; Pomodoro
-;; (use-package org-pomodoro
-;;   :after org
-;;   :config
-;;   (setq org-pomodoro-start-sound "~/.dotfiles/.emacs.d/sounds/focus_bell.wav")
-;;   (setq org-pomodoro-short-break-sound "~/.dotfiles/.emacs.d/sounds/three_beeps.wav")
-;;   (setq org-pomodoro-long-break-sound "~/.dotfiles/.emacs.d/sounds/three_beeps.wav")
-;;   (setq org-pomodoro-finished-sound "~/.dotfiles/.emacs.d/sounds/meditation_bell.wav")
+(use-package emacs
+  :init
+  (save-place-mode +1)
+  :hook
+  (after-init . winner-mode)
+  :config
+  (setq cursor-in-non-selected-windows nil)
+  (defface ct/tab-bar-numbers
+    '((t
+       :inherit tab-bar
+       :family "Iosevka Comfy"
+       :weight regular))
+    "Face for tab numbers in both active and inactive tabs.")
+  (defvar ct/circle-numbers-alist
+    '((0 . "⓪")
+      (1 . "①")
+      (2 . "②")
+      (3 . "③")
+      (4 . "④")
+      (5 . "⑤")
+      (6 . "⑥")
+      (7 . "⑦")
+      (8 . "⑧")
+      (9 . "⑨"))
+    "Alist of integers to strings of SF Symbols with numbers in boxes.")
+  (defun ct/tab-bar-tab-name-format-default (tab i)
+    (let ((current-p (eq (car tab) 'current-tab)))
+      (concat
+       (propertize
+        (when (and tab-bar-tab-hints (< i 10)) (alist-get i ct/circle-numbers-alist))
+        'face 'ct/tab-bar-numbers)
+       " "
+       (propertize
+        (concat (alist-get 'name tab)
+	        (or (and tab-bar-close-button-show
+			 (not (eq tab-bar-close-button-show
+				  (if current-p 'non-selected 'selected)))
+			 tab-bar-close-button)
+		    ""))
+        'face (funcall tab-bar-tab-face-function tab))
+       " ")))
+  (setq tab-bar-tab-name-format-function #'ct/tab-bar-tab-name-format-default
+        tab-bar-tab-hints t)
 
-;;   (dw/leader-key-def
-;;     "op"  '(org-pomodoro :which-key "pomodoro")))
+  (setq tab-bar-close-button-show nil
+	tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
+  (setq tab-bar-new-button-show nil
+	tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
+  (setq tab-bar-separator nil)
+  (setq tab-bar-format
+	'(;;tab-bar-format-history ;; forward/back buttons
+	  tab-bar-format-tabs-groups
+	  tab-bar-separator
+          ;; tab-bar-format-add-tab ;; new tab button
+	  tab-bar-format-align-right
+	  tab-bar-format-global))
 
-;; auto close bracket insertion. New in emacs 24
-;; (electric-pair-mode 1)
-;; make electric-pair-mode work on more brackets
-;; (setq electric-pair-pairs
-;;       '(
-;; 	(?\" . ?\")
-;;  	(?{ . ?\})))
-(global-display-line-numbers-mode 1)
-;; Revert buffers when the underlying file has changed
-(global-auto-revert-mode 1)
-;; Revert Dired and other buffers
-(setq global-auto-revert-non-file-buffers t)
-(save-place-mode 1)
-;; (setq window-combination-resize t
-;;       split-width-threshold 300)
-;; (set-fringe-mode 0)
-(setq
- split-width-threshold 0
- split-height-threshold nil)
-(global-set-key (kbd "\C-xf") 'recentf-open-files)
+  ;; Display battery and time in `tab-bar-format-global' section:
+  ;; (display-battery-mode +1)
+  (setq display-time-format "%Y-%m-%d %H:%M")   ;; Override time format.
+  (setq display-time-default-load-average nil)  ;; Hide load average.
+  (display-time-mode +1)
+
+  ;; Bind 1-9 in the tab prefix map to switch to that tab.
+  (mapcar (lambda (tab-number)
+            (let ((funname (intern (format "ct/tab-bar-select-%d" tab-number)))
+                  (docstring (format "Select tab %d by its absolute number." tab-number))
+                  (key (kbd (format "%d" tab-number)))
+                  (super-key (kbd (format "s-%d" tab-number))))
+              (eval-expression `(defun ,funname ()
+                                  ,docstring
+                                  (interactive)
+                                  (tab-bar-select-tab ,tab-number)))
+              (eval-expression `(define-key tab-prefix-map ,key ',funname))
+              (eval-expression `(global-set-key ,super-key ',funname))))
+          (number-sequence 1 9))
+
+  :hook
+  (tab-bar-mode . tab-bar-history-mode)
+  (after-init . tab-bar-mode)
+
+  :bind
+  ("s-[" . tab-bar-switch-to-prev-tab)
+  ("s-]" . tab-bar-switch-to-next-tab)
+  ("s-w" . tab-bar-new-tab)
+  ("s-c" . tab-bar-close-tab) ; I constantly want to close a buffer this way.
+  ("C-S-t" . tab-bar-undo-close-tab))
 
 ;; gcmh
 (use-package gcmh
@@ -155,56 +187,51 @@
   (setq gcmh-low-cons-threshold (* 16 1024 1024))
   (gcmh-mode +1))
 
-;; mood-line
-;; (use-package mood-line
+(use-package ibuffer
+  :ensure t
+  :init
+  ;; Rewrite all programmatic calls to `list-buffers`. Should work without this.
+					;(defalias 'list-buffers 'ibuffer-other-window)
+  ;; Override `list-buffers` shortcut with ibuffer
+  (global-unset-key (kbd "C-x b"))
+  (global-set-key (kbd "C-x b") 'ibuffer-other-window))
 
-;; Enable mood-line
-;; :config
-;; (mood-line-mode)):
-;; (setq mood-line-glyph-alist mood-line-glyphs-unicode)
-
-;; vertico
-;; (use-package vertico
+;; (use-package modus-themes
+;;   :ensure
+;;   :demand
 ;;   :init
-;;   (vertico-mode)
-;;   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-;;   (setq vertico-cycle t)
-;;   )
+;;   (require 'modus-themes)
+;;   (setq modus-themes-italic-constructs t
+;; 	modus-themes-bold-constructs t
+;; 	modus-themes-variable-pitch-ui t
+;; 	modus-themes-mixed-fonts t)
 
-;; lambda-line
-;; (use-package lambda-line
-;;   :straight (:type git :host github :repo "lambda-emacs/lambda-line")
-;;   :custom
-;;   (lambda-line-position 'bottom) ;; Set position of status-line
-;;   (lambda-line-abbrev t) ;; abbreviate major modes
-;;   (lambda-line-hspace "  ")  ;; add some cushion
-;;   (lambda-line-prefix t) ;; use a prefix symbol
-;;   (lambda-line-prefix-padding nil) ;; no extra space for prefix
-;;   (lambda-line-status-invert nil)  ;; no invert colors
-;;   (lambda-line-gui-ro-symbol  " ") ;; symbols
-;;   (lambda-line-gui-mod-symbol " ⬤")
-;;   (lambda-line-gui-rw-symbol  " ◯")
-;;   (lambda-line-vc-symbol " ")
-;;   (lambda-line-space-top +.50)  ;; padding on top and bottom of line
-;;   (lambda-line-space-bottom -.50)
-;;   (lambda-line-symbol-position 0.1) ;; adjust the vertical placement of symbol
-;;   :config
-;;   ;; activate lambda-line
-;;   (lambda-line-mode)
-;;   ;; set divider line in footer
-;;   (when (eq lambda-line-position 'top)
-;;     (setq-default mode-line-format (list "%_"))
-;;     (setq mode-line-format (list "%_"))))
+;;   ;; Theme overrides
+;;   ;; (customize-set-variable 'modus-themes-common-palette-overrides
+;; 		          ;; `(
+;; 		            ;; Make the mode-line borderless
+;; 		            ;; (bg-mode-line-active bg-inactive)
+;; 		            ;; (fg-mode-line-active fg-main)
+;; 		            ;; (bg-mode-line-inactive bg-inactive)
+;; 		            ;; (fg-mode-line-active fg-dim)
+;; 		            ;; (border-mode-line-active bg-inactive)
+;; 		            ;; (border-mode-line-inactive bg-main)
 
-;; (use-package lambda-themes
-;;   :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
-;;   :custom
-;;   (lambda-themes-set-italic-comments t)
-;;   (lambda-themes-set-italic-keywords t)
-;;   (lambda-themes-set-variable-pitch t)
-;;   :config
-;;   ;; load preferred theme
-;;   (load-theme 'lambda-light))
+;; 		            ;; macOS Selection colors
+;;                             ;; (bg-region "#242679")
+;;                             ;; (fg-region "#242679")
+;;                             ;; ))
+;;   (customize-set-variable 'modus-vivendi-palette-overrides
+;; 	                  `(
+;; 		            ;; More subtle gray for the inactive window and modeline
+;; 		            (bg-inactive "#202020"))))
+
+(use-package savehist
+  :ensure t
+  :hook (after-init . savehist-mode))
+
+(use-package sudo-edit
+  :ensure)
 
 (use-package recentf
   :config
@@ -220,16 +247,29 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-;;(setq org-clock-sound "~/Documents/emacs/ding.wav")
 
-;; (use-package display-line-numbers
-;;   :ensure nil
-;;   :hook (prog-mode . display-line-numbers-mode)
-;;   :config
-;;   (setq-default display-line-numbers-width 1))
-
-;; DAP
 (use-package dap-mode)
+
+(use-package lin
+  :config
+  (customize-set-variable 'lin-face 'lin-mac-override-fg)
+
+  (require 'cl-seq)
+  (customize-set-variable
+   'lin-mode-hooks
+   (cl-union lin-mode-hooks
+             '(dired-sidebar-mode-hook
+               dired-mode-hook
+               magit-status-mode-hook
+               magit-log-mode-hook
+	       recentf-mode)))
+
+  (defun ct/neotree-lin-mode-hook ()
+    "Prioritizes hl-line faces over neotree's before enabling lin."
+    (hl-line-mode -1)
+    (setq-local hl-line-overlay-priority +50)
+    (lin-mode))
+  (add-hook 'neotree-mode-hook #'ct/neotree-lin-mode-hook))
 
 (use-package lsp-mode
   :init
@@ -318,30 +358,6 @@
 ;;   :ensure nil
 ;;   :after lsp-java)
 
-;; (use-package kind-icon
-;;   :after corfu
-;;   :custom
-;;   (kind-icon-use-icons t)
-;;   (kind-icon-default-face 'corfu-default) ; Have background color be the same as `corfu' face background
-;;   (kind-icon-blend-background nil)  ; Use midpoint color between foreground and background colors ("blended")?
-;;   (kind-icon-blend-frac 0.08)
-
-;;   ;; NOTE 2022-02-05: `kind-icon' depends `svg-lib' which creates a cache
-;;   ;; directory that defaults to the `user-emacs-directory'. Here, I change that
-;;   ;; directory to a location appropriate to `no-littering' conventions, a
-;;   ;; package which moves directories of other packages to sane locations.
-;;   :config
-;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter) ; Enable `kind-icon'
-
-;;   ;; Add hook to reset cache so the icon colors match my theme
-;;   ;; NOTE 2022-02-05: This is a hook which resets the cache whenever I switch
-;;   ;; the theme using my custom defined command for switching themes. If I don't
-;;   ;; do this, then the backgound color will remain the same, meaning it will not
-;;   ;; match the background color corresponding to the current theme. Important
-;;   ;; since I have a light theme and dark theme I switch between. This has no
-;;   ;; function unless you use something similar
-;;   (add-hook 'kb/themes-hooks #'(lambda () (interactive) (kind-icon-reset-cache))))
-
 (use-package company
   :hook (prog-mode . company-mode)
   :config
@@ -372,9 +388,6 @@
   :after (prescient company)
   :config
   (company-prescient-mode +1))
-
-;; (use-package company-box
-;;   :hook (company-mode . company-box-mode))
 
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
@@ -424,8 +437,6 @@
       (remove-hook 'after-save-hook #'recompile t)
     (add-hook 'after-save-hook #'recompile nil t)))
 
-;; Snippets
-;; M-x package-install RET yasnippet-snippets
 (use-package yasnippet
   :hook (prog-mode . yas-minor-mode)
   :config
@@ -448,6 +459,15 @@
 (sp-local-pair 'prog-mode "{" nil :post-handlers '((indent-between-pair "RET")))
 (sp-local-pair 'prog-mode "[" nil :post-handlers '((indent-between-pair "RET")))
 (sp-local-pair 'prog-mode "(" nil :post-handlers '((indent-between-pair "RET")))
+
+;; Automatically dim buffers that don’t have focus
+(use-package auto-dim-other-buffers
+  :ensure
+  :defer
+  :commands auto-dim-other-buffers-mode
+  :config
+  (setq auto-dim-other-buffers-dim-on-switch-to-minibuffer nil)
+  (setq auto-dim-other-buffers-dim-on-focus-out t))
 
 ;; Dashboard
 (use-package dashboard
@@ -503,11 +523,6 @@
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))
 
-;; Aggressive-indent
-;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-
-;; undo fu & undo fu session
-
 (use-package undo-fu-session
   :config
   (setq undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'" "/git;-rebase-todo\\'"))
@@ -518,15 +533,6 @@
   (global-unset-key (kbd "C-z"))
   (global-set-key (kbd "C-z")   'undo-fu-only-undo)
   (global-set-key (kbd "C-S-z") 'undo-fu-only-redo))
-
-;; Git
-;; (use-package git-gutter
-;;   :hook (prog-mode . git-gutter-mode)
-;;   :ensure t
-;;   :init
-;;   (global-git-gutter-mode nil))
-
-;; Git integration
 
 (use-package magit
   :bind ("C-x g" . magit-status)
@@ -543,8 +549,6 @@
   :mode "\\.md\\'"
   :config
   (setq markdown-command "marked"))
-;; (set-face-attribute (car face) nil :weight 'normal :height (cdr face)))
-;; (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
 ;; clang-format
 (use-package clang-format)
@@ -639,23 +643,7 @@
   :after counsel
   :config
   (setcdr (assq t ivy-format-functions-alist)
-	  #'ivy-format-function-line))
-;; (setq ivy-format-function #'ivy-format-function-line)
-;; (setq ivy-rich-display-transformers-list
-;;       (plist-put ivy-rich-display-transformers-list
-;;                  'ivy-switch-buffer
-;;                  '(:columns
-;;                    ((ivy-rich-candidate (:width 40))
-;; 		      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
-;; 		      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
-;; 		      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
-;; 		      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
-;;                    :predicate
-;;                    (lambda (cand)
-;; 		       (if-let ((buffer (get-buffer cand)))
-;;                          ;; Don't mess with EXWM buffers
-;;                          (with-current-buffer buffer
-;;                            (not (derived-mode-p 'exwm-mode)))))))))
+	  'ivy-format-function-line))
 
 ;; swiper
 (use-package swiper
@@ -674,9 +662,9 @@
    '((t . ivy-posframe-display-at-frame-center)
      (swiper . ivy-posframe-display-at-frame-bottom-left)
      (complete-symbol . ivy-posframe-display-at-point)
-     (counsel-M-x . ivy-posframe-display-at-frame-center)))
-  :config
-  (ivy-posframe-mode))
+     (counsel-M-x . ivy-posframe-display-at-frame-center))
+   :config
+   (ivy-posframe-mode)))
 
 ;; ivy-prescient
 (use-package ivy-prescient
@@ -688,9 +676,8 @@
 (use-package counsel
   :demand t
   :bind (("M-x" . counsel-M-x)
-         ("C-x b" . counsel-ibuffer)
+         ;; ("C-x b" . counsel-ibuffer)
          ("C-x C-f" . counsel-find-file)
-         ;; ("C-M-j" . counsel-switch-buffer)
          ("C-M-l" . counsel-imenu)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
@@ -710,149 +697,27 @@
   :config
   (amx-mode 1))
 
-(use-package pulsar)
-
-;; (use-package general
-;;   :config
-;;   (general-evil-setup t)
-
-;;   (general-create-definer dw/leader-key-def
-;;     :keymaps '(normal insert visual emacs)
-;;     :prefix "SPC"
-;;     :global-prefix "C-SPC")
-
-;;   (general-create-definer dw/ctrl-c-keys
-;;     :prefix "C-c"))
-
-;; (dw/leader-key-def
-;;   "r"   '(ivy-resume :which-key "ivy resume")
-;;   "f"   '(:ignore t :which-key "files")
-;;   "ff"  '(counsel-find-file :which-key "open file")
-;;   "C-f" 'counsel-find-file
-;;   "fr"  '(counsel-recentf :which-key "recent files")
-;;   "fR"  '(revert-buffer :which-key "revert file")
-;;   "fj"  '(counsel-file-jump :which-key "jump to file"))
-
-(use-package avy
-  :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
-
-(global-set-key (kbd "C-.") 'avy-goto-char-2)
-
-(use-package flx  ;; Improves sorting for fuzzy-matched results
-  :after ivy
-  :defer t
+(use-package real-auto-save
+  :demand
+  :delight
   :init
-  (setq ivy-flx-limit 10000))
+  (setq real-auto-save-interval 10) ;; in seconds
 
-(use-package wgrep)
+  ;; Patching this in until https://github.com/ChillarAnand/real-auto-save/pull/55 is merged
+  (defun turn-on-real-auto-save () (real-auto-save-mode 1))
+  (defun turn-off-real-auto-save () (real-auto-save-mode -1))
+  (define-globalized-minor-mode global-real-auto-save-mode
+    real-auto-save-mode turn-on-real-auto-save)
 
-;; Keybindings
+  (global-real-auto-save-mode 1)
+  (add-hook 'message-mode-hook #'turn-off-real-auto-save))
 
-;; C-M-x eval-defun
-(winner-mode 1)
-;; (global-set-key (kbd "<s-right>") 'winner-redo)
-;; (global-set-key (kbd "<s-left>") 'winner-undo)
+(use-package goggles
+  :hook ((prog-mode text-mode) . goggles-mode)
+  :config
+  (setq-default goggles-pulse t)) ;; set to nil to disable pulsing
 
-(global-set-key (kbd "C-x v") 'ivy-push-view)
-(global-set-key (kbd "C-x V") 'ivy-switch-view)
-
-(define-key global-map (kbd "<f2>") 'save-buffer)
-(define-key global-map (kbd "<f5>") 'lsp-execute-code-actions)
-
-(define-key global-map (kbd "C-d") 'scroll-up-command)
-(define-key global-map (kbd "C-u") 'scroll-down-command)
-
-;; Move line up/down
-(defun move-line-up ()
-  (interactive)
-  (transpose-lines 1)
-  (forward-line -2))
-
-(defun move-line-down ()
-  (interactive)
-  (forward-line 1)
-  (transpose-lines 1)
-  (forward-line -1))
-
-(global-set-key (kbd "<M-up>") 'move-line-up)
-(global-set-key (kbd "<M-down>") 'move-line-down)
-
-;; Load custom file for specific OS {{{
-(defun load-custom ()
-  "Windows or GNU/Linux."
-  (pcase system-type
-    ('windows-nt
-     (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/custom.el"))
-    ('gnu/linux
-     (setq custom-file "~/.emacs.d/custom.el")))
-  (set-face-attribute 'default nil :font "Iosevka Comfy" :weight 'regular :height 170)
-  (load custom-file)
-  (setq visible-bell t))
-
-(load-custom)
-;;; }}}
-
-;; GUI theme
-(defun bb/system-dark-mode-enabled-p ()
-  "Check if dark mode is currently enabled."
-  (pcase system-type
-    ('darwin
-     ;; Have to use osascript here as defaults returns inconsistent results
-     ;; - AppleInterfaceStyleSwitchesAutomatically == 1 ;; exists only if the theme is set to auto
-     ;; - AppleInterfaceStyle == Dark ;; exists only if the theme is set to dark
-     ;; How to determine if theme is light or dark when Automatic Theme switching is in place?
-     ;; Luckily, osascript can provide that detail
-     (if (string= (shell-command-to-string "printf %s \"$( osascript -e \'tell application \"System Events\" to tell appearance preferences to return dark mode\' )\"") "true") t))
-    ('gnu/linux
-     ;; prefer-dark and default are possible options
-     (if (string= (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme") "\'prefer-dark\'\n") t))))
-
-(defun bb/set-emacs-frames (variant)
-  "Set GTK theme for Emacs; VARIANT=theme."
-  (dolist (frame (frame-list))
-    (let* ((window-id (frame-parameter frame 'outer-window-id))
-	   (id (string-to-number window-id))
-	   (cmd (format "xprop -id 0x%x -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT \"%s\""
-			id variant)))
-      (call-process-shell-command cmd))))
-
-(defun bb/set-modus-theme ()
-  "Load dark/light variant depending on the system theme."
-  (interactive)
-  (if (bb/system-dark-mode-enabled-p)
-      (progn
-	(modus-themes-load-vivendi)
-	(bb/set-emacs-frames "dark"))
-    (progn
-      (modus-themes-load-operandi)
-      (bb/set-emacs-frames "light"))))
-
-(defun bb/toggle-theme ()
-  "Toggle between modus-operandi and modus-vivendi with GTK frame colors."
-  (interactive)
-  (if (eq (car custom-enabled-themes) 'modus-operandi)
-      (progn
-	(disable-theme 'modus-operandi)
-	(bb/set-emacs-frames "dark"))
-    (progn
-      (load-theme 'modus-operandi)
-      (bb/set-emacs-frames "light"))))
-
-(define-key global-map (kbd "<f12>") #'bb/toggle-theme)
-;; Standard detect (GTK_THEME=light/dark)
-;; (bb/set-modus-theme)
-
-;; Force dark!
-(bb/set-emacs-frames "dark")
-(modus-themes-load-vivendi)
-;;; }}}
-
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode t)
-(menu-bar-mode -1)
-
-;; Pulsar
+(use-package pulsar)
 (setq pulsar-delay 0.095)
 (setq pulsar-iterations 10)
 (setq pulsar-face 'pulsar-blue)
@@ -865,37 +730,32 @@
 (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
 (define-key global-map (kbd "C-x l") #'pulsar-pulse-line-blue)
 
-;; Yes or No
-(defun yes-or-no-p->-y-or-n-p (orig-fun &rest r)
-  (cl-letf (((symbol-function 'yes-or-no-p) #'y-or-n-p))
-    (apply orig-fun r)))
+(use-package avy
+  :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
 
-(advice-add 'projectile-kill-buffers :around #'yes-or-no-p->-y-or-n-p)
-(advice-add 'project-kill-buffers :around #'yes-or-no-p->-y-or-n-p)
+(use-package flx  ;; Improves sorting for fuzzy-matched results
+  :after ivy
+  :defer t
+  :init
+  (setq ivy-flx-limit 10000))
 
-;; Lin
-;; (setq lin-face 'lin-blue) ; check doc string for alternative styles
-;; (setq lin-mode-hooks
-;;       '(bongo-mode-hook
-;;         dired-mode-hook
-;;         elfeed-search-mode-hook
-;;         git-rebase-mode-hook
-;;         grep-mode-hook
-;;         ibuffer-mode-hook
-;;         ilist-mode-hook
-;;         ledger-report-mode-hook
-;;         log-view-mode-hook
-;;         magit-log-mode-hook
-;;         mu4e-headers-mode-hook
-;;         notmuch-search-mode-hook
-;;         notmuch-tree-mode-hook
-;;         occur-mode-hook
-;;         org-agenda-mode-hook
-;;         pdf-outline-buffer-mode-hook
-;;         proced-mode-hook
-;; 	recentf-mode-hook
-;;         tabulated-list-mode-hook))
-;; (lin-global-mode 1)
+(use-package wgrep)
+
+(defun bb/init ()
+  "Windows or GNU/Linux."
+  (pcase system-type
+    ('windows-nt
+     (customize-save-variable 'custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/custom.el")
+     (add-to-list 'load-path "C:/Users/cculpc/AppData/Roaming/.emacs.d/lisp/"))
+    ('gnu/linux
+     (customize-save-variable 'custom-file "~/.emacs.d/custom.el")
+     (add-to-list 'load-path "~/.emacs.d/lisp/")))
+  (load "font_rc")
+  (load "options_rc")
+  (load "keybindings_rc")
+  (load "theme_rc")
+  (load-file custom-file))
+(bb/init)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
@@ -907,4 +767,4 @@
                      gcs-done)))
 
 (provide 'init)
-;;;init.el ends here
+;;; init.el ends here

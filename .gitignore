@@ -67,6 +67,8 @@ transient/
 ; Fonts
 *session*.*
 amx-items
+history
+history/
 
 fonts/.uuid
 fonts/opentype/.uuid
