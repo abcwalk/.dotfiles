@@ -777,38 +777,65 @@
 (global-set-key (kbd "<M-up>") 'move-line-up)
 (global-set-key (kbd "<M-down>") 'move-line-down)
 
+;; Load custom file for specific OS {{{
+(defun load-custom ()
+  "Windows or GNU/Linux."
+  (pcase system-type
+    ('windows-nt
+     (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/custom.el"))
+    ('gnu/linux
+     (setq custom-file "~/.emacs.d/custom.el")))
+  (set-face-attribute 'default nil :font "Iosevka Comfy" :weight 'regular :height 170)
+  (load custom-file)
+  (setq visible-bell t))
 
-;; OS {{{
-;; Windows
-(if (eq system-type 'windows-nt)
-    (progn
-      (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" ':weight 'regular :height 160)
-      (setq visible-bell t)
-      (setq custom-file "c:/Users/cculpc/AppData/Roaming/.emacs.d/custom.el")
-      (load custom-file)))
-
-;; Linux
-(if (eq system-type 'gnu/linux)
-    (progn
-      (set-face-attribute 'default nil :font "Iosevka Comfy" :weight 'regular :height 170)
-      (setq custom-file "~/.emacs.d/custom.el")
-      (load custom-file)))
-
-(define-key global-map (kbd "<f12>") #'modus-themes-toggle)
+(load-custom)
+;;; }}}
 
 ;; GUI theme
-(if (window-system)
-    (progn
-      (defun set-emacs-frames (variant)
-	(dolist (frame (frame-list))
-	  (let* ((window-id (frame-parameter frame 'outer-window-id))
-		 (id (string-to-number window-id))
-		 (cmd (format "xprop -id 0x%x -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT \"%s\""
-			      id variant)))
-	    (call-process-shell-command cmd))))
-      (set-emacs-frames "dark")))
+(defun bb/system-dark-mode-enabled-p ()
+  "Check if dark mode is currently enabled."
+  (pcase system-type
+    ('darwin
+     ;; Have to use osascript here as defaults returns inconsistent results
+     ;; - AppleInterfaceStyleSwitchesAutomatically == 1 ;; exists only if the theme is set to auto
+     ;; - AppleInterfaceStyle == Dark ;; exists only if the theme is set to dark
+     ;; How to determine if theme is light or dark when Automatic Theme switching is in place?
+     ;; Luckily, osascript can provide that detail
+     (if (string= (shell-command-to-string "printf %s \"$( osascript -e \'tell application \"System Events\" to tell appearance preferences to return dark mode\' )\"") "true") t))
+    ('gnu/linux
+     ;; prefer-dark and default are possible options
+     (if (string= (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme") "\'prefer-dark\'\n") t))))
 
+(defun bb/set-emacs-frames (variant)
+  "Set GTK theme for Emacs; VARIANT=theme."
+  (dolist (frame (frame-list))
+    (let* ((window-id (frame-parameter frame 'outer-window-id))
+	   (id (string-to-number window-id))
+	   (cmd (format "xprop -id 0x%x -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT \"%s\""
+			id variant)))
+      (call-process-shell-command cmd))))
+
+(defun bb/set-modus-theme ()
+  "Load dark/light variant depending on the system theme."
+  (interactive)
+  (if (bb/system-dark-mode-enabled-p)
+      (progn
+	(modus-themes-load-vivendi)
+	(bb/set-emacs-frames "dark"))
+    (progn
+      (modus-themes-load-operandi)
+      (bb/set-emacs-frames "light"))))
+
+;; Standard detect (GTK_THEME=light/dark)
+;; (bb/set-modus-theme)
+
+;; Force dark!
+(bb/set-emacs-frames "dark")
+(modus-themes-load-vivendi)
 ;;; }}}
+
+(define-key global-map (kbd "<f12>") #'bb/set-modus-theme)
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
