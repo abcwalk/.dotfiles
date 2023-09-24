@@ -51,8 +51,7 @@
 ;; (use-package straight
 ;;   :custom
 ;;   (straight-use-package-by-default t))
-
-;;}}}
+;; }}}
 
 ;; Open files externally
 (use-package openwith
@@ -97,6 +96,12 @@
   :hook
   (after-init . winner-mode)
   :config
+  ;; Scrolling is moving the document, not my cursor
+  (setq scroll-preserve-screen-position nil)
+  ;; Calendar
+  (setq calendar-week-start-day 1)
+  (setq display-time-24hr-format t)
+  ;; (setq-default line-spacing .2)
   (setq cursor-in-non-selected-windows nil)
   (defface ct/tab-bar-numbers
     '((t
@@ -179,6 +184,10 @@
   ("s-c" . tab-bar-close-tab) ; I constantly want to close a buffer this way.
   ("C-S-t" . tab-bar-undo-close-tab))
 
+;; (use-package mlscroll
+;;   :hook
+;;   (after-init . mlscroll-mode))
+
 ;; gcmh
 (use-package gcmh
   :hook (emacs-startup-hook . gcmh-mode)
@@ -226,9 +235,44 @@
 ;; 		            ;; More subtle gray for the inactive window and modeline
 ;; 		            (bg-inactive "#202020"))))
 
+(use-package dired-subtree
+  :ensure
+  :defer
+  :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
+
 (use-package savehist
   :ensure t
   :hook (after-init . savehist-mode))
+
+(use-package treemacs
+  :defer
+  :demand
+  :config
+  (setq treemacs-position 'left
+        treemacs-width 30
+        treemacs-show-hidden-files t)
+
+					;(setq treemacs--icon-size 16)
+  (treemacs-resize-icons 16)
+
+  ;; Don't always focus the currently visited file
+  (treemacs-follow-mode -1)
+
+  (defun ct/treemacs-decrease-text-scale ()
+    (text-scale-decrease 1))
+  :bind
+  ("<f2>" . treemacs)
+  :hook
+  (treemacs-mode . ct/treemacs-decrease-text-scale))
+
+(use-package treemacs-all-the-icons
+  :after treemacs
+  :config
+  (treemacs-load-theme "all-the-icons")
+
+  ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
+                                        ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
+  )
 
 (use-package sudo-edit
   :ensure)
@@ -500,11 +544,11 @@
   (evilnc-default-hotkeys nil t))
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
 
-(use-package minions
-  :config
-  (setq minions-mode-line-lighter "")
-  (setq minions-mode-line-delimiters '("" . ""))
-  (minions-mode +1))
+;; (use-package minions
+;;   :config
+;;   (setq minions-mode-line-lighter "")
+;;   (setq minions-mode-line-delimiters '("" . ""))
+;;   (minions-mode +1))
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
@@ -662,9 +706,9 @@
    '((t . ivy-posframe-display-at-frame-center)
      (swiper . ivy-posframe-display-at-frame-bottom-left)
      (complete-symbol . ivy-posframe-display-at-point)
-     (counsel-M-x . ivy-posframe-display-at-frame-center))
-   :config
-   (ivy-posframe-mode)))
+     (counsel-M-x . ivy-posframe-display-at-frame-center)))
+  :config
+  (ivy-posframe-mode))
 
 ;; ivy-prescient
 (use-package ivy-prescient
@@ -751,9 +795,10 @@
      (customize-save-variable 'custom-file "~/.emacs.d/custom.el")
      (add-to-list 'load-path "~/.emacs.d/lisp/")))
   (load "font_rc")
-  (load "options_rc")
   (load "keybindings_rc")
   (load "theme_rc")
+  (load "mood-line")
+  (load "options_rc")
   (load-file custom-file))
 (bb/init)
 

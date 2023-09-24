@@ -153,18 +153,18 @@ before existing. Replaces ‘save-buffers-kill-terminal’."
 (defun ct/modus-themes-tab-bar-colors ()
   "Override tab faces to have even less variety."
   (modus-themes-with-colors
-      (custom-set-faces
-       `(tab-bar ((,c
-                   :height 0.8
-                   :background ,bg-main
-                   :box nil)))
-       `(tab-bar-tab ((,c
-                       :background ,bg-main
-                       :underline (:color ,blue-intense :style line)
-                       :box (:line-width 2 :style flat-button))))
-      `(tab-bar-tab-inactive ((,c
-                               :background ,bg-main
-                               :box (:line-width 2 :style flat-button)))))))
+    (custom-set-faces
+     `(tab-bar ((,c
+                 :height 0.8
+                 :background ,bg-main
+                 :box nil)))
+     `(tab-bar-tab ((,c
+                     :background ,bg-main
+                     :underline (:color ,blue-intense :style line)
+                     :box (:line-width 2 :style flat-button))))
+     `(tab-bar-tab-inactive ((,c
+                              :background ,bg-main
+                              :box (:line-width 2 :style flat-button)))))))
 (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
 
 (setq backup-directory-alist
@@ -174,6 +174,20 @@ before existing. Replaces ‘save-buffers-kill-terminal’."
 
 ;; Save silently
 (setq save-silently t)
+
+;; Dired
+
+;; Enable using a to open the selected file/directory and exit the current buffer,
+;; instead of pushing another buffer on top of the stack
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; Notable shortcuts:
+;;     <a> to open directory and bury current buffer
+;;     <W> for browse-url-of-dired-file will open the system default application
+;;     <w> will enter wdired for text-based changes
+(setq dired-dwim-target t)
+
+(mood-line-mode)
 
 (provide 'options_rc)
 ;;; options_rc.el ends here

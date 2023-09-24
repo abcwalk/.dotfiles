@@ -42,22 +42,30 @@
 (defun bb/toggle-theme ()
   "Toggle between modus-operandi and modus-vivendi with GTK frame colors."
   (interactive)
-  (if (eq (car custom-enabled-themes) 'modus-operandi)
+  (if (eq (car custom-enabled-themes) 'modus-vivendi)
       (progn
-	(disable-theme 'modus-operandi)
-	(bb/set-emacs-frames "dark"))
+	(disable-theme 'modus-vivendi)
+	(bb/set-emacs-frames "light"))
     (progn
-      (load-theme 'modus-operandi t)
-      (bb/set-emacs-frames "light"))))
+      (load-theme 'modus-vivendi t)
+      (bb/set-emacs-frames "dark"))))
 
 ;; Standard detect (GTK_THEME=light/dark)
 ;; (bb/set-modus-theme)
 
-;; Force dark!
-(bb/set-emacs-frames "dark")
-(load-theme 'modus-vivendi t)
+;; Manual
+(bb/set-emacs-frames "light")
+(load-theme 'modus-operandi t)
 
 (define-key global-map (kbd "<f12>") #'bb/toggle-theme)
+
+(with-eval-after-load "modus-themes"
+  (with-eval-after-load "mlscroll"
+    (defun ct/modus-themes-mlscroll-colors ()
+      ('modus-themes-with-colors
+        (customize-set-variable 'mlscroll-in-color "#0a84ff")
+        (customize-set-variable 'mlscroll-out-color "black")))
+    (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-mlscroll-colors)))
 
 (provide 'theme_rc)
 ;;; theme_rc.el ends here

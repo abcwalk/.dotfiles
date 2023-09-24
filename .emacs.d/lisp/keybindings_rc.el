@@ -8,7 +8,6 @@
 (global-set-key (kbd "C-x v") 'ivy-push-view)
 (global-set-key (kbd "C-x V") 'ivy-switch-view)
 
-(define-key global-map (kbd "<f2>") 'save-buffer)
 (define-key global-map (kbd "<f5>") 'lsp-execute-code-actions)
 
 (define-key global-map (kbd "C-d") 'scroll-up-command)
