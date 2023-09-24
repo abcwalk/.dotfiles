@@ -265,14 +265,14 @@
   :hook
   (treemacs-mode . ct/treemacs-decrease-text-scale))
 
-(use-package treemacs-all-the-icons
-  :after treemacs
-  :config
-  (treemacs-load-theme "all-the-icons")
+;; (use-package treemacs-all-the-icons
+;;   :after treemacs
+;;   :config
+;;   (treemacs-load-theme "all-the-icons")
 
-  ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
-                                        ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
-  )
+;;   ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
+;;                                         ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
+;;   )
 
 (use-package sudo-edit
   :ensure)
