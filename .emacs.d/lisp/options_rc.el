@@ -9,7 +9,7 @@
 (tooltip-mode t)
 (menu-bar-mode -1)
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 (setq frame-resize-pixelwise nil)
 
 (global-display-line-numbers-mode 1)
