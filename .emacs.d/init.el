@@ -827,6 +827,18 @@
       (modus-themes-load-operandi)
       (bb/set-emacs-frames "light"))))
 
+(defun bb/toggle-theme ()
+  "Toggle between modus-operandi and modus-vivendi with GTK frame colors."
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'modus-operandi)
+      (progn
+	(disable-theme 'modus-operandi)
+	(bb/set-emacs-frames "dark"))
+    (progn
+      (load-theme 'modus-operandi)
+      (bb/set-emacs-frames "light"))))
+
+(define-key global-map (kbd "<f12>") #'bb/toggle-theme)
 ;; Standard detect (GTK_THEME=light/dark)
 ;; (bb/set-modus-theme)
 
@@ -834,8 +846,6 @@
 (bb/set-emacs-frames "dark")
 (modus-themes-load-vivendi)
 ;;; }}}
-
-(define-key global-map (kbd "<f12>") #'bb/set-modus-theme)
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
