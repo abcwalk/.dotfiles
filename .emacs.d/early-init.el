@@ -45,5 +45,8 @@
 (add-hook 'after-init-hook #'arco/return-gc-to-default)
 (advice-add #'package--ensure-init-file :override #'ignore)
 
+;; cl deprecated
+(setq byte-compile-warnings '(cl-functions))
+
 (provide 'early-init)
 ;;; early-init.el ends here

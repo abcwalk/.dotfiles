@@ -43,6 +43,7 @@
 	modus-themes
 	nerd-icons
 	treemacs-nerd-icons
+	treemacs-icons-dired
 	))
 
 ;; Initialize package sources
@@ -253,7 +254,7 @@
   (require 'modus-themes)
   (setq
    modus-themes-italic-constructs nil
-   modus-themes-bold-constructs t
+   modus-themes-bold-constructs nil
    modus-themes-variable-pitch-ui t
    modus-themes-mixed-fonts t))
 
@@ -295,24 +296,32 @@
         treemacs-show-hidden-files t)
 
   ;;(setq treemacs--icon-size 16)
-  (treemacs-resize-icons 16)
+  ;; (treemacs-resize-icons 16)
+
+  (setq treemacs-no-png-images t)
 
   ;; Don't always focus the currently visited file
   (treemacs-follow-mode -1)
 
   (defun ct/treemacs-decrease-text-scale ()
     (text-scale-decrease 1))
+
   :bind
   ("<f2>" . treemacs)
   :hook
   (treemacs-mode . ct/treemacs-decrease-text-scale))
 
-(use-package nerd-icons)
+;; (use-package nerd-icons)
 
-(use-package treemacs-nerd-icons
-  :after treemacs
-  :config
-  (treemacs-load-theme "nerd-icons"))
+;; (use-package treemacs-nerd-icons
+;;   :after treemacs
+;;   :config
+;;   (treemacs-load-theme "nerd-icons"))
+
+(use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
+  :after (treemacs)
+  :ensure t
+  :config (treemacs-set-scope-type 'Tabs))
 
 (use-package sudo-edit
   :ensure)

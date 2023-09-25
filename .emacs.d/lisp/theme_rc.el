@@ -49,6 +49,13 @@
       (load-theme 'modus-vivendi t)
       (bb/set-emacs-frames "dark"))))
 
+(defun bb/remove-underline-solarized()
+  "Remove underline from solarized-light theme."
+  (if (eq (car custom-enabled-themes) 'solarized-light)
+      (custom-set-faces
+       '(mode-line ((t (:underline nil))))
+       '(mode-line-inactive ((t (:underline nil)))))))
+
 ;; Standard detect (GTK_THEME=light/dark)
 ;; (bb/set-modus-theme)
 
@@ -58,13 +65,15 @@
 
 (define-key global-map (kbd "<f12>") #'bb/toggle-theme)
 
-(with-eval-after-load "modus-themes"
-  (with-eval-after-load "mlscroll"
-    (defun ct/modus-themes-mlscroll-colors ()
-      ('modus-themes-with-colors
-        (customize-set-variable 'mlscroll-in-color "#0a84ff")
-        (customize-set-variable 'mlscroll-out-color "black")))
-    (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-mlscroll-colors)))
+;; (bb/remove-underline-solarized)
+
+;; (with-eval-after-load "modus-themes"
+;;   (with-eval-after-load "mlscroll"
+;;     (defun ct/modus-themes-mlscroll-colors ()
+;;       ('modus-themes-with-colors
+;;         (customize-set-variable 'mlscroll-in-color "#0a84ff")
+;;         (customize-set-variable 'mlscroll-out-color "black")))
+;;     (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-mlscroll-colors)))
 
 (provide 'theme_rc)
 ;;; theme_rc.el ends here
