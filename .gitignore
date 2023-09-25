@@ -69,6 +69,7 @@ transient/
 amx-items
 history
 history/
+.dap*
 
 fonts/.uuid
 fonts/opentype/.uuid

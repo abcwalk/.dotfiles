@@ -7,21 +7,23 @@
 (setq package-list
       '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar flx wgrep lin web-mode ivy-posframe amx dired-subtree savehist modus-themes))
 
+;; Initialize package sources
 (require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
-(package-install-selected-packages)
 
-;; Bootstrap 'use-package'
+;; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
-(eval-and-compile
-  (setq use-package-always-ensure t
-        use-package-expand-minimally t))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
 
 (dolist (package package-list)
   (unless (package-installed-p package)
@@ -194,13 +196,11 @@
 ;;   :hook
 ;;   (after-init . mlscroll-mode))
 
-;; gcmh
-(use-package gcmh
-  :hook (emacs-startup-hook . gcmh-mode)
-  :demand t
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
   :config
-  (setq gcmh-low-cons-threshold (* 16 1024 1024))
-  (gcmh-mode +1))
+  (setq which-key-idle-delay 1))
 
 (use-package ibuffer
   :ensure t
@@ -215,11 +215,12 @@
 (use-package modus-themes
   :ensure
   :init
-  (require 'modus-themes))
-;;   (setq modus-themes-italic-constructs t
-;; 	modus-themes-bold-constructs t
-;; 	modus-themes-variable-pitch-ui t
-;; 	modus-themes-mixed-fonts t)
+  (require 'modus-themes)
+  (setq
+   modus-themes-italic-constructs nil
+   modus-themes-bold-constructs t
+   modus-themes-variable-pitch-ui t
+   modus-themes-mixed-fonts t))
 
 ;;   ;; Theme overrides
 ;;   ;; (customize-set-variable 'modus-themes-common-palette-overrides
@@ -263,7 +264,7 @@
 
   ;; Don't always focus the currently visited file
   (treemacs-follow-mode -1)
-  
+
   (defun ct/treemacs-decrease-text-scale ()
     (text-scale-decrease 1))
   :bind
@@ -293,37 +294,12 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-
-(use-package dap-mode)
-
-(use-package lin
-  :config
-  (customize-set-variable 'lin-face 'lin-mac-override-fg)
-
-  (require 'cl-seq)
-  (customize-set-variable
-   'lin-mode-hooks
-   (cl-union lin-mode-hooks
-             '(dired-sidebar-mode-hook
-               dired-mode-hook
-               magit-status-mode-hook
-               magit-log-mode-hook
-	       recentf-mode)))
-
-  (defun ct/neotree-lin-mode-hook ()
-    "Prioritizes hl-line faces over neotree's before enabling lin."
-    (hl-line-mode -1)
-    (setq-local hl-line-overlay-priority +50)
-    (lin-mode))
-  (add-hook 'neotree-mode-hook #'ct/neotree-lin-mode-hook))
-
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((python-mode
 	  ;; java-mode
 	  js-mode
-	  c-mode
 	  js-jsx-mode
 	  typescript-mode
 	  web-mode
@@ -331,6 +307,7 @@
   :commands lsp
   :config
   (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
+  (add-hook 'java-mode-hook 'lsp-java-lens-mode)
   (global-unset-key (kbd "<f4>"))
   (define-key global-map (kbd "<f4>") 'lsp-rename)
   (setq lsp-auto-guess-root t)
@@ -340,8 +317,8 @@
   (setq lsp-enable-links nil)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-lens-enable 1)
   (setq lsp-signature-auto-activate nil)
+  (setq lsp-lens-enable t)
   (setq lsp-signature-render-documentation nil)
   (setq lsp-eldoc-enable-hover nil)
   (setq lsp-eldoc-hook nil)
@@ -385,6 +362,31 @@
   (setq lsp-ui-peek-always-show t)
   (setq lsp-ui-sideline-delay 0.05))
 
+(use-package lin
+  :config
+  (setq lin-face 'lin-blue)
+
+  (setq lin-mode-hooks
+	'(bongo-mode-hook
+          dired-mode-hook
+          elfeed-search-mode-hook
+          git-rebase-mode-hook
+          grep-mode-hook
+          ibuffer-mode-hook
+          ilist-mode-hook
+          ledger-report-mode-hook
+          log-view-mode-hook
+          magit-log-mode-hook
+          mu4e-headers-mode-hook
+          notmuch-search-mode-hook
+          notmuch-tree-mode-hook
+          occur-mode-hook
+          org-agenda-mode-hook
+          pdf-outline-buffer-mode-hook
+          proced-mode-hook
+          tabulated-list-mode-hook))
+  (lin-global-mode 1))
+
 (use-package prescient
   :after counsel
   :config
@@ -399,6 +401,17 @@
 ;; Java
 (use-package lsp-java
   :after lsp)
+
+(use-package dap-mode
+  ;; Uncomment the config below if you want all UI panes to be hidden by default!
+  ;; :custom
+  ;; (lsp-enable-dap-auto-configure nil)
+  ;; :config
+  ;; (dap-ui-mode 1)
+
+  :config
+  (require 'dap-java))
+
 
 ;; (use-package java-mode
 ;;   :ensure nil
@@ -605,8 +618,6 @@
   (clang-format-buffer)
   (save-buffer))
 
-(define-key java-mode-map (kbd "C-f") #'clang-format-buffer-llvm)
-
 ;; format
 (use-package format-all
   :preface
@@ -620,6 +631,8 @@
   :config
   (global-set-key (kbd "C-f") #'ian/format-code)
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
+
+(define-key java-mode-map (kbd "C-f") #'clang-format-buffer-llvm)
 
 ;; Compile
 (add-hook 'java-mode-hook
@@ -767,7 +780,7 @@
 (setq pulsar-delay 0.095)
 (setq pulsar-iterations 10)
 (setq pulsar-face 'pulsar-blue)
-(setq pulsar-highlight-face 'pulsar-yellow)
+(setq pulsar-highlight-face 'pulsar-blue)
 (setq pulsar-pulse t)
 (pulsar-global-mode 1)
 (add-hook 'next-error-hook #'pulsar-pulse-line)
@@ -799,7 +812,7 @@
   (load "font_rc")
   (load "keybindings_rc")
   (load "theme_rc")
-  (load "mood-line")
+  ;; (load "mood-line")
   (load "options_rc")
   (load-file custom-file))
 (bb/init)

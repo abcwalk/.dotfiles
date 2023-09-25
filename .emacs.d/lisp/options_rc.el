@@ -11,6 +11,11 @@
 (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 (setq frame-resize-pixelwise nil)
 
+;; let's enable it for all programming major modes
+;; (add-hook 'prog-mode-hook #'hl-line-mode)
+;; and for all modes derived from text-mode
+;; (add-hook 'text-mode-hook #'hl-line-mode)
+
 (global-display-line-numbers-mode 1)
 (global-auto-revert-mode 1)
 (setq ring-bell-function 'ignore)
@@ -186,7 +191,17 @@ before existing. Replaces ‘save-buffers-kill-terminal’."
 ;;     <w> will enter wdired for text-based changes
 (setq dired-dwim-target t)
 
+;; Modeline
+;; Mood
 (mood-line-mode)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+	                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (provide 'options_rc)
 ;;; options_rc.el ends here
