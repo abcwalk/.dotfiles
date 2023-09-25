@@ -5,7 +5,7 @@
 ;;; Code:
 
 (setq package-list
-      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar flx wgrep lin web-mode ivy-posframe amx))
+      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar flx wgrep lin web-mode ivy-posframe amx dired-subtree savehist modus-themes))
 
 (require 'package)
 (add-to-list 'package-archives
