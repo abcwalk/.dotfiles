@@ -1,7 +1,6 @@
 ;;; options_rc.el --- -*- lexical-binding: t -*-
-;;  Author: Maksim Rozhkov
 ;;; Commentary:
-;;  This is options config
+;; This is options configuration
 ;;; Code:
 
 (scroll-bar-mode -1)

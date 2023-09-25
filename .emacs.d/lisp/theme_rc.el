@@ -1,7 +1,6 @@
 ;;; theme_rc.el --- -*- lexical-binding: t -*-
-;;  Author: Maksim Rozhkov
 ;;; Commentary:
-;;  This is my theme configuration
+;;  This is theme configuration
 ;;; Code:
 
 ;; GUI theme

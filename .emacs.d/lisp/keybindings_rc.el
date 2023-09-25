@@ -1,7 +1,6 @@
-;;; mappings_rc.el --- -*- lexical-binding: t -*-
-;;  Author: Maksim Rozhkov
+;;; keybindings_rc.el --- -*- lexical-binding: t -*-
 ;;; Commentary:
-;;  This is my personal mappings config
+;; This is keybindings configuration
 ;;; Code:
 
 (global-set-key (kbd "C-'") 'avy-goto-char-2)
@@ -12,10 +11,9 @@
 
 (define-key global-map (kbd "C-d") 'scroll-up-command)
 (define-key global-map (kbd "C-u") 'scroll-down-command)
+(define-key global-map (kbd "M-0") 'treemacs-select-window)
 
-(global-set-key (kbd "\C-xf") 'recentf-open-files)
-
-(global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "C-x f") 'counsel-recentf)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -33,4 +31,4 @@
 (global-set-key (kbd "<M-down>") 'move-line-down)
 
 (provide 'mappings_rc)
-;;; mappings_rc.el ends here
+;;; keybindings_rc.el ends here

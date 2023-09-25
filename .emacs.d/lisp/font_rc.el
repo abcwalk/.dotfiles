@@ -1,7 +1,5 @@
 ;;; font_rc.el --- -*- lexical-binding: t -*-
-;;  Author: Maksim Rozhkov
 ;;; Commentary:
-;;  This is font configuration
 ;;; Source: https://gist.github.com/DivineDominion/e15c152f2fad785f4e1167b9a4df548b#main-font-and-frame-settings
 ;;; Code:
 

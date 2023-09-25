@@ -5,7 +5,7 @@
 ;;; Code:
 
 (setq package-list
-      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar flx wgrep lin web-mode ivy-posframe amx modus-themes))
+      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar flx wgrep lin web-mode ivy-posframe amx))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -140,10 +140,11 @@
   (setq tab-bar-tab-name-format-function #'ct/tab-bar-tab-name-format-default
         tab-bar-tab-hints t)
 
-  (setq tab-bar-close-button-show nil
-	tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
-  (setq tab-bar-new-button-show nil
-	tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
+  (setq tab-bar-new-tab-choice 'recentf-open-files)
+  (setq tab-bar-close-button-show nil)
+  ;; tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
+  (setq tab-bar-new-button-show nil)
+  ;; tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
   (setq tab-bar-separator nil)
   (setq tab-bar-format
 	'(;;tab-bar-format-history ;; forward/back buttons
@@ -154,7 +155,12 @@
 	  tab-bar-format-global))
 
   ;; Display battery and time in `tab-bar-format-global' section:
-  ;; (display-battery-mode +1)
+  (require 'battery)
+  (when (and battery-status-function
+	     (not (string-match-p "N/A"
+				  (battery-format "%B"
+						  (funcall battery-status-function)))))
+    (display-battery-mode 1))
   (setq display-time-format "%Y-%m-%d %H:%M")   ;; Override time format.
   (setq display-time-default-load-average nil)  ;; Hide load average.
   (display-time-mode +1)
@@ -205,11 +211,11 @@
   (global-unset-key (kbd "C-x b"))
   (global-set-key (kbd "C-x b") 'ibuffer-other-window))
 
-;; (use-package modus-themes
-;;   :ensure
-;;   :demand
-;;   :init
-;;   (require 'modus-themes)
+;;; For packaged versions which must use `require':
+(use-package modus-themes
+  :ensure
+  :init
+  (require 'modus-themes))
 ;;   (setq modus-themes-italic-constructs t
 ;; 	modus-themes-bold-constructs t
 ;; 	modus-themes-variable-pitch-ui t
@@ -257,7 +263,7 @@
 
   ;; Don't always focus the currently visited file
   (treemacs-follow-mode -1)
-
+  
   (defun ct/treemacs-decrease-text-scale ()
     (text-scale-decrease 1))
   :bind
@@ -265,14 +271,10 @@
   :hook
   (treemacs-mode . ct/treemacs-decrease-text-scale))
 
-;; (use-package treemacs-all-the-icons
-;;   :after treemacs
-;;   :config
-;;   (treemacs-load-theme "all-the-icons")
-
-;;   ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
-;;                                         ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
-;;   )
+(use-package treemacs-nerd-icons
+  :after treemacs
+  :config
+  (treemacs-load-theme "nerd-icons"))
 
 (use-package sudo-edit
   :ensure)
