@@ -171,7 +171,7 @@
         (when (and vc-mode buffer-file-name)
 	  (let ((backend (vc-backend buffer-file-name))
 		(state (vc-state buffer-file-name (vc-backend buffer-file-name))))
-	    (propertize (format "[%s ]  " vc-mode) 'face 'regular)))))
+	    (propertize (format "[%s ]  " vc-mode) 'face 'mood-line-status-neutral)))))
 ;; (concat (cond ((memq state '(edited added))
 ;; 		     (setq face 'mood-line-status-info)
 ;; 		     (propertize "+ " 'face face))

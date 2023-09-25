@@ -5,7 +5,45 @@
 ;;; Code:
 
 (setq package-list
-      '(dap-mode vimrc-mode yaml-mode xclip use-package undo-fu-session undo-fu org-bullets orderless minions magit lua-mode lsp-ui lsp-pyright lsp-java json-mode ivy-prescient hl-todo gruber-darker-theme gcmh format-all flycheck evil-nerd-commenter dashboard counsel company-prescient pulsar flx wgrep lin web-mode ivy-posframe amx dired-subtree savehist modus-themes))
+      '(dap-mode
+	vimrc-mode
+	yaml-mode
+	xclip
+	use-package
+	undo-fu-session
+	undo-fu
+	org-bullets
+	orderless
+	minions
+	magit
+	lua-mode
+	lsp-ui
+	lsp-pyright
+	lsp-java
+	json-mode
+	ivy-prescient
+	hl-todo
+	gruber-darker-theme
+	gcmh
+	format-all
+	flycheck
+	evil-nerd-commenter
+	dashboard
+	counsel
+	company-prescient
+	pulsar
+	flx
+	wgrep
+	lin
+	web-mode
+	ivy-posframe
+	amx
+	dired-subtree
+	savehist
+	modus-themes
+	nerd-icons
+	treemacs-nerd-icons
+	))
 
 ;; Initialize package sources
 (require 'package)
@@ -108,8 +146,7 @@
   (defface ct/tab-bar-numbers
     '((t
        :inherit tab-bar
-       :family "Iosevka Comfy"
-       :weight regular))
+       :family "Iosevka Comfy"))
     "Face for tab numbers in both active and inactive tabs.")
   (defvar ct/circle-numbers-alist
     '((0 . "⓪")
@@ -158,14 +195,12 @@
 
   ;; Display battery and time in `tab-bar-format-global' section:
   (require 'battery)
-  (when (and battery-status-function
-	     (not (string-match-p "N/A"
-				  (battery-format "%B"
-						  (funcall battery-status-function)))))
-    (display-battery-mode 1))
-  (setq display-time-format "%Y-%m-%d %H:%M")   ;; Override time format.
-  (setq display-time-default-load-average nil)  ;; Hide load average.
-  (display-time-mode +1)
+  (setq have-battery-status-p
+	(let ((perc-charged (assoc ?p (funcall battery-status-function))))
+	  (and perc-charged
+               (not (zerop (string-to-number (cdr perc-charged)))))))
+  (if have-battery-status-p
+      (display-battery-mode 1))
 
   ;; Bind 1-9 in the tab prefix map to switch to that tab.
   (mapcar (lambda (tab-number)
@@ -194,7 +229,7 @@
 
 ;; (use-package mlscroll
 ;;   :hook
-;;   (after-init . mlscroll-mode))
+;;     (after-init . mlscroll-mode))
 
 (use-package which-key
   :init (which-key-mode)
@@ -208,7 +243,7 @@
   ;; Rewrite all programmatic calls to `list-buffers`. Should work without this.
 					;(defalias 'list-buffers 'ibuffer-other-window)
   ;; Override `list-buffers` shortcut with ibuffer
-  (global-unset-key (kbd "C-x b"))
+  (global-unset-key (kbd "C-x b"  ))
   (global-set-key (kbd "C-x b") 'ibuffer-other-window))
 
 ;;; For packaged versions which must use `require':
@@ -259,7 +294,7 @@
         treemacs-width 30
         treemacs-show-hidden-files t)
 
-					;(setq treemacs--icon-size 16)
+  ;;(setq treemacs--icon-size 16)
   (treemacs-resize-icons 16)
 
   ;; Don't always focus the currently visited file
@@ -271,6 +306,8 @@
   ("<f2>" . treemacs)
   :hook
   (treemacs-mode . ct/treemacs-decrease-text-scale))
+
+(use-package nerd-icons)
 
 (use-package treemacs-nerd-icons
   :after treemacs
@@ -812,7 +849,7 @@
   (load "font_rc")
   (load "keybindings_rc")
   (load "theme_rc")
-  ;; (load "mood-line")
+  (load "mood-line")
   (load "options_rc")
   (load-file custom-file))
 (bb/init)
