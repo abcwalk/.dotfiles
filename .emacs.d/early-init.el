@@ -48,5 +48,39 @@
 ;; cl deprecated
 (setq byte-compile-warnings '(cl-functions))
 
+;; Emacs 29, check the definition right below
+
+(defun mode-line-window-selected-p ()
+  "Return non-nil if we're updating the mode line for the selected window.
+This function is meant to be called in `:eval' mode line
+constructs to allow altering the look of the mode line depending
+on whether the mode line belongs to the currently selected window
+or not."
+  (let ((window (selected-window)))
+    (or (eq window (old-selected-window))
+	(and (minibuffer-window-active-p (minibuffer-window))
+	     (with-selected-window (minibuffer-window)
+	       (eq window (minibuffer-selected-window)))))))
+
+(mode-line-window-selected-p)
+
+(defun string-pixel-width (string)
+  "Return the width of STRING in pixels."
+  (with-temp-buffer
+    (insert string)
+    (save-window-excursion
+      (let ((dedicated (window-dedicated-p)))
+        ;; Avoid errors if the selected window is a dedicated one,
+        ;; and they just want to insert a document into it.
+        (unwind-protect
+            (progn
+              (when dedicated
+                (set-window-dedicated-p nil nil))
+              (set-window-buffer nil (current-buffer))
+              (car (window-text-pixel-size
+                    nil (line-beginning-position) (point))))
+          (when dedicated
+            (set-window-dedicated-p nil dedicated)))))))
+
 (provide 'early-init)
 ;;; early-init.el ends here

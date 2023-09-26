@@ -15,6 +15,8 @@
 
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 
+(define-key global-map (kbd "C-x l") #'pulsar-pulse-line-blue)
+
 ;; Move line up/down
 (defun move-line-up ()
   (interactive)

@@ -10,15 +10,16 @@
 
 (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 (setq frame-resize-pixelwise nil)
+(setq cursor-in-non-selected-windows nil)
 
 ;; let's enable it for all programming major modes
 ;; (add-hook 'prog-mode-hook #'hl-line-mode)
 ;; and for all modes derived from text-mode
 ;; (add-hook 'text-mode-hook #'hl-line-mode)
 
-(global-display-line-numbers-mode 1)
 (global-auto-revert-mode 1)
-(setq ring-bell-function 'ignore)
+(delete-selection-mode +1)
+(setq initial-buffer-choice 'recentf-open-files)
 
 (setq global-auto-revert-non-file-buffers t)
 
@@ -136,45 +137,45 @@
 (global-set-key [remap split-window-right] #'ct/split-window-right)
 
 ;; Close Emacs safely
-(defun ct/clean-exit ()
-  "Exit Emacs cleanly.
-If there are unsaved buffer, pop up a list for them to be saved
-before existing. Replaces ‘save-buffers-kill-terminal’."
-  (interactive)
-  (if (frame-parameter nil 'client)
-      (server-save-buffers-kill-terminal arg)
-    (if-let ((buf-list (seq-filter (lambda (buf)
-                                     (and (buffer-modified-p buf)
-                                          (buffer-file-name buf)))
-                                   (buffer-list))))
-        (progn
-          (pop-to-buffer (list-buffers-noselect t buf-list))
-          (message "s to save, C-k to kill, x to execute"))
-      (save-buffers-kill-emacs))))
-(global-set-key [remap save-buffers-kill-terminal] #'ct/clean-exit)
+;; (defun ct/clean-exit ()
+;;   "Exit Emacs cleanly.
+;; If there are unsaved buffer, pop up a list for them to be saved
+;; before existing. Replaces ‘save-buffers-kill-terminal’."
+;;   (interactive)
+;;   (if (frame-parameter nil 'client)
+;;       (server-save-buffers-kill-terminal arg)
+;;     (if-let ((buf-list (seq-filter (lambda (buf)
+;;                                      (and (buffer-modified-p buf)
+;;                                           (buffer-file-name buf)))
+;;                                    (buffer-list))))
+;;         (progn
+;;           (pop-to-buffer (list-buffers-noselect t buf-list))
+;;           (message "s to save, C-k to kill, x to execute"))
+;;       (save-buffers-kill-emacs))))
+;; (global-set-key [remap save-buffers-kill-terminal] #'ct/clean-exit)
 
-;; tab-bar color overrides so it’s less noise up there
-(defun ct/modus-themes-tab-bar-colors ()
-  "Override tab faces to have even less variety."
-  (modus-themes-with-colors
-    (custom-set-faces
-     `(tab-bar ((,c
-                 :height 0.8
-                 :background ,bg-main
-                 :box nil)))
-     `(tab-bar-tab ((,c
-                     :background ,bg-main
-                     :underline (:color ,blue-intense :style line)
-                     :box (:line-width 2 :style flat-button))))
-     `(tab-bar-tab-inactive ((,c
-                              :background ,bg-main
-                              :box (:line-width 2 :style flat-button)))))))
-(add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
+;; ;; tab-bar color overrides so it’s less noise up there
+;; (defun ct/modus-themes-tab-bar-colors ()
+;;   "Override tab faces to have even less variety."
+;;   (modus-themes-with-colors
+;;     (custom-set-faces
+;;      `(tab-bar ((,c
+;;                  :height 0.8
+;;                  :background ,bg-main
+;;                  :box nil)))
+;;      `(tab-bar-tab ((,c
+;;                      :background ,bg-main
+;;                      :underline (:color ,blue-intense :style line)
+;;                      :box (:line-width 2 :style flat-button))))
+;;      `(tab-bar-tab-inactive ((,c
+;;                               :background ,bg-main
+;;                               :box (:line-width 2 :style flat-button)))))))
+;; (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
 
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+;; (setq backup-directory-alist
+;;       `((".*" . ,temporary-file-directory)))
+;; (setq auto-save-file-name-transforms
+;;       `((".*" ,temporary-file-directory t)))
 
 ;; Save silently
 (setq save-silently t)
@@ -193,14 +194,16 @@ before existing. Replaces ‘save-buffers-kill-terminal’."
 
 ;; Modeline
 ;; Mood
-(mood-line-mode)
+;; (mood-line-mode)
 
+;; Numberline
+;; (global-display-line-numbers-mode 1)
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-                term-mode-hook
-                shell-mode-hook
-	                treemacs-mode-hook
-                eshell-mode-hook))
+		term-mode-hook
+		shell-mode-hook
+		treemacs-mode-hook
+		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (provide 'options_rc)
