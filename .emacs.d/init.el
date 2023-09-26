@@ -4,7 +4,7 @@
 ;;  This is my personal Emacs configuration
 ;;; Code:
 
-(setq package-list
+(defvar-local package-list
       '(dap-mode
 	vimrc-mode
 	yaml-mode
@@ -233,9 +233,9 @@
   ;; ("C-S-t" . tab-bar-undo-close-tab)
   )
 
-(use-package mlscroll
-  :hook
-    (after-init . mlscroll-mode))
+;; (use-package mlscroll
+;;   :hook
+;;     (after-init . mlscroll-mode))
 
 ;; (use-package which-key
 ;;   :init (which-key-mode)
@@ -249,8 +249,7 @@
   ;; Rewrite all programmatic calls to `list-buffers`. Should work without this.
 					;(defalias 'list-buffers 'ibuffer-other-window)
   ;; Override `list-buffers` shortcut with ibuffer
-  (global-unset-key (kbd "C-x b"  ))
-  (global-set-key (kbd "C-x b") 'ibuffer-other-window))
+)
 
 ;;; For packaged versions which must use `require':
 (use-package modus-themes
@@ -464,11 +463,6 @@
   :config
   (require 'dap-java))
 
-
-;; (use-package java-mode
-;;   :ensure nil
-;;   :after lsp-java)
-
 (use-package company
   :hook (prog-mode . company-mode)
   :config
@@ -514,8 +508,8 @@
   (setq flycheck-flake8rc "~/.config/flake8")
   (setq flycheck-checker-error-threshold 1000)
   (setq flycheck-indication-mode nil)
-  (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
-  (define-key flycheck-mode-map (kbd "<S-f8>") #'flycheck-previous-error)
+  (define-key flycheck-mode-map (kbd "<f8>") 'flycheck-next-error)
+  (define-key flycheck-mode-map (kbd "<S-f8>") 'flycheck-previous-error)
   (flycheck-define-checker proselint
     "A linter for prose. Install the executable with `pip3 install proselint'."
     :command ("proselint" source-inplace)
@@ -834,13 +828,13 @@
 (pulsar-global-mode 1)
 ;; There are convenience functions/commands which pulse the line using
 ;; a specific colour: `pulsar-pulse-line-red' is one of them.
-(add-hook 'next-error-hook #'pulsar-pulse-line-red)
-(add-hook 'flycheck-next-error #'pulsar-pulse-line-yellow)
-(add-hook 'flycheck-previous-error #'pulsar-pulse-line-yellow)
-(add-hook 'minibuffer-setup-hook #'pulsar-pulse-line-red)
-(add-hook 'minibuffer-setup-hook #'pulsar-pulse-line)
-(add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
-(add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
+(add-hook 'next-error-hook 'pulsar-pulse-line-red)
+(add-hook 'flycheck-next-error 'pulsar-pulse-line-yellow)
+(add-hook 'flycheck-previous-error 'pulsar-pulse-line-yellow)
+(add-hook 'minibuffer-setup-hook 'pulsar-pulse-line-red)
+(add-hook 'minibuffer-setup-hook 'pulsar-pulse-line)
+(add-hook 'imenu-after-jump-hook 'pulsar-recenter-top)
+(add-hook 'imenu-after-jump-hook 'pulsar-reveal-entry)
 
 (use-package avy
   :commands (avy-goto-char avy-goto-word-0 avy-goto-line))

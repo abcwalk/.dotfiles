@@ -455,54 +455,80 @@ Specific to the current window's mode line.")
 
 ;;; Flycheck
 (defvar flycheck-current-errors)
+(declare-function flycheck-count-errors "ext:flycheck")
 
-(declare-function flycheck-count-errors "flycheck" (errors))
+(defun bb--flycheck-count-errors ()
+  "Count the number of ERRORS, grouped by level.
+
+Return an alist, where each ITEM is a cons cell whose `car' is an
+error level, and whose `cdr' is the number of errors of that
+level."
+  (let ((info 0) (warning 0) (error 0))
+    (mapc
+     (lambda (item)
+       (let ((count (cdr item)))
+         (pcase (flycheck-error-level-compilation-level (car item))
+           (0 (cl-incf info count))
+           (1 (cl-incf warning count))
+           (2 (cl-incf error count)))))
+     (flycheck-count-errors flycheck-current-errors))
+    `((info . ,info) (warning . ,warning) (error . ,error))))
+
+(defun bb-modeline-checker-text (text &optional face)
+  "Displays TEXT with FACE."
+  (propertize text 'face (or face 'mode-line)))
 
 (defvar-local flycheck-text nil)
-(defun update-flycheck (&optional status)
+(defun update-flycheck-text (&optional status)
   "Update `flycheck-text' against the reported flycheck STATUS."
   (setq flycheck-text
-	(pcase status
-	  ('finished (if flycheck-current-errors
-			 (let-alist (flycheck-count-errors flycheck-current-errors)
-			   (let ((sum (+ (or .error 0) (or .warning 0))))
-			     (propertize (concat (if (and .warning .error)
-						     (format "⚑ %d · ✘ %d" .warning .error)
-						   (if .warning
-						       "⚑ "
-						     "✘ "))
-						 (number-to-string sum) "  ")
-					 'face (if .error
-						   'error
-						 'warning))))
-		       (propertize "" 'face 'success)))
-	  ('running (propertize "Checking... " 'face 'italic))
-	  ('errored (propertize "✘ " 'face 'error))
-	  ('interrupted (propertize "Paused" 'face 'normal))
-	  ('no-checker ""))))
+	(when-let
+	    ((text
+	      (pcase status
+		('finished (when flycheck-current-errors
+			     (let-alist (bb--flycheck-count-errors)
+			       (bb-modeline-checker-text
+				(number-to-string (+ .error .warning))
+				(cond ((> .error 0) 'error)
+				      ((> .warning 0) 'warning)))
+			       (format "!%s·%s"
+				       (bb-modeline-checker-text (number-to-string .error)
+								 'error)
+				       (bb-modeline-checker-text (number-to-string .warning)
+								 'warning)))))
+		('running (propertize "Checking..." 'face 'italic))
+		(_ nil))))
+	  (propertize
+	   text
+	   'help-echo (pcase status
+			('finished
+			 (when flycheck-current-errors
+			   (let-alist (bb--flycheck-count-errors)
+			     (format "error: %d, warning: %d\n" .error .warning))))
+			('running "Checking...")
+			('no-checker "No Checker")
+			('errored "Error")
+			('interrupted "Interrupted")
+			('suspicious "Suspicious"))))))
 
-(defun mood-line-segment-flycheck ()
-  "Displays color-coded flycheck information in the mode-line (if available)."
-  flycheck-text)
-
-;; Setup flycheck hooks
-(add-hook 'flycheck-status-changed-functions #'update-flycheck)
-(add-hook 'flycheck-mode-hook #'update-flycheck)
+;; ;; Setup flycheck hooks
+(add-hook 'flycheck-status-changed-functions #'update-flycheck-text)
+(add-hook 'flycheck-mode-hook #'update-flycheck-text)
 
 ;;;; Risky local variables
 
 ;; NOTE 2023-04-28: The `risky-local-variable' is critical, as those
 ;; variables will not work without it.
 (dolist (construct '(prot-modeline-kbd-macro
-                     prot-modeline-narrow
-                     prot-modeline-input-method
-                     prot-modeline-buffer-status
-                     prot-modeline-buffer-identification
-                     prot-modeline-major-mode
-                     prot-modeline-process
-                     prot-modeline-vc-branch
-                     prot-modeline-align-right
-                     prot-modeline-misc-info
+		     prot-modeline-narrow
+		     prot-modeline-input-method
+		     prot-modeline-buffer-status
+		     prot-modeline-buffer-identification
+		     prot-modeline-major-mode
+		     prot-modeline-process
+		     prot-modeline-vc-branch
+		     prot-modeline-align-right
+		     prot-modeline-misc-info
 		     flycheck-text
 		     time-and-date))
   (put construct 'risky-local-variable t))
@@ -560,7 +586,7 @@ Specific to the current window's mode line.")
 		prot-modeline-vc-branch
 		"  "
 		prot-modeline-breadcrumb
-                "  "
+		"  "
 		flycheck-text
 		"  "
 		prot-modeline-align-right

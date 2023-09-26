@@ -192,6 +192,8 @@
 ;; 		  'mouse-face face)
 ;; "  ")))))
 
+
+
 (defvar-local mood-line--flycheck-text nil)
 (defun mood-line--update-flycheck-segment (&optional status)
   "Update `mood-line--flycheck-text' against the reported flycheck STATUS."
