@@ -463,16 +463,15 @@ Specific to the current window's mode line.")
 Return an alist, where each ITEM is a cons cell whose `car' is an
 error level, and whose `cdr' is the number of errors of that
 level."
-  (let ((info 0) (warning 0) (error 0))
+  (let ((warning 0) (error 0))
     (mapc
      (lambda (item)
        (let ((count (cdr item)))
          (pcase (flycheck-error-level-compilation-level (car item))
-           (0 (cl-incf info count))
-           (1 (cl-incf warning count))
-           (2 (cl-incf error count)))))
+           (0 (cl-incf warning count))
+           (1 (cl-incf error count)))))
      (flycheck-count-errors flycheck-current-errors))
-    `((info . ,info) (warning . ,warning) (error . ,error))))
+    `((warning . ,warning) (error . ,error))))
 
 (defun bb-modeline-checker-text (text &optional face)
   "Displays TEXT with FACE."
