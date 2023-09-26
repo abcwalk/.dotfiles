@@ -594,6 +594,8 @@ level."
 
 (prot-modeline-subtle-mode 1)
 
+(define-key global-map (kbd "<f3>") #'prot-modeline-subtle-mode)
+
 (require 'keycast)
 (setq keycast-mode-line-format "%2s%k%c%R")
 (setq keycast-mode-line-insert-after 'prot-modeline-vc-branch)
