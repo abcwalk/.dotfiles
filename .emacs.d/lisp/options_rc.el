@@ -192,10 +192,6 @@
 ;;     <w> will enter wdired for text-based changes
 (setq dired-dwim-target t)
 
-;; Modeline
-;; Mood
-;; (mood-line-mode)
-
 ;; Numberline
 ;; (global-display-line-numbers-mode 1)
 ;; Disable line numbers for some modes
