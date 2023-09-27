@@ -23,7 +23,7 @@
 #TERM: alacritty
 window:
   opacity: 1
-  startup_mode: Windowed
+  startup_mode: Maximized
   dynamic_title: true
   # Window dimensions (changes require restart)
   #

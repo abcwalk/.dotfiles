@@ -457,62 +457,34 @@ Specific to the current window's mode line.")
 (defvar flycheck-current-errors)
 (declare-function flycheck-count-errors "ext:flycheck")
 
-(defun bb--flycheck-count-errors ()
-  "Count the number of ERRORS, grouped by level.
+(defcustom lambda-line-syntax t
+  "Show flycheck/flymake report in status-line."
+  :type 'boolean
+  :group 'lambda-line)
 
-Return an alist, where each ITEM is a cons cell whose `car' is an
-error level, and whose `cdr' is the number of errors of that
-level."
-  (let ((warning 0) (error 0))
-    (mapc
-     (lambda (item)
-       (let ((count (cdr item)))
-         (pcase (flycheck-error-level-compilation-level (car item))
-           (0 (cl-incf warning count))
-           (1 (cl-incf error count)))))
-     (flycheck-count-errors flycheck-current-errors))
-    `((warning . ,warning) (error . ,error))))
-
-(defun bb-modeline-checker-text (text &optional face)
-  "Displays TEXT with FACE."
-  (propertize text 'face (or face 'mode-line)))
-
+;;;;; Flycheck/Flymake Segment
 (defvar-local flycheck-text nil)
-(defun update-flycheck-text (&optional status)
+(defun update-flycheck-segment (&optional status)
   "Update `flycheck-text' against the reported flycheck STATUS."
   (setq flycheck-text
-	(when-let
-	    ((text
-	      (pcase status
-		('finished (when flycheck-current-errors
-			     (let-alist (bb--flycheck-count-errors)
-			       (bb-modeline-checker-text
-				(number-to-string (+ .error .warning))
-				(cond ((> .error 0) 'error)
-				      ((> .warning 0) 'warning)))
-			       (format "!%s·%s"
-				       (bb-modeline-checker-text (number-to-string .error)
-								 'error)
-				       (bb-modeline-checker-text (number-to-string .warning)
-								 'warning)))))
-		('running (propertize "Checking..." 'face 'italic))
-		(_ nil))))
-	  (propertize
-	   text
-	   'help-echo (pcase status
-			('finished
-			 (when flycheck-current-errors
-			   (let-alist (bb--flycheck-count-errors)
-			     (format "error: %d, warning: %d\n" .error .warning))))
-			('running "Checking...")
-			('no-checker "No Checker")
-			('errored "Error")
-			('interrupted "Interrupted")
-			('suspicious "Suspicious"))))))
+        (pcase status
+          ('finished (if flycheck-current-errors
+                         (let-alist (flycheck-count-errors flycheck-current-errors)
+                           (let ((sum (+ (or .error 0) (or .warning 0))))
+                             (propertize (concat "!"
+                                                 (number-to-string sum)
+                                                 " ")
+                                         'face (if .error
+                                                   'error
+                                                 'warning))))
+                       (propertize "Good" 'face 'success)))
+          ('running (propertize "Checking..." 'face 'info))
+          ('errored (propertize "Error" 'face 'error))
+          ('interrupted (propertize "Paused" 'face 'fringe))
+          ('no-checker ""))))
 
-;; ;; Setup flycheck hooks
-(add-hook 'flycheck-status-changed-functions #'update-flycheck-text)
-(add-hook 'flycheck-mode-hook #'update-flycheck-text)
+(add-hook 'flycheck-status-changed-functions #'update-flycheck-segment)
+(add-hook 'flycheck-mode-hook #'update-flycheck-segment)
 
 ;;;; Risky local variables
 
@@ -589,12 +561,12 @@ level."
 		flycheck-text
 		"  "
 		prot-modeline-align-right
+		"%l:%C %z"
+		"  "
 		time-and-date
 		))
 
 (prot-modeline-subtle-mode 1)
-
-(define-key global-map (kbd "<f3>") #'prot-modeline-subtle-mode)
 
 (require 'keycast)
 (setq keycast-mode-line-format "%2s%k%c%R")
