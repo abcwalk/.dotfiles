@@ -5,46 +5,46 @@
 ;;; Code:
 
 (defvar-local package-list
-      '(dap-mode
-	vimrc-mode
-	yaml-mode
-	xclip
-	use-package
-	undo-fu-session
-	undo-fu
-	org-bullets
-	orderless
-	minions
-	magit
-	lua-mode
-	lsp-ui
-	lsp-pyright
-	lsp-java
-	json-mode
-	ivy-prescient
-	hl-todo
-	gruber-darker-theme
-	gcmh
-	format-all
-	flycheck
-	evil-nerd-commenter
-	dashboard
-	counsel
-	company-prescient
-	pulsar
-	flx
-	wgrep
-	lin
-	web-mode
-	ivy-posframe
-	amx
-	dired-subtree
-	savehist
-	modus-themes
-	nerd-icons
-	treemacs-nerd-icons
-	treemacs-icons-dired
-	))
+  '(dap-mode
+    vimrc-mode
+    yaml-mode
+    xclip
+    use-package
+    undo-fu-session
+    undo-fu
+    org-bullets
+    orderless
+    minions
+    magit
+    lua-mode
+    lsp-ui
+    lsp-pyright
+    lsp-java
+    json-mode
+    ivy-prescient
+    hl-todo
+    gruber-darker-theme
+    gcmh
+    format-all
+    flycheck
+    evil-nerd-commenter
+    dashboard
+    counsel
+    company-prescient
+    pulsar
+    flx
+    wgrep
+    lin
+    web-mode
+    ivy-posframe
+    amx
+    dired-subtree
+    savehist
+    modus-themes
+    nerd-icons
+    treemacs-nerd-icons
+    treemacs-icons-dired
+    ))
 
 ;; Initialize package sources
 (require 'package)
@@ -249,7 +249,7 @@
   ;; Rewrite all programmatic calls to `list-buffers`. Should work without this.
 					;(defalias 'list-buffers 'ibuffer-other-window)
   ;; Override `list-buffers` shortcut with ibuffer
-)
+  )
 
 ;;; For packaged versions which must use `require':
 (use-package modus-themes
@@ -315,6 +315,8 @@
   :hook
   (treemacs-mode . ct/treemacs-decrease-text-scale))
 
+(use-package lsp-treemacs)
+
 ;; (use-package nerd-icons)
 
 ;; (use-package treemacs-nerd-icons
@@ -353,11 +355,11 @@
 	  js-jsx-mode
 	  typescript-mode
 	  web-mode
-	  ) . lsp-deferred)
+	  )
+	 . lsp)
   :commands lsp
   :config
-  (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
-  (add-hook 'java-mode-hook 'lsp-java-lens-mode)
+  ;; (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
   (global-unset-key (kbd "<f4>"))
   (define-key global-map (kbd "<f4>") 'lsp-rename)
   (setq lsp-auto-guess-root t)
@@ -387,6 +389,32 @@
   ;; (setq read-process-output-max (* 1024 1024)) ;; 1MB
   ;; (setq lsp-idle-delay 0.25)
   (setq lsp-auto-execute-action nil))
+
+(use-package flycheck
+  :hook ((prog-mode . flycheck-mode)
+         (markdown-mode . flycheck-mode)
+         (org-mode . flycheck-mode))
+  :custom-face
+  (flycheck-error   ((t (:inherit error :underline t))))
+  (flycheck-warning ((t (:inherit warning :underline t))))
+  :config
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (setq flycheck-display-errors-delay 0.1)
+  (setq-default flycheck-disabled-checkers '(python-pylint))
+  (setq flycheck-flake8rc "~/.config/flake8")
+  (setq flycheck-checker-error-threshold 1000)
+  (setq flycheck-indication-mode nil)
+  (define-key flycheck-mode-map (kbd "<f8>") 'flycheck-next-error)
+  (define-key flycheck-mode-map (kbd "<S-f8>") 'flycheck-previous-error)
+  (flycheck-define-checker proselint
+    "A linter for prose. Install the executable with `pip3 install proselint'."
+    :command ("proselint" source-inplace)
+    :error-patterns
+    ((warning line-start (file-name) ":" line ":" column ": "
+	      (id (one-or-more (not (any " "))))
+	      (message) line-end))
+    :modes (markdown-mode org-mode))
+  (add-to-list 'flycheck-checkers 'proselint))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -451,17 +479,16 @@
                          (lsp))))
 ;; Java
 (use-package lsp-java
-  :after lsp)
+  :config
+  (add-hook 'java-mode-hook 'lsp))
+(add-hook 'java-mode-hook #'lsp-java-lens-mode)
 
 (use-package dap-mode
-  ;; Uncomment the config below if you want all UI panes to be hidden by default!
-  ;; :custom
-  ;; (lsp-enable-dap-auto-configure nil)
-  ;; :config
-  ;; (dap-ui-mode 1)
+  :after lsp-mode
+  :config (dap-auto-configure-mode))
 
-  :config
-  (require 'dap-java))
+(use-package dap-java
+  :ensure nil)
 
 (use-package company
   :hook (prog-mode . company-mode)
@@ -494,32 +521,6 @@
   :config
   (company-prescient-mode +1))
 
-(use-package flycheck
-  :hook ((prog-mode . flycheck-mode)
-         (markdown-mode . flycheck-mode)
-         (org-mode . flycheck-mode))
-  :custom-face
-  (flycheck-error   ((t (:inherit error :underline t))))
-  (flycheck-warning ((t (:inherit warning :underline t))))
-  :config
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (setq flycheck-display-errors-delay 0.1)
-  (setq-default flycheck-disabled-checkers '(python-pylint))
-  (setq flycheck-flake8rc "~/.config/flake8")
-  (setq flycheck-checker-error-threshold 1000)
-  (setq flycheck-indication-mode nil)
-  (define-key flycheck-mode-map (kbd "<f8>") 'flycheck-next-error)
-  (define-key flycheck-mode-map (kbd "<S-f8>") 'flycheck-previous-error)
-  (flycheck-define-checker proselint
-    "A linter for prose. Install the executable with `pip3 install proselint'."
-    :command ("proselint" source-inplace)
-    :error-patterns
-    ((warning line-start (file-name) ":" line ":" column ": "
-	      (id (one-or-more (not (any " "))))
-	      (message) line-end))
-    :modes (markdown-mode org-mode))
-  (add-to-list 'flycheck-checkers 'proselint))
-
 (use-package lua-mode)
 
 (use-package json-mode)
@@ -545,7 +546,7 @@
 (use-package yasnippet
   :hook (prog-mode . yas-minor-mode)
   :config
-  (yas-reload-all))
+  (yas-global-mode))
 
 (use-package smartparens
   :config

@@ -43,7 +43,7 @@
 
 (add-hook 'after-init-hook #'arco/reset-file-handler-alist-h)
 (add-hook 'after-init-hook #'arco/return-gc-to-default)
-(advice-add #'package--ensure-init-file :override #'ignore)
+(advice-add 'package--ensure-init-file :override #'ignore)
 
 ;; cl deprecated
 (setq byte-compile-warnings '(cl-functions))

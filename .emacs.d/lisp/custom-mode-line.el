@@ -457,36 +457,53 @@ Specific to the current window's mode line.")
 (defvar flycheck-current-errors)
 (declare-function flycheck-count-errors "ext:flycheck")
 
-(defcustom lambda-line-syntax t
-  "Show flycheck/flymake report in status-line."
-  :type 'boolean
-  :group 'lambda-line)
+(defun bb-flycheck-count-errors ()
+  "Count the number of ERRORS, grouped by level.
 
-;;;;; Flycheck/Flymake Segment
+Return an alist, where each ITEM is a cons cell whose `car' is an
+error level, and whose `cdr' is the number of errors of that
+level."
+  (let ((info 0) (warning 0) (error 0))
+    (mapc
+     (lambda (item)
+       (let ((count (cdr item)))
+         (pcase (flycheck-error-level-compilation-level (car item))
+           (0 (cl-incf info count))
+           (1 (cl-incf warning count))
+           (2 (cl-incf error count)))))
+     (flycheck-count-errors flycheck-current-errors))
+    `((info . ,info) (warning . ,warning) (error . ,error))))
+
+(defun bb-checker-text (text &optional face)
+  "Displays TEXT with FACE."
+  (propertize text 'face (or face 'mode-line)))
+
 (defvar-local flycheck-text nil)
 (defun update-flycheck-segment (&optional status)
-  "Update `flycheck-text' against the reported flycheck STATUS."
+  "Update `flycheck-text' against the reported flycheck on STATUS."
   (setq flycheck-text
-        (pcase status
-          ('finished (if flycheck-current-errors
-                         (let-alist (flycheck-count-errors flycheck-current-errors)
-                           (let ((sum (+ (or .error 0) (or .warning 0))))
-                             (propertize (concat "!"
-                                                 (number-to-string sum)
-                                                 " ")
-                                         'face (if .error
-                                                   'error
-                                                 'warning))))
-                       (propertize "Good" 'face 'success)))
-          ('running (propertize "Checking..." 'face 'info))
-          ('errored (propertize "Error" 'face 'error))
-          ('interrupted (propertize "Paused" 'face 'fringe))
-          ('no-checker ""))))
+	(pcase status
+	  ('finished (when flycheck-current-errors
+		       (let-alist (bb-flycheck-count-errors)
+			 (bb-checker-text
+			  (number-to-string (+ .error .warning .info))
+			  (cond ((> .error 0) 'error)
+				((> .warning 0) 'warning)
+				(t 'success)))
+			 (format "%s·%s·%s"
+				 (bb-checker-text (number-to-string .error) 'error)
+				 (bb-checker-text (number-to-string .warning) 'warning)
+				 (bb-checker-text (number-to-string .info) 'success)))))
+	  ('running (propertize "Checking..." 'face 'italic))
+	  ('no-checker "No Checker")
+	  ('errored "Error")
+	  ('interrupted "Interrupted")
+          ('suspicious "Suspicious"))))
 
 (add-hook 'flycheck-status-changed-functions #'update-flycheck-segment)
 (add-hook 'flycheck-mode-hook #'update-flycheck-segment)
 
-;;;; Risky local variables
+ ;;;; Risky local variables
 
 ;; NOTE 2023-04-28: The `risky-local-variable' is critical, as those
 ;; variables will not work without it.
