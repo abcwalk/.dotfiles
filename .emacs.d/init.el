@@ -44,6 +44,7 @@
     nerd-icons
     treemacs-nerd-icons
     treemacs-icons-dired
+    java-snippets
     ))
 
 ;; Initialize package sources
