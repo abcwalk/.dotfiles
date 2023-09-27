@@ -518,18 +518,6 @@
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
 
-;;   (defun bb/company-backend-with-yas (backends)
-;;     "Add :with company-yasnippet to company BACKENDS.
-;; Taken from https://github.com/syl20bnr/spacemacs/pull/179."
-;;     (if (and (listp backends) (memq 'company-yasnippet backends))
-;; 	backends
-;;       (append (if (consp backends)
-;; 		  (list backends))
-;; 	      backends
-;; 	      '(:with company-yasnippet))))
-
-  ;; add yasnippet to all backends
-  ;; (setq company-backends (mapcar #'bb/company-backend-with-yas company-backends)))
 
 (use-package company-prescient
   :after (prescient company)
