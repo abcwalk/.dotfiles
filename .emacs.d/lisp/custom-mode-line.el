@@ -503,6 +503,12 @@ level."
 (add-hook 'flycheck-status-changed-functions #'update-flycheck-segment)
 (add-hook 'flycheck-mode-hook #'update-flycheck-segment)
 
+;;; File progress
+
+(defvar-local file-progress
+  '(:eval
+    (concat "L:%l" (format "%3d%%" (/ (window-start) 0.01 (point-max))) "%")))
+
  ;;;; Risky local variables
 
 ;; NOTE 2023-04-28: The `risky-local-variable' is critical, as those
@@ -518,6 +524,7 @@ level."
 		     prot-modeline-align-right
 		     prot-modeline-misc-info
 		     flycheck-text
+		     file-progress
 		     time-and-date))
   (put construct 'risky-local-variable t))
 
@@ -575,11 +582,10 @@ level."
 		"  "
 		prot-modeline-breadcrumb
 		"  "
+		prot-modeline-align-right
 		flycheck-text
 		"  "
-		prot-modeline-align-right
-		"L:%l "
-		(:eval (concat (format "%3d%%" (/ (window-start) 0.01 (point-max))) "%"))
+		file-progress
 		"  "
 		time-and-date
 		))
