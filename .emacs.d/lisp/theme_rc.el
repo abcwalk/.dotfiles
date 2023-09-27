@@ -45,11 +45,11 @@
       (progn
 	(disable-theme 'solarized-light)
 	(load-theme 'solarized-dark t)
-	(bb/set-emacs-frames "light"))
+	(bb/set-emacs-frames "dark"))
     (progn
       (disable-theme 'solarized-dark)
       (load-theme 'solarized-light t)
-      (bb/set-emacs-frames "dark"))))
+      (bb/set-emacs-frames "light"))))
 
 ;; Standard detect (GTK_THEME=light/dark)
 ;; (bb/set-modus-theme)
