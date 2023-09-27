@@ -561,7 +561,8 @@ Specific to the current window's mode line.")
 		flycheck-text
 		"  "
 		prot-modeline-align-right
-		"%l:%C %z"
+		"L:%l "
+		(:eval (concat (format "%3d%%" (/ (window-start) 0.01 (point-max))) "%"))
 		"  "
 		time-and-date
 		))
