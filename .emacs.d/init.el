@@ -266,7 +266,7 @@
   :bind
   ("s-[" . tab-bar-switch-to-prev-tab)
   ("s-]" . tab-bar-switch-to-next-tab)
-  ("s-n" . tab-bar-new-tab)
+  ("s-w" . tab-bar-new-tab)
   ("s-c" . tab-bar-close-tab) ; I constantly want to close a buffer this way.
   ("C-S-t" . tab-bar-undo-close-tab)
   )
