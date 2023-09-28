@@ -590,7 +590,7 @@ level."
 		;; time-and-date
 		))
 
-(prot-modeline-subtle-mode 1)
+;; (prot-modeline-subtle-mode 1)
 (global-set-key (kbd "<f6>") #'prot-modeline-subtle-mode)
 
 (require 'keycast)
