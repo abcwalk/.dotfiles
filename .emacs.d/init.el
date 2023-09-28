@@ -42,8 +42,8 @@
     dired-subtree
     savehist
     modus-themes
-    nerd-icons
-    treemacs-nerd-icons
+    all-the-icons
+    treemacs-all-the-icons
     treemacs-icons-dired
     java-snippets
     ))
@@ -295,14 +295,14 @@
   :init
   (require 'modus-themes)
   (setq
-   modus-themes-italic-constructs t
+   modus-themes-italic-constructs nil
    modus-themes-bold-constructs nil
    modus-themes-variable-pitch-ui t
    modus-themes-mixed-fonts t))
 
 ;; Comment
-(setq modus-operandi-palette-overrides
-      '((comment green-faint)))
+;; (setq modus-operandi-palette-overrides
+;;       '((comment green-faint)))
 
 ;;   ;; Theme overrides
 ;;   ;; (customize-set-variable 'modus-themes-common-palette-overrides
@@ -341,10 +341,9 @@
         treemacs-width 30
         treemacs-show-hidden-files t)
 
-  (setq treemacs-no-png-images t)
+  ;; (setq treemacs-no-png-images t)
 
-  ;; (setq treemacs--icon-size 16)
-  ;; (treemacs-resize-icons 16)
+  (treemacs-resize-icons 16)
 
   ;; Don't always focus the currently visited file
   (treemacs-follow-mode -1)
@@ -364,14 +363,23 @@
 
 (use-package lsp-treemacs)
 
-;; (use-package all-the-icons
-;;   :delight
-;;   :demand)
+(use-package all-the-icons
+  :delight
+  :demand)
+
+(use-package treemacs-all-the-icons
+  :after treemacs
+  :config
+  (treemacs-load-theme "all-the-icons")
+
+  ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
+                                        ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
+  )
 
 ;; (use-package treemacs-nerd-icons
 ;;   :after treemacs
 ;;   :config
-;;   (treemacs-load-theme "treemacs-icons")
+;;   (treemacs-load-theme "treemacs-icons"))
 
 ;;   ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
 ;;   ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
