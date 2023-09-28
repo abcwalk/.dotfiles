@@ -13,6 +13,7 @@
     undo-fu-session
     undo-fu
     org-bullets
+    solarized-theme
     orderless
     minions
     magit
