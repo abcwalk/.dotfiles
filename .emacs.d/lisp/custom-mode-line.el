@@ -582,11 +582,11 @@ level."
 		"  "
 		prot-modeline-breadcrumb
 		"  "
-		prot-modeline-align-right
+		;; prot-modeline-align-right
 		flycheck-text
-		"  "
-		file-progress
-		"  "
+		;; "  "
+		;; file-progress
+		;; "  "
 		;; time-and-date
 		))
 

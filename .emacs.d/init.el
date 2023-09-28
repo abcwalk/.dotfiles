@@ -609,6 +609,7 @@
   (smartparens-global-mode t)
   (sp-pair "'" nil :actions nil)
   (sp-pair "`" nil :actions nil)
+  (sp-pair "(" nil :actions nil)
   (setq sp-highlight-pair-overlay nil))
 
 ;; Autoindent
