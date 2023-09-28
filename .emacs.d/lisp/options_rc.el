@@ -154,24 +154,6 @@
 ;;       (save-buffers-kill-emacs))))
 ;; (global-set-key [remap save-buffers-kill-terminal] #'ct/clean-exit)
 
-;; ;; tab-bar color overrides so it’s less noise up there
-;; (defun ct/modus-themes-tab-bar-colors ()
-;;   "Override tab faces to have even less variety."
-;;   (modus-themes-with-colors
-;;     (custom-set-faces
-;;      `(tab-bar ((,c
-;;                  :height 0.8
-;;                  :background ,bg-main
-;;                  :box nil)))
-;;      `(tab-bar-tab ((,c
-;;                      :background ,bg-main
-;;                      :underline (:color ,blue-intense :style line)
-;;                      :box (:line-width 2 :style flat-button))))
-;;      `(tab-bar-tab-inactive ((,c
-;;                               :background ,bg-main
-;;                               :box (:line-width 2 :style flat-button)))))))
-;; (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
-
 ;; (setq backup-directory-alist
 ;;       `((".*" . ,temporary-file-directory)))
 ;; (setq auto-save-file-name-transforms
@@ -193,7 +175,7 @@
 (setq dired-dwim-target t)
 
 ;; Numberline
-;; (global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode 1)
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
 		term-mode-hook

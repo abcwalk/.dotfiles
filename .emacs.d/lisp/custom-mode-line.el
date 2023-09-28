@@ -587,10 +587,11 @@ level."
 		"  "
 		file-progress
 		"  "
-		time-and-date
+		;; time-and-date
 		))
 
 (prot-modeline-subtle-mode 1)
+(global-set-key (kbd "<f6>") #'prot-modeline-subtle-mode)
 
 (require 'keycast)
 (setq keycast-mode-line-format "%2s%k%c%R")

@@ -3,7 +3,7 @@
 ;;; Source: https://gist.github.com/DivineDominion/e15c152f2fad785f4e1167b9a4df548b#main-font-and-frame-settings
 ;;; Code:
 
-(defun ct/use-face (font height weight)
+(defun bb/use-face (font height weight)
   "Set font; FONT=font name; HEIGHT=font height; WEIGHT=font weight."
   (let ((the-font (format "%s-%d" font height)))
     (message the-font)
@@ -25,18 +25,18 @@
                       :height (* height 10))
   (set-face-attribute 'variable-pitch nil
                       :font "Iosevka Comfy"
-		      :weight weight
                       :height (* height 10))
   (set-face-attribute 'fixed-pitch nil
                       :font font
                       :height (* height 10)))
-(defun ct/use-regular-face ()
-  "Use Iosevka Comfy 16pt."
+(defun bb/use-regular-face ()
+  "Use SF Mono Regular 22pt, for larger screens."
   (interactive)
-  (ct/use-face "Iosevka Comfy" 18 'regular))
-  ;; (setq-default line-spacing .2))
+  (bb/use-face "Iosevka Comfy" 18 'regular))
 
-(ct/use-regular-face)
+(bb/use-regular-face)
 
-(provide 'font_rc)
+;; Map SF Symbols to a compatible font
+;; (set-fontset-font t '(?􀀀 . ?􏿽) "SF Pro Display")
+
 ;;; font_rc.el ends here

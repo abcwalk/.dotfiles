@@ -144,100 +144,136 @@
   ;; Calendar
   (setq calendar-week-start-day 1)
   (setq display-time-24hr-format t)
-  ;; (setq-default line-spacing .2)
 
-  ;; Tabs
-  ;; (defface ct/tab-bar-numbers
-  ;;   '((t
-  ;;      :inherit tab-bar
-  ;;      :family "Iosevka Comfy"))
-  ;;   "Face for tab numbers in both active and inactive tabs.")
-  ;; (defvar ct/circle-numbers-alist
-  ;;   '((0 . "⓪")
-  ;;     (1 . "①")
-  ;;     (2 . "②")
-  ;;     (3 . "③")
-  ;;     (4 . "④")
-  ;;     (5 . "⑤")
-  ;;     (6 . "⑥")
-  ;;     (7 . "⑦")
-  ;;     (8 . "⑧")
-  ;;     (9 . "⑨"))
-  ;;   "Alist of integers to strings of SF Symbols with numbers in boxes.")
-  ;; (defun ct/tab-bar-tab-name-format-default (tab i)
-  ;;   (let ((current-p (eq (car tab) 'current-tab)))
-  ;;     (concat
-  ;;      (propertize
-  ;;       (when (and tab-bar-tab-hints (< i 10)) (alist-get i ct/circle-numbers-alist))
-  ;;       'face 'ct/tab-bar-numbers)
-  ;;      " "
-  ;;      (propertize
-  ;;       (concat (alist-get 'name tab)
-  ;; 	        (or (and tab-bar-close-button-show
-  ;; 			 (not (eq tab-bar-close-button-show
-  ;; 				  (if current-p 'non-selected 'selected)))
-  ;; 			 tab-bar-close-button)
-  ;; 		    ""))
-  ;;       'face (funcall tab-bar-tab-face-function tab))
-  ;;      " ")))
-  ;; (setq tab-bar-tab-name-format-function #'ct/tab-bar-tab-name-format-default
-  ;;       tab-bar-tab-hints t)
+  ;;; Tabs
+  (defface ct/tab-bar-numbers
+    '((t
+       :inherit tab-bar
+       :family "Iosevka Comfy"
+       :weight light))
+    "Face for tab numbers in both active and inactive tabs.")
+  (defvar ct/circle-numbers-alist
+    '((0 . "⓪")
+      (1 . "①")
+      (2 . "②")
+      (3 . "③")
+      (4 . "④")
+      (5 . "⑤")
+      (6 . "⑥")
+      (7 . "⑦")
+      (8 . "⑧")
+      (9 . "⑨"))
+    "Alist of integers to strings of circled unicode numbers.")
+  (defvar ct/box-numbers-alist
+    '((1 . "􀃊")
+      (2 . "􀃌")
+      (3 . "􀃎")
+      (4 . "􀘙")
+      (5 . "􀃒")
+      (6 . "􀑵")
+      (7 . "􀃖")
+      (8 . "􀃘")
+      (9 . "􀑷")
+      (0 . "􀃈"))
+    "Alist of integers to strings of SF Symbols with numbers in boxes.")
+  (defun ct/tab-bar-tab-name-format-default (tab i)
+    (let ((current-p (eq (car tab) 'current-tab)))
+      (concat
+       (propertize
+        (when (and tab-bar-tab-hints (< i 10)) (alist-get i ct/circle-numbers-alist))
+        'face 'ct/tab-bar-numbers)
+       " "
+       (propertize
+        (concat (alist-get 'name tab)
+	        (or (and tab-bar-close-button-show
+			 (not (eq tab-bar-close-button-show
+				  (if current-p 'non-selected 'selected)))
+			 tab-bar-close-button)
+		    ""))
+        'face (funcall tab-bar-tab-face-function tab))
+       " ")))
+  (setq tab-bar-tab-name-format-function #'ct/tab-bar-tab-name-format-default
+        tab-bar-tab-hints t)
 
-  ;; (setq tab-bar-new-tab-choice 'recentf-open-files)
-  ;; (setq tab-bar-close-button-show nil)
-  ;; ;; tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
-  ;; (setq tab-bar-new-button-show nil)
-  ;; ;; tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
-  ;; (setq tab-bar-separator nil)
-  ;; (setq tab-bar-format
-  ;; 	'(;;tab-bar-format-history ;; forward/back buttons
-  ;; 	  tab-bar-format-tabs-groups
-  ;; 	  tab-bar-separator
-  ;;         ;; tab-bar-format-add-tab ;; new tab button
-  ;; 	  tab-bar-format-align-right
-  ;; 	  tab-bar-format-global))
+  (setq tab-bar-close-button-show nil
+	tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
+  (setq tab-bar-new-button-show nil
+	tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
+  (setq tab-bar-separator nil)
+  (setq tab-bar-format
+	'(;;tab-bar-format-history ;; forward/back buttons
+	  tab-bar-format-tabs-groups
+	  tab-bar-separator
+          ;; tab-bar-format-add-tab ;; new tab button
+	  tab-bar-format-align-right
+	  tab-bar-format-global))
 
-  ;; ;; Display battery and time in `tab-bar-format-global' section:
-  ;; (require 'battery)
-  ;; (setq have-battery-status-p
-  ;; 	(let ((perc-charged (assoc ?p (funcall battery-status-function))))
-  ;; 	  (and perc-charged
-  ;;              (not (zerop (string-to-number (cdr perc-charged)))))))
-  ;; (if have-battery-status-p
-  ;;     (display-battery-mode 1))
-  ;; (setq display-time-format "%a %e %B, %H:%M")
-  ;; (setq display-time-default-load-average nil)
-  ;; (display-time-mode +1)
+  ;; Display battery and time in `tab-bar-format-global' section:
+  (require 'battery)
+  (setq have-battery-status-p
+	(let ((perc-charged (assoc ?p (funcall battery-status-function))))
+	  (and perc-charged
+               (not (zerop (string-to-number (cdr perc-charged)))))))
 
-  ;; ;; Bind 1-9 in the tab prefix map to switch to that tab.
-  ;; (mapcar (lambda (tab-number)
-  ;;           (let ((funname (intern (format "ct/tab-bar-select-%d" tab-number)))
-  ;;                 (docstring (format "Select tab %d by its absolute number." tab-number))
-  ;;                 (key (kbd (format "%d" tab-number)))
-  ;;                 (super-key (kbd (format "s-%d" tab-number))))
-  ;;             (eval-expression `(defun ,funname ()
-  ;;                                 ,docstring
-  ;;                                 (interactive)
-  ;;                                 (tab-bar-select-tab ,tab-number)))
-  ;;             (eval-expression `(define-key tab-prefix-map ,key ',funname))
-  ;;             (eval-expression `(global-set-key ,super-key ',funname))))
-  ;;         (number-sequence 1 9))
+  (if have-battery-status-p
+      (display-battery-mode 1))
 
-  ;; :hook
-  ;; (tab-bar-mode . tab-bar-history-mode)
-  ;; (after-init . tab-bar-mode)
+  (setq display-time-format "%a %e %B, %H:%M")
+  (setq display-time-default-load-average nil)
+  (display-time-mode +1)
 
-  ;; :bind
-  ;; ("s-[" . tab-bar-switch-to-prev-tab)
-  ;; ("s-]" . tab-bar-switch-to-next-tab)
-  ;; ("s-w" . tab-bar-new-tab)
-  ;; ("s-c" . tab-bar-close-tab) ; I constantly want to close a buffer this way.
-  ;; ("C-S-t" . tab-bar-undo-close-tab)
+  ;; Bind 1-9 in the tab prefix map to switch to that tab.
+  (mapcar (lambda (tab-number)
+            (let ((funname (intern (format "ct/tab-bar-select-%d" tab-number)))
+                  (docstring (format "Select tab %d by its absolute number." tab-number))
+                  (key (kbd (format "%d" tab-number)))
+                  (super-key (kbd (format "s-%d" tab-number))))
+              (eval-expression `(defun ,funname ()
+                                  ,docstring
+                                  (interactive)
+                                  (tab-bar-select-tab ,tab-number)))
+              (eval-expression `(define-key tab-prefix-map ,key ',funname))
+              (eval-expression `(global-set-key ,super-key ',funname))))
+          (number-sequence 1 9))
+
+
+  (defun ct/modus-themes-tab-bar-colors ()
+    "Override `modus-themes-tab-*' to have even less variety"
+    (let* ((bg-color (modus-themes-color 'bg-main))
+           ;; Additional padding between tabs
+           (box `(:line-width
+                  (2 . -1)  ;; -1 for no vertical space
+                  :color ,bg-color :style flat-button))
+           (active-accent-color (modus-themes-color 'blue-active)))
+      (set-face-attribute 'tab-bar nil
+                          :height 0.8)
+      (set-face-attribute 'modus-themes-tab-backdrop nil
+                          :background bg-color
+                          :box nil)
+      (set-face-attribute 'modus-themes-tab-inactive nil
+                          :background bg-color
+                          :box box)
+      (set-face-attribute 'modus-themes-tab-active nil
+                          :background bg-color
+                          :underline `(:color ,active-accent-color :style line)
+                          :box box)))
+  (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
+
+  :hook
+  (tab-bar-mode . tab-bar-history-mode)
+  (after-init . tab-bar-mode)
+
+  :bind
+  ("s-[" . tab-bar-switch-to-prev-tab)
+  ("s-]" . tab-bar-switch-to-next-tab)
+  ("s-w" . tab-bar-new-tab)
+  ("s-c" . tab-bar-close-tab) ; I constantly want to close a buffer this way.
+  ("C-S-t" . tab-bar-undo-close-tab)
   )
 
 ;; (use-package mlscroll
 ;;   :hook
-;;     (after-init . mlscroll-mode))
+;;   (after-init . mlscroll-mode))
 
 ;; (use-package which-key
 ;;   :init (which-key-mode)
@@ -259,10 +295,14 @@
   :init
   (require 'modus-themes)
   (setq
-   modus-themes-italic-constructs nil
+   modus-themes-italic-constructs t
    modus-themes-bold-constructs nil
    modus-themes-variable-pitch-ui t
    modus-themes-mixed-fonts t))
+
+;; Comment
+(setq modus-operandi-palette-overrides
+      '((comment green-faint)))
 
 ;;   ;; Theme overrides
 ;;   ;; (customize-set-variable 'modus-themes-common-palette-overrides
@@ -301,30 +341,41 @@
         treemacs-width 30
         treemacs-show-hidden-files t)
 
-  ;;(setq treemacs--icon-size 16)
-  ;; (treemacs-resize-icons 16)
-
   (setq treemacs-no-png-images t)
+
+  ;; (setq treemacs--icon-size 16)
+  ;; (treemacs-resize-icons 16)
 
   ;; Don't always focus the currently visited file
   (treemacs-follow-mode -1)
 
-  (defun ct/treemacs-decrease-text-scale ()
-    (text-scale-decrease 1))
-
+  ;; (defun ct/treemacs-decrease-text-scale ()
+  ;;   (text-scale-decrease 1))
   :bind
-  ("<f2>" . treemacs)
-  :hook
-  (treemacs-mode . ct/treemacs-decrease-text-scale))
+  ("<f2>" . treemacs))
+;; :hook
+;; (treemacs-mode . ct/treemacs-decrease-text-scale))
+
+
+;; (use-package highlight-indent-guides
+;;   :config
+;;   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;;   (setq highlight-indent-guides-method 'bitmap))
 
 (use-package lsp-treemacs)
 
-;; (use-package nerd-icons)
+;; (use-package all-the-icons
+;;   :delight
+;;   :demand)
 
 ;; (use-package treemacs-nerd-icons
 ;;   :after treemacs
 ;;   :config
-;;   (treemacs-load-theme "nerd-icons"))
+;;   (treemacs-load-theme "treemacs-icons")
+
+;;   ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
+;;   ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
+;;   )
 
 (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
   :after (treemacs)
@@ -444,7 +495,7 @@
 
 (use-package lin
   :config
-  (setq lin-face 'lin-magenta)
+  (setq lin-face 'lin-blue)
 
   (setq lin-mode-hooks
 	'(bongo-mode-hook
@@ -455,6 +506,7 @@
           ibuffer-mode-hook
           ilist-mode-hook
           ledger-report-mode-hook
+	  treemacs-mode-hook
           log-view-mode-hook
           magit-log-mode-hook
           mu4e-headers-mode-hook
