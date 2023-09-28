@@ -530,18 +530,13 @@ level."
 
 ;;;; Subtle mode line style
 
-(defun prot-modeline-set-faces ()
+(defun prot-modeline-set-faces (_theme)
   "Make THEME mode lines subtle."
   (let ((subtle (face-foreground 'shadow)))
-    (if (eq (car custom-enabled-themes) 'solarized-light)
-	(custom-set-faces
-	 `(mode-line ((t :background unspecified :box unspecified :overline ,subtle :underline nil)))
-	 `(mode-line-active ((t :inherit mode-line :box unspecified :underline nil)))
-	 `(mode-line-inactive ((t :background unspecified :foreground ,subtle :box unspecified :overline ,subtle :underline nil))))
-      (custom-set-faces
-       `(mode-line ((t :background unspecified :box unspecified :overline ,subtle)))
-       `(mode-line-active ((t :inherit mode-line :box unspecified)))
-       `(mode-line-inactive ((t :background unspecified :foreground ,subtle :box unspecified :overline ,subtle)))))))
+    (custom-set-faces
+     `(mode-line ((t :background unspecified :box unspecified :overline ,subtle)))
+     `(mode-line-active ((t :inherit mode-line :box unspecified)))
+     `(mode-line-inactive ((t :background unspecified :foreground ,subtle :box unspecified :overline ,subtle))))))
 
 (defun prot-modeline-unset-faces ()
   "Make window dividers for THEME invisible."
@@ -552,7 +547,7 @@ level."
 
 (defun prot-modeline--enable-mode ()
   "Enable `prot-modeline-subtle-mode'."
-  (prot-modeline-set-faces)
+  (prot-modeline-set-faces nil)
   (add-hook 'enable-theme-functions #'prot-modeline-set-faces))
 
 (defun prot-modeline--disable-mode ()
@@ -584,6 +579,7 @@ level."
 		prot-modeline-process
 		"  "
 		prot-modeline-vc-branch
+		"  "
 		prot-modeline-breadcrumb
 		"  "
 		prot-modeline-align-right
