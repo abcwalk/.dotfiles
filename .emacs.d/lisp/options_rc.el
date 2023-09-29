@@ -19,7 +19,7 @@
 
 (global-auto-revert-mode 1)
 (delete-selection-mode +1)
-(setq initial-buffer-choice 'recentf-open-files)
+;; (setq initial-buffer-choice 'recentf-open-files)
 
 (setq global-auto-revert-non-file-buffers t)
 
