@@ -832,28 +832,8 @@
   (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
   (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
   (setf (alist-get 'swiper ivy-height-alist) 15)
-  (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7)
+  (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7))
 
-  (defcustom ivy-format-function 'ivy-format-function-default
-    "Function to transform the list of candidates into a string.
-This string is inserted into the minibuffer."
-    :type '(choice
-            (const :tag "Default" ivy-format-function-default)
-            (const :tag "Arrow prefix" ivy-format-function-arrow)
-            (const :tag "Full line" ivy-format-function-line)))
-
-  (setq ivy-format-function 'ivy-format-function-arrow)
-
-  (defun my-ivy-format-function-arrow (cands)
-    "Transform CAND-PAIRS into a string for minibuffer."
-    (ivy--format-function-generic
-     (lambda (str)
-       (concat "-> " (ivy--add-face str 'ivy-current-match)))
-     (lambda (str)
-       (concat "   " str))
-     cands
-     "\n"))
-  (setq ivy-format-function 'my-ivy-format-function-arrow))
 
 (use-package ivy-hydra
   :defer t
@@ -944,7 +924,7 @@ This string is inserted into the minibuffer."
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-blueg)
+  (setq pulsar-face 'pulsar-blue)
   (setq pulsar-highlight-face 'pulsar-yellow)
   (pulsar-global-mode 1)
 
