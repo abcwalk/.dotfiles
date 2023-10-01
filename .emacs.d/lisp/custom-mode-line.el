@@ -159,29 +159,29 @@ Truncation is done up to `prot-modeline-string-truncate-length'."
 ;;;; Keyboard macro indicator
 
 (defvar-local prot-modeline-kbd-macro
-  '(:eval
-    (when (and (mode-line-window-selected-p) defining-kbd-macro)
-      (propertize " KMacro " 'face 'prot-modeline-indicator-blue-bg)))
+    '(:eval
+      (when (and (mode-line-window-selected-p) defining-kbd-macro)
+	(propertize " KMacro " 'face 'prot-modeline-indicator-blue-bg)))
   "Mode line construct displaying `mode-line-defining-kbd-macro'.
 Specific to the current window's mode line.")
 
 ;;;; Narrow indicator
 
 (defvar-local prot-modeline-narrow
-  '(:eval
-    (when (and (mode-line-window-selected-p)
-               (buffer-narrowed-p)
-               (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
-      (propertize " Narrow " 'face 'prot-modeline-indicator-cyan-bg)))
+    '(:eval
+      (when (and (mode-line-window-selected-p)
+		 (buffer-narrowed-p)
+		 (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
+	(propertize " Narrow " 'face 'prot-modeline-indicator-cyan-bg)))
   "Mode line construct to report the multilingual environment.")
 
 ;;;; Input method
 
 (defvar-local prot-modeline-input-method
-  '(:eval
-    (when current-input-method-title
-      (propertize (format " %s" current-input-method-title)
-                  'mouse-face 'mode-line-highlight)))
+    '(:eval
+      (when current-input-method-title
+	(propertize (format " %s" current-input-method-title)
+                    'mouse-face 'mode-line-highlight)))
   "Mode line construct to report the multilingual environment.")
 
 ;;;; Buffer status
@@ -189,11 +189,11 @@ Specific to the current window's mode line.")
 ;; TODO 2023-07-05: What else is there beside remote files?  If
 ;; nothing, this must be renamed accordingly.
 (defvar-local prot-modeline-buffer-status
-  '(:eval
-    (when (file-remote-p default-directory)
-      (propertize " @ "
-                  'face 'prot-modeline-indicator-red-bg
-                  'mouse-face 'mode-line-highlight)))
+    '(:eval
+      (when (file-remote-p default-directory)
+	(propertize " @ "
+                    'face 'prot-modeline-indicator-red-bg
+                    'mouse-face 'mode-line-highlight)))
   "Mode line construct for showing remote file name.")
 
 ;;;; Buffer name and modified status
@@ -231,11 +231,11 @@ See `prot-modeline-string-truncate'."
        (format "No underlying file.\nDirectory is: %s" default-directory))))
 
 (defvar-local prot-modeline-buffer-identification
-  '(:eval
-    (propertize (prot-modeline-buffer-name)
-                'face (prot-modeline-buffer-identification-face)
-                'mouse-face 'mode-line-highlight
-                'help-echo (prot-modeline-buffer-name-help-echo)))
+    '(:eval
+      (propertize (prot-modeline-buffer-name)
+                  'face (prot-modeline-buffer-identification-face)
+                  'mouse-face 'mode-line-highlight
+                  'help-echo (prot-modeline-buffer-name-help-echo)))
   "Mode line construct for identifying the buffer being displayed.
 Propertize the current buffer with the `mode-line-buffer-id'
 face.  Let other buffers have no face.")
@@ -262,22 +262,22 @@ face.  Let other buffers have no face.")
     (format "Symbol: `%s'." major-mode)))
 
 (defvar-local prot-modeline-major-mode
-  (list
-   (propertize "%[" 'face 'prot-modeline-indicator-red)
-   '(:eval
-     (concat
-      (prot-modeline-major-mode-indicator)
-      " "
-      (propertize
-       (prot-modeline-string-truncate
-        (prot-modeline-major-mode-name))
-       'mouse-face 'mode-line-highlight
-       'help-echo (prot-modeline-major-mode-help-echo))))
-   (propertize "%]" 'face 'prot-modeline-indicator-red))
+    (list
+     (propertize "%[" 'face 'prot-modeline-indicator-red)
+     '(:eval
+       (concat
+	(prot-modeline-major-mode-indicator)
+	" "
+	(propertize
+	 (prot-modeline-string-truncate
+          (prot-modeline-major-mode-name))
+	 'mouse-face 'mode-line-highlight
+	 'help-echo (prot-modeline-major-mode-help-echo))))
+     (propertize "%]" 'face 'prot-modeline-indicator-red))
   "Mode line construct for displaying major modes.")
 
 (defvar-local prot-modeline-process
-  (list '("" mode-line-process))
+    (list '("" mode-line-process))
   "Mode line construct for the running process indicator.")
 
 ;;;; Git branch and diffstat
@@ -346,14 +346,14 @@ than `split-width-threshold'."
   (prot-modeline--vc-get-face (vc-state file backend)))
 
 (defvar-local prot-modeline-vc-branch
-  '(:eval
-    (when-let* (((mode-line-window-selected-p))
-                (file (buffer-file-name))
-                (backend (vc-backend file))
-                ;; ((vc-git-registered file))
-                (branch (prot-modeline--vc-branch-name file backend))
-                (face (prot-modeline--vc-face file backend)))
-      (prot-modeline--vc-details file branch face)))
+    '(:eval
+      (when-let* (((mode-line-window-selected-p))
+                  (file (buffer-file-name))
+                  (backend (vc-backend file))
+                  ;; ((vc-git-registered file))
+                  (branch (prot-modeline--vc-branch-name file backend))
+                  (face (prot-modeline--vc-face file backend)))
+	(prot-modeline--vc-details file branch face)))
   "Mode line construct to return propertized VC branch.")
 
 ;;;; Right side alignment
@@ -397,61 +397,61 @@ than `split-width-threshold'."
     (round height (* m-width (* height m-width 0.001)))))
 
 (defvar-local prot-modeline-align-right
-  '(:eval
-    (propertize
-     " "
-     'display
-     (let ((box-p (prot-modeline--box-p))
-           (variable-pitch-p (prot-modeline--variable-pitch-p))
-           (magic-number (prot-modeline--magic-number)))
-       `(space
-         :align-to
-         (- right
-            right-fringe
-            right-margin
-            ,(ceiling
-              (prot-modeline--right-align-width)
-              (string-pixel-width (propertize "m" 'face 'mode-line)))
-            ,(cond
-              ;; FIXME 2023-07-13: These hardcoded numbers are
-              ;; probably wrong in some case.  I am still testing.
-              ((and variable-pitch-p box-p)
-               (* magic-number 0.5))
-              ((and (not variable-pitch-p) box-p)
-               (* magic-number 0.25))
-              ((and variable-pitch-p (not box-p))
-               0)
-              ;; No box, no variable pitch, but I am keeping it as
-              ;; the fallback for the time being.
-              (t (* magic-number -0.1))))))))
+    '(:eval
+      (propertize
+       " "
+       'display
+       (let ((box-p (prot-modeline--box-p))
+             (variable-pitch-p (prot-modeline--variable-pitch-p))
+             (magic-number (prot-modeline--magic-number)))
+	 `(space
+           :align-to
+           (- right
+              right-fringe
+              right-margin
+              ,(ceiling
+		(prot-modeline--right-align-width)
+		(string-pixel-width (propertize "m" 'face 'mode-line)))
+              ,(cond
+		;; FIXME 2023-07-13: These hardcoded numbers are
+		;; probably wrong in some case.  I am still testing.
+		((and variable-pitch-p box-p)
+		 (* magic-number 0.5))
+		((and (not variable-pitch-p) box-p)
+		 (* magic-number 0.25))
+		((and variable-pitch-p (not box-p))
+		 0)
+		;; No box, no variable pitch, but I am keeping it as
+		;; the fallback for the time being.
+		(t (* magic-number -0.1))))))))
   "Mode line construct to align following elements to the right.
 Read Info node `(elisp) Pixel Specification'.")
 
 ;;;; Miscellaneous
 
 (defvar-local prot-modeline-misc-info
-  '(:eval
-    (when (mode-line-window-selected-p)
-      mode-line-misc-info))
+    '(:eval
+      (when (mode-line-window-selected-p)
+	mode-line-misc-info))
   "Mode line construct displaying `mode-line-misc-info'.
 Specific to the current window's mode line.")
 
 ;;;; Breadcrumb
 
 (defvar-local prot-modeline-breadcrumb
-  '(:eval
-    (when (and (featurep 'breadcrumb)
-               (derived-mode-p 'text-mode 'prog-mode)
-               (buffer-file-name)
-               (mode-line-window-selected-p))
-      ;; (breadcrumb-project-crumbs)
-      (breadcrumb-imenu-crumbs)))
+    '(:eval
+      (when (and (featurep 'breadcrumb)
+		 (derived-mode-p 'text-mode 'prog-mode)
+		 (buffer-file-name)
+		 (mode-line-window-selected-p))
+	;; (breadcrumb-project-crumbs)
+	(breadcrumb-imenu-crumbs)))
   "Mode line construct for displaying breadcrumbs.")
 
 ;;;; Time and date
 
 (defvar-local time-and-date
-  (format-time-string "%a %e %B, %H:%M" (current-time)))
+    (format-time-string "%a %e %B, %H:%M" (current-time)))
 
 ;;; Flycheck
 (defvar flycheck-current-errors)
@@ -506,8 +506,8 @@ level."
 ;;; File progress
 
 (defvar-local file-progress
-  '(:eval
-    (concat "L:%l" (format "%3d%%" (/ (window-start) 0.01 (point-max))) "%")))
+    '(:eval
+      (concat "L:%l" (format "%3d%%" (/ (window-start) 0.01 (point-max))) "%")))
 
  ;;;; Risky local variables
 
