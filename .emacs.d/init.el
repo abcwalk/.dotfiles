@@ -5,48 +5,48 @@
 ;;; Code:
 
 (defvar-local package-list
-    '(dap-mode
-      vimrc-mode
-      yaml-mode
-      xclip
-      use-package
-      undo-fu-session
-      undo-fu
-      org-bullets
-      solarized-theme
-      orderless
-      minions
-      magit
-      lua-mode
-      lsp-ui
-      lsp-pyright
-      lsp-java
-      json-mode
-      ivy-prescient
-      hl-todo
-      gruber-darker-theme
-      gcmh
-      format-all
-      flycheck
-      evil-nerd-commenter
-      dashboard
-      counsel
-      company-prescient
-      pulsar
-      flx
-      wgrep
-      lin
-      web-mode
-      ivy-posframe
-      amx
-      dired-subtree
-      savehist
-      modus-themes
-      all-the-icons
-      treemacs-all-the-icons
-      treemacs-icons-dired
-      java-snippets
-      ))
+  '(dap-mode
+    vimrc-mode
+    yaml-mode
+    xclip
+    use-package
+    undo-fu-session
+    undo-fu
+    org-bullets
+    solarized-theme
+    orderless
+    minions
+    magit
+    lua-mode
+    lsp-ui
+    lsp-pyright
+    lsp-java
+    json-mode
+    ivy-prescient
+    hl-todo
+    gruber-darker-theme
+    gcmh
+    format-all
+    flycheck
+    evil-nerd-commenter
+    dashboard
+    counsel
+    company-prescient
+    pulsar
+    flx
+    wgrep
+    lin
+    web-mode
+    ivy-posframe
+    amx
+    dired-subtree
+    savehist
+    modus-themes
+    all-the-icons
+    treemacs-all-the-icons
+    treemacs-icons-dired
+    java-snippets
+    ))
 
 ;; Initialize package sources
 (require 'package)
@@ -810,7 +810,28 @@
   (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
   (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
   (setf (alist-get 'swiper ivy-height-alist) 15)
-  (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7))
+  (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7)
+
+  (defcustom ivy-format-function 'ivy-format-function-default
+    "Function to transform the list of candidates into a string.
+This string is inserted into the minibuffer."
+    :type '(choice
+            (const :tag "Default" ivy-format-function-default)
+            (const :tag "Arrow prefix" ivy-format-function-arrow)
+            (const :tag "Full line" ivy-format-function-line)))
+
+  (setq ivy-format-function 'ivy-format-function-arrow)
+
+  (defun my-ivy-format-function-arrow (cands)
+    "Transform CAND-PAIRS into a string for minibuffer."
+    (ivy--format-function-generic
+     (lambda (str)
+       (concat "-> " (ivy--add-face str 'ivy-current-match)))
+     (lambda (str)
+       (concat "   " str))
+     cands
+     "\n"))
+  (setq ivy-format-function 'my-ivy-format-function-arrow))
 
 (use-package ivy-hydra
   :defer t
@@ -896,22 +917,25 @@
   :config
   (setq-default goggles-pulse t)) ;; set to nil to disable pulsing
 
-(use-package pulsar)
-(setq pulsar-pulse t)
-(setq pulsar-delay 0.055)
-(setq pulsar-iterations 10)
-(setq pulsar-face 'pulsar-blue)
-(setq pulsar-highlight-face 'pulsar-yellow)
-(pulsar-global-mode 1)
-;; There are convenience functions/commands which pulse the line using
-;; a specific colour: `pulsar-pulse-line-red' is one of them.
-(add-hook 'next-error-hook 'pulsar-pulse-line-red)
-(add-hook 'flycheck-next-error 'pulsar-pulse-line-yellow)
-(add-hook 'flycheck-previous-error 'pulsar-pulse-line-yellow)
-(add-hook 'minibuffer-setup-hook 'pulsar-pulse-line-red)
-(add-hook 'minibuffer-setup-hook 'pulsar-pulse-line)
-(add-hook 'imenu-after-jump-hook 'pulsar-recenter-top)
-(add-hook 'imenu-after-jump-hook 'pulsar-reveal-entry)
+(use-package pulsar
+  :config
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'pulsar-blueg)
+  (setq pulsar-highlight-face 'pulsar-yellow)
+  (pulsar-global-mode 1)
+
+  ;; There are convenience functions/commands which pulse the line using
+  ;; a specific colour: `pulsar-pulse-line-red' is one of them.
+
+  (add-hook 'next-error-hook 'pulsar-pulse-line-red)
+  (add-hook 'flycheck-next-error 'pulsar-pulse-line-yellow)
+  (add-hook 'flycheck-previous-error 'pulsar-pulse-line-)
+  (add-hook 'minibuffer-setup-hook 'pulsar-pulse-line-red)
+  (add-hook 'minibuffer-setup-hook 'pulsar-pulse-line)
+  (add-hook 'imenu-after-jump-hook 'pulsar-recenter-top)
+  (add-hook 'imenu-after-jump-hook 'pulsar-reveal-entry))
 
 (use-package avy
   :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
