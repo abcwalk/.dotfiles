@@ -281,6 +281,8 @@
 ;;   :config
 ;;   (setq which-key-idle-delay 1))
 
+(use-package rainbow-delimiters)
+
 (use-package ibuffer
   :ensure t
   :init
@@ -402,44 +404,44 @@
   (setq recentf-max-saved-items 100)
   (setq recentf-show-file-shortcuts-flag nil))
 
-;; (use-package orderless
-;;   :ensure t
-;;   :custom
-;;   (completion-styles '(orderless basic))
-;;   (completion-category-overrides '((file (styles basic partial-completion))))
-;;   ;; Ivy
-;;   (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-;;   (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
-;;   ;; Company
-;;   (setq orderless-component-separator "[ &]")
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  ;; Ivy
+  (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+  (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
+  ;; Company
+  (setq orderless-component-separator "[ &]"))
 
 ;; ;;;; Style dispatchers
 
-;;   (defun prot-orderless-literal (word _index _total)
-;;     "Read WORD= as a literal string."
-;;     (when (string-suffix-p "=" word)
-;;       ;; The `orderless-literal' is how this should be treated by
-;;       ;; orderless.  The `substring' form omits the `=' from the
-;;       ;; pattern.
-;;       `(orderless-literal . ,(substring word 0 -1))))
+  (defun prot-orderless-literal (word _index _total)
+    "Read WORD= as a literal string."
+    (when (string-suffix-p "=" word)
+      ;; The `orderless-literal' is how this should be treated by
+      ;; orderless.  The `substring' form omits the `=' from the
+      ;; pattern.
+      `(orderless-literal . ,(substring word 0 -1))))
 
-;;   (defun prot-orderless-file-ext (word _index _total)
-;;     "Expand WORD. to a file suffix when completing file names."
-;;     (when (and minibuffer-completing-file-name
-;;                (string-suffix-p "." word))
-;;       `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
+  (defun prot-orderless-file-ext (word _index _total)
+    "Expand WORD. to a file suffix when completing file names."
+    (when (and minibuffer-completing-file-name
+               (string-suffix-p "." word))
+      `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
 
-;;   (defun prot-orderless-beg-or-end (word _index _total)
-;;     "Expand WORD~ to \\(^WORD\\|WORD$\\)."
-;;     (when-let (((string-suffix-p "~" word))
-;;                (word (substring word 0 -1)))
-;;       `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
+  (defun prot-orderless-beg-or-end (word _index _total)
+    "Expand WORD~ to \\(^WORD\\|WORD$\\)."
+    (when-let (((string-suffix-p "~" word))
+               (word (substring word 0 -1)))
+      `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
 
-;;   (defun just-one-face (fn &rest args)
-;;     (let ((orderless-match-faces [completions-common-part]))
-;;       (apply fn args)))
+  (defun just-one-face (fn &rest args)
+    (let ((orderless-match-faces [completions-common-part]))
+      (apply fn args)))
 
-;;   (advice-add 'company-capf--candidates :around #'just-one-face))
+  (advice-add 'company-capf--candidates :around #'just-one-face)
 
 (use-package lsp-mode
   :init
@@ -622,6 +624,8 @@
 (use-package json-mode)
 
 (use-package vimrc-mode)
+
+(use-package slime)
 
 ;; YAML
 (use-package yaml-mode
