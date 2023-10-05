@@ -20,8 +20,12 @@
 (global-auto-revert-mode 1)
 (delete-selection-mode +1)
 ;; (setq initial-buffer-choice 'recentf-open-files)
+(setq inhibit-startup-screen t)
 
 (setq global-auto-revert-non-file-buffers t)
+
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(setq inferior-lisp-program "sbcl")
 
 (defun ct/kill-buffer--possibly-save--advice (original-function &rest args)
   "Ask user in the minibuffer whether to save before killing.

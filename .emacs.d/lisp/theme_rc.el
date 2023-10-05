@@ -60,8 +60,8 @@
 ;; (bb/set-modus-theme)
 
 ;; Manual
-(bb/set-emacs-frames "light")
-(load-theme 'modus-operandi t)
+(bb/set-emacs-frames "dark")
+(load-theme 'modus-vivendi t)
 
 (define-key global-map (kbd "<f12>") #'bb/toggle-theme)
 

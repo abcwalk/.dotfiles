@@ -70,6 +70,7 @@ amx-items
 history
 history/
 .dap*
+image-dired/
 
 fonts/.uuid
 fonts/opentype/.uuid

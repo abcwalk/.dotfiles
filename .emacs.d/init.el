@@ -333,48 +333,48 @@
   :ensure t
   :hook (after-init . savehist-mode))
 
-(use-package treemacs
-  :defer
-  :demand
-  :config
-  (setq treemacs-position 'left
-        treemacs-width 30
-        treemacs-show-hidden-files t)
-
-  ;; (setq treemacs-no-png-images t)
-
-  (treemacs-resize-icons 16)
-
-  ;; Don't always focus the currently visited file
-  (treemacs-follow-mode -1)
-
-  ;; (defun ct/treemacs-decrease-text-scale ()
-  ;;   (text-scale-decrease 1))
-  :bind
-  ("<f2>" . treemacs))
-;; :hook
-;; (treemacs-mode . ct/treemacs-decrease-text-scale))
-
-
-;; (use-package highlight-indent-guides
+;; (use-package treemacs
+;;   :defer
+;;   :demand
 ;;   :config
-;;   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-;;   (setq highlight-indent-guides-method 'bitmap))
+;;   (setq treemacs-position 'left
+;;         treemacs-width 30
+;;         treemacs-show-hidden-files t)
 
-(use-package lsp-treemacs)
+;;   ;; (setq treemacs-no-png-images t)
 
-(use-package all-the-icons
-  :delight
-  :demand)
+;;   (treemacs-resize-icons 16)
 
-(use-package treemacs-all-the-icons
-  :after treemacs
-  :config
-  (treemacs-load-theme "all-the-icons")
+;;   ;; Don't always focus the currently visited file
+;;   (treemacs-follow-mode -1)
 
-  ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
-                                        ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
-  )
+;;   ;; (defun ct/treemacs-decrease-text-scale ()
+;;   ;;   (text-scale-decrease 1))
+;;   :bind
+;;   ("<f2>" . treemacs))
+;; ;; :hook
+;; ;; (treemacs-mode . ct/treemacs-decrease-text-scale))
+
+
+;; ;; (use-package highlight-indent-guides
+;; ;;   :config
+;; ;;   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;; ;;   (setq highlight-indent-guides-method 'bitmap))
+
+;; (use-package lsp-treemacs)
+
+;; (use-package all-the-icons
+;;   :delight
+;;   :demand)
+
+;; (use-package treemacs-all-the-icons
+;;   :after treemacs
+;;   :config
+;;   (treemacs-load-theme "all-the-icons")
+
+;;   ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
+;;                                         ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
+;;   )
 
 ;; (use-package treemacs-nerd-icons
 ;;   :after treemacs
@@ -401,44 +401,44 @@
   (setq recentf-max-saved-items 100)
   (setq recentf-show-file-shortcuts-flag nil))
 
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion))))
-  ;; Ivy
-  (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-  (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
-  ;; Company
-  (setq orderless-component-separator "[ &]")
+;; (use-package orderless
+;;   :ensure t
+;;   :custom
+;;   (completion-styles '(orderless basic))
+;;   (completion-category-overrides '((file (styles basic partial-completion))))
+;;   ;; Ivy
+;;   (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+;;   (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
+;;   ;; Company
+;;   (setq orderless-component-separator "[ &]")
 
-;;;; Style dispatchers
+;; ;;;; Style dispatchers
 
-  (defun prot-orderless-literal (word _index _total)
-    "Read WORD= as a literal string."
-    (when (string-suffix-p "=" word)
-      ;; The `orderless-literal' is how this should be treated by
-      ;; orderless.  The `substring' form omits the `=' from the
-      ;; pattern.
-      `(orderless-literal . ,(substring word 0 -1))))
+;;   (defun prot-orderless-literal (word _index _total)
+;;     "Read WORD= as a literal string."
+;;     (when (string-suffix-p "=" word)
+;;       ;; The `orderless-literal' is how this should be treated by
+;;       ;; orderless.  The `substring' form omits the `=' from the
+;;       ;; pattern.
+;;       `(orderless-literal . ,(substring word 0 -1))))
 
-  (defun prot-orderless-file-ext (word _index _total)
-    "Expand WORD. to a file suffix when completing file names."
-    (when (and minibuffer-completing-file-name
-               (string-suffix-p "." word))
-      `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
+;;   (defun prot-orderless-file-ext (word _index _total)
+;;     "Expand WORD. to a file suffix when completing file names."
+;;     (when (and minibuffer-completing-file-name
+;;                (string-suffix-p "." word))
+;;       `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
 
-  (defun prot-orderless-beg-or-end (word _index _total)
-    "Expand WORD~ to \\(^WORD\\|WORD$\\)."
-    (when-let (((string-suffix-p "~" word))
-               (word (substring word 0 -1)))
-      `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
+;;   (defun prot-orderless-beg-or-end (word _index _total)
+;;     "Expand WORD~ to \\(^WORD\\|WORD$\\)."
+;;     (when-let (((string-suffix-p "~" word))
+;;                (word (substring word 0 -1)))
+;;       `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
 
-  (defun just-one-face (fn &rest args)
-    (let ((orderless-match-faces [completions-common-part]))
-      (apply fn args)))
+;;   (defun just-one-face (fn &rest args)
+;;     (let ((orderless-match-faces [completions-common-part]))
+;;       (apply fn args)))
 
-  (advice-add 'company-capf--candidates :around #'just-one-face))
+;;   (advice-add 'company-capf--candidates :around #'just-one-face))
 
 (use-package lsp-mode
   :init
@@ -611,8 +611,6 @@
     (define-key company-active-map (kbd "TAB") 'company-select-next))
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
-
-
 (use-package company-prescient
   :after (prescient company)
   :config
@@ -686,14 +684,14 @@
 ;;   (setq dashboard-footer-icon ""))
 ;;   ;; (setq dashboard-footer-messages '("😈 Happy hacking!   "))
 
-(use-package ace-window
-  :bind (("M-o" . ace-window))
-  :custom
-  (aw-scope 'frame)
-  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (aw-minibuffer-flag t)
-  :config
-  (ace-window-display-mode 1))
+;; (use-package ace-window
+;;   :bind (("M-o" . ace-window))
+;;   :custom
+;;   (aw-scope 'frame)
+;;   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+;;   (aw-minibuffer-flag t)
+;;   :config
+;;   (ace-window-display-mode 1))
 
 ;; Evil-Nerd2-commenter
 (use-package evil-nerd-commenter
