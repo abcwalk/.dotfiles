@@ -396,7 +396,8 @@
 (use-package recentf
   :config
   (recentf-mode 1)
-  ;; (setq recent-save-file "~/.emacs.d/recentf")
+  (setq recent-save-file "~/.emacs.d/recentf")
+  (setq recentf-auto-cleanup 'never)
   (setq recentf-max-menu-items 10)
   (setq recentf-max-saved-items 100)
   (setq recentf-show-file-shortcuts-flag nil))
@@ -854,17 +855,17 @@
   (swiper-goto-start-of-match t)
   (swiper-include-line-number-in-search t))
 
-(use-package ivy-posframe
-  :demand t
-  :after ivy
-  :custom
-  (ivy-posframe-display-functions-alist
-   '((t . ivy-posframe-display-at-frame-center)
-     (swiper . ivy-posframe-display-at-frame-bottom-left)
-     (complete-symbol . ivy-posframe-display-at-point)
-     (counsel-M-x . ivy-posframe-display-at-frame-center)))
-  :config
-  (ivy-posframe-mode))
+;; (use-package ivy-posframe
+;;   :demand t
+;;   :after ivy
+;;   :custom
+;;   (ivy-posframe-display-functions-alist
+;;    '((t . ivy-posframe-display-at-frame-center)
+;;      (swiper . ivy-posframe-display-at-frame-bottom-left)
+;;      (complete-symbol . ivy-posframe-display-at-point)
+;;      (counsel-M-x . ivy-posframe-display-at-frame-center)))
+;;   :config
+;;   (ivy-posframe-mode))
 
 ;; ivy-prescient
 (use-package ivy-prescient

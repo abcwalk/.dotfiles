@@ -117,16 +117,16 @@
 (add-hook 'ibuffer-mode-hook #'ct/ibuffer-enable-saved-filter-groups)
 
 ;; Modify the default ibuffer column format
-(setq ibuffer-formats
-      '((mark modified read-only locked " "
-	      (name 20 20 :left :elide)
-	      " "
-	      (mode 16 16 :left :elide)
-	      " "
-	      filename-and-process)
-	(mark " "
-	      (name 16 -1)
-	      " " filename)))
+;; (setq ibuffer-formats
+;;       '((mark modified read-only locked " "
+;; 	      (name 20 20 :left :elide)
+;; 	      " "
+;; 	      (mode 16 16 :left :elide)
+;; 	      " "
+;; 	      filename-and-process)
+;; 	(mark " "
+;; 	      (name 16 -1)
+;; 	      " " filename)))
 
 ;; Move focus to new window after manual splitting
 (defun ct/split-window-below (arg)
