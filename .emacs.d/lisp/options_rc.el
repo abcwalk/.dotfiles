@@ -24,7 +24,7 @@
 
 (setq global-auto-revert-non-file-buffers t)
 
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; Common Lisp
 (load (expand-file-name "~/.quicklisp/slime-helper.el"))
