@@ -417,31 +417,31 @@
 
 ;; ;;;; Style dispatchers
 
-  (defun prot-orderless-literal (word _index _total)
-    "Read WORD= as a literal string."
-    (when (string-suffix-p "=" word)
-      ;; The `orderless-literal' is how this should be treated by
-      ;; orderless.  The `substring' form omits the `=' from the
-      ;; pattern.
-      `(orderless-literal . ,(substring word 0 -1))))
+(defun prot-orderless-literal (word _index _total)
+  "Read WORD= as a literal string."
+  (when (string-suffix-p "=" word)
+    ;; The `orderless-literal' is how this should be treated by
+    ;; orderless.  The `substring' form omits the `=' from the
+    ;; pattern.
+    `(orderless-literal . ,(substring word 0 -1))))
 
-  (defun prot-orderless-file-ext (word _index _total)
-    "Expand WORD. to a file suffix when completing file names."
-    (when (and minibuffer-completing-file-name
-               (string-suffix-p "." word))
-      `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
+(defun prot-orderless-file-ext (word _index _total)
+  "Expand WORD. to a file suffix when completing file names."
+  (when (and minibuffer-completing-file-name
+             (string-suffix-p "." word))
+    `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
 
-  (defun prot-orderless-beg-or-end (word _index _total)
-    "Expand WORD~ to \\(^WORD\\|WORD$\\)."
-    (when-let (((string-suffix-p "~" word))
-               (word (substring word 0 -1)))
-      `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
+(defun prot-orderless-beg-or-end (word _index _total)
+  "Expand WORD~ to \\(^WORD\\|WORD$\\)."
+  (when-let (((string-suffix-p "~" word))
+             (word (substring word 0 -1)))
+    `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
 
-  (defun just-one-face (fn &rest args)
-    (let ((orderless-match-faces [completions-common-part]))
-      (apply fn args)))
+(defun just-one-face (fn &rest args)
+  (let ((orderless-match-faces [completions-common-part]))
+    (apply fn args)))
 
-  (advice-add 'company-capf--candidates :around #'just-one-face)
+(advice-add 'company-capf--candidates :around #'just-one-face)
 
 (use-package lsp-mode
   :init
@@ -625,7 +625,20 @@
 
 (use-package vimrc-mode)
 
-(use-package slime)
+;; (use-package slime)
+;; curl -o /tmp/ql.lisp http://beta.quicklisp.org/quicklisp.lisp
+;; sbcl --no-sysinit --no-userinit --load /tmp/ql.lisp \
+;; --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
+;; --eval '(ql:add-to-init-file)' \
+;; --quit
+
+(use-package slime-repl-ansi-color
+  :straight t)
+
+(use-package rainbow-delimiters)
+
+(use-package screenshot
+  :straight (:type git :host github :repo "tecosaur/screenshot"))
 
 ;; YAML
 (use-package yaml-mode

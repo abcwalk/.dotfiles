@@ -25,7 +25,17 @@
 (setq global-auto-revert-non-file-buffers t)
 
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;; Common Lisp
+(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "sbcl")
+
+;; Slime ANSI Colors
+(defun g-init-slime-repl-mode ()
+  (slime-repl-ansi-color-mode 1))
+  
+(add-hook 'slime-repl-mode-hook 'g-init-slime-repl-mode)
 
 (defun ct/kill-buffer--possibly-save--advice (original-function &rest args)
   "Ask user in the minibuffer whether to save before killing.
@@ -179,7 +189,7 @@
 (setq dired-dwim-target t)
 
 ;; Numberline
-(global-display-line-numbers-mode 1)
+;; (global-display-line-numbers-mode 1)
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
 		term-mode-hook
