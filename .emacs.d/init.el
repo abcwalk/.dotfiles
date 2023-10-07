@@ -606,7 +606,7 @@
 
 (use-package vimrc-mode)
 
-;; (use-package slime)
+(use-package slime)
 ;; curl -o /tmp/ql.lisp http://beta.quicklisp.org/quicklisp.lisp
 ;; sbcl --no-sysinit --no-userinit --load /tmp/ql.lisp \
 ;; --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
