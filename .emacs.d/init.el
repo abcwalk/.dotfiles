@@ -5,8 +5,7 @@
 ;;; Code:
 
 (defvar-local package-list
-    '(dap-mode
-      vimrc-mode
+    '(vimrc-mode
       yaml-mode
       xclip
       use-package
@@ -18,9 +17,7 @@
       minions
       magit
       lua-mode
-      lsp-ui
       lsp-pyright
-      lsp-java
       json-mode
       ivy-prescient
       hl-todo
@@ -45,7 +42,6 @@
       all-the-icons
       treemacs-all-the-icons
       treemacs-icons-dired
-      java-snippets
       ))
 
 ;; Initialize package sources
@@ -55,7 +51,7 @@
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(package-initialize)
+;; (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -465,7 +461,7 @@
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)
-  (setq lsp-lens-enable t)
+  ;; (setq lsp-lens-enable t)
   (setq lsp-signature-render-documentation nil)
   (setq lsp-eldoc-enable-hover nil)
   (setq lsp-eldoc-hook nil)
@@ -561,17 +557,17 @@
                          (require 'lsp-pyright)
                          (lsp))))
 ;; Java
-(use-package lsp-java
-  :config
-  (add-hook 'java-mode-hook 'lsp))
-(add-hook 'java-mode-hook #'lsp-java-lens-mode)
+;; (use-package lsp-java
+;;   :config
+;;   (add-hook 'java-mode-hook 'lsp))
+;; ;; (add-hook 'java-mode-hook #'lsp-java-lens-mode)
 
-(use-package dap-mode
-  :after lsp-mode
-  :config (dap-auto-configure-mode))
+;; (use-package dap-mode
+;;   :after lsp-mode
+;;   :config (dap-auto-configure-mode))
 
-(use-package dap-java
-  :ensure nil)
+;; (use-package dap-java
+;;   :ensure nil)
 
 (use-package company
   :hook (prog-mode . company-mode)
@@ -774,13 +770,13 @@
   (global-set-key (kbd "C-f") #'bb/format-code)
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
 
-(define-key java-mode-map (kbd "C-f") #'clang-format-buffer-llvm)
+;; (define-key java-mode-map (kbd "C-f") #'clang-format-buffer-llvm)
 
 ;; Compile
-(add-hook 'java-mode-hook
-	  (lambda ()
-	    (set (make-local-variable 'compile-command)
-                 (concat "java " buffer-file-name))))
+;; (add-hook 'java-mode-hook
+;; 	  (lambda ()
+;; 	    (set (make-local-variable 'compile-command)
+;;                  (concat "java " buffer-file-name))))
 
 ;; HTML
 (use-package web-mode
