@@ -5,48 +5,48 @@
 ;;; Code:
 
 (defvar-local package-list
-  '(dap-mode
-    vimrc-mode
-    yaml-mode
-    xclip
-    use-package
-    undo-fu-session
-    undo-fu
-    org-bullets
-    solarized-theme
-    orderless
-    minions
-    magit
-    lua-mode
-    lsp-ui
-    lsp-pyright
-    lsp-java
-    json-mode
-    ivy-prescient
-    hl-todo
-    gruber-darker-theme
-    gcmh
-    format-all
-    flycheck
-    evil-nerd-commenter
-    dashboard
-    counsel
-    company-prescient
-    pulsar
-    flx
-    wgrep
-    lin
-    web-mode
-    ivy-posframe
-    amx
-    dired-subtree
-    savehist
-    modus-themes
-    all-the-icons
-    treemacs-all-the-icons
-    treemacs-icons-dired
-    java-snippets
-    ))
+    '(dap-mode
+      vimrc-mode
+      yaml-mode
+      xclip
+      use-package
+      undo-fu-session
+      undo-fu
+      org-bullets
+      solarized-theme
+      orderless
+      minions
+      magit
+      lua-mode
+      lsp-ui
+      lsp-pyright
+      lsp-java
+      json-mode
+      ivy-prescient
+      hl-todo
+      gruber-darker-theme
+      gcmh
+      format-all
+      flycheck
+      evil-nerd-commenter
+      dashboard
+      counsel
+      company-prescient
+      pulsar
+      flx
+      wgrep
+      lin
+      web-mode
+      ivy-posframe
+      amx
+      dired-subtree
+      savehist
+      modus-themes
+      all-the-icons
+      treemacs-all-the-icons
+      treemacs-icons-dired
+      java-snippets
+      ))
 
 ;; Initialize package sources
 (require 'package)
@@ -281,8 +281,6 @@
 ;;   :config
 ;;   (setq which-key-idle-delay 1))
 
-(use-package rainbow-delimiters)
-
 (use-package ibuffer
   :ensure t
   :init
@@ -513,29 +511,16 @@
     :modes (markdown-mode org-mode))
   (add-to-list 'flycheck-checkers 'proselint))
 
-(use-package lsp-ui
-  :commands lsp-ui-mode
-  :custom-face
-  (lsp-ui-sideline-global ((t (:italic t))))
-  (lsp-ui-peek-highlight  ((t (:foreground unspecified :background unspecified :inherit isearch))))
-  :config
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-doc-show-with-mouse nil)
-  (setq lsp-ui-doc-enhanced-markdown nil)
-  (setq lsp-ui-doc-delay 0.01)
-  (setq lsp-prefer-capf t)
-  (when (display-graphic-p)
-    (setq lsp-ui-doc-use-childframe t)
-    (setq lsp-ui-doc-text-scale-level -1.0)
-    (setq lsp-ui-doc-max-width 80)
-    (setq lsp-ui-doc-max-height 25)
-    (setq lsp-ui-doc-position 'at-point))
-  (setq lsp-ui-doc-include-signature t)
-  (setq lsp-ui-doc-border (face-foreground 'font-lock-comment-face))
-  (setq lsp-ui-sideline-diagnostic-max-line-length 80)
-  (setq lsp-ui-sideline-diagnostic-max-lines 2)
-  (setq lsp-ui-peek-always-show t)
-  (setq lsp-ui-sideline-delay 0.05))
+;; (use-package lsp-ui
+;;   :commands lsp-ui-mode
+;;   :custom-face
+;;   (lsp-ui-sideline-global ((t (:italic t))))
+;;   (lsp-ui-peek-highlight  ((t (:foreground unspecified :background unspecified :inherit isearch))))
+;;   :config
+;;   (setq lsp-ui-doc-enable nil)
+;;   (setq lsp-ui-doc-show-with-mouse nil)
+;;   (setq lsp-ui-doc-enhanced-markdown nil)
+;;   (setq lsp-prefer-capf t))
 
 (use-package lin
   :config
@@ -631,11 +616,10 @@
 ;; --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
 ;; --eval '(ql:add-to-init-file)' \
 ;; --quit
+;; sbcl --eval '(ql:quickload :quicklisp-slime-helper)' --quit
 
 (use-package slime-repl-ansi-color
   :straight t)
-
-(use-package rainbow-delimiters)
 
 (use-package screenshot
   :straight (:type git :host github :repo "tecosaur/screenshot"))
