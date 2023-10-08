@@ -43,15 +43,15 @@
 (defun bb/toggle-theme ()
   "Toggle between light and dark themes."
   (interactive)
-  (if (eq (car custom-enabled-themes) 'solarized-light)
+  (if (eq (car custom-enabled-themes) 'modus-vivendi)
       (progn
-	(disable-theme 'solarized-light)
-	(load-theme 'solarized-dark t)
+	(disable-theme 'modus-vivendi)
+	(load-theme 'modus-operandi t)
 	;; (bb/set-emacs-frames "light")
 	)
     (progn
-      (disable-theme 'solarized-dark)
-      (load-theme 'solarized-light t)
+      (disable-theme 'modus-operandi)
+      (load-theme 'modus-vivendi t)
       ;; (bb/set-emacs-frames "dark")
       )))
 
@@ -66,10 +66,10 @@
 
 ;; Manual
 ;; (bb/set-emacs-frames "dark")
-(load-theme 'solarized-light t)
+(load-theme 'modus-vivendi t)
 
 (define-key global-map (kbd "<f12>") #'bb/toggle-theme)
-(bb/remove-underline-solarized)
+;; (bb/remove-underline-solarized)
 
 ;; (with-eval-after-load "modus-themes"
 ;;   (with-eval-after-load "mlscroll"

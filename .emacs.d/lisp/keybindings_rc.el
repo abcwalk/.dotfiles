@@ -15,13 +15,10 @@
 
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 
-(define-key global-map (kbd "C-x l") 'pulsar-pulse-line-magenta)
+(define-key global-map (kbd "C-x l") 'pulsar-pulse-line-blue)
 
 (global-unset-key (kbd "C-x b"))
 (global-set-key (kbd "C-x b") 'ibuffer-other-window)
-
-(global-set-key (kbd "C-s") 'phi-search)
-(global-set-key (kbd "C-r") 'phi-search-backward)
 
 ;; (global-set-key (kbd "M-%") 'phi-replace-query)
 

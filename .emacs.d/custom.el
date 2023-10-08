@@ -9,13 +9,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-file "~/.emacs.d/custom.el"))
+ '(custom-file "~/.emacs.d/custom.el")
+ '(git-gutter:added-sign "+")
+ '(git-gutter:deleted-sign "-")
+ '(git-gutter:modified-sign "~")
+ '(git-gutter:window-width 3))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(mode-line ((t :background unspecified :box unspecified :overline "#989898")))
+ '(mode-line-active ((t :inherit mode-line :box unspecified)))
+ '(mode-line-inactive ((t :background unspecified :foreground "#989898" :box unspecified :overline "#989898"))))
 (provide 'custom)
 ;;; custom.el ends here

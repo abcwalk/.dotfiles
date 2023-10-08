@@ -579,18 +579,18 @@ level."
 		prot-modeline-process
 		"  "
 		prot-modeline-vc-branch
-		"  "
-		prot-modeline-breadcrumb
+		;; "  "
+		;; prot-modeline-breadcrumb
 		"  "
 		flycheck-text
 		;; "  "
 		;; file-progress
 		;; "  "
-		prot-modeline-align-right
-		time-text
+		;; prot-modeline-align-right
+		;; time-text
 		))
 
-;; (prot-modeline-subtle-mode 1)
+(prot-modeline-subtle-mode 1)
 ;; (global-set-key (kbd "<f6>") #'prot-modeline-subtle-mode)
 
 ;; (require 'keycast)
