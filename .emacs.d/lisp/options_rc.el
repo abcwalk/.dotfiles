@@ -34,7 +34,7 @@
 ;; Slime ANSI Colors
 (defun g-init-slime-repl-mode ()
   (slime-repl-ansi-color-mode 1))
-  
+
 (add-hook 'slime-repl-mode-hook 'g-init-slime-repl-mode)
 
 (defun ct/kill-buffer--possibly-save--advice (original-function &rest args)
@@ -197,6 +197,13 @@
 		treemacs-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; Occur
+(add-hook 'occur-hook
+          '(lambda ()
+             (switch-to-buffer-other-window "*Occur*")))
+
+(setq help-window-select t)
 
 (provide 'options_rc)
 ;;; options_rc.el ends here

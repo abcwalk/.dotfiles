@@ -15,10 +15,22 @@
 
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 
-(define-key global-map (kbd "C-x l") 'pulsar-pulse-line-blue)
+(define-key global-map (kbd "C-x l") 'pulsar-pulse-line-magenta)
 
 (global-unset-key (kbd "C-x b"))
 (global-set-key (kbd "C-x b") 'ibuffer-other-window)
+
+(global-set-key (kbd "C-s") 'phi-search)
+(global-set-key (kbd "C-r") 'phi-search-backward)
+
+;; (global-set-key (kbd "M-%") 'phi-replace-query)
+
+(defun split-and-follow-vertically ()
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
 ;; Move line up/down
 (defun move-line-up ()

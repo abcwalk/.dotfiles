@@ -450,8 +450,8 @@ Specific to the current window's mode line.")
 
 ;;;; Time and date
 
-(defvar-local time-and-date
-    (format-time-string "%a %e %B, %H:%M" (current-time)))
+(defvar-local time-text
+    (format-time-string "%H:%M" (current-time)))
 
 ;;; Flycheck
 (defvar flycheck-current-errors)
@@ -525,7 +525,7 @@ level."
 		     prot-modeline-misc-info
 		     flycheck-text
 		     file-progress
-		     time-and-date))
+		     time-text))
   (put construct 'risky-local-variable t))
 
 ;;;; Subtle mode line style
@@ -587,29 +587,29 @@ level."
 		;; file-progress
 		;; "  "
 		prot-modeline-align-right
-		time-and-date
+		time-text
 		))
 
-(prot-modeline-subtle-mode 1)
-(global-set-key (kbd "<f6>") #'prot-modeline-subtle-mode)
+;; (prot-modeline-subtle-mode 1)
+;; (global-set-key (kbd "<f6>") #'prot-modeline-subtle-mode)
 
-(require 'keycast)
-(setq keycast-mode-line-format "%2s%k%c%R")
-(setq keycast-mode-line-insert-after 'prot-modeline-vc-branch)
-(setq keycast-mode-line-window-predicate 'mode-line-window-selected-p)
-(setq keycast-mode-line-remove-tail-elements nil)
+;; (require 'keycast)
+;; (setq keycast-mode-line-format "%2s%k%c%R")
+;; (setq keycast-mode-line-insert-after 'prot-modeline-vc-branch)
+;; (setq keycast-mode-line-window-predicate 'mode-line-window-selected-p)
+;; (setq keycast-mode-line-remove-tail-elements nil)
 
-(dolist (input '(self-insert-command org-self-insert-command))
-  (add-to-list 'keycast-substitute-alist `(,input "." "Typing…")))
+;; (dolist (input '(self-insert-command org-self-insert-command))
+;;   (add-to-list 'keycast-substitute-alist `(,input "." "Typing…")))
 
-(dolist (event '(mouse-event-p mouse-movement-p mwheel-scroll))
-  (add-to-list 'keycast-substitute-alist `(,event nil)))
+;; (dolist (event '(mouse-event-p mouse-movement-p mwheel-scroll))
+;;   (add-to-list 'keycast-substitute-alist `(,event nil)))
 
-(with-eval-after-load 'prot-prefix
-  (transient-append-suffix 'prot-prefix-toggle '(0 1 0)
-    '("k" "keycast-mode" keycast-mode)))
+;; (with-eval-after-load 'prot-prefix
+;;   (transient-append-suffix 'prot-prefix-toggle '(0 1 0)
+;;     '("k" "keycast-mode" keycast-mode)))
 
-(keycast-mode-line-mode)
+;; (keycast-mode-line-mode)
 
 (provide 'custom-mode-line)
 ;;; custom-mode-line.el ends here

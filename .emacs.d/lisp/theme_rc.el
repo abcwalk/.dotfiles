@@ -41,35 +41,35 @@
       )))
 
 (defun bb/toggle-theme ()
-  "Toggle between modus-operandi and modus-vivendi with GTK frame colors."
+  "Toggle between light and dark themes."
   (interactive)
-  (if (eq (car custom-enabled-themes) 'modus-vivendi)
+  (if (eq (car custom-enabled-themes) 'solarized-light)
       (progn
-	(disable-theme 'modus-vivendi)
+	(disable-theme 'solarized-light)
+	(load-theme 'solarized-dark t)
 	;; (bb/set-emacs-frames "light")
 	)
     (progn
-      (load-theme 'modus-vivendi t)
+      (disable-theme 'solarized-dark)
+      (load-theme 'solarized-light t)
       ;; (bb/set-emacs-frames "dark")
       )))
 
 (defun bb/remove-underline-solarized()
   "Remove underline from solarized-light theme."
-  (if (eq (car custom-enabled-themes) 'solarized-light)
-      (custom-set-faces
-       '(mode-line ((t (:underline nil))))
-       '(mode-line-inactive ((t (:underline nil)))))))
+  (custom-set-faces
+   '(mode-line ((t (:underline nil))))
+   '(mode-line-inactive ((t (:underline nil))))))
 
 ;; Standard detect (GTK_THEME=light/dark)
 ;; (bb/set-modus-theme)
 
 ;; Manual
 ;; (bb/set-emacs-frames "dark")
-(load-theme 'modus-vivendi t)
+(load-theme 'solarized-light t)
 
 (define-key global-map (kbd "<f12>") #'bb/toggle-theme)
-
-;; (bb/remove-underline-solarized)
+(bb/remove-underline-solarized)
 
 ;; (with-eval-after-load "modus-themes"
 ;;   (with-eval-after-load "mlscroll"

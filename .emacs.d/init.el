@@ -606,7 +606,7 @@
 
 (use-package vimrc-mode)
 
-(use-package slime)
+;; (use-package slime)
 ;; curl -o /tmp/ql.lisp http://beta.quicklisp.org/quicklisp.lisp
 ;; sbcl --no-sysinit --no-userinit --load /tmp/ql.lisp \
 ;; --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
@@ -797,20 +797,6 @@
 ;; ivy
 (use-package ivy
   :diminish
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-f" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
   :init
   (ivy-mode 1)
   :config
@@ -821,13 +807,13 @@
 
   ;; Use different regex strategies per completion command
   (push '(completion-at-point . ivy--regex-fuzzy) ivy-re-builders-alist) ;; This doesn't seem to work...
-  (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
+  ;; (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
   (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist)
 
   ;; Set minibuffer height for different commands
   (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
   (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
-  (setf (alist-get 'swiper ivy-height-alist) 15)
+  ;; (setf (alist-get 'swiper ivy-height-alist) 15)
   (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7))
 
 
@@ -844,13 +830,13 @@
 	  'ivy-format-function-line))
 
 ;; swiper
-(use-package swiper
-  :ensure t
-  :after ivy
-  :custom
-  (swiper-action-recenter t)
-  (swiper-goto-start-of-match t)
-  (swiper-include-line-number-in-search t))
+;; (use-package swiper
+;;   :ensure t
+;;   :after ivy
+;;   :custom
+;;   (swiper-action-recenter t)
+;;   (swiper-goto-start-of-match t)
+;;   (swiper-include-line-number-in-search t))
 
 ;; (use-package ivy-posframe
 ;;   :demand t
@@ -895,6 +881,12 @@
   :config
   (amx-mode 1))
 
+(use-package phi-search)
+
+(use-package phi-search-dired)
+
+(use-package phi-grep)
+
 (use-package real-auto-save
   :demand
   :delight
@@ -920,8 +912,9 @@
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-blue)
+  (setq pulsar-face 'pulsar-magenta)
   (setq pulsar-highlight-face 'pulsar-yellow)
+  
   (pulsar-global-mode 1)
 
   ;; There are convenience functions/commands which pulse the line using
