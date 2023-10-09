@@ -289,7 +289,8 @@ face.  Let other buffers have no face.")
   (when-let ((rev (vc-working-revision file backend))
              (branch (or (vc-git--symbolic-ref file)
                          (substring rev 0 7))))
-    (capitalize branch)))
+    ;; (capitalize branch)
+    ))
 
 (declare-function vc-git-working-revision "vc-git" (file))
 
@@ -504,12 +505,22 @@ level."
 (add-hook 'flycheck-mode-hook #'update-flycheck-segment)
 
 ;;; File progress
+(defface mood-line-unimportant
+  '((t (:inherit (shadow))))
+  "Face used for less important mode-line elements."
+  :group 'mood-line)
 
-(defvar-local file-progress
-    '(:eval
-      (concat "L:%l" (format "%3d%%" (/ (window-start) 0.01 (point-max))) "%")))
+(defcustom mood-line-show-cursor-point nil
+  "If t, the value of `point' will be displayed next to the cursor position in the mode-line."
+  :group 'mood-line
+  :type 'boolean)
 
- ;;;; Risky local variables
+(defvar-local mood-line-segment-position
+    '(:eval  (concat "%l:%c"
+		     (when mood-line-show-cursor-point (propertize (format ":%d" (point)) 'face 'mood-line-unimportant))
+		     (propertize " %p%" 'face 'mood-line-unimportant))))
+
+;;;; Risky local variables
 
 ;; NOTE 2023-04-28: The `risky-local-variable' is critical, as those
 ;; variables will not work without it.
@@ -525,6 +536,7 @@ level."
 		     prot-modeline-misc-info
 		     flycheck-text
 		     file-progress
+		     mood-line-segment-position
 		     time-text))
   (put construct 'risky-local-variable t))
 
@@ -576,18 +588,20 @@ level."
 		prot-modeline-buffer-identification
 		"  "
 		prot-modeline-major-mode
-		prot-modeline-process
 		"  "
 		prot-modeline-vc-branch
 		;; "  "
 		;; prot-modeline-breadcrumb
 		"  "
 		flycheck-text
+		prot-modeline-process
 		;; "  "
 		;; file-progress
 		;; "  "
-		;; prot-modeline-align-right
-		;; time-text
+		prot-modeline-align-right
+		prot-modeline-misc-info
+		"      "
+		mood-line-segment-position
 		))
 
 (prot-modeline-subtle-mode 1)

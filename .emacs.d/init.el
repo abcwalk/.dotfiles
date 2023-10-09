@@ -391,34 +391,6 @@
   ;; Company
   (setq orderless-component-separator "[ &]"))
 
-;; ;;;; Style dispatchers
-
-(defun prot-orderless-literal (word _index _total)
-  "Read WORD= as a literal string."
-  (when (string-suffix-p "=" word)
-    ;; The `orderless-literal' is how this should be treated by
-    ;; orderless.  The `substring' form omits the `=' from the
-    ;; pattern.
-    `(orderless-literal . ,(substring word 0 -1))))
-
-(defun prot-orderless-file-ext (word _index _total)
-  "Expand WORD. to a file suffix when completing file names."
-  (when (and minibuffer-completing-file-name
-             (string-suffix-p "." word))
-    `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
-
-(defun prot-orderless-beg-or-end (word _index _total)
-  "Expand WORD~ to \\(^WORD\\|WORD$\\)."
-  (when-let (((string-suffix-p "~" word))
-             (word (substring word 0 -1)))
-    `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
-
-(defun just-one-face (fn &rest args)
-  (let ((orderless-match-faces [completions-common-part]))
-    (apply fn args)))
-
-(advice-add 'company-capf--candidates :around #'just-one-face)
-
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
@@ -511,8 +483,14 @@
   :custom
   (emms-source-file-default-directory "~/Music")
   :bind
-  (("<M-f5>" . emms-browser)
-   ("<f6>" . emms)))
+  (("<f5>" . emms-play-directory)
+   ("<f6>" . emms))
+  :config
+  (emms-mode-line-disable))
+
+(use-package emms-state
+  :config
+  (eval-after-load 'emms '(emms-state-mode)))
 
 (use-package lin
   :config
@@ -605,19 +583,16 @@
 (use-package dockerfile-mode)
 
 (use-package git-gutter
-  :hook (prog-mode . git-gutter-mode)
+  ;; :hook (prog-mode . git-gutter-mode)
   :config
   (setq git-gutter:update-interval 0.02)
-  (set-face-foreground 'git-gutter:modified "orange")
-  (set-face-background 'git-gutter:modified "black")
-  (set-face-foreground 'git-gutter:added "#44bc44")
-  (set-face-background 'git-gutter:added "black")
-  (set-face-foreground 'git-gutter:deleted "#ff5f59")
-  (set-face-background 'git-gutter:deleted "black")
+  (set-face-background 'git-gutter:modified "orange")
+  (set-face-background 'git-gutter:added "#44bc44")
+  (set-face-background 'git-gutter:deleted "#ff5f59")
   (custom-set-variables
-   '(git-gutter:modified-sign "~")
-   '(git-gutter:added-sign "+")
-   '(git-gutter:deleted-sign "-")
+   '(git-gutter:modified-sign " ")
+   '(git-gutter:added-sign " ")
+   '(git-gutter:deleted-sign "")
    '(git-gutter:window-width 3)))
 
 (use-package ibuffer
@@ -638,191 +613,6 @@
    modus-themes-bold-constructs nil
    modus-themes-variable-pitch-ui t
    modus-themes-mixed-fonts t))
-
-;; Comment
-;; (setq modus-operandi-palette-overrides
-;;       '((comment green-faint)))
-
-;;   ;; Theme overrides
-;;   ;; (customize-set-variable 'modus-themes-common-palette-overrides
-;; 		          ;; `(
-;; 		            ;; Make the mode-line borderless
-;; 		            ;; (bg-mode-line-active bg-inactive)
-;; 		            ;; (fg-mode-line-active fg-main)
-;; 		            ;; (bg-mode-line-inactive bg-inactive)
-;; 		            ;; (fg-mode-line-active fg-dim)
-;; 		            ;; (border-mode-line-active bg-inactive)
-;; 		            ;; (border-mode-line-inactive bg-main)
-
-;; 		            ;; macOS Selection colors
-;;                             ;; (bg-region "#242679")
-;;                             ;; (fg-region "#242679")
-;;                             ;; ))
-;;   (customize-set-variable 'modus-vivendi-palette-overrides
-;; 	                  `(
-;; 		            ;; More subtle gray for the inactive window and modeline
-;; 		            (bg-inactive "#202020"))))
-
-(use-package dired-subtree
-  :ensure
-  :defer
-  :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
-
-(use-package savehist
-  :ensure t
-  :hook (after-init . savehist-mode))
-
-;; (use-package treemacs
-;;   :defer
-;;   :demand
-;;   :config
-;;   (setq treemacs-position 'left
-;;         treemacs-width 30
-;;         treemacs-show-hidden-files t)
-
-;;   ;; (setq treemacs-no-png-images t)
-
-;;   (treemacs-resize-icons 16)
-
-;;   ;; Don't always focus the currently visited file
-;;   (treemacs-follow-mode -1)
-
-;;   ;; (defun ct/treemacs-decrease-text-scale ()
-;;   ;;   (text-scale-decrease 1))
-;;   :bind
-;;   ("<f2>" . treemacs))
-;; ;; :hook
-;; ;; (treemacs-mode . ct/treemacs-decrease-text-scale))
-
-
-;; ;; (use-package highlight-indent-guides
-;; ;;   :config
-;; ;;   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-;; ;;   (setq highlight-indent-guides-method 'bitmap))
-
-;; (use-package lsp-treemacs)
-
-;; (use-package all-the-icons
-;;   :delight
-;;   :demand)
-
-;; (use-package treemacs-all-the-icons
-;;   :after treemacs
-;;   :config
-;;   (treemacs-load-theme "all-the-icons")
-
-;;   ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
-;;                                         ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
-;;   )
-
-;; (use-package treemacs-nerd-icons
-;;   :after treemacs
-;;   :config
-;;   (treemacs-load-theme "treemacs-icons"))
-
-;;   ;; Have to rely on customize to override the face to fix slanted inheritance form modus-theme
-;;   ; '(treemacs-all-the-icons-file-face ((t (:inherit treemacs-file-face))))
-;;   )
-
-;; (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
-;;   :after (treemacs)
-;;   :ensure t
-;;   :config (treemacs-set-scope-type 'Tabs))
-
-(use-package sudo-edit
-  :ensure)
-
-(use-package recentf
-  :config
-  (recentf-mode 1)
-  (setq recent-save-file "~/.emacs.d/recentf")
-  (setq recentf-auto-cleanup 'never)
-  (setq recentf-max-menu-items 10)
-  (setq recentf-max-saved-items 100)
-  (setq recentf-show-file-shortcuts-flag nil))
-
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion))))
-  ;; Ivy
-  (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-  (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
-  ;; Company
-  (setq orderless-component-separator "[ &]"))
-
-;; ;;;; Style dispatchers
-
-(defun prot-orderless-literal (word _index _total)
-  "Read WORD= as a literal string."
-  (when (string-suffix-p "=" word)
-    ;; The `orderless-literal' is how this should be treated by
-    ;; orderless.  The `substring' form omits the `=' from the
-    ;; pattern.
-    `(orderless-literal . ,(substring word 0 -1))))
-
-(defun prot-orderless-file-ext (word _index _total)
-  "Expand WORD. to a file suffix when completing file names."
-  (when (and minibuffer-completing-file-name
-             (string-suffix-p "." word))
-    `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
-
-(defun prot-orderless-beg-or-end (word _index _total)
-  "Expand WORD~ to \\(^WORD\\|WORD$\\)."
-  (when-let (((string-suffix-p "~" word))
-             (word (substring word 0 -1)))
-    `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
-
-(defun just-one-face (fn &rest args)
-  (let ((orderless-match-faces [completions-common-part]))
-    (apply fn args)))
-
-(advice-add 'company-capf--candidates :around #'just-one-face)
-
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook ((python-mode
-	  ;; java-mode
-	  js-mode
-	  js-jsx-mode
-	  typescript-mode
-	  web-mode
-	  )
-	 . lsp)
-  :commands lsp
-  :config
-  ;; (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
-  (global-unset-key (kbd "<f4>"))
-  (define-key global-map (kbd "<f4>") 'lsp-rename)
-  (setq lsp-auto-guess-root t)
-  (setq lsp-log-io nil)
-  (setq lsp-restart 'auto-restart)
-  (setq lsp-enable-indentation nil)
-  (setq lsp-enable-links nil)
-  (setq lsp-enable-symbol-highlighting nil)
-  (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-signature-auto-activate nil)
-  ;; (setq lsp-lens-enable t)
-  (setq lsp-signature-render-documentation nil)
-  (setq lsp-eldoc-enable-hover nil)
-  (setq lsp-eldoc-hook nil)
-  (setq lsp-modeline-code-actions-enable nil)
-  (setq lsp-modeline-diagnostics-enable nil)
-  (setq lsp-headerline-breadcrumb-enable nil)
-  (setq lsp-headerline-breadcrumb-icons-enable nil)
-  (setq lsp-semantic-tokens-enable nil)
-  (setq lsp-enable-folding nil)
-  (setq lsp-enable-imenu nil)
-  (setq lsp-completion-show-detail nil)
-  ;; (setq lsp-enable-snippet nil)
-  (setq lsp-enable-file-watchers nil)
-  (setq lsp-keep-workspace-alive nil)
-  (setq lsp-completion-show-kind nil)
-  ;; (setq read-process-output-max (* 1024 1024)) ;; 1MB
-  ;; (setq lsp-idle-delay 0.25)
-  (setq lsp-auto-execute-action nil))
 
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
@@ -873,43 +663,6 @@
 
 ;; (use-package dap-java
 ;;   :ensure nil)
-
-(use-package company
-  :hook (prog-mode . company-mode)
-  :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1)
-  (setq company-tooltip-align-annotations t)
-  (setq company-require-match nil)
-  (setq company-dabbrev-ignore-case t)
-  (setq company-dabbrev-downcase t)
-  ;; (setq company-text-icons-add-background t)
-  ;; (setq company-text-icons-mapping t)
-  ;; (setq company-text-icons-margin t)
-  (setq company-format-margin-function  #'company-text-icons-margin)
-  (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
-                            company-echo-metadata-frontend))
-  (unless (display-graphic-p)
-    (define-key company-active-map (kbd "C-h") #'backward-kill-word)
-    (define-key company-active-map (kbd "C-w") #'backward-kill-word))
-  (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous)
-  (if (display-graphic-p)
-      (define-key company-active-map (kbd "<tab>") 'company-select-next)
-    (define-key company-active-map (kbd "TAB") 'company-select-next))
-  (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
-
-(use-package company-prescient
-  :after (prescient company)
-  :config
-  (company-prescient-mode +1))
-
-(use-package lua-mode)
-
-(use-package json-mode)
-
-(use-package vimrc-mode)
 
 (use-package flycheck-clang-tidy
   :after flycheck
@@ -1025,7 +778,57 @@
   (setq org-startup-folded nil)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
   (add-to-list 'org-file-apps '("\\.pdf\\'" . emacs))
-  (setq org-html-checkbox-type 'html))
+  (setq org-html-checkbox-type 'html)
+
+  (defun org-todo-if-needed (state)
+    "Change header state to STATE unless the current item is in STATE already."
+    (unless (string-equal (org-get-todo-state) state)
+      (org-todo state)))
+
+  (defun ct/org-summary-todo-cookie (n-done n-not-done)
+    "Switch header state to DONE when all subentries are DONE, to TODO when none are DONE, and to DOING otherwise"
+    (let (org-log-done org-log-states)   ; turn off logging
+      (org-todo (cond ((= n-done 0)
+                       "TODO")
+                      ((= n-not-done 0)
+                       "DONE")
+                      (t
+                       "DOING")))))
+  (add-hook 'org-after-todo-statistics-hook #'ct/org-summary-todo-cookie)
+
+  (defun ct/org-summary-checkbox-cookie ()
+    "Switch header state to DONE when all checkboxes are ticked, to TODO when none are ticked, and to DOING otherwise"
+    (let (beg end)
+      (unless (not (org-get-todo-state))
+	(save-excursion
+          (org-back-to-heading t)
+          (setq beg (point))
+          (end-of-line)
+          (setq end (point))
+          (goto-char beg)
+          ;; Regex group 1: %-based cookie
+          ;; Regex group 2 and 3: x/y cookie
+          (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]"
+				 end t)
+              (if (match-end 1)
+                  ;; [xx%] cookie support
+                  (cond ((equal (match-string 1) "100%")
+			 (org-todo-if-needed "DONE"))
+			((equal (match-string 1) "0%")
+			 (org-todo-if-needed "TODO"))
+			(t
+			 (org-todo-if-needed "DOING")))
+		;; [x/y] cookie support
+		(if (> (match-end 2) (match-beginning 2)) ; = if not empty
+                    (cond ((equal (match-string 2) (match-string 3))
+                           (org-todo-if-needed "DONE"))
+                          ((or (equal (string-trim (match-string 2)) "")
+                               (equal (match-string 2) "0"))
+                           (org-todo-if-needed "TODO"))
+                          (t
+                           (org-todo-if-needed "DOING")))
+                  (org-todo-if-needed "DOING"))))))))
+  (add-hook 'org-checkbox-statistics-hook #'ct/org-summary-checkbox-cookie))
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))
@@ -1284,6 +1087,7 @@
   (load "theme_rc")
   (load "options_rc")
   (load "custom-mode-line")
+  ;; (load "mood-line")
   (load-file custom-file))
 (bb/init)
 

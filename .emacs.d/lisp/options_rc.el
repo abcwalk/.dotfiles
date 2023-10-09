@@ -8,6 +8,9 @@
 (tooltip-mode t)
 (menu-bar-mode -1)
 
+;; (require 'mood-line)
+;; (mood-line-mode)
+
 (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 (setq frame-resize-pixelwise nil)
 (setq cursor-in-non-selected-windows nil)
@@ -239,6 +242,34 @@ rather than the whole path."
           (t (emms-track-simple-description track)))))
 
 (setq emms-track-description-function 'my-emms-track-description)
+
+;;; Style dispatchers
+
+(defun prot-orderless-literal (word _index _total)
+  "Read WORD= as a literal string."
+  (when (string-suffix-p "=" word)
+    ;; The `orderless-literal' is how this should be treated by
+    ;; orderless.  The `substring' form omits the `=' from the
+    ;; pattern.
+    `(orderless-literal . ,(substring word 0 -1))))
+
+(defun prot-orderless-file-ext (word _index _total)
+  "Expand WORD. to a file suffix when completing file names."
+  (when (and minibuffer-completing-file-name
+             (string-suffix-p "." word))
+    `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
+
+(defun prot-orderless-beg-or-end (word _index _total)
+  "Expand WORD~ to \\(^WORD\\|WORD$\\)."
+  (when-let (((string-suffix-p "~" word))
+             (word (substring word 0 -1)))
+    `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
+
+(defun just-one-face (fn &rest args)
+  (let ((orderless-match-faces [completions-common-part]))
+    (apply fn args)))
+
+(advice-add 'company-capf--candidates :around #'just-one-face)
 
 (provide 'options_rc)
 ;;; options_rc.el ends here

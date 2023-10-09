@@ -7,11 +7,13 @@
 (global-set-key (kbd "C-x v") 'ivy-push-view)
 (global-set-key (kbd "C-x V") 'ivy-switch-view)
 
-(define-key global-map (kbd "<f5>") 'lsp-execute-code-actions)
+;; (define-key global-map (kbd "<f5>") 'lsp-execute-code-actions)
 
 (define-key global-map (kbd "C-d") 'scroll-up-command)
 (define-key global-map (kbd "C-u") 'scroll-down-command)
 (define-key global-map (kbd "M-0") 'treemacs-select-window)
+
+(define-key global-map (kbd "M-g") 'git-gutter-mode)
 
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 
@@ -19,6 +21,12 @@
 
 (global-unset-key (kbd "C-x b"))
 (global-set-key (kbd "C-x b") 'ibuffer-other-window)
+
+;; Emms
+(global-set-key (kbd "C-c r") 'emms-toggle-repeat-track)
+(global-set-key (kbd "C-c p") 'emms-pause)
+(global-set-key (kbd "C-c n") 'emms-previous)
+(global-set-key (kbd "C-c b") 'emms-next)
 
 ;; (global-set-key (kbd "M-%") 'phi-replace-query)
 
