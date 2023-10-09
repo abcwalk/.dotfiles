@@ -22,6 +22,8 @@
       json-mode
       ivy-prescient
       hl-todo
+      emms
+      emms-state
       gruber-darker-theme
       gcmh
       format-all
