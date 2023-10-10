@@ -679,8 +679,10 @@
 ;; --quit
 ;; sbcl --eval '(ql:quickload :quicklisp-slime-helper)' --quit
 
-(use-package slime-repl-ansi-color
-  :straight t)
+;; (use-package slime-repl-ansi-color
+;;   :straight t)
+
+(use-package sly)
 
 (use-package screenshot
   :straight (:type git :host github :repo "tecosaur/screenshot"))
@@ -705,6 +707,8 @@
   :hook (prog-mode . yas-minor-mode)
   :config
   (yas-global-mode))
+
+(use-package common-lisp-snippets)
 
 (use-package smartparens
   :config
@@ -1074,6 +1078,11 @@
 (use-package wgrep)
 
 (use-package pdf-tools)
+
+(use-package highlight-parentheses
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
 
 (defun bb/init ()
   "Windows or GNU/Linux."

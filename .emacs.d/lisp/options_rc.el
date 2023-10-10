@@ -30,15 +30,15 @@
 ;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; Common Lisp
-(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;; (load (expand-file-name "~/.quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "sbcl")
 
 ;; Slime ANSI Colors
-(defun g-init-slime-repl-mode ()
-  (slime-repl-ansi-color-mode 1))
+;; (defun g-init-slime-repl-mode ()
+;;   (slime-repl-ansi-color-mode 1))
 
-(add-hook 'slime-repl-mode-hook 'g-init-slime-repl-mode)
+;; (add-hook 'slime-repl-mode-hook 'g-init-slime-repl-mode)
 
 (defun ct/kill-buffer--possibly-save--advice (original-function &rest args)
   "Ask user in the minibuffer whether to save before killing.
