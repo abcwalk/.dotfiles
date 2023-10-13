@@ -311,7 +311,13 @@
 
 (use-package savehist
   :ensure t
-  :hook (after-init . savehist-mode))
+  :hook (after-init . savehist-mode)
+  :config
+  (setq history-length 25))
+
+(use-package color-theme-approximate
+  :config
+  (color-theme-approximate-on))
 
 ;; (use-package treemacs
 ;;   :defer

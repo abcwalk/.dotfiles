@@ -8,37 +8,24 @@
 (tooltip-mode t)
 (menu-bar-mode -1)
 
-;; (require 'mood-line)
-;; (mood-line-mode)
+;; Use no-littering to automatically set common paths to the new user-emacs-directory
+(use-package no-littering)
 
 (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 (setq frame-resize-pixelwise nil)
 (setq cursor-in-non-selected-windows nil)
 
-;; let's enable it for all programming major modes
-;; (add-hook 'prog-mode-hook #'hl-line-mode)
-;; and for all modes derived from text-mode
-;; (add-hook 'text-mode-hook #'hl-line-mode)
+;; Don't pop up UI dialogs when prompting
+(setq use-dialog-box nil)
 
 (global-auto-revert-mode 1)
 (delete-selection-mode +1)
-;; (setq initial-buffer-choice 'recentf-open-files)
 (setq inhibit-startup-screen t)
-
 (setq global-auto-revert-non-file-buffers t)
 
-;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-;; Common Lisp
 ;; (load (expand-file-name "~/.quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "sbcl")
-
-;; Slime ANSI Colors
-;; (defun g-init-slime-repl-mode ()
-;;   (slime-repl-ansi-color-mode 1))
-
-;; (add-hook 'slime-repl-mode-hook 'g-init-slime-repl-mode)
 
 (defun ct/kill-buffer--possibly-save--advice (original-function &rest args)
   "Ask user in the minibuffer whether to save before killing.
@@ -129,18 +116,6 @@
 
 (add-hook 'ibuffer-mode-hook #'ct/ibuffer-enable-saved-filter-groups)
 
-;; Modify the default ibuffer column format
-;; (setq ibuffer-formats
-;;       '((mark modified read-only locked " "
-;; 	      (name 20 20 :left :elide)
-;; 	      " "
-;; 	      (mode 16 16 :left :elide)
-;; 	      " "
-;; 	      filename-and-process)
-;; 	(mark " "
-;; 	      (name 16 -1)
-;; 	      " " filename)))
-
 ;; Move focus to new window after manual splitting
 (defun ct/split-window-below (arg)
   (interactive "P")
@@ -152,29 +127,6 @@
   (other-window 1))
 (global-set-key [remap split-window-below] #'ct/split-window-below)
 (global-set-key [remap split-window-right] #'ct/split-window-right)
-
-;; Close Emacs safely
-;; (defun ct/clean-exit ()
-;;   "Exit Emacs cleanly.
-;; If there are unsaved buffer, pop up a list for them to be saved
-;; before existing. Replaces ‘save-buffers-kill-terminal’."
-;;   (interactive)
-;;   (if (frame-parameter nil 'client)
-;;       (server-save-buffers-kill-terminal arg)
-;;     (if-let ((buf-list (seq-filter (lambda (buf)
-;;                                      (and (buffer-modified-p buf)
-;;                                           (buffer-file-name buf)))
-;;                                    (buffer-list))))
-;;         (progn
-;;           (pop-to-buffer (list-buffers-noselect t buf-list))
-;;           (message "s to save, C-k to kill, x to execute"))
-;;       (save-buffers-kill-emacs))))
-;; (global-set-key [remap save-buffers-kill-terminal] #'ct/clean-exit)
-
-;; (setq backup-directory-alist
-;;       `((".*" . ,temporary-file-directory)))
-;; (setq auto-save-file-name-transforms
-;;       `((".*" ,temporary-file-directory t)))
 
 ;; Save silently
 (setq save-silently t)
@@ -200,11 +152,6 @@
 		treemacs-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-;; Occur
-;; (add-hook 'occur-hook
-;;           '(lambda ()
-;;              (switch-to-buffer-other-window "*Occur*")))
 
 (setq help-window-select t)
 

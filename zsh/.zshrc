@@ -106,9 +106,9 @@ fi
 
 alias n="nvim"
 alias n.="nvim ."
-alias e="emacs -nw"
 alias r="ranger"
 alias cd..="cd .."
+alias e="emacs -nw"
 alias disable_webcam="sudo modprobe -r uvcvideo"
 alias enable_webcam="sudo modprobe uvcvideo"
 alias toggle_l2tp_SmartFinance="nmcli c show --active | grep SmartFinance && nmcli c down SmartFinance || nmcli c up SmartFinance"

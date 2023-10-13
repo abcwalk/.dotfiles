@@ -23,7 +23,7 @@
 #TERM: alacritty
 window:
   opacity: 1
-  startup_mode: Maximized
+  startup_mode: Fullscreen
   dynamic_title: true
   # Window dimensions (changes require restart)
   #
@@ -107,6 +107,13 @@ window:
   #history: 10000
   # Scrolling distance multiplier.
   #multiplier: 3
+
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux attach || tmux"
 
 # Font configuration
 font:

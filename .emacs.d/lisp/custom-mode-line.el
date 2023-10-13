@@ -289,7 +289,7 @@ face.  Let other buffers have no face.")
   (when-let ((rev (vc-working-revision file backend))
              (branch (or (vc-git--symbolic-ref file)
                          (substring rev 0 7))))
-    ;; (capitalize branch)
+    (capitalize branch)
     ))
 
 (declare-function vc-git-working-revision "vc-git" (file))
