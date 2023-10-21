@@ -29,7 +29,7 @@
       format-all
       flycheck
       flycheck-clang-tidy
-      git-gutter
+      ;; git-gutter
       evil-nerd-commenter
       dashboard
       counsel
@@ -315,6 +315,17 @@
   :config
   (setq history-length 25))
 
+(use-package which-key
+  :config
+  ;; (setq which-key-idle-delay 10000)
+  ;; (setq which-key-idle-secondary-delay 0.05)
+  (which-key-setup-side-window-right)
+  (which-key-mode))
+
+;; (use-package projectile
+;;   :config
+;;   (projectile-mode +1))
+
 (use-package multi-compile
   :config
   (setq multi-compile-alist '(
@@ -340,6 +351,8 @@
   :config
   (add-hook 'go-mode-hook (lambda ()
                             (set (make-local-variable 'company-backends) '(company-go))
+			    (setq tab-width 4 indent-tabs-mode 4)
+			    (define-key go-mode-map (kbd "<f5>") 'multi-compile-run)
                             (company-mode))))
 (use-package go-rename)
 
@@ -351,7 +364,7 @@
     (setq gofmt-command "goimports")                ; gofmt uses invokes goimports
     (if (not (string-match "go" compile-command))   ; set compile command default
 	(set (make-local-variable 'compile-command)
-             "go build -v && go test -v && go vet && eval ./${PWD##*/}"))
+             "go run ."))
 
     ;; guru settings
     (go-guru-hl-identifier-mode))                    ; highlight identifier
@@ -365,6 +378,21 @@
 (use-package golint
   :config
   (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs")))
+
+;; (use-package go-projectile
+;;   :config
+;;   (go-projectile-tools-add-path)
+;;   (setq go-projectile-tools
+;; 	'((gocode    . "github.com/mdempsky/gocode")
+;; 	  (golint    . "golang.org/x/lint/golint")
+;; 	  (godef     . "github.com/rogpeppe/godef")
+;; 	  (errcheck  . "github.com/kisielk/errcheck")
+;; 	  (godoc     . "golang.org/x/tools/cmd/godoc")
+;; 	  (gogetdoc  . "github.com/zmb3/gogetdoc")
+;; 	  (goimports . "golang.org/x/tools/cmd/goimports")
+;; 	  (gorename  . "golang.org/x/tools/cmd/gorename")
+;; 	  ;; (gomvpkg   . "golang.org/x/tools/cmd/gomvpkg")
+;; 	  (guru      . "golang.org/x/tools/cmd/guru"))))
 
 (use-package color-theme-approximate
   :config
@@ -506,7 +534,8 @@
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
-         (org-mode . flycheck-mode))
+         (org-mode . flycheck-mode)
+	 (go-mode . flycheck-mode))
   :custom-face
   (flycheck-error   ((t (:inherit error :underline t))))
   (flycheck-warning ((t (:inherit warning :underline t))))
@@ -551,8 +580,8 @@
   :custom
   (emms-source-file-default-directory "~/Music")
   :bind
-  (("<f5>" . emms-play-directory)
-   ("<f6>" . emms))
+  (("<f2>" . emms-play-directory)
+   ("<f3>" . emms))
   :config
   (emms-mode-line-disable))
 
@@ -651,18 +680,18 @@
 
 (use-package dockerfile-mode)
 
-(use-package git-gutter
-  ;; :hook (prog-mode . git-gutter-mode)
-  :config
-  (setq git-gutter:update-interval 0.02)
-  (set-face-background 'git-gutter:modified "orange")
-  (set-face-background 'git-gutter:added "#44bc44")
-  (set-face-background 'git-gutter:deleted "#ff5f59")
-  (custom-set-variables
-   '(git-gutter:modified-sign " ")
-   '(git-gutter:added-sign " ")
-   '(git-gutter:deleted-sign "")
-   '(git-gutter:window-width 3)))
+;; (use-package git-gutter
+;;   ;; :hook (prog-mode . git-gutter-mode)
+;;   :config
+;;   (setq git-gutter:update-interval 0.02)
+;;   (set-face-background 'git-gutter:modified "orange")
+;;   (set-face-background 'git-gutter:added "#44bc44")
+;;   (set-face-background 'git-gutter:deleted "#ff5f59")
+;;   (custom-set-variables
+;;    '(git-gutter:modified-sign " ")
+;;    '(git-gutter:added-sign " ")
+;;    '(git-gutter:deleted-sign "")
+;;    '(git-gutter:window-width 3)))
 
 (use-package ibuffer
   :ensure t

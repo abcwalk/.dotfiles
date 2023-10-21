@@ -243,8 +243,5 @@ rather than the whole path."
 (setenv "GOPATH" "/home/pingvi/goprojects")
 (add-to-list 'exec-path "/home/pingvi/go/bin")
 
-;;Compilation autoscroll
-(setq compilation-scroll-output t)
-
 (provide 'options_rc)
 ;;; options_rc.el ends here
