@@ -315,6 +315,57 @@
   :config
   (setq history-length 25))
 
+(use-package multi-compile
+  :config
+  (setq multi-compile-alist '(
+			      (go-mode . (
+					  ("go-build" "go build -v"
+					   (locate-dominating-file buffer-file-name ".git"))
+					  ("go-build-and-run" "go build -v && echo 'build finish' && eval ./${PWD##*/}"
+					   (multi-compile-locate-file-dir ".git"))
+					  ("go-build-test-and-run" "go build -v && go test -v && go vet && eval ./${PWD##*/}"
+					   (multi-compile-locate-file-dir ".git")))))))
+
+(use-package go-mode
+  :ensure t
+  :mode "\\.go\\'")
+
+(use-package exec-path-from-shell)
+
+(use-package go-eldoc
+  :config
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+(use-package company-go
+  :config
+  (add-hook 'go-mode-hook (lambda ()
+                            (set (make-local-variable 'company-backends) '(company-go))
+                            (company-mode))))
+(use-package go-rename)
+
+(use-package go-guru
+  :config
+  ;; Define function to call when go-mode loads
+  (defun my-go-mode-hook ()
+    (add-hook 'before-save-hook 'gofmt-before-save) ; gofmt before every save
+    (setq gofmt-command "goimports")                ; gofmt uses invokes goimports
+    (if (not (string-match "go" compile-command))   ; set compile command default
+	(set (make-local-variable 'compile-command)
+             "go build -v && go test -v && go vet && eval ./${PWD##*/}"))
+
+    ;; guru settings
+    (go-guru-hl-identifier-mode))                    ; highlight identifier
+
+  ;; Connect go-mode-hook with the function we just defined
+  (add-hook 'go-mode-hook 'my-go-mode-hook))
+
+
+;; (use-package go-autocomplete)
+
+(use-package golint
+  :config
+  (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs")))
+
 (use-package color-theme-approximate
   :config
   (color-theme-approximate-on))
@@ -408,9 +459,10 @@
 	  js-jsx-mode
 	  typescript-mode
 	  web-mode
+	  go-mode
 	  )
-	 . lsp)
-  :commands lsp
+	 . lsp-deferred)
+  :commands lsp-deferred
   :config
   ;; (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
   (global-unset-key (kbd "<f4>"))
@@ -423,6 +475,7 @@
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)
+  (setq lsp-go-use-gofumpt t)
   ;; (setq lsp-lens-enable t)
   (setq lsp-signature-render-documentation nil)
   (setq lsp-eldoc-enable-hover nil)
@@ -441,7 +494,14 @@
   (setq lsp-completion-show-kind nil)
   ;; (setq read-process-output-max (* 1024 1024)) ;; 1MB
   ;; (setq lsp-idle-delay 0.25)
-  (setq lsp-auto-execute-action nil))
+  (setq lsp-auto-execute-action nil)
+  (setq lsp-go-analyses '((fieldalignment . t)
+                          (nilness . t)
+                          (shadow . t)
+                          (unusedparams . t)
+                          (unusedwrite . t)
+                          (useany . t)
+                          (unusedvariable . t))))
 
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
@@ -538,6 +598,7 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp))))
+
 ;; Java
 ;; (use-package lsp-java
 ;;   :config
@@ -801,11 +862,11 @@
     "Switch header state to DONE when all subentries are DONE, to TODO when none are DONE, and to DOING otherwise"
     (let (org-log-done org-log-states)   ; turn off logging
       (org-todo (cond ((= n-done 0)
-                       "TODO")
-                      ((= n-not-done 0)
-                       "DONE")
-                      (t
-                       "DOING")))))
+		       "TODO")
+		      ((= n-not-done 0)
+		       "DONE")
+		      (t
+		       "DOING")))))
   (add-hook 'org-after-todo-statistics-hook #'ct/org-summary-todo-cookie)
 
   (defun ct/org-summary-checkbox-cookie ()
@@ -822,7 +883,7 @@
           ;; Regex group 2 and 3: x/y cookie
           (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]"
 				 end t)
-              (if (match-end 1)
+	      (if (match-end 1)
                   ;; [xx%] cookie support
                   (cond ((equal (match-string 1) "100%")
 			 (org-todo-if-needed "DONE"))
@@ -835,7 +896,7 @@
                     (cond ((equal (match-string 2) (match-string 3))
                            (org-todo-if-needed "DONE"))
                           ((or (equal (string-trim (match-string 2)) "")
-                               (equal (match-string 2) "0"))
+			       (equal (match-string 2) "0"))
                            (org-todo-if-needed "TODO"))
                           (t
                            (org-todo-if-needed "DOING")))
@@ -861,9 +922,9 @@
   :config
   (local-unset-key (kbd "f"))
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
-                                              (interactive)
-                                              (magit-refresh)
-                                              (message "Refreshing Magit...done"))))
+					      (interactive)
+					      (magit-refresh)
+					      (message "Refreshing Magit...done"))))
 
 ;; Markdown
 (use-package markdown-mode
@@ -1085,10 +1146,10 @@
 
 (use-package pdf-tools)
 
-(use-package highlight-parentheses
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
+;; (use-package highlight-parentheses
+;;   :ensure t
+;;   :config
+;;   (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
 
 (defun bb/init ()
   "Windows or GNU/Linux."

@@ -118,6 +118,7 @@ export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 alias luamake=/home/nonh/Загрузки/lua-language-server/3rd/luamake/luamake
 export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"
 export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

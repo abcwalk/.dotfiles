@@ -600,8 +600,9 @@ level."
 		;; "  "
 		prot-modeline-align-right
 		prot-modeline-misc-info
-		"      "
+		"   "
 		mood-line-segment-position
+		" "
 		))
 
 (prot-modeline-subtle-mode 1)
