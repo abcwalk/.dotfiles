@@ -8,20 +8,24 @@
 (tooltip-mode t)
 (menu-bar-mode -1)
 
+;; Use no-littering to automatically set common paths to the new user-emacs-directory
+(use-package no-littering)
+
 (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 (setq frame-resize-pixelwise nil)
 (setq cursor-in-non-selected-windows nil)
 
-;; let's enable it for all programming major modes
-;; (add-hook 'prog-mode-hook #'hl-line-mode)
-;; and for all modes derived from text-mode
-;; (add-hook 'text-mode-hook #'hl-line-mode)
+;; Don't pop up UI dialogs when prompting
+(setq use-dialog-box nil)
 
 (global-auto-revert-mode 1)
 (delete-selection-mode +1)
-(setq initial-buffer-choice 'recentf-open-files)
-
+(setq inhibit-startup-screen t)
 (setq global-auto-revert-non-file-buffers t)
+
+;; (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;; Replace "sbcl" with the path to your implementation
+(setq inferior-lisp-program "sbcl")
 
 (defun ct/kill-buffer--possibly-save--advice (original-function &rest args)
   "Ask user in the minibuffer whether to save before killing.
@@ -112,18 +116,6 @@
 
 (add-hook 'ibuffer-mode-hook #'ct/ibuffer-enable-saved-filter-groups)
 
-;; Modify the default ibuffer column format
-(setq ibuffer-formats
-      '((mark modified read-only locked " "
-	      (name 20 20 :left :elide)
-	      " "
-	      (mode 16 16 :left :elide)
-	      " "
-	      filename-and-process)
-	(mark " "
-	      (name 16 -1)
-	      " " filename)))
-
 ;; Move focus to new window after manual splitting
 (defun ct/split-window-below (arg)
   (interactive "P")
@@ -135,47 +127,6 @@
   (other-window 1))
 (global-set-key [remap split-window-below] #'ct/split-window-below)
 (global-set-key [remap split-window-right] #'ct/split-window-right)
-
-;; Close Emacs safely
-;; (defun ct/clean-exit ()
-;;   "Exit Emacs cleanly.
-;; If there are unsaved buffer, pop up a list for them to be saved
-;; before existing. Replaces ‘save-buffers-kill-terminal’."
-;;   (interactive)
-;;   (if (frame-parameter nil 'client)
-;;       (server-save-buffers-kill-terminal arg)
-;;     (if-let ((buf-list (seq-filter (lambda (buf)
-;;                                      (and (buffer-modified-p buf)
-;;                                           (buffer-file-name buf)))
-;;                                    (buffer-list))))
-;;         (progn
-;;           (pop-to-buffer (list-buffers-noselect t buf-list))
-;;           (message "s to save, C-k to kill, x to execute"))
-;;       (save-buffers-kill-emacs))))
-;; (global-set-key [remap save-buffers-kill-terminal] #'ct/clean-exit)
-
-;; ;; tab-bar color overrides so it’s less noise up there
-;; (defun ct/modus-themes-tab-bar-colors ()
-;;   "Override tab faces to have even less variety."
-;;   (modus-themes-with-colors
-;;     (custom-set-faces
-;;      `(tab-bar ((,c
-;;                  :height 0.8
-;;                  :background ,bg-main
-;;                  :box nil)))
-;;      `(tab-bar-tab ((,c
-;;                      :background ,bg-main
-;;                      :underline (:color ,blue-intense :style line)
-;;                      :box (:line-width 2 :style flat-button))))
-;;      `(tab-bar-tab-inactive ((,c
-;;                               :background ,bg-main
-;;                               :box (:line-width 2 :style flat-button)))))))
-;; (add-hook 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
-
-;; (setq backup-directory-alist
-;;       `((".*" . ,temporary-file-directory)))
-;; (setq auto-save-file-name-transforms
-;;       `((".*" ,temporary-file-directory t)))
 
 ;; Save silently
 (setq save-silently t)
@@ -201,6 +152,96 @@
 		treemacs-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(setq help-window-select t)
+
+;;; Emms
+
+(defun track-title-from-file-name (file)
+  "For using with EMMS description functions. Extracts the track
+title from the file name FILE, which just means a) taking only
+the file component at the end of the path, and b) removing any
+file extension."
+  (with-temp-buffer
+    (save-excursion (insert (file-name-nondirectory (directory-file-name file))))
+    (ignore-error 'search-failed
+      (search-forward-regexp (rx "." (+ alnum) eol))
+      (delete-region (match-beginning 0) (match-end 0)))
+    (buffer-string)))
+
+(defun my-emms-track-description (track)
+  "Return a description of TRACK, for EMMS, but try to cut just
+the track name from the file name, and just use the file name too
+rather than the whole path."
+  (let ((artist (emms-track-get track 'info-artist))
+        (title (emms-track-get track 'info-title)))
+    (cond ((and artist title)
+           ;; Converting the artist/title to a string works around a bug in `emms-info-exiftool'
+           ;; where, if your track name is a number, e.g. "1999" by Jeroen Tel, then it will be an
+           ;; integer type here, confusing everything.
+           ;;
+           ;; I would fix the bug properly and submit a patch but I just cannot be bothered to
+           ;; figure out how to do that.
+           (concat (format "%s" artist) " - " (format "%s" title)))
+          (title title)
+          ((eq (emms-track-type track) 'file)
+           (track-title-from-file-name (emms-track-name track)))
+          (t (emms-track-simple-description track)))))
+
+(setq emms-track-description-function 'my-emms-track-description)
+
+;;; Style dispatchers
+
+(defun prot-orderless-literal (word _index _total)
+  "Read WORD= as a literal string."
+  (when (string-suffix-p "=" word)
+    ;; The `orderless-literal' is how this should be treated by
+    ;; orderless.  The `substring' form omits the `=' from the
+    ;; pattern.
+    `(orderless-literal . ,(substring word 0 -1))))
+
+(defun prot-orderless-file-ext (word _index _total)
+  "Expand WORD. to a file suffix when completing file names."
+  (when (and minibuffer-completing-file-name
+             (string-suffix-p "." word))
+    `(orderless-regexp . ,(format "\\.%s\\'" (substring word 0 -1)))))
+
+(defun prot-orderless-beg-or-end (word _index _total)
+  "Expand WORD~ to \\(^WORD\\|WORD$\\)."
+  (when-let (((string-suffix-p "~" word))
+             (word (substring word 0 -1)))
+    `(orderless-regexp . ,(format "\\(^%s\\|%s$\\)" word word))))
+
+(defun just-one-face (fn &rest args)
+  (let ((orderless-match-faces [completions-common-part]))
+    (apply fn args)))
+
+(advice-add 'company-capf--candidates :around #'just-one-face)
+
+;;; Treesit langs
+(setq treesit-language-source-alist
+      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+	(cmake "https://github.com/uyha/tree-sitter-cmake")
+	(css "https://github.com/tree-sitter/tree-sitter-css")
+	(elisp "https://github.com/Wilfred/tree-sitter-elisp")
+	(go "https://github.com/tree-sitter/tree-sitter-go")
+	(html "https://github.com/tree-sitter/tree-sitter-html")
+	(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+	(json "https://github.com/tree-sitter/tree-sitter-json")
+	(make "https://github.com/alemuller/tree-sitter-make")
+	(markdown "https://github.com/ikatyang/tree-sitter-markdown")
+	(python "https://github.com/tree-sitter/tree-sitter-python")
+	(toml "https://github.com/tree-sitter/tree-sitter-toml")
+	(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+	(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+	(yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+
+;;; Golang
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/go/bin"))
+(setenv "GOPATH" "/home/pingvi/goprojects")
+(add-to-list 'exec-path "/home/pingvi/go/bin")
 
 (provide 'options_rc)
 ;;; options_rc.el ends here

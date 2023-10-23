@@ -70,6 +70,7 @@ amx-items
 history
 history/
 .dap*
+image-dired/
 
 fonts/.uuid
 fonts/opentype/.uuid
@@ -82,3 +83,8 @@ elpa/
 places
 recentf
 recentf/
+eshell/
+lastdir
+emms/
+url/
+tree-sitter/
