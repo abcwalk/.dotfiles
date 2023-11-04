@@ -19,6 +19,8 @@
       magit
       lua-mode
       lsp-pyright
+      projectile
+      go-projectile
       json-mode
       ivy-prescient
       hl-todo
@@ -322,9 +324,15 @@
   (which-key-setup-side-window-right)
   (which-key-mode))
 
-;; (use-package projectile
-;;   :config
-;;   (projectile-mode +1))
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c j" . projectile-command-map)))
+
+(use-package go-projectile)
 
 (use-package multi-compile
   :config
@@ -337,15 +345,22 @@
 					  ("go-build-test-and-run" "go build -v && go test -v && go vet && eval ./${PWD##*/}"
 					   (multi-compile-locate-file-dir ".git")))))))
 
+;;; Go
 (use-package go-mode
   :ensure t
-  :mode "\\.go\\'")
+  :hook ((go-mode . lsp-deferred)
+	 (go-mode . company-mode))
+  :config
+  (require 'lsp-go)
+  ;; GOPATH/bin
+  (add-to-list 'exec-path "/home/pingvi/go/bin/go")
+  (setq gofmt-command "goimports"))
 
 (use-package exec-path-from-shell)
 
-(use-package go-eldoc
-  :config
-  (add-hook 'go-mode-hook 'go-eldoc-setup))
+;; (use-package go-eldoc
+;;   :config
+;;   (add-hook 'go-mode-hook 'go-eldoc-setup))
 
 (use-package company-go
   :config
@@ -459,13 +474,13 @@
   :ensure)
 
 (use-package recentf
-  :config
-  (recentf-mode 1)
-  (setq recent-save-file "~/.emacs.d/recentf")
-  (setq recentf-auto-cleanup 'never)
+  :init
+  (setq recentf-save-file "~/.emacs.d/recentf")
+  (setq recentf-max-saved-items 40)
   (setq recentf-max-menu-items 10)
-  (setq recentf-max-saved-items 100)
-  (setq recentf-show-file-shortcuts-flag nil))
+  (setq recentf-show-file-shortcuts-flag nil)
+  (recentf-mode 1)
+  (run-at-time nil (* 5 60) 'recentf-save-list))
 
 (use-package orderless
   :ensure t
@@ -534,8 +549,7 @@
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
-         (org-mode . flycheck-mode)
-	 (go-mode . flycheck-mode))
+         (org-mode . flycheck-mode))
   :custom-face
   (flycheck-error   ((t (:inherit error :underline t))))
   (flycheck-warning ((t (:inherit warning :underline t))))

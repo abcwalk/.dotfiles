@@ -119,6 +119,7 @@ alias luamake=/home/nonh/Загрузки/lua-language-server/3rd/luamake/luamak
 export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export GOPATH="$HOME/go"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
