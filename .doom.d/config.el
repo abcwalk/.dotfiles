@@ -96,6 +96,22 @@
 (map! :desc "emms-next"
       "C-c ." 'emms-next)
 
+(defun bb/toggle-theme ()
+  "Toggle between light and dark themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'modus-vivendi)
+      (progn
+	(disable-theme 'modus-vivendi)
+	(load-theme 'modus-operandi t)
+	)
+    (progn
+      (disable-theme 'modus-operandi)
+      (load-theme 'modus-vivendi t)
+      )))
+
+(map! :desc "toggle-modus-themes"
+      "<f12>" #'bb/toggle-theme)
+
 ;; Start maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
