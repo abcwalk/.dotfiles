@@ -15,6 +15,7 @@
 (package! sudo-edit)
 (package! evil-nerd-commenter)
 (package! pulsar)
+(package! gruber-darker-theme)
 (package! virtualenvwrapper)
 (package! python-black) ;; pip install black-macchiato
 ;; (package! virtualenvwrapper)
