@@ -23,7 +23,6 @@
 ;;
 (setq doom-font (font-spec :family "Iosevka Comfy" :size 20))
 
-(setq lsp-ui-sideline-actions-icon '(nerd-icons-faicon "nf-fa-lightbulb_o"))
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -33,7 +32,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 
-(setq doom-theme 'modus-operandi)
+(setq doom-theme 'modus-vivendi)
 
 (use-package! git-gutter-fringe
   :config
@@ -105,7 +104,7 @@
 	(load-theme 'modus-operandi t)
 	)
     (progn
-      (disable-theme 'modus-operandi)
+      (disable-theme 'modus-vivendi)
       (load-theme 'modus-vivendi t)
       )))
 
@@ -128,14 +127,15 @@
 (map! :desc "counsel-recentf"
       "C-x f" 'counsel-recentf)
 
-(use-package! python-black
+(use-package python-black
+  :demand t
   :after python
   :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
-(use-package! virtualenvwrapper)
-(after! virtualenvwrapper
-  (setq venv-location "~/.virtualenvs/")
-  )
+(require 'auto-virtualenv)
+(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+
+;; (add-hook 'python-mode-hook #'format-all-mode)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -198,6 +198,8 @@
 
 (map! :desc "current-line-pulse"
       "C-c l" 'pulsar-pulse-line)
+
+(set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
 
 (use-package! multi-compile
   :config
