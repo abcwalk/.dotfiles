@@ -32,7 +32,31 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
+
 (setq doom-theme 'modus-operandi)
+
+(use-package! git-gutter-fringe
+  :config
+  ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
+  ;; (fringe-helper-define 'git-gutter-fr:deleted nil " ")
+  ;; (fringe-helper-define 'git-gutter-fr:modified nil " ")
+  ;; (define-fringe-bitmap 'git-gutter-fr:added
+  (setq-default fringes-outside-margins t)
+  (define-fringe-bitmap 'git-gutter-fr:added [0]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [0]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [0]
+    nil nil 'bottom)
+  (defun my-modus-themes-custom-faces ()
+    (modus-themes-with-colors
+      (custom-set-faces
+       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
+  (add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces)
+  )
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -169,6 +193,7 @@
 					   (multi-compile-locate-file-dir ".git"))
 					  ("go-build-test-and-run" "go build -v && go test -v && go vet && eval ./${PWD##*/}"
 					   (multi-compile-locate-file-dir ".git")))))))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -181,9 +206,8 @@
 ;;   - Setting variables which explicitly tell you to set them before their
 ;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
 ;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
+
 ;; Here are some additional functions/macros that will help you configure Doom.
-;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
 ;; - `after!' for running code after a package has loaded
