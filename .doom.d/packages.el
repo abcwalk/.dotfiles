@@ -18,6 +18,7 @@
 (package! gruber-darker-theme)
 (package! auto-virtualenv)
 (package! format-all)
+(package! olivetti)
 (package! python-black) ;; pip install black-macchiato
 ;; (package! virtualenvwrapper)
 ;; To install a package directly from a remote git repo, you must specify a
