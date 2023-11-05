@@ -79,11 +79,20 @@
 (map! :desc "scroll-up"
       "C-d" 'scroll-up-command)
 (map! :desc "scroll-down"
-      "C-u" 'scroll-up-command)
+      "C-u" 'scroll-down-command)
 (map! :desc "treemacs-select-window"
       "M-0" 'treemacs-select-window)
 (map! :desc "counsel-recentf"
       "C-x f" 'counsel-recentf)
+
+(use-package! python-black
+  :after python
+  :hook (python-mode . python-black-on-save-mode-enable-dwim))
+
+(use-package! virtualenvwrapper)
+(after! virtualenvwrapper
+  (setq venv-location "~/.virtualenvs/")
+  )
 
 ;; Move line up/down
 (defun move-line-up ()
