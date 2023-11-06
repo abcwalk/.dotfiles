@@ -22,7 +22,14 @@
        `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
   (add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces))
 
+;;; Line numbers
 (setq display-line-numbers-type t)
+
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (setq org-directory "~/org/")
 
@@ -146,18 +153,44 @@ rather than the whole path."
 
 ;;; Dashboard
 
-(setq user-full-name "Maxim Rozhkob"
+(add-to-list '+doom-dashboard-menu-sections
+             '("Open diary"
+               :icon (nerd-icons-mdicon "nf-md-notebook_heart" :face 'doom-dashboard-menu-title)
+               :action diary))
+
+(setq user-full-name "Maxim Rozhkov"
       user-mail-address "foldersjarer@gmail.com"
       +doom-dashboard-banner-file "/home/pingvi/.doom.d/misc/doom.png"
       +doom-dashboard-banner-padding '(0 . 2))
 
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Start maximized
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;;; Info colors
 
+(use-package! info-colors
+  :after info
+  :commands (info-colors-fontify-node)
+  :hook (Info-selection . info-colors-fontify-node))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Improve completions
+(after! lsp-mode
+  (setq +lsp-company-backends
+        '(:separate company-capf company-yasnippet company-dabbrev)))
+
+;; Start maximized
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(when (version< "29.0.50" emacs-version)
+  (pixel-scroll-precision-mode))
+
+(map! :desc "save-buffer"
+      "C-s" 'save-buffer)
 (map! :desc "swiper"
-      "C-s" 'swiper-isearch)
+      "C-f" 'swiper-isearch)
 (map! :desc "avy-goto-char-2"
       "C-'" 'avy-goto-char-2)
 (map! :desc "scroll-up"
@@ -248,4 +281,3 @@ rather than the whole path."
 					   (multi-compile-locate-file-dir ".git"))
 					  ("go-build-test-and-run" "go build -v && go test -v && go vet && eval ./${PWD##*/}"
 					   (multi-compile-locate-file-dir ".git")))))))
-
