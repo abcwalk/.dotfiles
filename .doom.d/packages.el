@@ -19,6 +19,7 @@
 (package! auto-virtualenv)
 (package! format-all)
 (package! info-colors)
+(package! pyimport)
 (package! olivetti)
 (package! python-black) ;; pip install black-macchiato
 ;; (package! virtualenvwrapper)
