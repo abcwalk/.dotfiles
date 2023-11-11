@@ -4,25 +4,6 @@
 
 (setq doom-font (font-spec :family "Iosevka Comfy" :size 20))
 
-;;; TODO detect modus themes and enable this git-gutter fix
-;; (use-package! git-gutter-fringe
-;;   :config
-;;   (setq-default fringes-outside-margins t)
-;;   (define-fringe-bitmap 'git-gutter-fr:added [0]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:modified [0]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:deleted [0]
-;;     nil nil 'bottom)
-;;   (defun my-modus-themes-custom-faces ()
-;;     (modus-themes-with-colors
-;;      (custom-set-faces
-;;       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
-;;       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
-;;       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
-;;       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
-;;   (add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces))
-
 ;;; Line numbers
 (setq display-line-numbers-type t)
 
@@ -51,7 +32,8 @@
   (emms-mode-line-disable))
 
 (defun track-title-from-file-name (file)
-  "For using with EMMS description functions. Extracts the track
+  "For using with EMMS description functions.
+Extracts the track
 title from the file name FILE, which just means a) taking only
 the file component at the end of the path, and b) removing any
 file extension."
@@ -63,7 +45,8 @@ file extension."
     (buffer-string)))
 
 (defun my-emms-track-description (track)
-  "Return a description of TRACK, for EMMS, but try to cut just
+  "Return a description of TRACK, for EMMS.
+But try to cut just
 the track name from the file name, and just use the file name too
 rather than the whole path."
   (let ((artist (emms-track-get track 'info-artist))
@@ -91,51 +74,83 @@ rather than the whole path."
       "C-c ," 'emms-previous)
 (map! :desc "emms-next"
       "C-c ." 'emms-next)
+(map! :desc "emms-minus"
+      "C-c <f2>" 'emms-volume-mode-minus)
+(map! :desc "emms-plus"
+      "C-c <f3>" 'emms-volume-mode-plus)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Theme
 
-(setq doom-theme 'doom-homage-black)
+(setq doom-theme 'modus-operandi)
 
 ;;; Theme toggle
+;; (defun pingvi/fix-git-gutter ()
+;;   (setq-default fringes-outside-margins t)
+;;   (define-fringe-bitmap 'git-gutter-fr:added [0]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:modified [0]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:deleted [0]
+;;     nil nil 'bottom)
+;;   (defun my-modus-themes-custom-faces ()
+;;     (modus-themes-with-colors
+;;       (custom-set-faces
+;;        ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+;;        `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+;;        `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+;;        `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg)))))))
 
-(defun bb/toggle-theme ()
+(defun pingvi/toggle-theme()
   "Toggle between light and dark themes."
   (interactive)
-  (if (eq (car custom-enabled-themes) 'doom-homage-black)
+  (if (eq (car custom-enabled-themes) 'modus-operandi)
       (progn
-	(disable-theme 'doom-homage-black)
-	(load-theme 'modus-operandi t)
+	(disable-theme 'modus-operandi)
+	(load-theme 'doom-homage-black t)
+        ;; (pingvi/fix-git-gutter)
 	)
     (progn
       (disable-theme 'doom-homage-black)
-      (load-theme 'doom-homage-black t)
+      (load-theme 'modus-operandi t)
+      ;; (pingvi/fix-git-gutter)
       )))
 
 (map! :desc "toggle-modus-themes"
-      "<f12>" #'bb/toggle-theme)
+      "<f12>" #'pingvi/toggle-theme)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Olivetti
 
+(add-to-list 'load-path "~/.doom.d/lisp/")
+
 (use-package! olivetti
   :config
-  (setq-default olivetti-body-width 130)
+  (setq-default olivetti-body-width 120)
   (add-hook 'mixed-pitch-mode-hook  (lambda () (setq-local olivetti-body-width 80))))
 
-(load-file "~/.doom.d/modules/ui/auto-olivetti/auto-olivetti.el")
+(map! :desc "toggle-olivetti-mode"
+      "C-c z" 'olivetti-mode)
 
-(use-package! auto-olivetti
-  :custom
-  (auto-olivetti-enabled-modes '(text-mode prog-mode helpful-mode ibuffer-mode image-mode))
-  :config
-  (auto-olivetti-mode))
+;; (use-package! auto-olivetti
+;;   :custom
+;;   (load-file "~/.doom.d/lisp/auto-olivetti.el")
+;;   (auto-olivetti-enabled-modes '(text-mode prog-mode helpful-mode ibuffer-mode image-mode))
+;;   :config
+;;   (auto-olivetti-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ChatGPT
+
+;; (setq openai-key "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")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Go
+
 (setq exec-path (append exec-path '("~/go/bin")))
 (setq lsp-gopls-server-path (expand-file-name "~/go/bin/gopls"))
 (setq lsp-gopls-staticcheck t)
@@ -170,7 +185,7 @@ rather than the whole path."
 
 (setq user-full-name "Maxim Rozhkov"
       user-mail-address "foldersjarer@gmail.com"
-      +doom-dashboard-banner-file "/home/pingvi/.doom.d/misc/doom.png"
+      +doom-dashboard-ascii-banner-fn ""
       +doom-dashboard-banner-padding '(0 . 2))
 
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
@@ -235,10 +250,6 @@ rather than the whole path."
       "C-f" 'swiper-isearch)
 (map! :desc "avy-goto-char-2"
       "C-'" 'avy-goto-char-2)
-(map! :desc "scroll-up"
-      "C-d" 'scroll-up-command)
-(map! :desc "scroll-down"
-      "C-u" 'scroll-down-command)
 (map! :desc "treemacs-select-window"
       "M-0" 'treemacs-select-window)
 (map! :desc "counsel-recentf"
@@ -249,8 +260,29 @@ rather than the whole path."
   :after python
   :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
-(require 'auto-virtualenv)
-(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+;; (require 'auto-virtualenv)
+;; (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+
+;;; Spell check
+
+(flyspell-mode -1)
+;; (add-hook 'text-mode-hook 'flyspell-mode)
+;; (add-hook 'python-mode-hook 'flyspell-prog-mode)
+;; (add-hook 'java-mode-hook 'flyspell-prog-mode)
+(remove-hook 'markdown-mode-hook 'flyspell-mode)
+(remove-hook 'org-mode-hook 'flyspell-mode)
+(setq ispell-program-name "hunspell")
+
+(map! :desc "Flyspell mode"
+      "<f8>" 'flyspell-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Org-superstar
+
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -283,12 +315,13 @@ rather than the whole path."
 
 (use-package! undo-fu
   :custom
-  (global-unset-key (kbd "C-z"))
-  (global-set-key (kbd "C-z")   'undo-fu-only-undo)
-  (global-set-key (kbd "C-S-z") 'undo-fu-only-redo))
+  (global-unset-key (kbd "C-z")))
 
 (map! :desc "undo-fu-only-undo"
       :map 'override "C-z" 'undo-fu-only-undo)
+
+(map! :desc "undo-fu-only-redo"
+      :map 'override "C-S-z" 'undo-fu-only-redo)
 
 (use-package! pulsar
   :config
