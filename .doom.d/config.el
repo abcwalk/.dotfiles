@@ -19,7 +19,7 @@
 
 ;;; Git
 
-;; TEST Magit credentials
+;; TEST Magit credentials again
 
 ;; disable conflicts window
 (setq magit-ediff-dwim-show-on-hunks t)
