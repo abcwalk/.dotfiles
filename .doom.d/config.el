@@ -67,96 +67,96 @@
 
 ;;; Tab-bar
 
-(when (< 26 emacs-major-version)
-  (tab-bar-mode 1)                           ;; enable tab bar
-  (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
-  (setq tab-bar-new-tab-choice "*doom*"))    ;; buffer to show in new tabs
+;; (when (< 26 emacs-major-version)
+;;   (tab-bar-mode 1)                           ;; enable tab bar
+;;   (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
+;;   (setq tab-bar-new-tab-choice "*doom*"))    ;; buffer to show in new tabs
 
-(map! :desc "tab-bar-prevoius-tab"
-      "s-," 'tab-bar-switch-to-prev-tab)
+;; (map! :desc "tab-bar-prevoius-tab"
+;;       "s-," 'tab-bar-switch-to-prev-tab)
 
-(map! :desc "tab-bar-next-tab"
-      "s-." 'tab-bar-switch-to-next-tab)
+;; (map! :desc "tab-bar-next-tab"
+;;       "s-." 'tab-bar-switch-to-next-tab)
 
-(map! :desc "tab-bar-new-tab"
-      "s-w" 'tab-bar-new-tab)
+;; (map! :desc "tab-bar-new-tab"
+;;       "s-w" 'tab-bar-new-tab)
 
-(map! :desc "tab-bar-close-tab"
-      "s-c" 'tab-bar-close-tab)
+;; (map! :desc "tab-bar-close-tab"
+;;       "s-c" 'tab-bar-close-tab)
 
-(defface ct/tab-bar-numbers
-  '((t
-     :inherit tab-bar
-     :family "Iosevka Comfy"
-     :weight light))
-  "Face for tab numbers in both active and inactive tabs.")
-(defvar ct/circle-numbers-alist
-  '((0 . "⓪")
-    (1 . "①")
-    (2 . "②")
-    (3 . "③")
-    (4 . "④")
-    (5 . "⑤")
-    (6 . "⑥")
-    (7 . "⑦")
-    (8 . "⑧")
-    (9 . "⑨"))
-  "Alist of integers to strings of circled unicode numbers.")
+;; (defface ct/tab-bar-numbers
+;;   '((t
+;;      :inherit tab-bar
+;;      :family "Iosevka Comfy"
+;;      :weight light))
+;;   "Face for tab numbers in both active and inactive tabs.")
+;; (defvar ct/circle-numbers-alist
+;;   '((0 . "⓪")
+;;     (1 . "①")
+;;     (2 . "②")
+;;     (3 . "③")
+;;     (4 . "④")
+;;     (5 . "⑤")
+;;     (6 . "⑥")
+;;     (7 . "⑦")
+;;     (8 . "⑧")
+;;     (9 . "⑨"))
+;;   "Alist of integers to strings of circled unicode numbers.")
 
-(defun ct/tab-bar-tab-name-format-default (tab i)
-  (let ((current-p (eq (car tab) 'current-tab)))
-    (concat
-     (propertize
-      (when (and tab-bar-tab-hints (< i 10)) (alist-get i ct/circle-numbers-alist))
-      'face 'ct/tab-bar-numbers)
-     " "
-     (propertize
-      (concat (alist-get 'name tab)
-	      (or (and tab-bar-close-button-show
-		       (not (eq tab-bar-close-button-show
-				(if current-p 'non-selected 'selected)))
-		       tab-bar-close-button)
-		  ""))
-      'face (funcall tab-bar-tab-face-function tab))
-     " ")))
-(setq tab-bar-tab-name-format-function #'ct/tab-bar-tab-name-format-default
-      tab-bar-tab-hints t)
+;; (defun ct/tab-bar-tab-name-format-default (tab i)
+;;   (let ((current-p (eq (car tab) 'current-tab)))
+;;     (concat
+;;      (propertize
+;;       (when (and tab-bar-tab-hints (< i 10)) (alist-get i ct/circle-numbers-alist))
+;;       'face 'ct/tab-bar-numbers)
+;;      " "
+;;      (propertize
+;;       (concat (alist-get 'name tab)
+;; 	      (or (and tab-bar-close-button-show
+;; 		       (not (eq tab-bar-close-button-show
+;; 				(if current-p 'non-selected 'selected)))
+;; 		       tab-bar-close-button)
+;; 		  ""))
+;;       'face (funcall tab-bar-tab-face-function tab))
+;;      " ")))
+;; (setq tab-bar-tab-name-format-function #'ct/tab-bar-tab-name-format-default
+;;       tab-bar-tab-hints t)
 
-(setq tab-bar-close-button-show nil
-      tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
-(setq tab-bar-format nil
-      tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
-(setq tab-bar-separator nil)
-(setq tab-bar-format
-      '(;;tab-bar-format-history ;; forward/back buttons
-	tab-bar-format-tabs-groups
-	tab-bar-separator
-        ;; tab-bar-format-add-tab ;; new tab button
-	tab-bar-format-align-right
-	tab-bar-format-global))
+;; (setq tab-bar-close-button-show nil
+;;       tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
+;; (setq tab-bar-format nil
+;;       tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
+;; (setq tab-bar-separator nil)
+;; (setq tab-bar-format
+;;       '(;;tab-bar-format-history ;; forward/back buttons
+;; 	tab-bar-format-tabs-groups
+;; 	tab-bar-separator
+;;         ;; tab-bar-format-add-tab ;; new tab button
+;; 	tab-bar-format-align-right
+;; 	tab-bar-format-global))
 
-(defun ct/modus-themes-tab-bar-colors ()
-  "Override `modus-themes-tab-*' to have even less variety"
-  (let* ((bg-color (modus-themes-color 'bg-main))
-         ;; Additional padding between tabs
-         (box `(:line-width
-                (2 . -1)  ;; -1 for no vertical space
-                :color ,bg-color :style flat-button))
-         (active-accent-color (modus-themes-color 'blue-active)))
-    (set-face-attribute 'tab-bar nil
-                        :height 0.8)
-    (set-face-attribute 'modus-themes-tab-backdrop nil
-                        :background bg-color
-                        :box nil)
-    (set-face-attribute 'modus-themes-tab-inactive nil
-                        :background bg-color
-                        :box box)
-    (set-face-attribute 'modus-themes-tab-active nil
-                        :background bg-color
-                        :underline `(:color ,active-accent-color :style line)
-                        :box box)))
+;; (defun ct/modus-themes-tab-bar-colors ()
+;;   "Override `modus-themes-tab-*' to have even less variety"
+;;   (let* ((bg-color (modus-themes-color 'bg-main))
+;;          ;; Additional padding between tabs
+;;          (box `(:line-width
+;;                 (2 . -1)  ;; -1 for no vertical space
+;;                 :color ,bg-color :style flat-button))
+;;          (active-accent-color (modus-themes-color 'blue-active)))
+;;     (set-face-attribute 'tab-bar nil
+;;                         :height 0.8)
+;;     (set-face-attribute 'modus-themes-tab-backdrop nil
+;;                         :background bg-color
+;;                         :box nil)
+;;     (set-face-attribute 'modus-themes-tab-inactive nil
+;;                         :background bg-color
+;;                         :box box)
+;;     (set-face-attribute 'modus-themes-tab-active nil
+;;                         :background bg-color
+;;                         :underline `(:color ,active-accent-color :style line)
+;;                         :box box)))
 
-(add-hook! 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
+;; (add-hook! 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
 
 ;;; mode-line
 
