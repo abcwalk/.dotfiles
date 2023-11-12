@@ -69,16 +69,16 @@
   (setq tab-bar-new-tab-choice "*doom*"))    ;; buffer to show in new tabs
 
 (map! :desc "tab-bar-prevoius-tab"
-      "s-[" 'tab-bar-switch-to-prev-tab)
+      "s-," 'tab-bar-switch-to-prev-tab)
 
 (map! :desc "tab-bar-next-tab"
-      "s-]" 'tab-bar-switch-to-next-tab)
+      "s-." 'tab-bar-switch-to-next-tab)
 
 (map! :desc "tab-bar-new-tab"
-      "s-t" 'tab-bar-new-tab)
+      "s-w" 'tab-bar-new-tab)
 
 (map! :desc "tab-bar-close-tab"
-      "s-w" 'tab-bar-close-tab)
+      "s-c" 'tab-bar-close-tab)
 
 (defface ct/tab-bar-numbers
   '((t
