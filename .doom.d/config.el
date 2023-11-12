@@ -17,6 +17,124 @@
 
 (fset 'rainbow-delimiters-mode #'ignore)
 
+;;; org-moders
+
+(modify-all-frames-parameters
+ '((right-divider-width . 40)
+   (internal-border-width . 40)))
+(dolist (face '(window-divider
+                window-divider-first-pixel
+                window-divider-last-pixel))
+  (face-spec-reset-face face)
+  (set-face-foreground face (face-attribute 'default :background)))
+(set-face-background 'fringe (face-attribute 'default :background))
+
+;; Option 1: Per buffer
+;; (add-hook 'org-mode-hook #'org-modern-mode)
+;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+;; Option 2: Globally
+(with-eval-after-load 'org (global-org-modern-mode) #'set-frame-borders-and-window-dividers)
+
+(setq
+ ;; Edit settings
+ org-auto-align-tags nil
+ org-tags-column 0
+ org-fold-catch-invisible-edits 'show-and-error
+ org-special-ctrl-a/e t
+ org-insert-heading-respect-content t
+
+ ;; Org styling, hide markup etc.
+ org-hide-emphasis-markers t
+ org-pretty-entities t
+ org-ellipsis "…"
+
+ ;; Agenda styling
+ org-agenda-tags-column 0
+ org-agenda-block-separator ?─
+ org-agenda-time-grid
+ '((daily today require-timed)
+   (800 1000 1200 1400 1600 1800 2000)
+   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+ org-agenda-current-time-string
+ "◀── now ─────────────────────────────────────────────────")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Tab-bar
+
+(when (< 26 emacs-major-version)
+  (tab-bar-mode 1)                           ;; enable tab bar
+  (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
+  (setq tab-bar-new-tab-choice "*doom*"))    ;; buffer to show in new tabs
+
+(map! :desc "tab-bar-prevoius-tab"
+      "s-[" 'tab-bar-switch-to-prev-tab)
+
+(map! :desc "tab-bar-next-tab"
+      "s-]" 'tab-bar-switch-to-next-tab)
+
+(map! :desc "tab-bar-new-tab"
+      "s-t" 'tab-bar-new-tab)
+
+(map! :desc "tab-bar-close-tab"
+      "s-w" 'tab-bar-close-tab)
+
+(defface ct/tab-bar-numbers
+  '((t
+     :inherit tab-bar
+     :family "Iosevka Comfy"
+     :weight light))
+  "Face for tab numbers in both active and inactive tabs.")
+(defvar ct/circle-numbers-alist
+  '((0 . "⓪")
+    (1 . "①")
+    (2 . "②")
+    (3 . "③")
+    (4 . "④")
+    (5 . "⑤")
+    (6 . "⑥")
+    (7 . "⑦")
+    (8 . "⑧")
+    (9 . "⑨"))
+  "Alist of integers to strings of circled unicode numbers.")
+
+(defun ct/tab-bar-tab-name-format-default (tab i)
+  (let ((current-p (eq (car tab) 'current-tab)))
+    (concat
+     (propertize
+      (when (and tab-bar-tab-hints (< i 10)) (alist-get i ct/circle-numbers-alist))
+      'face 'ct/tab-bar-numbers)
+     " "
+     (propertize
+      (concat (alist-get 'name tab)
+	      (or (and tab-bar-close-button-show
+		       (not (eq tab-bar-close-button-show
+				(if current-p 'non-selected 'selected)))
+		       tab-bar-close-button)
+		  ""))
+      'face (funcall tab-bar-tab-face-function tab))
+     " ")))
+(setq tab-bar-tab-name-format-function #'ct/tab-bar-tab-name-format-default
+      tab-bar-tab-hints t)
+
+(setq tab-bar-close-button-show nil
+      tab-bar-close-button " \x00d7 ") ;; Cross multiplication character
+(setq tab-bar-format nil
+      tab-bar-new-button " + ")  ;; Thicker + than the flimsy default
+(setq tab-bar-separator nil)
+(setq tab-bar-format
+      '(;;tab-bar-format-history ;; forward/back buttons
+	tab-bar-format-tabs-groups
+	tab-bar-separator
+        ;; tab-bar-format-add-tab ;; new tab button
+	tab-bar-format-align-right
+	tab-bar-format-global))
+
+;;; mode-line
+
+(load! "lisp/custom-mode-line")
+
 ;;; Emms
 
 (use-package emms
@@ -85,22 +203,27 @@ rather than the whole path."
 
 (setq doom-theme 'modus-operandi)
 
-;;; Theme toggle
-;; (defun pingvi/fix-git-gutter ()
-;;   (setq-default fringes-outside-margins t)
-;;   (define-fringe-bitmap 'git-gutter-fr:added [0]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:modified [0]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:deleted [0]
-;;     nil nil 'bottom)
-;;   (defun my-modus-themes-custom-faces ()
-;;     (modus-themes-with-colors
-;;       (custom-set-faces
-;;        ;; Replace green with blue if you use `modus-themes-deuteranopia'.
-;;        `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
-;;        `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
-;;        `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg)))))))
+(use-package! git-gutter-fringe
+  :config
+  ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
+  ;; (fringe-helper-define 'git-gutter-fr:deleted nil " ")
+  ;; (fringe-helper-define 'git-gutter-fr:modified nil " ")
+  ;; (define-fringe-bitmap 'git-gutter-fr:added
+  (setq-default fringes-outside-margins t)
+  (define-fringe-bitmap 'git-gutter-fr:added [0]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [0]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [0]
+    nil nil 'bottom)
+  (defun my-modus-themes-custom-faces ()
+    (modus-themes-with-colors
+      (custom-set-faces
+       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
+  (add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces))
 
 (defun pingvi/toggle-theme()
   "Toggle between light and dark themes."
@@ -123,8 +246,6 @@ rather than the whole path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Olivetti
-
-(add-to-list 'load-path "~/.doom.d/lisp/")
 
 (use-package! olivetti
   :config
@@ -260,8 +381,8 @@ rather than the whole path."
   :after python
   :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
-;; (require 'auto-virtualenv)
-;; (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+(require 'auto-virtualenv)
+(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 
 ;;; Spell check
 
@@ -273,14 +394,17 @@ rather than the whole path."
 (remove-hook 'org-mode-hook 'flyspell-mode)
 (setq ispell-program-name "hunspell")
 
+
 (map! :desc "Flyspell mode"
       "<f8>" 'flyspell-mode)
+
+(setq company-ispell-available nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Org-superstar
 
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

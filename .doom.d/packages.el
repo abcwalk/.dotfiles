@@ -20,10 +20,13 @@
 (package! format-all)
 (package! info-colors)
 (package! pyimport)
-(package! org-superstar)
 (package! denote)
 (package! olivetti)
 (package! python-black) ;; pip install black-macchiato
+(package! org-modern)
+
+;; (package! org-superstar)
+;; (package! packagename :disable t)
 ;; (package! virtualenvwrapper)
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
