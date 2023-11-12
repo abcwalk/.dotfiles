@@ -162,6 +162,9 @@
 
 (load! "lisp/custom-mode-line")
 
+(setq window-divider-default-places 'right-only)
+(setq window-divider-default-right-width 1)
+
 ;;; Emms
 
 (use-package emms
