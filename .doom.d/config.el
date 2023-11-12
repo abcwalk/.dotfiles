@@ -264,12 +264,6 @@ rather than the whole path."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; ChatGPT
-
-;; (setq openai-key "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")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;;; Go
 
 (setq exec-path (append exec-path '("~/go/bin")))
