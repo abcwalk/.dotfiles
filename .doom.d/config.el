@@ -181,8 +181,8 @@
 
 (defun track-title-from-file-name (file)
   "For using with EMMS description functions.
-Extracts the track
-title from the file name FILE, which just means a) taking only
+      Extracts the track
+      title from the file name FILE, which just means a) taking only
 the file component at the end of the path, and b) removing any
 file extension."
   (with-temp-buffer
@@ -298,11 +298,11 @@ parameter is the buffer, which is the `car' or ARGS."
   (if (eq (car custom-enabled-themes) 'modus-operandi)
       (progn
 	(disable-theme 'modus-operandi)
-	(load-theme 'doom-homage-black t)
+	(load-theme 'modus-vivendi t)
         ;; (pingvi/fix-git-gutter)
 	)
     (progn
-      (disable-theme 'doom-homage-black)
+      (disable-theme 'modus-vivendi)
       (load-theme 'modus-operandi t)
       ;; (pingvi/fix-git-gutter)
       )))
@@ -448,14 +448,14 @@ tyle>")
 
 (defun filter-mwheel-always-coalesce (orig &rest args)
   "A filter function suitable for :around advices that ensures only
-   coalesced scroll events reach the advised function."
+coalesced scroll events reach the advised function."
   (if mwheel-coalesce-scroll-events
       (apply orig args)
     (setq mwheel-coalesce-scroll-events t)))
 
 (defun filter-mwheel-never-coalesce (orig &rest args)
   "A filter function suitable for :around advices that ensures only
-   non-coalesced scroll events reach the advised function."
+non-coalesced scroll events reach the advised function."
   (if mwheel-coalesce-scroll-events
       (setq mwheel-coalesce-scroll-events nil)
     (apply orig args)))
