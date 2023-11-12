@@ -17,6 +17,11 @@
 
 (fset 'rainbow-delimiters-mode #'ignore)
 
+;;; Git
+
+;; disable conflicts window
+(setq magit-ediff-dwim-show-on-hunks t)
+
 ;;; org-moders
 
 (modify-all-frames-parameters
@@ -27,7 +32,6 @@
                 window-divider-last-pixel))
   (face-spec-reset-face face)
   (set-face-foreground face (face-attribute 'default :background)))
-(set-face-background 'fringe (face-attribute 'default :background))
 
 ;; Option 1: Per buffer
 ;; (add-hook 'org-mode-hook #'org-modern-mode)
@@ -131,6 +135,29 @@
 	tab-bar-format-align-right
 	tab-bar-format-global))
 
+(defun ct/modus-themes-tab-bar-colors ()
+  "Override `modus-themes-tab-*' to have even less variety"
+  (let* ((bg-color (modus-themes-color 'bg-main))
+         ;; Additional padding between tabs
+         (box `(:line-width
+                (2 . -1)  ;; -1 for no vertical space
+                :color ,bg-color :style flat-button))
+         (active-accent-color (modus-themes-color 'blue-active)))
+    (set-face-attribute 'tab-bar nil
+                        :height 0.8)
+    (set-face-attribute 'modus-themes-tab-backdrop nil
+                        :background bg-color
+                        :box nil)
+    (set-face-attribute 'modus-themes-tab-inactive nil
+                        :background bg-color
+                        :box box)
+    (set-face-attribute 'modus-themes-tab-active nil
+                        :background bg-color
+                        :underline `(:color ,active-accent-color :style line)
+                        :box box)))
+
+(add-hook! 'modus-themes-after-load-theme-hook #'ct/modus-themes-tab-bar-colors)
+
 ;;; mode-line
 
 (load! "lisp/custom-mode-line")
@@ -183,7 +210,7 @@ rather than the whole path."
   (eval-after-load 'emms '(emms-state-mode)))
 
 (map! :desc "emms-play-directory"
-      "<f2>" 'emms-play-directory)
+      "<f5>" 'emms-play-directory)
 (map! :desc "emms-toggle-repeat-track"
       "C-c r" 'emms-toggle-repeat-track)
 (map! :desc "emms-pause"
@@ -199,9 +226,46 @@ rather than the whole path."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Kill Unsaved Emacs Buffers UX: Replacing Yes/No/Save with Meaningful Options
+
+(defun ct/kill-buffer--possibly-save--advice (original-function buffer &rest args)
+  "Ask user in the minibuffer whether to save before killing.
+
+Replaces `kill-buffer--possibly-save' as advice, so
+ORIGINAL-FUNCTION is unused and never delegated to. Its first
+parameter is the buffer, which is the `car' or ARGS."
+  (let ((response
+         (car
+          (read-multiple-choice
+           (format "Buffer %s modified."
+                   (buffer-name))
+           '((?s "Save and kill buffer" "save the buffer and then kill it")
+             (?d "Discard and kill buffer without saving" "kill buffer without saving")
+             (?c "Cancel" "Exit without doing anything"))
+           nil nil (and (not use-short-answers)
+                        (not (use-dialog-box-p)))))))
+    (cond ((= response ?s)
+           (with-current-buffer buffer (save-buffer))
+           t)
+          ((= response ?d)
+           t)
+          ((= response ?c)
+           nil)
+          )))
+
+(advice-add 'kill-buffer--possibly-save :around #'ct/kill-buffer--possibly-save--advice)
+
 ;;; Theme
 
 (setq doom-theme 'modus-operandi)
+
+
+;;; Use System File Open Dialog for File Actions in Emacs (Just Once!)
+
+;; (let ((last-nonmenu-event nil)
+;;       (use-dialog-box t)
+;;       (use-file-dialog t))
+;;   (call-interactively #'find-file))
 
 (use-package! git-gutter-fringe
   :config
@@ -253,7 +317,7 @@ rather than the whole path."
   (add-hook 'mixed-pitch-mode-hook  (lambda () (setq-local olivetti-body-width 80))))
 
 (map! :desc "toggle-olivetti-mode"
-      "C-c z" 'olivetti-mode)
+      "C-x z" 'olivetti-mode)
 
 ;; (use-package! auto-olivetti
 ;;   :custom
@@ -307,7 +371,58 @@ rather than the whole path."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Completion
+
+;; File pats
+
+(setq completion-at-point-functions '(elisp-completion-at-point comint-dynamic-complete-filename t))
+
+;;; Treemacs
+
+(use-package! treemacs-nerd-icons
+  :config
+  (treemacs-load-theme "nerd-icons"))
+
+;; (use-package! treemacs-projectile
+;;   :after (treemacs projectile)
+;;   :ensure t)
+
+(map! :desc "treemacs"
+      "<f2>" 'treemacs)
+
+;;; Ditaa
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t))) ; this line activates ditaa
+
+(setq org-ditaa-jar-path "~/.doom.d/misc/ditaa.jar")
+
+;;; Company
+
+(use-package! company
+  :config
+  (setq company-format-margin-function  'company-text-icons-margin))
+
+;;; org export html
+
+(setq org-src-fontify-natively t)
+
+(defun my-change-style (backend)
+  (when (org-export-derived-backend-p backend 'html)
+    (goto-char (point-min))
+    (insert "#+OPTIONS: html-postamble:nil")
+    (newline)
+    (insert "#+OPTIONS: org-html-head-include-default-style:nil")
+    (newline)
+    (insert "#+HTML_HEAD_EXTRA: <style>*{font-family: Iosevka Comfy !important; font-size: 24px;}</s\
+tyle>")
+    (newline)
+    ))
+(add-hook 'org-export-before-parsing-functions #'my-change-style)
+
 ;;; Info colors
+;;;
 
 (use-package! info-colors
   :after info
@@ -366,7 +481,7 @@ rather than the whole path."
 (map! :desc "avy-goto-char-2"
       "C-'" 'avy-goto-char-2)
 (map! :desc "treemacs-select-window"
-      "M-0" 'treemacs-select-window)
+      "M-o" 'treemacs-select-window)
 (map! :desc "counsel-recentf"
       "C-x f" 'counsel-recentf)
 

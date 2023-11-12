@@ -24,6 +24,9 @@
 (package! olivetti)
 (package! python-black) ;; pip install black-macchiato
 (package! org-modern)
+(package! treemacs-nerd-icons)
+(package! treemacs-projectile)
+(package! writeroom-mode)
 
 ;; (package! org-superstar)
 ;; (package! packagename :disable t)

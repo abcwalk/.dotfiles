@@ -537,7 +537,8 @@ level."
 		     flycheck-text
 		     file-progress
 		     mood-line-segment-position
-		     time-text))
+		     ;; time-text
+                     ))
   (put construct 'risky-local-variable t))
 
 ;;;; Subtle mode line style
