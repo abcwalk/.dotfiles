@@ -4,6 +4,13 @@
 
 (setq doom-font (font-spec :family "Iosevka Comfy" :size 20))
 
+(setq user-full-name "Maxim Rozhkov"
+      user-mail-address "foldersjarer@gmail.com")
+
+;;; Trash bin
+
+(setq delete-by-moving-to-trash t)
+
 ;;; Line numbers
 (setq display-line-numbers-type t)
 
@@ -16,6 +23,43 @@
 (setq org-directory "~/org/")
 
 (fset 'rainbow-delimiters-mode #'ignore)
+
+;;; Nerd icons
+
+(use-package! nerd-icons
+  :custom
+  ;; The Nerd Font you want to use in GUI
+  ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;; but you can use any other Nerd Font if you want
+  (nerd-icons-font-family "Symbols Nerd Font Mono")
+  )
+
+;;; Dashboard
+
+(use-package! dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-center-content t)
+  (setq dashboard-items '((recents  . 5)
+                          (projects )))
+  (setq dashboard-display-icons-p nil)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-icon-type 'nerd-icons)
+  (dashboard-modify-heading-icons '((recents . "nf-oct-file_text")
+                                    (projects . "nf-oct-book")))
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-navigator t)
+  ;; Format: "(icon title help action face prefix suffix)"
+  (setq dashboard-navigator-buttons
+        `(
+          ((,(nerd-icons-sucicon "nf-seti-github" :height 1.1 :v-adjust 0.0)
+            "Homepage"
+            "Browse homepage"
+            (lambda (&rest _) (browse-url "https://github.com/behemothbucket/.dotfiles")))
+           ("󱌢" "Settings" "Show settings" (lambda (&rest _) (counsel-find-file "~/.doom.d/"))))))
+  (setq dashboard-item-names '(("Recent Files:" . " Recent Files:")
+                               ("Projects:" . "󰹕 Projects"))
+        ))
 
 ;;; Git
 
@@ -164,9 +208,15 @@
 
 (load! "lisp/custom-mode-line")
 
-(setq window-divider-default-places 'right-only)
-(setq window-divider-default-right-width 1)
-
+;; `window-divider-mode' gives us finer control over the border between windows.
+;; The native border "consumes" a pixel of the left fringe on righter-most splits
+;; (in Yamamoto's emacs-mac at least), window-divider does not.
+;; NOTE Only available on Emacs 25.1+
+(when (boundp 'window-divider-mode)
+  (setq window-divider-default-places t
+        window-divider-default-bottom-width 0
+        window-divider-default-right-width 1)
+  (window-divider-mode +1))
 ;;; Emms
 
 (use-package emms
@@ -360,19 +410,18 @@ parameter is the buffer, which is the `car' or ARGS."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Dashboard
+;;; Doom-dashboard
 
-(add-to-list '+doom-dashboard-menu-sections
-             '("Open diary"
-               :icon (nerd-icons-mdicon "nf-md-notebook_heart" :face 'doom-dashboard-menu-title)
-               :action diary))
+;; (add-to-list '+doom-dashboard-menu-sections
+;;              '("Open diary"
+;;                :icon (nerd-icons-mdicon "nf-md-notebook_heart" :face 'doom-dashboard-menu-title)
+;;                :action diary))
 
-(setq user-full-name "Maxim Rozhkov"
-      user-mail-address "foldersjarer@gmail.com"
-      +doom-dashboard-ascii-banner-fn ""
-      +doom-dashboard-banner-padding '(0 . 2))
+;; (setq
+;;       +doom-dashboard-ascii-banner-fn ""
+;;       +doom-dashboard-banner-padding '(0 . 2))
 
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
+;; (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -484,7 +533,7 @@ non-coalesced scroll events reach the advised function."
 (map! :desc "swiper"
       "C-f" 'swiper-isearch)
 (map! :desc "avy-goto-char-2"
-      "C-'" 'avy-goto-char-2)
+      :map 'override  "C-'" 'avy-goto-char-2)
 (map! :desc "treemacs-select-window"
       "M-o" 'treemacs-select-window)
 (map! :desc "counsel-recentf"

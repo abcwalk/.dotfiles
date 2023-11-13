@@ -26,7 +26,9 @@
 (package! org-modern)
 (package! treemacs-nerd-icons)
 (package! treemacs-projectile)
+(package! dashboard)
 (package! writeroom-mode)
+(package! nerd-icons)
 
 ;; (package! org-superstar)
 ;; (package! packagename :disable t)
