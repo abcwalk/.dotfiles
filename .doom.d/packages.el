@@ -29,6 +29,9 @@
 (package! dashboard)
 (package! writeroom-mode)
 (package! nerd-icons)
+(package! editorconfig)
+(package! spacious-padding)
+(package! dotenv-mode)
 
 ;; (package! org-superstar)
 ;; (package! packagename :disable t)

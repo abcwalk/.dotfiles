@@ -7,6 +7,27 @@
 (setq user-full-name "Maxim Rozhkov"
       user-mail-address "foldersjarer@gmail.com")
 
+;;; Screen settings
+
+;; `window-divider-mode' gives us finer control over the border between windows.
+;; The native border "consumes" a pixel of the left fringe on righter-most splits
+;; (in Yamamoto's emacs-mac at least), window-divider does not.
+;; NOTE Only available on Emacs 25.1+
+(when (boundp 'window-divider-mode)
+  (setq window-divider-default-places t
+        window-divider-default-bottom-width 0
+        window-divider-default-right-width 1)
+  (window-divider-mode +1))
+
+(modify-all-frames-parameters
+ '((right-divider-width . 40)
+   (internal-border-width . 40)))
+(dolist (face '(window-divider
+                window-divider-first-pixel
+                window-divider-last-pixel))
+  (face-spec-reset-face face)
+  (set-face-foreground face (face-attribute 'default :background)))
+
 ;;; Trash bin
 
 (setq delete-by-moving-to-trash t)
@@ -68,23 +89,18 @@
 ;; disable conflicts window
 (setq magit-ediff-dwim-show-on-hunks t)
 
-;;; org-moders
-
-(modify-all-frames-parameters
- '((right-divider-width . 40)
-   (internal-border-width . 40)))
-(dolist (face '(window-divider
-                window-divider-first-pixel
-                window-divider-last-pixel))
-  (face-spec-reset-face face)
-  (set-face-foreground face (face-attribute 'default :background)))
+;;; org
 
 ;; Option 1: Per buffer
 ;; (add-hook 'org-mode-hook #'org-modern-mode)
 ;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
 ;; Option 2: Globally
-(with-eval-after-load 'org (global-org-modern-mode) #'set-frame-borders-and-window-dividers)
+;; (with-eval-after-load 'org (global-org-modern-mode) #'set-frame-borders-and-window-dividers)
+
+(setq
+ org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
+ )
 
 (setq
  ;; Edit settings
@@ -97,17 +113,7 @@
  ;; Org styling, hide markup etc.
  org-hide-emphasis-markers t
  org-pretty-entities t
- org-ellipsis "…"
-
- ;; Agenda styling
- org-agenda-tags-column 0
- org-agenda-block-separator ?─
- org-agenda-time-grid
- '((daily today require-timed)
-   (800 1000 1200 1400 1600 1800 2000)
-   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
- org-agenda-current-time-string
- "◀── now ─────────────────────────────────────────────────")
+ org-ellipsis "…")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -208,15 +214,6 @@
 
 (load! "lisp/custom-mode-line")
 
-;; `window-divider-mode' gives us finer control over the border between windows.
-;; The native border "consumes" a pixel of the left fringe on righter-most splits
-;; (in Yamamoto's emacs-mac at least), window-divider does not.
-;; NOTE Only available on Emacs 25.1+
-(when (boundp 'window-divider-mode)
-  (setq window-divider-default-places t
-        window-divider-default-bottom-width 0
-        window-divider-default-right-width 1)
-  (window-divider-mode +1))
 ;;; Emms
 
 (use-package emms
@@ -310,11 +307,6 @@ parameter is the buffer, which is the `car' or ARGS."
 
 (advice-add 'kill-buffer--possibly-save :around #'ct/kill-buffer--possibly-save--advice)
 
-;;; Theme
-
-(setq doom-theme 'modus-operandi)
-
-
 ;;; Use System File Open Dialog for File Actions in Emacs (Just Once!)
 
 ;; (let ((last-nonmenu-event nil)
@@ -361,6 +353,8 @@ parameter is the buffer, which is the `car' or ARGS."
 
 (map! :desc "toggle-modus-themes"
       "<f12>" #'pingvi/toggle-theme)
+
+(setq doom-theme 'modus-vivendi)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -523,6 +517,7 @@ non-coalesced scroll events reach the advised function."
 (setq mouse-wheel-tilt-scroll t)
 ;; Reversed/Natural scrolling
 (setq mouse-wheel-flip-direction t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Use smaller step for text scaling
@@ -538,6 +533,28 @@ non-coalesced scroll events reach the advised function."
       "M-o" 'treemacs-select-window)
 (map! :desc "counsel-recentf"
       "C-x f" 'counsel-recentf)
+(map! :desc "dired"
+      "C-x j" 'dired-jump)
+(map! :desc "exit-emacs"
+      "s-x" 'save-buffers-kill-emacs)
+(map! :desc "dashboard"
+      "s-d" 'dashboard-open)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Dired
+
+(with-eval-after-load 'dired (define-key dired-mode-map "-" 'dired-up-directory))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Editorconfig
+
+(use-package! editorconfig
+  :config
+  (editorconfig-mode 1))
+
+;;; Python
 
 (use-package! python-black
   :demand t
@@ -546,6 +563,8 @@ non-coalesced scroll events reach the advised function."
 
 (require 'auto-virtualenv)
 (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+
+(setq lsp-enable-file-watchers nil)
 
 ;;; Spell check
 
