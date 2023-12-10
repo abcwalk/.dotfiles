@@ -547,7 +547,7 @@ non-coalesced scroll events reach the advised function."
 
 ;;; Dired
 
-(with-eval-after-load 'dired (define-key dired-mode-map "-" 'dired-up-directory))
+(with-eval-after-load 'dired (define-key dired-mode-map (kbd "<backspace>") 'dired-up-directory))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
