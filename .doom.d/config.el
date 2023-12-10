@@ -342,21 +342,21 @@ parameter is the buffer, which is the `car' or ARGS."
   (if (eq (car custom-enabled-themes) 'modus-operandi)
       (progn
 	(disable-theme 'modus-operandi)
-	(load-theme 'modus-vivendi t)
-        ;; (pingvi/fix-git-gutter)
-	)
+	(load-theme 'modus-vivendi))
     (progn
       (disable-theme 'modus-vivendi)
-      (load-theme 'modus-operandi t)
-      ;; (pingvi/fix-git-gutter)
-      )))
+      (load-theme 'modus-operandi))))
 
-(map! :desc "toggle-modus-themes"
+(map! :desc "toggle-themes"
       "<f12>" #'pingvi/toggle-theme)
 
-(setq doom-theme 'modus-vivendi)
+(setq doom-theme 'modus-operandi)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (use-package! standard-themes
+;;   :config
+;;   (setq doom-theme 'standard-light))
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Olivetti
 
@@ -427,16 +427,16 @@ parameter is the buffer, which is the `car' or ARGS."
 
 ;;; Treemacs
 
-(use-package! treemacs-nerd-icons
-  :config
-  (treemacs-load-theme "nerd-icons"))
+;; (use-package! treemacs-nerd-icons
+;;   :config
+;;   (treemacs-load-theme "nerd-icons"))
 
 ;; (use-package! treemacs-projectile
 ;;   :after (treemacs projectile)
 ;;   :ensure t)
 
-(map! :desc "treemacs"
-      "<f2>" 'treemacs)
+;; (map! :desc "treemacs"
+;;       "<f2>" 'treemacs)
 
 ;;; Ditaa
 
@@ -484,6 +484,9 @@ tyle>")
   (setq +lsp-company-backends
         '(:separate company-capf company-yasnippet company-dabbrev)))
 
+(after! company
+  (setq company-prefix-length 1))
+
 ;; Start maximized
 (add-to-list 'default-frame-alist '(fullscreen . fullscreen))
 
@@ -528,7 +531,7 @@ non-coalesced scroll events reach the advised function."
 (map! :desc "swiper"
       "C-f" 'swiper-isearch)
 (map! :desc "avy-goto-char-2"
-      :map 'override  "C-'" 'avy-goto-char-2)
+      :map 'override  "C-\\" 'avy-goto-char-2)
 (map! :desc "treemacs-select-window"
       "M-o" 'treemacs-select-window)
 (map! :desc "counsel-recentf"
@@ -547,6 +550,11 @@ non-coalesced scroll events reach the advised function."
 (with-eval-after-load 'dired (define-key dired-mode-map "-" 'dired-up-directory))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Selection
+
+(use-package! selection-highlight-mode
+  :config (selection-highlight-mode))
 
 ;;; Editorconfig
 
@@ -634,7 +642,7 @@ non-coalesced scroll events reach the advised function."
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-blue)
+  (setq pulsar-face 'pulsar-magenta)
   (setq pulsar-highlight-face 'pulsar-yellow)
 
   (pulsar-global-mode 1)

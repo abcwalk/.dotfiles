@@ -24,14 +24,15 @@
 (package! olivetti)
 (package! python-black) ;; pip install black-macchiato
 (package! org-modern)
-(package! treemacs-nerd-icons)
-(package! treemacs-projectile)
 (package! dashboard)
 (package! writeroom-mode)
 (package! nerd-icons)
 (package! editorconfig)
-(package! spacious-padding)
 (package! dotenv-mode)
+(package! ef-themes)
+(package! standard-themes)
+(package! selection-highlight-mode
+  :recipe (:host github :repo "balloneij/selection-highlight-mode"))
 
 ;; (package! org-superstar)
 ;; (package! packagename :disable t)
