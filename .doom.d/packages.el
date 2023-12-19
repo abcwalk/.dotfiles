@@ -27,10 +27,14 @@
 (package! dashboard)
 (package! writeroom-mode)
 (package! nerd-icons)
-(package! editorconfig)
+(package! editorconfig :disable t)
 (package! dotenv-mode)
-(package! ef-themes)
-(package! standard-themes)
+(package! ef-themes :disable t)
+(package! vscode-dark-plus-theme)
+(package! gandalf-theme :disable t)
+(package! oblivion-theme :disable t)
+(package! nano-theme :disable t)
+(package! standard-themes :disable t)
 (package! selection-highlight-mode
   :recipe (:host github :repo "balloneij/selection-highlight-mode"))
 

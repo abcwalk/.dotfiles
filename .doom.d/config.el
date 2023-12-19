@@ -329,11 +329,11 @@ parameter is the buffer, which is the `car' or ARGS."
     nil nil 'bottom)
   (defun my-modus-themes-custom-faces ()
     (modus-themes-with-colors
-      (custom-set-faces
-       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
-       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
-       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
-       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
+     (custom-set-faces
+      ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+      `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+      `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+      `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
   (add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces))
 
 (defun pingvi/toggle-theme()
@@ -350,13 +350,11 @@ parameter is the buffer, which is the `car' or ARGS."
 (map! :desc "toggle-themes"
       "<f12>" #'pingvi/toggle-theme)
 
-(setq doom-theme 'modus-operandi)
+;; (setq doom-theme 'modus-vivendi)
 
-
-;; (use-package! standard-themes
-;;   :config
-;;   (setq doom-theme 'standard-light))
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package! vscode-dark-plus-theme
+  :config
+  (load-theme 'vscode-dark-plus t))
 
 ;;; Olivetti
 
@@ -642,7 +640,7 @@ non-coalesced scroll events reach the advised function."
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-magenta)
+  (setq pulsar-face 'pulsar-blue)
   (setq pulsar-highlight-face 'pulsar-yellow)
 
   (pulsar-global-mode 1)
