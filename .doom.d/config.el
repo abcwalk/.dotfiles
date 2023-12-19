@@ -70,6 +70,7 @@
                                     (projects . "nf-oct-book")))
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
+  (setq dashboard-startup-banner "~/.doom.d/misc/doom.png")
   ;; Format: "(icon title help action face prefix suffix)"
   (setq dashboard-navigator-buttons
         `(
@@ -314,47 +315,48 @@ parameter is the buffer, which is the `car' or ARGS."
 ;;       (use-file-dialog t))
 ;;   (call-interactively #'find-file))
 
-(use-package! git-gutter-fringe
+;; (use-package! git-gutter-fringe
+;;   :config
+;;   ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
+;;   ;; (fringe-helper-define 'git-gutter-fr:deleted nil " ")
+;;   ;; (fringe-helper-define 'git-gutter-fr:modified nil " ")
+;;   ;; (define-fringe-bitmap 'git-gutter-fr:added
+;;   (setq-default fringes-outside-margins t)
+;;   (define-fringe-bitmap 'git-gutter-fr:added [0]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:modified [0]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:deleted [0]
+;;     nil nil 'bottom)
+;;   (defun gutter-gutter ()
+;;     (modus-themes-with-colors
+;;      (custom-set-faces
+;;       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+;;       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+;;       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+;;       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
+;;   (add-hook 'modus-themes-after-load-theme-hook #'gutter-gutter)
+;;   (add-hook 'soothe-theme-after-load-theme-hook #'gutter-gutter))
+
+;; (defun pingvi/toggle-theme()
+;;   "Toggle between light and dark themes."
+;;   (interactive)
+;;   (if (eq (car custom-enabled-themes) 'modus-operandi)
+;;       (progn
+;; 	(disable-theme 'modus-operandi)
+;; 	(load-theme 'modus-vivendi))
+;;     (progn
+;;       (disable-theme 'modus-vivendi)
+;;       (load-theme 'modus-operandi))))
+
+;; (map! :desc "toggle-themes"
+;;       "<f12>" #'pingvi/toggle-theme)
+
+;;(setq doom-theme 'modus-vivendi)
+
+(use-package! soothe-theme
   :config
-  ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
-  ;; (fringe-helper-define 'git-gutter-fr:deleted nil " ")
-  ;; (fringe-helper-define 'git-gutter-fr:modified nil " ")
-  ;; (define-fringe-bitmap 'git-gutter-fr:added
-  (setq-default fringes-outside-margins t)
-  (define-fringe-bitmap 'git-gutter-fr:added [0]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified [0]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [0]
-    nil nil 'bottom)
-  (defun my-modus-themes-custom-faces ()
-    (modus-themes-with-colors
-     (custom-set-faces
-      ;; Replace green with blue if you use `modus-themes-deuteranopia'.
-      `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
-      `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
-      `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
-  (add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces))
-
-(defun pingvi/toggle-theme()
-  "Toggle between light and dark themes."
-  (interactive)
-  (if (eq (car custom-enabled-themes) 'modus-operandi)
-      (progn
-	(disable-theme 'modus-operandi)
-	(load-theme 'modus-vivendi))
-    (progn
-      (disable-theme 'modus-vivendi)
-      (load-theme 'modus-operandi))))
-
-(map! :desc "toggle-themes"
-      "<f12>" #'pingvi/toggle-theme)
-
-;; (setq doom-theme 'modus-vivendi)
-
-(use-package! vscode-dark-plus-theme
-  :config
-  (load-theme 'vscode-dark-plus t))
+  (load-theme 'soothe t))
 
 ;;; Olivetti
 
@@ -553,12 +555,6 @@ non-coalesced scroll events reach the advised function."
 
 (use-package! selection-highlight-mode
   :config (selection-highlight-mode))
-
-;;; Editorconfig
-
-(use-package! editorconfig
-  :config
-  (editorconfig-mode 1))
 
 ;;; Python
 

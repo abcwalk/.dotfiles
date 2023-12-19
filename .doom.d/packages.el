@@ -27,20 +27,12 @@
 (package! dashboard)
 (package! writeroom-mode)
 (package! nerd-icons)
-(package! editorconfig :disable t)
 (package! dotenv-mode)
-(package! ef-themes :disable t)
-(package! vscode-dark-plus-theme)
-(package! gandalf-theme :disable t)
-(package! oblivion-theme :disable t)
-(package! nano-theme :disable t)
-(package! standard-themes :disable t)
+(package! soothe-theme)
 (package! selection-highlight-mode
   :recipe (:host github :repo "balloneij/selection-highlight-mode"))
 
-;; (package! org-superstar)
 ;; (package! packagename :disable t)
-;; (package! virtualenvwrapper)
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/radian-software/straight.el#the-recipe-format
