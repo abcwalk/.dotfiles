@@ -17,12 +17,8 @@
 (package! pulsar)
 (package! gruber-darker-theme)
 (package! auto-virtualenv)
-(package! format-all)
 (package! info-colors)
-(package! pyimport)
-(package! denote)
 (package! olivetti)
-(package! python-black) ;; pip install black-macchiato
 (package! org-modern)
 (package! dashboard)
 (package! writeroom-mode)

@@ -379,17 +379,17 @@ parameter is the buffer, which is the `car' or ARGS."
 
 ;;; Go
 
-(setq exec-path (append exec-path '("~/go/bin")))
-(setq lsp-gopls-server-path (expand-file-name "~/go/bin/gopls"))
-(setq lsp-gopls-staticcheck t)
-(setq gofmt-command "goimports")
+;; (setq exec-path (append exec-path '("~/go/bin")))
+;; (setq lsp-gopls-server-path (expand-file-name "~/go/bin/gopls"))
+;; (setq lsp-gopls-staticcheck t)
+;; (setq gofmt-command "goimports")
 
-(add-hook 'before-save-hook 'gofmt-before-save)
+;; (add-hook 'before-save-hook 'gofmt-before-save)
 
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+;; (defun lsp-go-install-save-hooks ()
+;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+;;   (add-hook 'before-save-hook #'lsp-organize-imports t t))
+;; (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -558,15 +558,19 @@ non-coalesced scroll events reach the advised function."
 
 ;;; Python
 
-(use-package! python-black
-  :demand t
-  :after python
-  :hook (python-mode . python-black-on-save-mode-enable-dwim))
+;; (use-package! python-black
+;;   :demand t
+;;   :after python
+;;   :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
 (require 'auto-virtualenv)
 (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 
-(setq lsp-enable-file-watchers nil)
+;; (setq lsp-enable-file-watchers nil)
+
+;; (use-package! pet
+;;   :config
+;;   (add-hook 'python-base-mode-hook 'pet-mode -10))
 
 ;;; Spell check
 
@@ -654,13 +658,13 @@ non-coalesced scroll events reach the advised function."
 
 (set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
 
-(use-package! multi-compile
-  :config
-  (setq multi-compile-alist '(
-			      (go-mode . (
-					  ("go-build" "go build -v"
-					   (locate-dominating-file buffer-file-name ".git"))
-					  ("go-build-and-run" "go build -v && echo 'build finish' && eval ./${PWD##*/}"
-					   (multi-compile-locate-file-dir ".git"))
-					  ("go-build-test-and-run" "go build -v && go test -v && go vet && eval ./${PWD##*/}"
-					   (multi-compile-locate-file-dir ".git")))))))
+;; (use-package! multi-compile
+;;   :config
+;;   (setq multi-compile-alist '(
+;; 			      (go-mode . (
+;; 					  ("go-build" "go build -v"
+;; 					   (locate-dominating-file buffer-file-name ".git"))
+;; 					  ("go-build-and-run" "go build -v && echo 'build finish' && eval ./${PWD##*/}"
+;; 					   (multi-compile-locate-file-dir ".git"))
+;; 					  ("go-build-test-and-run" "go build -v && go test -v && go vet && eval ./${PWD##*/}"
+;; 					   (multi-compile-locate-file-dir ".git")))))))

@@ -119,6 +119,7 @@ alias luamake=/home/nonh/Загрузки/lua-language-server/3rd/luamake/luamak
 export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:~/.local/bin
 export GOPATH="$HOME/go"
 export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.emacs.d/bin:$PATH"
