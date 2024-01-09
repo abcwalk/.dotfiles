@@ -25,6 +25,7 @@
 (package! nerd-icons)
 (package! dotenv-mode)
 (package! soothe-theme)
+(package! ef-themes)
 (package! selection-highlight-mode
   :recipe (:host github :repo "balloneij/selection-highlight-mode"))
 

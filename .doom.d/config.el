@@ -97,7 +97,7 @@
 ;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
 ;; Option 2: Globally
-;; (with-eval-after-load 'org (global-org-modern-mode) #'set-frame-borders-and-window-dividers)
+(with-eval-after-load 'org (global-org-modern-mode) #'set-frame-borders-and-window-dividers)
 
 (setq
  org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
@@ -115,6 +115,20 @@
  org-hide-emphasis-markers t
  org-pretty-entities t
  org-ellipsis "…")
+
+(defun org+-kill-list-item (&optional delete)
+  "Kill list item at POINT.
+Delete if DELETE is non-nil.
+In interactive calls DELETE is the prefix arg."
+  (interactive "P")
+  (unless (org-at-item-p) (error "Not at an item"))
+  (let* ((col (current-column))
+         (item (pos-bol))
+         (struct (org-list-struct)))
+    (org-list-send-item item (if delete 'delete 'kill) struct)
+    (org-list-write-struct struct (org-list-parents-alist struct))
+    (org-list-repair)
+    (org-move-to-column col)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -315,48 +329,48 @@ parameter is the buffer, which is the `car' or ARGS."
 ;;       (use-file-dialog t))
 ;;   (call-interactively #'find-file))
 
-;; (use-package! git-gutter-fringe
-;;   :config
-;;   ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
-;;   ;; (fringe-helper-define 'git-gutter-fr:deleted nil " ")
-;;   ;; (fringe-helper-define 'git-gutter-fr:modified nil " ")
-;;   ;; (define-fringe-bitmap 'git-gutter-fr:added
-;;   (setq-default fringes-outside-margins t)
-;;   (define-fringe-bitmap 'git-gutter-fr:added [0]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:modified [0]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:deleted [0]
-;;     nil nil 'bottom)
-;;   (defun gutter-gutter ()
-;;     (modus-themes-with-colors
-;;      (custom-set-faces
-;;       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
-;;       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
-;;       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
-;;       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
-;;   (add-hook 'modus-themes-after-load-theme-hook #'gutter-gutter)
-;;   (add-hook 'soothe-theme-after-load-theme-hook #'gutter-gutter))
-
-;; (defun pingvi/toggle-theme()
-;;   "Toggle between light and dark themes."
-;;   (interactive)
-;;   (if (eq (car custom-enabled-themes) 'modus-operandi)
-;;       (progn
-;; 	(disable-theme 'modus-operandi)
-;; 	(load-theme 'modus-vivendi))
-;;     (progn
-;;       (disable-theme 'modus-vivendi)
-;;       (load-theme 'modus-operandi))))
-
-;; (map! :desc "toggle-themes"
-;;       "<f12>" #'pingvi/toggle-theme)
-
-;;(setq doom-theme 'modus-vivendi)
-
-(use-package! soothe-theme
+(use-package! git-gutter-fringe
   :config
-  (load-theme 'soothe t))
+  ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
+  ;; (fringe-helper-define 'git-gutter-fr:deleted nil " ")
+  ;; (fringe-helper-define 'git-gutter-fr:modified nil " ")
+  ;; (define-fringe-bitmap 'git-gutter-fr:added
+  (setq-default fringes-outside-margins t)
+  (define-fringe-bitmap 'git-gutter-fr:added [0]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [0]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [0]
+    nil nil 'bottom)
+  (defun gutter-gutter ()
+    (modus-themes-with-colors
+      (custom-set-faces
+       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
+  (add-hook 'modus-themes-after-load-theme-hook #'gutter-gutter)
+  (add-hook 'soothe-theme-after-load-theme-hook #'gutter-gutter))
+
+(defun pingvi/toggle-theme()
+  "Toggle between light and dark themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'ef-dark)
+      (progn
+	(disable-theme 'ef-dark)
+	(load-theme 'modus-operandi))
+    (progn
+      (disable-theme 'modus-operandi)
+      (load-theme 'ef-dark))))
+
+(map! :desc "toggle-themes"
+      "<f12>" #'pingvi/toggle-theme)
+
+(setq doom-theme 'ef-dark)
+
+;; (use-package! soothe-theme
+;;   :config
+;;   (load-theme 'soothe t))
 
 ;;; Olivetti
 
@@ -488,7 +502,9 @@ tyle>")
   (setq company-prefix-length 1))
 
 ;; Start maximized
-(add-to-list 'default-frame-alist '(fullscreen . fullscreen))
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Scrolling
 
@@ -640,7 +656,7 @@ non-coalesced scroll events reach the advised function."
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-blue)
+  (setq pulsar-face 'pulsar-magenta)
   (setq pulsar-highlight-face 'pulsar-yellow)
 
   (pulsar-global-mode 1)
