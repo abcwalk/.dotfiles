@@ -7,6 +7,7 @@
 (setq user-full-name "Maxim Rozhkov"
       user-mail-address "foldersjarer@gmail.com")
 
+
 ;;; Screen settings
 
 ;; `window-divider-mode' gives us finer control over the border between windows.
@@ -344,11 +345,11 @@ parameter is the buffer, which is the `car' or ARGS."
     nil nil 'bottom)
   (defun gutter-gutter ()
     (modus-themes-with-colors
-      (custom-set-faces
-       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
-       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
-       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
-       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
+     (custom-set-faces
+      ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+      `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+      `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+      `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
   (add-hook 'modus-themes-after-load-theme-hook #'gutter-gutter)
   (add-hook 'soothe-theme-after-load-theme-hook #'gutter-gutter))
 
