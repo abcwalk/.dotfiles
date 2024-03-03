@@ -1,35 +1,132 @@
 local api = vim.api
 
 --Remember last cursor position
-api.nvim_create_autocmd("BufRead", {
+api.nvim_create_autocmd('BufRead', {
   callback = function(opts)
-    api.nvim_create_autocmd("BufWinEnter", {
+    api.nvim_create_autocmd('BufWinEnter', {
       once = true,
       buffer = opts.buf,
       callback = function()
         local ft = vim.bo[opts.buf].filetype
         local last_known_line = api.nvim_buf_get_mark(opts.buf, '"')[1]
         if
-            not (ft:match "commit" and ft:match "rebase")
+            not (ft:match('commit') and ft:match('rebase'))
             and last_known_line > 1
             and last_known_line <= api.nvim_buf_line_count(opts.buf)
         then
-          api.nvim_feedkeys([[g`"]], "x", false)
+          api.nvim_feedkeys([[g`"]], 'x', false)
         end
       end,
     })
   end,
 })
 
--- Delete [No Name] buffers.
-api.nvim_create_autocmd("BufHidden", {
-  desc = "Delete [No Name] buffers",
-  callback = function(event)
-    if event.file == "" and vim.bo[event.buf].buftype == "" and not vim.bo[event.buf].modified then
-      vim.schedule(function() pcall(vim.api.nvim_buf_delete, event.buf, {}) end)
-    end
+--Remove all trailing whitespaces on save for all filetypes
+--We can use .editorconfig to format
+api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  callback = function()
+    local save_cursor = vim.fn.getpos('.')
+    vim.cmd([[%s/\s\+$//e]])
+    vim.fn.setpos('.', save_cursor)
   end,
 })
+
+-- Format on save
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   callback = function()
+--     vim.lsp.buf.format({ async = false })
+--   end,
+-- })
+
+-- Go
+-- local format_sync_grp = vim.api.nvim_create_augroup('GoFormat', {})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*.go',
+--   callback = function()
+--     require('go.format').goimport()
+--   end,
+--   group = format_sync_grp,
+-- })
+
+--Highlight on yank
+api.nvim_create_augroup('YankHighlightGrp', {})
+api.nvim_create_autocmd('TextYankPost', {
+  group = 'YankHighlightGrp',
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = 'IncSearch',
+      timeout = 200,
+    })
+  end,
+})
+
+--Disable autocomments
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  callback = function()
+    vim.opt.formatoptions = vim.opt.formatoptions - { 'c', 'r', 'o' }
+  end,
+})
+
+-- close some filetypes with <q>
+local function augroup(name)
+  return vim.api.nvim_create_augroup('nvim_' .. name, { clear = true })
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup('close_with_q'),
+  pattern = {
+    'PlenaryTestPopup',
+    'help',
+    'lspinfo',
+    'man',
+    'notify',
+    'qf',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
+    'neotest-output',
+    'checkhealth',
+    'neotest-summary',
+    'neotest-output-panel',
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+  end,
+})
+
+-- Illuminate auto update the highlight style on colorscheme change
+vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+  pattern = { '*' },
+  callback = function()
+    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+  end,
+})
+
+-- vim.api.nvim_create_autocmd("WinEnter", {
+--   callback = function()
+--     local floating = vim.api.nvim_win_get_config(0).relative ~= ""
+--     vim.diagnostic.config({
+--       virtual_text = floating,
+--       virtual_lines = not floating,
+--     })
+--   end,
+-- })
+
+-- Delete [No Name] buffers.
+-- api.nvim_create_autocmd("BufHidden", {
+--   desc = "Delete [No Name] buffers",
+--   callback = function(event)
+--     if event.file == "" and vim.bo[event.buf].buftype == "" and not vim.bo[event.buf].modified then
+--       vim.schedule(function() pcall(vim.api.nvim_buf_delete, event.buf, {}) end)
+--     end
+--   end,
+-- })
 
 -- Add this autocmd to exit yabs when mouse click the main buffer.
 -- api.nvim_create_autocmd("BufEnter", {
@@ -43,44 +140,31 @@ api.nvim_create_autocmd("BufHidden", {
 
 -- Function to check if a floating dialog exists and if not
 -- then check for diagnostics under the cursor
-function OpenDiagnosticIfNoFloat()
-  for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-    if vim.api.nvim_win_get_config(winid).zindex then
-      return
-    end
-  end
-  -- THIS IS FOR BUILTIN LSP
-  vim.diagnostic.open_float(0, {
-    scope = "cursor",
-    focusable = false,
-    close_events = {
-      "CursorMoved",
-      "CursorMovedI",
-      "BufHidden",
-      "InsertCharPre",
-      "WinLeave",
-    },
-  })
-end
+-- function OpenDiagnosticIfNoFloat()
+--   for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+--     if vim.api.nvim_win_get_config(winid).zindex then
+--       return
+--     end
+--   end
+--   -- THIS IS FOR BUILTIN LSP
+--   vim.diagnostic.open_float(0, {
+--     scope = "cursor",
+--     focusable = false,
+--     close_events = {
+--       "CursorMoved",
+--       "CursorMovedI",
+--       "BufHidden",
+--       "InsertCharPre",
+--       "WinLeave",
+--     },
+--   })
+-- end
 
--- Show diagnostics under the cursor when holding position
-vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-  pattern = "*",
-  group = "lsp_diagnostics_hold",
-  command = "lua OpenDiagnosticIfNoFloat()",
-})
-
---Remove all trailing whitespaces on save for all filetypes
---We can use .editorconfig to format
-api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  callback = function(ev)
-    save_cursor = vim.fn.getpos "."
-    vim.cmd [[%s/\s\+$//e]]
-    vim.fn.setpos(".", save_cursor)
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   callback = function()
+--     vim.lsp.buf.format { async = false }
+--   end
+-- })
 
 -- JAVA
 -- local _jdtls, jdtls = pcall(require, "lsp.jdtls")
@@ -91,27 +175,6 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
 -- 		desc = "Starting Java language server",
 -- 	})
 -- end
-
---Highlight on yank
-api.nvim_create_augroup("YankHighlightGrp", {})
-api.nvim_create_autocmd("TextYankPost", {
-  group = "YankHighlightGrp",
-  pattern = "*",
-  callback = function()
-    vim.highlight.on_yank {
-      higroup = "IncSearch",
-      timeout = 200,
-    }
-  end,
-})
-
---Disable autocomments
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  callback = function()
-    vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
-  end,
-})
 
 --One statusline for split Terminal and buffer
 -- cmd "autocmd TermOpen * setlocal nonumber norelativenumber | set laststatus=3"
@@ -125,60 +188,39 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- })
 
 -- Git branch
-local function branch_name()
-  local branch = ""
-  if vim.fn.has('win64') or vim.fn.has('win32') then
-    branch = vim.fn.system("git branch --show-current 2>&1 | grep -v 'fatal'"):match("[^\n]*")
-  elseif vim.fn.has('unix') then
-    branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
-  end
-  if branch ~= "" then
-    return " " .. branch
-  else
-    return ""
-  end
-end
+-- local function branch_name()
+--   local branch = ""
+--   if vim.fn.has('win64') or vim.fn.has('win32') then
+--     branch = vim.fn.system("git branch --show-current 2>&1 | grep -v 'fatal'"):match("[^\n]*")
+--   elseif vim.fn.has('unix') then
+--     branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+--   end
+--   if branch ~= "" then
+--     return " " .. branch
+--   else
+--     return ""
+--   end
+-- end
+--
+-- vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "FocusGained" }, {
+--   callback = function()
+--     vim.b.branch_name = branch_name()
+--   end
+-- })
 
-vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "FocusGained" }, {
-  callback = function()
-    vim.b.branch_name = branch_name()
-  end
-})
-
--- close some filetypes with <q>
-
-local function augroup(name)
-  return vim.api.nvim_create_augroup("nvim_" .. name, { clear = true })
-end
-
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
-  pattern = {
-    "PlenaryTestPopup",
-    "help",
-    "lspinfo",
-    "man",
-    "notify",
-    "qf",
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
-    "neotest-output",
-    "checkhealth",
-    "neotest-summary",
-    "neotest-output-panel",
-  },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
-  end,
-})
+-- Show diagnostics under the cursor when holding position
+-- vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
+-- vim.api.nvim_create_autocmd({ "CursorHold" }, {
+--   pattern = "*",
+--   group = "lsp_diagnostics_hold",
+--   command = "lua OpenDiagnosticIfNoFloat()",
+-- })
 
 --Toggle-checkbox Markdown
-local checked_character = "x"
+local checked_character = 'x'
 
-local checked_checkbox = "%[" .. checked_character .. "%]"
-local unchecked_checkbox = "%[ %]"
+local checked_checkbox = '%[' .. checked_character .. '%]'
+local unchecked_checkbox = '%[ %]'
 
 local line_contains_an_unchecked_checkbox = function(line)
   return string.find(line, unchecked_checkbox)
@@ -199,11 +241,11 @@ M.toggle = function()
   local bufnr = vim.api.nvim_buf_get_number(0)
   local cursor = vim.api.nvim_win_get_cursor(0)
   local start_line = cursor[1] - 1
-  local current_line = vim.api.nvim_buf_get_lines(bufnr, start_line, start_line + 1, false)[1] or ""
+  local current_line = vim.api.nvim_buf_get_lines(bufnr, start_line, start_line + 1, false)[1] or ''
 
   -- If the line contains a checked checkbox then uncheck it.
   -- Otherwise, if it contains an unchecked checkbox, check it.
-  local new_line = ""
+  local new_line = ''
   if line_contains_an_unchecked_checkbox(current_line) then
     new_line = checkbox.check(current_line)
   else
@@ -211,9 +253,10 @@ M.toggle = function()
   end
 
   vim.api.nvim_buf_set_lines(bufnr, start_line, start_line + 1, false, { new_line })
+  vim.api.nvim_buf_set_lines(bufnr, start_line, start_line + 1, false, { new_line })
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
-vim.api.nvim_create_user_command("ToggleCheckbox", M.toggle, {})
+vim.api.nvim_create_user_command('ToggleCheckbox', M.toggle, {})
 
 return M
