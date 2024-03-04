@@ -12,23 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-vim.g.coq_settings = {
-  auto_start = true,
-  keymap = { recommended = false },
-  clients = {
-    lsp = {
-      enabled = true,
-    },
-    tree_sitter = {
-      enabled = true,
-      weight_adjust = 1.0,
-    },
-    tabnine = {
-      enabled = false,
-    },
-  },
-}
-
 local status_ok, lazy = pcall(require, 'lazy')
 if not status_ok then
   return

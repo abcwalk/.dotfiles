@@ -107,6 +107,15 @@ local plugins = {
         config = load_config('tools.toggle-term'),
     },
     {
+        'iamcco/markdown-preview.nvim',
+
+        build = function()
+            vim.fn['mkdp#util#install']()
+        end,
+        ft = 'markdown',
+        cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview' },
+    },
+    {
         'nvim-neo-tree/neo-tree.nvim',
         branch = 'v3.x',
         lazy = false,
@@ -129,6 +138,7 @@ local plugins = {
     },
     {
         'windwp/nvim-autopairs',
+        -- event = 'InsertEnter',
         lazy = false,
         config = load_config('tools.autopairs'),
     },
@@ -177,6 +187,27 @@ local plugins = {
         ft = { 'go', 'gomod' },
         build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
     },
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-nvim-lsp',
+            -- 'hrsh7th/cmp-nvim-lsp-signature-help',
+            'hrsh7th/cmp-nvim-lua',
+            'saadparwaiz1/cmp_luasnip',
+        },
+        config = load_config('lang.cmp'),
+        event = 'InsertEnter',
+    },
+    {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        dependencies = { 'rafamadriz/friendly-snippets' },
+        build = 'make install_jsregexp',
+        event = 'InsertEnter',
+    },
 
     -- Tresitter
     {
@@ -188,32 +219,24 @@ local plugins = {
 
     -- LSP
     {
-        'neovim/nvim-lspconfig',
-        event = { 'BufReadPre', 'BufNewFile' },
-        dependencies = {
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-            {
-                'ms-jpq/coq_nvim',
-                branch = 'coq',
-                build = 'python3 -m coq deps',
-            },
-            { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
-        },
-        config = load_config('lang.lspconfig'),
-    },
-    {
-        'ray-x/lsp_signature.nvim',
-        event = 'VeryLazy',
-        opts = {},
-        config = function(_, opts)
-            require('lsp_signature').setup(opts)
-        end,
-    },
-    {
         'folke/neodev.nvim',
         ft = { 'lua', 'vim' },
         config = load_config('lang.neodev'),
+    },
+    {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'williamboman/mason-lspconfig.nvim',
+        },
+        config = load_config('lang.lsp-zero'),
+        event = { 'BufReadPre', 'BufNewFile' },
+    },
+    {
+        'nvimdev/lspsaga.nvim',
+        config = load_config('lang.lspsaga'),
+        event = 'LspAttach',
     },
     {
         'williamboman/mason.nvim',

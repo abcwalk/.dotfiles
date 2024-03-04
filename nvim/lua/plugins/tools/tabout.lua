@@ -23,4 +23,3 @@ tabout.setup({
   ignore_beginning = true,
   exclude = { 'markdown' },
 })
-
