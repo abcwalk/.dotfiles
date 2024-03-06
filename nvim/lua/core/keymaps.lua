@@ -1,29 +1,71 @@
 local map = vim.keymap.set
-local buffalo = require("buffalo.ui")
+-- local buffalo = require("buffalo.ui")
 -- local dap = require("dap")
 -- local dapui = require("dapui")
 
+-- -- Arrow
+-- map("n", "<Space>e", require("arrow.persist").toggle)
+
 -- Buffalo
-map({ "t", "n" }, "<Tab><Tab>", buffalo.toggle_buf_menu, { noremap = true })
-map({ 't', 'n' }, '<C-t>', buffalo.toggle_tab_menu, { noremap = true })
+-- map({ "t", "n" }, "<C-e>", buffalo.toggle_buf_menu, { noremap = true })
+-- map({ 't', 'n' }, '<C-t>', buffalo.toggle_tab_menu, { noremap = true })
+
+-- NvimTree
+-- map("n", "<Space>e", ":NvimTreeFindFileToggle<CR>", { noremap = true, silent = true })
 
 -- Trouble
 -- map("n", "<Space>d", function() require("trouble").open() end)
 
--- NoNeckPain
-map("n", "<Space>z", ":NoNeckPain<CR>", { noremap = true, silent = true })
-
 --PackerSync
 -- map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
 
+--Zen-mode
+-- map("n", "<Space>z", ":ZenMode<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>zz", function()
+--   require("zen-mode").setup {
+--     window = {
+--       width = 90,
+--       options = {}
+--     },
+--   }
+--   require("zen-mode").toggle()
+--   vim.wo.wrap = false
+--   vim.wo.number = true
+--   vim.wo.rnu = false
+--   ApplyTheme()
+-- end)
+
+-- map("n", "<Space>zZ", function()
+--   require("zen-mode").setup {
+--     window = {
+--       width = 80,
+--       options = {}
+--     },
+--   }
+--   require("zen-mode").toggle()
+--   vim.wo.wrap = false
+--   vim.wo.number = false
+--   vim.wo.rnu = false
+--   vim.opt.colorcolumn = "0"
+--   ApplyTheme()
+-- end)
+
+--Projects
+map(
+  'n',
+  '<Space>p',
+  ":lua require'telescope'.extensions.projects.projects{}<CR>",
+  { noremap = true, silent = true, nowait = true }
+)
+
 --Lazy
-map("n", "<Space>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait = true })
+-- map("n", "<Space>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait = true })
 
 --ToggleTerm
 -- map("n", "<C-Bslash>", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 --Oil
-map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
+map('n', '<Bslash>f', ':Oil<CR>', { noremap = true, silent = true })
 
 --Mini.files
 -- map("n", "<Tab><Tab>", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
@@ -32,9 +74,9 @@ map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 -- map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
 
 --Harpoon
--- map("n", "<Space>m", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
+-- map("n", "<Space>a", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
 --   { noremap = true, silent = true })
--- map("n", "<Bslash><Bslash>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
+-- map("n", "<Space>e", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
 
 --Window
 -- map("n", "<Space>w", ":lua require('nvim-window').pick()<CR>", { silent = true })
@@ -43,21 +85,21 @@ map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 -- map("n", "<Space>gf", ":lua require('neogen').generate({ type = 'func' })<CR>", { noremap = true, silent = true })
 -- map("n", "<Space>gc", ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
 
--- --Goto-preview
+--Goto-preview
 -- map(
---   "n",
---   "<Space>d",
---   "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+--   'n',
+--   '<Space>d',
+--   "<cmd>lua require('goto-preview').goto_preview_definition()<CR><cmd>",
 --   { noremap = true, silent = true }
 -- )
 -- map(
---   "n",
---   "<Space>r",
---   "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+--   'n',
+--   '<Space>r',
+--   "<cmd>lua require('goto-preview').goto_preview_references()<CR><cmd>",
 --   { noremap = true, silent = true }
 -- )
--- map("n", "<Space>q", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true, silent = true })
---
+-- map('n', '<Space>q', "<cmd>lua require('goto-preview').close_all_win()<CR><cmd>", { noremap = true, silent = true })
+
 --Cheatsheet
 -- map("n", "<F12>", ":Cheatsheet<CR>", { noremap = truen, silent = true })
 
@@ -75,27 +117,10 @@ map("n", "<Bslash>f", ":Oil --float .<CR>", { noremap = true, silent = true })
 -- map("n", "<M-r>", ":lua require('alternate-toggler').toggleAlternate()<CR>", { noremap = true, silent = true })
 
 --Toggle-checkbox Markdown
-map("n", "<Space>tt", ":ToggleCheckbox<CR>", { noremap = true, silent = true })
+map('n', '<Space>tt', ':ToggleCheckbox<CR>', { noremap = true, silent = true })
 
 --Gitsigns toggle
-map("n", "<Space>gs", ":Gitsigns toggle_signs<CR>", { noremap = true, silent = true })
-
---Hop
-local hop = require "hop"
-local directions = require("hop.hint").HintDirection
-map("", "f", function()
-  hop.hint_char1 { direction = directions.AFTER_CURSOR, current_line_only = false }
-end, { remap = true })
-map("", "F", function()
-  hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = false }
-end, { remap = true })
-map("", "t", function()
-  hop.hint_char1 { direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }
-end, { remap = true })
-map("", "T", function()
-  hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }
-end, { remap = true })
-map("n", "ff", ":HopChar2<CR>")
+map('n', '<Space>gs', ':Gitsigns toggle_signs<CR>', { noremap = true, silent = true })
 
 --Floaterm
 -- map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
@@ -109,92 +134,111 @@ map("n", "ff", ":HopChar2<CR>")
 -- map("n", "<Space>p", ":TroubleToggle<CR>")
 
 --Mov to start/end of line
-map("i", "<C-s>", "<ESC>I")
-map("i", "<C-e>", "<ESC>A")
-
---No highlight
--- map("n", "<Space>h", ":noh<CR>", { noremap = true, silent = true })
+map('i', '<C-a>', '<ESC>I')
+map('i', '<C-e>', '<ESC>A')
 
 -- Always use very magic mode for searching
-map("n", "/", [[/\v]])
+map('n', '/', [[/\v]])
+
+-- Hlslens
+map(
+  'n',
+  'n',
+  [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+  { noremap = true, silent = true }
+)
+map(
+  'n',
+  'N',
+  [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+  { noremap = true, silent = true }
+)
+map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+-- Noh
+map('n', '<Space>l', '<Cmd>noh<CR>', { noremap = true, silent = true })
 
 --Escape -> jj
-map("i", "jj", "<Esc>", { nowait = true })
-map("t", "jj", "<C-Bslash><C-n>", { nowait = true })
-map("t", "<Esc>", "<C-Bslash><C-n>", { nowait = true })
+map('i', 'jj', '<Esc>', { nowait = true })
+map('i', 'jj', '<Esc>', { nowait = true })
+map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
+map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
+map('t', '<Esc>', '<C-Bslash><C-n>', { nowait = true })
 
 --Open URL in browser (Windows
 -- vnoremap <silent> <C-F5> :<C-U>let old_reg=@"<CR>gvy:silent!!cmd /cstart <C-R><C-R>"<CR><CR>:let @"=old_reg<CR>
-map("n", "gx", ":silent !xdg-open <cfile><CR>", { noremap = true, silent = true }) -- Not work properly
+map('n', 'gx', ':silent !xdg-open <cfile><CR>', { noremap = true, silent = true }) -- Not work properly
 
 -- Linux https://www.reddit.com/r/neovim/comments/ro6oye/comment/hq2o7rc/?utm_source=share&utm_medium=web2x&context=3
 -- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
 
 --Plugins file
-if vim.fn.has("unix") then
-  map("n", "<F3>", ":e ~/.config/nvim/lua/<CR>", { noremap = true, silent = true })
-elseif vim.fn.has("win32") or vim.fn.has("win64") then
-  map("n", "<F3>", ":e ~/cculpc/AppData/Local/nvim<CR>", { noremap = true, silent = true })
-end
+map('n', '<F3>', ':e ~/.config/nvim/lua/<CR>', { noremap = true, silent = true })
 
--- nvim-toggler emacs
-map("n", '<c-i>', require('nvim-toggler').toggle, { noremap = true, silent = true, nowait = true })
+-- nvim-toggler emacs true
+-- map("n", '<c-i>', require('nvim-toggler').toggle, { silent = true, nowait = true })
 
--- Telescope live_grep
-map("n", "fw", ":Telescope live_grep<CR>", { noremap = true, silent = true })
+-- Telescope
+map('n', 'lg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
+map('n', 'lf', ':Telescope find_files<CR>', { noremap = true, silent = true })
 
 --Source current file
-map("n", "<Space>ss", "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
+map('n', '<Space>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
 --Tab navigation
-map("n", "<A-Left>", ":bprevious<CR>", { silent = true })
-map("n", "<A-Right>", ":bnext<CR>", { silent = true })
+map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
+map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
-map("n", "<A-d>", "<cmd>bprevious <bar> bdelete #<cr>", { silent = true })
-map("n", "<A-q>", ":wqa<CR>", { silent = true })
-map("n", "<C-s>", ":w<CR>:echo 'Saved'<CR>")
-map("n", "<A-w>", ":q<CR>", { silent = true })
-map("n", "<A-c>", ":bdelete<CR>", { silent = true })
+map('n', '<A-d>', '<cmd>bprevious <bar> bdelete #<cr>', { silent = true })
+map('n', '<A-q>', ':wqa<CR>', { silent = true })
+map('n', '<C-s>', ":w<CR>:echo 'Saved'<CR>")
+map('n', '<A-w>', ':q<CR>', { silent = true })
+map('n', '<A-c>', ':bdelete<CR>', { silent = true })
 -- map("n", "<A-c>", ":BufferClose<CR>", { silent = true })
 -- map("n", "<A-d>", ":w <Bar> bdelete<CR>", { silent = true })
 
 --Resize tab
-map("n", "<C-Left>", ":vertical resize -10<CR>", { silent = true })
-map("n", "<C-Right>", ":vertical resize +10<CR>", { silent = true })
+map('n', '<C-Left>', ':vertical resize -10<CR>', { silent = true })
+map('n', '<C-Right>', ':vertical resize +10<CR>', { silent = true })
 
 --Move lines up and down
-map("n", "<S-Up>", ":m-2<CR>", { noremap = true, silent = true })
-map("n", "<S-Down>", ":m+<CR>", { noremap = true, silent = true })
+map('n', '<S-Up>', ':m-2<CR>', { noremap = true, silent = true })
+map('n', '<S-Down>', ':m+<CR>', { noremap = true, silent = true })
 
 --Add lines above and below
-map("n", "<A-Up>", ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', { noremap = true, silent = true })
-map("n", "<A-Down>", ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { noremap = true, silent = true })
+map('n', '<A-Up>', ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', { noremap = true, silent = true })
+map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { noremap = true, silent = true })
 
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map("n", "<Space><Space>", "<cmd>lcd %:p:h<CR><cmd>pwd<CR>", { noremap = true, silent = false })
+map('n', '<Space><Space>', '<cmd>lcd %:p:h<CR><cmd>pwd<CR>', { noremap = true, silent = false })
 
 -- Copy entire buffer.
-map("n", "<Space>y", "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
+map('n', '<Space>y', "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
+
+-- Redo
+map('n', 'U', '<C-r>', { noremap = true })
 
 -- Do not move my cursor when joining lines.
-map("n", "J", function()
-  vim.cmd [[
+map('n', 'J', function()
+  vim.cmd([[
       normal! mzJ`z
       delmarks z
-    ]]
+    ]])
 end, {
-  desc = "join line",
+  desc = 'join line',
 })
 
 -- Overseer
-map("n", '<F5>', ":w<CR>:echo 'Saved'<CR>:OverseerRun<CR>", { noremap = true, silent = true })
+--map("n", '<F5>', ":w<CR>:echo 'Saved'<CR>:OverseerRun<CR>", { noremap = true, silent = true })
 
 -- Close quickfix list
-map("n", "<Space>q", ":cclose<CR>:echo 'Quickfix closed'<CR>", { noremap = true })
+-- map("n", "<Space>q", ":cclose<CR>:echo 'Quickfix closed'<CR>", { noremap = true })
 
 -- insert semicolon in the end
-map("i", "<A-;>", "<Esc>A;<Esc>i");
+map('i', '<A-;>', '<Esc>A;<Esc>i')
 
 --Dap
 -- map('n', '<F5>', function()
@@ -219,3 +263,36 @@ map("i", "<A-;>", "<Esc>A;<Esc>i");
 
 --Dapui
 -- map('n', "<Space>du", dapui.toggle)
+
+-- Neo-tree
+map('n', '<Tab><Tab>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
+map({ 't', 'n' }, '<C-e>', '<cmd>Neotree buffers<CR>', { noremap = true })
+map({ 't', 'n' }, '<C-g>', '<cmd>Neotree source=git_status dir=%:p:h left<CR>', { noremap = true, nowait = true })
+-- map('n', '<Tab><Tab>', '<cmd>Neotree position=left dir=%:p:h:h reveal_file=%:p<CR>')
+-- mapn", "<Space>nc", ":Neotree close<CR>")
+
+-- Spider
+map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' })
+map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-e' })
+map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-b' })
+map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-ge' })
+
+-- Lspsaga
+map('n', '<Space>f', '<cmd>Lspsaga finder imp+def+ref<CR>', { silent = true })
+map('n', '<Space>d', '<cmd>Lspsaga finder def<CR>', { silent = true })
+map('n', '<Space>i', '<cmd>Lspsaga finder imp<CR>', { silent = true })
+-- map('n', '<Space>r', '<cmd>Lspsaga finder ref<CR>', { silent = true })
+map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
+-- map({ 'n', 'v' }, '<Space>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
+map('n', '<Space>r', '<cmd>Lspsaga finder ref<CR>', { silent = true })
+map('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
+map('n', 'gT', '<cmd>Lspsaga peek_type_definition<CR>', { silent = true })
+-- keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { silent = true })
+map('n', '<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>')
+map('n', '<M-l>o', '<cmd>Lspsaga outline<CR>', { silent = true })
+map('n', '[[', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
+map('n', ']]', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
+map({ 'n', 't' }, '<A-d>', '<cmd>Lspsaga term_toggle<CR>', { silent = true })
+
+-- Spectre
+map('n', '<F10>', '<cmd>Spectre<CR>', { noremap = true, silent = true })

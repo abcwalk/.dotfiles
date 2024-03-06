@@ -1,3 +1,0 @@
-return {
-  "ibhagwan/fzf-lua",
-}
