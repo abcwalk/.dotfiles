@@ -86,19 +86,19 @@ map('n', '<Bslash>f', ':Oil<CR>', { noremap = true, silent = true })
 -- map("n", "<Space>gc", ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
 
 --Goto-preview
-map(
-  'n',
-  '<Space>d',
-  "<cmd>lua require('goto-preview').goto_preview_definition()<CR><cmd>",
-  { noremap = true, silent = true }
-)
-map(
-  'n',
-  '<Space>r',
-  "<cmd>lua require('goto-preview').goto_preview_references()<CR><cmd>",
-  { noremap = true, silent = true }
-)
-map('n', '<Space>q', "<cmd>lua require('goto-preview').close_all_win()<CR><cmd>", { noremap = true, silent = true })
+-- map(
+--   'n',
+--   '<Space>d',
+--   "<cmd>lua require('goto-preview').goto_preview_definition()<CR><cmd>",
+--   { noremap = true, silent = true }
+-- )
+-- map(
+--   'n',
+--   '<Space>r',
+--   "<cmd>lua require('goto-preview').goto_preview_references()<CR><cmd>",
+--   { noremap = true, silent = true }
+-- )
+-- map('n', '<Space>q', "<cmd>lua require('goto-preview').close_all_win()<CR><cmd>", { noremap = true, silent = true })
 
 --Cheatsheet
 -- map("n", "<F12>", ":Cheatsheet<CR>", { noremap = truen, silent = true })
@@ -137,9 +137,6 @@ map('n', '<Space>gs', ':Gitsigns toggle_signs<CR>', { noremap = true, silent = t
 map('i', '<C-a>', '<ESC>I')
 map('i', '<C-e>', '<ESC>A')
 
---No highlight
-map('n', '<Space>l', ':noh<CR>', { noremap = true, silent = true })
-
 -- Always use very magic mode for searching
 map('n', '/', [[/\v]])
 
@@ -160,6 +157,7 @@ map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, si
 map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
 map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
 map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+-- Noh
 map('n', '<Space>l', '<Cmd>noh<CR>', { noremap = true, silent = true })
 
 --Escape -> jj
@@ -265,8 +263,31 @@ map('i', '<A-;>', '<Esc>A;<Esc>i')
 -- map('n', "<Space>du", dapui.toggle)
 
 -- Neo-tree
--- map('n', '<Tab><Tab>', '<cmd>Neotree focus<CR>', { noremap = true })
+map('n', '<Tab><Tab>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
 map({ 't', 'n' }, '<C-e>', '<cmd>Neotree buffers<CR>', { noremap = true })
-map({ 't', 'n' }, '<C-g>', '<cmd>Neotree source=git_status dir=%:p:h left<CR>', { noremap = true })
-map('n', '<Tab><Tab>', '<cmd>Neotree source=filesystem reveal reveal_force_cwd<CR>')
+map({ 't', 'n' }, '<C-g>', '<cmd>Neotree source=git_status dir=%:p:h left<CR>', { noremap = true, nowait = true })
+-- map('n', '<Tab><Tab>', '<cmd>Neotree position=left dir=%:p:h:h reveal_file=%:p<CR>')
 -- mapn", "<Space>nc", ":Neotree close<CR>")
+
+-- Spider
+map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' })
+map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-e' })
+map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-b' })
+map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-ge' })
+
+-- Lspsaga
+map('n', '<Space>f', '<cmd>Lspsaga finder imp+def+ref<CR>', { silent = true })
+map('n', '<Space>d', '<cmd>Lspsaga finder def<CR>', { silent = true })
+map('n', '<Space>i', '<cmd>Lspsaga finder imp<CR>', { silent = true })
+-- map('n', '<Space>r', '<cmd>Lspsaga finder ref<CR>', { silent = true })
+map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
+-- map({ 'n', 'v' }, '<Space>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
+map('n', '<Space>r', '<cmd>Lspsaga finder ref<CR>', { silent = true })
+map('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
+map('n', 'gT', '<cmd>Lspsaga peek_type_definition<CR>', { silent = true })
+-- keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { silent = true })
+map('n', '<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>')
+map('n', '<M-l>o', '<cmd>Lspsaga outline<CR>', { silent = true })
+map('n', '[[', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
+map('n', ']]', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
+map({ 'n', 't' }, '<A-d>', '<cmd>Lspsaga term_toggle<CR>', { silent = true })

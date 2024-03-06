@@ -4,24 +4,38 @@ if not status_ok then
 end
 
 saga.setup({
+  preview = {
+    lines_above = 0,
+    lines_below = 10,
+  },
+  scroll_preview = {
+    scroll_down = '<C-d>',
+    scroll_up = '<C-u>',
+  },
   finder = {
     default = 'imp+def+ref',
     keys = {
       toggle_or_open = '<CR>',
       vsplit = '<C-v>',
       split = '<C-x>',
-      quit = '<ESC>',
-      close = 'q',
+      quit = 'q',
+      -- close = 'q',
     },
   },
   lightbulb = {
     enable = false,
   },
   symbol_in_winbar = {
-    enable = false,     -- showing symbols in feline
-    separator = '  ',
+    enable = true,
+    -- separator = '  ',
     hide_keyword = true,
     show_file = false,
+  },
+  implement = {
+    enable = true,
+    sign = true,
+    virtual_text = true,
+    -- priority = 100,
   },
   request_timeout = 2500,
   definition = {
@@ -33,11 +47,15 @@ saga.setup({
     },
   },
   diagnostic = {
-    custom_fix = 'Code Actions',
+    -- custom_fix = 'Code Actions',
     on_insert = false,
     on_insert_follow = false,
     max_width = 0.4,
     max_show_width = 0.7,
+    show_code_action = false,
+    keys = {
+      quit = { 'q', '<ESC>' },
+    },
   },
   rename = {
     in_select = false,
@@ -54,3 +72,17 @@ saga.setup({
     title = true,
   },
 })
+
+--Gutter icons
+local signs = {
+  Error = '',
+  Warn = '',
+  Hint = '',
+  Info = '',
+  Question = '',
+}
+
+for type, icon in pairs(signs) do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end

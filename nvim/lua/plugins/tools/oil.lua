@@ -7,10 +7,10 @@ oil.setup({
     -- Id is automatically added at the beginning, and name at the end
     -- See :help oil-columns
     columns = {
-        'icon',
-        -- "permissions",
-        -- "size",
-        -- "mtime",
+        'icons',
+        -- 'permissions',
+        -- 'size',
+        -- 'mtime',
     },
     -- Buffer-local options to use for oil buffers
     buf_options = {
@@ -27,6 +27,8 @@ oil.setup({
         conceallevel = 3,
         concealcursor = 'n',
     },
+    -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
+    delete_to_trash = false,
     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
     default_file_explorer = true,
     -- Restore window options to previous values when leaving an oil buffer
@@ -53,6 +55,9 @@ oil.setup({
         ['`'] = 'actions.cd',
         ['~'] = 'actions.tcd', -- Like :cd, but only set the directory for the current tab.
         ['g.'] = 'actions.toggle_hidden',
+    },
+    keymaps_help = {
+        border = 'rounded',
     },
     -- Set to false to disable all of the above keymaps
     use_default_keymaps = false,
