@@ -67,6 +67,7 @@ cmp.setup({
     expandable_indicator = true,
     format = function(entry, vim_item)
       vim_item.menu = ({
+        -- copilot = '[Copilot]',
         nvim_lsp = '[LSP]',
         luasnip = '[Snippet]',
         buffer = '[Buffer]',
@@ -76,6 +77,7 @@ cmp.setup({
     end,
   },
   sources = {
+    -- { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'nvim_lsp_signature_help' },

@@ -26,13 +26,13 @@ saga.setup({
     enable = false,
   },
   symbol_in_winbar = {
-    enable = true,
+    enable = false,
     -- separator = '  ',
     hide_keyword = true,
     show_file = false,
   },
   implement = {
-    enable = true,
+    enable = false,
     sign = true,
     virtual_text = true,
     -- priority = 100,

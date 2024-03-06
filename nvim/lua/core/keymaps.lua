@@ -162,7 +162,9 @@ map('n', '<Space>l', '<Cmd>noh<CR>', { noremap = true, silent = true })
 
 --Escape -> jj
 map('i', 'jj', '<Esc>', { nowait = true })
-map('t', 'jj', '<C-Bslash><C-n>', { nowait = true })
+map('i', 'jj', '<Esc>', { nowait = true })
+map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
+map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
 map('t', '<Esc>', '<C-Bslash><C-n>', { nowait = true })
 
 --Open URL in browser (Windows
@@ -291,3 +293,6 @@ map('n', '<M-l>o', '<cmd>Lspsaga outline<CR>', { silent = true })
 map('n', '[[', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
 map('n', ']]', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
 map({ 'n', 't' }, '<A-d>', '<cmd>Lspsaga term_toggle<CR>', { silent = true })
+
+-- Spectre
+map('n', '<F10>', '<cmd>Spectre<CR>', { noremap = true, silent = true })

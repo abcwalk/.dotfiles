@@ -138,11 +138,15 @@ local plugins = {
   -- },
   {
     'stevearc/oil.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', 'SirZenith/oil-vcs-status' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = load_config('tools.oil'),
     lazy = false,
   },
-
+  {
+    'SirZenith/oil-vcs-status',
+    config = load_config('tools.oil-vcs-status'),
+    lazy = false,
+  },
   {
     'vidocqh/auto-indent.nvim',
     lazy = false,
@@ -308,6 +312,14 @@ local plugins = {
     end,
     lazy = false,
   },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   dependencies = {
+  --     'zbirenbaum/copilot-cmp',
+  --   },
+  --   config = load_config('lang.copilot'),
+  --   event = 'InsertEnter',
+  -- },
 
   -- Telescope
   {

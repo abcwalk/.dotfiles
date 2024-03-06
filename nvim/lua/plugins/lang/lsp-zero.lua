@@ -8,6 +8,7 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 local installed_servers = require('plugins.list').lsp_servers
+local lspconfig = require('lspconfig')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -25,7 +26,11 @@ require('mason-lspconfig').setup({
         },
       }
       lua_opts.settings.Lua.format = custom_options
-      require('lspconfig').lua_ls.setup(lua_opts)
+      lspconfig.lua_ls.setup(lua_opts)
     end,
   },
 })
+
+local lsp_ui = require('lspconfig.ui.windows')
+
+lsp_ui.default_options.border = 'rounded'
