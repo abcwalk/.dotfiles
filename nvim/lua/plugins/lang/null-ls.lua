@@ -6,7 +6,7 @@ end
 local format = null_ls.builtins.formatting
 local diag = null_ls.builtins.diagnostics
 local hover = null_ls.builtins.hover
-local action = null_ls.builtins.code_actions
+-- local action = null_ls.builtins.code_actions
 local comp = null_ls.builtins.completion
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
@@ -17,15 +17,15 @@ null_ls.setup({
     log_level = 'info',
     diagnostics_format = '#{c} #{m} (#{s})',
     sources = {
-        action.refactoring,
-        comp.spell,
+        -- action.refactoring,
+        -- comp.spell,
         comp.tags,
         diag.actionlint,
-        -- diag.golangci_lint,
+        diag.golangci_lint,
         diag.todo_comments,
         diag.trail_space,
         diag.vint,
-        diag.write_good,
+        -- diag.write_good,
         format.prettier,
         format.shfmt,
         format.gofumpt,

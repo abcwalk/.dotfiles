@@ -6,7 +6,8 @@ end
 dressing.setup({
     win_options = {
         winblend = 10,
-        winhighlight = 'Normal:DressingInputNormalFloat,NormalFloat:DressingInputNormalFloat,FloatBorder:DressingInputFloatBorder',
+        winhighlight =
+        'Normal:DressingInputNormalFloat,NormalFloat:DressingInputNormalFloat,FloatBorder:DressingInputFloatBorder',
     },
     input = {
         enabled = true,
@@ -26,5 +27,17 @@ dressing.setup({
         enabled = true,
         backend = { 'telescope', 'fzf_lua', 'fzf', 'nui', 'builtin' },
         trim_prompt = true,
+    },
+    mappings = {
+        n = {
+            ['<C-c>'] = 'Close',
+            ['<CR>'] = 'Confirm',
+        },
+        i = {
+            ['<C-c>'] = 'Close',
+            ['<CR>'] = 'Confirm',
+            ['<Up>'] = 'HistoryPrev',
+            ['<Down>'] = 'HistoryNext',
+        },
     },
 })

@@ -1,3 +1,5 @@
+require('core.functions')
+-- require('plugins.ui.alabaster')
 require('core.options')
 require('core.keymaps')
 require('core.autocommands')

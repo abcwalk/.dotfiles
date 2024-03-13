@@ -55,11 +55,11 @@ local servers = {
                 printWidth = 200,
             },
             keyOrdering = false,
-            schemaStore = {
-                enable = true,
-                url = 'https://www.schemastore.org/api/json/catalog.json',
-            },
-            schemas = require('schemastore').yaml.schemas(),
+            -- schemaStore = {
+            --     enable = true,
+            --     url = 'https://www.schemastore.org/api/json/catalog.json',
+            -- },
+            -- schemas = require('schemastore').yaml.schemas(),
             validate = true,
         },
     },
@@ -67,54 +67,64 @@ local servers = {
         filetypes = { 'sh', 'zsh' },
     },
     gopls = {
-        analyses = {
-            unusedparams = true,
-            unusedvariable = true,
-            useany = true,
+        -- analyses = {
+        --     unusedparams = true,
+        --     unusedvariable = true,
+        --     useany = true,
+        -- },
+        -- codelenses = {
+        --     generate = true,
+        --     gc_details = true,
+        --     regenerate_cgo = true,
+        --     tidy = true,
+        --     upgrade_dependency = true,
+        --     vendor = true,
+        -- },
+        -- experimentalPostfixCompletions = true,
+        -- gofumpt = true,
+        -- linksInHover = false,
+        -- staticcheck = true,
+        -- usePlaceholders = true,
+        hints = {
+            -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            compositeLiteralTypes = true,
+            constantValues = true,
+
+            functionTypeParameters = true,
+            parameterNames = true,
+            rangeVariableTypes = true,
         },
-        codelenses = {
-            generate = true,
-            gc_details = true,
-            regenerate_cgo = true,
-            tidy = true,
-            upgrade_dependency = true,
-            vendor = true,
-        },
-        experimentalPostfixCompletions = true,
-        gofumpt = true,
-        linksInHover = false,
-        staticcheck = true,
-        usePlaceholders = true,
     },
     lua_ls = {},
-    -- Lua = {
-    --   diagnostics = {
-    --     globals = { 'vim', 'jit' },
-    --     neededFileStatus = true,
-    --     ['codestyle-check'] = 'Any',
-    --   },
-    --   format = {
-    --     enable = true,
-    --     defaultConfig = {
-    --       indent_style = 'space',
-    --       indent_size = '2',
-    --     },
-    --   },
-    --   runtime = {
-    --     version = 'LuaJIT',
-    --   },
-    --   workspace = {
-    --     checkThirdParty = false,
-    --     library = {
-    --       [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-    --       [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-    --     },
-    --     maxPreload = 10000,
-    --     preloadFileSize = 10000,
-    --   },
-    --   telemetry = { enable = false },
-    -- },
-    -- },
+    Lua = {
+        diagnostics = {
+            globals = { 'vim' },
+            -- neededFileStatus = true,
+            -- ['codestyle-check'] = 'Any',
+        },
+        -- format = {
+        --     enable = true,
+        --     defaultConfig = {
+        --         indent_style = 'space',
+        --         indent_size = '2',
+        --     },
+        -- },
+        -- runtime = {
+        --     version = 'LuaJIT',
+        -- },
+        -- workspace = {
+        --     checkThirdParty = false,
+        --     library = {
+        --         [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+        --         [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        --     },
+        --     maxPreload = 10000,
+        --     preloadFileSize = 10000,
+        -- },
+        -- telemetry = { enable = false },
+    },
 }
 
 return servers

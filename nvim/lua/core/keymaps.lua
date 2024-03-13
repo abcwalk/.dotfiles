@@ -3,9 +3,6 @@ local map = vim.keymap.set
 -- local dap = require("dap")
 -- local dapui = require("dapui")
 
--- -- Arrow
--- map("n", "<Space>e", require("arrow.persist").toggle)
-
 -- Buffalo
 -- map({ "t", "n" }, "<C-e>", buffalo.toggle_buf_menu, { noremap = true })
 -- map({ 't', 'n' }, '<C-t>', buffalo.toggle_tab_menu, { noremap = true })
@@ -15,6 +12,7 @@ local map = vim.keymap.set
 
 -- Trouble
 -- map("n", "<Space>d", function() require("trouble").open() end)
+map('n', '<Space>q', '<cmd>TroubleToggle quickfix<cr>', { silent = true, noremap = true })
 
 --PackerSync
 -- map("n", "<Space>p", ":PackerSync<CR>", { noremap = true, silent = true, nowait = true })
@@ -52,10 +50,10 @@ local map = vim.keymap.set
 
 --Projects
 map(
-  'n',
-  '<Space>p',
-  ":lua require'telescope'.extensions.projects.projects{}<CR>",
-  { noremap = true, silent = true, nowait = true }
+    'n',
+    '<Space>p',
+    ":lua require'telescope'.extensions.projects.projects{}<CR>",
+    { noremap = true, silent = true, nowait = true }
 )
 
 --Lazy
@@ -141,22 +139,23 @@ map('i', '<C-e>', '<ESC>A')
 map('n', '/', [[/\v]])
 
 -- Hlslens
-map(
-  'n',
-  'n',
-  [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-  { noremap = true, silent = true }
-)
-map(
-  'n',
-  'N',
-  [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-  { noremap = true, silent = true }
-)
-map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
-map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
-map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
-map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+-- map(
+--     'n',
+--     'n',
+--     [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+--     { noremap = true, silent = true }
+-- )
+-- map(
+--     'n',
+--     'N',
+--     [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+--     { noremap = true, silent = true }
+-- )
+-- map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+-- map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+-- map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+-- map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+
 -- Noh
 map('n', '<Space>l', '<Cmd>noh<CR>', { noremap = true, silent = true })
 
@@ -181,15 +180,15 @@ map('n', '<F3>', ':e ~/.config/nvim/lua/<CR>', { noremap = true, silent = true }
 -- map("n", '<c-i>', require('nvim-toggler').toggle, { silent = true, nowait = true })
 
 -- Telescope
-map('n', 'lg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
-map('n', 'lf', ':Telescope find_files<CR>', { noremap = true, silent = true })
+map('n', 'lg', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
+map('n', 'lf', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
 
 --Source current file
 map('n', '<Space>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
 --Tab navigation
-map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
-map('n', '<A-Right>', ':bnext<CR>', { silent = true })
+-- map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
+-- map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
 map('n', '<A-d>', '<cmd>bprevious <bar> bdelete #<cr>', { silent = true })
 map('n', '<A-q>', ':wqa<CR>', { silent = true })
@@ -223,12 +222,12 @@ map('n', 'U', '<C-r>', { noremap = true })
 
 -- Do not move my cursor when joining lines.
 map('n', 'J', function()
-  vim.cmd([[
+    vim.cmd([[
       normal! mzJ`z
       delmarks z
     ]])
 end, {
-  desc = 'join line',
+    desc = 'join line',
 })
 
 -- Overseer
@@ -236,6 +235,9 @@ end, {
 
 -- Close quickfix list
 -- map("n", "<Space>q", ":cclose<CR>:echo 'Quickfix closed'<CR>", { noremap = true })
+
+-- Swenv
+map('n', '<Space>e', '<cmd>Swenv<CR>', { noremap = true, silent = true })
 
 -- insert semicolon in the end
 map('i', '<A-;>', '<Esc>A;<Esc>i')
@@ -265,34 +267,25 @@ map('i', '<A-;>', '<Esc>A;<Esc>i')
 -- map('n', "<Space>du", dapui.toggle)
 
 -- Neo-tree
-map('n', '<Tab><Tab>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
-map({ 't', 'n' }, '<C-e>', '<cmd>Neotree buffers<CR>', { noremap = true })
-map({ 't', 'n' }, '<C-g>', '<cmd>Neotree source=git_status dir=%:p:h left<CR>', { noremap = true, nowait = true })
+-- map('n', '<Tab><Tab>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
+-- map({ 't', 'n' }, '<C-e>', '<cmd>Neotree buffers<CR>', { noremap = true })
+-- map({ 't', 'n' }, '<C-g>', '<cmd>Neotree source=git_status dir=%:p:h left<CR>', { noremap = true, nowait = true })
 -- map('n', '<Tab><Tab>', '<cmd>Neotree position=left dir=%:p:h:h reveal_file=%:p<CR>')
 -- mapn", "<Space>nc", ":Neotree close<CR>")
 
 -- Spider
-map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' })
-map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-e' })
-map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-b' })
-map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-ge' })
+-- map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' })
+-- map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-e' })
+-- map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-b' })
+-- map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-ge' })
 
--- Lspsaga
-map('n', '<Space>f', '<cmd>Lspsaga finder imp+def+ref<CR>', { silent = true })
-map('n', '<Space>d', '<cmd>Lspsaga finder def<CR>', { silent = true })
-map('n', '<Space>i', '<cmd>Lspsaga finder imp<CR>', { silent = true })
--- map('n', '<Space>r', '<cmd>Lspsaga finder ref<CR>', { silent = true })
-map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
--- map({ 'n', 'v' }, '<Space>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
-map('n', '<Space>r', '<cmd>Lspsaga finder ref<CR>', { silent = true })
-map('n', 'gD', '<cmd>Lspsaga peek_definition<CR>', { silent = true })
-map('n', 'gT', '<cmd>Lspsaga peek_type_definition<CR>', { silent = true })
--- keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { silent = true })
-map('n', '<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>')
-map('n', '<M-l>o', '<cmd>Lspsaga outline<CR>', { silent = true })
-map('n', '[[', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
-map('n', ']]', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
-map({ 'n', 't' }, '<A-d>', '<cmd>Lspsaga term_toggle<CR>', { silent = true })
+-- Startify
+-- map('n', '<Space>s', '<cmd>Startify<CR>', { noremap = true, silent = true, nowait = true })
 
 -- Spectre
-map('n', '<F10>', '<cmd>Spectre<CR>', { noremap = true, silent = true })
+-- map(
+--     'n',
+--     '<C-f>',
+--     '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
+--     { noremap = true, silent = true }
+-- )
