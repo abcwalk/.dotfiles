@@ -67,11 +67,12 @@ local servers = {
         filetypes = { 'sh', 'zsh' },
     },
     gopls = {
-        -- analyses = {
-        --     unusedparams = true,
-        --     unusedvariable = true,
-        --     useany = true,
-        -- },
+        analyses = {
+            unusedparams = true,
+            --     unusedvariable = true,
+            --     useany = true,
+            shadow = true,
+        },
         -- codelenses = {
         --     generate = true,
         --     gc_details = true,
@@ -80,11 +81,11 @@ local servers = {
         --     upgrade_dependency = true,
         --     vendor = true,
         -- },
-        -- experimentalPostfixCompletions = true,
+        experimentalPostfixCompletions = true,
         -- gofumpt = true,
         -- linksInHover = false,
-        -- staticcheck = true,
-        -- usePlaceholders = true,
+        staticcheck = true,
+        usePlaceholders = true,
         hints = {
             -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
             assignVariableTypes = true,
@@ -104,6 +105,12 @@ local servers = {
             -- neededFileStatus = true,
             -- ['codestyle-check'] = 'Any',
         },
+        -- hint = {
+        --     enable = true,
+        -- },
+        -- completion = {
+        --     callSnippet = 'Replace',
+        -- },
         -- format = {
         --     enable = true,
         --     defaultConfig = {

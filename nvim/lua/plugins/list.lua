@@ -116,7 +116,7 @@ local plugins = {
         event = 'VeryLazy',
         keys = {
             {
-                '<C-f>',
+                'f',
                 mode = { 'n', 'x', 'o' },
                 function()
                     require('flash').jump()
@@ -225,7 +225,12 @@ local plugins = {
     --     config = load_config('ui.vscode-theme'),
     -- },
     -- { 'rose-pine/neovim', name = 'rose-pine', lazy = false, config = load_config('ui.rose-pine') },
-    { 'metalelf0/base16-black-metal-scheme', lazy = false, config = load_config('ui.black-metal') },
+    {
+        'metalelf0/base16-black-metal-scheme',
+        lazy = false,
+        priority = 1000,
+        config = load_config('ui.black-metal'),
+    },
     -- {
     --     'jesseleite/nvim-noirbuddy',
     --     dependencies = {
@@ -276,18 +281,26 @@ local plugins = {
     },
 
     -- Language
-    -- {
-    --     'ray-x/go.nvim',
-    --     dependencies = { -- optional packages
-    --         'ray-x/guihua.lua',
-    --         'neovim/nvim-lspconfig',
-    --         'nvim-treesitter/nvim-treesitter',
-    --     },
-    --     config = load_config('lang.go'),
-    --     event = { 'CmdlineEnter' },
-    --     ft = { 'go', 'gomod' },
-    --     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
-    -- },
+    {
+        'ray-x/go.nvim',
+        dependencies = { -- optional packages
+            'ray-x/guihua.lua',
+            'neovim/nvim-lspconfig',
+            'nvim-treesitter/nvim-treesitter',
+        },
+        config = function()
+            require('go').setup({})
+        end,
+        event = { 'CmdlineEnter' },
+        ft = { 'go', 'gomod' },
+        build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+    },
+    {
+        'maxmx03/dracula.nvim',
+        lazy = false,
+        priority = 1000,
+        config = load_config('ui.dracula'),
+    },
     -- {
     --     'yanskun/gotests.nvim',
     --     ft = 'go',

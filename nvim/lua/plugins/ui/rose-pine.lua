@@ -53,11 +53,11 @@ rose_pine.setup({
     },
 
     highlight_groups = {
-        Normal = { bg = 'none' },
-        FloatBorder = { bg = 'none' },
-        -- StatusLine = { bg = '#1c1c1c' },
-        StatusLine = { bg = 'none' },
+        -- Normal = { bg = '#1b160a' },
+        -- FloatBorder = { bg = 'none' },
+        -- StatusLine = { bg = 'none' },
         CursorLine = { bg = 'none' },
+        -- StatusLine = { bg = '#1c1c1c' },
         -- ColorColumn = { bg = '#1c1c1c' },
         -- Cursor = { bg = '#c5c9c5', fg = '#181618' },
         -- MatchParen = { bg = 'none', fg = '#338fff', bold = true },

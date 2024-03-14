@@ -8,6 +8,34 @@ if not snip_status_ok then
     return
 end
 
+local kind_icons = {
+    Text = '',
+    Method = '󰆧',
+    Function = '󰊕',
+    Constructor = '',
+    Field = '󰇽',
+    Variable = '󰂡',
+    Class = '󰠱',
+    Interface = '',
+    Module = '',
+    Property = '󰜢',
+    Unit = '',
+    Value = '󰎠',
+    Enum = '',
+    Keyword = '󰌋',
+    Snippet = '',
+    Color = '󰏘',
+    File = '󰈙',
+    Reference = '',
+    Folder = '󰉋',
+    EnumMember = '',
+    Constant = '󰏿',
+    Struct = '',
+    Event = '',
+    Operator = '󰆕',
+    TypeParameter = '󰅲',
+}
+
 require('luasnip/loaders/from_vscode').lazy_load()
 
 local compare = require('cmp.config.compare')
@@ -63,10 +91,10 @@ cmp.setup({
         }),
     },
     formatting = {
-        -- fields = { 'kind', 'abbr', 'menu' },
-        fields = { 'abbr', 'menu' },
+        fields = { 'abbr', 'menu', 'kind' },
         expandable_indicator = true,
         format = function(entry, vim_item)
+            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
             vim_item.menu = ({
                 -- copilot = '[Copilot]',
                 nvim_lsp = '[LSP]',
@@ -74,6 +102,7 @@ cmp.setup({
                 buffer = '[Buffer]',
                 path = '[Path]',
             })[entry.source.name]
+            vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
             return vim_item
         end,
     },
@@ -121,6 +150,6 @@ cmp.setup({
         scrollbar = true,
     },
     experimental = {
-        ghost_text = false,
+        ghost_text = true,
     },
 })

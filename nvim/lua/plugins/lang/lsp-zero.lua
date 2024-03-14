@@ -50,13 +50,19 @@ require('mason-lspconfig').setup({
 local lsp_ui = require('lspconfig.ui.windows')
 lsp_ui.default_options.border = 'rounded'
 
-lsp_zero.set_sign_icons({
-    error = '✘',
-    warn = '',
-    hint = '',
-    info = '',
-    question = '',
-})
+-- lsp_zero.set_sign_icons({
+--     error = '✘',
+--     warn = '',
+--     hint = '',
+--     info = '',
+--     question = '',
+-- })
+
+local signs = { Error = '✘', Warn = '', Hint = '', Info = '', Question = '' }
+for type, icon in pairs(signs) do
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 vim.diagnostic.config({
     virtual_text = false,
