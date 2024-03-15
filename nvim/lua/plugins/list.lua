@@ -478,8 +478,8 @@ local lsp_servers = {
     'gopls',
     'jsonls',
     'lua_ls',
-    -- 'typos_lsp',
     'vimls',
+    'pyright',
 }
 
 local null_ls_sources = {
@@ -491,6 +491,7 @@ local null_ls_sources = {
     'goimports_reviser',
     'black',
     'isort',
+    'golangci-lint',
 }
 
 return {

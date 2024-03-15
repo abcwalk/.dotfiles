@@ -14,7 +14,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ln -s ${ZSH_CUSTOM}/themes/minimal/minimal.zsh ${ZSH_CUSTOM}/themes/minimal.zsh-theme
 # then update `ZSH_THEME` to `minimal` in your .zshrc
 
-ZSH_THEME="minimal"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -107,10 +107,8 @@ fi
 alias n="nvim"
 
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
+export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-export GOROOT=/usr/lib/go
-export PATH=$PATH:$GOPATH
-export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export EDITOR='neovim'
 
@@ -127,8 +125,10 @@ export PATH="$HOME/.local/bin:$PATH"
 export NOTES_DIR=/home/cicerone/Projects/notes
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/usr/local/go/bin"
 if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init -)"
 fi
 
-source /home/cicerone/.config/broot/launcher/bash/br
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

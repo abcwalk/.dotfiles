@@ -302,9 +302,7 @@ if vim.o.background == 'dark' then
         ['@comment.note.comment'] = { link = '@text.note' },
         ['@comment.warning.comment'] = { link = '@text.warning' },
         ['@comment.error.comment'] = { link = '@text.danger' },
-        -- ['@text.note'] = { bg = '#1d292b', fg = ansi.blue },
         ['@text.note'] = { bg = '#1b0e23', fg = '#FF57FF' },
-        -- ['@text.warning'] = { bg = '#d0d058', fg = bg },
         ['@text.warning'] = { bg = '#392a13', fg = '#FF9900' },
         ['@text.danger'] = { bg = '#391a13', fg = '#FF8B64' },
 

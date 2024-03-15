@@ -1,5 +1,10 @@
 vim.cmd('colorscheme base16-black-metal')
 
+local diffadd = '#6abf40'
+local diffdelete = '#d2322d'
+local diffchange = '#FF9900'
+local gray = "#C4C6CD"
+
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
@@ -9,22 +14,22 @@ vim.api.nvim_set_hl(0, 'CursorLineNR', { link = 'String' })
 vim.api.nvim_set_hl(0, 'LineNR', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'LineNR', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'SignifySignAdd', { bg = 'none', fg = 'NvimLightGreen' })
-vim.api.nvim_set_hl(0, 'SignifySignChange', { bg = 'none', fg = 'NvimLightYellow' })
-vim.api.nvim_set_hl(0, 'SignifySignDelete', { bg = 'none', fg = 'NvimLightRed' })
-vim.api.nvim_set_hl(0, 'GitGutterAdd', { bg = 'none', fg = 'NvimLightGreen' })
-vim.api.nvim_set_hl(0, 'GitGutterChange', { bg = 'none', fg = 'NvimLightYellow' })
-vim.api.nvim_set_hl(0, 'GitGutterChangeDelete', { bg = 'none', fg = 'NvimLightRed' })
-vim.api.nvim_set_hl(0, 'GitGutterDelete', { bg = 'none', fg = 'NvimLightRed' })
+vim.api.nvim_set_hl(0, 'SignifySignAdd', { bg = 'none', fg = diffadd })
+vim.api.nvim_set_hl(0, 'SignifySignChange', { bg = 'none', fg = diffchange })
+vim.api.nvim_set_hl(0, 'SignifySignDelete', { bg = 'none', fg = diffdelete })
+vim.api.nvim_set_hl(0, 'GitGutterAdd', { bg = 'none', fg = diffadd })
+vim.api.nvim_set_hl(0, 'GitGutterChange', { bg = 'none', fg = diffchange })
+vim.api.nvim_set_hl(0, 'GitGutterChangeDelete', { bg = 'none', fg = diffchange })
+vim.api.nvim_set_hl(0, 'GitGutterDelete', { bg = 'none', fg = diffdelete })
 vim.api.nvim_set_hl(0, 'PMenu', { bg = 'none' })
-vim.api.nvim_set_hl(0, '@comment.todo.comment', { bg = '#121212', fg = '#7799bb' })
-vim.api.nvim_set_hl(0, '@comment.warning.comment', { bg = '#121212', fg = 'NvimLightYellow' })
-vim.api.nvim_set_hl(0, '@comment.note.comment', { bg = '#121212', fg = 'NvimLightMagenta' })
-vim.api.nvim_set_hl(0, '@comment.error.comment', { bg = '#121212', fg = 'NvimLightRed' })
-vim.api.nvim_set_hl(0, '@variable', { fg = 'NvimLightGrey3' })
+vim.api.nvim_set_hl(0, '@comment.todo.comment', { bg = '#0b1e33', fg = '#4BA8FF' })
+vim.api.nvim_set_hl(0, '@comment.note.comment', { bg = '#1b0e23', fg = '#FF57FF' })
+vim.api.nvim_set_hl(0, '@comment.warning.comment', { bg = '#392a13', fg = '#FF9900' })
+vim.api.nvim_set_hl(0, '@comment.error.comment', { bg = '#391a13', fg = diffchange })
+
+vim.api.nvim_set_hl(0, '@variable', { fg = gray })
 vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'String' })
-vim.api.nvim_set_hl(0, 'FlashMatch', { fg = 'NvimLightGrey3' })
-vim.api.nvim_set_hl(0, 'CmpItemMenuDefault', { fg = '#7799bb' }) -- TODO не работает
+vim.api.nvim_set_hl(0, 'FlashMatch', { fg = gray })
 
 -- TODO
 -- NOTE
@@ -65,3 +70,5 @@ vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link = 'CmpItemKindFunction' })
 vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { link = 'CmpItemKindFunction' })
 vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindKeyword' })
 vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindKeyword' })
+
+-- TODO Oil
