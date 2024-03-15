@@ -26,7 +26,7 @@ lazy.setup({
     spec = plugins,
     lockfile = vim.fn.stdpath('config') .. '/lua/plugins/lock.json',
     concurrency = 8,
-    install = { missing = true, colorscheme = { 'dracula' } },
+    install = { missing = true, colorscheme = { 'base16-black-metal' } },
 
     git = {
         log = { '--since=3 days ago' },

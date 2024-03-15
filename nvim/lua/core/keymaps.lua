@@ -193,7 +193,7 @@ map('n', '<Space>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = tru
 map('n', '<A-d>', '<cmd>bprevious <bar> bdelete #<cr>', { silent = true })
 map('n', '<A-q>', ':wqa<CR>', { silent = true })
 map('n', '<C-s>', ":w<CR>:echo 'Saved'<CR>")
-map('n', '<A-w>', ':q<CR>', { silent = true })
+-- map('n', '<A-w>', ':q<CR>', { silent = true })
 map('n', '<A-c>', ':bdelete<CR>', { silent = true })
 -- map("n", "<A-c>", ":BufferClose<CR>", { silent = true })
 -- map("n", "<A-d>", ":w <Bar> bdelete<CR>", { silent = true })

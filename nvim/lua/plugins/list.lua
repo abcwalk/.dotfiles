@@ -289,18 +289,22 @@ local plugins = {
             'nvim-treesitter/nvim-treesitter',
         },
         config = function()
-            require('go').setup({})
+            require('go').setup({
+                diagnostic = {
+                    virtual_text = false,
+                },
+            })
         end,
         event = { 'CmdlineEnter' },
         ft = { 'go', 'gomod' },
         build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
     },
-    {
-        'maxmx03/dracula.nvim',
-        lazy = false,
-        priority = 1000,
-        config = load_config('ui.dracula'),
-    },
+    -- {
+    --     'maxmx03/dracula.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = load_config('ui.dracula'),
+    -- },
     -- {
     --     'yanskun/gotests.nvim',
     --     ft = 'go',
@@ -380,11 +384,18 @@ local plugins = {
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
+    -- {
+    --     'nvimtools/none-ls.nvim',
+    --     dependencies = { 'neovim/nvim-lspconfig', 'jay-babu/mason-null-ls.nvim' },
+    --     config = load_config('lang.null-ls'),
+    --     event = { 'BufReadPre', 'BufNewFile' },
+    -- },
     {
-        'nvimtools/none-ls.nvim',
-        dependencies = { 'neovim/nvim-lspconfig', 'jay-babu/mason-null-ls.nvim' },
-        config = load_config('lang.null-ls'),
-        event = { 'BufReadPre', 'BufNewFile' },
+        'stevearc/conform.nvim',
+        event = { 'BufWritePre' },
+        cmd = { 'ConformInfo' },
+        config = load_config('lang.conform'),
+        lazy = false,
     },
     -- {
     --     'ThePrimeagen/refactoring.nvim',
@@ -417,7 +428,7 @@ local plugins = {
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
+        tag = '0.1.6',
         dependencies = {
             'nvim-lua/plenary.nvim',
             {
@@ -473,7 +484,8 @@ local lsp_servers = {
 
 local null_ls_sources = {
     'shellcheck',
-    'gofmt',
+    'codespell',
+    'gofumpt',
     'goimports',
     'golines',
     'goimports_reviser',
