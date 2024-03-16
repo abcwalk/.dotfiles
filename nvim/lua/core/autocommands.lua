@@ -240,6 +240,13 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 --     },
 --   })
 -- end
+-- vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+--     callback = function()
+--         if vim.lsp.buf.server_ready() then
+--             vim.diagnostic.open_float()
+--         end
+--     end,
+-- })
 
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --   callback = function()

@@ -226,10 +226,13 @@ local plugins = {
     -- },
     -- { 'rose-pine/neovim', name = 'rose-pine', lazy = false, config = load_config('ui.rose-pine') },
     {
-        'metalelf0/base16-black-metal-scheme',
+        -- 'metalelf0/base16-black-metal-scheme',
+        'behemothbucket/base16-black-metal-scheme',
         lazy = false,
         priority = 1000,
-        config = load_config('ui.black-metal'),
+        config = function()
+            vim.cmd('colorscheme base16-black-metal')
+        end,
     },
     -- {
     --     'jesseleite/nvim-noirbuddy',
@@ -384,18 +387,30 @@ local plugins = {
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
-    -- {
-    --     'nvimtools/none-ls.nvim',
-    --     config = load_config('lang.null-ls'),
-    --     event = { 'BufReadPre', 'BufNewFile' },
-    -- },
     {
-        'stevearc/conform.nvim',
-        event = { 'BufWritePre' },
-        cmd = { 'ConformInfo' },
-        config = load_config('lang.conform'),
-        lazy = false,
+        'nvimtools/none-ls.nvim',
+        config = load_config('lang.none-ls'),
+        dependencies = {
+            'jay-babu/mason-null-ls.nvim',
+        },
+        event = { 'BufReadPre', 'BufNewFile' },
     },
+    -- {
+    --     'folke/trouble.nvim',
+    --     config = function()
+    --         require('trouble').setup({
+    --             icons = true,
+    --         })
+    --     end,
+    --     lazy = false,
+    -- },
+    -- {
+    --     'stevearc/conform.nvim',
+    --     event = { 'BufWritePre' },
+    --     cmd = { 'ConformInfo' },
+    --     config = load_config('lang.conform'),
+    --     lazy = false,
+    -- },
     -- {
     --     'ThePrimeagen/refactoring.nvim',
     --     config = load_config('lang.refactoring'),
@@ -473,11 +488,10 @@ local ts_parsers = {
 }
 
 local lsp_servers = {
-    -- 'bashls',
+    'bashls',
     'gopls',
     'jsonls',
     'lua_ls',
-    'vimls',
     'pyright',
 }
 
@@ -489,7 +503,7 @@ local tools_sources = {
     'goimports',
     'golines',
     'golangci-lint',
-    -- 'goimports-reviser',
+    'goimports-reviser',
     'gotests',
     'impl',
     'isort',

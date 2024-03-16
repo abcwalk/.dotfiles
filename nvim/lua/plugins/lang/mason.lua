@@ -17,9 +17,3 @@ mason.setup({
         height = 0.8,
     },
 })
-
-local tools_sources = require('plugins.list').tools_sources
-
-require('mason-tool-installer').setup({
-    ensure_installed = tools_sources,
-})

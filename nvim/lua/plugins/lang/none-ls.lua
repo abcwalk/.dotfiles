@@ -3,6 +3,13 @@ if not status_ok then
     return
 end
 
+local installed_sources = require('plugins.list').tools_sources
+
+require('mason-null-ls').setup({
+    ensure_installed = installed_sources,
+    automatic_installation = true,
+})
+
 local format = null_ls.builtins.formatting
 local diag = null_ls.builtins.diagnostics
 local hover = null_ls.builtins.hover
@@ -21,7 +28,7 @@ null_ls.setup({
         -- comp.spell,
         comp.tags,
         diag.golangci_lint,
-        -- diag.todo_comments,
+        diag.todo_comments,
         diag.trail_space,
         diag.vint,
         -- diag.write_good,
