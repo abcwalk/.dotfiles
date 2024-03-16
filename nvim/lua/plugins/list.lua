@@ -386,7 +386,6 @@ local plugins = {
     },
     -- {
     --     'nvimtools/none-ls.nvim',
-    --     dependencies = { 'neovim/nvim-lspconfig', 'jay-babu/mason-null-ls.nvim' },
     --     config = load_config('lang.null-ls'),
     --     event = { 'BufReadPre', 'BufNewFile' },
     -- },
@@ -474,7 +473,7 @@ local ts_parsers = {
 }
 
 local lsp_servers = {
-    'bashls',
+    -- 'bashls',
     'gopls',
     'jsonls',
     'lua_ls',
@@ -482,21 +481,26 @@ local lsp_servers = {
     'pyright',
 }
 
-local null_ls_sources = {
-    'shellcheck',
+local tools_sources = {
+    'black',
     'codespell',
+    'editorconfig-checker',
     'gofumpt',
     'goimports',
     'golines',
-    'goimports_reviser',
-    'black',
-    'isort',
     'golangci-lint',
+    -- 'goimports-reviser',
+    'gotests',
+    'impl',
+    'isort',
+    'json-to-struct',
+    'shellcheck',
+    'beautysh',
 }
 
 return {
     plugins = plugins,
     ts_parsers = ts_parsers,
     lsp_servers = lsp_servers,
-    null_ls_sources = null_ls_sources,
+    tools_sources = tools_sources,
 }

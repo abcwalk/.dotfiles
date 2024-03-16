@@ -52,10 +52,3 @@ null_ls.setup({
         end
     end,
 })
-
-local installed_sources = require('plugins.list').null_ls_sources
-
-require('mason-null-ls').setup({
-    ensure_installed = installed_sources,
-    automatic_installation = true,
-})

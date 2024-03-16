@@ -16,7 +16,7 @@ conform.setup({
             -- 'golangci-lint',
         },
         python = { 'black', 'isort' },
-        bash = { 'shellcheck' },
+        bash = { 'beautysh' },
         ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
     },
