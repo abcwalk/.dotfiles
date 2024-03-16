@@ -52,10 +52,10 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Dark Ocean (terminal.sexy)"
+config.color_scheme = "Black Metal (base16)"
 -- config.color_schemes = {
 --     ["rose-pine"] = {
---         -- background = "#0E0A00",
+--         background = "#1b160a",
 --         foreground = "#d8dacb",
 --         cursor_bg = "#f3eeea",
 --         cursor_fg = "#090a18",
@@ -77,7 +77,7 @@ config.window_padding = {
 	bottom = 15,
 }
 config.font_size = 18
-config.window_decorations = "RESIZE"
+-- config.window_decorations = "TITLE"
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.use_fancy_tab_bar = false
@@ -89,6 +89,7 @@ config.colors = {
 		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
 		-- active_tab = { bg_color = "#121212", fg_color = "#FCE8C3" },
 	},
+	-- saturate(0.1),
 }
 config.window_close_confirmation = "NeverPrompt"
 config.enable_scroll_bar = false
@@ -103,10 +104,18 @@ config.keys = {
 		action = act.SpawnTab("CurrentPaneDomain"),
 	},
 	{
-		key = "s",
-		mods = "SHIFT|CTRL",
+		key = "|",
+		mods = "SHIFT",
 		action = wezterm.action.SplitPane({
 			direction = "Right",
+			size = { Percent = 40 },
+		}),
+	},
+	{
+		key = "_",
+		mods = "SHIFT",
+		action = wezterm.action.SplitPane({
+			direction = "Down",
 			size = { Percent = 40 },
 		}),
 	},
@@ -116,9 +125,11 @@ config.keys = {
 	{ key = "+", mods = "SHIFT|CTRL", action = act.IncreaseFontSize },
 	{ key = "-", mods = "CTRL", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CTRL", action = act.ResetFontSize },
-	{ key = "RightArrow", mods = "CTRL", action = act.ActivatePaneDirection("Right") },
-	{ key = "LeftArrow", mods = "CTRL", action = act.ActivatePaneDirection("Left") },
-	{ key = "w", mods = "ALT", action = act.CloseCurrentTab({ confirm = false }) },
+	{ key = "RightArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Right") },
+	{ key = "LeftArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Left") },
+	{ key = "UpArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Up") },
+	{ key = "DownArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Down") },
+	-- { key = "w",          mods = "ALT",        action = act.CloseCurrentTab({ confirm = false }) },
 	{
 		key = "Enter",
 		mods = "ALT",
@@ -130,19 +141,18 @@ config.inactive_pane_hsb = {
 	saturation = 0.9,
 	brightness = 0.5,
 }
+config.window_background_image = "C:/Users/Максим/castle.jpg"
 config.window_background_image_hsb = {
 	-- Darken the background image by reducing it to 1/3rd
 	brightness = 0.04,
 
 	-- You can adjust the hue by scaling its value.
 	-- a multiplier of 1.0 leaves the value unchanged.
-	hue = 1.0,
+	hue = 5.0,
 
 	-- You can adjust the saturation also.
 	saturation = 1.0,
 }
-config.window_background_image = "C:/Users/Максим/leaf.jpg"
--- config.window_background_image = "~/.dotfiles/misc/img/leaf.png"
 config.default_domain = "WSL:Ubuntu"
 
 return config
