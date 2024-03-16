@@ -1,6 +1,6 @@
 # Base
 sudo apt update && sudo apt upgrade
-sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev xclip fzf shellcheck python3-pip codespell python3.10-venv zsh shfmt
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev xclip fzf shellcheck python3-pip codespell python3.10-venv zsh shfmt ripgrep
 
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -58,7 +58,7 @@ source ~/.zshrc
 cargo install stylua -y
 
 # Python
-pip3 install pynvim virtualenv
+pip3 install pynvim virtualenv vim-vint
 if [! -d ~/.venvs/ ]
     mkdir /venvs && cd ~/venvs
 fi
