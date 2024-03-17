@@ -6,7 +6,7 @@ end
 local installed_parsers = require('plugins.list').ts_parsers
 
 configs.setup({
-    ensure_installed = installed_parsers,
+    -- ensure_installed = installed_parsers,
     sync_install = false,
     ignore_install = {},
     auto_install = true,

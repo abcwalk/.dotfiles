@@ -338,10 +338,15 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        config = load_config('lang.treesitter'),
-        event = { 'BufReadPre', 'BufNewFile' },
+        lazy = false,
+        config = function()
+            local configs = require('nvim-treesitter.configs')
+            configs.setup({
+                sync_install = false,
+                highlight = { enable = true },
+            })
+        end,
     },
-
     -- LSP
     -- {
     --     'folke/neodev.nvim',
