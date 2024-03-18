@@ -38,7 +38,9 @@ local SymbolKind = vim.lsp.protocol.SymbolKind
 
 symbolusage.setup({
     ---@type table<string, any> `nvim_set_hl`-like options for highlight virtual text
-    hl = { fg = '#332626' },
+    -- hl = { fg = '#332626' }, -- black-metal
+    -- hl = { fg = '#a68685' }, -- rose-pine
+    hl = { fg = '#202829' }, -- alabaster
     ---@type lsp.SymbolKind[] Symbol kinds what need to be count (see `lsp.SymbolKind`)
     kinds = { SymbolKind.Function, SymbolKind.Method, SymbolKind.Interface, SymbolKind.Struct, SymbolKind.Class },
     ---Additional filter for kinds. Recommended use in the filetypes override table.

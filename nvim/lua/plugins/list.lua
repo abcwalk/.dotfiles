@@ -16,6 +16,12 @@ local plugins = {
         lazy = false,
     },
     {
+        'shadowofseaice/yabs.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        lazy = false,
+        config = load_config('tools.yabs'),
+    },
+    {
         'b0o/incline.nvim',
         config = function()
             require('incline').setup()
@@ -224,16 +230,66 @@ local plugins = {
     --     lazy = false,
     --     config = load_config('ui.vscode-theme'),
     -- },
-    -- { 'rose-pine/neovim', name = 'rose-pine', lazy = false, config = load_config('ui.rose-pine') },
+    -- {
+    --     'rockerBOO/boo-colorscheme-nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('boo-colorscheme').use({
+    --             italic = false,
+    --             theme = 'boo',
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     'metalelf0/jellybeans-nvim',
+    --     dependencies = { 'rktjmp/lush.nvim' },
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme jellybeans-nvim')
+    --     end,
+    -- },
     {
-        -- 'metalelf0/base16-black-metal-scheme',
-        'behemothbucket/base16-black-metal-scheme',
+        'p00f/alabaster.nvim',
         lazy = false,
         priority = 1000,
-        config = function()
-            vim.cmd('colorscheme base16-black-metal')
-        end,
+        config = load_config('ui.alabaster'),
+        -- config = function()
+        --     vim.cmd('colorscheme alabaster')
+        -- end,
     },
+    -- {
+    --     'rose-pine/neovim',
+    --     name = 'rose-pine',
+    --     lazy = false,
+    --     config = load_config('ui.rose-pine'),
+    -- },
+    -- {
+    --     'behemothbucket/base16-black-metal-scheme',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme base16-black-metal')
+    --     end,
+    -- },
+    -- {
+    --     'behemothbucket/gruber-darker-theme.nvim',
+    --     config = function()
+    --         require('gruber-darker').setup()
+    --         vim.cmd('colorscheme gruber-darker')
+    --     end,
+    --     priority = 1000,
+    --     lazy = false,
+    -- },
+    -- {
+    --     'behemothbucket/dirty-ice-theme.nvim',
+    --     config = function()
+    --         require('dirty-ice').setup()
+    --         vim.cmd('colorscheme dirty-ice')
+    --     end,
+    --     lazy = false,
+    -- },
     -- {
     --     'jesseleite/nvim-noirbuddy',
     --     dependencies = {
@@ -288,8 +344,6 @@ local plugins = {
         'ray-x/go.nvim',
         dependencies = { -- optional packages
             'ray-x/guihua.lua',
-            'neovim/nvim-lspconfig',
-            'nvim-treesitter/nvim-treesitter',
         },
         config = function()
             require('go').setup({
@@ -514,7 +568,7 @@ local tools_sources = {
     'isort',
     'json-to-struct',
     'shellcheck',
-    'beautysh',
+    'shfmt',
 }
 
 return {

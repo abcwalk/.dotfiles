@@ -37,10 +37,13 @@ local servers = {
     -- },
     -- clangd = {},
     pyright = {
+        autoImportCompletion = true,
         python = {
             analysis = {
                 autoSearchPaths = true,
-                diagnosticMode = 'workspace',
+                diagnosticMode = 'openFilesOnly',
+                indexing = true,
+                typeCheckingMode = 'strict',
                 useLibraryCodeForTypes = true,
             },
         },

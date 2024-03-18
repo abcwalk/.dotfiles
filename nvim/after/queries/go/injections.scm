@@ -14,7 +14,6 @@
   (#lua-match? @sql "^`%s*[Uu][Pp][Ss][Ee][Rr][Tt]%s*")
     (#offset! @sql 0 1 0 -1))
 
-
 ((raw_string_literal) @sql
   (#lua-match? @sql "^`%s*[Dd][Ee][Ll][Ee][Tt][Ee]%s*")
     (#offset! @sql 0 1 0 -1))
@@ -50,7 +49,6 @@
 ((interpreted_string_literal) @sql
   (#lua-match? @sql "^`%s*[Uu][Pp][Ss][Ee][Rr][Tt]%s*")
     (#offset! @sql 0 1 0 -1))
-
 
 ((interpreted_string_literal) @sql
   (#lua-match? @sql "^`%s*[Dd][Ee][Ll][Ee][Tt][Ee]%s*")

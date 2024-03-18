@@ -3,6 +3,21 @@ if not status_ok then
     return
 end
 
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+local lsp_format_on_save = function(bufnr)
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+            vim.lsp.buf.format()
+            filter = function(client)
+                return client.name == 'null-ls'
+            end
+        end,
+    })
+end
+
 lsp_zero.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr }
     vim.keymap.set('n', '<Space>f', '<cmd>Lspsaga finder imp+def+ref<CR>', opts)
@@ -21,10 +36,12 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<C-]>', '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
     vim.keymap.set({ 'n', 't' }, '<A-d>', '<cmd>Lspsaga term_toggle<CR>', opts)
     vim.keymap.set({ 'n', 't' }, '<F2>', '<cmd>Lspsaga rename<CR>', opts)
+    lsp_format_on_save(bufnr)
 end)
 
 local installed_servers = require('plugins.list').lsp_servers
 local lspconfig = require('lspconfig')
+local server_settings = require('plugins.lang.servers-settings').server_settings
 
 require('mason').setup({})
 require('mason-lspconfig').setup({

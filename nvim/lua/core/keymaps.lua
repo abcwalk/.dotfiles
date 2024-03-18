@@ -69,8 +69,8 @@ map('n', '<Bslash>f', ':Oil<CR>', { noremap = true, silent = true })
 --Mini.files
 -- map("n", "<Tab><Tab>", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
 
---Yabs
--- map("n", "<Tab><Tab>", ":YABSOpen<CR>:call cursor(1, 1)<CR>", { noremap = true, silent = true })
+-- Yabs
+map('n', '<Tab><Tab>', ':YABSOpen<CR>:call cursor(1, 1)<CR>', { noremap = true, silent = true })
 
 --Harpoon
 -- map("n", "<leader>a", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",
@@ -204,8 +204,8 @@ map('n', '<C-Left>', ':vertical resize -10<CR>', { silent = true })
 map('n', '<C-Right>', ':vertical resize +10<CR>', { silent = true })
 
 --Move lines up and down
-map('n', '<S-Up>', ':m-2<CR>', { noremap = true, silent = true })
-map('n', '<S-Down>', ':m+<CR>', { noremap = true, silent = true })
+map('n', '<C-Up>', ':m-2<CR>', { noremap = true, silent = true })
+map('n', '<C-Down>', ':m+<CR>', { noremap = true, silent = true })
 
 --Add lines above and below
 map('n', '<A-Up>', ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', { noremap = true, silent = true })

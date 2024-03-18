@@ -53,15 +53,41 @@ rose_pine.setup({
     },
 
     highlight_groups = {
-        -- Normal = { bg = '#1b160a' },
-        -- FloatBorder = { bg = 'none' },
-        -- StatusLine = { bg = 'none' },
+        Normal = { bg = 'none' },
+        FloatBorder = { bg = 'none' },
         CursorLine = { bg = 'none' },
-        -- StatusLine = { bg = '#1c1c1c' },
-        -- ColorColumn = { bg = '#1c1c1c' },
+        StatusLine = { bg = '#1a1815' },
+        -- Normal = { bg = '#1b160a' },
+        -- ColorColumn = { bg = '#c1c1c' },
         -- Cursor = { bg = '#c5c9c5', fg = '#181618' },
         -- MatchParen = { bg = 'none', fg = '#338fff', bold = true },
     },
 })
 
 vim.cmd('colorscheme rose-pine')
+
+vim.api.nvim_set_hl(0, 'OilVcsStatusAdded', { bg = 'none', fg = '#31748f' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusCopied', { bg = 'none', fg = '#403d52' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusDeleted', { bg = 'none', fg = '#eb6f92' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusIgnored', { bg = 'none', fg = '#6e6a86' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusModified', { bg = 'none', fg = '#f6c177' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusRenamed', { bg = 'none', fg = '#ebbcba' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { bg = 'none', fg = '#c4a7e7' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamAdded', { bg = 'none', fg = '#31748f' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamCopied', { bg = 'none', fg = '#403d52' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamDeleted', { bg = 'none', fg = '#eb6f92' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamIgnored', { bg = 'none', fg = '#6e6a86' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamModified', { bg = 'none', fg = '#f6c177' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamRenamed', { bg = 'none', fg = '#ebbcba' })
+vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamUntracked', { bg = 'none', fg = '#c4a7e7' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg = 'none', strikethrough = true, fg = '#808080' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg = 'none', fg = '#569CD6' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpIntemAbbrMatch' })
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg = 'none', fg = '#9ccfd8' })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link = 'CmpItemKindVariable' })
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { link = 'CmpItemKindVariable' })
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg = 'none', fg = '#c4a7e7' })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link = 'CmpItemKindFunction' })
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { link = 'CmpItemKindFunction' })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindKeyword' })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindKeyword' })
