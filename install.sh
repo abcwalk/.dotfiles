@@ -16,7 +16,7 @@ npm install -g neovim
 git clone https://github.com/behemothbucket/.dotfiles.git
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
-if [!    -d ~/.config/ ]
+if [! -d ~/.config/ ]
     mkdir -p /.config
 fi
 ln -s ~/.dotfiles/nvim/ ~/.config/nvim

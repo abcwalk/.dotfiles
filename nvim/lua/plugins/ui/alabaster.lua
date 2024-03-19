@@ -80,10 +80,14 @@ if vim.o.background == 'dark' then
         CursorColumn = { bg = '#182325' },
         CursorLine = { bg = 'none' },
         Directory = { fg = ansi.blue },
-        DiffAdd = { bg = '#244032', fg = '#56d364' },
-        DiffDelete = { bg = '#462c32', fg = '#f85149' },
-        DiffText = { fg = '#341a00', bg = '#fff987' },
-        DiffChange = { bg = '#341a00', fg = '#e3b341' },
+        -- DiffAdd = { bg = '#244032', fg = '#56d364' },
+        -- DiffDelete = { bg = '#462c32', fg = '#f85149' },
+        -- DiffText = { fg = '#341a00', bg = '#fff987' },
+        -- DiffChange = { bg = '#341a00', fg = '#e3b341' },
+        DiffAdd = { bg = 'none', fg = '#56d364' },
+        DiffDelete = { bg = 'none', fg = '#f85149' },
+        DiffText = { fg = 'none', bg = '#fff987' },
+        DiffChange = { bg = 'none', fg = '#e3b341' },
         EndOfBuffer = { fg = '#354c50', bg = 'none' },
         -- TermCursor   { }, -- cursor in a focused terminal
         TermCursorNC = { fg = bg, bg = fg },
@@ -119,7 +123,7 @@ if vim.o.background == 'dark' then
         SpellLocal = { undercurl = 1, sp = ansi.cyan },
         SpellRare = { undercurl = 1, sp = ansi.magenta },
         -- StatusLine = { bg = statusline, fg = fg },
-        StatusLine = { bg = '#1c1c1c', fg = fg },
+        StatusLine = { bg = '#202829', fg = fg },
         StatusLineNC = { bg = statusline, fg = '#9f9f9f' },
         TabLine = { bg = statusline, fg = '#7d7d7d' },
         TabLineFill = { bg = statusline },
@@ -199,10 +203,19 @@ if vim.o.background == 'dark' then
         DiagnosticWarn = { fg = warn },
         DiagnosticHint = { fg = hint },
         DiagnosticInfo = { fg = info },
-        DiagnosticVirtualTextError = { bg = '#350B0B', fg = '#D1503A' },
-        DiagnosticVirtualTextWarn = { bg = '#3F240A', fg = '#C8935D' },
-        DiagnosticVirtualTextHint = { bg = '#1D2B37', fg = '#7E9CB9' },
-        DiagnosticVirtualTextInfo = { bg = '#162C0B', fg = '#7BAC62' },
+        -- DiagnosticVirtualTextError = { bg = '#350B0B', fg = '#D1503A' },
+        -- DiagnosticVirtualTextWarn = { bg = '#3F240A', fg = '#C8935D' },
+        -- DiagnosticVirtualTextHint = { bg = '#1D2B37', fg = '#7E9CB9' },
+        -- DiagnosticVirtualTextInfo = { bg = '#162C0B', fg = '#7BAC62' },
+        DiagnosticVirtualTextError = { bg = 'none', fg = '#D1503A' },
+        DiagnosticVirtualTextWarn = { bg = 'none', fg = '#C8935D' },
+        DiagnosticVirtualTextHint = { bg = 'none', fg = '#7E9CB9' },
+        DiagnosticVirtualTextInfo = { bg = 'none', fg = '#7BAC62' },
+        DiagnosticUnderlineError = { underline = 0 },
+        DiagnosticUnderlineHint = { underline = 0 },
+        DiagnosticUnderlineInfo = { underline = 0 },
+        DiagnosticUnderlineOk = { underline = 0 },
+        DiagnosticUnderlineWarn = { underline = 0 },
 
         --- Treesitter
         TSAttribute = {},
@@ -399,24 +412,31 @@ if vim.o.background == 'dark' then
         OilVcsStatusAdded = { bg = 'none', fg = string_fg },
         OilVcsStatusCopied = { bg = 'none', fg = punct_fg },
         OilVcsStatusDeleted = { bg = 'none', fg = red },
-        OilVcsStatusIgnored = { bg = 'none', fg = statusline },
+        OilVcsStatusIgnored = { bg = 'none', fg = darker_fg },
         OilVcsStatusModified = { bg = 'none', fg = warn },
         OilVcsStatusRenamed = { bg = 'none', fg = def_fg },
         OilVcsStatusUntracked = { bg = 'none', fg = const_fg },
         OilVcsStatusUpstreamAdded = { bg = 'none', fg = string_fg },
         OilVcsStatusUpstreamCopied = { bg = 'none', fg = punct_fg },
         OilVcsStatusUpstreamDeleted = { bg = 'none', fg = red },
-        OilVcsStatusUpstreamIgnored = { bg = 'none', fg = statusline },
+        OilVcsStatusUpstreamIgnored = { bg = 'none', fg = darker_fg },
         OilVcsStatusUpstreamModified = { bg = 'none', fg = warn },
         OilVcsStatusUpstreamRenamed = { bg = 'none', fg = def_fg },
         OilVcsStatusUpstreamUntracked = { bg = 'none', fg = const_fg },
 
         -- Languages
+        --sql
+        -- ['@sql'] = { link = '@AlabasterConstant' },
         --- asm
         asmDirective = { fg = dim_comment },
         nasmLabel = { link = '@AlabasterDefinition' },
+        --- go
+        -- ['@type.builtin.go'] = { fg = '#338fff' },
+        ['@function.builtin.go'] = { link = '@AlabasterDefinition' },
         --- python
-        ['@keyword.repeat.python'] = { fg = const_fg },
+        -- ['@keyword.repeat.python'] = { fg = const_fg },
+        --- dockerfile
+        -- ['@keyword.dockerfile'] = { fg = '#71ade7' },
     }
 end
 

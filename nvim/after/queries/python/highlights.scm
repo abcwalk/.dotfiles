@@ -14,12 +14,12 @@
   "case"
 ] @AlabasterDefinition
 
-; [
-;   "for"
-;   "while"
-;   "break"
-;   "continue"
-; ] @Number
+[
+  "for"
+  "while"
+  "break"
+  "continue"
+] @AlabasterDefinition
 
 [
   "try"
@@ -27,7 +27,7 @@
   "except*"
   "raise"
   "finally"
-] @AlabasterHashbang
+] @character.special
 
 (raise_statement
   "from" @AlabasterHashbang)

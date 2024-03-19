@@ -15,6 +15,23 @@ local plugins = {
         config = load_config('tools.arrow'),
         lazy = false,
     },
+    -- {
+    --     'tzachar/local-highlight.nvim',
+    --     config = function()
+    --         require('local-highlight').setup({
+    --             -- file_types = { 'python', 'cpp' }, -- If this is given only attach to this
+    --             -- OR attach to every filetype except:
+    --             -- disable_file_types = { 'tex' },
+    --             -- hlgroup = 'Search',
+    --             -- -- cw_hlgroup = nil,
+    --             -- Whether to display highlights in INSERT mode or not
+    --             insert_mode = false,
+    --             min_match_len = 2,
+    --             max_match_len = math.huge,
+    --         })
+    --     end,
+    --     lazy = false,
+    -- },
     {
         'shadowofseaice/yabs.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -220,10 +237,19 @@ local plugins = {
 
     -- UI
     -- {
-    --   'rebelot/kanagawa.nvim',
-    --   config = load_config('ui.kanagawa'),
-    --   lazy = false,
-    --   priority = 1000,
+    --     'rebelot/kanagawa.nvim',
+    --     config = load_config('ui.kanagawa'),
+    --     lazy = false,
+    --     priority = 1000,
+    -- },
+    -- {
+    --     'bluz71/vim-moonfly-colors',
+    --     name = 'moonfly',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme moonfly')
+    --     end,
     -- },
     -- {
     --     'Mofiqul/vscode.nvim',
@@ -259,6 +285,15 @@ local plugins = {
         --     vim.cmd('colorscheme alabaster')
         -- end,
     },
+    -- {
+    --     'marko-cerovac/material.nvim',
+    --
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme material-deep-ocean')
+    --     end,
+    -- },
     -- {
     --     'rose-pine/neovim',
     --     name = 'rose-pine',
@@ -306,6 +341,15 @@ local plugins = {
     --     config = load_config('ui.darkrose')
     -- },
     -- { "miikanissi/modus-themes.nvim", priority = 1000, lazy = false, config = load_config('ui.modus') },
+    -- {
+    --     'craftzdog/solarized-osaka.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = load_config('ui.solarized-osaka'),
+    --     -- config = function()
+    --     --     vim.cmd('colorscheme solarized-osaka')
+    --     -- end,
+    -- },
     -- {
     --     'Mofiqul/adwaita.nvim',
     --     lazy = false,
@@ -531,6 +575,8 @@ local ts_parsers = {
     'css',
     'gitcommit',
     'go',
+    'gosum',
+    'gomod',
     'html',
     'java',
     'javascript',

@@ -1,6 +1,15 @@
 ;; vim: ft=query
 ;; extends
 
-(object
-  (pair
-    key: (string) @AlabasterString))
+[
+  (true)
+  (false)
+] @boolean
+
+(null) @constant.builtin
+
+(pair
+  key: (string) @AlabasterDefinition)
+
+(pair
+  value: (string) @string)
