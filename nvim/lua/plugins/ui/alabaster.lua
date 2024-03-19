@@ -430,6 +430,9 @@ if vim.o.background == 'dark' then
         --- asm
         asmDirective = { fg = dim_comment },
         nasmLabel = { link = '@AlabasterDefinition' },
+        --- lua
+        ['@module.builtin.lua'] = { link = '@variable' },
+        ['@lsp.typemod.variable.definition.lua'] = { link = '@punctuation.delimiter' },
         --- go
         -- ['@type.builtin.go'] = { fg = '#338fff' },
         ['@function.builtin.go'] = { link = '@AlabasterDefinition' },
