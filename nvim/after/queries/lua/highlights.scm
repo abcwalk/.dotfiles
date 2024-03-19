@@ -1,9 +1,6 @@
 ;; vim: ft=query
 ;; extends
 
-(function_declaration
-  name: (identifier) @AlabasterDefinition)
-
 (assignment_statement
   (variable_list
     name: (dot_index_expression
@@ -18,12 +15,17 @@
     value: (function_definition)))
 
 (function_declaration
-  name: (dot_index_expression
-          field: (identifier) @AlabasterDefinition))
+  name:
+    [
+      (identifier) @function
+      (dot_index_expression
+        field: (identifier) @function)
+    ])
 
-; перетирается
-; (table_constructor
-;   (field name: (identifier) @AlabasterString))
+(function_declaration
+  name:
+    (method_index_expression
+      method: (identifier) @function.method))
 
 (field
   name: (identifier) @keyword)
