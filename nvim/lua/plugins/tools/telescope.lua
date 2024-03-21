@@ -3,5 +3,17 @@ if not status_ok then
     return
 end
 
-telescope.setup()
-require('telescope').load_extension('projects')
+telescope.setup({
+    pickers = {
+        find_files = {
+            theme = 'ivy',
+        },
+        live_grep = {
+            theme = 'ivy',
+        },
+        grep_string = {
+            theme = 'ivy',
+        },
+    },
+})
+-- require('telescope').load_extension('projects')
