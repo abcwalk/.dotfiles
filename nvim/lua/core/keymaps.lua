@@ -49,22 +49,6 @@ map('n', '<leader>q', '<cmd>TroubleToggle quickfix<cr>', { silent = true, norema
 --   ApplyTheme()
 -- end)
 
---Projects
-map(
-    'n',
-    '<leader>p',
-    ":lua require'telescope'.extensions.projects.projects{}<CR>",
-    { noremap = true, silent = true, nowait = true }
-)
-
--- Toggle background
-map(
-    'n',
-    '<M-t>',
-    ':exec &bg=="light"? "set bg=dark || hi Normal guibg=none" : "set bg=light"<CR>',
-    { noremap = true, silent = true }
-)
-
 --Lazy
 -- map("n", "<leader>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait = true })
 
@@ -189,9 +173,10 @@ map('n', '<F3>', ':e ~/.config/nvim/lua/<CR>', { noremap = true, silent = true }
 -- map("n", '<c-i>', require('nvim-toggler').toggle, { silent = true, nowait = true })
 
 -- Telescope
-map('n', '<Bslash>g', '<cmd>Telescope live_grep theme=ivy<CR>', { noremap = true, silent = true })
-map('n', '<Bslash>f', '<cmd>Telescope find_files theme=ivy<CR>', { noremap = true, silent = true })
-map('n', '<Bslash>w', '<cmd>Telescope grep_string theme=ivy<CR>', { noremap = true, silent = true })
+map('n', '<Bslash><Bslash>', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true, nowait = true })
+map('n', '<C-f>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true, nowait = true })
+map('n', '<C-w>', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true, nowait = true })
+map('n', '<leader>p', '<cmd>Telescope projects theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
 
 --Source current file
 map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
@@ -222,7 +207,7 @@ map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { nor
 
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map('n', '<leader><Space>', '<cmd>lcd %:p:h<CR><cmd>pwd<CR>', { noremap = true, silent = false })
+map('n', '<leader><leader>', '<cmd>lcd %:p:h<CR><cmd>pwd<CR>', { noremap = true, silent = false })
 
 -- Copy entire buffer.
 map('n', '<leader>y', "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
