@@ -284,8 +284,8 @@ if vim.o.background == 'dark' then
         ['@type'] = { fg = ansi.white },
         ['@type.builtin'] = { fg = ansi.white },
         ['@variable'] = { fg = ansi.white },
-        -- ['@variable.builtin'] = { fg = ansi.white },
-        ['@variable.builtin'] = { link = '@punctuation.special' },
+        ['@variable.builtin'] = { fg = ansi.white },
+        -- ['@variable.builtin'] = { link = '@punctuation.special' },
         ['@tag'] = { fg = ansi.white },
         ['@tag.delimiter'] = { fg = punct_fg },
         ['@text'] = { fg = ansi.white },
@@ -425,21 +425,65 @@ if vim.o.background == 'dark' then
         OilVcsStatusUpstreamUntracked = { bg = 'none', fg = const_fg },
 
         -- Languages
-        --sql
-        -- ['@sql'] = { link = '@AlabasterConstant' },
+        --- bash
+        ['@function.bash'] = { link = '@AlabasterDefinition' },
+        ['@keyword.directive.bash'] = { link = 'Special' },
+        ['@operator.bash'] = { link = 'Operator' },
+        ['@constant.bash'] = { link = 'Constant' },
         --- asm
         asmDirective = { fg = dim_comment },
         nasmLabel = { link = '@AlabasterDefinition' },
         --- lua
+        ['@keyword.lua'] = { link = '@AlabasterConstant' },
+        ['@keyword.conditional.lua'] = { link = '@AlabasterDefinition' },
+        ['@keyword.repeat.lua'] = { link = '@AlabasterDefinition' },
         ['@module.builtin.lua'] = { link = '@variable' },
+        ['@keyword.operator.lua'] = { link = '@AlabasterConstant' },
         ['@lsp.typemod.variable.definition.lua'] = { link = '@punctuation.delimiter' },
+        ['@lsp.typemod.function.declaration.lua'] = { link = '@AlabasterDefinition' },
+        ['@AlabasterString.lua'] = { link = '@variable' },
+        ['@keyword.return.lua'] = { link = '@AlabasterConstant' },
         --- go
-        -- ['@type.builtin.go'] = { fg = '#338fff' },
+        ['@keyword.go'] = { link = '@AlabasterDefinition' },
         ['@function.builtin.go'] = { link = '@AlabasterDefinition' },
+        ['@type.builtin.go'] = { link = '@AlabasterDefinition' },
+        ['@keyword.import.go'] = { link = '@AlabasterConstant' },
+        ['@keyword.coroutine.go'] = { link = '@AlabasterConstant' },
+        ['@keyword.return.go'] = { link = '@AlabasterConstant' },
+        ['@keyword.conditional.go'] = { link = '@AlabasterConstant' },
+        ['@keyword.repeat.go'] = { link = '@AlabasterConstant' },
+        ['@constant.builtin.go'] = { link = '@AlabasterConstant' },
+        ['@type.go'] = { link = '@AlabasterDefinition' },
+        ['@type.definition.go'] = { link = '@AlabasterDefinition' },
+        --- gomod
+        ['@keyword.gomod'] = { link = '@AlabasterConstant' },
         --- python
-        -- ['@keyword.repeat.python'] = { fg = const_fg },
+        ['@keyword.python'] = { link = '@AlabasterConstant' },
+        ['@variable.builtin.python'] = { link = '@AlabasterConstant' },
+        ['@constant.builtin.python'] = { link = '@AlabasterConstant' },
+        ['@keyword.conditional.python'] = { link = '@AlabasterDefinition' },
+        ['@keyword.repeat.python'] = { link = '@AlabasterDefinition' },
+        ['@keyword.exception.python'] = { link = '@AlabasterConstant' },
+        ['@keyword.import.python'] = { link = '@AlabasterConstant' },
+        ['@type.builtin.python'] = { link = '@AlabasterDefinition' },
+        ['@attribute.python'] = { link = 'Operator' },
+        ['@keyword.return.python'] = { link = '@AlabasterConstant' },
         --- dockerfile
-        -- ['@keyword.dockerfile'] = { fg = '#71ade7' },
+        ['@keyword.dockerfile'] = { link = '@AlabasterDefinition' },
+        ['@operator.dockerfile'] = { link = 'Operator' },
+        ['@punctuation.special.dockerfile'] = { link = 'Operator' },
+        --- yml
+        ['@property.yml'] = { link = '@AlabasterDefinition' },
+        --- ini
+        ['@type.ini'] = { link = '@AlabasterConstant' },
+        ['@property.ini'] = { link = '@AlabasterConstant' },
+        ['@operator.ini'] = { link = 'Operator' },
+        --- json
+        ['@boolean.json'] = { link = 'Boolean' },
+        ['@constant.builtin.json'] = { link = '@AlabasterConstant' },
+        ['@number.json'] = { link = '@AlabasterConstant' },
+        ['@string.json'] = { link = '@String' },
+        ['@property.json'] = { link = '@AlabasterDefinition' },
     }
 end
 

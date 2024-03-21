@@ -57,6 +57,14 @@ map(
     { noremap = true, silent = true, nowait = true }
 )
 
+-- Toggle background
+map(
+    'n',
+    '<M-t>',
+    ':exec &bg=="light"? "set bg=dark || hi Normal guibg=none" : "set bg=light"<CR>',
+    { noremap = true, silent = true }
+)
+
 --Lazy
 -- map("n", "<leader>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait = true })
 
@@ -280,10 +288,10 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- mapn", "<leader>nc", ":Neotree close<CR>")
 
 -- Spider
--- map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' })
--- map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-e' })
--- map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-b' })
--- map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-ge' })
+map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' })
+map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-e' })
+map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-b' })
+map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-ge' })
 
 -- Startify
 -- map('n', '<leader>s', '<cmd>Startify<CR>', { noremap = true, silent = true, nowait = true })

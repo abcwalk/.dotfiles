@@ -108,11 +108,10 @@ local plugins = {
         config = load_config('tools.surround'),
         lazy = false,
     },
-    -- {
-    --     'chrisgrieser/nvim-spider',
-    --     config = load_config('tools.spider'),
-    --     event = { 'BufReadPre', 'BufNewFile' },
-    -- },
+    {
+        'chrisgrieser/nvim-spider',
+        config = load_config('tools.spider'),
+    },
     {
         'abecodes/tabout.nvim',
         config = load_config('tools.tabout'),
@@ -281,9 +280,6 @@ local plugins = {
         lazy = false,
         priority = 1000,
         config = load_config('ui.alabaster'),
-        -- config = function()
-        --     vim.cmd('colorscheme alabaster')
-        -- end,
     },
     -- {
     --     'marko-cerovac/material.nvim',
