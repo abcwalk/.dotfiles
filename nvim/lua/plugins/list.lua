@@ -276,10 +276,12 @@ local plugins = {
     --     end,
     -- },
     {
-        'p00f/alabaster.nvim',
+        'behemothbucket/alabaster.nvim',
         lazy = false,
         priority = 1000,
-        config = load_config('ui.alabaster'),
+        config = function()
+            vim.cmd('colorscheme alabaster')
+        end,
     },
     -- {
     --     'marko-cerovac/material.nvim',
@@ -591,7 +593,7 @@ local ts_parsers = {
 local lsp_servers = {
     'bashls',
     'gopls',
-    'jsonls',
+    -- 'jsonls',
     'lua_ls',
     'pyright',
 }

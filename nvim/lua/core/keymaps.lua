@@ -189,8 +189,9 @@ map('n', '<F3>', ':e ~/.config/nvim/lua/<CR>', { noremap = true, silent = true }
 -- map("n", '<c-i>', require('nvim-toggler').toggle, { silent = true, nowait = true })
 
 -- Telescope
-map('n', 'lg', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
-map('n', 'lf', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
+map('n', '<Bslash>g', '<cmd>Telescope live_grep theme=ivy<CR>', { noremap = true, silent = true })
+map('n', '<Bslash>f', '<cmd>Telescope find_files theme=ivy<CR>', { noremap = true, silent = true })
+map('n', '<Bslash>w', '<cmd>Telescope grep_string theme=ivy<CR>', { noremap = true, silent = true })
 
 --Source current file
 map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
