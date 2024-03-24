@@ -403,9 +403,16 @@ local plugins = {
             'ray-x/guihua.lua',
         },
         event = { 'CmdlineEnter' },
+        config = load_config('lang.go'),
         ft = { 'go', 'gomod' },
         build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
         lazy = false,
+    },
+    {
+        -- Linting
+        'mfussenegger/nvim-lint',
+        event = { 'BufReadPre', 'BufNewFile' },
+        config = load_config('lang.lint'),
     },
     -- {
     --     'maxmx03/dracula.nvim',
@@ -519,11 +526,11 @@ local plugins = {
     --     end,
     --     lazy = false,
     -- },
-    -- {
-    --     'stevearc/conform.nvim',
-    --     config = load_config('lang.conform'),
-    --     lazy = false,
-    -- },
+    {
+        'stevearc/conform.nvim',
+        config = load_config('lang.conform'),
+        lazy = false,
+    },
     -- {
     --     'ThePrimeagen/refactoring.nvim',
     --     config = load_config('lang.refactoring'),
@@ -562,7 +569,6 @@ local plugins = {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
             },
-            { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-tree/nvim-web-devicons' },
         },
         config = load_config('tools.telescope'),

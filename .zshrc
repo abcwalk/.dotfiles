@@ -126,13 +126,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init -)"
 fi
 
+export GOPATH=~/go
+export GOROOT=/usr/local/go
+export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="$PATH:/usr/local/go/bin"
-export GOROOT=/usr/local/go
-export GOPATH="~/go"
-export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
-export PATH="$PATH:/opt/nvim-linux64/bin"
-export PATH="$PATH:/usr/local/go/bin"
-export GOROOT=/usr/local/go
-export GOPATH="~/go"
-export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"

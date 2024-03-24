@@ -18,7 +18,7 @@ conform.setup({
         --     'golines',
         -- },
         python = { 'black', 'isort' },
-        bash = { 'beautysh' },
+        bash = { 'shfmt' },
         ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
     },

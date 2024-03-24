@@ -15,7 +15,7 @@ local diag = null_ls.builtins.diagnostics
 local hover = null_ls.builtins.hover
 -- local action = null_ls.builtins.code_actions
 local comp = null_ls.builtins.completion
-local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+-- local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
 -- Buily in sources: https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
 null_ls.setup({
