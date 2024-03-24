@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 rose_pine.setup({
-    variant = 'auto',      -- auto, main, moon, or dawn
+    variant = 'auto', -- auto, main, moon, or dawn
     dark_variant = 'main', -- main, moon, or dawn
     dim_inactive_windows = false,
     extend_background_behind_borders = true,
@@ -12,7 +12,7 @@ rose_pine.setup({
     enable = {
         terminal = true,
         legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-        migrations = true,        -- Handle deprecated options automatically
+        migrations = true, -- Handle deprecated options automatically
     },
 
     styles = {
@@ -65,6 +65,15 @@ rose_pine.setup({
 })
 
 vim.cmd('colorscheme rose-pine')
+
+-- TODO
+-- FIXME
+-- BUG
+-- WARN
+-- XXX
+-- TEST
+-- HACK
+-- PERF
 
 vim.api.nvim_set_hl(0, 'OilVcsStatusAdded', { bg = 'none', fg = '#31748f' })
 vim.api.nvim_set_hl(0, 'OilVcsStatusCopied', { bg = 'none', fg = '#403d52' })

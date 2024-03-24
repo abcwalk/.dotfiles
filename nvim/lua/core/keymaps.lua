@@ -150,7 +150,7 @@ map('n', '/', [[/\v]])
 -- map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
 
 -- Noh
-map('n', '<leader>l', '<Cmd>noh<CR>', { noremap = true, silent = true })
+map('n', '<leader>l', '<cmd>noh<CR>', { noremap = true, silent = true })
 
 --Escape -> jj
 map('i', 'jj', '<Esc>', { nowait = true })
@@ -175,7 +175,7 @@ map('n', '<F3>', ':e ~/.config/nvim/lua/<CR>', { noremap = true, silent = true }
 -- Telescope
 map('n', '<Bslash><Bslash>', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true, nowait = true })
 map('n', '<C-f>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true, nowait = true })
-map('n', '<C-w>', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true, nowait = true })
+-- map('n', '<C-w>', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true, nowait = true })
 map('n', '<leader>p', '<cmd>Telescope projects theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
 
 --Source current file

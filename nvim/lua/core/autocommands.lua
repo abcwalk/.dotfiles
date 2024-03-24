@@ -81,15 +81,26 @@ api.nvim_create_autocmd('FileType', {
 -- })
 
 --Highlight on yank
-api.nvim_create_augroup('YankHighlightGrp', {})
+-- api.nvim_create_augroup('YankHighlightGrp', {})
+-- api.nvim_create_autocmd('TextYankPost', {
+--     group = 'YankHighlightGrp',
+--     pattern = '*',
+--     callback = function()
+--         vim.highlight.on_yank({
+--             higroup = 'IncSearch',
+--             timeout = 200,
+--         })
+--     end,
+-- })
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
 api.nvim_create_autocmd('TextYankPost', {
-    group = 'YankHighlightGrp',
-    pattern = '*',
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
     callback = function()
-        vim.highlight.on_yank({
-            higroup = 'IncSearch',
-            timeout = 200,
-        })
+        vim.highlight.on_yank()
     end,
 })
 
@@ -303,6 +314,12 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 --   group = "lsp_diagnostics_hold",
 --   command = "lua OpenDiagnosticIfNoFloat()",
 -- })
+
+-- Or, you can disable all semantic highlights by clearing all the groups
+
+for _, group in ipairs(vim.fn.getcompletion('@lsp', 'highlight')) do
+    vim.api.nvim_set_hl(0, group, {})
+end
 
 --Toggle-checkbox Markdown
 local checked_character = 'x'

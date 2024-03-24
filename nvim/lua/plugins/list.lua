@@ -6,6 +6,18 @@ end
 
 local plugins = {
     -- Tools
+    -- {
+    --     'tpope/vim-sleuth',
+    --     lazy = false,
+    -- },
+    {
+        'asiryk/auto-hlsearch.nvim',
+        tag = '1.1.0',
+        lazy = false,
+        config = function()
+            require('auto-hlsearch').setup()
+        end,
+    },
     {
         'otavioschwanck/arrow.nvim',
         opts = {
@@ -34,7 +46,6 @@ local plugins = {
     -- },
     {
         'shadowofseaice/yabs.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
         lazy = false,
         config = load_config('tools.yabs'),
     },
@@ -192,7 +203,6 @@ local plugins = {
     -- },
     {
         'stevearc/oil.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = load_config('tools.oil'),
         lazy = false,
     },
@@ -338,7 +348,12 @@ local plugins = {
     --     priority = 1000,
     --     config = load_config('ui.darkrose')
     -- },
-    -- { "miikanissi/modus-themes.nvim", priority = 1000, lazy = false, config = load_config('ui.modus') },
+    -- {
+    --     'miikanissi/modus-themes.nvim',
+    --     priority = 1000,
+    --     lazy = false,
+    --     -- config = load_config('ui.modus')
+    -- },
     -- {
     --     'craftzdog/solarized-osaka.nvim',
     --     lazy = false,
@@ -387,16 +402,10 @@ local plugins = {
         dependencies = { -- optional packages
             'ray-x/guihua.lua',
         },
-        config = function()
-            require('go').setup({
-                diagnostic = {
-                    virtual_text = false,
-                },
-            })
-        end,
         event = { 'CmdlineEnter' },
         ft = { 'go', 'gomod' },
         build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+        lazy = false,
     },
     -- {
     --     'maxmx03/dracula.nvim',
@@ -421,6 +430,7 @@ local plugins = {
             'saadparwaiz1/cmp_luasnip',
         },
         config = load_config('lang.cmp'),
+        lazy = false,
         event = 'InsertEnter',
     },
     {
@@ -435,13 +445,7 @@ local plugins = {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         lazy = false,
-        config = function()
-            local configs = require('nvim-treesitter.configs')
-            configs.setup({
-                sync_install = false,
-                highlight = { enable = true },
-            })
-        end,
+        config = load_config('lang.treesitter'),
     },
     -- LSP
     -- {
@@ -465,37 +469,47 @@ local plugins = {
         lazy = false,
         config = load_config('lang.swenv'),
     },
+    -- {
+    --     'VonHeikemen/lsp-zero.nvim',
+    --     branch = 'v3.x',
+    --     dependencies = {
+    --         'neovim/nvim-lspconfig',
+    --         'williamboman/mason-lspconfig.nvim',
+    --     },
+    --     config = load_config('lang.lsp-zero'),
+    --     event = { 'BufReadPre', 'BufNewFile' },
+    -- },
+    -- {
+    --     'nvimdev/lspsaga.nvim',
+    --     config = load_config('lang.lspsaga'),
+    --     event = 'LspAttach',
+    -- },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
+        'neovim/nvim-lspconfig',
         dependencies = {
-            'neovim/nvim-lspconfig',
+            -- Automatically install LSPs and related tools to stdpath for Neovim
+            'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
-        },
-        config = load_config('lang.lsp-zero'),
-        event = { 'BufReadPre', 'BufNewFile' },
-    },
-    {
-        'nvimdev/lspsaga.nvim',
-        config = load_config('lang.lspsaga'),
-        event = 'LspAttach',
-    },
-    {
-        'williamboman/mason.nvim',
-        dependencies = {
             'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+            -- Useful status updates for LSP.
+            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+            { 'j-hui/fidget.nvim', opts = {} },
+            -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
+            -- used for completion, annotations and signatures of Neovim apis
+            -- { 'folke/neodev.nvim', opts = {} },
         },
-        config = load_config('lang.mason'),
-        cmd = 'Mason',
+        config = load_config('lang.lspconfig'),
+        lazy = false,
     },
-    {
-        'nvimtools/none-ls.nvim',
-        config = load_config('lang.none-ls'),
-        dependencies = {
-            'jay-babu/mason-null-ls.nvim',
-        },
-        event = { 'BufReadPre', 'BufNewFile' },
-    },
+    -- {
+    --     'nvimtools/none-ls.nvim',
+    --     config = load_config('lang.none-ls'),
+    --     dependencies = {
+    --         'jay-babu/mason-null-ls.nvim',
+    --     },
+    --     event = { 'BufReadPre', 'BufNewFile' },
+    -- },
     -- {
     --     'folke/trouble.nvim',
     --     config = function()
@@ -507,8 +521,6 @@ local plugins = {
     -- },
     -- {
     --     'stevearc/conform.nvim',
-    --     event = { 'BufWritePre' },
-    --     cmd = { 'ConformInfo' },
     --     config = load_config('lang.conform'),
     --     lazy = false,
     -- },
@@ -550,6 +562,8 @@ local plugins = {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
             },
+            { 'nvim-telescope/telescope-ui-select.nvim' },
+            { 'nvim-tree/nvim-web-devicons' },
         },
         config = load_config('tools.telescope'),
         cmd = 'Telescope',
@@ -560,7 +574,7 @@ local plugins = {
         'lewis6991/gitsigns.nvim',
         config = load_config('tools.gitsigns'),
         cmd = 'Gitsigns',
-        event = { 'BufReadPre', 'BufNewFile' },
+        lazy = false,
     },
     {
         'tpope/vim-fugitive',
@@ -568,56 +582,6 @@ local plugins = {
     },
 }
 
-local ts_parsers = {
-    'bash',
-    'css',
-    'gitcommit',
-    'go',
-    'gosum',
-    'gomod',
-    'html',
-    'java',
-    'javascript',
-    'json',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'python',
-    'rust',
-    'typescript',
-    'vim',
-    'vimdoc',
-    'yaml',
-}
-
-local lsp_servers = {
-    'bashls',
-    'gopls',
-    -- 'jsonls',
-    'lua_ls',
-    'pyright',
-}
-
-local tools_sources = {
-    'black',
-    'codespell',
-    'editorconfig-checker',
-    'gofumpt',
-    'goimports',
-    'golines',
-    'golangci-lint',
-    'goimports-reviser',
-    'gotests',
-    'impl',
-    'isort',
-    'json-to-struct',
-    'shellcheck',
-    'shfmt',
-}
-
 return {
     plugins = plugins,
-    ts_parsers = ts_parsers,
-    lsp_servers = lsp_servers,
-    tools_sources = tools_sources,
 }
