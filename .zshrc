@@ -107,9 +107,6 @@ fi
 alias n="nvim"
 
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export EDITOR='neovim'
 
 alias m='pgrep -vx tmux > /dev/null && \
@@ -130,3 +127,12 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$PATH:/usr/local/go/bin"
+export GOROOT=/usr/local/go
+export GOPATH="~/go"
+export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/usr/local/go/bin"
+export GOROOT=/usr/local/go
+export GOPATH="~/go"
+export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
