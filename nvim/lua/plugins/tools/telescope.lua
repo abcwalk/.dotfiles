@@ -4,6 +4,14 @@ if not status_ok then
 end
 
 telescope.setup({
+    -- extensions = {
+    --     ['ui-select'] = {
+    --         require('telescope.themes').get_ivy({}),
+    --     },
+    --     specific_opts = {
+    --         codeactions = false,
+    --     },
+    -- },
     pickers = {
         find_files = {
             theme = 'ivy',
@@ -21,6 +29,7 @@ telescope.setup({
 })
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'projects')
+-- pcall(require('telescope').load_extension, 'ui-select')
 
 local builtin = require('telescope.builtin')
 

@@ -306,6 +306,11 @@ vim.api.nvim_create_autocmd('BufHidden', {
 --   command = "lua OpenDiagnosticIfNoFloat()",
 -- })
 
+-- Or, you can disable all semantic highlights by clearing all the groups
+for _, group in ipairs(vim.fn.getcompletion('@lsp', 'highlight')) do
+    vim.api.nvim_set_hl(0, group, {})
+end
+
 --Toggle-checkbox Markdown
 local checked_character = 'x'
 

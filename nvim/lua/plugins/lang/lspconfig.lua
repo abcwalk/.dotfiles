@@ -47,7 +47,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map('<leader>ca', vim.lsp.buf.code_action)
+        -- map('<leader>ca', vim.lsp.buf.code_action)
+        map('<leader>ca', require('actions-preview').code_actions)
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap.
@@ -359,6 +360,8 @@ vim.list_extend(ensure_installed, {
 })
 require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
+local lsp = require('lspconfig')
+
 require('mason-lspconfig').setup({
     handlers = {
         function(server_name)
@@ -367,16 +370,18 @@ require('mason-lspconfig').setup({
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            lsp[server_name].setup(server)
         end,
     },
 })
 
 --- UI
 
+require('lspconfig.ui.windows').default_options.border = 'rounded'
+
 vim.diagnostic.config({
     virtual_text = false,
-    -- update_in_insert = true,
+    update_in_insert = false,
     underline = false,
     severity_sort = true,
     float = {
