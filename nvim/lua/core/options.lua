@@ -70,7 +70,7 @@ vim.g.maplocalleader = ' '
 ---------------------------------------------------------------------------------------------------
 local possible_python_paths = {
     -- Extend the list for possible python path. Will use the 1st possible one
-    os.getenv('HOME') .. '/qa/autotests_jm_landing/.venv/bin/python3', -- Python3's venv (dev)
+    os.getenv('HOME') .. '/qa/automaps_jm_landing/.venv/bin/python3', -- Python3's venv (dev)
     -- os.getenv("HOME") .. "/opt/anaconda3/envs/dev/bin/python",          -- MacOS's conda (dev)
     -- os.getenv("HOME") .. "/anaconda3/envs/dev/bin/python",              -- Linux's conda (dev)
     -- os.getenv('HOME') .. '/.conda/envs/dev/bin/python',                 -- Linux's alternative conda (dev)
@@ -106,3 +106,25 @@ end
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
+--- Statusline
+-- statusline
+-- cf the default statusline: %<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
+-- format markers:
+--   %< truncation point
+--   %n buffer number
+--   %f relative path to file
+--   %m modified flag [+] (modified), [-] (unmodifiable) or nothing
+--   %r readonly flag [RO]
+--   %y filetype [ruby]
+--   %= split point for left and right justification
+--   %-35. width specification
+--   %l current line number
+--   %L number of lines in buffer
+--   %c current column number
+--   %V current virtual column number (-n), if different from %c
+--   %P percentage through buffer
+--   %) end of width specification
+
+vim.opt.statusline = '  %<%f       L:%l    %h%m%r'

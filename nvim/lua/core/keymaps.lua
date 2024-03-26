@@ -240,7 +240,7 @@ map('i', '<A-;>', '<Esc>A;<Esc>i')
 -- This is going to get me cancelled
 vim.keymap.set('i', '<C-c>', '<Esc>')
 
--- greatest remap ever
+-- greamap remap ever
 vim.keymap.set('x', 'p', [["_dP]])
 
 -- map('n', '<F5>', function()
@@ -283,9 +283,11 @@ map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { de
 -- map('n', '<leader>s', '<cmd>Startify<CR>', { noremap = true, silent = true, nowait = true })
 
 -- Spectre
--- map(
---     'n',
---     '<C-f>',
---     '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
---     { noremap = true, silent = true }
--- )
+map('n', '<F12>', '<cmd>lua require("spectre").toggle()<CR>', { noremap = true, silent = true })
+map(
+    'n',
+    '<leader>.',
+    '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+    { noremap = true, silent = true }
+)
+map('v', '<leader>.', '<esc><cmd>lua require("spectre").open_visual()<CR>', { noremap = true, silent = true })

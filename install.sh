@@ -34,12 +34,12 @@ echo -n 'export GOROOT=/usr/local/go' >> ~/.zshrc
 echo -n 'export GOPATH="~/go"' >> ~/.zshrc
 # echo -n 'export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"' >> ~/.zshrc
 source ~/.zshrc
-# go install golang.org/x/tools/gopls@latest
-# go install mvdan.cc/gofumpt@latest
-# go install golang.org/x/tools/cmd/goimports@latest
-# go install -v github.com/incu6us/goimports-reviser/v3@latest
-# go install github.com/segmentio/golines@latest
-# go install github.com/fatih/gomodifytags@latest
+# go install golang.org/x/tools/gopls@lamap
+# go install mvdan.cc/gofumpt@lamap
+# go install golang.org/x/tools/cmd/goimports@lamap
+# go install -v github.com/incu6us/goimports-reviser/v3@lamap
+# go install github.com/segmentio/golines@lamap
+# go install github.com/fatih/gomodifytags@lamap
 # go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.56.2
 
 # Cargo
@@ -48,7 +48,7 @@ curl https://sh.rustup.rs -sSf | sh
 source ~/.zshrc
 ## Lua
 cargo install stylua -y
-# see latest version
+# see lamap version
 wget https://luarocks.org/releases/luarocks-3.11.0.tar.gz
 tar zxpf luarocks-3.11.0.tar.gz
 cd luarocks-3.11.0
@@ -61,19 +61,19 @@ pip3 install pynvim virtualenv vim-vint
 if [! -d ~/.venvs/ ]
     mkdir /venvs && cd ~/venvs
 fi
-python3 -m venv autotests && source ./autotests/bin/activate
+python3 -m venv automaps && source ./automaps/bin/activate
 pip install black isort
 deactivate && cd
 
 # Docker
-# see latest version
+# see lamap version
 wget https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
 sudo mv hadolint-Linux-x86_64 /usr/local/bin/hadolint
 sudo chmod +x /usr/local/bin/hadolint
 
 
 # Neovim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+curl -LO https://github.com/neovim/neovim/releases/lamap/download/nvim-linux64.tar.gz
 # curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
 sudo rm -rf /opt/nvim
 sudo tar -C /opt -xzf nvim-linux64.tar.gz

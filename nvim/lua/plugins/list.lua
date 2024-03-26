@@ -221,22 +221,22 @@ local plugins = {
         lazy = false,
         config = load_config('tools.autopairs'),
     },
-    -- {
-    --     'sindrets/diffview.nvim',
-    --     opts = {
-    --         view = {
-    --             merge_tool = {
-    --                 layout = 'diff3_mixed',
-    --             },
-    --         },
-    --     },
-    --     lazy = false,
-    -- },
-    -- {
-    --     'windwp/nvim-spectre',
-    --     config = load_config('tools.spectre'),
-    --     cmd = 'Spectre',
-    -- },
+    {
+        'sindrets/diffview.nvim',
+        opts = {
+            view = {
+                merge_tool = {
+                    layout = 'diff3_mixed',
+                },
+            },
+        },
+        lazy = false,
+    },
+    {
+        'windwp/nvim-spectre',
+        config = load_config('tools.spectre'),
+        cmd = 'Spectre',
+    },
     -- {
     --     'lukas-reineke/indent-blankline.nvim',
     --     event = { 'BufReadPost', 'BufNewFile' },
@@ -421,10 +421,10 @@ local plugins = {
     --     config = load_config('ui.dracula'),
     -- },
     -- {
-    --     'yanskun/gotests.nvim',
+    --     'yanskun/gomaps.nvim',
     --     ft = 'go',
     --     config = function()
-    --         require('gotests').setup()
+    --         require('gomaps').setup()
     --     end,
     -- },
     {

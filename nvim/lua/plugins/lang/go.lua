@@ -13,8 +13,8 @@ go.setup({
     -- max_line_len = 0, -- max line length in golines format, Target maximum line length for golines
     -- tag_transform = false, -- can be transform option("snakecase", "camelcase", etc) check gomodifytags for details and more options
     -- tag_options = 'json=omitempty', -- sets options sent to gomodifytags, i.e., json=omitempty
-    -- gotests_template = '', -- sets gotests -template parameter (check gotests for details)
-    -- gotests_template_dir = '', -- sets gotests -template_dir parameter (check gotests for details)
+    -- gomaps_template = '', -- sets gomaps -template parameter (check gomaps for details)
+    -- gomaps_template_dir = '', -- sets gomaps -template_dir parameter (check gomaps for details)
     -- comment_placeholder = '', -- comment_placeholder your cool placeholder e.g. 󰟓       
     -- icons = { breakpoint = '🧘', currentpos = '🏃' }, -- setup to `false` to disable icons setup
     -- icons = false, -- setup to `false` to disable icons setup
@@ -95,8 +95,8 @@ go.setup({
     -- dap_retries = 20, -- see dap option max_retries
     -- build_tags = 'tag1,tag2', -- set default build tags
     -- textobjects = true, -- enable default text objects through treesittter-text-objects
-    -- test_runner = 'go', -- one of {`go`, `richgo`, `dlv`, `ginkgo`, `gotestsum`}
-    -- verbose_tests = true, -- set to add verbose flag to tests deprecated, see '-v' option
+    -- map_runner = 'go', -- one of {`go`, `richgo`, `dlv`, `ginkgo`, `gomapsum`}
+    -- verbose_maps = true, -- set to add verbose flag to maps deprecated, see '-v' option
     -- run_in_floaterm = false, -- set to true to run in a float window. :GoTermClose closes the floatterm
     -- float term recommend if you use richgo/ginkgo with terminal color
 

@@ -71,7 +71,7 @@ vim.cmd('colorscheme rose-pine')
 -- BUG
 -- WARN
 -- XXX
--- TEST
+-- map
 -- HACK
 -- PERF
 

@@ -1,3 +1,9 @@
+-- Jump between diagnostics
+-- Независимо от LSP
+vim.keymap.set('n', '<C-[>', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<C-]>', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>ca', require('actions-preview').code_actions)
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
     callback = function(event)
@@ -19,10 +25,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
-        map('gd', require('telescope.builtin').lsp_definitions)
+        map('<leader>d', require('telescope.builtin').lsp_definitions)
 
         -- Find references for the word under your cursor.
-        map('gr', require('telescope.builtin').lsp_references)
+        map('<leader>r', require('telescope.builtin').lsp_references)
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
@@ -48,15 +54,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
         -- map('<leader>ca', vim.lsp.buf.code_action)
-        map('<leader>ca', require('actions-preview').code_actions)
+        -- map('<leader>ca', require('actions-preview').code_actions)
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap.
         map('K', vim.lsp.buf.hover)
-
-        -- Jump between diagnostics
-        map('<C-[>', vim.diagnostic.goto_prev)
-        map('<C-]>', vim.diagnostic.goto_next)
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
@@ -190,7 +192,7 @@ local servers = {
         --         -- codelenses = {
         --         --     generate = true, -- show the `go generate` lens.
         --         --     gc_details = true, -- Show a code lens toggling the display of gc's choices.
-        --         --     test = true,
+        --         --     map = true,
         --         --     tidy = true,
         --         --     vendor = true,
         --         --     regenerate_cgo = true,
@@ -289,7 +291,7 @@ local servers = {
                 codelenses = {
                     generate = true, -- show the `go generate` lens.
                     gc_details = true, -- Show a code lens toggling the display of gc's choices.
-                    test = true,
+                    map = true,
                     tidy = true,
                     vendor = true,
                     regenerate_cgo = true,
@@ -347,16 +349,19 @@ vim.list_extend(ensure_installed, {
     'stylua',
     'black',
     'flake8',
+    'vale',
+    'markdownlint',
     -- 'gofumpt',
     -- 'goimports',
     -- 'golines',
     -- 'golangci-lint',
     -- 'goimports-reviser',
-    -- 'gotests',
+    -- 'gomaps',
     -- 'impl',
     'isort',
     'shellcheck',
     'shfmt',
+    'yamllint',
 })
 require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 

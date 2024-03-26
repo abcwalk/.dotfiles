@@ -36,7 +36,7 @@ api.nvim_create_autocmd('FileType', {
     pattern = { 'python' },
     callback = function()
         -- require('swenv.api').auto_venv()
-        require('swenv.api').set_venv('autotests')
+        require('swenv.api').set_venv('automaps')
     end,
 })
 
@@ -120,7 +120,7 @@ end
 vim.api.nvim_create_autocmd('FileType', {
     group = augroup('close_with_q'),
     pattern = {
-        'PlenaryTestPopup',
+        'PlenarymapPopup',
         'help',
         'lspinfo',
         'man',
@@ -129,10 +129,10 @@ vim.api.nvim_create_autocmd('FileType', {
         'spectre_panel',
         'startuptime',
         'tsplayground',
-        'neotest-output',
+        'neomap-output',
         'checkhealth',
-        'neotest-summary',
-        'neotest-output-panel',
+        'neomap-summary',
+        'neomap-output-panel',
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
