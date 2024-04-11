@@ -25,6 +25,12 @@ telescope.setup({
         lsp_references = {
             theme = 'ivy',
         },
+        diagnostics = {
+            theme = 'ivy',
+            layout_config = {
+                vertical = { width = 0.5 },
+            },
+        },
     },
 })
 pcall(require('telescope').load_extension, 'fzf')

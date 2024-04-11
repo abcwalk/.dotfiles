@@ -8,6 +8,8 @@ if not snip_status_ok then
     return
 end
 
+local compare = require('cmp.config.compare')
+
 local kind_icons = {
     Text = '',
     Method = '󰆧',
@@ -37,8 +39,6 @@ local kind_icons = {
 }
 
 require('luasnip/loaders/from_vscode').lazy_load()
-
-local compare = require('cmp.config.compare')
 
 cmp.setup({
     snippet = {
@@ -90,6 +90,9 @@ cmp.setup({
             's',
         }),
     },
+    completion = {
+        completeopt = 'menu,menuone,noinsert',
+    },
     formatting = {
         fields = { 'abbr', 'menu', 'kind' },
         expandable_indicator = true,
@@ -118,18 +121,18 @@ cmp.setup({
     sorting = {
         priority_weight = 2,
         comparators = {
-            -- require("copilot_cmp.comparators").prioritize,
-            -- require("copilot_cmp.comparators").score,
             compare.offset,
             compare.exact,
-            -- compare.scopes,
             compare.score,
             compare.recently_used,
             compare.locality,
-            -- compare.kind,
             compare.sort_text,
             compare.length,
             compare.order,
+            -- compare.scopes,
+            -- compare.kind,
+            -- require("copilot_cmp.comparators").score,
+            -- require("copilot_cmp.comparators").prioritize,
             -- require("copilot_cmp.comparators").prioritize,
             -- require("copilot_cmp.comparators").score,
         },

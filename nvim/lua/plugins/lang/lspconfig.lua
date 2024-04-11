@@ -8,10 +8,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
     callback = function(event)
         local bufnr = event.buf
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
-            vim.lsp.inlay_hint.enable(bufnr, true)
-        end
+        -- local client = vim.lsp.get_client_by_id(event.data.client_id)
+        -- if client and client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
+        --     vim.lsp.inlay_hint.enable(bufnr, true)
+        -- end
 
         -- NOTE: Remember that Lua is a real programming language, and as such it is possible
         -- to define small helper and utility functions so you don't have to repeat yourself.
@@ -22,34 +22,51 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set('n', keys, func, { buffer = event.buf })
         end
 
+        map('<Space>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
+        map('<Space>d', '<cmd>Lspsaga finder def<CR>')
+        map('<Space>i', '<cmd>Lspsaga finder imp<CR>')
+        map('<Space>r', '<cmd>Lspsaga finder ref<CR>')
+        map('K', '<cmd>Lspsaga hover_doc<CR>')
+        map('<Space>ca', '<cmd>Lspsaga code_action<CR>')
+        map('gD', '<cmd>Lspsaga peek_definition<CR>')
+        map('gT', '<cmd>Lspsaga peek_type_definition<CR>')
+        map('gd', '<cmd>Lspsaga goto_definition<CR>')
+        map('<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>')
+        map('<M-l>o', '<cmd>Lspsaga outline<CR>')
+        map('<A-d>', '<cmd>Lspsaga term_toggle<CR>')
+        map('<F2>', '<cmd>Lspsaga rename<CR>')
+
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
-        map('<leader>d', require('telescope.builtin').lsp_definitions)
+        -- map('<leader>d', require('telescope.builtin').lsp_definitions)
 
         -- Find references for the word under your cursor.
-        map('<leader>r', require('telescope.builtin').lsp_references)
+        -- map('<leader>r', require('telescope.builtin').lsp_references)
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map('gI', require('telescope.builtin').lsp_implementations)
+        -- map('gI', require('telescope.builtin').lsp_implementations)
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        map('<leader>D', require('telescope.builtin').lsp_type_definitions)
+        -- map('<leader>D', require('telescope.builtin').lsp_type_definitions)
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        map('<leader>ds', require('telescope.builtin').lsp_document_symbols)
+        -- map('<leader>ds', require('telescope.builtin').lsp_document_symbols)
+
+        -- Quickfix menu Project
+        -- map('<leader>q', require('telescope.builtin').diagnostics)
 
         -- Fuzzy find all the symbols in your current workspace.
         --  Similar to document symbols, except searches over your entire project.
-        map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
+        -- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map('<F2>', vim.lsp.buf.rename)
+        -- map('<F2', vim.lsp.buf.rename)
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
@@ -58,17 +75,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap.
-        map('K', vim.lsp.buf.hover)
+        -- map('K', vim.lsp.buf.hover)
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
-        map('gD', vim.lsp.buf.declaration)
+        -- map('gD', vim.lsp.buf.declaration)
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed
-        --
-        -- When you move your cursor, the highlights will be cleared (the second autocommand).
         -- local client = vim.lsp.get_client_by_id(event.data.client_id)
         -- if client and client.server_capabilities.documentHighlightProvider then
         --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -278,16 +293,16 @@ local servers = {
                 -- https://github.com/golangci/golangci-lint/issues/741#issuecomment-1488116634
                 --
                 -- staticcheck = true,
-                usePlaceholders = true,
-                hints = {
-                    -- assignVariableTypes = true,
-                    compositeLiteralFields = true,
+                usePlaceholders = false,
+                -- hints = {
+                -- assignVariableTypes = true,
+                --[[ compositeLiteralFields = true,
                     compositeLiteralTypes = true,
                     constantValues = true,
                     functionTypeParameters = true,
-                    parameterNames = true,
-                    -- rangeVariableTypes = true,
-                },
+                    parameterNames = true, ]]
+                -- rangeVariableTypes = true,
+                -- },
                 codelenses = {
                     generate = true, -- show the `go generate` lens.
                     gc_details = true, -- Show a code lens toggling the display of gc's choices.

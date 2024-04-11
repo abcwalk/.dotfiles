@@ -13,12 +13,12 @@ saga.setup({
         scroll_up = '<C-b>',
     },
     finder = {
-        default = 'imp+def+ref',
+        default = 'tyd+ref+imp+def',
         keys = {
             toggle_or_open = '<CR>',
             vsplit = '<C-v>',
             split = '<C-x>',
-            quit = 'q',
+            quit = '<C-c>',
             -- close = 'q',
         },
     },
@@ -28,14 +28,14 @@ saga.setup({
     symbol_in_winbar = {
         enable = false,
         -- separator = '  ',
-        hide_keyword = true,
-        show_file = false,
+        hide_keyword = false,
+        show_file = true,
+        folder_level = 2,
     },
     implement = {
-        enable = false,
+        enable = true,
         sign = true,
         virtual_text = false,
-        -- priority = 100,
     },
     request_timeout = 2500,
     definition = {
@@ -43,7 +43,7 @@ saga.setup({
             edit = '<CR>',
             vsplit = '<C-v>',
             split = '<C-x>',
-            quit = 'q',
+            quit = '<C-c>',
         },
     },
     diagnostic = {

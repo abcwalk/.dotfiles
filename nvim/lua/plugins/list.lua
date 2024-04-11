@@ -119,10 +119,19 @@ local plugins = {
         config = load_config('tools.surround'),
         lazy = false,
     },
-    {
-        'chrisgrieser/nvim-spider',
-        config = load_config('tools.spider'),
-    },
+    -- {
+    --     'chrisgrieser/nvim-spider',
+    --     config = load_config('tools.spider'),
+    -- },
+    -- {
+    --     'Verf/deepwhite.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd([[colorscheme deepwhite]])
+    --         vim.api.nvim_set_hl(0, "WarningMsg", { bg = "none", fg = "#f27900" })
+    --     end,
+    -- },
     {
         'abecodes/tabout.nvim',
         config = load_config('tools.tabout'),
@@ -149,7 +158,7 @@ local plugins = {
         event = 'VeryLazy',
         keys = {
             {
-                'f',
+                's',
                 mode = { 'n', 'x', 'o' },
                 function()
                     require('flash').jump()
@@ -435,6 +444,7 @@ local plugins = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
             'saadparwaiz1/cmp_luasnip',
+            'lukas-reineke/cmp-under-comparator',
         },
         config = load_config('lang.cmp'),
         lazy = false,
@@ -486,11 +496,11 @@ local plugins = {
     --     config = load_config('lang.lsp-zero'),
     --     event = { 'BufReadPre', 'BufNewFile' },
     -- },
-    -- {
-    --     'nvimdev/lspsaga.nvim',
-    --     config = load_config('lang.lspsaga'),
-    --     event = 'LspAttach',
-    -- },
+    {
+        'nvimdev/lspsaga.nvim',
+        config = load_config('lang.lspsaga'),
+        event = 'LspAttach',
+    },
     {
         'neovim/nvim-lspconfig',
         dependencies = {

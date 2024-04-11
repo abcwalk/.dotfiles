@@ -127,4 +127,4 @@ end
 --   %P percentage through buffer
 --   %) end of width specification
 
-vim.opt.statusline = '  %<%f       L:%l    %h%m%r'
+vim.opt.statusline = '%<%f %h%m%r'

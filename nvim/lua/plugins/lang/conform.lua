@@ -4,19 +4,19 @@ if not status_ok then
 end
 
 local slow_format_filetypes = {
-    -- 'go',
+    'go',
     'python',
 }
 
 conform.setup({
     formatters_by_ft = {
         lua = { 'stylua' },
-        -- go = {
-        --     'goimports',
-        --     'gofumpt',
-        --     'goimports_reviser',
-        --     'golines',
-        -- },
+        go = {
+            'goimports',
+            'gofumpt',
+            'goimports_reviser',
+            'golines',
+        },
         python = { 'black', 'isort' },
         bash = { 'shfmt' },
         ['*'] = { 'codespell' },
@@ -34,7 +34,6 @@ conform.setup({
 
         return { timeout_ms = 200, lsp_fallback = true }, on_format
     end,
-
     format_after_save = function(bufnr)
         if not slow_format_filetypes[vim.bo[bufnr].filetype] then
             return
@@ -43,12 +42,3 @@ conform.setup({
     end,
     notify_on_error = false,
 })
-
--- local format_sync_grp = vim.api.nvim_create_augroup('goimports', {})
--- vim.api.nvim_create_autocmd('BufWritePre', {
---     pattern = '*.go',
---     callback = function()
---         require('go.format').goimports()
---     end,
---     group = format_sync_grp,
--- })

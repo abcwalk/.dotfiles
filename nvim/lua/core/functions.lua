@@ -3,5 +3,5 @@ vim.api.nvim_create_user_command('Swenv', function()
 end, {})
 
 vim.api.nvim_create_user_command('Dos2Unix', function()
-    vim.cmd([[%s/\r//]])
+    vim.cmd([[%s/\r$//]])
 end, {})
