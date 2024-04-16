@@ -18,7 +18,7 @@ saga.setup({
             toggle_or_open = '<CR>',
             vsplit = '<C-v>',
             split = '<C-x>',
-            quit = '<C-c>',
+            quit = 'q',
             -- close = 'q',
         },
     },

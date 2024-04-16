@@ -501,6 +501,29 @@ local plugins = {
         config = load_config('lang.lspsaga'),
         event = 'LspAttach',
     },
+    -- {
+    --     'zbirenbaum/neodim',
+    --     event = 'LspAttach',
+    --     config = function()
+    --         require('neodim').setup({
+    --             refresh_delay = 75,
+    --             alpha = 0.75,
+    --             blend_color = '#696969',
+    --             hide = {
+    --                 underline = false,
+    --                 virtual_text = true,
+    --                 signs = true,
+    --             },
+    --             regex = {
+    --                 '[uU]nused',
+    --                 '[nN]ever [rR]ead',
+    --                 '[nN]ot [rR]ead',
+    --             },
+    --             priority = 128,
+    --             disable = {},
+    --         })
+    --     end,
+    -- },
     {
         'neovim/nvim-lspconfig',
         dependencies = {
@@ -518,6 +541,14 @@ local plugins = {
         },
         config = load_config('lang.lspconfig'),
         lazy = false,
+    },
+    {
+        'ray-x/lsp_signature.nvim',
+        event = 'VeryLazy',
+        opts = {},
+        config = function(_, opts)
+            require('lsp_signature').setup(opts)
+        end,
     },
     -- {
     --     'nvimtools/none-ls.nvim',

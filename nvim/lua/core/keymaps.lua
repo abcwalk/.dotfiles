@@ -177,6 +177,7 @@ map('n', '<Bslash><Bslash>', '<cmd>Telescope live_grep<CR>', { noremap = true, s
 map('n', '<C-f>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true, nowait = true })
 -- map('n', '<C-w>', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true, nowait = true })
 map('n', '<leader>p', '<cmd>Telescope projects theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
+map('n', '<Tab><Tab>', '<cmd>Telescope buffers theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
 
 --Source current file
 map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })

@@ -31,6 +31,9 @@ telescope.setup({
                 vertical = { width = 0.5 },
             },
         },
+        buffers = {
+            theme = 'ivy',
+        },
     },
 })
 pcall(require('telescope').load_extension, 'fzf')

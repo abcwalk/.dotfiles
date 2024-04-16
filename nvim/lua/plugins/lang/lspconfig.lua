@@ -22,16 +22,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set('n', keys, func, { buffer = event.buf })
         end
 
-        map('<Space>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
-        map('<Space>d', '<cmd>Lspsaga finder def<CR>')
-        map('<Space>i', '<cmd>Lspsaga finder imp<CR>')
-        map('<Space>r', '<cmd>Lspsaga finder ref<CR>')
+        map('<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
+        map('<leader>d', '<cmd>Lspsaga finder def<CR>')
+        map('<leader>i', '<cmd>Lspsaga finder imp<CR>')
+        map('<leader>r', '<cmd>Lspsaga finder ref<CR>')
         map('K', '<cmd>Lspsaga hover_doc<CR>')
-        map('<Space>ca', '<cmd>Lspsaga code_action<CR>')
+        map('<leader>ca', '<cmd>Lspsaga code_action<CR>')
         map('gD', '<cmd>Lspsaga peek_definition<CR>')
         map('gT', '<cmd>Lspsaga peek_type_definition<CR>')
         map('gd', '<cmd>Lspsaga goto_definition<CR>')
-        map('<C-g>d', '<cmd>Lspsaga show_buf_diagnostics<CR>')
+        map('<leader>q', '<cmd>Lspsaga show_workspace_diagnostics<CR>')
         map('<M-l>o', '<cmd>Lspsaga outline<CR>')
         map('<A-d>', '<cmd>Lspsaga term_toggle<CR>')
         map('<F2>', '<cmd>Lspsaga rename<CR>')
@@ -213,15 +213,15 @@ local servers = {
         --         --     regenerate_cgo = true,
         --         --     upgrade_dependency = true,
         --         -- },
-        --         hints = {
-        --             -- assignVariableTypes = true,
+        -- hints = {
+        --     --             -- assignVariableTypes = true,
         --             compositeLiteralFields = true,
         --             compositeLiteralTypes = true,
         --             constantValues = true,
-        --             functionTypeParameters = true,
-        --             parameterNames = true,
+        -- functionTypeParameters = true,
+        -- parameterNames = true,
         --             -- rangeVariableTypes = true,
-        --         },
+        -- },
         --         usePlaceholders = false,
         --         completeUnimported = true,
         --         staticcheck = true,
@@ -296,11 +296,11 @@ local servers = {
                 usePlaceholders = false,
                 -- hints = {
                 -- assignVariableTypes = true,
-                --[[ compositeLiteralFields = true,
-                    compositeLiteralTypes = true,
-                    constantValues = true,
-                    functionTypeParameters = true,
-                    parameterNames = true, ]]
+                -- compositeLiteralFields = true,
+                -- compositeLiteralTypes = true,
+                -- constantValues = true,
+                -- functionTypeParameters = true,
+                -- parameterNames = true,
                 -- rangeVariableTypes = true,
                 -- },
                 codelenses = {
@@ -395,6 +395,18 @@ require('mason-lspconfig').setup({
     },
 })
 
+--- Signature Help
+
+local cfg = {
+    bind = true,
+    max_width = 100,
+    hint_enable = true, -- virtual hint enable
+    -- floating_window = false,
+    hint_prefix = '⚡️ ',
+}
+
+require('lsp_signature').setup(cfg)
+
 --- UI
 
 require('lspconfig.ui.windows').default_options.border = 'rounded'
@@ -411,6 +423,11 @@ vim.diagnostic.config({
         source = 'always',
         header = '',
         prefix = '',
+    },
+    signs = {
+        linehl = {
+            [vim.diagnostic.severity.ERROR] = 'Error',
+        },
     },
 })
 
