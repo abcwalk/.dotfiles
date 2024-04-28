@@ -62,7 +62,7 @@ cmp.setup({
             c = cmp.mapping.close(),
         }),
         ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
+            behavior = cmp.ConfirmBehavior.Insert,
             select = false,
         }),
         ['<Tab>'] = cmp.mapping(function(fallback)
@@ -118,6 +118,7 @@ cmp.setup({
             's',
         }),
     },
+    preselect = cmp.PreselectMode.None, -- Выбирать всегда подсказку
     completion = {
         completeopt = 'menu,menuone,noinsert',
     },
@@ -140,10 +141,10 @@ cmp.setup({
     sources = {
         -- { name = 'copilot' },
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
         { name = 'nvim_lua' },
-        { name = 'luasnip' },
     },
     sorting = {
         priority_weight = 2,
@@ -165,8 +166,8 @@ cmp.setup({
         },
     },
     confirm_opts = {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
     },
     window = {
         documentation = {
@@ -180,6 +181,6 @@ cmp.setup({
         scrollbar = true,
     },
     experimental = {
-        ghost_text = true,
+        ghost_text = false,
     },
 })

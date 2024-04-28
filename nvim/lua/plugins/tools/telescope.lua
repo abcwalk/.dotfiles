@@ -25,6 +25,9 @@ telescope.setup({
         lsp_references = {
             theme = 'ivy',
         },
+        oldfiles = {
+            theme = 'ivy',
+        },
         diagnostics = {
             theme = 'ivy',
             layout_config = {

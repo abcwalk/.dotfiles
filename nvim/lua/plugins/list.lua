@@ -19,14 +19,72 @@ local plugins = {
         end,
     },
     {
-        'otavioschwanck/arrow.nvim',
-        opts = {
-            show_icons = true,
-            leader_key = ';',
-        },
-        config = load_config('tools.arrow'),
+        'scottmckendry/cyberdream.nvim',
         lazy = false,
+        priority = 1000,
+        config = load_config('ui.cyberdream'),
     },
+    {
+        'kdheepak/lazygit.nvim',
+        cmd = {
+            'LazyGit',
+            'LazyGitConfig',
+            'LazyGitCurrentFile',
+            'LazyGitFilter',
+            'LazyGitFilterCurrentFile',
+        },
+        -- optional for floating window border decoration
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        -- setting the keybinding for LazyGit with 'keys' is recommended in
+        -- order to load the plugin when the command is run for the first time
+        keys = {
+            { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+        },
+    },
+    -- {
+    --     'romgrk/barbar.nvim',
+    --     enabled = true,
+    --     dependencies = 'nvim-web-devicons',
+    --     config = function()
+    --         vim.api.nvim_set_hl(0, 'BufferDefaultTabpageFill', { bg = 'none' })
+    --     end,
+    --     lazy = false,
+    -- },
+    -- {
+    --     'nvim-neo-tree/neo-tree.nvim',
+    --     branch = 'v3.x',
+    --     lazy = false,
+    --     dependencies = {
+    --         'nvim-lua/plenary.nvim',
+    --         'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+    --         'MunifTanjim/nui.nvim',
+    --         -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    --     },
+    --     config = function()
+    --         require('neo-tree').setup({
+    --             close_if_last_window = true,
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     'nvim-tree/nvim-tree.lua',
+    --     enabled = true,
+    --     dependencies = {
+    --         'nvim-tree/nvim-web-devicons',
+    --     },
+    --     config = load_config('tools.nvim-tree'),
+    -- },
+    -- {
+    --     'otavioschwanck/arrow.nvim',
+    --     opts = {
+    --         show_icons = true,
+    --         leader_key = ';',
+    --     },
+    --     config = load_config('tools.arrow'),
+    --     lazy = false,
+    -- },
     -- {
     --     'tzachar/local-highlight.nvim',
     --     config = function()
@@ -49,14 +107,14 @@ local plugins = {
         lazy = false,
         config = load_config('tools.yabs'),
     },
-    {
-        'b0o/incline.nvim',
-        config = function()
-            require('incline').setup()
-        end,
-        -- Optional: Lazy load Incline
-        event = 'VeryLazy',
-    },
+    -- {
+    --     'b0o/incline.nvim',
+    --     config = function()
+    --         require('incline').setup()
+    --     end,
+    -- Optional: Lazy load Incline
+    --     event = 'VeryLazy',
+    -- },
     {
         'NvChad/nvim-colorizer.lua',
         enabled = true,
@@ -294,14 +352,22 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
-    {
-        'behemothbucket/alabaster.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd('colorscheme alabaster')
-        end,
-    },
+    -- {
+    --     'behemothbucket/alabaster.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme alabaster')
+    --     end,
+    -- },
+    -- {
+    --     'mikesmithgh/gruvsquirrel.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme gruvsquirrel')
+    --     end,
+    -- },
     -- {
     --     'marko-cerovac/material.nvim',
     --
@@ -584,31 +650,31 @@ local plugins = {
             })
         end,
     },
-    {
-        'aznhe21/actions-preview.nvim',
-        config = function()
-            require('actions-preview').setup({
-                -- options related to telescope.nvim
-                telescope = vim.tbl_extend(
-                    'force',
-                    -- telescope theme: https://github.com/nvim-telescope/telescope.nvim#themes
-                    require('telescope.themes').get_ivy(),
-                    -- a table for customizing content
-                    {
-                        -- a function to make a table containing the values to be displayed.
-                        -- fun(action: Action): { title: string, client_name: string|nil }
-                        make_value = nil,
-
-                        -- a function to make a function to be used in `display` of a entry.
-                        -- see also `:h telescope.make_entry` and `:h telescope.pickers.entry_display`.
-                        -- fun(values: { index: integer, action: Action, title: string, client_name: string }[]): function
-                        make_make_display = nil,
-                    }
-                ),
-            })
-        end,
-        lazy = false,
-    },
+    -- {
+    --     'aznhe21/actions-preview.nvim',
+    --     config = function()
+    --         require('actions-preview').setup({
+    --             -- options related to telescope.nvim
+    --             telescope = vim.tbl_extend(
+    --                 'force',
+    --                 -- telescope theme: https://github.com/nvim-telescope/telescope.nvim#themes
+    --                 require('telescope.themes').get_ivy(),
+    --                 -- a table for customizing content
+    --                 {
+    --                     -- a function to make a table containing the values to be displayed.
+    --                     -- fun(action: Action): { title: string, client_name: string|nil }
+    --                     make_value = nil,
+    --
+    --                     -- a function to make a function to be used in `display` of a entry.
+    --                     -- see also `:h telescope.make_entry` and `:h telescope.pickers.entry_display`.
+    --                     -- fun(values: { index: integer, action: Action, title: string, client_name: string }[]): function
+    --                     make_make_display = nil,
+    --                 }
+    --             ),
+    --         })
+    --     end,
+    --     lazy = false,
+    -- },
     -- { 'nvim-telescope/telescope-ui-select.nvim' },
     {
         'stevearc/conform.nvim',

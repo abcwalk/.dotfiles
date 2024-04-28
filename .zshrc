@@ -105,6 +105,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias n="nvim"
+alias nn="nvim -c 'Telescope oldfiles'"
 
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 export EDITOR='neovim'
@@ -129,5 +130,6 @@ fi
 export GOPATH=~/go
 export GOROOT=/usr/local/go
 export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

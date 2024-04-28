@@ -58,6 +58,9 @@ map('n', '<leader>q', '<cmd>TroubleToggle quickfix<cr>', { silent = true, norema
 --Oil
 map('n', '<Bslash>f', ':Oil<CR>', { noremap = true, silent = true })
 
+--- Neotree
+-- map('n', '<Bslash>f', ':Neotree<CR>', { noremap = true, silent = true })
+
 --Mini.files
 -- map("n", "<Tab><Tab>", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
 
@@ -150,7 +153,7 @@ map('n', '/', [[/\v]])
 -- map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
 
 -- Noh
-map('n', '<leader>l', '<cmd>noh<CR>', { noremap = true, silent = true })
+map('n', '<c-l>', '<cmd>noh<CR>', { noremap = true, silent = true })
 
 --Escape -> jj
 map('i', 'jj', '<Esc>', { nowait = true })
@@ -159,7 +162,7 @@ map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
 map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
 map('t', '<Esc>', '<C-Bslash><C-n>', { nowait = true })
 
---Open URL in browser (Windows
+--Open URL in browser (Windows)
 -- vnoremap <silent> <C-F5> :<C-U>let old_reg=@"<CR>gvy:silent!!cmd /cstart <C-R><C-R>"<CR><CR>:let @"=old_reg<CR>
 map('n', 'gx', ':silent !xdg-open <cfile><CR>', { noremap = true, silent = true }) -- Not work properly
 
@@ -183,15 +186,15 @@ map('n', '<Tab><Tab>', '<cmd>Telescope buffers theme=ivy<CR>', { noremap = true,
 map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
 --Tab navigation
--- map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
--- map('n', '<A-Right>', ':bnext<CR>', { silent = true })
+map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
+map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
 -- map('n', '<A-d>', '<cmd>bprevious <bar> bdelete #<cr>', { silent = true })
 -- map('n', '<A-q>', ':wqa<CR>', { silent = true })
 map('n', '<C-s>', ':w<CR>')
 -- map('n', '<A-w>', ':q<CR>', { silent = true })
 map('n', '<A-q>', ':bdelete<CR>', { silent = true })
--- map("n", "<A-c>", ":BufferClose<CR>", { silent = true })
+map('n', '<A-c>', ':BufferClose<CR>', { silent = true })
 -- map("n", "<A-d>", ":w <Bar> bdelete<CR>", { silent = true })
 
 --Resize tab
