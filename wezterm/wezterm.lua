@@ -94,15 +94,18 @@ config.window_frame = {
 	-- inactive_titlebar_bg = colors.dark_palette.bg1,
 	-- inactive_titlebar_fg = colors.dark_palette.fg1,
 }
-config.tab_bar_at_bottom = true
+-- config.tab_bar_at_bottom = true
 config.window_padding = {
-	top = 15,
-	bottom = 15,
+	top = 0,
+	bottom = 0,
+	left = 0,
+	right = 0,
 }
 config.font_size = 16
 -- config.window_decorations = "RESIZE"
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
+config.show_new_tab_button_in_tab_bar = false
 config.use_fancy_tab_bar = false
 -- config.hide_tab_bar_if_only_one_tab = true
 config.colors = {
@@ -164,18 +167,22 @@ config.inactive_pane_hsb = {
 	saturation = 0.9,
 	brightness = 0.65,
 }
-config.window_background_image = "C:/Users/Максим/cas.jpg"
-config.window_background_image_hsb = {
-	-- Darken the background image by reducing it to 1/3rd
-	brightness = 0.025,
 
-	-- You can adjust the hue by scaling its value.
-	-- a multiplier of 1.0 leaves the value unchanged.
-	hue = 1.0,
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	config.window_background_image = "C:/Users/Максим/cas.jpg"
+	config.default_domain = "WSL:Ubuntu"
+	config.window_background_image_hsb = {
+		-- Darken the background image by reducing it to 1/3rd
+		brightness = 0.025,
 
-	-- You can adjust the saturation also.
-	saturation = 1.0,
-}
-config.default_domain = "WSL:Ubuntu"
+		-- You can adjust the hue by scaling its value.
+		-- a multiplier of 1.0 leaves the value unchanged.
+		hue = 1.0,
+
+		-- You can adjust the saturation also.
+		saturation = 1.0,
+	}
+end
+-- x86_64-unknown-linux-gnu
 
 return config

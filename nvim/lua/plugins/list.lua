@@ -19,7 +19,7 @@ local plugins = {
         end,
     },
     {
-        'scottmckendry/cyberdream.nvim',
+        'behemothbucket/cyberdream.nvim',
         lazy = false,
         priority = 1000,
         config = load_config('ui.cyberdream'),

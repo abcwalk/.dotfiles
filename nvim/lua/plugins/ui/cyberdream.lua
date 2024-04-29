@@ -12,11 +12,11 @@ cyberdream.setup({
     terminal_colors = true,
     theme = {
         highlights = {
-            Normal = { fg = '#cecece' },
-            Constant = { fg = colors.magenta },
+            -- Normal = { fg = '#cecece' },
+            Constant = { fg = colors.magenta, bold = true },
             StatusLine = { fg = '#cecece' },
             ModeMsg = { link = 'Comment' },
-            MsgArea = { link = 'Comment' },
+            -- MsgArea = { link = 'Comment' },
         },
     },
 })
