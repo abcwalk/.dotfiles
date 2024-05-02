@@ -94,7 +94,7 @@ config.window_frame = {
 	-- inactive_titlebar_bg = colors.dark_palette.bg1,
 	-- inactive_titlebar_fg = colors.dark_palette.fg1,
 }
--- config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = true
 config.window_padding = {
 	top = 0,
 	bottom = 0,
