@@ -360,7 +360,13 @@ local plugins = {
     --         vim.cmd('colorscheme alabaster')
     --     end,
     -- },
-    { 'EdenEast/nightfox.nvim', lazy = false, config = load_config('ui.nightfox') },
+    {
+        'behemothbucket/mellow.nvim',
+        lazy = false,
+        priority = 1000,
+        config = load_config('ui.mellow'),
+    },
+    -- { 'EdenEast/nightfox.nvim', lazy = false, config = load_config('ui.nightfox') },
     -- {
     --     'NTBBloodbath/doom-one.nvim',
     --     lazy = false,

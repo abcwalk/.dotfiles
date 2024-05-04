@@ -52,7 +52,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Wryan"
+config.color_scheme = "nightfox"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
 -- 		background = "#0e1415",
@@ -95,12 +95,12 @@ config.window_frame = {
 	-- inactive_titlebar_fg = colors.dark_palette.fg1,
 }
 config.tab_bar_at_bottom = true
-config.window_padding = {
-	top = 0,
-	bottom = 0,
-	left = 0,
-	right = 0,
-}
+-- config.window_padding = {
+-- 	top = 0,
+-- 	bottom = 0,
+-- 	left = 0,
+-- 	right = 0,
+-- }
 config.font_size = 16
 -- config.window_decorations = "RESIZE"
 config.default_cursor_style = "SteadyBlock"
