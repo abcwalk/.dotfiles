@@ -14,7 +14,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ln -s ${ZSH_CUSTOM}/themes/minimal/minimal.zsh ${ZSH_CUSTOM}/themes/minimal.zsh-theme
 # then update `ZSH_THEME` to `minimal` in your .zshrc
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="refined"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

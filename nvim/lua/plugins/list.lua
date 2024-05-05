@@ -52,22 +52,11 @@ local plugins = {
     --     end,
     --     lazy = false,
     -- },
-    -- {
-    --     'nvim-neo-tree/neo-tree.nvim',
-    --     branch = 'v3.x',
-    --     lazy = false,
-    --     dependencies = {
-    --         'nvim-lua/plenary.nvim',
-    --         'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-    --         'MunifTanjim/nui.nvim',
-    --         -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    --     },
-    --     config = function()
-    --         require('neo-tree').setup({
-    --             close_if_last_window = true,
-    --         })
-    --     end,
-    -- },
+    {
+        'nvim-neo-tree/neo-tree.nvim',
+        lazy = false,
+        config = load_config('tools.neotree'),
+    },
     -- {
     --     'nvim-tree/nvim-tree.lua',
     --     enabled = true,
@@ -282,6 +271,38 @@ local plugins = {
     --     'vidocqh/auto-indent.nvim',
     --     lazy = false,
     -- },
+
+    -- {
+    --     'echasnovski/mini.indentscope',
+    --     lazy = false,
+    --     config = function()
+    --         vim.api.nvim_create_autocmd('FileType', {
+    --             pattern = {
+    --                 'NeogitPopup',
+    --                 'Trouble',
+    --                 'alpha',
+    --                 'dashboard',
+    --                 'floaterm',
+    --                 'help',
+    --                 'lazy',
+    --                 'lazyterm',
+    --                 'mason',
+    --                 'neo-tree',
+    --                 'neogit',
+    --                 'notify',
+    --                 'toggleterm',
+    --             },
+    --             callback = function()
+    --                 vim.b.miniindentscope_disable = true
+    --             end,
+    --         })
+    --         require('mini.indentscope').setup({
+    --             draw = {
+    --                 animation = require('mini.indentscope').gen_animation.none(),
+    --             },
+    --         })
+    --     end,
+    -- },
     {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
@@ -304,12 +325,12 @@ local plugins = {
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
     },
-    -- {
-    --     'lukas-reineke/indent-blankline.nvim',
-    --     event = { 'BufReadPost', 'BufNewFile' },
-    --     main = 'ibl',
-    --     config = load_config('ui.indent-blankline'),
-    -- },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        event = { 'BufReadPost', 'BufNewFile' },
+        main = 'ibl',
+        config = load_config('ui.indent-blankline'),
+    },
 
     -- UI
     -- {
@@ -360,12 +381,37 @@ local plugins = {
     --         vim.cmd('colorscheme alabaster')
     --     end,
     -- },
+    -- {
+    --     'behemothbucket/mellow.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = load_config('ui.mellow'),
+    -- },
     {
-        'behemothbucket/mellow.nvim',
+        'ronisbr/nano-theme.nvim',
         lazy = false,
         priority = 1000,
-        config = load_config('ui.mellow'),
+        init = function()
+            vim.o.background = 'light'
+            vim.cmd('colorscheme nano-theme')
+        end,
     },
+    -- {
+    --     'yorickpeterse/nvim-grey',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme grey')
+    --     end,
+    -- },
+    -- {
+    --     'xiantang/darcula-dark.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme darcula-dark')
+    --     end,
+    -- },
     -- { 'EdenEast/nightfox.nvim', lazy = false, config = load_config('ui.nightfox') },
     -- {
     --     'NTBBloodbath/doom-one.nvim',
@@ -503,11 +549,11 @@ local plugins = {
     --         vim.cmd('colorscheme zenburn')
     --     end,
     -- },
-    -- {
-    --     'nvim-lualine/lualine.nvim',
-    --     config = load_config('ui.lualine'),
-    --     event = { 'BufReadPre', 'BufNewFile' },
-    -- },
+    {
+        'nvim-lualine/lualine.nvim',
+        config = load_config('ui.lualine'),
+        event = 'VeryLazy',
+    },
     {
         'stevearc/dressing.nvim',
         config = load_config('ui.dressing'),

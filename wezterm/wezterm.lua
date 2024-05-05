@@ -28,7 +28,7 @@ wezterm.on("update-right-status", function(window, pane)
 		"#1c1c1c",
 	}
 
-	local text_fg = "#7799bb"
+	local text_fg = "#673ab7"
 
 	local elements = {}
 	local num_cells = 0
@@ -52,6 +52,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
+config.color_scheme = "Github Light (Gogh)"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
 -- 		background = "#0e1415",
@@ -95,24 +96,26 @@ config.window_frame = {
 }
 config.tab_bar_at_bottom = true
 -- config.window_padding = {
--- 	top = 0,
--- 	bottom = 0,
--- 	left = 0,
--- 	right = 0,
+-- 	top = 15,
+-- 	bottom = 15,
+-- 	left = 15,
+-- 	right = 15,
 -- }
-config.font_size = 16
+config.font_size = 13
 -- config.window_decorations = "RESIZE"
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
 config.use_fancy_tab_bar = false
--- config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = true
 config.colors = {
 	tab_bar = {
-		background = "#121212",
+		background = "#dcdfe0",
 		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
 		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
-		-- active_tab = { bg_color = "#121212", fg_color = "#FCE8C3" },
+		active_tab = { fg_color = "#37474f", bg_color = "#90a4ae" },
+		inactive_tab = { fg_color = "#37474f", bg_color = "#eceff1" },
+		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
 	},
 	-- saturate(0.1),
 }
@@ -164,12 +167,11 @@ config.keys = {
 config.mouse_bindings = mouse_bindings
 config.inactive_pane_hsb = {
 	saturation = 0.9,
-	brightness = 0.65,
+	brightness = 0.85,
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	config.color_scheme = "nightfox"
-	config.window_background_image = "C:/Users/Максим/cas.jpg"
+	-- config.window_background_image = "C:/Users/Максим/cas.jpg"
 	config.default_domain = "WSL:Ubuntu"
 	config.window_background_image_hsb = {
 		-- Darken the background image by reducing it to 1/3rd
@@ -183,8 +185,6 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 		saturation = 1.0,
 	}
 end
-
--- if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
--- end
+-- x86_64-unknown-linux-gnu
 
 return config

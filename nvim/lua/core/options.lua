@@ -114,7 +114,7 @@ local options = {
     ai = true,
     autoindent = true,
     autowrite = true,
-    background = 'dark',
+    background = 'light',
     backspace = 'indent,eol,start',
     backup = false, -- creates a backup file
     breakindent = true,
@@ -244,6 +244,6 @@ vim.opt.fillchars = { eob = ' ', fold = '.', foldopen = '', foldclose = ''
 --   %) end of width specification
 
 -- vim.opt.statusline = '%<%f %h%m%r%=%-14.(%l,%c%V%) %P'
-vim.opt.statusline = '%<%f %h%m%r'
+-- vim.opt.statusline = '%<%f %h%m%r'
 -- vim.opt.statusline = "%#WinSeparator#%{%v:lua.string.rep('—', v:lua.vim.fn.winwidth(0))%}"
 require('core.echoline')

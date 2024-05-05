@@ -26,7 +26,7 @@ ibl.setup({
     scope = {
         show_start = false,
         show_end = false,
-        highlight = { '@keyword' },
+        highlight = { 'Comment' },
         char = '▏',
         include = {
             node_type = {
