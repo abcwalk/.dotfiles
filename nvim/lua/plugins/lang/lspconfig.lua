@@ -417,14 +417,14 @@ vim.diagnostic.config({
     update_in_insert = false,
     underline = false,
     severity_sort = true,
-    -- float = {
-    --     focusable = true,
-    --     style = 'minimal',
-    --     border = 'rounded',
-    --     source = 'always',
-    --     header = '',
-    --     prefix = '',
-    -- },
+    float = {
+        focusable = true,
+        style = 'minimal',
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
     -- signs = {
     --     linehl = {
     --         [vim.diagnostic.severity.ERROR] = 'Error',

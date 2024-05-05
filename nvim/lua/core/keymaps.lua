@@ -194,7 +194,7 @@ map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 map('n', '<C-s>', ':w<CR>')
 -- map('n', '<A-w>', ':q<CR>', { silent = true })
 map('n', '<A-q>', ':bdelete<CR>', { silent = true })
-map('n', '<A-c>', ':BufferClose<CR>', { silent = true })
+map('n', '<A-c>', ':bd<CR>', { silent = true })
 -- map("n", "<A-d>", ":w <Bar> bdelete<CR>", { silent = true })
 
 --Resize tab
@@ -270,11 +270,11 @@ vim.keymap.set('x', 'p', [["_dP]])
 --Dapui
 -- map('n', "<leader>du", dapui.toggle)
 
--- Neo-tree
--- map('n', '<Tab><Tab>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
+-- Neotree
+map('n', '<S-f>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
 -- map({ 't', 'n' }, '<C-e>', '<cmd>Neotree buffers<CR>', { noremap = true })
 -- map({ 't', 'n' }, '<C-g>', '<cmd>Neotree source=git_status dir=%:p:h left<CR>', { noremap = true, nowait = true })
--- map('n', '<Tab><Tab>', '<cmd>Neotree position=left dir=%:p:h:h reveal_file=%:p<CR>')
+-- map('n', '<S-f>', '<cmd>Neotree position=left dir=%:p:h:h reveal_file=%:p<CR>')
 -- mapn", "<leader>nc", ":Neotree close<CR>")
 
 -- Spider
