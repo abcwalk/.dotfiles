@@ -413,23 +413,23 @@ require('lsp_signature').setup(cfg)
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 vim.diagnostic.config({
-    virtual_text = false,
+    virtual_text = true,
     update_in_insert = false,
     underline = false,
     severity_sort = true,
-    float = {
-        focusable = true,
-        style = 'minimal',
-        border = 'rounded',
-        source = 'always',
-        header = '',
-        prefix = '',
-    },
-    signs = {
-        linehl = {
-            [vim.diagnostic.severity.ERROR] = 'Error',
-        },
-    },
+    -- float = {
+    --     focusable = true,
+    --     style = 'minimal',
+    --     border = 'rounded',
+    --     source = 'always',
+    --     header = '',
+    --     prefix = '',
+    -- },
+    -- signs = {
+    --     linehl = {
+    --         [vim.diagnostic.severity.ERROR] = 'Error',
+    --     },
+    -- },
 })
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {

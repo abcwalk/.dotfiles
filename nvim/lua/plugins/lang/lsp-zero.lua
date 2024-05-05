@@ -1,7 +1,7 @@
-local status_ok, lsp_zero = pcall(require, 'lsp-zero')
-if not status_ok then
-    return
-end
+-- local status_ok, lsp_zero = pcall(require, 'lsp-zero')
+-- if not status_ok then
+--     return
+-- end
 
 -- lsp_zero.setup({})
 

@@ -52,7 +52,6 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "nightfox"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
 -- 		background = "#0e1415",
@@ -169,6 +168,7 @@ config.inactive_pane_hsb = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	config.color_scheme = "nightfox"
 	config.window_background_image = "C:/Users/Максим/cas.jpg"
 	config.default_domain = "WSL:Ubuntu"
 	config.window_background_image_hsb = {
@@ -183,6 +183,8 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 		saturation = 1.0,
 	}
 end
--- x86_64-unknown-linux-gnu
+
+-- if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
+-- end
 
 return config
