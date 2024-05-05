@@ -52,7 +52,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Github Light (Gogh)"
+config.color_scheme = "Google Light (base16)"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
 -- 		background = "#0e1415",

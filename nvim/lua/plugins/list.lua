@@ -395,7 +395,7 @@ local plugins = {
     --     config = load_config('ui.mellow'),
     -- },
     {
-        'ronisbr/nano-theme.nvim',
+        'behemothbucket/nano-theme.nvim',
         lazy = false,
         priority = 1000,
         init = function()
