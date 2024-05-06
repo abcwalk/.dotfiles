@@ -173,17 +173,17 @@ config.inactive_pane_hsb = {
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.window_background_image = "C:/Users/Максим/cas.jpg"
 	config.default_domain = "WSL:Ubuntu"
-	config.window_background_image_hsb = {
-		-- Darken the background image by reducing it to 1/3rd
-		brightness = 0.025,
+	-- config.window_background_image_hsb = {
+	-- Darken the background image by reducing it to 1/3rd
+	-- brightness = 0.025,
 
-		-- You can adjust the hue by scaling its value.
-		-- a multiplier of 1.0 leaves the value unchanged.
-		hue = 1.0,
+	-- You can adjust the hue by scaling its value.
+	-- a multiplier of 1.0 leaves the value unchanged.
+	-- hue = 1.0,
 
-		-- You can adjust the saturation also.
-		saturation = 1.0,
-	}
+	-- You can adjust the saturation also.
+	-- saturation = 1.0,
+	-- }
 end
 -- x86_64-unknown-linux-gnu
 
