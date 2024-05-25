@@ -8,7 +8,7 @@ lint.linters_by_ft = {
     yaml = { 'yamllint' },
     go = { 'golangcilint' },
     python = { 'flake8' },
-    dockerfile = { 'hadolint' },
+    -- dockerfile = { 'hadolint' },
     bash = { 'shellcheck' },
     json = { 'jsonlint' },
 }

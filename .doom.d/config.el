@@ -232,65 +232,65 @@ In interactive calls DELETE is the prefix arg."
 
 ;;; Emms
 
-(use-package emms
-  :init
-  (require 'emms-setup)
-  (require 'emms-mpris)
-  (emms-all)
-  (emms-default-players)
-  (emms-mpris-enable)
-  :custom
-  (emms-source-file-default-directory "~/Music")
-  :config
-  (emms-mode-line-disable))
+;;(use-package emms
+;;:init
+;;(require 'emms-setup)
+;;(require 'emms-mpris)
+;;(emms-all)
+;;(emms-default-players)
+;;(emms-mpris-enable)
+;;:custom
+;;(emms-source-file-default-directory "~/Music")
+;;:config
+;;(emms-mode-line-disable))
 
-(defun track-title-from-file-name (file)
-  "For using with EMMS description functions.
-      Extracts the track
-      title from the file name FILE, which just means a) taking only
-the file component at the end of the path, and b) removing any
-file extension."
-  (with-temp-buffer
-    (save-excursion (insert (file-name-nondirectory (directory-file-name file))))
-    (ignore-error 'search-failed
-      (search-forward-regexp (rx "." (+ alnum) eol))
-      (delete-region (match-beginning 0) (match-end 0)))
-    (buffer-string)))
+;;(defun track-title-from-file-name (file)
+;;  "For using with EMMS description functions.
+;;      Extracts the track
+;;      title from the file name FILE, which just means a) taking only
+;;the file component at the end of the path, and b) removing any
+;;file extension."
+;;  (with-temp-buffer
+;;    (save-excursion (insert (file-name-nondirectory (directory-file-name file))))
+;;    (ignore-error 'search-failed
+;;      (search-forward-regexp (rx "." (+ alnum) eol))
+;;      (delete-region (match-beginning 0) (match-end 0)))
+;;    (buffer-string)))
 
-(defun my-emms-track-description (track)
-  "Return a description of TRACK, for EMMS.
-But try to cut just
-the track name from the file name, and just use the file name too
-rather than the whole path."
-  (let ((artist (emms-track-get track 'info-artist))
-        (title (emms-track-get track 'info-title)))
-    (cond ((and artist title)
-           (concat (format "%s" artist) " - " (format "%s" title)))
-          (title title)
-          ((eq (emms-track-type track) 'file)
-           (track-title-from-file-name (emms-track-name track)))
-          (t (emms-track-simple-description track)))))
+;;(defun my-emms-track-description (track)
+;;  "Return a description of TRACK, for EMMS.
+;;But try to cut just
+;;the track name from the file name, and just use the file name too
+;;rather than the whole path."
+;; (let ((artist (emms-track-get track 'info-artist))
+;;        (title (emms-track-get track 'info-title)))
+;;    (cond ((and artist title)
+;;           (concat (format "%s" artist) " - " (format "%s" title)))
+;;          (title title)
+;;          ((eq (emms-track-type track) 'file)
+;;           (track-title-from-file-name (emms-track-name track)))
+;;          (t (emms-track-simple-description track)))))
 
-(setq emms-track-description-function 'my-emms-track-description)
+;;(setq emms-track-description-function 'my-emms-track-description)
 
-(use-package! emms-state
-  :config
-  (eval-after-load 'emms '(emms-state-mode)))
+;;(use-package! emms-state
+;;  :config
+;;  (eval-after-load 'emms '(emms-state-mode)))
 
-(map! :desc "emms-play-directory"
-      "<f5>" 'emms-play-directory)
-(map! :desc "emms-toggle-repeat-track"
-      "C-c r" 'emms-toggle-repeat-track)
-(map! :desc "emms-pause"
-      "C-c <f1>" 'emms-pause)
-(map! :desc "emms-previous"
-      "C-c ," 'emms-previous)
-(map! :desc "emms-next"
-      "C-c ." 'emms-next)
-(map! :desc "emms-minus"
-      "C-c <f2>" 'emms-volume-mode-minus)
-(map! :desc "emms-plus"
-      "C-c <f3>" 'emms-volume-mode-plus)
+;;(map! :desc "emms-play-directory"
+;;      "<f5>" 'emms-play-directory)
+;;(map! :desc "emms-toggle-repeat-track"
+;;      "C-c r" 'emms-toggle-repeat-track)
+;;(map! :desc "emms-pause"
+;;      "C-c <f1>" 'emms-pause)
+;;(map! :desc "emms-previous"
+;;      "C-c ," 'emms-previous)
+;;(map! :desc "emms-next"
+;;      "C-c ." 'emms-next)
+;;(map! :desc "emms-minus"
+;;      "C-c <f2>" 'emms-volume-mode-minus)
+;;(map! :desc "emms-plus"
+;;      "C-c <f3>" 'emms-volume-mode-plus)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

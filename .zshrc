@@ -126,10 +126,14 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init -)"
 fi
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 export GOPATH=~/go
 export GOROOT=/usr/local/go
 export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+export JMETER_HOME="$HOME/apache-jmeter/"
+export PATH=$JMETER_HOME/bin:$PATH
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
