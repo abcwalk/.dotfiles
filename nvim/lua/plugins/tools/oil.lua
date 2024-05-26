@@ -25,7 +25,7 @@ oil.setup({
         spell = false,
         list = false,
         conceallevel = 3,
-        concealcursor = 'n',
+        concealcursor = 'nvic',
     },
     -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
     delete_to_trash = false,

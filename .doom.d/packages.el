@@ -26,13 +26,16 @@
 (package! dotenv-mode)
 (package! soothe-theme)
 (package! ef-themes)
+(package! nano-theme
+  :recipe (:host github :repo "rougier/nano-theme"))
 (package! selection-highlight-mode
   :recipe (:host github :repo "balloneij/selection-highlight-mode"))
 
 ;; (package! packagename :disable t)
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
-;; https://github.com/radian-software/straight.el#the-recipe-format
+;; https://github.c
+;; om/radian-software/straight.el#the-recipe-format
                                         ;(package! another-package
                                         ;  :recipe (:host github :repo "username/repo"))
 

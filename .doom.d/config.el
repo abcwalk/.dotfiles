@@ -367,7 +367,7 @@ parameter is the buffer, which is the `car' or ARGS."
 (map! :desc "toggle-themes"
       "<f12>" #'pingvi/toggle-theme)
 
-(setq doom-theme 'ef-dark)
+(setq doom-theme 'nano-light)
 
 ;; (use-package! soothe-theme
 ;;   :config
