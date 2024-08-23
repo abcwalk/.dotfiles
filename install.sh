@@ -63,7 +63,7 @@ pip3 install pynvim virtualenv vim-vint
 if [! -d ~/.venvs/ ]
     mkdir ~/venvs && cd ~/venvs
 fi
-python3 -m venv automaps && source ./automaps/bin/activate
+python3 -m venv autotests && source ./autotests/bin/activate
 pip install black isort
 deactivate && cd
 
