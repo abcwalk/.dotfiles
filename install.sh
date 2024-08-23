@@ -5,11 +5,6 @@ sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Node
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-nvm install node
-npm install -g neovim
-
 # Dotfiles
 git clone https://github.com/behemothbucket/.dotfiles.git
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
@@ -20,6 +15,12 @@ if [! -d ~/.config/ ]
 fi
 ln -s ~/.dotfiles/nvim/ ~/.config/nvim
 ln -s ~/.dotfiles/wezterm/ ~/.config/wezterm
+
+# Node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install node
+npm install -g neovim
+source ~/.zshrc
 
 # Go
 sudo rm -rf /usr/local/go
