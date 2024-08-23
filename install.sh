@@ -47,7 +47,7 @@ curl https://sh.rustup.rs -sSf | sh
 . "$HOME/.cargo/env"
 source ~/.zshrc
 ## Lua
-cargo install stylua -y
+cargo install stylua
 # see lamap version
 wget https://luarocks.org/releases/luarocks-3.11.0.tar.gz
 tar zxpf luarocks-3.11.0.tar.gz
