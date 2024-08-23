@@ -48,6 +48,7 @@ curl https://sh.rustup.rs -sSf | sh
 source ~/.zshrc
 ## Lua
 sudo apt install lua5.3
+sudo apt install liblua5.3-dev
 cargo install stylua
 # see lamap version
 wget https://luarocks.org/releases/luarocks-3.11.0.tar.gz
