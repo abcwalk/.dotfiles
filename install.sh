@@ -44,7 +44,7 @@ source ~/.zshrc
 
 # Cargo
 curl https://sh.rustup.rs -sSf | sh
-. "~/.cargo/env"
+. "$HOME/.cargo/env"
 source ~/.zshrc
 ## Lua
 cargo install stylua -y
