@@ -61,7 +61,7 @@ sudo luarocks install luasocket
 # Python
 pip3 install pynvim virtualenv vim-vint
 if [! -d ~/.venvs/ ]
-    mkdir /venvs && cd ~/venvs
+    mkdir ~/venvs && cd ~/venvs
 fi
 python3 -m venv automaps && source ./automaps/bin/activate
 pip install black isort
