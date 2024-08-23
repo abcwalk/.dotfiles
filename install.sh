@@ -47,6 +47,7 @@ curl https://sh.rustup.rs -sSf | sh
 . "$HOME/.cargo/env"
 source ~/.zshrc
 ## Lua
+sudo apt install lua5.3
 cargo install stylua
 # see lamap version
 wget https://luarocks.org/releases/luarocks-3.11.0.tar.gz
