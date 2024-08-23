@@ -4,7 +4,6 @@ sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-
 
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-source ~/.zshrc
 
 # Node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -15,6 +14,7 @@ npm install -g neovim
 # Dotfiles
 git clone https://github.com/behemothbucket/.dotfiles.git
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
+source ~/.zshrc
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
 if [! -d ~/.config/ ]
     mkdir -p /.config
