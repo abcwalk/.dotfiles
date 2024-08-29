@@ -6,7 +6,7 @@ end
 lint.linters_by_ft = {
     markdown = { 'markdownlint' },
     yaml = { 'yamllint' },
-    go = { 'golangcilint' },
+    -- go = { 'golangcilint' },
     python = { 'flake8' },
     -- dockerfile = { 'hadolint' },
     bash = { 'shellcheck' },
