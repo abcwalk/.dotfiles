@@ -568,17 +568,17 @@ local plugins = {
     },
 
     -- Language
-    {
-        'ray-x/go.nvim',
-        dependencies = { -- optional packages
-            'ray-x/guihua.lua',
-        },
-        event = { 'CmdlineEnter' },
-        config = load_config('lang.go'),
-        ft = { 'go', 'gomod' },
-        build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
-        lazy = false,
-    },
+    -- {
+    --     'ray-x/go.nvim',
+    --     dependencies = { -- optional packages
+    --         'ray-x/guihua.lua',
+    --     },
+    --     event = { 'CmdlineEnter' },
+    --     config = load_config('lang.go'),
+    --     ft = { 'go', 'gomod' },
+    --     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+    --     lazy = false,
+    -- },
     {
         -- Linting
         'mfussenegger/nvim-lint',

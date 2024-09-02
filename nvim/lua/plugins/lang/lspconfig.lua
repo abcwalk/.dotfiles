@@ -147,175 +147,175 @@ local servers = {
             validate = true,
         },
     },
-    gopls = {
-        -- capabilities = {
-        --     textDocument = {
-        --         completion = {
-        --             completionItem = {
-        --                 commitCharactersSupport = true,
-        --                 deprecatedSupport = true,
-        --                 documentationFormat = { 'markdown', 'plaintext' },
-        --                 preselectSupport = true,
-        --                 insertReplaceSupport = true,
-        --                 labelDetailsSupport = true,
-        --                 snippetSupport = true,
-        --                 resolveSupport = {
-        --                     properties = {
-        --                         'documentation',
-        --                         'details',
-        --                         'additionalTextEdits',
-        --                     },
-        --                 },
-        --             },
-        --             contextSupport = true,
-        --             dynamicRegistration = true,
-        --         },
-        --     },
-        -- },
-        -- filetypes = { 'go', 'gomod', 'gosum', 'gotmpl', 'gohtmltmpl', 'gotexttmpl' },
-        -- message_level = vim.lsp.protocol.MessageType.Error,
-        -- cmd = {
-        --     'gopls', -- share the gopls instance if there is one already
-        --     -- '-remote.debug=:0',
-        -- },
-        -- root_dir = function(fname)
-        --     local has_lsp, lspconfig = pcall(require, 'lspconfig')
-        --     if has_lsp then
-        --         local util = lspconfig.util
-        --         return util.root_pattern('go.work', 'go.mod')(fname)
-        --             or util.root_pattern('.git')(fname)
-        --             or util.path.dirname(fname)
-        --     end
-        -- end,
-        -- flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
-        -- settings = {
-        --     gopls = {
-        --         -- more settings: https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-        --         -- not supported
-        --         analyses = {
-        --             unreachable = true,
-        --             nilness = true,
-        --             unusedparams = true,
-        --             useany = true,
-        --             unusedwrite = true,
-        --             ST1003 = true,
-        --             undeclaredname = true,
-        --             fillreturns = true,
-        --             nonewvars = true,
-        --             fieldalignment = false,
-        --             shadow = true,
-        --         },
-        --         -- codelenses = {
-        --         --     generate = true, -- show the `go generate` lens.
-        --         --     gc_details = true, -- Show a code lens toggling the display of gc's choices.
-        --         --     map = true,
-        --         --     tidy = true,
-        --         --     vendor = true,
-        --         --     regenerate_cgo = true,
-        --         --     upgrade_dependency = true,
-        --         -- },
-        -- hints = {
-        --     --             -- assignVariableTypes = true,
-        --             compositeLiteralFields = true,
-        --             compositeLiteralTypes = true,
-        --             constantValues = true,
-        -- functionTypeParameters = true,
-        -- parameterNames = true,
-        --             -- rangeVariableTypes = true,
-        -- },
-        --         usePlaceholders = false,
-        --         completeUnimported = true,
-        --         staticcheck = true,
-        --         matcher = 'Fuzzy',
-        --         diagnosticsDelay = '500ms',
-        --         symbolMatcher = 'fuzzy',
-        --         semanticTokens = false,
-        --         -- noSemanticTokens = true, -- WARN: disable semantic string tokens so we can use treesitter highlight injection
-        --
-        --         -- ['local'] = get_current_gomod(),
-        --         -- gofumpt = _GO_NVIM_CFG.lsp_gofumpt or false, -- true|false, -- turn on for new repos, gofmpt is good but also create code turmoils
-        --         -- buildFlags = { '-tags', 'integration' },
-        --     },
-        -- },
-        -- -- NOTE: it is important to add handler to formatting handlers
-        -- -- the async formatter will call these handlers when gopls responed
-        -- -- without these handlers, the file will not be saved
-        -- handlers = {
-        --     ['range_format'] = function(...)
-        --         vim.lsp.handlers[range_format](...)
-        --         if vfn.getbufinfo('%')[1].changed == 1 then
-        --             vim.cmd('noautocmd write')
-        --         end
-        --     end,
-        --     ['formatting'] = function(...)
-        --         vim.lsp.handlers[formatting](...)
-        --         if vfn.getbufinfo('%')[1].changed == 1 then
-        --             vim.cmd('noautocmd write')
-        --         end
-        --     end,
-        -- },
-        settings = {
-            -- https://go.googlesource.com/vscode-go/+/HEAD/docs/settings.md#settings-for
-            gopls = {
+    -- gopls = {
+    -- capabilities = {
+    --     textDocument = {
+    --         completion = {
+    --             completionItem = {
+    --                 commitCharactersSupport = true,
+    --                 deprecatedSupport = true,
+    --                 documentationFormat = { 'markdown', 'plaintext' },
+    --                 preselectSupport = true,
+    --                 insertReplaceSupport = true,
+    --                 labelDetailsSupport = true,
+    --                 snippetSupport = true,
+    --                 resolveSupport = {
+    --                     properties = {
+    --                         'documentation',
+    --                         'details',
+    --                         'additionalTextEdits',
+    --                     },
+    --                 },
+    --             },
+    --             contextSupport = true,
+    --             dynamicRegistration = true,
+    --         },
+    --     },
+    -- },
+    -- filetypes = { 'go', 'gomod', 'gosum', 'gotmpl', 'gohtmltmpl', 'gotexttmpl' },
+    -- message_level = vim.lsp.protocol.MessageType.Error,
+    -- cmd = {
+    --     'gopls', -- share the gopls instance if there is one already
+    --     -- '-remote.debug=:0',
+    -- },
+    -- root_dir = function(fname)
+    --     local has_lsp, lspconfig = pcall(require, 'lspconfig')
+    --     if has_lsp then
+    --         local util = lspconfig.util
+    --         return util.root_pattern('go.work', 'go.mod')(fname)
+    --             or util.root_pattern('.git')(fname)
+    --             or util.path.dirname(fname)
+    --     end
+    -- end,
+    -- flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
+    -- settings = {
+    --     gopls = {
+    --         -- more settings: https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+    --         -- not supported
+    --         analyses = {
+    --             unreachable = true,
+    --             nilness = true,
+    --             unusedparams = true,
+    --             useany = true,
+    --             unusedwrite = true,
+    --             ST1003 = true,
+    --             undeclaredname = true,
+    --             fillreturns = true,
+    --             nonewvars = true,
+    --             fieldalignment = false,
+    --             shadow = true,
+    --         },
+    --         -- codelenses = {
+    --         --     generate = true, -- show the `go generate` lens.
+    --         --     gc_details = true, -- Show a code lens toggling the display of gc's choices.
+    --         --     map = true,
+    --         --     tidy = true,
+    --         --     vendor = true,
+    --         --     regenerate_cgo = true,
+    --         --     upgrade_dependency = true,
+    --         -- },
+    -- hints = {
+    --     --             -- assignVariableTypes = true,
+    --             compositeLiteralFields = true,
+    --             compositeLiteralTypes = true,
+    --             constantValues = true,
+    -- functionTypeParameters = true,
+    -- parameterNames = true,
+    --             -- rangeVariableTypes = true,
+    -- },
+    --         usePlaceholders = false,
+    --         completeUnimported = true,
+    --         staticcheck = true,
+    --         matcher = 'Fuzzy',
+    --         diagnosticsDelay = '500ms',
+    --         symbolMatcher = 'fuzzy',
+    --         semanticTokens = false,
+    --         -- noSemanticTokens = true, -- WARN: disable semantic string tokens so we can use treesitter highlight injection
+    --
+    --         -- ['local'] = get_current_gomod(),
+    --         -- gofumpt = _GO_NVIM_CFG.lsp_gofumpt or false, -- true|false, -- turn on for new repos, gofmpt is good but also create code turmoils
+    --         -- buildFlags = { '-tags', 'integration' },
+    --     },
+    -- },
+    -- -- NOTE: it is important to add handler to formatting handlers
+    -- -- the async formatter will call these handlers when gopls responed
+    -- -- without these handlers, the file will not be saved
+    -- handlers = {
+    --     ['range_format'] = function(...)
+    --         vim.lsp.handlers[range_format](...)
+    --         if vfn.getbufinfo('%')[1].changed == 1 then
+    --             vim.cmd('noautocmd write')
+    --         end
+    --     end,
+    --     ['formatting'] = function(...)
+    --         vim.lsp.handlers[formatting](...)
+    --         if vfn.getbufinfo('%')[1].changed == 1 then
+    --             vim.cmd('noautocmd write')
+    --         end
+    --     end,
+    -- },
+    -- settings = {
+    -- https://go.googlesource.com/vscode-go/+/HEAD/docs/settings.md#settings-for
+    -- gopls = {
 
-                analyses = {
-                    -- nilness = true,
-                    -- unusedparams = true,
-                    -- unusedwrite = true,
-                    -- useany = true,
+    -- analyses = {
+    -- nilness = true,
+    -- unusedparams = true,
+    -- unusedwrite = true,
+    -- useany = true,
 
-                    unreachable = true,
-                    nilness = true,
-                    unusedparams = true,
-                    useany = true,
-                    unusedwrite = true,
-                    ST1003 = true,
-                    undeclaredname = true,
-                    fillreturns = true,
-                    nonewvars = true,
-                    fieldalignment = false,
-                    shadow = true,
-                },
-                experimentalPostfixCompletions = true,
-                gofumpt = true,
-                -- DISABLED: staticcheck
-                --
-                -- gopls doesn't invoke the staticcheck binary.
-                -- Instead it imports the analyzers directly.
-                -- This means it can report on issues the binary can't.
-                -- But it's not a good thing (like it initially sounds).
-                -- You can't then use line directives to ignore issues.
-                --
-                -- Instead of using staticcheck via gopls.
-                -- We have golangci-lint execute it instead.
-                --
-                -- For more details:
-                -- https://github.com/golang/go/issues/36373#issuecomment-570643870
-                -- https://github.com/golangci/golangci-lint/issues/741#issuecomment-1488116634
-                --
-                -- staticcheck = true,
-                usePlaceholders = false,
-                -- hints = {
-                -- assignVariableTypes = true,
-                -- compositeLiteralFields = true,
-                -- compositeLiteralTypes = true,
-                -- constantValues = true,
-                -- functionTypeParameters = true,
-                -- parameterNames = true,
-                -- rangeVariableTypes = true,
-                -- },
-                codelenses = {
-                    generate = true, -- show the `go generate` lens.
-                    gc_details = true, -- Show a code lens toggling the display of gc's choices.
-                    map = true,
-                    tidy = true,
-                    vendor = true,
-                    regenerate_cgo = true,
-                    upgrade_dependency = true,
-                },
-            },
-        },
-    },
+    --     unreachable = true,
+    --     nilness = true,
+    --     unusedparams = true,
+    --     useany = true,
+    --     unusedwrite = true,
+    --     ST1003 = true,
+    --     undeclaredname = true,
+    --     fillreturns = true,
+    --     nonewvars = true,
+    --     fieldalignment = false,
+    --     shadow = true,
+    -- },
+    -- experimentalPostfixCompletions = true,
+    -- gofumpt = true,
+    -- DISABLED: staticcheck
+    --
+    -- gopls doesn't invoke the staticcheck binary.
+    -- Instead it imports the analyzers directly.
+    -- This means it can report on issues the binary can't.
+    -- But it's not a good thing (like it initially sounds).
+    -- You can't then use line directives to ignore issues.
+    --
+    -- Instead of using staticcheck via gopls.
+    -- We have golangci-lint execute it instead.
+    --
+    -- For more details:
+    -- https://github.com/golang/go/issues/36373#issuecomment-570643870
+    -- https://github.com/golangci/golangci-lint/issues/741#issuecomment-1488116634
+    --
+    -- staticcheck = true,
+    -- usePlaceholders = false,
+    -- hints = {
+    -- assignVariableTypes = true,
+    -- compositeLiteralFields = true,
+    -- compositeLiteralTypes = true,
+    -- constantValues = true,
+    -- functionTypeParameters = true,
+    -- parameterNames = true,
+    -- rangeVariableTypes = true,
+    -- },
+    --             codelenses = {
+    --                 generate = true, -- show the `go generate` lens.
+    --                 gc_details = true, -- Show a code lens toggling the display of gc's choices.
+    --                 map = true,
+    --                 tidy = true,
+    --                 vendor = true,
+    --                 regenerate_cgo = true,
+    --                 upgrade_dependency = true,
+    --             },
+    --         },
+    --     },
+    -- },
     lua_ls = {
         settings = {
             Lua = {
@@ -358,7 +358,7 @@ require('mason').setup({
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
     'bashls',
-    'gopls',
+    -- 'gopls',
     'jsonls',
     'lua_ls',
     'pyright',
