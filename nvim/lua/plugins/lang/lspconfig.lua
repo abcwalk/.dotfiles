@@ -123,10 +123,10 @@ local servers = {
         python = {
             analysis = {
                 autoSearchPaths = true,
-                diagnosticMode = 'openFilesOnly',
-                indexing = true,
-                typeCheckingMode = 'strict',
                 useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+                -- indexing = true,
+                -- typeCheckingMode = 'strict',
             },
         },
     },
@@ -294,7 +294,10 @@ local servers = {
     -- https://github.com/golangci/golangci-lint/issues/741#issuecomment-1488116634
     --
     -- staticcheck = true,
+<<<<<<< HEAD
     -- usePlaceholders = false,
+=======
+>>>>>>> de7139ff7154b4142514707838bb77080a38ff4e
     -- hints = {
     -- assignVariableTypes = true,
     -- compositeLiteralFields = true,
@@ -303,6 +306,12 @@ local servers = {
     -- functionTypeParameters = true,
     -- parameterNames = true,
     -- rangeVariableTypes = true,
+<<<<<<< HEAD
+=======
+
+    -- ONLY THIS
+    -- usePlaceholders = false,
+>>>>>>> de7139ff7154b4142514707838bb77080a38ff4e
     -- },
     --             codelenses = {
     --                 generate = true, -- show the `go generate` lens.
@@ -358,7 +367,10 @@ require('mason').setup({
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
     'bashls',
+<<<<<<< HEAD
     -- 'gopls',
+=======
+>>>>>>> de7139ff7154b4142514707838bb77080a38ff4e
     'jsonls',
     'lua_ls',
     'pyright',
@@ -367,6 +379,7 @@ vim.list_extend(ensure_installed, {
     'flake8',
     'vale',
     'markdownlint',
+    -- 'gopls',
     -- 'gofumpt',
     -- 'goimports',
     -- 'golines',
