@@ -332,12 +332,12 @@ local plugins = {
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        event = { 'BufReadPost', 'BufNewFile' },
-        main = 'ibl',
-        config = load_config('ui.indent-blankline'),
-    },
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     event = { 'BufReadPost', 'BufNewFile' },
+    --     main = 'ibl',
+    --     config = load_config('ui.indent-blankline'),
+    -- },
 
     -- UI
     -- {
@@ -380,29 +380,30 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
-    -- {
-    --     'behemothbucket/alabaster.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.cmd('colorscheme alabaster')
-    --     end,
-    -- },
+    {
+        'behemothbucket/alabaster.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.o.background = 'dark'
+            vim.cmd('colorscheme alabaster')
+        end,
+    },
     -- {
     --     'behemothbucket/mellow.nvim',
     --     lazy = false,
     --     priority = 1000,
     --     config = load_config('ui.mellow'),
     -- },
-    {
-        'behemothbucket/nano-theme.nvim',
-        lazy = false,
-        priority = 1000,
-        init = function()
-            vim.o.background = 'light'
-            vim.cmd('colorscheme nano-theme')
-        end,
-    },
+    -- {
+    --     'behemothbucket/nano-theme.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     init = function()
+    --         vim.o.background = 'light'
+    --         vim.cmd('colorscheme nano-theme')
+    --     end,
+    -- },
     -- {
     --     'yorickpeterse/nvim-grey',
     --     lazy = false,
