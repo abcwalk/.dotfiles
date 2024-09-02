@@ -137,3 +137,4 @@ export PATH=$JMETER_HOME/bin:$PATH
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$PATH:/opt/nvim-linux64/bin"
