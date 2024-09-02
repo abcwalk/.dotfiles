@@ -416,7 +416,7 @@ require('lsp_signature').setup(cfg)
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = false,
     update_in_insert = false,
     underline = false,
     severity_sort = true,
