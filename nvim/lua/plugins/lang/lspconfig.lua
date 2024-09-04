@@ -369,6 +369,7 @@ vim.list_extend(ensure_installed, {
     'flake8',
     'vale',
     'markdownlint',
+    'sqlfmt',
     -- 'gopls',
     -- 'gofumpt',
     -- 'goimports',

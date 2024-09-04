@@ -6,6 +6,7 @@ end
 local slow_format_filetypes = {
     'go',
     'python',
+    'sql',
 }
 
 conform.setup({
@@ -17,11 +18,13 @@ conform.setup({
         --     'goimports_reviser',
         --     'golines',
         -- },
+        sql = { 'sqlfmt' },
         python = { 'black', 'isort' },
         bash = { 'shfmt' },
         ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
     },
+    formatters = {},
     format_on_save = function(bufnr)
         if slow_format_filetypes[vim.bo[bufnr].filetype] then
             return
