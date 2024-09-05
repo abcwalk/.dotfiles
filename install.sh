@@ -1,6 +1,6 @@
 # Base
 sudo apt update && sudo apt upgrade
-sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev xclip fzf shellcheck python3-pip codespell python3-venv zsh shfmt ripgrep unzip
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev xclip fzf shellcheck python3-pip codespell python3-venv zsh shfmt ripgrep unzip fd-find
 
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -10,8 +10,8 @@ git clone https://github.com/behemothbucket/.dotfiles.git
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 source ~/.zshrc
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
-if [ ! -d ~/.config/ ]; then  # Added space after [ and added 'then'
-    mkdir -p ~/.config  # Corrected path from /.config to ~/.config
+if [ ! -d ~/.config/ ]; then # Added space after [ and added 'then'
+    mkdir -p ~/.config       # Corrected path from /.config to ~/.config
 fi
 ln -s ~/.dotfiles/nvim/ ~/.config/nvim
 ln -s ~/.dotfiles/wezterm/ ~/.config/wezterm
@@ -30,8 +30,8 @@ if [ ! -d ~/go/ ]; then
     mkdir ~/go
 fi
 rm go1.22.1.linux-amd64.tar.gz
-echo 'export GOROOT=/usr/local/go' >> ~/.zshrc
-echo "export GOPATH='$HOME/go'" >> ~/.zshrc
+echo 'export GOROOT=/usr/local/go' >>~/.zshrc
+echo "export GOPATH='$HOME/go'" >>~/.zshrc
 # echo 'export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"' >> ~/.zshrc
 source ~/.zshrc
 
@@ -69,5 +69,5 @@ curl -LO https://github.com/neovim/neovim/releases/download/v0.10.1/nvim-linux64
 sudo rm -rf /opt/nvim
 sudo tar -C /opt -xzf nvim-linux64.tar.gz
 rm nvim-linux64.tar.gz
-echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> ~/.zshrc
+echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >>~/.zshrc
 source ~/.zshrc

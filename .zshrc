@@ -134,7 +134,9 @@ export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 export JMETER_HOME="$HOME/apache-jmeter/"
 export PATH=$JMETER_HOME/bin:$PATH
+export PATH="$HOME/.local/bin/fd:$PATH"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$PATH:/opt/nvim-linux64/bin"
+. "$HOME/.cargo/env"
