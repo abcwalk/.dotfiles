@@ -28,7 +28,11 @@ wezterm.on("update-right-status", function(window, pane)
 		"#1c1c1c",
 	}
 
-	local text_fg = "#673ab7"
+	-- Nano text_fg color
+	-- local text_fg = "#673ab7"
+
+	-- Alabaster text_fg color
+	local text_fg = "71ade7"
 
 	local elements = {}
 	local num_cells = 0
@@ -52,39 +56,40 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Google Light (base16)"
--- config.color_schemes = {
--- 	["Alabaster Dark"] = {
--- 		background = "#0e1415",
--- 		foreground = "#cecece",
--- 		cursor_bg = "#cd974b",
--- 		cursor_border = "#cd974b",
--- 		cursor_fg = "#0e1415",
--- 		selection_bg = "#293334",
--- 		selection_fg = "#cecece",
--- 		ansi = {
--- 			"#000000",
--- 			"#d2322d",
--- 			"#6abf40",
--- 			"#cd974b",
--- 			"#217EBC",
--- 			"#9B3596",
--- 			"#178F79",
--- 			"#cecece",
--- 		},
--- 		brights = {
--- 			"#333333",
--- 			"#c33c33",
--- 			"#95cb82",
--- 			"#dfdf8e",
--- 			"#71aed7",
--- 			"#cc8bc9",
--- 			"#47BEA9",
--- 			"#ffffff",
--- 		},
--- 	},
--- }
--- config.window_background_opacity = 0.7
+config.color_scheme = "Alabaster Dark"
+config.color_schemes = {
+	["Alabaster Dark"] = {
+		background = "#0e1415",
+		foreground = "#cecece",
+		cursor_bg = "#cd974b",
+		cursor_border = "#cd974b",
+		cursor_fg = "#0e1415",
+		selection_bg = "#293334",
+		selection_fg = "#cecece",
+		ansi = {
+			"#000000",
+			"#d2322d",
+			"#6abf40",
+			"#cd974b",
+			"#217EBC",
+			"#9B3596",
+			"#178F79",
+			"#cecece",
+		},
+		brights = {
+			"#333333",
+			"#c33c33",
+			"#95cb82",
+			"#dfdf8e",
+			"#71aed7",
+			"#cc8bc9",
+			"#47BEA9",
+			"#ffffff",
+		},
+	},
+}
+-- config.window_background_opacity = 0.5
+-- config.win32_system_backdrop = "Acrylic"
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.window_frame = {
 	font = wezterm.font({ family = "JetBrainsMono Nerd Font" }),
@@ -108,17 +113,33 @@ config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
+
+-- Nano
+-- config.colors = {
+-- 	tab_bar = {
+-- 		background = "#dcdfe0",
+-- 		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
+-- 		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
+-- 		active_tab = { fg_color = "#37474f", bg_color = "#90a4ae" },
+-- 		inactive_tab = { fg_color = "#37474f", bg_color = "#eceff1" },
+-- 		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
+-- 	},
+-- 	-- saturate(0.1),
+-- }
+
+-- Alabaster
 config.colors = {
 	tab_bar = {
-		background = "#dcdfe0",
+		background = "#162022",
 		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
 		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
-		active_tab = { fg_color = "#37474f", bg_color = "#90a4ae" },
-		inactive_tab = { fg_color = "#37474f", bg_color = "#eceff1" },
+		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
+		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#162022" },
 		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
 	},
 	-- saturate(0.1),
 }
+
 config.window_close_confirmation = "NeverPrompt"
 config.enable_scroll_bar = false
 config.audible_bell = "Disabled"
@@ -164,6 +185,7 @@ config.keys = {
 		action = wezterm.action.ToggleFullScreen,
 	},
 }
+
 config.mouse_bindings = mouse_bindings
 config.inactive_pane_hsb = {
 	saturation = 0.9,
@@ -171,18 +193,18 @@ config.inactive_pane_hsb = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	-- config.window_background_image = "C:/Users/Максим/cas.jpg"
+	-- config.window_background_image = "C:/Users/Работа/cas.jpg"
 	config.default_domain = "WSL:Ubuntu"
 	-- config.window_background_image_hsb = {
-	-- Darken the background image by reducing it to 1/3rd
-	-- brightness = 0.025,
-
-	-- You can adjust the hue by scaling its value.
-	-- a multiplier of 1.0 leaves the value unchanged.
-	-- hue = 1.0,
-
-	-- You can adjust the saturation also.
-	-- saturation = 1.0,
+	-- 	-- Darken the background image by reducing it to 1/3rd
+	-- 	brightness = 0.2,
+	--
+	-- 	-- You can adjust the hue by scaling its value.
+	-- 	-- a multiplier of 1.0 leaves the value unchanged.
+	-- 	hue = 1.0,
+	--
+	-- 	-- You can adjust the saturation also.
+	-- 	saturation = 1.0,
 	-- }
 end
 -- x86_64-unknown-linux-gnu
