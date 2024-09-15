@@ -1,5 +1,5 @@
 # Base
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
 sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev xclip fzf shellcheck python3-pip codespell python3-venv zsh shfmt ripgrep unzip fd-find
 
 # Zsh
