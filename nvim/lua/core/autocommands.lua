@@ -36,7 +36,7 @@ api.nvim_create_autocmd('FileType', {
     pattern = { 'python' },
     callback = function()
         -- require('swenv.api').auto_venv()
-        require('swenv.api').set_venv('automaps')
+        require('swenv.api').set_venv('autotests')
     end,
 })
 

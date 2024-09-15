@@ -106,7 +106,7 @@ config.tab_bar_at_bottom = true
 -- 	left = 15,
 -- 	right = 15,
 -- }
-config.font_size = 13
+config.font_size = 14
 -- config.window_decorations = "RESIZE"
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
