@@ -385,7 +385,7 @@ local plugins = {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.o.background = 'dark'
+            vim.o.background = 'light'
             vim.cmd('colorscheme alabaster')
         end,
     },
