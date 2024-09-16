@@ -1,11 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+
 ;;; Font
 
-(setq doom-font (font-spec :family "Iosevka Comfy" :size 20))
-
-(setq user-full-name "Maxim Rozhkov"
-      user-mail-address "foldersjarer@gmail.com")
+(setq doom-font (font-spec :family "JetBrainsMono NerdFont" :size 20))
 
 
 ;;; Screen settings
@@ -335,7 +333,7 @@ parameter is the buffer, which is the `car' or ARGS."
   ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
   ;; (fringe-helper-define 'git-gutter-fr:deleted nil " ")
   ;; (fringe-helper-define 'git-gutter-fr:modified nil " ")
-  ;; (define-fringe-bitmap 'git-gutter-fr:added
+  ;; (fringe-helper-define 'git-gutter-fr:added nil " ")
   (setq-default fringes-outside-margins t)
   (define-fringe-bitmap 'git-gutter-fr:added [0]
     nil nil '(center repeated))
@@ -345,11 +343,11 @@ parameter is the buffer, which is the `car' or ARGS."
     nil nil 'bottom)
   (defun gutter-gutter ()
     (modus-themes-with-colors
-     (custom-set-faces
-      ;; Replace green with blue if you use `modus-themes-deuteranopia'.
-      `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
-      `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
-      `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
+      (custom-set-faces
+       ;; Replace green with blue if you use `modus-themes-deuteranopia'.
+       `(git-gutter-fr:added ((,class :foreground ,green-fringe-bg)))
+       `(git-gutter-fr:deleted ((,class :foreground ,red-fringe-bg)))
+       `(git-gutter-fr:modified ((,class :foreground ,yellow-fringe-bg))))))
   (add-hook 'modus-themes-after-load-theme-hook #'gutter-gutter)
   (add-hook 'soothe-theme-after-load-theme-hook #'gutter-gutter))
 
@@ -367,7 +365,7 @@ parameter is the buffer, which is the `car' or ARGS."
 (map! :desc "toggle-themes"
       "<f12>" #'pingvi/toggle-theme)
 
-(setq doom-theme 'nano-light)
+(setq doom-theme 'modus-operandi)
 
 ;; (use-package! soothe-theme
 ;;   :config
@@ -583,6 +581,15 @@ non-coalesced scroll events reach the advised function."
 (require 'auto-virtualenv)
 (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 
+(use-package! python-black
+  :demand t
+  :after python)
+(add-hook! 'python-mode-hook #'python-black-on-save-mode)
+;; Feel free to throw your own personal keybindings here
+(map! :leader :desc "Blacken Buffer" "m b b" #'python-black-buffer)
+(map! :leader :desc "Blacken Region" "m b r" #'python-black-region)
+(map! :leader :desc "Blacken Statement" "m b s" #'python-black-statement)
+
 ;; (setq lsp-enable-file-watchers nil)
 
 ;; (use-package! pet
@@ -641,6 +648,9 @@ non-coalesced scroll events reach the advised function."
   :init
   (evilnc-default-hotkeys nil t))
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
+
+(map! :desc "Leave insert mode (evil)"
+      :map 'override "jj" 'evil-normal-state)
 
 (use-package! undo-fu
   :custom

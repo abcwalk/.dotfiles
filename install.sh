@@ -4,10 +4,13 @@ sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-
 
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/ikhomutov/zsh-auto-venv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-auto-venv
+rm ~/.zshrc
 
 # Dotfiles
 git clone https://github.com/behemothbucket/.dotfiles.git
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
+
 source ~/.zshrc
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
 if [ ! -d ~/.config/ ]; then # Added space after [ and added 'then'

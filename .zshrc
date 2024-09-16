@@ -76,7 +76,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git  zsh-auto-venv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -135,8 +135,10 @@ export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 export JMETER_HOME="$HOME/apache-jmeter/"
 export PATH=$JMETER_HOME/bin:$PATH
 export PATH="$HOME/.local/bin/fd:$PATH"
+export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$PATH:/opt/nvim-linux64/bin"
 . "$HOME/.cargo/env"
+export PATH="$PATH:/opt/nvim-linux64/bin"
