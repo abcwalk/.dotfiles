@@ -4,12 +4,18 @@ if not status_ok then
 end
 
 gitsigns.setup({
+    -- ┃
     signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        topdelete = { text = '-' },
-        delete = { text = '-' },
-        changedelete = { text = '~' },
+        -- add = { text = '+' },
+        -- change = { text = '~' },
+        -- topdelete = { text = '-' },
+        -- delete = { text = '-' },
+        -- changedelete = { text = '~' },
+        add = { text = '┃' },
+        change = { text = '┃' },
+        topdelete = { text = '┃' },
+        delete = { text = '┃' },
+        changedelete = { text = '┃' },
     },
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = false, -- Toggle with `:Gitsigns toggle_numhl`

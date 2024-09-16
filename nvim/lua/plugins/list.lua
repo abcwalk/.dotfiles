@@ -390,6 +390,54 @@ local plugins = {
         end,
     },
     -- {
+    --     'projekt0n/github-nvim-theme',
+    --     lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    --     priority = 1000, -- make sure to load this before all the other start plugins
+    --     config = function()
+    --         require('github-theme').setup({
+    --             -- ...
+    --         })
+    --         vim.o.background = 'dark'
+    --         vim.cmd('colorscheme github_dark_default')
+    --     end,
+    -- },
+    -- {
+    --     'phha/zenburn.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = 'light'
+    --         vim.cmd('colorscheme zenburn')
+    --     end,
+    -- },
+    --     'yorickpeterse/nvim-grey',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = 'light'
+    --         vim.cmd('colorscheme grey')
+    --     end,
+    -- },
+    --     'yorickpeterse/nvim-grey',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = 'light'
+    --         vim.cmd('colorscheme grey')
+    --     end,
+    -- },
+    -- {
+    --     'slugbyte/lackluster.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     init = function()
+    --         vim.o.background = 'dark'
+    --         -- vim.cmd.colorscheme('lackluster')
+    --         vim.cmd.colorscheme('lackluster-hack') -- my favorite
+    --         -- vim.cmd.colorscheme("lackluster-mint")
+    --     end,
+    -- },
+    -- {
     --     'behemothbucket/mellow.nvim',
     --     lazy = false,
     --     priority = 1000,
@@ -525,6 +573,18 @@ local plugins = {
     --     priority = 1000,
     --     lazy = false,
     --     -- config = load_config('ui.modus')
+    -- },
+    -- {
+    --     'maxmx03/solarized.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         vim.o.termguicolors = true
+    --         vim.o.background = 'light'
+    --         require('solarized').setup(opts)
+    --         vim.cmd.colorscheme('solarized')
+    --     end,
     -- },
     -- {
     --     'craftzdog/solarized-osaka.nvim',

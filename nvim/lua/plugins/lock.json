@@ -1,7 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "LuaSnip": { "branch": "master", "commit": "03c8e67eb7293c404845b3982db895d59c0d1538" },
-  "alabaster.nvim": { "branch": "main", "commit": "f95d29313cea20164ea67914bfcfc4cd2daa27d4" },
   "auto-hlsearch.nvim": { "branch": "main", "commit": "8f28246d53e9478717ca3b51c8112083fbebd7e3" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "39e2eda76828d88b773cc27a3f61d2ad782c922d" },
@@ -41,6 +40,7 @@
   "plenary.nvim": { "branch": "master", "commit": "f4faa5a3dc77a694ba58f42585985fed88540ac6" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "python-import.nvim": { "branch": "master", "commit": "a62f4c4c7d8929c4ea2b0bec43f4ffd864fe5b48" },
+  "solarized.nvim": { "branch": "main", "commit": "50edf5a4eee481cf179685508a219fa683ea0949" },
   "swenv.nvim": { "branch": "main", "commit": "d760a8f956b0058ffef1434df7ba7a6e2dc3a782" },
   "symbol-usage.nvim": { "branch": "main", "commit": "0f9b3da014b7e41559b643e7461fcabb2a7dc83a" },
   "tabout.nvim": { "branch": "master", "commit": "923aea2613c9e7abf81e099d46086f62c7e54896" },

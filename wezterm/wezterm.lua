@@ -107,7 +107,7 @@ config.window_padding = {
 	left = 30,
 	right = 30,
 }
-config.font_size = 18
+config.font_size = 14
 -- config.window_decorations = "RESIZE"
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
