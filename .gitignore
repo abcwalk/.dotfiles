@@ -89,3 +89,6 @@ emms/
 url/
 tree-sitter/
 .vscode/
+
+# Misc
+lock.json

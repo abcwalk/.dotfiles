@@ -56,7 +56,8 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Alabaster"
+config.color_scheme = "dirtysea (base16)"
+-- config.color_scheme = "Alabaster Dark"
 config.color_schemes = {
 	["Alabaster Dark"] = {
 		background = "#0e1415",
@@ -106,7 +107,7 @@ config.window_padding = {
 	left = 30,
 	right = 30,
 }
-config.font_size = 14
+config.font_size = 18
 -- config.window_decorations = "RESIZE"
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
@@ -127,17 +128,14 @@ config.hide_tab_bar_if_only_one_tab = true
 -- 	-- saturate(0.1),
 -- }
 
--- Alabaster
+-- Alabaster Dark
 config.colors = {
 	tab_bar = {
 		background = "#162022",
-		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
-		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
 		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
 		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#162022" },
 		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
 	},
-	-- saturate(0.1),
 }
 
 config.window_close_confirmation = "NeverPrompt"
