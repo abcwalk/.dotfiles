@@ -200,11 +200,11 @@ local plugins = {
     --     keys = { '[t', ']t' },
     --     lazy = false,
     -- },
-    -- {
-    --     'kevinhwang91/nvim-hlslens',
-    --     config = load_config('tools.hlslens'),
-    --     lazy = false,
-    -- },
+    {
+        'kevinhwang91/nvim-hlslens',
+        config = load_config('tools.hlslens'),
+        lazy = false,
+    },
     {
         'folke/flash.nvim',
         config = load_config('tools.flash'),

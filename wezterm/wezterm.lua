@@ -56,8 +56,9 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "dirtysea (base16)"
+-- config.color_scheme = "dirtysea (base16)"
 -- config.color_scheme = "Alabaster Dark"
+config.color_scheme = "Alabaster Light"
 config.color_schemes = {
 	["Alabaster Dark"] = {
 		background = "#0e1415",
@@ -86,6 +87,36 @@ config.color_schemes = {
 			"#cc8bc9",
 			"#47BEA9",
 			"#ffffff",
+		},
+	},
+	-- AI generated
+	["Alabaster Light"] = {
+		background = "#f0f0f0",
+		foreground = "#333333",
+		cursor_bg = "#cd974b",
+		cursor_border = "#cd974b",
+		cursor_fg = "#f0f0f0",
+		selection_bg = "#d6d6d6",
+		selection_fg = "#333333",
+		ansi = {
+			"#ffffff",
+			"#d2322d",
+			"#6abf40",
+			"#cd974b",
+			"#217EBC",
+			"#9B3596",
+			"#178F79",
+			"#333333",
+		},
+		brights = {
+			"#cccccc",
+			"#c33c33",
+			"#95cb82",
+			"#dfdf8e",
+			"#71aed7",
+			"#cc8bc9",
+			"#47BEA9",
+			"#000000",
 		},
 	},
 }
@@ -189,6 +220,8 @@ config.inactive_pane_hsb = {
 	saturation = 0.9,
 	brightness = 0.85,
 }
+
+config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.window_background_image = "C:/Users/Работа/cas.jpg"

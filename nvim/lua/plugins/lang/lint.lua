@@ -7,7 +7,7 @@ lint.linters_by_ft = {
     markdown = { 'markdownlint' },
     yaml = { 'yamllint' },
     -- go = { 'golangcilint' },
-    python = { 'flake8' },
+    python = { 'pylint' },
     -- dockerfile = { 'hadolint' },
     bash = { 'shellcheck' },
     json = { 'jsonlint' },
@@ -46,10 +46,10 @@ lint.linters_by_ft = {
 -- lint.linters_by_ft['terraform'] = nil
 -- lint.linters_by_ft['text'] = nil
 
-local flake8 = require('lint').linters.flake8
-flake8.args = {
-    '--line-length=120',
-}
+-- local flake8 = require('lint').linters.flake8
+-- flake8.args = {
+--     '--line-length=120',
+-- }
 
 -- Create autocommand which carries out the actual linting
 -- on the specified events.
