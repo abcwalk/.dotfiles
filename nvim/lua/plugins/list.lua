@@ -402,11 +402,7 @@ local plugins = {
         'F4LCn/oxocharcoal.nvim',
         lazy = false,
         priority = 1000,
-        config = function()
-            vim.o.background = 'dark'
-            vim.cmd('colorscheme oxocharcoal')
-            vim.api.nvim_set_hl(0, 'variable', { fg = '#d0d0d0' })
-        end,
+        config = load_config('ui.oxocarbon'),
     },
     -- {
     --     'projekt0n/github-nvim-theme',

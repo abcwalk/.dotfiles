@@ -56,9 +56,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
--- config.color_scheme = "dirtysea (base16)"
--- config.color_scheme = "Alabaster Dark"
-config.color_scheme = "Alabaster Light"
+config.color_scheme = "Oxocarbon Dark"
 config.color_schemes = {
 	["Alabaster Dark"] = {
 		background = "#0e1415",
@@ -139,7 +137,7 @@ config.window_padding = {
 	right = 30,
 }
 config.font_size = 14
--- config.window_decorations = "RESIZE"
+config.window_decorations = "RESIZE"
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
