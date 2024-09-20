@@ -1019,6 +1019,25 @@ local plugins = {
     --   config = load_config('lang.copilot'),
     --   event = 'InsertEnter',
     -- },
+    {
+        'folke/which-key.nvim',
+        event = 'VeryLazy',
+        opts = {
+            preset = 'modern',
+            win = {
+                title = true,
+            },
+        },
+        keys = {
+            {
+                '<Space>?',
+                function()
+                    require('which-key').show({ global = false })
+                end,
+                desc = 'Buffer Local Keymaps (which-key)',
+            },
+        },
+    },
 
     -- Telescope
     {

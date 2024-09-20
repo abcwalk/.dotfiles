@@ -271,7 +271,7 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- map('n', "<leader>du", dapui.toggle)
 
 -- Neotree
-map('n', '<S-f>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
+-- map('n', '<S-f>', '<cmd>Neotree toggle reveal<CR>', { noremap = true })
 -- map({ 't', 'n' }, '<C-e>', '<cmd>Neotree buffers<CR>', { noremap = true })
 -- map({ 't', 'n' }, '<C-g>', '<cmd>Neotree source=git_status dir=%:p:h left<CR>', { noremap = true, nowait = true })
 -- map('n', '<S-f>', '<cmd>Neotree position=left dir=%:p:h:h reveal_file=%:p<CR>')
