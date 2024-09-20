@@ -3,9 +3,10 @@ local oxocharcoal = require('oxocharcoal')
 vim.o.background = 'dark'
 vim.cmd('colorscheme oxocharcoal')
 
-local white = '#d0d0d0'
+local white = '#d0d0d0' -- '#f1f1f1' '#ffffff'
 local green = '#99ff99'
 local orange = '#ffb897'
+local visual_bg = '#463c51'
 
 vim.api.nvim_set_hl(0, 'variable', { fg = white })
 vim.api.nvim_set_hl(0, 'FloatBorder', { fg = white })
@@ -22,3 +23,5 @@ vim.api.nvim_set_hl(0, 'TelescopePreviewLine', { fg = oxocharcoal.none, bg = oxo
 vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = green })
 vim.api.nvim_set_hl(0, 'GitsignsAdd', { fg = green })
 vim.api.nvim_set_hl(0, 'GitsignsChange', { fg = orange })
+vim.api.nvim_set_hl(0, 'Visual', { bg = visual_bg })
+vim.api.nvim_set_hl(0, 'IncSearch', { bg = visual_bg })

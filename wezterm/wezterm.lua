@@ -158,14 +158,14 @@ config.hide_tab_bar_if_only_one_tab = true
 -- }
 
 -- Alabaster Dark
-config.colors = {
-	tab_bar = {
-		background = "#162022",
-		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
-		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#162022" },
-		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
-	},
-}
+-- config.colors = {
+-- 	tab_bar = {
+-- 		background = "#162022",
+-- 		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
+-- 		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#162022" },
+-- 		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
+-- 	},
+-- }
 
 config.window_close_confirmation = "NeverPrompt"
 config.enable_scroll_bar = false
