@@ -380,13 +380,32 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
+    -- {
+    --     'behemothbucket/alabaster.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = 'light'
+    --         vim.cmd('colorscheme alabaster')
+    --     end,
+    -- },
+    -- {
+    --     'nyoom-engineering/oxocarbon.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = 'dark'
+    --         vim.cmd('colorscheme oxocarbon')
+    --     end,
+    -- },
     {
-        'behemothbucket/alabaster.nvim',
+        'F4LCn/oxocharcoal.nvim',
         lazy = false,
         priority = 1000,
         config = function()
-            vim.o.background = 'light'
-            vim.cmd('colorscheme alabaster')
+            vim.o.background = 'dark'
+            vim.cmd('colorscheme oxocharcoal')
+            vim.api.nvim_set_hl(0, 'variable', { fg = '#d0d0d0' })
         end,
     },
     -- {
