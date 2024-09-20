@@ -151,7 +151,7 @@ lualine.setup({
         },
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        theme = 'auto',
+        theme = 'oxocharcoal',
     },
 
     -- The status bar will show only the buffer list.
@@ -232,10 +232,6 @@ lualine.setup({
         lualine_x = {
             {
                 'visual_selection',
-                -- color = function()
-                --     local c = require('nano-theme.colors').get()
-                --     return { fg = c.nano_salient_color }
-                -- end,
                 fmt = get_visual_selection_information,
             },
         },
@@ -243,33 +239,21 @@ lualine.setup({
         lualine_y = {
             -- This component is necessary to allow Neovide to keep the winbar fixed while
             -- scrolling with smooth scroll enabled.
-            {
-                'spacer',
-                color = 'WinBar',
-                fmt = function()
-                    return ' '
-                end,
-            },
+            -- {
+            --     'spacer',
+            --     color = 'WinBar',
+            --     fmt = function()
+            --         return ' '
+            --     end,
+            -- },
             {
                 'progress',
-                -- color = function()
-                --     local c = require('nano-theme.colors').get()
-                --     return { fg = c.nano_faded_color }
-                -- end,
             },
             {
                 'location',
-                -- color = function()
-                --     local c = require('nano-theme.colors').get()
-                --     return { fg = c.nano_faded_color }
-                -- end,
             },
             {
                 'current_tab',
-                -- color = function()
-                --     local c = require('nano-theme.colors').get()
-                --     return { fg = c.nano_faded_color }
-                -- end,
                 fmt = show_tab_indicator,
             },
         },
@@ -301,10 +285,6 @@ lualine.setup({
         lualine_c = {
             {
                 'branch',
-                -- color = function()
-                --     local c = require('nano-theme.colors').get()
-                --     return { fg = c.nano_faded_color }
-                -- end,
                 on_click = function()
                     require('telescope.builtin').git_branches()
                 end,
