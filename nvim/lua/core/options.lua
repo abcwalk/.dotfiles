@@ -185,7 +185,7 @@ vim.g.maplocalleader = ' '
 ---------------------------------------------------------------------------------------------------
 local possible_python_paths = {
     -- Extend the list for possible python path. Will use the 1st possible one
-    os.getenv('HOME') .. '/qa/automaps_jm_landing/.venv/bin/python3', -- Python3's venv (dev)
+    -- os.getenv('HOME') .. '/qa/automaps_jm_landing/.venv/bin/python3', -- Python3's venv (dev)
     -- os.getenv("HOME") .. "/opt/anaconda3/envs/dev/bin/python",          -- MacOS's conda (dev)
     -- os.getenv("HOME") .. "/anaconda3/envs/dev/bin/python",              -- Linux's conda (dev)
     -- os.getenv('HOME') .. '/.conda/envs/dev/bin/python',                 -- Linux's alternative conda (dev)

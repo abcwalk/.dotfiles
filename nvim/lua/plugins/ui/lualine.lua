@@ -160,17 +160,15 @@ lualine.setup({
         lualine_b = {
             {
                 'buffers',
-                -- buffers_color = {
-                --     active = function()
-                --         local c = require('nano-theme.colors').get()
-                --         return { fg = c.nano_salient_color, gui = 'bold' }
-                --     end,
-                --
-                --     inactive = function()
-                --         local c = require('nano-theme.colors').get()
-                --         return { fg = c.nano_foreground_color }
-                --     end,
-                -- },
+                buffers_color = {
+                    active = function()
+                        return { fg = '#d0d0d0', gui = 'bold' }
+                    end,
+
+                    inactive = function()
+                        return { fg = '#808080' }
+                    end,
+                },
                 mode = 0,
                 symbols = {
                     alternate_file = '',
