@@ -219,22 +219,23 @@ config.inactive_pane_hsb = {
 	brightness = 0.85,
 }
 
+-- config.window_background_image_hsb = {
+-- 	-- Darken the background image by reducing it to 1/3rd
+-- 	brightness = 0.2,
+--
+-- 	-- You can adjust the hue by scaling its value.
+-- 	-- a multiplier of 1.0 leaves the value unchanged.
+-- 	hue = 1.0,
+--
+-- 	-- You can adjust the saturation also.
+-- 	saturation = 1.0,
+-- }
+
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	-- config.window_background_image = "C:/Users/Работа/cas.jpg"
+	-- config.window_background_image = ""
 	config.default_domain = "WSL:Ubuntu"
-	-- config.window_background_image_hsb = {
-	-- 	-- Darken the background image by reducing it to 1/3rd
-	-- 	brightness = 0.2,
-	--
-	-- 	-- You can adjust the hue by scaling its value.
-	-- 	-- a multiplier of 1.0 leaves the value unchanged.
-	-- 	hue = 1.0,
-	--
-	-- 	-- You can adjust the saturation also.
-	-- 	saturation = 1.0,
-	-- }
 end
 -- x86_64-unknown-linux-gnu
 

@@ -1000,6 +1000,18 @@ local plugins = {
             end,
         },
     },
+    {
+        'NeogitOrg/neogit',
+        dependencies = {
+            'nvim-lua/plenary.nvim', -- required
+            'sindrets/diffview.nvim', -- optional - Diff integration
+        },
+        lazy = false,
+        config = function()
+            require('neogit').setup({})
+        end,
+    },
+
     -- {
     --     'stevanmilic/nvim-lspimport',
     --     lazy = false,
