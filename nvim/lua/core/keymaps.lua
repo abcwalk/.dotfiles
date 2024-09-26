@@ -185,6 +185,9 @@ map('n', '<Tab><Tab>', '<cmd>Telescope buffers theme=ivy<CR>', { noremap = true,
 --Source current file
 map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
+-- Neogit
+map('n', '<C-g>', '<cmd>Neogit<CR>', { noremap = true, silent = true })
+
 --Tab navigation
 map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
 map('n', '<A-Right>', ':bnext<CR>', { silent = true })

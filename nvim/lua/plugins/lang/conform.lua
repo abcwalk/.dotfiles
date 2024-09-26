@@ -12,12 +12,12 @@ local slow_format_filetypes = {
 conform.setup({
     formatters_by_ft = {
         lua = { 'stylua' },
-        -- go = {
-        --     'goimports',
-        --     'gofumpt',
-        --     'goimports_reviser',
-        --     'golines',
-        -- },
+        go = {
+            'goimports',
+            'gofumpt',
+            'goimports_reviser',
+            'golines',
+        },
         sql = { 'sqlfmt' },
         python = { 'black', 'isort' },
         bash = { 'shfmt' },

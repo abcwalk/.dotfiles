@@ -14,7 +14,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ln -s ${ZSH_CUSTOM}/themes/minimal/minimal.zsh ${ZSH_CUSTOM}/themes/minimal.zsh-theme
 # then update `ZSH_THEME` to `minimal` in your .zshrc
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="refined"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -128,9 +128,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
-export GOPATH=~/go
-export GOROOT=/usr/local/go
-export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 export JMETER_HOME="$HOME/apache-jmeter/"
 export PATH=$JMETER_HOME/bin:$PATH
@@ -143,3 +140,4 @@ export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 . "$HOME/.cargo/env"
 export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH=/home/home/go/bin:/usr/local/go/bin:/home/home/.cargo/bin:/usr/libexec/imv:/home/home/.local/bin/fd:/home/home/apache-jmeter//bin:/home/home/go/bin:/usr/local/go/bin:/home/home/.emacs.d/bin:/home/home/.pyenv/bin:/home/home/.local/bin:/home/home/.nvm/versions/node/v22.8.0/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/home/.dotnet/tools:/opt/nvim-linux64/bin:/opt/nvim-linux64/bin:/opt/nvim-linux64/bin

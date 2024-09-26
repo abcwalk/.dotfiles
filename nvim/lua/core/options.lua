@@ -1,120 +1,120 @@
 local namespace = vim.api.nvim_create_namespace('iqf')
 
-function _G.quickfixtextfunc(info)
-    local items, list
-    if info.quickfix > 0 then
-        list = vim.fn.getqflist({ id = info.id, items = 0, qfbufnr = 1 })
-    else
-        list = vim.fn.getloclist(info.winid, { id = info.id, items = 0, qfbufnr = 1 })
-    end
-    items = list.items
-
-    local max_width = vim.api.nvim_get_option('columns')
-    local function get_item_fname(item)
-        local fname = item.bufnr > 0 and vim.fn.bufname(item.bufnr) or ''
-        local display = nil
-        local style = nil
-
-        if fname == '' then
-            display = '[No Name]'
-        else
-            fname = vim.fn.fnamemodify(fname, ':p:~:.')
-            display, style = require('telescope.utils').transform_path({ path_display = { 'filename_first' } }, fname)
-        end
-
-        -- local len = vim.fn.strchars(fname)
-        -- if len > 20 then
-        --   fname = "…" .. vim.fn.strpart(fname, len - 20, len, true)
-        -- end
-
-        return fname, display, style
-    end
-
-    local fname_limit = 1
-    local lnum_limit = 1
-    local col_limit = 1
-
-    for _, item in ipairs(items) do
-        local fname, display, style = get_item_fname(item)
-        item._file = { filename = fname, display = display, style = style }
-        local lnum = '' .. item.lnum
-        local col = '' .. item.col
-
-        if #display > fname_limit then
-            fname_limit = #display
-        end
-        if #lnum > lnum_limit then
-            lnum_limit = #lnum
-        end
-        if #col > col_limit then
-            col_limit = #col
-        end
-    end
-
-    local function type_to_value(type)
-        if type == 'E' then
-            return 'error'
-        elseif type == 'W' then
-            return 'warning'
-        elseif type == 'N' then
-            return 'note'
-        elseif type == 'I' then
-            return 'info'
-        end
-        return type
-    end
-
-    local highlights = {}
-    local counter = 0
-    local function format_item(item)
-        if item.valid == 1 then
-            local fname = item._file.filename
-            local display = item._file.display
-            local extension = vim.fn.fnamemodify(fname, ':t:e')
-            local icon, icon_hl = require('nvim-web-devicons').get_icon(fname, extension)
-            if not icon or icon == 'nil' then
-                icon = ''
-            else
-                table.insert(highlights, { line = counter, group = icon_hl })
-            end
-            local highlight = item._file.style[1]
-            table.insert(
-                highlights,
-                { line = counter, col = highlight[1][1] + 5, end_col = highlight[1][2] + 5, group = highlight[2] }
-            )
-            counter = counter + 1
-
-            local lnum = '' .. item.lnum
-            local col = '' .. item.col
-
-            return ('%s  %s | %s col %s%s | %s'):format(
-                icon,
-                display .. string.rep(' ', fname_limit - #fname),
-                string.rep(' ', lnum_limit - #lnum) .. lnum,
-                col .. string.rep(' ', col_limit - #col),
-                item.type == '' and '' or ' ' .. type_to_value(item.type),
-                item.text:gsub('^%s+', ''):gsub('\n', ' ')
-            )
-        else
-            return item.text
-        end
-    end
-    vim.schedule(function()
-        local id = list.qfbufnr
-        for _, hl in ipairs(highlights) do
-            local col = hl.col or 0
-            local end_col = hl.end_col or 2
-            vim.highlight.range(id, namespace, hl.group, { hl.line, col }, { hl.line, end_col })
-        end
-    end)
-    return vim.tbl_map(format_item, vim.list_slice(items, info.start_idx, info.end_idx))
-end
+-- function _G.quickfixtextfunc(info)
+--     local items, list
+--     if info.quickfix > 0 then
+--         list = vim.fn.getqflist({ id = info.id, items = 0, qfbufnr = 1 })
+--     else
+--         list = vim.fn.getloclist(info.winid, { id = info.id, items = 0, qfbufnr = 1 })
+--     end
+--     items = list.items
+--
+--     local max_width = vim.api.nvim_get_option('columns')
+--     local function get_item_fname(item)
+--         local fname = item.bufnr > 0 and vim.fn.bufname(item.bufnr) or ''
+--         local display = nil
+--         local style = nil
+--
+--         if fname == '' then
+--             display = '[No Name]'
+--         else
+--             fname = vim.fn.fnamemodify(fname, ':p:~:.')
+--             display, style = require('telescope.utils').transform_path({ path_display = { 'filename_first' } }, fname)
+--         end
+--
+--         -- local len = vim.fn.strchars(fname)
+--         -- if len > 20 then
+--         --   fname = "…" .. vim.fn.strpart(fname, len - 20, len, true)
+--         -- end
+--
+--         return fname, display, style
+--     end
+--
+--     local fname_limit = 1
+--     local lnum_limit = 1
+--     local col_limit = 1
+--
+--     for _, item in ipairs(items) do
+--         local fname, display, style = get_item_fname(item)
+--         item._file = { filename = fname, display = display, style = style }
+--         local lnum = '' .. item.lnum
+--         local col = '' .. item.col
+--
+--         if #display > fname_limit then
+--             fname_limit = #display
+--         end
+--         if #lnum > lnum_limit then
+--             lnum_limit = #lnum
+--         end
+--         if #col > col_limit then
+--             col_limit = #col
+--         end
+--     end
+--
+--     local function type_to_value(type)
+--         if type == 'E' then
+--             return 'error'
+--         elseif type == 'W' then
+--             return 'warning'
+--         elseif type == 'N' then
+--             return 'note'
+--         elseif type == 'I' then
+--             return 'info'
+--         end
+--         return type
+--     end
+--
+--     local highlights = {}
+--     local counter = 0
+--     local function format_item(item)
+--         if item.valid == 1 then
+--             local fname = item._file.filename
+--             local display = item._file.display
+--             local extension = vim.fn.fnamemodify(fname, ':t:e')
+--             local icon, icon_hl = require('nvim-web-devicons').get_icon(fname, extension)
+--             if not icon or icon == 'nil' then
+--                 icon = ''
+--             else
+--                 table.insert(highlights, { line = counter, group = icon_hl })
+--             end
+--             local highlight = item._file.style[1]
+--             table.insert(
+--                 highlights,
+--                 { line = counter, col = highlight[1][1] + 5, end_col = highlight[1][2] + 5, group = highlight[2] }
+--             )
+--             counter = counter + 1
+--
+--             local lnum = '' .. item.lnum
+--             local col = '' .. item.col
+--
+--             return ('%s  %s | %s col %s%s | %s'):format(
+--                 icon,
+--                 display .. string.rep(' ', fname_limit - #fname),
+--                 string.rep(' ', lnum_limit - #lnum) .. lnum,
+--                 col .. string.rep(' ', col_limit - #col),
+--                 item.type == '' and '' or ' ' .. type_to_value(item.type),
+--                 item.text:gsub('^%s+', ''):gsub('\n', ' ')
+--             )
+--         else
+--             return item.text
+--         end
+--     end
+--     vim.schedule(function()
+--         local id = list.qfbufnr
+--         for _, hl in ipairs(highlights) do
+--             local col = hl.col or 0
+--             local end_col = hl.end_col or 2
+--             vim.highlight.range(id, namespace, hl.group, { hl.line, col }, { hl.line, end_col })
+--         end
+--     end)
+--     return vim.tbl_map(format_item, vim.list_slice(items, info.start_idx, info.end_idx))
+-- end
 
 local options = {
     ai = true,
     autoindent = true,
     autowrite = true,
-    background = 'light',
+    background = 'dark',
     backspace = 'indent,eol,start',
     backup = false, -- creates a backup file
     breakindent = true,
@@ -151,7 +151,7 @@ local options = {
     shiftwidth = 4, -- the number of spaces inserted for each indentation
     showcmd = false,
     showmode = true, -- we don't need to see things like -- INSERT -- anymore
-    showtabline = 0, -- always show tabs
+    showtabline = 2, -- always show tabs
     si = true,
     sidescrolloff = 8,
     signcolumn = 'yes', -- always show the sign column, otherwise it would shift the text each time
@@ -246,4 +246,4 @@ vim.opt.fillchars = { eob = ' ', fold = '.', foldopen = '', foldclose = ''
 -- vim.opt.statusline = '%<%f %h%m%r%=%-14.(%l,%c%V%) %P'
 -- vim.opt.statusline = '%<%f %h%m%r'
 -- vim.opt.statusline = "%#WinSeparator#%{%v:lua.string.rep('—', v:lua.vim.fn.winwidth(0))%}"
-require('core.echoline')
+-- require('core.echoline')

@@ -359,6 +359,7 @@ require('mason').setup({
 
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
+    'ts_ls',
     'bashls',
     'jsonls',
     'lua_ls',
@@ -370,14 +371,14 @@ vim.list_extend(ensure_installed, {
     'vale',
     'markdownlint',
     'sqlfmt',
-    -- 'gopls',
-    -- 'gofumpt',
-    -- 'goimports',
-    -- 'golines',
-    -- 'golangci-lint',
-    -- 'goimports-reviser',
+    'gopls',
+    'gofumpt',
+    'goimports',
+    'golines',
+    'golangci-lint',
+    'goimports-reviser',
     -- 'gomaps',
-    -- 'impl',
+    'impl',
     'isort',
     'shellcheck',
     'shfmt',
@@ -416,6 +417,14 @@ require('lsp_signature').setup(cfg)
 
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = 'rounded',
+})
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = 'rounded',
+})
+
 vim.diagnostic.config({
     virtual_text = false,
     update_in_insert = false,
@@ -434,14 +443,6 @@ vim.diagnostic.config({
     --         [vim.diagnostic.severity.ERROR] = 'Error',
     --     },
     -- },
-})
-
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'rounded',
-})
-
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = 'rounded',
 })
 
 local signs = { Error = '✘', Warn = '', Hint = '', Info = '', Question = '' }

@@ -346,15 +346,18 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
-    -- {
-    --     'bluz71/vim-moonfly-colors',
-    --     name = 'moonfly',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.cmd('colorscheme moonfly')
-    --     end,
-    -- },
+    {
+        'bluz71/vim-moonfly-colors',
+        name = 'moonfly',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.g.moonflyNormalFloat = true
+            vim.g.moonflyWinSeparator = 2
+            vim.cmd('colorscheme moonfly')
+            vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
+        end,
+    },
     -- {
     --     'Mofiqul/vscode.nvim',
     --     lazy = false,
@@ -398,12 +401,12 @@ local plugins = {
     --         vim.cmd('colorscheme oxocarbon')
     --     end,
     -- },
-    {
-        'F4LCn/oxocharcoal.nvim',
-        lazy = false,
-        priority = 1000,
-        config = load_config('ui.oxocharcoal'),
-    },
+    -- {
+    --     'F4LCn/oxocharcoal.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = load_config('ui.oxocharcoal'),
+    -- },
     -- {
     --     'projekt0n/github-nvim-theme',
     --     lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -632,10 +635,25 @@ local plugins = {
     --         vim.cmd('colorscheme zenburn')
     --     end,
     -- },
+    -- {
+    --     'nvim-lualine/lualine.nvim',
+    --     config = load_config('ui.lualine'),
+    --     event = 'VeryLazy',
+    -- },
     {
-        'nvim-lualine/lualine.nvim',
-        config = load_config('ui.lualine'),
-        event = 'VeryLazy',
+        'bluz71/nvim-linefly',
+        lazy = false,
+        config = function()
+            vim.g.linefly_options = {
+                active_tab_symbol = '',
+                -- tabline = true,
+                winbar = true,
+                with_lsp_status = true,
+                with_search_count = true,
+                with_spell_status = true,
+                with_indent_status = true,
+            }
+        end,
     },
     {
         'stevearc/dressing.nvim',

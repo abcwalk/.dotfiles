@@ -11,6 +11,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/ikhomutov/zsh-auto-venv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-auto-venv
 rm ~/.zshrc
 
+# Zsh plugins
+git clone https://github.com/sebastiencs/icons-in-terminal.git
+cd icons-in-terminal
+./install.sh
+cd ..
+git clone https://github.com/sebastiencs/ls-icons.git
+
 # Dotfiles
 git clone https://github.com/behemothbucket/.dotfiles.git
 ln -s ~/.dotfiles/.zshrc ~/.zshrc

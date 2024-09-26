@@ -151,7 +151,7 @@ lualine.setup({
         },
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        theme = 'oxocharcoal',
+        theme = 'moonfly',
     },
 
     -- The status bar will show only the buffer list.

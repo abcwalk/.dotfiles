@@ -40,7 +40,7 @@ lazy.setup({
         wrap = true,
         border = 'rounded',
         backdrop = 100,
-        title = 'Lazy',
+        -- title = 'Lazy',
         title_pos = 'center',
         browser = nil,
         throttle = 20,
