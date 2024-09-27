@@ -119,10 +119,10 @@ config.color_scheme = "moonfly"
 -- 	},
 -- }
 
--- config.window_background_opacity = 0.5
--- config.win32_system_backdrop = "Acrylic"
+-- config.window_background_opacity = 0.98
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font_size = 14
 config.window_frame = {
 	font = wezterm.font({ family = "JetBrainsMono Nerd Font" }),
 	font_size = 14.0,
@@ -138,8 +138,7 @@ config.window_padding = {
 	left = 30,
 	right = 30,
 }
-config.font_size = 14
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE" -- NONE, TITLE, RESIZE, TITLE | RESIZE
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
@@ -221,17 +220,20 @@ config.inactive_pane_hsb = {
 	brightness = 0.50,
 }
 
--- config.window_background_image_hsb = {
--- 	-- Darken the background image by reducing it to 1/3rd
--- 	brightness = 0.2,
---
--- 	-- You can adjust the hue by scaling its value.
--- 	-- a multiplier of 1.0 leaves the value unchanged.
--- 	hue = 1.0,
---
--- 	-- You can adjust the saturation also.
--- 	saturation = 1.0,
--- }
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+config.window_background_image = home .. "/.dotfiles/misc/leaf.jpg"
+
+config.window_background_image_hsb = {
+	-- Darken the background image by reducing it to 1/3rd
+	brightness = 0.01,
+
+	-- You can adjust the hue by scaling its value.
+	-- a multiplier of 1.0 leaves the value unchanged.
+	hue = 1.0,
+
+	-- You can adjust the saturation also.
+	saturation = 1.0,
+}
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 

@@ -11,12 +11,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/ikhomutov/zsh-auto-venv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-auto-venv
 rm ~/.zshrc
 
-# Zsh plugins
-git clone https://github.com/sebastiencs/icons-in-terminal.git
-cd icons-in-terminal
-./install.sh
-cd ..
-git clone https://github.com/sebastiencs/ls-icons.git
+# Zsh themes
+git clone https://github.com/ergenekonyigit/lambda-gitster.git
+cd lambda-gitster
+cp lambda-gitster.zsh-theme ~/.oh-my-zsh/custom/themes
+# .zshrc ZSH_THEME="lambda-gitster"
 
 # Dotfiles
 git clone https://github.com/behemothbucket/.dotfiles.git

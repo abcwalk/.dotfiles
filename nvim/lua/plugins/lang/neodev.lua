@@ -16,4 +16,3 @@ neodev.setup({
     lspconfig = true,
     pathStrict = true,
 })
-

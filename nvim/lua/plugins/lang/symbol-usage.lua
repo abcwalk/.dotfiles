@@ -41,7 +41,7 @@ symbolusage.setup({
     -- hl = { fg = '#332626' }, -- black-metal
     -- hl = { fg = '#a68685' }, -- rose-pine
     -- hl = { fg = '#202829' }, -- alabaster dark
-    hl = { link = 'Conceal' }, -- alabaster light
+    hl = { link = 'MoonflyGrey23' }, -- alabaster light
     ---@type lsp.SymbolKind[] Symbol kinds what need to be count (see `lsp.SymbolKind`)
     kinds = { SymbolKind.Function, SymbolKind.Method, SymbolKind.Interface, SymbolKind.Struct, SymbolKind.Class },
     ---Additional filter for kinds. Recommended use in the filetypes override table.
