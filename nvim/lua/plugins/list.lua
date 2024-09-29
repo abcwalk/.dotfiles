@@ -343,6 +343,11 @@ local plugins = {
     --     main = 'ibl',
     --     config = load_config('ui.indent-blankline'),
     -- },
+    {
+        'akinsho/bufferline.nvim',
+        lazy = false,
+        config = load_config('ui.bufferline'),
+    },
 
     -- UI
     -- {
@@ -359,7 +364,7 @@ local plugins = {
         config = function()
             vim.g.moonflyNormalFloat = true
             vim.g.moonflyWinSeparator = 2
-            vim.g.moonflyTransparent = true
+            vim.g.moonflyTransparent = false
             vim.cmd('colorscheme moonfly')
             vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
             vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
@@ -647,11 +652,11 @@ local plugins = {
     --         vim.cmd('colorscheme zenburn')
     --     end,
     -- },
-    -- {
-    --     'nvim-lualine/lualine.nvim',
-    --     config = load_config('ui.lualine'),
-    --     event = 'VeryLazy',
-    -- },
+    {
+        'nvim-lualine/lualine.nvim',
+        config = load_config('ui.lualine'),
+        lazy = false,
+    },
     {
         'bluz71/nvim-linefly',
         lazy = false,
