@@ -17,10 +17,9 @@ local diagnostics = {
     symbols = { error = 'E', warn = 'W', hint = 'H' },
     colored = true,
     update_in_insert = true,
-    always_visible = false,
+    always_visible = true,
 }
 
--- display the current mode
 local mode = {
     'mode',
     fmt = function(str)
@@ -28,19 +27,21 @@ local mode = {
     end,
 }
 
--- display the active filetype
 local filetype = {
     'filetype',
     icons_enabled = false,
     icon = nil,
 }
 
--- display the git branch
 local branch = {
     'branch',
     icons_enabled = true,
     icon = '',
 }
+
+local time = function()
+    return os.date('%H:%M:%S')
+end
 
 --------------------------------------------------------------------------------------------
 -- Plugin Configuration                                                                   --
@@ -66,16 +67,16 @@ lualine.setup({
     sections = {
         lualine_a = { mode },
         lualine_b = { branch },
-        lualine_c = { diagnostics, 'filename' },
+        lualine_c = { diagnostics, '%=', 'filename' },
         lualine_x = {},
-        lualine_y = {},
+        lualine_y = { time },
         lualine_z = { filetype },
     },
 
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {},
+        lualine_c = { 'filename' },
         lualine_x = {},
         lualine_y = {},
         lualine_z = { filetype },
