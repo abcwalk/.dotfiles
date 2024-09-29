@@ -1,30 +1,36 @@
-local custom_auto = require('lualine.themes.auto')
+-- Plugin configuration: lualine.nvim ------------------------------------------------------
+
 local status_ok, lualine = pcall(require, 'lualine')
 if not status_ok then
     return
 end
 
-local hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
-end
+--------------------------------------------------------------------------------------------
+-- Local Functions                                                                        --
+--------------------------------------------------------------------------------------------
 
+-- display the number of errors, warnings, and infos
 local diagnostics = {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
-    sections = { 'error', 'warn' },
-    symbols = { error = ' ', warn = ' ' },
+    sections = { 'error', 'warn', 'hint' },
+    symbols = { error = 'E', warn = 'W', hint = 'H' },
     colored = false,
     update_in_insert = false,
     always_visible = true,
 }
 
-local diff = {
-    'diff',
-    colored = false,
-    symbols = { added = ' ', modified = ' ', removed = ' ' },
-    cond = hide_in_width,
+local diagnostics = {
+    'diagnostics',
+    sources = { 'nvim_diagnostic' },
+    sections = { 'error', 'warn' },
+    symbols = { error = ' ', warn = ' ', hint = '' },
+    colored = true,
+    update_in_insert = true,
+    always_visible = false,
 }
 
+-- display the current mode
 local mode = {
     'mode',
     fmt = function(str)
@@ -32,90 +38,58 @@ local mode = {
     end,
 }
 
-local function filename()
-    return vim.fn.expand('%')
-end
-
-local filetype_no_icon = {
-    'filetype',
-    icons_enabled = false,
-}
-
+-- display the active filetype
 local filetype = {
     'filetype',
-    colored = true,
-    icon_only = true,
+    icons_enabled = false,
+    icon = nil,
 }
 
+-- display the git branch
 local branch = {
     'branch',
     icons_enabled = true,
     icon = '',
 }
 
-local location = {
-    'location',
-    padding = 0,
-}
-
--- cool function for progress
-local progress = function()
-    local current_line = vim.fn.line('.')
-    local total_lines = vim.fn.line('$')
-    local chars = { '__', '▁▁', '▂▂', '▃▃', '▄▄', '▅▅', '▆▆', '▇▇', '██' }
-    local line_ratio = current_line / total_lines
-    local index = math.ceil(line_ratio * #chars)
-    return chars[index]
-end
-
-local spaces = function()
-    return 'spaces: ' .. vim.api.nvim_buf_get_option(0, 'shiftwidth')
-end
-
-local time = function()
-    return os.date('%H:%M:%S')
-end
-
-local function is_recording()
-    local reg = vim.fn.reg_recording()
-    if reg == '' then
-        return ''
-    end -- not recording
-    return '@' .. reg
-end
-
-custom_auto.normal.x = custom_auto.normal.c
-custom_auto.insert.x = custom_auto.insert.c
-custom_auto.visual.x = custom_auto.visual.c
-custom_auto.replace.x = custom_auto.replace.c
-custom_auto.command.x = custom_auto.command.c
-custom_auto.inactive.x = custom_auto.inactive.c
+--------------------------------------------------------------------------------------------
+-- Plugin Configuration                                                                   --
+--------------------------------------------------------------------------------------------
 
 lualine.setup({
     options = {
+        -- Filetypes in which we will hide the bar.
+        disabled_filetypes = {
+            'alpha',
+            'dashboard',
+            'neo-tree',
+            'noice',
+            'starter',
+        },
         icons_enabled = true,
-        theme = custom_auto,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        disabled_filetypes = { 'alpha', 'dashboard', 'NvimTree', 'Outline' },
-        always_divide_middle = true,
+        always_divide_middle = false,
+        theme = 'moonfly',
     },
+
     sections = {
-        lualine_a = { mode, is_recording },
-        lualine_b = { branch, diagnostics, time },
-        lualine_c = { '%=', filetype, filename, diff },
-        lualine_x = { 'searchcount', 'selectioncount', spaces, 'encoding', filetype_no_icon },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' },
+        lualine_a = { mode },
+        lualine_b = { branch },
+        lualine_c = { diagnostics },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = { filetype },
     },
-    -- inactive_sections = {
-    --   lualine_a = {},
-    --   lualine_b = {},
-    --   lualine_c = { "filename" },
-    --   lualine_x = { "location" },
-    --   lualine_y = {},
-    --   lualine_z = {},
-    -- },
+
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = { filetype },
+    },
     tabline = {},
     extensions = {},
 })
