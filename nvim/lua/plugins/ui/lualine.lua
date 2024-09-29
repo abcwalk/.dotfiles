@@ -9,22 +9,12 @@ end
 -- Local Functions                                                                        --
 --------------------------------------------------------------------------------------------
 
--- display the number of errors, warnings, and infos
-local diagnostics = {
-    'diagnostics',
-    sources = { 'nvim_diagnostic' },
-    sections = { 'error', 'warn', 'hint' },
-    symbols = { error = 'E', warn = 'W', hint = 'H' },
-    colored = false,
-    update_in_insert = false,
-    always_visible = true,
-}
-
 local diagnostics = {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
     sections = { 'error', 'warn' },
-    symbols = { error = ' ', warn = ' ', hint = '' },
+    -- symbols = { error = ' ', warn = ' ', hint = '' },
+    symbols = { error = 'E', warn = 'W', hint = 'H' },
     colored = true,
     update_in_insert = true,
     always_visible = false,
@@ -76,7 +66,7 @@ lualine.setup({
     sections = {
         lualine_a = { mode },
         lualine_b = { branch },
-        lualine_c = { diagnostics },
+        lualine_c = { diagnostics, 'filename' },
         lualine_x = {},
         lualine_y = {},
         lualine_z = { filetype },
