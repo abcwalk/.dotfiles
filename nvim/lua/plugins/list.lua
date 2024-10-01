@@ -375,9 +375,9 @@ local plugins = {
         priority = 1000,
         opts = {
             variant = 'winter',
-            -- transparent = {
-            -- enabled = true,
-            -- },
+            transparent = {
+                enabled = false,
+            },
             styles = {
                 comments = { italic = false, bold = false },
                 functions = { italic = false },
@@ -682,12 +682,12 @@ local plugins = {
     --     config = load_config('ui.lualine'),
     --     lazy = false,
     -- },
+    -- https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html
+    -- https://github.com/nvimdev/modeline.nvim
     {
         'nvimdev/modeline.nvim',
         config = function()
             require('modeline').setup()
-            -- vim.api.nvim_set_hl(0, 'ModeLinemode', { link = 'MoonflyBlue' })
-            -- vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { link = 'MoonflyBlue' })
         end,
         lazy = false,
     },
