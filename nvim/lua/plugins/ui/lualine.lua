@@ -47,6 +47,9 @@ local branch = {
 
 local filename = {
     'filename',
+    file_status = true,
+    newfile_status = false,
+    path = 1,
     on_click = function()
         local parent_dir = vim.fn.expand('%:p:h')
         vim.cmd('Oil ' .. parent_dir)
@@ -119,18 +122,18 @@ lualine.setup({
     },
 
     sections = {
-        lualine_a = { mode },
-        lualine_b = { branch, swenv },
-        lualine_c = { diagnostics, '%=', filename },
-        lualine_x = {},
-        lualine_y = { time },
+        lualine_a = { branch },
+        lualine_b = { filename },
+        lualine_c = { diagnostics },
+        lualine_x = { swenv },
+        lualine_y = {},
         lualine_z = { filetype },
     },
 
     inactive_sections = {
         lualine_a = {},
-        lualine_b = {},
-        lualine_c = { filename },
+        lualine_b = { filename },
+        lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = { filetype },

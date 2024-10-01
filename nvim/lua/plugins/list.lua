@@ -651,20 +651,20 @@ local plugins = {
         config = load_config('ui.lualine'),
         lazy = false,
     },
-    {
-        'bluz71/nvim-linefly',
-        lazy = false,
-        config = function()
-            vim.g.linefly_options = {
-                tabline = false,
-                winbar = false,
-                with_lsp_status = true,
-                with_search_count = true,
-                with_spell_status = true,
-                with_indent_status = true,
-            }
-        end,
-    },
+    -- {
+    --     'bluz71/nvim-linefly',
+    --     lazy = false,
+    --     config = function()
+    --         vim.g.linefly_options = {
+    --             tabline = false,
+    --             winbar = false,
+    --             with_lsp_status = true,
+    --             with_search_count = true,
+    --             with_spell_status = true,
+    --             with_indent_status = true,
+    --         }
+    --     end,
+    -- },
     {
         'stevearc/dressing.nvim',
         config = load_config('ui.dressing'),
