@@ -247,7 +247,7 @@ map('i', '<A-;>', '<Esc>A;<Esc>i')
 -- This is going to get me cancelled
 vim.keymap.set('i', '<C-c>', '<Esc>')
 
--- greamap remap ever
+-- greatest remap ever
 vim.keymap.set('x', 'p', [["_dP]])
 
 -- map('n', '<F5>', function()

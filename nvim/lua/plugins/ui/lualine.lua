@@ -102,7 +102,7 @@ local swenv = {
 
 lualine.setup({
     options = {
-        -- Filetypes in which we will hide the bar.
+
         disabled_filetypes = {
             'alpha',
             'dashboard',
@@ -110,6 +110,7 @@ lualine.setup({
             'noice',
             'starter',
         },
+
         icons_enabled = true,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
@@ -134,6 +135,7 @@ lualine.setup({
         lualine_y = {},
         lualine_z = { filetype },
     },
+
     tabline = {},
     extensions = {},
 })

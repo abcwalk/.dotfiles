@@ -21,7 +21,7 @@ conform.setup({
         sql = { 'sqlfmt' },
         python = { 'black', 'isort' },
         bash = { 'shfmt' },
-        ['*'] = { 'codespell' },
+        -- ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
     },
     formatters = {},

@@ -8,12 +8,13 @@ git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux/plugins/tmux-re
 
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/ikhomutov/zsh-auto-venv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-auto-venv
+# Zsh plugin
+git clone https://github.com/ikhomutov/zsh-auto-venv "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-auto-venv
 rm ~/.zshrc
 
 # Zsh themes
 git clone https://github.com/ergenekonyigit/lambda-gitster.git
-cd lambda-gitster
+cd lambda-gitster || exit
 cp lambda-gitster.zsh-theme ~/.oh-my-zsh/custom/themes
 # .zshrc ZSH_THEME="lambda-gitster"
 
@@ -59,18 +60,18 @@ sudo apt install lua5.3 liblua5.3-dev
 # Luarocks
 wget https://luarocks.org/releases/luarocks-3.11.0.tar.gz
 tar zxpf luarocks-3.11.0.tar.gz
-cd luarocks-3.11.0
+cd luarocks-3.11.0 || exit
 ./configure && make && sudo make install
 sudo luarocks install luasocket
 
 # Python
 pip3 install pynvim virtualenv vim-vint
 if [ ! -d ~/venvs/ ]; then
-    mkdir ~/venvs && cd ~/venvs
+    mkdir ~/venvs && cd ~/venvs || exit
 fi
 python3 -m venv autotests && source ./autotests/bin/activate
 pip install black isort
-deactivate && cd
+deactivate && cd || exit
 
 # Docker
 wget https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
