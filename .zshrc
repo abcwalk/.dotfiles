@@ -110,11 +110,11 @@ alias nn="nvim -c 'Telescope oldfiles'"
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 export EDITOR='neovim'
 
-alias m='pgrep -vx tmux > /dev/null && \
-        tmux new -d -s delete-me && \
-        tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
-        tmux kill-session -t delete-me && \
-        tmux attach || tmux attach'
+# alias m='pgrep -vx tmux > /dev/null && \
+#         tmux new -d -s delete-me && \
+#         tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
+#         tmux kill-session -t delete-me && \
+#         tmux attach || tmux attach'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -685,7 +685,7 @@ local plugins = {
     -- https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html
     -- https://github.com/nvimdev/modeline.nvim
     {
-        'nvimdev/modeline.nvim',
+        'behemothbucket/modeline.nvim',
         config = function()
             require('modeline').setup()
         end,
@@ -885,7 +885,16 @@ local plugins = {
 
             -- Useful status updates for LSP.
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim', opts = {} },
+            -- {
+            --     'j-hui/fidget.nvim',
+            --     opts = {
+            --         notification = {
+            --             window = {
+            --                 winblend = 0,
+            --             },
+            --         },
+            --     },
+            -- },
             -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
             -- used for completion, annotations and signatures of Neovim apis
             -- { 'folke/neodev.nvim', opts = {} },
