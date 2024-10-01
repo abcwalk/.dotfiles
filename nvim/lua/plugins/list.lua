@@ -124,10 +124,10 @@ local plugins = {
     },
     -- {
     --     'mhinz/vim-startify',
-    --     lazy = false,
     -- },
     -- {
     --   'phaazon/hop.nvim',
+    --     lazy = false,
     --   branch = 'v2',
     --   config = function()
     --     require('hop').setup({})
@@ -350,23 +350,54 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
+    -- {
+    --     'bluz71/vim-moonfly-colors',
+    --     name = 'moonfly',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.g.moonflyNormalFloat = true
+    --         vim.g.moonflyWinSeparator = 2
+    --         vim.g.moonflyTransparent = false
+    --         vim.cmd('colorscheme moonfly')
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
+    --         vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
+    --         vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
+    --         vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
+    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
+    --     end,
+    -- },
     {
-        'bluz71/vim-moonfly-colors',
-        name = 'moonfly',
+        'maxmx03/solarized.nvim',
         lazy = false,
         priority = 1000,
-        config = function()
-            vim.g.moonflyNormalFloat = true
-            vim.g.moonflyWinSeparator = 2
-            vim.g.moonflyTransparent = false
-            vim.cmd('colorscheme moonfly')
-            vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
-            vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
-            vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
-            vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
-            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
+        opts = {
+            variant = 'winter',
+            -- transparent = {
+            -- enabled = true,
+            -- },
+            styles = {
+                comments = { italic = false, bold = false },
+                functions = { italic = false },
+                variables = { italic = false },
+            },
+            palette = 'selenized',
+            -- on_highlights = function(colors, color)
+            -- local groups = {
+            -- Pmenu = { link = 'Normal' },
+            -- NormalFloat = { link = 'Normal' },
+            -- FloatBorder = { link = 'Normal' },
+            -- }
+            -- return groups
+            -- end,
+        },
+        config = function(_, opts)
+            vim.o.termguicolors = true
+            vim.o.background = 'light'
+            require('solarized').setup(opts)
+            vim.cmd.colorscheme('solarized')
         end,
     },
     -- {
@@ -646,9 +677,18 @@ local plugins = {
     --         vim.cmd('colorscheme zenburn')
     --     end,
     -- },
+    -- {
+    --     'nvim-lualine/lualine.nvim',
+    --     config = load_config('ui.lualine'),
+    --     lazy = false,
+    -- },
     {
-        'nvim-lualine/lualine.nvim',
-        config = load_config('ui.lualine'),
+        'nvimdev/modeline.nvim',
+        config = function()
+            require('modeline').setup()
+            -- vim.api.nvim_set_hl(0, 'ModeLinemode', { link = 'MoonflyBlue' })
+            -- vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { link = 'MoonflyBlue' })
+        end,
         lazy = false,
     },
     -- {

@@ -17,8 +17,8 @@ end)
 wezterm.on("update-right-status", function(window, pane)
 	local cells = {}
 
-	local date = wezterm.strftime("%a %-d %b - %H:%M:%S")
-	table.insert(cells, date)
+	-- local date = wezterm.strftime("%a %-d %b - %H:%M:%S")
+	-- table.insert(cells, date)
 
 	for _, b in ipairs(wezterm.battery_info()) do
 		table.insert(cells, string.format("%.0f%%", b.state_of_charge * 100))
@@ -56,7 +56,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "moonfly"
+config.color_scheme = "solarized-light"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
 -- 		background = "#0e1415",
@@ -123,14 +123,16 @@ config.color_scheme = "moonfly"
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 14
+
 config.window_frame = {
 	font = wezterm.font({ family = "JetBrainsMono Nerd Font" }),
 	font_size = 14.0,
-	-- active_titlebar_bg = colors.dark_palette.bg0,
-	-- active_titlebar_fg = colors.dark_palette.fg0,
-	-- inactive_titlebar_bg = colors.dark_palette.bg1,
-	-- inactive_titlebar_fg = colors.dark_palette.fg1,
+	active_titlebar_bg = "#fdf6e3", -- base3 (background light)
+	active_titlebar_fg = "#657B83", -- base00 (foreground light)
+	inactive_titlebar_bg = "#eee8d5", -- base2 (background highlight light)
+	inactive_titlebar_fg = "#93A1A1", -- base1 (comments light)
 }
+
 config.tab_bar_at_bottom = true
 config.window_padding = {
 	top = 30,
@@ -217,23 +219,23 @@ config.keys = {
 config.mouse_bindings = mouse_bindings
 config.inactive_pane_hsb = {
 	saturation = 0.9,
-	brightness = 0.50,
+	brightness = 0.80,
 }
 
-local home = os.getenv("HOME") or os.getenv("USERPROFILE")
-config.window_background_image = home .. "/.dotfiles/misc/leaf.jpg"
+-- local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+-- config.window_background_image = home .. "/.dotfiles/misc/leaf.jpg"
 
-config.window_background_image_hsb = {
-	-- Darken the background image by reducing it to 1/3rd
-	brightness = 0.01,
-
-	-- You can adjust the hue by scaling its value.
-	-- a multiplier of 1.0 leaves the value unchanged.
-	hue = 1.0,
-
-	-- You can adjust the saturation also.
-	saturation = 1.0,
-}
+-- config.window_background_image_hsb = {
+-- 	-- Darken the background image by reducing it to 1/3rd
+-- 	brightness = 0.01,
+--
+-- 	-- You can adjust the hue by scaling its value.
+-- 	-- a multiplier of 1.0 leaves the value unchanged.
+-- 	hue = 1.0,
+--
+-- 	-- You can adjust the saturation also.
+-- 	saturation = 1.0,
+-- }
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
