@@ -384,14 +384,12 @@ local plugins = {
                 variables = { italic = false },
             },
             palette = 'selenized',
-            -- on_highlights = function(colors, color)
-            -- local groups = {
-            -- Pmenu = { link = 'Normal' },
-            -- NormalFloat = { link = 'Normal' },
-            -- FloatBorder = { link = 'Normal' },
-            -- }
-            -- return groups
-            -- end,
+            on_highlights = function(colors, color)
+                local groups = {
+                    Identifier = { fg = '#000000' },
+                }
+                return groups
+            end,
         },
         config = function(_, opts)
             vim.o.termguicolors = true

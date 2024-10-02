@@ -21,6 +21,8 @@ cp lambda-gitster.zsh-theme ~/.oh-my-zsh/custom/themes
 # Dotfiles
 git clone https://github.com/behemothbucket/.dotfiles.git
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/.vimrc ~/.vimrc
+ln -s ~/.dotfiles/.vim/ ~/.vim
 
 source ~/.zshrc
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
