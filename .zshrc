@@ -128,7 +128,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+export JAVA_HOME="/usr/bin/java"
 export JMETER_HOME="$HOME/apache-jmeter/"
 export PATH=$JMETER_HOME/bin:$PATH
 export PATH="$HOME/.local/bin/fd:$PATH"

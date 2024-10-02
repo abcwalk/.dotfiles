@@ -43,6 +43,28 @@ local plugins = {
             { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
         },
     },
+    {
+        'MeanderingProgrammer/py-requirements.nvim',
+        lazy = false,
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        config = function()
+            local requirements = require('py-requirements')
+            vim.keymap.set('n', '<leader>ru', requirements.upgrade, { silent = true, desc = 'Requirements: Upgrade' })
+            vim.keymap.set(
+                'n',
+                '<leader>rU',
+                requirements.upgrade_all,
+                { silent = true, desc = 'Requirements: Upgrade All' }
+            )
+            vim.keymap.set(
+                'n',
+                '<leader>rK',
+                requirements.show_description,
+                { silent = true, desc = 'Requirements: Show package description' }
+            )
+            requirements.setup({})
+        end,
+    },
     -- {
     --     'romgrk/barbar.nvim',
     --     enabled = true,
@@ -239,12 +261,12 @@ local plugins = {
         lazy = false,
         config = load_config('tools.project'),
     },
-    -- {
-    --     'akinsho/toggleterm.nvim',
-    --     event = 'ColorScheme',
-    --     version = '*',
-    --     config = load_config('tools.toggle-term'),
-    -- },
+    {
+        'akinsho/toggleterm.nvim',
+        event = 'ColorScheme',
+        version = '*',
+        config = load_config('tools.toggle-term'),
+    },
     -- {
     --     'iamcco/markdown-preview.nvim',
     --
@@ -846,11 +868,30 @@ local plugins = {
         event = 'LspAttach', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
         config = load_config('lang.symbol-usage'),
     },
+    -- {
+    --     'AckslD/swenv.nvim',
+    --     lazy = false,
+    --     config = load_config('lang.swenv'),
+    -- },
+
     {
-        'AckslD/swenv.nvim',
+        'linux-cultist/venv-selector.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'mfussenegger/nvim-dap',
+            'mfussenegger/nvim-dap-python', --optional
+            { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+        },
         lazy = false,
-        config = load_config('lang.swenv'),
+        branch = 'regexp', -- This is the regexp branch, use this for the new version
+        config = function()
+            require('venv-selector').setup()
+        end,
+        keys = {
+            { ',v', '<cmd>VenvSelect<cr>' },
+        },
     },
+
     -- {
     --     'VonHeikemen/lsp-zero.nvim',
     --     branch = 'v3.x',
@@ -1006,7 +1047,7 @@ local plugins = {
     --             ft = 'python',
     --         },
     --         {
-    --             '<Space>a',
+    --             '<Space>0.1.5',
     --             function()
     --                 require('python_import.api').add_import_current_selection_and_notify()
     --             end,

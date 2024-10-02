@@ -169,17 +169,17 @@ cmp.setup({
         behavior = cmp.ConfirmBehavior.Insert,
         select = true,
     },
-    window = {
-        documentation = {
-            border = 'rounded',
-            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
-        },
-        completion = {
-            border = 'rounded',
-            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
-        },
-        scrollbar = true,
-    },
+    -- window = {
+    --     documentation = {
+    --         --         border = 'none',
+    --         winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+    --     },
+    --     completion = {
+    --         --         border = 'none',
+    --         winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+    --     },
+    --     scrollbar = true,
+    -- },
     experimental = {
         ghost_text = false,
     },

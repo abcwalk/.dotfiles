@@ -15,6 +15,7 @@ local ts_parsers = {
     'java',
     'javascript',
     'json',
+    'requirements',
     'lua',
     'markdown',
     'markdown_inline',

@@ -32,13 +32,13 @@ api.nvim_create_autocmd({ 'BufWritePre' }, {
     end,
 })
 
-api.nvim_create_autocmd('FileType', {
-    pattern = { 'python' },
-    callback = function()
-        -- require('swenv.api').auto_venv()
-        require('swenv.api').set_venv('autotests')
-    end,
-})
+-- api.nvim_create_autocmd('FileType', {
+-- pattern = { 'python' },
+-- callback = function()
+-- require('swenv.api').auto_venv()
+-- require('swenv.api').set_venv('autotests')
+-- end,
+-- })
 
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --     desc = 'LSP actions',

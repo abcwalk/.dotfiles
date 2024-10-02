@@ -53,7 +53,7 @@ map('n', '<leader>q', '<cmd>TroubleToggle quickfix<cr>', { silent = true, norema
 -- map("n", "<leader>p", ":Lazy sync<CR>", { noremap = true, silent = true, nowait = true })
 
 --ToggleTerm
--- map("n", "<C-Bslash>", ":ToggleTerm<CR>", { noremap = true, silent = true })
+map('n', '<C-Bslash>', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 --Oil
 map('n', '<Bslash>f', ':Oil<CR>', { noremap = true, silent = true })
