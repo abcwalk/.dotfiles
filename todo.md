@@ -1,4 +1,4 @@
 ## Selenized
 
 - [ ] Rename branch -> Solarized
-- [ ] Fix OilVcs highlights
+- [x] Fix OilVcs highlights

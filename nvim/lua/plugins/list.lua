@@ -386,7 +386,23 @@ local plugins = {
             palette = 'selenized',
             on_highlights = function(colors, color)
                 local groups = {
-                    Identifier = { fg = '#000000' },
+                    Identifier = { fg = 'Black' },
+                    Property = { fg = 'Black' },
+                    FloatBorder = { bg = 'none' },
+                    OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusCopied = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusDeleted = { link = 'DiagnosticSignError' },
+                    OilVcsStatusIgnored = { bg = '#ece3cc', fg = '#909995' },
+                    OilVcsStatusModified = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusRenamed = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusUntracked = { link = 'DiagnosticSignHint' },
+                    OilVcsStatusUpstreamAdded = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusUpstreamCopied = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusUpstreamDeleted = { link = 'DiagnosticSignError' },
+                    OilVcsStatusUpstreamIgnored = { bg = '#ece3cc', fg = '#909995' },
+                    OilVcsStatusUpstreamModified = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusUpstreamRenamed = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusUpstreamUntracked = { link = 'DiagnosticSignHint' },
                 }
                 return groups
             end,
@@ -925,23 +941,23 @@ local plugins = {
     --     end,
     --     lazy = false,
     -- },
-    {
-        'kosayoda/nvim-lightbulb',
-        lazy = false,
-        config = function()
-            require('nvim-lightbulb').setup({
-                sign = {
-                    enabled = true,
-                    -- Text to show in the sign column.
-                    -- Must be between 1-2 characters.
-                    text = '',
-                    -- Highlight group to highlight the sign column text.
-                    hl = 'Comment',
-                },
-                autocmd = { enabled = true },
-            })
-        end,
-    },
+    -- {
+    --     'kosayoda/nvim-lightbulb',
+    --     lazy = false,
+    --     config = function()
+    --         require('nvim-lightbulb').setup({
+    --             sign = {
+    --                 enabled = true,
+    --                 -- Text to show in the sign column.
+    --                 -- Must be between 1-2 characters.
+    --                 text = '',
+    --                 -- Highlight group to highlight the sign column text.
+    --                 hl = 'Comment',
+    --             },
+    --             autocmd = { enabled = true },
+    --         })
+    --     end,
+    -- },
     -- {
     --     'aznhe21/actions-preview.nvim',
     --     config = function()

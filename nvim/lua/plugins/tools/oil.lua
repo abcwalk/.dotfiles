@@ -28,7 +28,7 @@ oil.setup({
         concealcursor = 'nvic',
     },
     -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
-    delete_to_trash = false,
+    delete_to_trash = true,
     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
     default_file_explorer = true,
     -- Restore window options to previous values when leaving an oil buffer

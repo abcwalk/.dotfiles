@@ -114,6 +114,7 @@ local options = {
     ai = true,
     autoindent = true,
     autowrite = true,
+    autoread = true,
     background = 'light',
     backspace = 'indent,eol,start',
     backup = false, -- creates a backup file

@@ -289,6 +289,9 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- Startify
 -- map('n', '<leader>s', '<cmd>Startify<CR>', { noremap = true, silent = true, nowait = true })
 
+-- Reload buffers
+map('n', '<C-r>', '<cmd>bufdo e<CR><cmd>echo "Buffers reloaded"<CR>', { noremap = true, silent = true })
+
 -- Spectre
 map('n', '<F12>', '<cmd>lua require("spectre").toggle()<CR>', { noremap = true, silent = true })
 map(
