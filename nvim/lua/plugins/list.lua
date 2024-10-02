@@ -397,9 +397,7 @@ local plugins = {
         priority = 1000,
         opts = {
             variant = 'winter',
-            transparent = {
-                enabled = false,
-            },
+            transparent = { enabled = true },
             styles = {
                 comments = { italic = false, bold = false },
                 functions = { italic = false },
