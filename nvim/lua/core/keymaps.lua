@@ -56,7 +56,7 @@ map('n', '<leader>q', '<cmd>TroubleToggle quickfix<cr>', { silent = true, norema
 map('n', '<C-Bslash>', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 --Oil
-map('n', '<Bslash>f', ':Oil --float .<CR>', { noremap = true, silent = true })
+map('n', '<Bslash>f', ':Oil .<CR>', { noremap = true, silent = true })
 
 --- Neotree
 -- map('n', '<Bslash>f', ':Neotree<CR>', { noremap = true, silent = true })
@@ -170,7 +170,7 @@ map('n', 'gx', ':silent !xdg-open <cfile><CR>', { noremap = true, silent = true 
 -- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
 
 --Plugins file
-map('n', '<F3>', ':Oil --float ~/.config/nvim/lua<CR>', { noremap = true, silent = true })
+map('n', '<F3>', ':Oil ~/.config/nvim/lua<CR>', { noremap = true, silent = true })
 
 -- nvim-toggler emacs true
 -- map("n", '<c-i>', require('nvim-toggler').toggle, { silent = true, nowait = true })
@@ -300,4 +300,4 @@ map(
     '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
     { noremap = true, silent = true }
 )
-map('v', '<leader>.', '<esc><cmd>lua require("spectre").open_visual()<CR>', { noremap = true, silent = true })
+map('v', '<F12>', '<esc><cmd>lua require("spectre").open_visual()<CR>', { noremap = true, silent = true })

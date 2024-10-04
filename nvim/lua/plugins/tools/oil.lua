@@ -22,7 +22,7 @@ oil.setup({
     -- Window-local options to use for oil buffers
     win_options = {
         wrap = false,
-        signcolumn = 'yes',
+        signcolumn = 'number',
         cursorcolumn = false,
         foldcolumn = '0',
         spell = false,
