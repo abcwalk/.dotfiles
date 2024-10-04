@@ -56,7 +56,7 @@ map('n', '<leader>q', '<cmd>TroubleToggle quickfix<cr>', { silent = true, norema
 map('n', '<C-Bslash>', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 --Oil
-map('n', '<Bslash>f', ':Oil<CR>', { noremap = true, silent = true })
+map('n', '<Bslash>f', ':Oil --float .<CR>', { noremap = true, silent = true })
 
 --- Neotree
 -- map('n', '<Bslash>f', ':Neotree<CR>', { noremap = true, silent = true })
@@ -170,7 +170,7 @@ map('n', 'gx', ':silent !xdg-open <cfile><CR>', { noremap = true, silent = true 
 -- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
 
 --Plugins file
-map('n', '<F3>', ':e ~/.config/nvim/lua/<CR>', { noremap = true, silent = true })
+map('n', '<F3>', ':Oil --float ~/.config/nvim/lua<CR>', { noremap = true, silent = true })
 
 -- nvim-toggler emacs true
 -- map("n", '<c-i>', require('nvim-toggler').toggle, { silent = true, nowait = true })
@@ -239,7 +239,7 @@ end, {
 -- map("n", "<leader>q", ":cclose<CR>:echo 'Quickfix closed'<CR>", { noremap = true })
 
 -- Swenv
-map('n', '<leader>e', '<cmd>Swenv<CR>', { noremap = true, silent = true })
+-- map('n', '<leader>e', '<cmd>Swenv<CR>', { noremap = true, silent = true })
 
 -- insert semicolon in the end
 map('i', '<A-;>', '<Esc>A;<Esc>i')

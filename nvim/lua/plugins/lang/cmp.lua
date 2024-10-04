@@ -123,7 +123,8 @@ cmp.setup({
         completeopt = 'menu,menuone,noinsert',
     },
     formatting = {
-        fields = { 'abbr', 'menu', 'kind' },
+        -- fields = { 'abbr', 'menu', 'kind' },
+        fields = { 'kind', 'abbr', 'menu' },
         expandable_indicator = true,
         format = function(entry, vim_item)
             vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
@@ -134,7 +135,7 @@ cmp.setup({
                 buffer = '[Buffer]',
                 path = '[Path]',
             })[entry.source.name]
-            vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+            vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
             return vim_item
         end,
     },
@@ -169,17 +170,18 @@ cmp.setup({
         behavior = cmp.ConfirmBehavior.Insert,
         select = true,
     },
-    -- window = {
-    --     documentation = {
-    --         --         border = 'none',
-    --         winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
-    --     },
-    --     completion = {
-    --         --         border = 'none',
-    --         winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
-    --     },
-    --     scrollbar = true,
-    -- },
+    window = {
+        -- documentation = {
+        -- border = 'rounded',
+        -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+        -- },
+        documentation = cmp.config.disable,
+        completion = {
+            border = 'rounded',
+            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+        },
+        scrollbar = false,
+    },
     experimental = {
         ghost_text = false,
     },

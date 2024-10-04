@@ -3,6 +3,8 @@ if not status_ok then
     return
 end
 
+local detail = false
+
 oil.setup({
     -- Id is automatically added at the beginning, and name at the end
     -- See :help oil-columns
@@ -15,11 +17,12 @@ oil.setup({
     -- Buffer-local options to use for oil buffers
     buf_options = {
         buflisted = false,
+        bufhidden = 'hide',
     },
     -- Window-local options to use for oil buffers
     win_options = {
         wrap = false,
-        signcolumn = 'number',
+        signcolumn = 'yes',
         cursorcolumn = false,
         foldcolumn = '0',
         spell = false,
@@ -41,6 +44,7 @@ oil.setup({
     -- it will use the mapping at require("oil.actions").<name>
     -- Set to `false` to remove a keymap
     -- See :help oil-actions for a list of all available actions
+    watch_for_changes = true,
     keymaps = {
         ['g?'] = 'actions.show_help',
         ['<CR>'] = 'actions.select',
@@ -55,6 +59,17 @@ oil.setup({
         ['`'] = 'actions.cd',
         ['~'] = 'actions.tcd', -- Like :cd, but only set the directory for the current tab.
         ['g.'] = 'actions.toggle_hidden',
+        ['gd'] = {
+            desc = 'Toggle file detail view',
+            callback = function()
+                detail = not detail
+                if detail then
+                    require('oil').set_columns({ 'icon', 'permissions', 'size', 'mtime' })
+                else
+                    require('oil').set_columns({ 'icon' })
+                end
+            end,
+        },
     },
     keymaps_help = {
         border = 'rounded',
@@ -77,8 +92,8 @@ oil.setup({
     float = {
         -- Padding around the floating window
         padding = 2,
-        max_width = 60,
-        max_height = 30,
+        max_width = 40,
+        max_height = 20,
         border = 'rounded',
         win_options = {
             winblend = 0,

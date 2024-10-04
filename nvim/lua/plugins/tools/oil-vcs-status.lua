@@ -16,7 +16,7 @@ oilvcs.setup({
         [StatusType.Renamed] = 'R',
         [StatusType.TypeChanged] = 'T',
 
-        [StatusType.Unmodified] = ' ',
+        [StatusType.Unmodified] = '!M',
         [StatusType.Unmerged] = 'U',
         [StatusType.Untracked] = '?',
         [StatusType.External] = 'X',
@@ -29,7 +29,7 @@ oilvcs.setup({
         [StatusType.UpstreamRenamed] = 'R',
 
         [StatusType.UpstreamTypeChanged] = 'T',
-        [StatusType.UpstreamUnmodified] = ' ',
+        [StatusType.UpstreamUnmodified] = '!M',
         [StatusType.UpstreamUnmerged] = 'U',
         [StatusType.UpstreamUntracked] = '?',
         [StatusType.UpstreamExternal] = 'X',

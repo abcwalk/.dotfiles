@@ -112,6 +112,13 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'oil',
+    callback = function()
+        vim.cmd('set nonumber')
+    end,
+})
+
 -- close some filetypes with <q>
 local function augroup(name)
     return vim.api.nvim_create_augroup('nvim_' .. name, { clear = true })

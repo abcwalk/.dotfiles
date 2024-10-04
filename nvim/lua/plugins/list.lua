@@ -49,16 +49,11 @@ local plugins = {
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         config = function()
             local requirements = require('py-requirements')
-            vim.keymap.set('n', '<leader>ru', requirements.upgrade, { silent = true, desc = 'Requirements: Upgrade' })
+            vim.keymap.set('n', ',ru', requirements.upgrade, { silent = true, desc = 'Requirements: Upgrade' })
+            vim.keymap.set('n', ',rU', requirements.upgrade_all, { silent = true, desc = 'Requirements: Upgrade All' })
             vim.keymap.set(
                 'n',
-                '<leader>rU',
-                requirements.upgrade_all,
-                { silent = true, desc = 'Requirements: Upgrade All' }
-            )
-            vim.keymap.set(
-                'n',
-                '<leader>rK',
+                ',rK',
                 requirements.show_description,
                 { silent = true, desc = 'Requirements: Show package description' }
             )
@@ -209,8 +204,11 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     --     config = function()
+    --         require('deepwhite').setup({
+    --             low_blue_light = false,
+    --         })
     --         vim.cmd([[colorscheme deepwhite]])
-    --         vim.api.nvim_set_hl(0, "WarningMsg", { bg = "none", fg = "#f27900" })
+    --         -- vim.api.nvim_set_hl(0, 'WarningMsg', { bg = 'none', fg = '#f27900' })
     --     end,
     -- },
     {
@@ -397,8 +395,7 @@ local plugins = {
         priority = 1000,
         opts = {
             variant = 'winter',
-            transparent = { enabled = true, pmenu = false },
-
+            -- transparent = { enabled = true, pmenu = false, normalfloat = false },
             styles = {
                 comments = { italic = false, bold = false },
                 functions = { italic = false },
@@ -413,14 +410,14 @@ local plugins = {
                     -- OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
                     -- OilVcsStatusCopied = { link = 'DiagnosticSignOk' },
                     -- OilVcsStatusDeleted = { link = 'DiagnosticSignError' },
-                    -- OilVcsStatusIgnored = { bg = '#ece3cc', fg = '#909995' },
+                    -- OilVcsStatusIgnored = { link = 'LineNr' },
                     -- OilVcsStatusModified = { link = 'DiagnosticSignWarn' },
                     -- OilVcsStatusRenamed = { link = 'DiagnosticSignWarn' },
                     -- OilVcsStatusUntracked = { link = 'DiagnosticSignHint' },
                     -- OilVcsStatusUpstreamAdded = { link = 'DiagnosticSignOk' },
                     -- OilVcsStatusUpstreamCopied = { link = 'DiagnosticSignOk' },
                     -- OilVcsStatusUpstreamDeleted = { link = 'DiagnosticSignError' },
-                    -- OilVcsStatusUpstreamIgnored = { bg = '#ece3cc', fg = '#909995' },
+                    -- OilVcsStatusUpstreamIgnored = { link = 'LineNr' },
                     -- OilVcsStatusUpstreamModified = { link = 'DiagnosticSignWarn' },
                     -- OilVcsStatusUpstreamRenamed = { link = 'DiagnosticSignWarn' },
                     -- OilVcsStatusUpstreamUntracked = { link = 'DiagnosticSignHint' },

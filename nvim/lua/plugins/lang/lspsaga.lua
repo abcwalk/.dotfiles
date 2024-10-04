@@ -61,7 +61,7 @@ saga.setup({
     rename = {
         in_select = false,
         keys = {
-            quit = '<C-c>',
+            quit = { '<C-c>', '<ESC>' },
         },
     },
     code_action = {
