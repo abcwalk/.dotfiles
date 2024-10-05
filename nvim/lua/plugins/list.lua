@@ -406,6 +406,7 @@ local plugins = {
                 local groups = {
                     Identifier = { fg = 'Black' },
                     Property = { fg = 'Black' },
+                    Parameter = { fg = 'Black' }, -- test
                     CmpItemAbbr = { fg = 'Black' },
                     CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
                     CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
@@ -826,7 +827,7 @@ local plugins = {
         config = load_config('lang.treesitter'),
     },
     -- LSP
-    { 'onsails/lspkind.nvim' },
+    -- { 'onsails/lspkind.nvim' },
     -- {
     --     'folke/neodev.nvim',
     --     ft = { 'lua', 'vim' },

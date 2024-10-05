@@ -118,18 +118,35 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
 local servers = {
-    pyright = {
-        autoImportCompletion = true,
-        python = {
-            analysis = {
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
-                diagnosticMode = 'openFilesOnly',
-                -- indexing = true,
-                -- typeCheckingMode = 'strict',
-            },
-        },
-    },
+    -- basedpyright = {
+    --     settings = {
+    --         basedpyright = {
+    --             disableOrganizeImports = true,
+    --             -- https://github.com/DetachHead/basedpyright/issues/203
+    --             typeCheckingMode = 'off',
+    --         },
+    --         python = {
+    --             analysis = {
+    --                 -- Ignore all files for analysis to exclusively use Ruff for linting
+    --                 ignore = { '*' },
+    --             },
+    --         },
+    --     },
+    -- },
+    -- pyright = {
+    --     enabled = false,
+    --     settings = {
+    --         pyright = {
+    --             disableOrganizeImports = true,
+    --         },
+    --         python = {
+    --             analysis = {
+    --                 -- Ignore all files for analysis to exclusively use Ruff for linting
+    --                 ignore = { '*' },
+    --             },
+    --         },
+    --     },
+    -- },
     yamlls = {
         yaml = {
             completion = true,
@@ -319,27 +336,39 @@ local servers = {
     --     },
     -- },
     lua_ls = {
-        settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { 'vim' },
-                },
-                hint = {
-                    enable = false,
-                },
-                completion = {
-                    callSnippet = 'Replace',
-                },
-                format = {
-                    enable = true,
-                    defaultConfig = {
-                        indent_style = 'space',
-                        indent_size = '4',
-                    },
-                },
+        Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+            completion = {
+                callSnippet = 'Disable',
+            },
+            codelens = {
+                enable = true,
             },
         },
     },
+    -- lua_ls = {
+    --     settings = {
+    --         Lua = {
+    --             diagnostics = {
+    --                 globals = { 'vim' },
+    --             },
+    --             hint = {
+    --                 enable = false,
+    --             },
+    --             completion = {
+    --                 callSnippet = 'Replace',
+    --             },
+    --             format = {
+    --                 enable = true,
+    --                 defaultConfig = {
+    --                     indent_style = 'space',
+    --                     indent_size = '4',
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- },
 }
 
 -- Ensure the servers and tools above are installed
@@ -363,10 +392,12 @@ vim.list_extend(ensure_installed, {
     'bashls',
     'jsonls',
     'lua_ls',
-    'pyright',
+    -- 'pyright',
     'stylua',
-    'black',
-    'pylint',
+    -- 'black',
+    'ruff',
+    -- 'ruff-lsp',
+    -- 'pylint',
     -- 'flake8',
     'vale',
     'markdownlint',
@@ -374,35 +405,91 @@ vim.list_extend(ensure_installed, {
     'gopls',
     'gofumpt',
     'goimports',
+    'eslint_d',
     'golines',
     'golangci-lint',
     'goimports-reviser',
+    'prettier',
+    'prettierd',
     -- 'gomaps',
     'impl',
-    'isort',
+    -- 'isort',
     'shellcheck',
     'shfmt',
     'yamllint',
 })
 require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-local lsp = require('lspconfig')
+require('mason-lspconfig').setup()
 
-require('mason-lspconfig').setup({
-    handlers = {
-        function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            lsp[server_name].setup(server)
-        end,
+local lspconfig = require('lspconfig')
+
+lspconfig.basedpyright.setup({
+    settings = {
+        basedpyright = {
+            disableOrganizeImports = true,
+            -- https://github.com/DetachHead/basedpyright/issues/203
+            typeCheckingMode = 'standard', -- ["off", "basic", "standard", "strict", "all"]
+        },
+    },
+    capabilities = {
+        textDocument = {
+            publishDiagnostics = {
+                tagSupport = {
+                    valueSet = { 2 }, -- prevent duplicates with ruff_lsp https://github.com/microsoft/pyright/issues/4652
+                },
+            },
+        },
     },
 })
 
---- Signature Help
+-- lspconfig.ruff_lsp.setup({
+--     on_attach = function(client, _)
+--         client.server_capabilities.hoverProvider = false
+--     end,
+-- })
 
+lspconfig.lua_ls.setup({
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            hint = {
+                enable = false,
+            },
+            completion = {
+                callSnippet = 'Replace',
+            },
+            format = {
+                enable = true,
+                defaultConfig = {
+                    indent_style = 'space',
+                    indent_size = '4',
+                },
+            },
+        },
+    },
+})
+
+lspconfig.yamlls.setup({
+    settings = {
+        yaml = {
+            completion = true,
+            format = {
+                enable = true,
+                proseWrap = 'never',
+                printWidth = 200,
+            },
+            keyOrdering = false,
+            validate = true,
+        },
+    },
+})
+
+lspconfig.ts_ls.setup({})
+
+--- Signature Help
 local cfg = {
     bind = true,
     max_width = 100,
@@ -414,7 +501,6 @@ local cfg = {
 require('lsp_signature').setup(cfg)
 
 --- UI
-
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -438,11 +524,6 @@ vim.diagnostic.config({
         header = '',
         prefix = '',
     },
-    -- signs = {
-    --     linehl = {
-    --         [vim.diagnostic.severity.ERROR] = 'Error',
-    --     },
-    -- },
 })
 
 local signs = { Error = '✘', Warn = '', Hint = '', Info = '', Question = '' }
