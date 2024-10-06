@@ -402,7 +402,7 @@ local plugins = {
                 variables = { italic = false },
             },
             palette = 'selenized',
-            on_highlights = function(colors, color)
+            on_highlights = function(_, _)
                 local groups = {
                     Identifier = { fg = 'Black' },
                     Property = { fg = 'Black' },
@@ -884,11 +884,11 @@ local plugins = {
     --         },
     --     },
     -- },
-    {
-        'Wansmer/symbol-usage.nvim',
-        event = 'LspAttach', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-        config = load_config('lang.symbol-usage'),
-    },
+    -- {
+    --     'Wansmer/symbol-usage.nvim',
+    --     event = 'LspAttach', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    --     config = load_config('lang.symbol-usage'),
+    -- },
     -- {
     --     'AckslD/swenv.nvim',
     --     lazy = false,
@@ -911,6 +911,21 @@ local plugins = {
         keys = {
             { ',v', '<cmd>VenvSelect<cr>' },
         },
+    },
+    {
+        'alexpasmantier/pymple.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'MunifTanjim/nui.nvim',
+            -- optional (nicer ui)
+            'stevearc/dressing.nvim',
+            'nvim-tree/nvim-web-devicons',
+        },
+        build = ':PympleBuild',
+        lazy = false,
+        config = function()
+            require('pymple').setup()
+        end,
     },
 
     -- {

@@ -19,7 +19,11 @@ conform.setup({
             'golines',
         },
         sql = { 'sqlfmt' },
-        python = { 'ruff_format', 'ruff_organize_imports' },
+        python = {
+            'ruff_format',
+            'ruff_organize_imports',
+            'ruff_fix',
+        },
         css = { 'prettier' },
         svelte = { 'prettier' },
         c = { 'clang-format' },
@@ -32,27 +36,27 @@ conform.setup({
         -- ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
     },
-    -- formatters = {
-    --     ruff_organize_imports = {
-    --         command = 'ruff',
-    --         args = {
-    --             'check',
-    --             '--force-exclude',
-    --             '--select=I001',
-    --             '--fix',
-    --             '--exit-zero',
-    --             '--stdin-filename',
-    --             '$FILENAME',
-    --             '-',
-    --         },
-    --         stdin = true,
-    --         cwd = require('conform.util').root_file({
-    --             'pyproject.toml',
-    --             'ruff.toml',
-    --             '.ruff.toml',
-    --         }),
-    --     },
-    -- },
+    formatters = {
+        ruff_organize_imports = {
+            command = 'ruff',
+            args = {
+                'check',
+                '--force-exclude',
+                '--select=I001',
+                '--fix',
+                '--exit-zero',
+                '--stdin-filename',
+                '$FILENAME',
+                '-',
+            },
+            stdin = true,
+            cwd = require('conform.util').root_file({
+                'pyproject.toml',
+                'ruff.toml',
+                '.ruff.toml',
+            }),
+        },
+    },
     format_on_save = {
         timeout_ms = 500,
         lsp_format = 'fallback',

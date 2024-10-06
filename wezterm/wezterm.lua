@@ -121,11 +121,16 @@ config.color_scheme = "solarized-light"
 
 -- config.window_background_opacity = 0.98
 
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+local font = "JetBrainsMono Nerd Font"
+-- local font = "Iosevka Nerd Font Mono"
+config.font = wezterm.font({
+	family = font,
+	-- weight = "Regular",
+})
 config.font_size = 14
 
 config.window_frame = {
-	font = wezterm.font({ family = "JetBrainsMono Nerd Font" }),
+	font = wezterm.font({ family = font }),
 	font_size = 14.0,
 	active_titlebar_bg = "#fdf6e3", -- base3 (background light)
 	active_titlebar_fg = "#657B83", -- base00 (foreground light)
@@ -216,6 +221,8 @@ config.keys = {
 	},
 }
 
+config.warn_about_missing_glyphs = false
+
 config.mouse_bindings = mouse_bindings
 config.inactive_pane_hsb = {
 	saturation = 0.9,
@@ -230,6 +237,8 @@ config.inactive_pane_hsb = {
 -- 	brightness = 0.01,
 --
 -- 	-- You can adjust the hue by scaling its value.
+
+config.warn_about_missing_glyphs = false
 -- 	-- a multiplier of 1.0 leaves the value unchanged.
 -- 	hue = 1.0,
 --
@@ -237,7 +246,10 @@ config.inactive_pane_hsb = {
 -- 	saturation = 1.0,
 -- }
 
-config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+-- config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+
+-- config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+config.harfbuzz_features = { "ss07", "calt", "liga=0" }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.window_background_image = ""
