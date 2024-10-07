@@ -1,0 +1,169 @@
+{
+    "editor.bracketPairColorization.enabled": false,
+    "editor.mouseWheelZoom": true,
+    "editor.minimap.enabled": false,
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.unicodeHighlight.allowedLocales": {
+        "ru": true
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh (2)",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "breadcrumbs.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.formatOnSave": true,
+    "chat.editor.fontSize": 12,
+    "markdown.preview.fontSize": 12,
+    "workbench.startupEditor": "none",
+    "workbench.editor.enablePreview": false,
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "editor.fontSize": 16,
+    "debug.console.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
+    "window.zoomLevel": 0.2,
+    "terminal.integrated.mouseWheelZoom": true,
+    "editor.cursorStyle": "block",
+    "window.commandCenter": false,
+    "workbench.layoutControl.enabled": false,
+    "workbench.colorCustomizations": {
+        "tab.inactiveBackground": "#202c2f",
+        "sideBar.background": "#161f21",
+        "editorGroupHeader.tabsBackground": "#161f21",
+        "[Alabaster Dark]": {
+            "editor.background": "#0e1415",
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Alabaster Dark]": {
+            "textMateRules": [
+                {
+                    "scope": "comment",
+                    "settings": {
+                        "foreground": "#696969"
+                    }
+                },
+                {
+                    "scope": "punctuation.definition.comment",
+                    "settings": {
+                        "foreground": "#696969"
+                    }
+                }
+            ]
+        }
+    },
+    "vim.searchHighlightColor": "rgba(150, 255, 255, 0.3)",
+    "git.confirmSync": false,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.ignorecase": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.cursorStylePerMode.insert": "line-thin",
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
+                "k",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
+                "<c-a>"
+            ],
+            "after": [
+                "<Esc>",
+                "I"
+            ]
+        },
+        {
+            "before": [
+                "<c-e>"
+            ],
+            "after": [
+                "<Esc>",
+                "A"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<c-l>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "commands": [
+                "lineBreakInsert"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "s"
+            ],
+            "after": [
+                "leader",
+                "leader",
+                "s"
+            ]
+        },
+        {
+            "before": [
+                "<c-]>"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<c-["
+            ],
+            "commands": [
+                "editor.action.marker.prevInFiles"
+            ],
+            "silent": true
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-k>": false,
+        "<C-w>": false,
+        "<C-c>": false,
+        "<C-v>": false,
+        "<C-b>": false,
+        "<C-s>": false
+    },
+    // To improve performance
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "workbench.iconTheme": "helium-icon-theme",
+    "workbench.activityBar.location": "hidden",
+    "workbench.colorTheme": "Alabaster Dark",
+}

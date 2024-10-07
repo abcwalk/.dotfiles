@@ -1,0 +1,66 @@
+import = ["C:/Users/Максим/.config/alacritty/theme.toml"]
+
+[shell]
+program = "ubuntu"
+
+[window]
+opacity = 1
+startup_mode = "Maximized"
+dynamic_padding = false
+dynamic_title = false
+title = "Alacritty"
+
+[window.padding]
+x = 6
+y = 6
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[font]
+size = 18
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.cursor]
+text                  = "#181618"
+cursor                = "#c5c9c5"
+
+[colors.vi_mode_cursor]
+text                  = "#181618"
+cursor                = "#c5c9c5"
+
+[cursor.style]
+shape                 = "Block"
+blinking              = "Always"
+
+[cursor.vi_mode_style]
+shape                 = "Block"
+blinking              = "Always"
+
+[cursor]
+blink_interval        = 800
+blink_timeout         = 0
+

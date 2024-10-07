@@ -1,0 +1,35 @@
+# AI generated
+[colors]
+background = "#fbf3db"  # base3 (background light)
+foreground = "#657B83"  # base00 (foreground light)
+cursor_bg = "#586E75"   # base01
+cursor_fg = "#fdf6e3"   # base3
+cursor_border = "#586E75"  # base01
+selection_bg = "#eee8d5"  # base2 (background highlight light)
+selection_fg = "#657B83"  # base00
+scrollbar_thumb = "#93A1A1"  # base1
+split = "#93A1A1"  # base1
+
+ansi = [
+  "#eee8d5",  # base2
+  "#DC322F",  # red
+  "#859900",  # green
+  "#B58900",  # yellow
+  "#268BD2",  # blue
+  "#D33682",  # magenta
+  "#2AA198",  # cyan
+  "#073642",  # base02
+]
+brights = [
+  "#fbf3db",  # base4
+  "#CB4B16",  # orange
+  "#274C25",  # mix_green
+  "#B58900",  # yellow
+  "#6C71C4",  # violet
+  "#D33682",  # magenta
+  "#2AA198",  # cyan
+  "#002B36",  # base03
+]
+
+compose_cursor = "#B58900"  # yellow
+visual_bell = "#B58900"  # yellow
