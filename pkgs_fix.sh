@@ -26,6 +26,7 @@ rm ~/.zshrc
 git clone https://github.com/ergenekonyigit/lambda-gitster.git
 cd lambda-gitster || exit
 cp lambda-gitster.zsh-theme ~/.oh-my-zsh/custom/themes
+rm -r lambda-gitster
 # .zshrc ZSH_THEME="lambda-gitster"
 
 # Dotfiles

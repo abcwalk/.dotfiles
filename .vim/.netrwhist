@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/home/.dotfiles'
 let g:netrw_dirhist_5='/home/home/DataGripProjects'
 let g:netrw_dirhist_4='/home/home/DataGripProjects/ITSF'
 let g:netrw_dirhist_3='/home/home/DataGripProjects/ITSF/.idea'

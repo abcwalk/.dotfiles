@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-# export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -14,6 +14,7 @@
 # ln -s ${ZSH_CUSTOM}/themes/minimal/minimal.zsh ${ZSH_CUSTOM}/themes/minimal.zsh-theme
 # then update `ZSH_THEME` to `minimal` in your .zshrc
 
+# ZSH_THEME="robbyrussell"
 ZSH_THEME="lambda-gitster"
 # ZSH_THEME="rockerboo"
 
@@ -84,7 +85,7 @@ ZSH_THEME="lambda-gitster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-auto-venv node docker fzf themes kubectl)
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
