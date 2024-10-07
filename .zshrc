@@ -128,9 +128,6 @@ export EDITOR='neovim'
 #         tmux kill-session -t delete-me && \
 #         tmux attach || tmux attach'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 export PATH="$HOME/.local/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -149,8 +146,10 @@ export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$PATH:/opt/nvim-linux64/bin"
-. "$HOME/.cargo/env"
-export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH=/home/home/go/bin:/usr/local/go/bin:/home/home/.cargo/bin:/usr/libexec/imv:/home/home/.local/bin/fd:/home/home/apache-jmeter//bin:/home/home/go/bin:/usr/local/go/bin:/home/home/.emacs.d/bin:/home/home/.pyenv/bin:/home/home/.local/bin:/home/home/.nvm/versions/node/v22.8.0/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/home/.dotnet/tools:/opt/nvim-linux64/bin:/opt/nvim-linux64/bin:/opt/nvim-linux64/bin
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export NVM_DIR="$HOME/.nvm"
+. "$HOME/.cargo/env"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion

@@ -122,16 +122,16 @@ config.color_scheme = "Cloud (terminal.sexy)"
 
 -- config.window_background_opacity = 0.98
 
-local font = "JetBrainsMono Nerd Font"
+-- local font = "JetBrainsMono Nerd Font"
 -- local font = "Iosevka Nerd Font Mono"
-config.font = wezterm.font({
-	family = font,
-	-- weight = "Regular",
-})
+-- config.font =--[[   ]]wezterm.font({
+-- family = font,
+-- weight = "Regular",
+-- })
 config.font_size = 14
 
 config.window_frame = {
-	font = wezterm.font({ family = font }),
+	-- font = wezterm.font({ family = font }),
 	font_size = 14.0,
 	active_titlebar_bg = "#fdf6e3", -- base3 (background light)
 	active_titlebar_fg = "#657B83", -- base00 (foreground light)
