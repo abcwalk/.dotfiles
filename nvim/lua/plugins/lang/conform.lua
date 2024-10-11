@@ -3,11 +3,11 @@ if not status_ok then
     return
 end
 
-local slow_format_filetypes = {
-    'go',
-    'python',
-    'sql',
-}
+-- local slow_format_filetypes = {
+--     'go',
+--     'python',
+--     'sql',
+-- }
 
 conform.setup({
     formatters_by_ft = {
@@ -19,11 +19,13 @@ conform.setup({
             'golines',
         },
         sql = { 'sqlfmt' },
-        python = {
-            'ruff_format',
-            'ruff_organize_imports',
-            'ruff_fix',
-        },
+        python = function(bufnr)
+            if require('conform').get_formatter_info('ruff_format', bufnr).available then
+                return { 'ruff_format', 'ruff_organize_imports', 'ruff_fix' }
+            else
+                return { 'isort', 'black' }
+            end
+        end,
         css = { 'prettier' },
         svelte = { 'prettier' },
         c = { 'clang-format' },
@@ -82,3 +84,4 @@ conform.setup({
     -- end,
     notify_on_error = false,
 })
+

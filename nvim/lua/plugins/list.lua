@@ -225,6 +225,16 @@ local plugins = {
     --     keys = { '[t', ']t' },
     --     lazy = false,
     -- },
+    -- {
+    --     'folke/todo-comments.nvim',
+    --     lazy = false,
+    --     dependencies = { 'nvim-lua/plenary.nvim' },
+    --     opts = {
+    --         -- your configuration comes here
+    --         -- or leave it empty to use the default settings
+    --         -- refer to the configuration section below
+    --     },
+    -- },
     {
         'kevinhwang91/nvim-hlslens',
         config = load_config('tools.hlslens'),
@@ -303,7 +313,13 @@ local plugins = {
     --     'vidocqh/auto-indent.nvim',
     --     lazy = false,
     -- },
-
+    {
+        'FabijanZulj/blame.nvim',
+        lazy = false,
+        config = function()
+            require('blame').setup()
+        end,
+    },
     -- {
     --     'echasnovski/mini.indentscope',
     --     lazy = false,
@@ -474,6 +490,14 @@ local plugins = {
     --     config = function()
     --         vim.o.background = 'light'
     --         vim.cmd('colorscheme alabaster')
+    --     end,
+    -- },
+    -- {
+    --     'alvarosevilla95/luatab.nvim',
+    --     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    --     lazy = false,
+    --     config = function()
+    --         require('luatab').setup()
     --     end,
     -- },
     -- {
