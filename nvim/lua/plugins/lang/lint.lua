@@ -4,10 +4,10 @@ if not status_ok then
 end
 
 lint.linters_by_ft = {
-    markdown = { 'markdownlint' },
+    -- markdown = { 'markdownlint' },
     yaml = { 'yamllint' },
     -- go = { 'golangcilint' },
-    -- python = { 'ruff' },
+    python = { 'pylint' },
     javascript = { 'eslint_d' },
     dockerfile = { 'hadolint' },
     bash = { 'shellcheck' },

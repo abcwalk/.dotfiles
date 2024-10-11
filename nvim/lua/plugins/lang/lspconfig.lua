@@ -131,7 +131,7 @@ vim.list_extend(ensure_installed, {
     -- 'black',
     'ruff',
     -- 'ruff-lsp',
-    -- 'pylint',
+    'pylint',
     -- 'flake8',
     'hadolint',
     'vale',

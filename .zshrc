@@ -144,6 +144,12 @@ export PATH="$HOME/.local/bin/fd:$PATH"
 export PATH="/usr/libexec/imv:$PATH"
 export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
+# Rubackup
+PATH=$PATH:/opt/rubackup/bin
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rubackup/lib
+export PATH
+export LD_LIBRARY_PATH
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH=/home/home/go/bin:/usr/local/go/bin:/home/home/.cargo/bin:/usr/libexec/imv:/home/home/.local/bin/fd:/home/home/apache-jmeter//bin:/home/home/go/bin:/usr/local/go/bin:/home/home/.emacs.d/bin:/home/home/.pyenv/bin:/home/home/.local/bin:/home/home/.nvm/versions/node/v22.8.0/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/home/.dotnet/tools:/opt/nvim-linux64/bin:/opt/nvim-linux64/bin:/opt/nvim-linux64/bin

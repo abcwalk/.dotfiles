@@ -225,6 +225,16 @@ local plugins = {
     --     keys = { '[t', ']t' },
     --     lazy = false,
     -- },
+    -- {
+    --     'folke/todo-comments.nvim',
+    --     lazy = false,
+    --     dependencies = { 'nvim-lua/plenary.nvim' },
+    --     opts = {
+    --         -- your configuration comes here
+    --         -- or leave it empty to use the default settings
+    --         -- refer to the configuration section below
+    --     },
+    -- },
     {
         'kevinhwang91/nvim-hlslens',
         config = load_config('tools.hlslens'),
@@ -303,7 +313,13 @@ local plugins = {
     --     'vidocqh/auto-indent.nvim',
     --     lazy = false,
     -- },
-
+    {
+        'FabijanZulj/blame.nvim',
+        lazy = false,
+        config = function()
+            require('blame').setup()
+        end,
+    },
     -- {
     --     'echasnovski/mini.indentscope',
     --     lazy = false,
@@ -370,78 +386,78 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
-    {
-        'bluz71/vim-moonfly-colors',
-        name = 'moonfly',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.g.moonflyNormalFloat = true
-            vim.g.moonflyWinSeparator = 2
-            vim.g.moonflyTransparent = false
-            vim.cmd('colorscheme moonfly')
-            vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
-            vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
-            vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
-            vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
-            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
-        end,
-    },
     -- {
-    --     'maxmx03/solarized.nvim',
+    --     'bluz71/vim-moonfly-colors',
+    --     name = 'moonfly',
     --     lazy = false,
     --     priority = 1000,
-    --     opts = {
-    --         variant = 'winter',
-    --         -- transparent = { enabled = true, pmenu = false, normalfloat = false },
-    --         styles = {
-    --             comments = { italic = false, bold = false },
-    --             functions = { italic = false },
-    --             variables = { italic = false },
-    --         },
-    --         palette = 'selenized',
-    --         on_highlights = function(_, _)
-    --             local groups = {
-    --                 Identifier = { fg = 'Black' },
-    --                 Property = { fg = 'Black' },
-    --                 Search = { fg = '#489100', bg = '#e9e9c5', bold = true },
-    --                 -- MatchParen = { fg = '#009c8f', cterm = 'reverse' },
-    --                 Parameter = { fg = 'Black' }, -- test
-    --                 CmpItemAbbr = { fg = 'Black' },
-    --                 CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
-    --                 CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
-    --                 PmenuSel = { fg = '#909995' },
-    --                 -- PmenuKindSel = { bg = '#909995' },
-    --                 -- FloatBorder = { bg = 'none' },
-    --                 OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
-    --                 OilVcsStatusCopied = { link = 'DiagnosticSignOk' },
-    --                 OilVcsStatusDeleted = { link = 'DiagnosticSignError' },
-    --                 OilVcsStatusIgnored = { link = 'LineNr' },
-    --                 OilVcsStatusModified = { link = 'DiagnosticSignWarn' },
-    --                 OilVcsStatusUnModified = { link = 'LineNr' },
-    --                 OilVcsStatusRenamed = { link = 'DiagnosticSignWarn' },
-    --                 OilVcsStatusUntracked = { link = 'DiagnosticSignHint' },
-    --                 OilVcsStatusUpstreamAdded = { link = 'DiagnosticSignOk' },
-    --                 OilVcsStatusUpstreamCopied = { link = 'DiagnosticSignOk' },
-    --                 OilVcsStatusUpstreamDeleted = { link = 'DiagnosticSignError' },
-    --                 OilVcsStatusUpstreamIgnored = { link = 'LineNr' },
-    --                 OilVcsStatusUpstreamModified = { link = 'DiagnosticSignWarn' },
-    --                 OilVcsStatusUpstreamUnModified = { link = 'LineNr' },
-    --                 OilVcsStatusUpstreamRenamed = { link = 'DiagnosticSignWarn' },
-    --                 OilVcsStatusUpstreamUntracked = { link = 'DiagnosticSignHint' },
-    --             }
-    --             return groups
-    --         end,
-    --     },
-    --     config = function(_, opts)
-    --         vim.o.termguicolors = true
-    --         vim.o.background = 'light'
-    --         require('solarized').setup(opts)
-    --         vim.cmd.colorscheme('solarized')
+    --     config = function()
+    --         vim.g.moonflyNormalFloat = true
+    --         vim.g.moonflyWinSeparator = 2
+    --         vim.g.moonflyTransparent = false
+    --         vim.cmd('colorscheme moonfly')
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
+    --         vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
+    --         vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
+    --         vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
+    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
     --     end,
     -- },
+    {
+        'maxmx03/solarized.nvim',
+        lazy = false,
+        priority = 1000,
+        opts = {
+            variant = 'winter',
+            -- transparent = { enabled = true, pmenu = false, normalfloat = false },
+            styles = {
+                comments = { italic = false, bold = false },
+                functions = { italic = false },
+                variables = { italic = false },
+            },
+            palette = 'selenized',
+            on_highlights = function(_, _)
+                local groups = {
+                    Identifier = { fg = 'Black' },
+                    Property = { fg = 'Black' },
+                    Search = { fg = '#489100', bg = '#e9e9c5', bold = true },
+                    -- MatchParen = { fg = '#009c8f', cterm = 'reverse' },
+                    Parameter = { fg = 'Black' }, -- test
+                    CmpItemAbbr = { fg = 'Black' },
+                    CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
+                    CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
+                    PmenuSel = { fg = '#909995' },
+                    -- PmenuKindSel = { bg = '#909995' },
+                    -- FloatBorder = { bg = 'none' },
+                    OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusCopied = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusDeleted = { link = 'DiagnosticSignError' },
+                    OilVcsStatusIgnored = { link = 'LineNr' },
+                    OilVcsStatusModified = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusUnModified = { link = 'LineNr' },
+                    OilVcsStatusRenamed = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusUntracked = { link = 'DiagnosticSignHint' },
+                    OilVcsStatusUpstreamAdded = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusUpstreamCopied = { link = 'DiagnosticSignOk' },
+                    OilVcsStatusUpstreamDeleted = { link = 'DiagnosticSignError' },
+                    OilVcsStatusUpstreamIgnored = { link = 'LineNr' },
+                    OilVcsStatusUpstreamModified = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusUpstreamUnModified = { link = 'LineNr' },
+                    OilVcsStatusUpstreamRenamed = { link = 'DiagnosticSignWarn' },
+                    OilVcsStatusUpstreamUntracked = { link = 'DiagnosticSignHint' },
+                }
+                return groups
+            end,
+        },
+        config = function(_, opts)
+            vim.o.termguicolors = true
+            vim.o.background = 'light'
+            require('solarized').setup(opts)
+            vim.cmd.colorscheme('solarized')
+        end,
+    },
     -- {
     --     'Mofiqul/vscode.nvim',
     --     lazy = false,
@@ -474,6 +490,14 @@ local plugins = {
     --     config = function()
     --         vim.o.background = 'light'
     --         vim.cmd('colorscheme alabaster')
+    --     end,
+    -- },
+    -- {
+    --     'alvarosevilla95/luatab.nvim',
+    --     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    --     lazy = false,
+    --     config = function()
+    --         require('luatab').setup()
     --     end,
     -- },
     -- {
