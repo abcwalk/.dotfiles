@@ -426,14 +426,14 @@ local plugins = {
         lazy = false,
         priority = 1000,
         opts = {
-            variant = 'winter',
+            variant = 'winter', -- "spring" | "summer" | "autumn" | "winter" (default)
             -- transparent = { enabled = true, pmenu = false, normalfloat = false },
             styles = {
                 comments = { italic = false, bold = false },
                 functions = { italic = false },
                 variables = { italic = false },
             },
-            palette = 'selenized',
+            -- palette = 'selenized',
             on_highlights = function(_, _)
                 local groups = {
                     -- Light
@@ -445,6 +445,14 @@ local plugins = {
                     -- CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
                     -- CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
                     -- PmenuSel = { fg = '#909995' },
+
+                    -- Dark
+                    Identifier = { fg = '#93a1a1' },
+                    Property = { fg = '#93a1a1' },
+                    Parameter = { fg = '#93a1a1' }, -- test
+                    CmpItemAbbr = { fg = '#93a1a1' },
+                    CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
+                    CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
 
                     OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
                     OilVcsStatusCopied = { link = 'DiagnosticSignOk' },

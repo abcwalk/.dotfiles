@@ -56,7 +56,8 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Cloud (terminal.sexy)"
+-- config.color_scheme = "Cloud (terminal.sexy)"
+config.color_scheme = "Solarized Dark - Patched"
 -- config.color_scheme = "selenized"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
