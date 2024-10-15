@@ -395,6 +395,7 @@ local plugins = {
             vim.g.moonflyNormalFloat = true
             vim.g.moonflyWinSeparator = 2
             vim.g.moonflyTransparent = false
+            vim.g.moonflyItalics = false
             vim.cmd('colorscheme moonfly')
             vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
             vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })

@@ -91,4 +91,4 @@ tree-sitter/
 .vscode/
 
 # Misc
-lock.json
+nvim/lua/plugins/lock.json
