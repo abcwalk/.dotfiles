@@ -1,0 +1,35 @@
+# Solarized Dark Theme
+[colors]
+background = "#002B36"  # base03 (background dark)
+foreground = "#839496"  # base00 (foreground dark)
+cursor_bg = "#839496"   # base00
+cursor_fg = "#FDF6E3"   # base3
+cursor_border = "#839496"  # base00
+selection_bg = "#073642"  # base02 (background highlight dark)
+selection_fg = "#EEE8D5"  # base2
+scrollbar_thumb = "#657B83"  # base1
+split = "#657B83"  # base1
+
+ansi = [
+  "#073642",  # base02 (black)
+  "#DC322F",  # red
+  "#859900",  # green
+  "#CF9A6B",  # yellow
+  "#268BD2",  # blue
+  "#D33682",  # magenta
+  "#2AA198",  # cyan
+  "#EEE8D5",  # base2 (white)
+]
+brights = [
+  "#657B83",  # base1 (bright black)
+  "#CB4B16",  # bright red
+  "#859900",  # bright green
+  "#CF9A6B",  # bright yellow
+  "#6C71C4",  # bright blue
+  "#D33682",  # bright magenta
+  "#2AA198",  # bright cyan
+  "#FDF6E3",  # base3 (bright white)
+]
+
+compose_cursor = "#B58900"  # yellow
+visual_bell = "#B58900"  # yellow

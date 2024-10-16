@@ -460,9 +460,19 @@ local plugins = {
                     Identifier = { fg = '#93a1a1' },
                     Property = { fg = '#93a1a1' },
                     Parameter = { fg = '#93a1a1' }, -- test
+                    Keyword = { fg = '#93a1a1', bold = false },
+                    ['@string.documentation.python'] = { link = 'String' },
+                    Type = { fg = '#b58900' },
+                    ['@variable.builtin.python'] = { link = 'Function' },
+                    ['@keyword.function.python'] = { link = 'Statement' },
+                    ['@keyword.import.python'] = { fg = '#cb4b16' },
+                    ['@keyword.type.python'] = { link = 'Statement' },
+                    ['@type.builtin.python'] = { link = 'Type' },
+                    -- ['@variable.member.python'] = { link = 'Constant' },
+
                     CmpItemAbbr = { fg = '#93a1a1' },
-                    CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
-                    CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
+                    CmpItemAbbrMatch = { fg = '#b58900' },
+                    CmpItemAbbrMatchFuzzy = { fg = '#b58900' },
 
                     OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
                     OilVcsStatusCopied = { link = 'DiagnosticSignOk' },

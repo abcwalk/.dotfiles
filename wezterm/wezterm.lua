@@ -57,7 +57,7 @@ wezterm.on("update-right-status", function(window, pane)
 end)
 
 -- config.color_scheme = "Cloud (terminal.sexy)"
-config.color_scheme = "Solarized Dark - Patched"
+config.color_scheme = "solarized-dark"
 -- config.color_scheme = "selenized"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
@@ -161,7 +161,7 @@ config.colors = {
 		background = "#001e27",
 		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
 		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
-		active_tab = { fg_color = "#708284", bg_color = "#002831" },
+		active_tab = { fg_color = "#268bd2", bg_color = "#002831" },
 		inactive_tab = { fg_color = "#708284", bg_color = "#001e27" },
 		inactive_tab_hover = { fg_color = "#708284", bg_color = "#001e27" },
 	},
@@ -234,6 +234,11 @@ config.keys = {
 		key = "Enter",
 		mods = "ALT",
 		action = wezterm.action.ToggleFullScreen,
+	},
+	{
+		key = "w",
+		mods = "CMD",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 }
 
