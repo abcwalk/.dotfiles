@@ -123,14 +123,14 @@ config.color_scheme = "solarized-dark"
 
 -- config.window_background_opacity = 0.90
 
-local font = "IosevkaTerm Nerd Font"
--- local font = "JetBrainsMono Nerd Font"
+-- local font = "IosevkaTerm Nerd Font"
+local font = "JetBrainsMono Nerd Font"
 -- local font = "Iosevka Nerd Font Mono"
 config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
 })
-config.font_size = 16
+config.font_size = 14
 
 config.window_frame = {
 	font = wezterm.font({ family = font }),

@@ -432,78 +432,78 @@ local plugins = {
     --         'tjdevries/colorbuddy.nvim',
     --     },
     -- },
-    {
-        'maxmx03/solarized.nvim',
-        lazy = false,
-        priority = 1000,
-        opts = {
-            variant = 'winter', -- "spring" | "summer" | "autumn" | "winter" (default)
-            -- transparent = { enabled = true, pmenu = false, normalfloat = false },
-            styles = {
-                comments = { italic = false, bold = false },
-                functions = { italic = false },
-                variables = { italic = false },
-            },
-            -- palette = 'selenized',
-            on_highlights = function(_, _)
-                local groups = {
-                    -- Light
-                    -- Identifier = { fg = 'Black' },
-                    -- Property = { fg = 'Black' },
-                    -- Search = { fg = '#489100', bg = '#e9e9c5', bold = true },
-                    -- Parameter = { fg = 'Black' }, -- test
-                    -- CmpItemAbbr = { fg = 'Black' },
-                    -- CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
-                    -- CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
-                    -- PmenuSel = { fg = '#909995' },
-
-                    -- Dark
-                    Identifier = { fg = '#93a1a1' },
-                    Property = { fg = '#93a1a1' },
-                    Parameter = { fg = '#93a1a1' }, -- test
-                    Keyword = { fg = '#93a1a1', bold = false },
-                    StatusLine = { fg = '#7F7F7F', bg = '#002731' },
-                    ['@string.documentation.python'] = { link = 'String' },
-                    Type = { fg = '#b58900' },
-                    ['@variable.builtin.python'] = { link = 'Function' },
-                    ['@keyword.function.python'] = { link = 'Statement' },
-                    ['@keyword.import.python'] = { fg = '#cb4b16' },
-                    ['@keyword.type.python'] = { link = 'Statement' },
-                    ['@keyword.python'] = { link = 'Statement' },
-                    ['@type.builtin.python'] = { link = 'Type' },
-                    -- ['@variable.member.python'] = { link = 'Constant' },
-
-                    CmpItemAbbr = { fg = '#93a1a1' },
-                    CmpItemAbbrMatch = { fg = '#b58900' },
-                    CmpItemAbbrMatchFuzzy = { fg = '#b58900' },
-
-                    OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
-                    OilVcsStatusCopied = { link = 'DiagnosticSignOk' },
-                    OilVcsStatusDeleted = { link = 'DiagnosticSignError' },
-                    OilVcsStatusIgnored = { link = 'LineNr' },
-                    OilVcsStatusModified = { link = 'DiagnosticSignWarn' },
-                    OilVcsStatusUnModified = { link = 'LineNr' },
-                    OilVcsStatusRenamed = { link = 'DiagnosticSignWarn' },
-                    OilVcsStatusUntracked = { link = 'DiagnosticSignHint' },
-                    OilVcsStatusUpstreamAdded = { link = 'DiagnosticSignOk' },
-                    OilVcsStatusUpstreamCopied = { link = 'DiagnosticSignOk' },
-                    OilVcsStatusUpstreamDeleted = { link = 'DiagnosticSignError' },
-                    OilVcsStatusUpstreamIgnored = { link = 'LineNr' },
-                    OilVcsStatusUpstreamModified = { link = 'DiagnosticSignWarn' },
-                    OilVcsStatusUpstreamUnModified = { link = 'LineNr' },
-                    OilVcsStatusUpstreamRenamed = { link = 'DiagnosticSignWarn' },
-                    OilVcsStatusUpstreamUntracked = { link = 'DiagnosticSignHint' },
-                }
-                return groups
-            end,
-        },
-        config = function(_, opts)
-            vim.o.termguicolors = true
-            vim.o.background = 'dark'
-            require('solarized').setup(opts)
-            vim.cmd.colorscheme('solarized')
-        end,
-    },
+    -- {
+    --     'maxmx03/solarized.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {
+    --         variant = 'winter', -- "spring" | "summer" | "autumn" | "winter" (default)
+    --         -- transparent = { enabled = true, pmenu = false, normalfloat = false },
+    --         styles = {
+    --             comments = { italic = false, bold = false },
+    --             functions = { italic = false },
+    --             variables = { italic = false },
+    --         },
+    --         -- palette = 'selenized',
+    --         on_highlights = function(_, _)
+    --             local groups = {
+    --                 -- Light
+    --                 -- Identifier = { fg = 'Black' },
+    --                 -- Property = { fg = 'Black' },
+    --                 -- Search = { fg = '#489100', bg = '#e9e9c5', bold = true },
+    --                 -- Parameter = { fg = 'Black' }, -- test
+    --                 -- CmpItemAbbr = { fg = 'Black' },
+    --                 -- CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
+    --                 -- CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
+    --                 -- PmenuSel = { fg = '#909995' },
+    --
+    --                 -- Dark
+    --                 Identifier = { fg = '#93a1a1' },
+    --                 Property = { fg = '#93a1a1' },
+    --                 Parameter = { fg = '#93a1a1' }, -- test
+    --                 Keyword = { fg = '#93a1a1', bold = false },
+    --                 StatusLine = { fg = '#909995', bg = '#002731' },
+    --                 ['@string.documentation.python'] = { link = 'String' },
+    --                 Type = { fg = '#b58900' },
+    --                 ['@variable.builtin.python'] = { link = 'Function' },
+    --                 ['@keyword.function.python'] = { link = 'Statement' },
+    --                 ['@keyword.import.python'] = { fg = '#cb4b16' },
+    --                 ['@keyword.type.python'] = { link = 'Statement' },
+    --                 ['@keyword.python'] = { link = 'Statement' },
+    --                 ['@type.builtin.python'] = { link = 'Type' },
+    --                 -- ['@variable.member.python'] = { link = 'Constant' },
+    --
+    --                 CmpItemAbbr = { fg = '#93a1a1' },
+    --                 CmpItemAbbrMatch = { fg = '#b58900' },
+    --                 CmpItemAbbrMatchFuzzy = { fg = '#b58900' },
+    --
+    --                 OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
+    --                 OilVcsStatusCopied = { link = 'DiagnosticSignOk' },
+    --                 OilVcsStatusDeleted = { link = 'DiagnosticSignError' },
+    --                 OilVcsStatusIgnored = { link = 'LineNr' },
+    --                 OilVcsStatusModified = { link = 'DiagnosticSignWarn' },
+    --                 OilVcsStatusUnModified = { link = 'LineNr' },
+    --                 OilVcsStatusRenamed = { link = 'DiagnosticSignWarn' },
+    --                 OilVcsStatusUntracked = { link = 'DiagnosticSignHint' },
+    --                 OilVcsStatusUpstreamAdded = { link = 'DiagnosticSignOk' },
+    --                 OilVcsStatusUpstreamCopied = { link = 'DiagnosticSignOk' },
+    --                 OilVcsStatusUpstreamDeleted = { link = 'DiagnosticSignError' },
+    --                 OilVcsStatusUpstreamIgnored = { link = 'LineNr' },
+    --                 OilVcsStatusUpstreamModified = { link = 'DiagnosticSignWarn' },
+    --                 OilVcsStatusUpstreamUnModified = { link = 'LineNr' },
+    --                 OilVcsStatusUpstreamRenamed = { link = 'DiagnosticSignWarn' },
+    --                 OilVcsStatusUpstreamUntracked = { link = 'DiagnosticSignHint' },
+    --             }
+    --             return groups
+    --         end,
+    --     },
+    --     config = function(_, opts)
+    --         vim.o.termguicolors = true
+    --         vim.o.background = 'dark'
+    --         require('solarized').setup(opts)
+    --         vim.cmd.colorscheme('solarized')
+    --     end,
+    -- },
     -- {
     --     'Mofiqul/vscode.nvim',
     --     lazy = false,
@@ -598,17 +598,15 @@ local plugins = {
     --         vim.cmd('colorscheme grey')
     --     end,
     -- },
-    -- {
-    --     'slugbyte/lackluster.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     init = function()
-    --         vim.o.background = 'dark'
-    --         -- vim.cmd.colorscheme('lackluster')
-    --         vim.cmd.colorscheme('lackluster-hack') -- my favorite
-    --         -- vim.cmd.colorscheme("lackluster-mint")
-    --     end,
-    -- },
+    {
+        'slugbyte/lackluster.nvim',
+        lazy = false,
+        priority = 1000,
+        init = function()
+            vim.o.background = 'dark'
+            vim.cmd.colorscheme('lackluster-hack') -- my favorite
+        end,
+    },
     -- {
     --     'behemothbucket/mellow.nvim',
     --     lazy = false,
@@ -677,30 +675,30 @@ local plugins = {
     --         vim.cmd('colorscheme doom-one')
     --     end,
     -- },
-    {
-        'RRethy/vim-illuminate',
-        lazy = false,
-        config = function()
-            require('illuminate').configure({
-                -- min_count_to_highlight = 2,
-                under_cursor = false,
-            })
-            -- change the highlight style
-            vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-            vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-            vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
-
-            --- auto update the highlight style on colorscheme change
-            vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-                pattern = { '*' },
-                callback = function(ev)
-                    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-                    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-                    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
-                end,
-            })
-        end,
-    },
+    -- {
+    --     'RRethy/vim-illuminate',
+    --     lazy = false,
+    --     config = function()
+    --         require('illuminate').configure({
+    --             -- min_count_to_highlight = 2,
+    --             under_cursor = false,
+    --         })
+    --         -- change the highlight style
+    --         vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+    --         vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+    --         vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+    --
+    --         --- auto update the highlight style on colorscheme change
+    --         vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+    --             pattern = { '*' },
+    --             callback = function(ev)
+    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+    --             end,
+    --         })
+    --     end,
+    -- },
     -- {
     --     'echasnovski/mini.cursorword',
     --     version = '*',
