@@ -300,6 +300,9 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- Recent files
 map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
 
+-- Lspsaga outline
+map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { noremap = true, silent = true })
+
 -- Spectre
 map('n', '<F12>', '<cmd>lua require("spectre").toggle()<CR>', { noremap = true, silent = true })
 map(

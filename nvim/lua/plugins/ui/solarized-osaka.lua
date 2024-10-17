@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 solarized_osaka.setup({
-    transparent = true,
+    transparent = false,
     terminal_colors = true,
     styles = {
         comments = { italic = false },
@@ -20,17 +20,30 @@ solarized_osaka.setup({
     dim_inactive = false, -- dims inactive windows
     lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 
-    on_highlights = function(hl, cl)
+    on_highlights = function(hl, c)
         hl.Float = {
-            bg = 'none',
+            bg = 'None',
         }
         hl.FloatBorder = {
-            bg = 'none',
+            bg = 'None',
         }
         hl.PMenu = {
-            bg = 'none',
+            bg = 'None',
+        }
+        hl.OilVcsStatusModified = {
+            fg = '#b28500',
+            bg = 'None',
+        }
+        hl.OilVcsStatusDeleted = {
+            fg = '#db302d',
+            bg = 'None',
+        }
+        hl.OilVcsStatusAdd = {
+            fg = '#849900',
+            bg = 'None',
         }
     end,
 })
 
+vim.o.background = 'dark'
 vim.cmd([[colorscheme solarized-osaka]])

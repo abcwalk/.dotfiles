@@ -4,6 +4,17 @@ if not status_ok then
 end
 
 saga.setup({
+    outline = {
+        win_position = 'left',
+        win_width = 30,
+        auto_preview = false,
+        detail = true,
+        auto_close = true,
+        close_after_jump = false,
+        layout = 'normal',
+        max_height = 0.5,
+        left_width = 0.3,
+    },
     preview = {
         lines_above = 0,
         lines_below = 10,
