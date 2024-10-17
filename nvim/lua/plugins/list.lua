@@ -397,26 +397,26 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
-    -- {
-    --     'bluz71/vim-moonfly-colors',
-    --     name = 'moonfly',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.g.moonflyNormalFloat = true
-    --         vim.g.moonflyWinSeparator = 2
-    --         vim.g.moonflyTransparent = false
-    --         vim.g.moonflyItalics = false
-    --         vim.cmd('colorscheme moonfly')
-    --         vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
-    --         vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
-    --         vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
-    --         vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
-    --         vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
-    --         vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
-    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
-    --     end,
-    -- },
+    {
+        'bluz71/vim-moonfly-colors',
+        name = 'moonfly',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.g.moonflyNormalFloat = true
+            vim.g.moonflyWinSeparator = 2
+            vim.g.moonflyTransparent = false
+            vim.g.moonflyItalics = false
+            vim.cmd('colorscheme moonfly')
+            vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
+            vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
+            vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
+            vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
+            vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
+            vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
+        end,
+    },
     -- {
     --     'svrana/neosolarized.nvim',
     --     lazy = false,
@@ -598,15 +598,15 @@ local plugins = {
     --         vim.cmd('colorscheme grey')
     --     end,
     -- },
-    {
-        'slugbyte/lackluster.nvim',
-        lazy = false,
-        priority = 1000,
-        init = function()
-            vim.o.background = 'dark'
-            vim.cmd.colorscheme('lackluster-hack') -- my favorite
-        end,
-    },
+    -- {
+    --     'slugbyte/lackluster.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     init = function()
+    --         vim.o.background = 'dark'
+    --         vim.cmd.colorscheme('lackluster-hack') -- my favorite
+    --     end,
+    -- },
     -- {
     --     'behemothbucket/mellow.nvim',
     --     lazy = false,
@@ -675,30 +675,30 @@ local plugins = {
     --         vim.cmd('colorscheme doom-one')
     --     end,
     -- },
-    -- {
-    --     'RRethy/vim-illuminate',
-    --     lazy = false,
-    --     config = function()
-    --         require('illuminate').configure({
-    --             -- min_count_to_highlight = 2,
-    --             under_cursor = false,
-    --         })
-    --         -- change the highlight style
-    --         vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-    --         vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-    --         vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
-    --
-    --         --- auto update the highlight style on colorscheme change
-    --         vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-    --             pattern = { '*' },
-    --             callback = function(ev)
-    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
-    --             end,
-    --         })
-    --     end,
-    -- },
+    {
+        'RRethy/vim-illuminate',
+        lazy = false,
+        config = function()
+            require('illuminate').configure({
+                -- min_count_to_highlight = 2,
+                under_cursor = false,
+            })
+            -- change the highlight style
+            vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+
+            --- auto update the highlight style on colorscheme change
+            vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+                pattern = { '*' },
+                callback = function(ev)
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+                end,
+            })
+        end,
+    },
     -- {
     --     'echasnovski/mini.cursorword',
     --     version = '*',

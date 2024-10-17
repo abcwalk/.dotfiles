@@ -85,11 +85,10 @@ iter(vim.tbl_keys(events)):map(function(e)
         desc = '[ModeLine] update',
     })
 end)
--- Light Selenized
--- vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { fg = '#c6c6c6', bg = '#2e2e2e' })
+vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { fg = '#c6c6c6', bg = '#2e2e2e' })
 -- Dark Selenized
-vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { fg = '#c6c6c6', bg = '#0e3641' })
+-- vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { fg = '#c6c6c6', bg = '#0e3641' })
 -- Dark Solarized
-vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { bg = '#002731' })
+-- vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { bg = '#002731' })
 -- end,
 -- }

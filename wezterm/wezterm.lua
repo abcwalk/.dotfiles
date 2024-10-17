@@ -56,8 +56,8 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
--- config.color_scheme = "Cloud (terminal.sexy)"
-config.color_scheme = "solarized-dark"
+config.color_scheme = "Cloud (terminal.sexy)"
+-- config.color_scheme = "solarized-dark"
 -- config.color_scheme = "selenized"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
@@ -125,7 +125,6 @@ config.color_scheme = "solarized-dark"
 
 -- local font = "IosevkaTerm Nerd Font"
 local font = "JetBrainsMono Nerd Font"
--- local font = "Iosevka Nerd Font Mono"
 config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
@@ -156,17 +155,17 @@ config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
 -- Solarized Dark (Patched)
-config.colors = {
-	tab_bar = {
-		background = "#001e27",
-		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
-		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
-		active_tab = { fg_color = "#268bd2", bg_color = "#002831" },
-		inactive_tab = { fg_color = "#708284", bg_color = "#001e27" },
-		inactive_tab_hover = { fg_color = "#708284", bg_color = "#001e27" },
-	},
-	-- saturate(0.1),
-}
+-- config.colors = {
+-- 	tab_bar = {
+-- 		background = "#001e27",
+-- 		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
+-- 		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
+-- 		active_tab = { fg_color = "#268bd2", bg_color = "#002831" },
+-- 		inactive_tab = { fg_color = "#708284", bg_color = "#001e27" },
+-- 		inactive_tab_hover = { fg_color = "#708284", bg_color = "#001e27" },
+-- 	},
+-- 	-- saturate(0.1),
+-- }
 
 -- Nano
 -- config.colors = {

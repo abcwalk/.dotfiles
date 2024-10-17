@@ -124,5 +124,5 @@ spectre.setup({
     },
     replace_vim_cmd = 'cdo',
     is_open_target_win = true,
-    is_insert_mode = false,
+    is_insert_mode = true,
 })
