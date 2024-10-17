@@ -467,6 +467,7 @@ local plugins = {
                     ['@keyword.function.python'] = { link = 'Statement' },
                     ['@keyword.import.python'] = { fg = '#cb4b16' },
                     ['@keyword.type.python'] = { link = 'Statement' },
+                    ['@keyword.python'] = { link = 'Statement' },
                     ['@type.builtin.python'] = { link = 'Type' },
                     -- ['@variable.member.python'] = { link = 'Constant' },
 
