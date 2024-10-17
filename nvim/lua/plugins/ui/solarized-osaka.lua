@@ -27,7 +27,7 @@ solarized_osaka.setup({
         hl.FloatBorder = {
             bg = 'None',
         }
-        hl.PMenu = {
+        hl.Pmenu = {
             bg = 'None',
         }
         hl.OilVcsStatusModified = {
