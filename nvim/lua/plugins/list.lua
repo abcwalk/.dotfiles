@@ -462,6 +462,7 @@ local plugins = {
                     Property = { fg = '#93a1a1' },
                     Parameter = { fg = '#93a1a1' }, -- test
                     Keyword = { fg = '#93a1a1', bold = false },
+                    StatusLine = { fg = '#7F7F7F', bg = '#002731' },
                     ['@string.documentation.python'] = { link = 'String' },
                     Type = { fg = '#b58900' },
                     ['@variable.builtin.python'] = { link = 'Function' },
