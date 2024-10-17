@@ -676,30 +676,30 @@ local plugins = {
     --         vim.cmd('colorscheme doom-one')
     --     end,
     -- },
-    -- {
-    --     'RRethy/vim-illuminate',
-    --     lazy = false,
-    --     config = function()
-    --         require('illuminate').configure({
-    --             -- min_count_to_highlight = 2,
-    --             under_cursor = false,
-    --         })
-    --         -- change the highlight style
-    --         vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-    --         vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-    --         vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
-    --
-    --         --- auto update the highlight style on colorscheme change
-    --         vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-    --             pattern = { '*' },
-    --             callback = function(ev)
-    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-    --                 vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
-    --             end,
-    --         })
-    --     end,
-    -- },
+    {
+        'RRethy/vim-illuminate',
+        lazy = false,
+        config = function()
+            require('illuminate').configure({
+                -- min_count_to_highlight = 2,
+                under_cursor = false,
+            })
+            -- change the highlight style
+            vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+
+            --- auto update the highlight style on colorscheme change
+            vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+                pattern = { '*' },
+                callback = function(ev)
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+                end,
+            })
+        end,
+    },
     -- {
     --     'echasnovski/mini.cursorword',
     --     version = '*',

@@ -14,13 +14,16 @@ solarized_osaka.setup({
         sidebars = 'dark',
         floats = 'dark',
     },
-    sidebars = { 'qf', 'help' }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+    sidebars = { 'qf', 'help', 'terminal' }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
     day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
     hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
     dim_inactive = false, -- dims inactive windows
     lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 
     on_highlights = function(hl, c)
+        -- hl.Normal = {
+        --     bg = 'None',
+        -- }
         hl.Float = {
             bg = 'None',
         }
@@ -41,6 +44,9 @@ solarized_osaka.setup({
         hl.OilVcsStatusAdd = {
             fg = '#849900',
             bg = 'None',
+        }
+        hl.Visual = {
+            bg = '#002c38',
         }
     end,
 })

@@ -121,7 +121,7 @@ config.color_scheme = "solarized-dark"
 -- 	},
 -- }
 
--- config.window_background_opacity = 0.98
+-- config.window_background_opacity = 0.90
 
 local font = "IosevkaTerm Nerd Font"
 -- local font = "JetBrainsMono Nerd Font"
