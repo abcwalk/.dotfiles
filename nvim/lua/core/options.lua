@@ -226,8 +226,6 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
--- vim.opt.fillchars = { eob = ' ', fold = '.', foldopen = '', foldclose = '', foldsep = ' ' }
-
 --- Statusline
 -- cf the default statusline: %<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 

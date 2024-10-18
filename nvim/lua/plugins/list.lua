@@ -24,6 +24,35 @@ local plugins = {
     --     priority = 1000,
     --     config = load_config('ui.cyberdream'),
     -- },
+    -- {
+    --     'nvim-zh/colorful-winsep.nvim',
+    --     config = function()
+    --         require('colorful-winsep').setup({
+    --             -- highlight for Window separator
+    --             -- hi = {
+    --             --     bg = '#16161E',
+    --             --     fg = '#1F3442',
+    --             -- },
+    --             -- This plugin will not be activated for filetype in the following table.
+    --             no_exec_files = { 'packer', 'TelescopePrompt', 'mason', 'CompetiTest', 'NvimTree' },
+    --             -- Symbols for separator lines, the order: horizontal, vertical, top left, top right, bottom left, bottom right.
+    --             symbols = { '━', '┃', '┏', '┓', '┗', '┛' },
+    --             -- #70: https://github.com/nvim-zh/colorful-winsep.nvim/discussions/70
+    --             only_line_seq = false,
+    --             -- Smooth moving switch
+    --             smooth = true,
+    --             exponential_smoothing = true,
+    --             anchor = {
+    --                 left = { height = 1, x = -1, y = -1 },
+    --                 right = { height = 1, x = -1, y = 0 },
+    --                 up = { width = 0, x = -1, y = 0 },
+    --                 bottom = { width = 0, x = 1, y = 0 },
+    --             },
+    --             light_pollution = function(lines) end,
+    --         })
+    --     end,
+    --     event = { 'WinLeave' },
+    -- },
     {
         'kdheepak/lazygit.nvim',
         cmd = {
@@ -606,6 +635,7 @@ local plugins = {
             vim.cmd('colorscheme tokyonight-night')
             vim.api.nvim_set_hl(0, 'Pmenu', { fg = '#c0caf5', bg = 'None' })
             vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#27a1b9', bg = 'None' })
+            vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#bb9af7' })
             vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = '#394b70', bg = 'None' })
             vim.api.nvim_set_hl(0, 'OilVcsStatusRenamed', { link = 'Normal' })
             vim.api.nvim_set_hl(0, 'OilVcsStatusModified', { link = 'Constant' })
