@@ -27,11 +27,11 @@ cmp.setup({
         -- documentation = cmp.config.window.bordered(),
         documentation = {
             border = 'rounded',
-            -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
         },
         completion = {
             border = 'rounded',
-            -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
         },
     },
     mapping = cmp.mapping.preset.insert({
