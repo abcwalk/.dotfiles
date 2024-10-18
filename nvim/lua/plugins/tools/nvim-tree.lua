@@ -3,7 +3,97 @@ if not status then
     return
 end
 
-nvim_tree.setup({})
+local nt_api = require('nvim-tree.api')
+
+nt_api.events.subscribe(nt_api.events.Event.TreeOpen, function()
+    local tree_winid = nt_api.tree.winid()
+
+    if tree_winid ~= nil then
+        vim.api.nvim_set_option_value('statusline', '%t', { win = tree_winid })
+    end
+end)
+
+local function nvim_tree_on_attach(bufnr)
+    local api = require('nvim-tree.api')
+
+    local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    -- default mappings
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- custom mappings
+    local function change_root_to_node(node)
+        if node == nil then
+            node = api.tree.get_node_under_cursor()
+        end
+
+        if node ~= nil and node.type == 'directory' then
+            vim.api.nvim_set_current_dir(node.absolute_path)
+        end
+        api.tree.change_root_to_node(node)
+    end
+
+    local function change_root_to_parent(node)
+        local abs_path
+        if node == nil then
+            abs_path = api.tree.get_nodes().absolute_path
+        else
+            abs_path = node.absolute_path
+        end
+
+        local parent_path = vim.fs.dirname(abs_path)
+        vim.api.nvim_set_current_dir(parent_path)
+        api.tree.change_root(parent_path)
+    end
+
+    vim.keymap.set('n', '<C-]>', change_root_to_node, opts('CD'))
+    vim.keymap.set('n', '<2-RightMouse>', change_root_to_node, opts('CD'))
+    vim.keymap.set('n', '-', change_root_to_parent, opts('Up'))
+end
+
+-- Make :bd and :q behave as usual when tree is visible
+vim.api.nvim_create_autocmd({ 'BufEnter', 'QuitPre' }, {
+    nested = false,
+    callback = function(e)
+        local tree = require('nvim-tree.api').tree
+
+        -- Nothing to do if tree is not opened
+        if not tree.is_visible() then
+            return
+        end
+
+        -- How many focusable windows do we have? (excluding e.g. incline status window)
+        local winCount = 0
+        for _, winId in ipairs(vim.api.nvim_list_wins()) do
+            if vim.api.nvim_win_get_config(winId).focusable then
+                winCount = winCount + 1
+            end
+        end
+
+        -- We want to quit and only one window besides tree is left
+        if e.event == 'QuitPre' and winCount == 2 then
+            vim.api.nvim_cmd({ cmd = 'qall' }, {})
+        end
+
+        -- :bd was probably issued an only tree window is left
+        -- Behave as if tree was closed (see `:h :bd`)
+        if e.event == 'BufEnter' and winCount == 1 then
+            -- Required to avoid "Vim:E444: Cannot close last window"
+            vim.defer_fn(function()
+                -- close nvim-tree: will go to the last buffer used before closing
+                tree.toggle({ find_file = true, focus = true })
+                -- re-open nivm-tree
+                tree.toggle({ find_file = true, focus = false })
+            end, 10)
+        end
+    end,
+})
+
+nvim_tree.setup({
+    on_attach = nvim_tree_on_attach,
+})
 
 -- local my_mappings_list = {
 --     { key = { '<CR>', 'o', '<2-LeftMouse>' }, action = 'edit' },

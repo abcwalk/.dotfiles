@@ -57,12 +57,73 @@ wezterm.on("update-right-status", function(window, pane)
 end)
 
 config.color_scheme = "Alabaster Dark"
-
--- config.window_background_opacity = 0.98
+-- config.color_scheme = "solarized-dark"
+-- config.color_scheme = "selenized"
+-- config.color_schemes = {
+-- 	["Alabaster Dark"] = {
+-- 		background = "#0e1415",
+-- 		foreground = "#cecece",
+-- 		cursor_bg = "#cd974b",
+-- 		cursor_border = "#cd974b",
+-- 		cursor_fg = "#0e1415",
+-- 		selection_bg = "#293334",
+-- 		selection_fg = "#cecece",
+-- 		ansi = {
+-- 			"#000000",
+-- 			"#d2322d",
+-- 			"#6abf40",
+-- 			"#cd974b",
+-- 			"#217EBC",
+-- 			"#9B3596",
+-- 			"#178F79",
+-- 			"#cecece",
+-- 		},
+-- 		brights = {
+-- 			"#333333",
+-- 			"#c33c33",
+-- 			"#95cb82",
+-- 			"#dfdf8e",
+-- 			"#71aed7",
+-- 			"#cc8bc9",
+-- 			"#47BEA9",
+-- 			"#ffffff",
+-- 		},
+-- 	},
+-- 	-- AI generated
+-- 	["Alabaster Light"] = {
+-- 		background = "#f0f0f0",
+-- 		foreground = "#333333",
+-- 		cursor_bg = "#cd974b",
+-- 		cursor_border = "#cd974b",
+-- 		cursor_fg = "#f0f0f0",
+-- 		selection_bg = "#d6d6d6",
+-- 		selection_fg = "#333333",
+-- 		ansi = {
+-- 			"#ffffff",
+-- 			"#d2322d",
+-- 			"#6abf40",
+-- 			"#cd974b",
+-- 			"#217EBC",
+-- 			"#9B3596",
+-- 			"#178F79",
+-- 			"#333333",
+-- 		},
+-- 		brights = {
+-- 			"#cccccc",
+-- 			"#c33c33",
+-- 			"#95cb82",
+-- 			"#dfdf8e",
+-- 			"#71aed7",
+-- 			"#cc8bc9",
+-- 			"#47BEA9",
+-- 			"#000000",
+-- 		},
+-- 	},
+-- }
+-- config.window_background_opacity = 0.90
 
 -- local font = "IosevkaTerm Nerd Font"
 local font = "JetBrainsMono Nerd Font"
--- local font = "Iosevka Nerd Font Mono"
 config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
@@ -72,10 +133,10 @@ config.font_size = 14
 config.window_frame = {
 	font = wezterm.font({ family = font }),
 	font_size = 14.0,
-	active_titlebar_bg = "#fdf6e3", -- base3 (background light)
-	active_titlebar_fg = "#657B83", -- base00 (foreground light)
-	inactive_titlebar_bg = "#eee8d5", -- base2 (background highlight light)
-	inactive_titlebar_fg = "#93A1A1", -- base1 (comments light)
+	active_titlebar_bg = "001e27", -- base3 (background light)
+	active_titlebar_fg = "#708284", -- base00 (foreground light)
+	inactive_titlebar_bg = "001e27", -- base2 (background highlight light)
+	inactive_titlebar_fg = "#708284", -- base1 (comments light)
 }
 
 config.tab_bar_at_bottom = true
@@ -91,6 +152,19 @@ config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
+
+-- Solarized Dark (Patched)
+-- config.colors = {
+-- 	tab_bar = {
+-- 		background = "#001e27",
+-- 		-- new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
+-- 		-- new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
+-- 		active_tab = { fg_color = "#268bd2", bg_color = "#002831" },
+-- 		inactive_tab = { fg_color = "#708284", bg_color = "#001e27" },
+-- 		inactive_tab_hover = { fg_color = "#708284", bg_color = "#001e27" },
+-- 	},
+-- 	-- saturate(0.1),
+-- }
 
 -- Nano
 -- config.colors = {
@@ -158,6 +232,11 @@ config.keys = {
 		key = "Enter",
 		mods = "ALT",
 		action = wezterm.action.ToggleFullScreen,
+	},
+	{
+		key = "w",
+		mods = "CMD",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 }
 

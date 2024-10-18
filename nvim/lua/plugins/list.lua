@@ -94,6 +94,16 @@ local plugins = {
     --     },
     --     config = load_config('tools.nvim-tree'),
     -- },
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        lazy = false,
+        config = function()
+            require('render-markdown').setup()
+        end,
+    },
     -- {
     --     'otavioschwanck/arrow.nvim',
     --     opts = {
@@ -373,12 +383,13 @@ local plugins = {
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
     },
-    -- {
-    --     'lukas-reineke/indent-blankline.nvim',
-    --     event = { 'BufReadPost', 'BufNewFile' },
-    --     main = 'ibl',
-    --     config = load_config('ui.indent-blankline'),
-    -- },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        event = { 'BufReadPost', 'BufNewFile' },
+        main = 'ibl',
+        config = load_config('ui.indent-blankline'),
+    },
+
     -- UI
     -- {
     --     'rebelot/kanagawa.nvim',
@@ -407,31 +418,65 @@ local plugins = {
     --     end,
     -- },
     -- {
+    --     'svrana/neosolarized.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('neosolarized').setup({
+    --             comment_italics = false,
+    --             background_set = true,
+    --         })
+    --         vim.cmd.colorscheme('neosolarized')
+    --     end,
+    --     dependencies = {
+    --         'tjdevries/colorbuddy.nvim',
+    --     },
+    -- },
+    -- {
     --     'maxmx03/solarized.nvim',
     --     lazy = false,
     --     priority = 1000,
     --     opts = {
-    --         variant = 'winter',
+    --         variant = 'winter', -- "spring" | "summer" | "autumn" | "winter" (default)
     --         -- transparent = { enabled = true, pmenu = false, normalfloat = false },
     --         styles = {
     --             comments = { italic = false, bold = false },
     --             functions = { italic = false },
     --             variables = { italic = false },
     --         },
-    --         palette = 'selenized',
+    --         -- palette = 'selenized',
     --         on_highlights = function(_, _)
     --             local groups = {
-    --                 Identifier = { fg = 'Black' },
-    --                 Property = { fg = 'Black' },
-    --                 Search = { fg = '#489100', bg = '#e9e9c5', bold = true },
-    --                 -- MatchParen = { fg = '#009c8f', cterm = 'reverse' },
-    --                 Parameter = { fg = 'Black' }, -- test
-    --                 CmpItemAbbr = { fg = 'Black' },
-    --                 CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
-    --                 CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
-    --                 PmenuSel = { fg = '#909995' },
-    --                 -- PmenuKindSel = { bg = '#909995' },
-    --                 -- FloatBorder = { bg = 'none' },
+    --                 -- Light
+    --                 -- Identifier = { fg = 'Black' },
+    --                 -- Property = { fg = 'Black' },
+    --                 -- Search = { fg = '#489100', bg = '#e9e9c5', bold = true },
+    --                 -- Parameter = { fg = 'Black' }, -- test
+    --                 -- CmpItemAbbr = { fg = 'Black' },
+    --                 -- CmpItemAbbrMatch = { link = 'DiagnosticSignWarn' },
+    --                 -- CmpItemAbbrMatchFuzzy = { link = 'DiagnosticSignWarn' },
+    --                 -- PmenuSel = { fg = '#909995' },
+    --
+    --                 -- Dark
+    --                 Identifier = { fg = '#93a1a1' },
+    --                 Property = { fg = '#93a1a1' },
+    --                 Parameter = { fg = '#93a1a1' }, -- test
+    --                 Keyword = { fg = '#93a1a1', bold = false },
+    --                 StatusLine = { fg = '#909995', bg = '#002731' },
+    --                 ['@string.documentation.python'] = { link = 'String' },
+    --                 Type = { fg = '#b58900' },
+    --                 ['@variable.builtin.python'] = { link = 'Function' },
+    --                 ['@keyword.function.python'] = { link = 'Statement' },
+    --                 ['@keyword.import.python'] = { fg = '#cb4b16' },
+    --                 ['@keyword.type.python'] = { link = 'Statement' },
+    --                 ['@keyword.python'] = { link = 'Statement' },
+    --                 ['@type.builtin.python'] = { link = 'Type' },
+    --                 -- ['@variable.member.python'] = { link = 'Constant' },
+    --
+    --                 CmpItemAbbr = { fg = '#93a1a1' },
+    --                 CmpItemAbbrMatch = { fg = '#b58900' },
+    --                 CmpItemAbbrMatchFuzzy = { fg = '#b58900' },
+    --
     --                 OilVcsStatusAdded = { link = 'DiagnosticSignOk' },
     --                 OilVcsStatusCopied = { link = 'DiagnosticSignOk' },
     --                 OilVcsStatusDeleted = { link = 'DiagnosticSignError' },
@@ -454,7 +499,7 @@ local plugins = {
     --     },
     --     config = function(_, opts)
     --         vim.o.termguicolors = true
-    --         vim.o.background = 'light'
+    --         vim.o.background = 'dark'
     --         require('solarized').setup(opts)
     --         vim.cmd.colorscheme('solarized')
     --     end,
@@ -558,9 +603,7 @@ local plugins = {
     --     priority = 1000,
     --     init = function()
     --         vim.o.background = 'dark'
-    --         -- vim.cmd.colorscheme('lackluster')
     --         vim.cmd.colorscheme('lackluster-hack') -- my favorite
-    --         -- vim.cmd.colorscheme("lackluster-mint")
     --     end,
     -- },
     -- {
@@ -667,6 +710,14 @@ local plugins = {
         end,
     },
     -- {
+    --     'echasnovski/mini.cursorword',
+    --     version = '*',
+    --     lazy = false,
+    --     config = function()
+    --         require('mini.cursorword').setup()
+    --     end,
+    -- },
+    -- {
     --     'mikesmithgh/gruvsquirrel.nvim',
     --     lazy = false,
     --     priority = 1000,
@@ -753,6 +804,7 @@ local plugins = {
     --     priority = 1000,
     --     config = load_config('ui.solarized-osaka'),
     --     -- config = function()
+    --     --     vim.o.background = 'dark'
     --     --     vim.cmd('colorscheme solarized-osaka')
     --     -- end,
     -- },

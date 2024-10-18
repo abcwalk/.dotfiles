@@ -296,7 +296,7 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- Reload buffers
 -- map('n', '<C-r>', '<cmd>bufdo e<CR><cmd>echo "Buffers reloaded"<CR>', { noremap = true, silent = true })
 
--- Telescope oldfiles
+-- Recent files
 map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
 
 -- Lspsaga outline
