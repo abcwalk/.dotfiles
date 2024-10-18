@@ -643,6 +643,12 @@ local plugins = {
         config = function()
             require('illuminate').configure({
                 -- min_count_to_highlight = 2,
+                filetypes_denylist = {
+                    'dirbuf',
+                    'dirvish',
+                    'fugitive',
+                    'Blame',
+                },
                 under_cursor = false,
             })
             -- change the highlight style
