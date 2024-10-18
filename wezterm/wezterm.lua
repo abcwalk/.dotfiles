@@ -56,7 +56,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "One Dark (Gogh)"
+config.color_scheme = "OneDark (base16)"
 -- config.color_scheme = "selenized"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
