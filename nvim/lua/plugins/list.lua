@@ -602,7 +602,10 @@ local plugins = {
         priority = 1000,
         opts = {},
         config = function()
+            vim.o.background = 'dark'
             vim.cmd('colorscheme tokyonight-night')
+            vim.api.nvim_set_hl(0, 'Pmenu', { fg = '#c0caf5', bg = 'None' })
+            vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#27a1b9', bg = 'None' })
         end,
     },
     -- {
