@@ -18,7 +18,7 @@ wezterm.on("update-right-status", function(window, pane)
 	local cells = {}
 
 	local date = wezterm.strftime("%a %-d %b - %H:%M:%S")
-	table.insert(cells, date)
+	-- table.insert(cells, date)
 
 	for _, b in ipairs(wezterm.battery_info()) do
 		table.insert(cells, string.format("%.0f%%", b.state_of_charge * 100))
@@ -56,69 +56,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Oxocarbon Dark (Gogh)"
--- config.color_scheme = "selenized"
--- config.color_schemes = {
--- 	["Alabaster Dark"] = {
--- 		background = "#0e1415",
--- 		foreground = "#cecece",
--- 		cursor_bg = "#cd974b",
--- 		cursor_border = "#cd974b",
--- 		cursor_fg = "#0e1415",
--- 		selection_bg = "#293334",
--- 		selection_fg = "#cecece",
--- 		ansi = {
--- 			"#000000",
--- 			"#d2322d",
--- 			"#6abf40",
--- 			"#cd974b",
--- 			"#217EBC",
--- 			"#9B3596",
--- 			"#178F79",
--- 			"#cecece",
--- 		},
--- 		brights = {
--- 			"#333333",
--- 			"#c33c33",
--- 			"#95cb82",
--- 			"#dfdf8e",
--- 			"#71aed7",
--- 			"#cc8bc9",
--- 			"#47BEA9",
--- 			"#ffffff",
--- 		},
--- 	},
--- 	-- AI generated
--- 	["Alabaster Light"] = {
--- 		background = "#f0f0f0",
--- 		foreground = "#333333",
--- 		cursor_bg = "#cd974b",
--- 		cursor_border = "#cd974b",
--- 		cursor_fg = "#f0f0f0",
--- 		selection_bg = "#d6d6d6",
--- 		selection_fg = "#333333",
--- 		ansi = {
--- 			"#ffffff",
--- 			"#d2322d",
--- 			"#6abf40",
--- 			"#cd974b",
--- 			"#217EBC",
--- 			"#9B3596",
--- 			"#178F79",
--- 			"#333333",
--- 		},
--- 		brights = {
--- 			"#cccccc",
--- 			"#c33c33",
--- 			"#95cb82",
--- 			"#dfdf8e",
--- 			"#71aed7",
--- 			"#cc8bc9",
--- 			"#47BEA9",
--- 			"#000000",
--- 		},
--- 	},
--- }
+config.color_scheme = "Alabaster Dark"
 
 -- config.window_background_opacity = 0.98
 
@@ -168,14 +106,14 @@ config.hide_tab_bar_if_only_one_tab = true
 -- }
 
 -- Alabaster Dark
--- config.colors = {
--- 	tab_bar = {
--- 		background = "#162022",
--- 		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
--- 		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#162022" },
--- 		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
--- 	},
--- }
+config.colors = {
+	tab_bar = {
+		background = "#0e1415",
+		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
+		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#0e1415" },
+		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#202829" },
+	},
+}
 
 config.window_close_confirmation = "NeverPrompt"
 config.enable_scroll_bar = false

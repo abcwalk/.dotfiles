@@ -373,12 +373,12 @@ local plugins = {
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        event = { 'BufReadPost', 'BufNewFile' },
-        main = 'ibl',
-        config = load_config('ui.indent-blankline'),
-    },
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     event = { 'BufReadPost', 'BufNewFile' },
+    --     main = 'ibl',
+    --     config = load_config('ui.indent-blankline'),
+    -- },
     -- UI
     -- {
     --     'rebelot/kanagawa.nvim',
@@ -484,15 +484,14 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
-    -- {
-    --     'behemothbucket/alabaster.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.o.background = 'light'
-    --         vim.cmd('colorscheme alabaster')
-    --     end,
-    -- },
+    {
+        'behemothbucket/alabaster.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd('colorscheme alabaster')
+        end,
+    },
     -- {
     --     'alvarosevilla95/luatab.nvim',
     --     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -501,15 +500,15 @@ local plugins = {
     --         require('luatab').setup()
     --     end,
     -- },
-    {
-        'nyoom-engineering/oxocarbon.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.o.background = 'dark'
-            vim.cmd('colorscheme oxocarbon')
-        end,
-    },
+    -- {
+    --     'nyoom-engineering/oxocarbon.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = 'dark'
+    --         vim.cmd('colorscheme oxocarbon')
+    --     end,
+    -- },
     -- {
     --     'F4LCn/oxocharcoal.nvim',
     --     lazy = false,
