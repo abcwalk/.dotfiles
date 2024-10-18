@@ -606,6 +606,16 @@ local plugins = {
             vim.cmd('colorscheme tokyonight-night')
             vim.api.nvim_set_hl(0, 'Pmenu', { fg = '#c0caf5', bg = 'None' })
             vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#27a1b9', bg = 'None' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = '#394b70', bg = 'None' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusRenamed', { link = 'Normal' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusModified', { link = 'Constant' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusAdded', { link = 'String' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusDeleted', { link = 'Error' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamUntracked', { fg = '#394b70', bg = 'None' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamRenamed', { link = 'Normal' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamModified', { link = 'Constant' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamAdded', { link = 'String' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUpstreamDeleted', { link = 'Error' })
         end,
     },
     -- {
