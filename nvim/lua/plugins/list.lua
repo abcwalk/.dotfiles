@@ -383,12 +383,12 @@ local plugins = {
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        event = { 'BufReadPost', 'BufNewFile' },
-        main = 'ibl',
-        config = load_config('ui.indent-blankline'),
-    },
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     event = { 'BufReadPost', 'BufNewFile' },
+    --     main = 'ibl',
+    --     config = load_config('ui.indent-blankline'),
+    -- },
 
     -- UI
     -- {
