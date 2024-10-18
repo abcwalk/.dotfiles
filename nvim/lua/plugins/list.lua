@@ -373,12 +373,12 @@ local plugins = {
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        event = { 'BufReadPost', 'BufNewFile' },
-        main = 'ibl',
-        config = load_config('ui.indent-blankline'),
-    },
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     event = { 'BufReadPost', 'BufNewFile' },
+    --     main = 'ibl',
+    --     config = load_config('ui.indent-blankline'),
+    -- },
     -- UI
     -- {
     --     'rebelot/kanagawa.nvim',
@@ -596,47 +596,47 @@ local plugins = {
     --     end,
     -- },
     -- { 'EdenEast/nightfox.nvim', lazy = false, config = load_config('ui.nightfox') },
-    {
-        'NTBBloodbath/doom-one.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            -- Add color to cursor
-            vim.g.doom_one_cursor_coloring = true
-            -- Set :terminal colors
-            vim.g.doom_one_terminal_colors = true
-            -- Enable italic comments
-            vim.g.doom_one_italic_comments = false
-            -- Enable TS support
-            vim.g.doom_one_enable_treesitter = true
-            -- Color whole diagnostic text or only underline
-            vim.g.doom_one_diagnostics_text_color = false
-            -- Enable transparent background
-            vim.g.doom_one_transparent_background = false
-
-            -- Pumblend transparency
-            vim.g.doom_one_pumblend_enable = false
-            -- vim.g.doom_one_pumblend_transparency = 20
-
-            -- Plugins integration
-            -- vim.g.doom_one_plugin_neorg = true
-            -- vim.g.doom_one_plugin_barbar = false
-            vim.g.doom_one_plugin_telescope = true
-            -- vim.g.doom_one_plugin_neogit = true
-            -- vim.g.doom_one_plugin_nvim_tree = true
-            -- vim.g.doom_one_plugin_dashboard = true
-            -- vim.g.doom_one_plugin_startify = true
-            vim.g.doom_one_plugin_whichkey = true
-            vim.g.doom_one_plugin_indent_blankline = true
-            vim.g.doom_one_plugin_vim_illuminate = true
-            vim.g.doom_one_plugin_lspsaga = true
-            vim.o.background = 'dark'
-            vim.cmd('colorscheme doom-one')
-            vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
-            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
-            vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff6c6b' })
-        end,
-    },
+    -- {
+    --     'NTBBloodbath/doom-one.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         -- Add color to cursor
+    --         vim.g.doom_one_cursor_coloring = true
+    --         -- Set :terminal colors
+    --         vim.g.doom_one_terminal_colors = true
+    --         -- Enable italic comments
+    --         vim.g.doom_one_italic_comments = false
+    --         -- Enable TS support
+    --         vim.g.doom_one_enable_treesitter = true
+    --         -- Color whole diagnostic text or only underline
+    --         vim.g.doom_one_diagnostics_text_color = false
+    --         -- Enable transparent background
+    --         vim.g.doom_one_transparent_background = false
+    --
+    --         -- Pumblend transparency
+    --         vim.g.doom_one_pumblend_enable = false
+    --         -- vim.g.doom_one_pumblend_transparency = 20
+    --
+    --         -- Plugins integration
+    --         -- vim.g.doom_one_plugin_neorg = true
+    --         -- vim.g.doom_one_plugin_barbar = false
+    --         vim.g.doom_one_plugin_telescope = true
+    --         -- vim.g.doom_one_plugin_neogit = true
+    --         -- vim.g.doom_one_plugin_nvim_tree = true
+    --         -- vim.g.doom_one_plugin_dashboard = true
+    --         -- vim.g.doom_one_plugin_startify = true
+    --         vim.g.doom_one_plugin_whichkey = true
+    --         vim.g.doom_one_plugin_indent_blankline = true
+    --         vim.g.doom_one_plugin_vim_illuminate = true
+    --         vim.g.doom_one_plugin_lspsaga = true
+    --         vim.o.background = 'dark'
+    --         vim.cmd('colorscheme doom-one')
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
+    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
+    --         vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff6c6b' })
+    --     end,
+    -- },
     {
         'RRethy/vim-illuminate',
         lazy = false,
@@ -718,6 +718,58 @@ local plugins = {
     --     priority = 1000,
     --     config = load_config('ui.noirbuddy'),
     -- },
+    {
+        'tjdevries/gruvbuddy.nvim',
+        dependencies = {
+            { 'tjdevries/colorbuddy.nvim', branch = 'dev' },
+        },
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require('colorbuddy').colorscheme('gruvbuddy')
+
+            local colorbuddy = require('colorbuddy')
+            local Color = colorbuddy.Color
+            local Group = colorbuddy.Group
+            local c = colorbuddy.colors
+            local g = colorbuddy.groups
+            local s = colorbuddy.styles
+
+            Color.new('white', '#f2e5bc')
+            Color.new('red', '#cc6666')
+            Color.new('pink', '#fef601')
+            Color.new('green', '#99cc99')
+            Color.new('yellow', '#f8fe7a')
+            Color.new('blue', '#81a2be')
+            Color.new('aqua', '#8ec07c')
+            Color.new('cyan', '#8abeb7')
+            Color.new('purple', '#8e6fbd')
+            Color.new('violet', '#b294bb')
+            Color.new('orange', '#de935f')
+            Color.new('brown', '#a3685a')
+
+            Color.new('seagreen', '#698b69')
+            Color.new('turquoise', '#698b69')
+
+            local background_string = '#111111'
+            Color.new('background', background_string)
+            Color.new('gray0', background_string)
+
+            Group.new('Normal', c.superwhite, c.gray0)
+
+            Group.new('@constant', c.orange, nil, s.none)
+            Group.new('@function', c.yellow, nil, s.none)
+            Group.new('@function.bracket', g.Normal, g.Normal)
+            Group.new('@keyword', c.violet, nil, s.none)
+            Group.new('@keyword.faded', g.nontext.fg:light(), nil, s.none)
+            Group.new('@property', c.blue)
+            Group.new('@variable', c.superwhite, nil)
+            Group.new('@variable.builtin', c.purple:light():light(), g.Normal)
+
+            -- I've always liked lua function calls to be blue. I don't know why.
+            Group.new('@function.call.lua', c.blue:dark(), nil, nil)
+        end,
+    },
     -- {
     --     "water-sucks/darkrose.nvim",
     --     lazy = false,
