@@ -56,7 +56,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Cloud (terminal.sexy)"
+config.color_scheme = "One Dark (Gogh)"
 -- config.color_scheme = "selenized"
 -- config.color_schemes = {
 -- 	["Alabaster Dark"] = {
@@ -122,14 +122,14 @@ config.color_scheme = "Cloud (terminal.sexy)"
 
 -- config.window_background_opacity = 0.98
 
-local font = "IosevkaTerm Nerd Font"
--- local font = "JetBrainsMono Nerd Font"
+-- local font = "IosevkaTerm Nerd Font"
+local font = "JetBrainsMono Nerd Font"
 -- local font = "Iosevka Nerd Font Mono"
 config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
 })
-config.font_size = 16
+config.font_size = 14
 
 config.window_frame = {
 	font = wezterm.font({ family = font }),

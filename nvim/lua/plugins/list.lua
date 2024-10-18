@@ -373,12 +373,12 @@ local plugins = {
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
     },
-    -- {
-    --     'lukas-reineke/indent-blankline.nvim',
-    --     event = { 'BufReadPost', 'BufNewFile' },
-    --     main = 'ibl',
-    --     config = load_config('ui.indent-blankline'),
-    -- },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        event = { 'BufReadPost', 'BufNewFile' },
+        main = 'ibl',
+        config = load_config('ui.indent-blankline'),
+    },
     -- UI
     -- {
     --     'rebelot/kanagawa.nvim',
@@ -386,26 +386,26 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
-    {
-        'bluz71/vim-moonfly-colors',
-        name = 'moonfly',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.g.moonflyNormalFloat = true
-            vim.g.moonflyWinSeparator = 2
-            vim.g.moonflyTransparent = false
-            vim.g.moonflyItalics = false
-            vim.cmd('colorscheme moonfly')
-            vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
-            vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
-            vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
-            vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
-            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
-        end,
-    },
+    -- {
+    --     'bluz71/vim-moonfly-colors',
+    --     name = 'moonfly',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.g.moonflyNormalFloat = true
+    --         vim.g.moonflyWinSeparator = 2
+    --         vim.g.moonflyTransparent = false
+    --         vim.g.moonflyItalics = false
+    --         vim.cmd('colorscheme moonfly')
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
+    --         vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
+    --         vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
+    --         vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
+    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
+    --     end,
+    -- },
     -- {
     --     'maxmx03/solarized.nvim',
     --     lazy = false,
@@ -596,42 +596,71 @@ local plugins = {
     --     end,
     -- },
     -- { 'EdenEast/nightfox.nvim', lazy = false, config = load_config('ui.nightfox') },
-    -- {
-    --     'NTBBloodbath/doom-one.nvim',
-    --     lazy = false,
-    --     config = function()
-    --         -- Add color to cursor
-    --         vim.g.doom_one_cursor_coloring = false
-    --         -- Set :terminal colors
-    --         vim.g.doom_one_terminal_colors = true
-    --         -- Enable italic comments
-    --         vim.g.doom_one_italic_comments = false
-    --         -- Enable TS support
-    --         vim.g.doom_one_enable_treesitter = true
-    --         -- Color whole diagnostic text or only underline
-    --         vim.g.doom_one_diagnostics_text_color = false
-    --         -- Enable transparent background
-    --         vim.g.doom_one_transparent_background = false
-    --
-    --         -- Pumblend transparency
-    --         vim.g.doom_one_pumblend_enable = false
-    --         vim.g.doom_one_pumblend_transparency = 20
-    --
-    --         -- Plugins integration
-    --         -- vim.g.doom_one_plugin_neorg = true
-    --         -- vim.g.doom_one_plugin_barbar = false
-    --         vim.g.doom_one_plugin_telescope = false
-    --         -- vim.g.doom_one_plugin_neogit = true
-    --         vim.g.doom_one_plugin_nvim_tree = true
-    --         -- vim.g.doom_one_plugin_dashboard = true
-    --         -- vim.g.doom_one_plugin_startify = true
-    --         -- vim.g.doom_one_plugin_whichkey = true
-    --         -- vim.g.doom_one_plugin_indent_blankline = true
-    --         -- vim.g.doom_one_plugin_vim_illuminate = true
-    --         vim.g.doom_one_plugin_lspsaga = false
-    --         vim.cmd('colorscheme doom-one')
-    --     end,
-    -- },
+    {
+        'NTBBloodbath/doom-one.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            -- Add color to cursor
+            vim.g.doom_one_cursor_coloring = true
+            -- Set :terminal colors
+            vim.g.doom_one_terminal_colors = true
+            -- Enable italic comments
+            vim.g.doom_one_italic_comments = false
+            -- Enable TS support
+            vim.g.doom_one_enable_treesitter = true
+            -- Color whole diagnostic text or only underline
+            vim.g.doom_one_diagnostics_text_color = false
+            -- Enable transparent background
+            vim.g.doom_one_transparent_background = false
+
+            -- Pumblend transparency
+            vim.g.doom_one_pumblend_enable = false
+            -- vim.g.doom_one_pumblend_transparency = 20
+
+            -- Plugins integration
+            -- vim.g.doom_one_plugin_neorg = true
+            -- vim.g.doom_one_plugin_barbar = false
+            vim.g.doom_one_plugin_telescope = true
+            -- vim.g.doom_one_plugin_neogit = true
+            -- vim.g.doom_one_plugin_nvim_tree = true
+            -- vim.g.doom_one_plugin_dashboard = true
+            -- vim.g.doom_one_plugin_startify = true
+            vim.g.doom_one_plugin_whichkey = true
+            vim.g.doom_one_plugin_indent_blankline = true
+            vim.g.doom_one_plugin_vim_illuminate = true
+            vim.g.doom_one_plugin_lspsaga = true
+            vim.o.background = 'dark'
+            vim.cmd('colorscheme doom-one')
+            vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
+            vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff6c6b' })
+        end,
+    },
+    {
+        'RRethy/vim-illuminate',
+        lazy = false,
+        config = function()
+            require('illuminate').configure({
+                -- min_count_to_highlight = 2,
+                under_cursor = false,
+            })
+            -- change the highlight style
+            vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+
+            --- auto update the highlight style on colorscheme change
+            vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+                pattern = { '*' },
+                callback = function(ev)
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+                    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+                end,
+            })
+        end,
+    },
     -- {
     --     'mikesmithgh/gruvsquirrel.nvim',
     --     lazy = false,
