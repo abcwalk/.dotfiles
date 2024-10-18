@@ -85,6 +85,6 @@ iter(vim.tbl_keys(events)):map(function(e)
         desc = '[ModeLine] update',
     })
 end)
-vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { bg = '#23272e' })
+vim.api.nvim_set_hl(0, 'ModeLinefileinfo', { bg = '#16161e' })
 -- end,
 -- }
