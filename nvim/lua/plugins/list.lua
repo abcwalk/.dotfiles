@@ -397,26 +397,26 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
-    {
-        'bluz71/vim-moonfly-colors',
-        name = 'moonfly',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.g.moonflyNormalFloat = true
-            vim.g.moonflyWinSeparator = 2
-            vim.g.moonflyTransparent = false
-            vim.g.moonflyItalics = false
-            vim.cmd('colorscheme moonfly')
-            vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
-            vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
-            vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
-            vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
-            vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
-            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
-        end,
-    },
+    -- {
+    --     'bluz71/vim-moonfly-colors',
+    --     name = 'moonfly',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.g.moonflyNormalFloat = true
+    --         vim.g.moonflyWinSeparator = 2
+    --         vim.g.moonflyTransparent = false
+    --         vim.g.moonflyItalics = false
+    --         vim.cmd('colorscheme moonfly')
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
+    --         vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
+    --         vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
+    --         vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
+    --         vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
+    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
+    --     end,
+    -- },
     -- {
     --     'svrana/neosolarized.nvim',
     --     lazy = false,
@@ -529,15 +529,14 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
-    -- {
-    --     'behemothbucket/alabaster.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.o.background = 'light'
-    --         vim.cmd('colorscheme alabaster')
-    --     end,
-    -- },
+    {
+        'behemothbucket/alabaster.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd('colorscheme alabaster')
+        end,
+    },
     -- {
     --     'alvarosevilla95/luatab.nvim',
     --     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -642,9 +641,10 @@ local plugins = {
     -- {
     --     'NTBBloodbath/doom-one.nvim',
     --     lazy = false,
+    --     priority = 1000,
     --     config = function()
     --         -- Add color to cursor
-    --         vim.g.doom_one_cursor_coloring = false
+    --         vim.g.doom_one_cursor_coloring = true
     --         -- Set :terminal colors
     --         vim.g.doom_one_terminal_colors = true
     --         -- Enable italic comments
@@ -658,21 +658,25 @@ local plugins = {
     --
     --         -- Pumblend transparency
     --         vim.g.doom_one_pumblend_enable = false
-    --         vim.g.doom_one_pumblend_transparency = 20
+    --         -- vim.g.doom_one_pumblend_transparency = 20
     --
     --         -- Plugins integration
     --         -- vim.g.doom_one_plugin_neorg = true
     --         -- vim.g.doom_one_plugin_barbar = false
-    --         vim.g.doom_one_plugin_telescope = false
+    --         vim.g.doom_one_plugin_telescope = true
     --         -- vim.g.doom_one_plugin_neogit = true
-    --         vim.g.doom_one_plugin_nvim_tree = true
+    --         -- vim.g.doom_one_plugin_nvim_tree = true
     --         -- vim.g.doom_one_plugin_dashboard = true
     --         -- vim.g.doom_one_plugin_startify = true
-    --         -- vim.g.doom_one_plugin_whichkey = true
-    --         -- vim.g.doom_one_plugin_indent_blankline = true
-    --         -- vim.g.doom_one_plugin_vim_illuminate = true
-    --         vim.g.doom_one_plugin_lspsaga = false
+    --         vim.g.doom_one_plugin_whichkey = true
+    --         vim.g.doom_one_plugin_indent_blankline = true
+    --         vim.g.doom_one_plugin_vim_illuminate = true
+    --         vim.g.doom_one_plugin_lspsaga = true
+    --         vim.o.background = 'dark'
     --         vim.cmd('colorscheme doom-one')
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
+    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
+    --         vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff6c6b' })
     --     end,
     -- },
     {
@@ -681,6 +685,12 @@ local plugins = {
         config = function()
             require('illuminate').configure({
                 -- min_count_to_highlight = 2,
+                filetypes_denylist = {
+                    'dirbuf',
+                    'dirvish',
+                    'fugitive',
+                    'Blame',
+                },
                 under_cursor = false,
             })
             -- change the highlight style

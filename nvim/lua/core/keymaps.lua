@@ -1,8 +1,7 @@
 local map = vim.keymap.set
 vim.g.mapleader = ' '
 -- local buffalo = require("buffalo.ui")
--- local dap = require("dap")
--- local dapui = require("dapui")
+-- local dap = require("dap") local dapui = require("dapui")
 
 -- Buffalo
 -- map({ "t", "n" }, "<C-e>", buffalo.toggle_buf_menu, { noremap = true })

@@ -135,8 +135,10 @@ local options = {
     inccommand = 'split', -- preview incremental substitute
     incsearch = true,
     laststatus = 3,
-    list = false,
     linebreak = true,
+    list = false,
+    -- listchars = 'eol:↲',
+    -- listchars = 'tab:» ,lead:•,trail:•',
     -- listchars = { trail = '', tab = '', nbsp = '_', extends = '>', precedes = '<' }, -- highlight
     -- listchars = { tab = '» ', trail = '·', nbsp = '␣' },
     mouse = 'a', -- allow the mouse to be used in neovim
@@ -224,7 +226,7 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
-vim.opt.fillchars = { eob = ' ', fold = '.', foldopen = '', foldclose = '', foldsep = ' ' }
+-- vim.opt.fillchars = { eob = ' ', fold = '.', foldopen = '', foldclose = '', foldsep = ' ' }
 
 --- Statusline
 -- cf the default statusline: %<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P

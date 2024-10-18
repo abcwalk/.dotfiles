@@ -56,7 +56,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Cloud (terminal.sexy)"
+config.color_scheme = "Alabaster Dark"
 -- config.color_scheme = "solarized-dark"
 -- config.color_scheme = "selenized"
 -- config.color_schemes = {
@@ -120,7 +120,6 @@ config.color_scheme = "Cloud (terminal.sexy)"
 -- 		},
 -- 	},
 -- }
-
 -- config.window_background_opacity = 0.90
 
 -- local font = "IosevkaTerm Nerd Font"
@@ -181,14 +180,14 @@ config.hide_tab_bar_if_only_one_tab = true
 -- }
 
 -- Alabaster Dark
--- config.colors = {
--- 	tab_bar = {
--- 		background = "#162022",
--- 		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
--- 		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#162022" },
--- 		inactive_tab_hover = { fg_color = "#673ab7", bg_color = "#eceff1" },
--- 	},
--- }
+config.colors = {
+	tab_bar = {
+		background = "#0e1415",
+		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
+		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#0e1415" },
+		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#202829" },
+	},
+}
 
 config.window_close_confirmation = "NeverPrompt"
 config.enable_scroll_bar = false
