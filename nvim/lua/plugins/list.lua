@@ -940,7 +940,7 @@ local plugins = {
         config = load_config('lang.treesitter'),
     },
     -- LSP
-    -- { 'onsails/lspkind.nvim' },
+    { 'onsails/lspkind.nvim' },
     -- {
     --     'folke/neodev.nvim',
     --     ft = { 'lua', 'vim' },

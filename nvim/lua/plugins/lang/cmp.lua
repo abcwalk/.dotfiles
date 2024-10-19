@@ -32,7 +32,25 @@ cmp.setup({
         completion = {
             border = 'rounded',
             winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            col_offset = -3,
+            side_padding = 0,
         },
+    },
+    formatting = {
+        fields = {
+            'kind',
+            'abbr',
+            -- 'menu'
+        },
+        format = function(entry, vim_item)
+            local kind = require('lspkind').cmp_format({ mode = 'symbol_text', maxwidth = 20 })(entry, vim_item)
+            local strings = vim.split(kind.kind, '%s', { trimempty = true })
+            kind.kind = ' ' .. (strings[1] or '') .. ' '
+            kind.menu = ''
+            -- kind.menu = '    (' .. (strings[2] or '') .. ')'
+
+            return kind
+        end,
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-k>'] = cmp.mapping.select_prev_item(),
