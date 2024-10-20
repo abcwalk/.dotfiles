@@ -64,7 +64,7 @@ map('n', '<Bslash>f', ':Oil .<CR>', { noremap = true, silent = true })
 -- map("n", "<Tab><Tab>", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
 
 -- Yabs
-map('n', '<Tab><Tab>', ':YABSOpen<CR>:call cursor(1, 1)<CR>', { noremap = true, silent = true })
+-- map('n', '<Tab><Tab>', ':YABSOpen<CR>:call cursor(1, 1)<CR>', { noremap = true, silent = true })
 
 --Harpoon
 -- map("n", "<leader>a", "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'Harpoon: Mark added'<CR>",

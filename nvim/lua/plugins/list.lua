@@ -1375,6 +1375,32 @@ local plugins = {
             },
         },
     },
+    {
+        'leath-dub/snipe.nvim',
+        lazy = false,
+        keys = {
+            {
+                '<Tab><Tab>',
+                function()
+                    require('snipe').open_buffer_menu()
+                end,
+                desc = 'Open Snipe buffer menu',
+            },
+        },
+        config = function()
+            require('snipe').setup({
+                ui = {
+                    position = 'cursor',
+                },
+                -- The default sort used for the buffers
+                -- Can be any of "last", (sort buffers by last accessed) "default" (sort buffers by its number)
+                sort = 'last',
+                -- Limit the width of path buffer names
+                -- /my/long/path/is/really/annoying will be is/really/annoying (max of 3)
+                -- max_path_width = 3,
+            })
+        end,
+    },
 
     -- Telescope
     {
