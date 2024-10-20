@@ -35,3 +35,11 @@ configs.setup({
         additional_vim_regex_highlighting = false,
     },
 })
+
+require('nvim-treesitter.configs').setup({
+    matchup = {
+        enable = true,
+        -- disable = { 'c', 'ruby' }, -- optional, list of language that will be disabled
+        -- [options]
+    },
+})

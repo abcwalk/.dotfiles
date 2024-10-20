@@ -532,7 +532,7 @@ local plugins = {
     {
         'behemothbucket/alabaster.nvim',
         lazy = false,
-        branch = 'main', -- main | custom
+        branch = 'custom', -- main | custom
         priority = 1000,
         config = function()
             vim.g.alabaster_dim_comments = true
@@ -584,6 +584,13 @@ local plugins = {
     --         vim.cmd('colorscheme zenburn')
     --     end,
     -- },
+    {
+        'andymass/vim-matchup',
+        lazy = false,
+        config = function()
+            vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+        end,
+    },
     --     'yorickpeterse/nvim-grey',
     --     lazy = false,
     --     priority = 1000,
@@ -692,7 +699,7 @@ local plugins = {
                     'dirbuf',
                     'dirvish',
                     'fugitive',
-                    'Blame',
+                    'blame',
                 },
                 under_cursor = false,
             })
@@ -1293,6 +1300,25 @@ local plugins = {
         lazy = false,
         config = function()
             require('neogit').setup({})
+        end,
+    },
+    {
+        'danymat/neogen',
+        -- Uncomment next line if you want to follow only stable versions
+        version = '*',
+        lazy = false,
+        config = function()
+            require('neogen').setup({
+                enabled = true,
+                snippet_engine = 'luasnip',
+                languages = {
+                    python = {
+                        template = {
+                            annotation_convention = 'reST', -- reST | google_docstrings | numpydoc
+                        },
+                    },
+                },
+            })
         end,
     },
 

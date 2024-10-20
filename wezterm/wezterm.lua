@@ -146,7 +146,15 @@ config.window_padding = {
 	left = 30,
 	right = 30,
 }
-config.window_decorations = "NONE" -- NONE, TITLE, RESIZE, TITLE | RESIZE
+
+-- window_decorations = "NONE" - disables titlebar and border (borderless mode),
+-- but causes problems with resizing and minimizing the window, so you probably want
+-- to use RESIZE instead of NONE if you just want to remove the title bar.
+--
+-- window_decorations = "TITLE" - disable the resizable border and enable only the title bar
+-- window_decorations = "RESIZE" - disable the title bar but enable the resizable border
+-- window_decorations = "TITLE | RESIZE" - Enable titlebar and border. This is the default.
+-- config.window_decorations = "NONE" -- NONE, TITLE, RESIZE, TITLE | RESIZE
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
