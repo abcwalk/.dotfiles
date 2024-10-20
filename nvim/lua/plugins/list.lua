@@ -130,11 +130,11 @@ local plugins = {
     --     end,
     --     lazy = false,
     -- },
-    {
-        'shadowofseaice/yabs.nvim',
-        lazy = false,
-        config = load_config('tools.yabs'),
-    },
+    -- {
+    --     'shadowofseaice/yabs.nvim',
+    --     lazy = false,
+    --     config = load_config('tools.yabs'),
+    -- },
     -- {
     --     'b0o/incline.nvim',
     --     config = function()
