@@ -532,8 +532,11 @@ local plugins = {
     {
         'behemothbucket/alabaster.nvim',
         lazy = false,
+        branch = 'main', -- main | custom
         priority = 1000,
         config = function()
+            vim.g.alabaster_dim_comments = true
+            vim.g.alabaster_floatborder = true
             vim.cmd('colorscheme alabaster')
         end,
     },
