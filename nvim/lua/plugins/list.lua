@@ -690,6 +690,14 @@ local plugins = {
     --     end,
     -- },
     {
+        'goolord/alpha-nvim',
+        dependencies = { 'echasnovski/mini.icons' },
+        lazy = false,
+        config = function()
+            require('alpha').setup(require('alpha.themes.startify').config)
+        end,
+    },
+    {
         'RRethy/vim-illuminate',
         lazy = false,
         config = function()
@@ -700,6 +708,7 @@ local plugins = {
                     'dirvish',
                     'fugitive',
                     'blame',
+                    'alpha',
                 },
                 under_cursor = false,
             })
