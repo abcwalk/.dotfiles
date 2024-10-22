@@ -23,14 +23,14 @@ api.nvim_create_autocmd('BufRead', {
 
 --Remove all trailing whitespaces on save for all filetypes
 --We can use .editorconfig to format
-api.nvim_create_autocmd({ 'BufWritePre' }, {
-    pattern = { '*' },
-    callback = function()
-        local save_cursor = vim.fn.getpos('.')
-        vim.cmd([[%s/\s\+$//e]])
-        vim.fn.setpos('.', save_cursor)
-    end,
-})
+-- api.nvim_create_autocmd({ 'BufWritePre' }, {
+--     pattern = { '*' },
+--     callback = function()
+--         local save_cursor = vim.fn.getpos('.')
+--         vim.cmd([[%s/\s\+$//e]])
+--         vim.fn.setpos('.', save_cursor)
+--     end,
+-- })
 
 -- api.nvim_create_autocmd('FileType', {
 -- pattern = { 'python' },

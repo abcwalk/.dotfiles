@@ -135,14 +135,14 @@ local plugins = {
     --     lazy = false,
     --     config = load_config('tools.yabs'),
     -- },
-    -- {
-    --     'b0o/incline.nvim',
-    --     config = function()
-    --         require('incline').setup()
-    --     end,
-    -- Optional: Lazy load Incline
-    --     event = 'VeryLazy',
-    -- },
+    {
+        'b0o/incline.nvim',
+        config = function()
+            require('incline').setup()
+        end,
+        -- Optional: Lazy load Incline
+        event = 'VeryLazy',
+    },
     {
         'NvChad/nvim-colorizer.lua',
         enabled = true,
@@ -709,6 +709,7 @@ local plugins = {
                     'fugitive',
                     'blame',
                     'alpha',
+                    'oil',
                 },
                 under_cursor = false,
             })
@@ -1323,7 +1324,7 @@ local plugins = {
                 languages = {
                     python = {
                         template = {
-                            annotation_convention = 'reST', -- reST | google_docstrings | numpydoc
+                            annotation_convention = 'numpydoc', -- reST | google_docstrings | numpydoc
                         },
                     },
                 },
