@@ -6,7 +6,7 @@
 # 'color_scheme' in your 'wezterm.lua' configuration.
 
 [metadata]
-name = "moonfly"
+name = "Moonfly"
 origin_url = "https://github.com/bluz71/vim-moonfly-colors"
 
 [colors]

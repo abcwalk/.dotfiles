@@ -56,70 +56,8 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Alabaster Dark"
--- config.color_scheme = "solarized-dark"
--- config.color_scheme = "selenized"
--- config.color_schemes = {
--- 	["Alabaster Dark"] = {
--- 		background = "#0e1415",
--- 		foreground = "#cecece",
--- 		cursor_bg = "#cd974b",
--- 		cursor_border = "#cd974b",
--- 		cursor_fg = "#0e1415",
--- 		selection_bg = "#293334",
--- 		selection_fg = "#cecece",
--- 		ansi = {
--- 			"#000000",
--- 			"#d2322d",
--- 			"#6abf40",
--- 			"#cd974b",
--- 			"#217EBC",
--- 			"#9B3596",
--- 			"#178F79",
--- 			"#cecece",
--- 		},
--- 		brights = {
--- 			"#333333",
--- 			"#c33c33",
--- 			"#95cb82",
--- 			"#dfdf8e",
--- 			"#71aed7",
--- 			"#cc8bc9",
--- 			"#47BEA9",
--- 			"#ffffff",
--- 		},
--- 	},
--- 	-- AI generated
--- 	["Alabaster Light"] = {
--- 		background = "#f0f0f0",
--- 		foreground = "#333333",
--- 		cursor_bg = "#cd974b",
--- 		cursor_border = "#cd974b",
--- 		cursor_fg = "#f0f0f0",
--- 		selection_bg = "#d6d6d6",
--- 		selection_fg = "#333333",
--- 		ansi = {
--- 			"#ffffff",
--- 			"#d2322d",
--- 			"#6abf40",
--- 			"#cd974b",
--- 			"#217EBC",
--- 			"#9B3596",
--- 			"#178F79",
--- 			"#333333",
--- 		},
--- 		brights = {
--- 			"#cccccc",
--- 			"#c33c33",
--- 			"#95cb82",
--- 			"#dfdf8e",
--- 			"#71aed7",
--- 			"#cc8bc9",
--- 			"#47BEA9",
--- 			"#000000",
--- 		},
--- 	},
--- }
+config.color_scheme = "Moonfly"
+
 -- config.window_background_opacity = 0.90
 
 -- local font = "IosevkaTerm Nerd Font"
@@ -154,7 +92,7 @@ config.window_padding = {
 -- window_decorations = "TITLE" - disable the resizable border and enable only the title bar
 -- window_decorations = "RESIZE" - disable the title bar but enable the resizable border
 -- window_decorations = "TITLE | RESIZE" - Enable titlebar and border. This is the default.
--- config.window_decorations = "NONE" -- NONE, TITLE, RESIZE, TITLE | RESIZE
+config.window_decorations = "NONE" -- NONE, TITLE, RESIZE, TITLE | RESIZE
 config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false

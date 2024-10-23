@@ -94,16 +94,16 @@ local plugins = {
     --     },
     --     config = load_config('tools.nvim-tree'),
     -- },
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-        lazy = false,
-        config = function()
-            require('render-markdown').setup()
-        end,
-    },
+    -- {
+    --     'MeanderingProgrammer/render-markdown.nvim',
+    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    --     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    --     lazy = false,
+    --     config = function()
+    --         require('render-markdown').setup()
+    --     end,
+    -- },
     -- {
     --     'otavioschwanck/arrow.nvim',
     --     opts = {
@@ -397,26 +397,26 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
-    -- {
-    --     'bluz71/vim-moonfly-colors',
-    --     name = 'moonfly',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.g.moonflyNormalFloat = true
-    --         vim.g.moonflyWinSeparator = 2
-    --         vim.g.moonflyTransparent = false
-    --         vim.g.moonflyItalics = false
-    --         vim.cmd('colorscheme moonfly')
-    --         vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
-    --         vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
-    --         vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
-    --         vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
-    --         vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
-    --         vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
-    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
-    --     end,
-    -- },
+    {
+        'bluz71/vim-moonfly-colors',
+        name = 'moonfly',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.g.moonflyNormalFloat = true
+            vim.g.moonflyWinSeparator = 2
+            vim.g.moonflyTransparent = false
+            vim.g.moonflyItalics = false
+            vim.cmd('colorscheme moonfly')
+            vim.api.nvim_set_hl(0, 'Pmenu', { link = 'Normal' })
+            vim.api.nvim_set_hl(0, 'LazyButton', { link = 'Normal' })
+            vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'MoonflyBlueMode' })
+            vim.api.nvim_set_hl(0, 'DiffAdd', { link = 'MoonflyGreen' })
+            vim.api.nvim_set_hl(0, 'DiffDelete', { link = 'MoonflyRed' })
+            vim.api.nvim_set_hl(0, 'DiffChange', { link = 'MoonflyOrange' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { link = 'MoonflyGrey80' })
+        end,
+    },
     -- {
     --     'svrana/neosolarized.nvim',
     --     lazy = false,
@@ -529,17 +529,17 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
-    {
-        'behemothbucket/alabaster.nvim',
-        lazy = false,
-        branch = 'custom', -- main | custom
-        priority = 1000,
-        config = function()
-            vim.g.alabaster_dim_comments = true
-            vim.g.alabaster_floatborder = true
-            vim.cmd('colorscheme alabaster')
-        end,
-    },
+    -- {
+    --     'behemothbucket/alabaster.nvim',
+    --     lazy = false,
+    --     branch = 'custom', -- main | custom
+    --     priority = 1000,
+    --     config = function()
+    --         vim.g.alabaster_dim_comments = true
+    --         vim.g.alabaster_floatborder = true
+    --         vim.cmd('colorscheme alabaster')
+    --     end,
+    -- },
     -- {
     --     'alvarosevilla95/luatab.nvim',
     --     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -959,6 +959,28 @@ local plugins = {
         lazy = false,
         config = load_config('lang.treesitter'),
     },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        lazy = false,
+        config = function()
+            require('treesitter-context').setup({
+                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+                min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+                line_numbers = false,
+                multiline_threshold = 20, -- Maximum number of lines to show for a single context
+                trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+                mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
+                -- Separator between context and content. Should be a single character string, like '-'.
+                -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+                separator = ' ',
+                zindex = 20, -- The Z-index of the context window
+                on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+            })
+            vim.api.nvim_set_hl(0, 'TreesitterContext', { link = 'Statusline' })
+        end,
+    },
     -- LSP
     { 'onsails/lspkind.nvim' },
     -- {
@@ -1126,14 +1148,14 @@ local plugins = {
         config = load_config('lang.lspconfig'),
         lazy = false,
     },
-    {
-        'ray-x/lsp_signature.nvim',
-        event = 'VeryLazy',
-        opts = {},
-        config = function(_, opts)
-            require('lsp_signature').setup(opts)
-        end,
-    },
+    -- {
+    --     'ray-x/lsp_signature.nvim',
+    --     event = 'VeryLazy',
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require('lsp_signature').setup(opts)
+    --     end,
+    -- },
     -- {
     --     'nvimtools/none-ls.nvim',
     --     config = load_config('lang.none-ls'),
@@ -1197,7 +1219,7 @@ local plugins = {
     {
         'stevearc/conform.nvim',
         config = load_config('lang.conform'),
-        lazy = false,
+        lazy = true,
     },
     -- {
     --     'kiyoon/python-import.nvim',

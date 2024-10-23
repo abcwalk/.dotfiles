@@ -12,6 +12,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set('n', keys, func, { buffer = event.buf })
         end
 
+        vim.keymap.set('i', '<c-s>', function()
+            vim.lsp.buf.signature_help()
+        end, { buffer = true })
+        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers['signature_help'], {
+            border = 'single',
+            close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
+        })
+
         map('<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
         map('<leader>d', '<cmd>Lspsaga finder def<CR>')
         map('<leader>i', '<cmd>Lspsaga finder imp<CR>')
@@ -165,15 +173,15 @@ require('mason-lspconfig').setup({
 })
 
 --- Signature Help
-local cfg = {
-    bind = true,
-    max_width = 100,
-    hint_enable = true, -- virtual hint enable
-    -- floating_window = false,
-    hint_prefix = '⚡️ ',
-}
+-- local cfg = {
+--     bind = true,
+--     max_width = 100,
+--     hint_enable = true, -- virtual hint enable
+--     -- floating_window = false,
+--     hint_prefix = '⚡️ ',
+-- }
 
-require('lsp_signature').setup(cfg)
+-- require('lsp_signature').setup(cfg)
 
 --- UI
 require('lspconfig.ui.windows').default_options.border = 'rounded'
