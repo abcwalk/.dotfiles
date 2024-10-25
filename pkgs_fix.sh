@@ -43,6 +43,11 @@ fi
 ln -s ~/.dotfiles/nvim/ ~/.config/nvim
 ln -s ~/.dotfiles/wezterm/ ~/.config/wezterm
 
+# Emacs
+ln -s ~/.dotfiles/doom/ ~/.config/doom
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+~/.config/emacs/bin/doom install
+
 # Node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install node
