@@ -98,7 +98,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='nvim'
+    export EDITOR='emacs'
 fi
 
 # Compilation flags
@@ -120,7 +120,7 @@ alias n="nvim"
 alias nn="nvim -c 'Telescope oldfiles'"
 
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
-export EDITOR='neovim'
+export EDITOR='/usr/local/bin/emacs'
 
 # alias m='pgrep -vx tmux > /dev/null && \
 #         tmux new -d -s delete-me && \
@@ -136,6 +136,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.config/emacs/bin:$PATH"
 
 export JAVA_HOME="/usr/bin/java"
 export JMETER_HOME="$HOME/apache-jmeter/"
