@@ -9,6 +9,11 @@
 (setq user-full-name "Maxim Rozhkov"
       user-mail-address "w79014580859@gmail.com")
 
+;; When I bring up Doom's scratch buffer with SPC x, it's often to play with
+;; elisp or note something down (that isn't worth an entry in my notes). I can
+;; do both in `lisp-interaction-mode'.
+(setq doom-scratch-initial-major-mode 'lisp-interaction-mode)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -32,11 +37,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-pine)
+(setq doom-theme 'doom-tomorrow-night)
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+;; Line numbers are pretty slow all around. The performance boost of disabling
+;; them outweighs the utility of always keeping them on.
+(setq display-line-numbers-type nil)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -62,20 +67,20 @@
 
 (map! :desc "save-buffer"
       "C-s" 'save-buffer)
-(map! :desc "swiper"
-      "C-f" 'swiper-isearch)
-(map! :desc "avy-goto-char-2"
-      :map 'override  "C-\\" 'avy-goto-char-2)
-(map! :desc "treemacs-select-window"
-      "M-o" 'treemacs-select-window)
-(map! :desc "counsel-recentf"
-      "C-x r" 'counsel-recentf)
+;; (map! :desc "swiper"
+;;       "C-f" 'swiper-isearch)
+;; (map! :desc "avy-goto-char-2"
+;;       :map 'override  "C-\\" 'avy-goto-char-2)
+;; (map! :desc "treemacs-select-window"
+;;       "M-o" 'treemacs-select-window)
+;; (map! :desc "counsel-recentf"
+;;       "C-x r" 'counsel-recentf)
 (map! :desc "dired"
-      "C-x j" 'dired-jump)
-(map! :desc "exit-emacs"
-      "s-x" 'save-buffers-kill-emacs)
-(map! :desc "dashboard"
-      "s-d" 'dashboard-open)
+      "C-x j" 'dirvish)
+;; (map! :desc "exit-emacs"
+;;       "s-x" 'save-buffers-kill-emacs)
+;; (map! :desc "dashboard"
+;;       "s-d" 'dashboard-open)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -95,12 +100,12 @@
       "<M-down>" #'move-line-down)
 
 ;; Recentf
-(use-package! recentf
-  :custom
-  (setq recentf-max-saved-items 40)
-  (setq recentf-max-menu-items 10)      ;
-  (setq recentf-show-file-shortcuts-flag nil)
-  (run-at-time nil (* 5 60) 'recentf-save-list))
+;; (use-package! recentf
+;;   :custom
+;;   (setq recentf-max-saved-items 40)
+;;   (setq recentf-max-menu-items 10)      ;
+;;   (setq recentf-show-file-shortcuts-flag nil)
+;;   (run-at-time nil (* 5 60) 'recentf-save-list))
 
 ;; Python
 (add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
@@ -108,23 +113,23 @@
 ;; Trash bin
 (setq delete-by-moving-to-trash t)
 
-(use-package! nerd-icons
-  :custom
-  ;; The Nerd Font you want to use in GUI
-  ;; "Symbols Nerd Font Mono" is the default and is recommended
-  ;; but you can use any other Nerd Font if you want
-  (nerd-icons-font-family "JetBrainsMono Nerd Font")
-  (doom-modeline-major-mode-icon t))
+;; (use-package! nerd-icons
+;;   :custom
+;;   ;; The Nerd Font you want to use in GUI
+;;   ;; "Symbols Nerd Font Mono" is the default and is recommended
+;;   ;; but you can use any other Nerd Font if you want
+;;   (nerd-icons-font-family "JetBrainsMono Nerd Font")
+;;   (doom-modeline-major-mode-icon t))
 
-(use-package! olivetti
-  :config
-  (setq-default olivetti-body-width 120)
-  (add-hook 'mixed-pitch-mode-hook  (lambda () (setq-local olivetti-body-width 80))))
+;; (use-package! olivetti
+;;   :config
+;;   (setq-default olivetti-body-width 120)
+;;   (add-hook 'mixed-pitch-mode-hook  (lambda () (setq-local olivetti-body-width 80))))
 
-(map! :desc "toggle-olivetti-mode"
-      "C-x z" 'olivetti-mode)
+;; (map! :desc "toggle-olivetti-mode"
+;;       "C-x z" 'olivetti-mode)
 
-;;Completion File pats (мешается)
+;;Completion File pats (annoying))
 ;; (setq completion-at-point-functions '(elisp-completion-at-point comint-dynamic-complete-filename t))
 
 ;; Company
@@ -137,6 +142,54 @@
 ;; (after! lsp-mode
 ;;   (setq +lsp-company-backends
 ;;         '(:separate company-capf company-yasnippet company-dabbrev)))
+;;
+
+;;; :completion company
+;; IMO, modern editors have trained a bad habit into us all: a burning need for
+;; completion all the time -- as we type, as we breathe, as we pray to the
+;; ancient ones -- but how often do you *really* need that information? I say
+;; rarely. So opt for manual completion:
+(after! company
+  (setq company-idle-delay nil))
+
+
+;;; :completion corfu
+;; IMO, modern editors have trained a bad habit into us all: a burning need for
+;; completion all the time -- as we type, as we breathe, as we pray to the
+;; ancient ones -- but how often do you *really* need that information? I say
+;; rarely. So opt for manual completion:
+(after! corfu
+  (setq corfu-auto nil))
+
+;;; :ui modeline
+;; An evil mode indicator is redundant with cursor shape
+(setq doom-modeline-modal nil)
+
+;;; :editor evil
+;; Focus new window after splitting
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
+;; Implicit /g flag on evil ex substitution, because I use the default behavior
+;; less often.
+(setq evil-ex-substitute-global t)
+
+;;; :tools lsp
+;; Disable invasive lsp-mode features
+(after! lsp-mode
+  (setq lsp-enable-symbol-highlighting nil
+        ;; If an LSP server isn't present when I start a prog-mode buffer, you
+        ;; don't need to tell me. I know. On some machines I don't care to have
+        ;; a whole development environment for some ecosystems.
+        lsp-enable-suggest-server-download nil))
+(after! lsp-ui
+  (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
+        lsp-ui-doc-enable nil))     ; redundant with K
+
+;;; :ui doom-dashboard
+(setq fancy-splash-image (file-name-concat doom-user-dir "splash.png"))
+;; Hide the menu for as minimalistic a startup screen as possible.
+(setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
 
 ;; Scrolling
 
@@ -177,23 +230,23 @@ non-coalesced scroll events reach the advised function."
 (use-package! selection-highlight-mode
   :config (selection-highlight-mode))
 
-(use-package! undo-fu
-  :custom
-  (global-unset-key (kbd "C-z")))
+;; (use-package! undo-fu
+;;   :custom
+;;   (global-unset-key (kbd "C-z")))
 
-(map! :desc "undo-fu-only-undo"
-      :map 'override "C-z" 'undo-fu-only-undo)
+;; (map! :desc "undo-fu-only-undo"
+;;       :map 'override "C-z" 'undo-fu-only-undo)
 
-(map! :desc "undo-fu-only-redo"
-      :map 'override "C-S-z" 'undo-fu-only-redo)
+;; (map! :desc "undo-fu-only-redo"
+;;       :map 'override "C-S-z" 'undo-fu-only-redo)
 
 (use-package! pulsar
   :config
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  ;; (setq pulsar-face 'pulsar-magenta)
-  ;; (setq pulsar-highlight-face 'pulsar-yellow)
+  (setq pulsar-face 'pulsar-blue)
+  (setq pulsar-highlight-face 'pulsar-blue)
 
   (pulsar-global-mode 1)
 
