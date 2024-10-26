@@ -267,6 +267,30 @@ non-coalesced scroll events reach the advised function."
 
 (advice-add 'evil-yank :around 'meain/evil-yank-advice)
 
+;; Padding
+(require 'spacious-padding)
+
+;; These is the default value, but I keep it here for visiibility.
+(setq spacious-padding-widths
+      '( :internal-border-width 15
+         :header-line-width 4
+         :mode-line-width 6
+         :tab-width 4
+         :right-divider-width 30
+         :scroll-bar-width 8
+         :fringe-width 8))
+
+;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+;; is very flexible and provides several examples.
+;; (setq spacious-padding-subtle-mode-line
+;;       `( :mode-line-active 'default
+;;          :mode-line-inactive vertical-border))
+
+(spacious-padding-mode 1)
+
+;; Set a key binding if you need to toggle spacious padding.
+(define-key global-map (kbd "<f8>") #'spacious-padding-mode)
+
 ;;Vterm
 (set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
 

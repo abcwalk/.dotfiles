@@ -10,14 +10,16 @@
 ;; (package! some-package)
 
 (package! zenburn-theme :disable t)
-(package! ef-themes)
+(package! ef-themes :disable t)
 (package! standard-themes :disable t)
 (package! soothe-theme :disable t)
-(package! olivetti)
-(package! pulsar)
+(package! olivetti :disable t)
+(package! pulsar :disable t)
 (package! writeroom-mode)
 (package! nerd-icons)
 (package! avy)
+(package! spacious-padding)
+(package! vim-tab-bar :disable t)
 (package! selection-highlight-mode
   :recipe (:host github :repo "balloneij/selection-highlight-mode"))
 
