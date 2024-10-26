@@ -17,6 +17,7 @@
 (package! pulsar :disable t)
 (package! writeroom-mode)
 (package! nerd-icons)
+(package! lsp-pyright)
 (package! avy)
 (package! spacious-padding)
 (package! vim-tab-bar :disable t)

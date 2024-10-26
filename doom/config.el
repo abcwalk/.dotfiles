@@ -108,6 +108,13 @@
 ;;   (run-at-time nil (* 5 60) 'recentf-save-list))
 
 ;; Python
+
+(use-package! lsp-pyright
+  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
 (add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
 
 ;; Trash bin
