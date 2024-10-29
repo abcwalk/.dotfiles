@@ -10,19 +10,23 @@
 ;; (package! some-package)
 
 (package! zenburn-theme :disable t)
-(package! ef-themes :disable t)
-(package! standard-themes :disable t)
+(package! ef-themes)
+(package! standard-themes)
 (package! soothe-theme :disable t)
-(package! olivetti :disable t)
-(package! pulsar :disable t)
-(package! writeroom-mode)
-(package! nerd-icons)
+(package! olivetti)
+(package! pulsar)
+(package! writeroom-mode :disable t)
+(package! nerd-icons :disable t)
 (package! avy)
-(package! spacious-padding)
+(package! spacious-padding :disable t)
+(package! company :disable t)
 (package! vim-tab-bar :disable t)
+(package! minions)
+(package! diminish)
 (package! selection-highlight-mode
-  :recipe (:host github :repo "balloneij/selection-highlight-mode"))
-
+  :recipe (:host github :repo "balloneij/selection-highlight-mode") :disable t)
+(package! bespoke-modeline
+  :recipe (:type git :host github :repo "mclear-tools/bespoke-modeline") :disable t)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

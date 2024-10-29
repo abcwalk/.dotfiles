@@ -118,6 +118,7 @@ fi
 
 alias n="nvim"
 alias nn="nvim -c 'Telescope oldfiles'"
+alias e="emacs -nw"
 
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 export EDITOR='/usr/local/bin/emacs'
