@@ -37,7 +37,35 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tomorrow-night)
+(setq doom-theme nil)
+
+(setq confirm-kill-emacs nil)
+(remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
+
+;; (defun my/initial-layout ()
+;;   (interactive)
+;;   (prog-mode)
+;;   (setq olivetti-minimum-body-width 130)
+;;   (olivetti-mode))
+
+;; (my/initial-layout)
+
+;; (after! bespoke-modeline
+;;   :init
+;;   ;; Set header line
+;;   (setq bespoke-modeline-position 'bottom)
+;;   ;; Set mode-line height
+;;   (setq bespoke-modeline-size 3)
+;;   ;; Show diff lines in mode-line
+;;   (setq bespoke-modeline-git-diff-mode-line t)
+;;   ;; Set mode-line cleaner
+;;   (setq bespoke-modeline-cleaner t)
+;;   ;; Use mode-line visual bell
+;;   (setq bespoke-modeline-visual-bell t)
+;;   ;; Set vc symbol
+;;   (setq  bespoke-modeline-vc-symbol "G:")
+;;   :config
+;;   (bespoke-modeline-mode))
 
 ;; Line numbers are pretty slow all around. The performance boost of disabling
 ;; them outweighs the utility of always keeping them on.
@@ -46,6 +74,12 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+
+;; Modeline
+;; (setq-default doom-modeline-height 15)
+
+;; Autocomments
+(setq-hook! 'python-mode-hook comment-line-break-function nil)
 
 ;; Fullscreen
 ;; (add-to-list 'initial-frame-alist '(maximized . fullscreen))
@@ -56,6 +90,30 @@
 ;; Dired
 (require 'dired)
 (with-eval-after-load 'dired (define-key dired-mode-map (kbd "<backspace>") 'dired-up-directory))
+
+(setq-default mode-line-format (delq 'mode-line-modes mode-line-format))
+
+;; Diminish
+;; (after! diminish
+;;   :config
+;;   (eval-after-load "filladapt" '(diminish 'filladapt-mode))
+
+;; (diminish 'rainbow-mode)                                       ; Hide lighter from mode-line
+;; (diminish 'rainbow-mode " Rbow")                               ; Replace rainbow-mode lighter with " Rbow"
+;; (diminish 'rainbow-mode 'rainbow-mode-lighter)                 ; Use raingow-mode-lighter variable value
+;; (diminish 'rainbow-mode '(" " "R-" "bow"))                     ; Replace rainbow-mode lighter with " R-bow"
+;; (diminish 'rainbow-mode '((" " "R") "/" "bow"))                ; Replace rainbow-mode lighter with " R/bow"
+;; (diminish 'rainbow-mode '(:eval (format " Rbow/%s" (+ 2 3))))  ; Replace rainbow-mode lighter with " Rbow/5"
+;; (diminish 'rainbow-mode                                        ; Replace rainbow-mode lighter with greened " Rbow"
+;;   '(:propertize " Rbow" face '(:foreground "green")))
+;; (diminish 'rainbow-mode                                        ; If rainbow-mode-mode-linep is non-nil " Rbow/t"
+;;   '(rainbow-mode-mode-linep " Rbow/t" " Rbow/nil"))
+;; (diminish 'rainbow-mode '(3 " Rbow" "/" "s"))                  ; Replace rainbow-mode lighter with " Rb"
+
+;; Minions
+(after! minions
+  :config
+  (minions-mode 1))
 
 ;; Keymaps
 (after! evil-escape
@@ -75,12 +133,14 @@
 ;;       "M-o" 'treemacs-select-window)
 ;; (map! :desc "counsel-recentf"
 ;;       "C-x r" 'counsel-recentf)
-(map! :desc "dired"
-      "C-x j" 'dirvish)
+;; (map! :desc "dired"
+;;       "C-x j" 'dired)
 ;; (map! :desc "exit-emacs"
 ;;       "s-x" 'save-buffers-kill-emacs)
 ;; (map! :desc "dashboard"
 ;;       "s-d" 'dashboard-open)
+
+(setq doom-modeline-enable-word-count t)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -156,9 +216,8 @@
 ;; completion all the time -- as we type, as we breathe, as we pray to the
 ;; ancient ones -- but how often do you *really* need that information? I say
 ;; rarely. So opt for manual completion:
-(after! company
-  (setq company-idle-delay nil))
-
+;; (after! company
+;;    (company-mode -1))
 
 ;;; :completion corfu
 ;; IMO, modern editors have trained a bad habit into us all: a burning need for
@@ -184,11 +243,13 @@
 ;;; :tools lsp
 ;; Disable invasive lsp-mode features
 (after! lsp-mode
-  (setq lsp-enable-symbol-highlighting nil
+  (setq lsp-enable-symbol-highlighting t
+        lsp-headerline-breadcrumb-enable t
         ;; If an LSP server isn't present when I start a prog-mode buffer, you
         ;; don't need to tell me. I know. On some machines I don't care to have
         ;; a whole development environment for some ecosystems.
-        lsp-enable-suggest-server-download nil))
+        lsp-enable-suggest-server-download nil
+        lsp-completion-provider :none))
 (after! lsp-ui
   (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
         lsp-ui-doc-enable nil))     ; redundant with K
@@ -200,7 +261,7 @@
 
 ;; Scrolling
 
-(pixel-scroll-precision-mode)
+(pixel-scroll-precision-mode 1)
 
 (defun filter-mwheel-always-coalesce (orig &rest args)
   "A filter function suitable for :around advices that ensures only
@@ -234,8 +295,8 @@ non-coalesced scroll events reach the advised function."
 
 ;;; Selection
 
-(use-package! selection-highlight-mode
-  :config (selection-highlight-mode))
+;; (use-package! selection-highlight-mode
+;;   :config (selection-highlight-mode))
 
 ;; (use-package! undo-fu
 ;;   :custom
@@ -252,8 +313,8 @@ non-coalesced scroll events reach the advised function."
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-blue)
-  (setq pulsar-highlight-face 'pulsar-blue)
+  (setq pulsar-face 'pulsar-magenta)
+  (setq pulsar-highlight-face 'pulsar-yellow)
 
   (pulsar-global-mode 1)
 
@@ -275,17 +336,17 @@ non-coalesced scroll events reach the advised function."
 (advice-add 'evil-yank :around 'meain/evil-yank-advice)
 
 ;; Padding
-(require 'spacious-padding)
+;; (require 'spacious-padding)
 
 ;; These is the default value, but I keep it here for visiibility.
-(setq spacious-padding-widths
-      '( :internal-border-width 15
-         :header-line-width 4
-         :mode-line-width 6
-         :tab-width 4
-         :right-divider-width 30
-         :scroll-bar-width 8
-         :fringe-width 8))
+;; (setq spacious-padding-widths
+;;       '( :internal-border-width 15
+;;          :header-line-width 4
+;;          :mode-line-width 6
+;;          :tab-width 4
+;;          :right-divider-width 30
+;;          :scroll-bar-width 8
+;;          :fringe-width 8))
 
 ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
 ;; is very flexible and provides several examples.
@@ -293,10 +354,10 @@ non-coalesced scroll events reach the advised function."
 ;;       `( :mode-line-active 'default
 ;;          :mode-line-inactive vertical-border))
 
-(spacious-padding-mode 1)
+;; (spacious-padding-mode nil)
 
 ;; Set a key binding if you need to toggle spacious padding.
-(define-key global-map (kbd "<f8>") #'spacious-padding-mode)
+;; (define-key global-map (kbd "<f8>") #'spacious-padding-mode)
 
 ;;Vterm
 (set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
