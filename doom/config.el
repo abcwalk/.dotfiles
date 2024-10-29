@@ -38,6 +38,28 @@
 ;; `load-theme' function. This is the default:
 (load-theme 'ef-eagle t)
 
+(use-package diff-hl
+  :init
+  ;; Better looking colours for diff indicators /w spacemacs-light theme
+  (custom-set-faces
+  '(diff-hl-change ((t (:background "#3a81c3"))))
+  '(diff-hl-insert ((t (:background "#7ccd7c"))))
+  '(diff-hl-delete ((t (:background "#ee6363")))))
+  ;; On-the-fly diff updates
+  (diff-hl-flydiff-mode)
+  ;; Enable diff-hl globally
+  (global-diff-hl-mode))
+
+;; prot themes fringe fix
+;; (use-package! git-gutter
+;;   :hook (prog-mode . git-gutter-mode)
+;;   :config
+;;   (setq git-gutter:update-interval 0.02)
+;;   (custom-set-variables
+;;  '(git-gutter:modified-sign " ")
+;;  '(git-gutter:added-sign " ")
+;;  '(git-gutter:deleted-sign "_")))
+
 ;; Modeline
 (use-package! modeline)
 
@@ -91,7 +113,7 @@
 ;; (map! :desc "dashboard"
 ;;       "s-d" 'dashboard-open)
 
-(setq doom-modeline-enable-word-count t)
+;; (setq doom-modeline-enable-word-count t)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -173,7 +195,7 @@
 
 ;;; :ui modeline
 ;; An evil mode indicator is redundant with cursor shape
-(setq doom-modeline-modal nil)
+;; (setq doom-modeline-modal nil)
 
 ;;; :editor evil
 ;; Focus new window after splitting

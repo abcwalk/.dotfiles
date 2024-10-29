@@ -19,6 +19,8 @@
 (package! writeroom-mode :disable t)
 (package! nerd-icons :disable t)
 (package! avy)
+(package! git-gutter :disable t)
+(package! git-gutter-fringe :disable t)
 (package! spacious-padding)
 (package! company :disable t)
 (package! vim-tab-bar :disable t)
