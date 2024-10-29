@@ -92,3 +92,6 @@ tree-sitter/
 
 # Misc
 nvim/lua/plugins/lock.json
+
+# Emacs
+custom.el

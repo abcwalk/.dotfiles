@@ -2,8 +2,7 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
-
+(add-to-list 'load-path "~/.dotfiles/doom/lisp")
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Maxim Rozhkov"
@@ -37,35 +36,13 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme nil)
+(load-theme 'ef-eagle t)
+
+;; Modeline
+(use-package! modeline)
 
 (setq confirm-kill-emacs nil)
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
-
-;; (defun my/initial-layout ()
-;;   (interactive)
-;;   (prog-mode)
-;;   (setq olivetti-minimum-body-width 130)
-;;   (olivetti-mode))
-
-;; (my/initial-layout)
-
-;; (after! bespoke-modeline
-;;   :init
-;;   ;; Set header line
-;;   (setq bespoke-modeline-position 'bottom)
-;;   ;; Set mode-line height
-;;   (setq bespoke-modeline-size 3)
-;;   ;; Show diff lines in mode-line
-;;   (setq bespoke-modeline-git-diff-mode-line t)
-;;   ;; Set mode-line cleaner
-;;   (setq bespoke-modeline-cleaner t)
-;;   ;; Use mode-line visual bell
-;;   (setq bespoke-modeline-visual-bell t)
-;;   ;; Set vc symbol
-;;   (setq  bespoke-modeline-vc-symbol "G:")
-;;   :config
-;;   (bespoke-modeline-mode))
 
 ;; Line numbers are pretty slow all around. The performance boost of disabling
 ;; them outweighs the utility of always keeping them on.
@@ -74,9 +51,6 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-
-;; Modeline
-;; (setq-default doom-modeline-height 15)
 
 ;; Autocomments
 (setq-hook! 'python-mode-hook comment-line-break-function nil)
@@ -91,30 +65,6 @@
 (require 'dired)
 (with-eval-after-load 'dired (define-key dired-mode-map (kbd "<backspace>") 'dired-up-directory))
 
-(setq-default mode-line-format (delq 'mode-line-modes mode-line-format))
-
-;; Diminish
-;; (after! diminish
-;;   :config
-;;   (eval-after-load "filladapt" '(diminish 'filladapt-mode))
-
-;; (diminish 'rainbow-mode)                                       ; Hide lighter from mode-line
-;; (diminish 'rainbow-mode " Rbow")                               ; Replace rainbow-mode lighter with " Rbow"
-;; (diminish 'rainbow-mode 'rainbow-mode-lighter)                 ; Use raingow-mode-lighter variable value
-;; (diminish 'rainbow-mode '(" " "R-" "bow"))                     ; Replace rainbow-mode lighter with " R-bow"
-;; (diminish 'rainbow-mode '((" " "R") "/" "bow"))                ; Replace rainbow-mode lighter with " R/bow"
-;; (diminish 'rainbow-mode '(:eval (format " Rbow/%s" (+ 2 3))))  ; Replace rainbow-mode lighter with " Rbow/5"
-;; (diminish 'rainbow-mode                                        ; Replace rainbow-mode lighter with greened " Rbow"
-;;   '(:propertize " Rbow" face '(:foreground "green")))
-;; (diminish 'rainbow-mode                                        ; If rainbow-mode-mode-linep is non-nil " Rbow/t"
-;;   '(rainbow-mode-mode-linep " Rbow/t" " Rbow/nil"))
-;; (diminish 'rainbow-mode '(3 " Rbow" "/" "s"))                  ; Replace rainbow-mode lighter with " Rb"
-
-;; Minions
-(after! minions
-  :config
-  (minions-mode 1))
-
 ;; Keymaps
 (after! evil-escape
   (setq evil-escape-key-sequence "jj")
@@ -123,6 +73,7 @@
 (global-set-key (kbd "C-j") (kbd "<down>"))
 (global-set-key (kbd "C-k") (kbd "<up>"))
 
+(map! :n "s" 'evil-avy-goto-char-2)
 (map! :desc "save-buffer"
       "C-s" 'save-buffer)
 ;; (map! :desc "swiper"
@@ -328,29 +279,21 @@ non-coalesced scroll events reach the advised function."
 
 (advice-add 'evil-yank :around 'meain/evil-yank-advice)
 
-;; Padding
-;; (require 'spacious-padding)
-
-;; These is the default value, but I keep it here for visiibility.
-;; (setq spacious-padding-widths
-;;       '( :internal-border-width 15
-;;          :header-line-width 4
-;;          :mode-line-width 6
-;;          :tab-width 4
-;;          :right-divider-width 30
-;;          :scroll-bar-width 8
-;;          :fringe-width 8))
-
-;; Read the doc string of `spacious-padding-subtle-mode-line' as it
-;; is very flexible and provides several examples.
+;; Spacious padding
+(require 'spacious-padding)
+(setq spacious-padding-widths
+      '( :internal-border-width 15
+         :header-line-width 4
+         :mode-line-width 6
+         :tab-width 4
+         :right-divider-width 30
+         :scroll-bar-width 8
+         :fringe-width 8))
 ;; (setq spacious-padding-subtle-mode-line
-;;       `( :mode-line-active 'default
-;;          :mode-line-inactive vertical-border))
-
-;; (spacious-padding-mode nil)
-
-;; Set a key binding if you need to toggle spacious padding.
-;; (define-key global-map (kbd "<f8>") #'spacious-padding-mode)
+      ;; `( :mode-line-active 'default))
+         ;; :mode-line-inactive vertical-border))
+(spacious-padding-mode 1)
+(define-key global-map (kbd "<f8>") #'spacious-padding-mode)
 
 ;;Vterm
 (set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
