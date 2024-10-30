@@ -48,6 +48,8 @@
   '(default :background "#111111")
   '(fringe :background "#111111")
   '(whitespace-tab :background "#181818")
+  '(magit-diff-added :background "#454845" :foreground "#4E6B4E")
+  '(magit-diff-removed :background "#3A3A3A" :foreground "#8B5B5B")
   `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
   `(font-lock-builtin-face :foreground ,(doom-color 'fg))
   `(highlight-numbers-number :foreground ,(doom-color 'fg))
@@ -116,9 +118,9 @@
    tab-line-separator " "  ;; delimitation between tabs
    ))
 
-  (global-set-key (kbd "s-[") 'tab-line-switch-to-prev-tab)
+  (global-set-key (kbd "M-[") 'tab-line-switch-to-prev-tab)
   ;; (global-set-key (kbd "C-<iso-lefttab>") 'tab-line-switch-to-prev-tab)
-  (global-set-key (kbd "s-]") 'tab-line-switch-to-next-tab)
+  (global-set-key (kbd "M-]") 'tab-line-switch-to-next-tab)
   ;; (global-set-key (kbd "C-<tab>") 'tab-line-switch-to-next-tab)
   ;; (global-set-key (kbd "C-S-<prior>") 'intuitive-tab-line-shift-tab-left)
   ;; (global-set-key (kbd "C-S-<next>") 'intuitive-tab-line-shift-tab-right)
