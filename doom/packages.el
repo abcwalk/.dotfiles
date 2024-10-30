@@ -27,6 +27,7 @@
 (package! vim-tab-bar :disable t)
 (package! minions :disable t)
 (package! diminish :disable t)
+(package! dired-k :disable t)
 (package! diredfl :disable t)
 (package! selection-highlight-mode
   :recipe (:host github :repo "balloneij/selection-highlight-mode") :disable t)

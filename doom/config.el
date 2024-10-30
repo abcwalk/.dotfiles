@@ -50,7 +50,8 @@
   '(whitespace-tab :background "#181818")
   `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
   `(font-lock-builtin-face :foreground ,(doom-color 'fg))
-  `(highlight-numbers-number :foreground ,(doom-color 'fg)))
+  `(highlight-numbers-number :foreground ,(doom-color 'fg))
+  `(dired-directory :foreground ,(doom-color 'green)))
 
 ;; Diff-hl
 (use-package! diff-hl
