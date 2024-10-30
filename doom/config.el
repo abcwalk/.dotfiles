@@ -46,7 +46,8 @@
 ;; doom-zenburn theme config
 (custom-theme-set-faces! 'doom-zenburn
   '(default :background "#111111")
-  '(fringe :foreground "#111111")
+  '(fringe :background "#111111")
+  '(whitespace-tab :inherit default)
   `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
   `(font-lock-builtin-face :foreground ,(doom-color 'fg))
   `(highlight-numbers-number :foreground ,(doom-color 'fg)))
