@@ -39,12 +39,13 @@
 (load-theme 'ef-eagle t)
 
 ;; Diff-hl
-(use-package diff-hl
+(use-package! diff-hl
   :init
   (custom-set-faces
-  '(diff-hl-change ((t (:background "#3a81c3"))))
-  '(diff-hl-insert ((t (:background "#7ccd7c"))))
-  '(diff-hl-delete ((t (:background "#ee6363")))))
+   ;; ef-eagle
+  '(diff-hl-change ((t (:foreground "#005200"))))
+  '(diff-hl-insert ((t (:foreground "#553d00"))))
+  '(diff-hl-delete ((t (:foreground "#8f1013")))))
   (let* ((width 2)
          (bitmap (vector (1- (expt 2 width)))))
     (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
