@@ -28,8 +28,6 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18 :weight 'Regular)
-     doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 14))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -39,15 +37,34 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(load-theme 'ef-eagle t)
+;; Must be used *after* the theme is loaded
+
+;; Theme
+(use-package doom-themes
+  :config
+  (load-theme 'doom-zenburn t))
+;; (doom-themes-visual-bell-config)
+;; for treemacs users
+;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+;; (doom-themes-treemacs-config)
+;; (doom-themes-org-config))
+
+;; Font
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16 :weight 'Regular)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 13))
+
+(custom-set-faces!
+  '(default :background "#111111")
+  '(fringe :foreground "#111111"))
 
 ;; Diff-hl
 (use-package! diff-hl
   :init
-  (custom-set-faces
-  '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
-  '(diff-hl-change ((t (:foreground "#ff8f00"))))
-  '(diff-hl-delete ((t (:foreground "#ee6363")))))
+  ;; Modus and ef fix
+  ;; (custom-set-faces
+  ;; '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
+  ;; '(diff-hl-change((t (:foreground "#ff8f00"))))
+  ;; '(diff-hl-delete ((t (:foreground "#ee6363")))))
   (let* ((width 2)
          (bitmap (vector (1- (expt 2 width)))))
     (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
@@ -86,6 +103,10 @@
 
 ;; Modeline
 (use-package! modeline)
+
+;; Solaire
+(after! solaire-mode
+  (solaire-global-mode -1))
 
 (setq confirm-kill-emacs nil)
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
@@ -234,7 +255,7 @@
 ;; Disable invasive lsp-mode features
 (after! lsp-mode
   (setq lsp-enable-symbol-highlighting t
-        lsp-headerline-breadcrumb-enable t
+        lsp-headerline-breadcrumb-enable nil
         ;; If an LSP server isn't present when I start a prog-mode buffer, you
         ;; don't need to tell me. I know. On some machines I don't care to have
         ;; a whole development environment for some ecosystems.

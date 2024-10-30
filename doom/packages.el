@@ -9,7 +9,7 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)
 
-(package! zenburn-theme :disable t)
+(package! zenburn-theme)
 (package! ef-themes)
 (package! standard-themes :disable t)
 (package! soothe-theme :disable t)
@@ -19,11 +19,8 @@
 (package! writeroom-mode :disable t)
 (package! nerd-icons :disable t)
 (package! avy)
-<<<<<<< HEAD
-=======
 (package! git-gutter :disable t)
 (package! git-gutter-fringe :disable t)
->>>>>>> lenovo
 (package! spacious-padding)
 (package! company :disable t)
 (package! vim-tab-bar :disable t)
