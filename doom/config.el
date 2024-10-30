@@ -38,6 +38,33 @@
 ;; `load-theme' function. This is the default:
 (load-theme 'ef-eagle t)
 
+;; Diff-hl
+(use-package! diff-hl
+  :init
+  (custom-set-faces
+   ;; ef-eagle
+  '(diff-hl-change ((t (:foreground "#005200"))))
+  '(diff-hl-insert ((t (:foreground "#553d00"))))
+  '(diff-hl-delete ((t (:foreground "#8f1013")))))
+  (let* ((width 2)
+         (bitmap (vector (1- (expt 2 width)))))
+    (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
+  (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
+  ;; On-the-fly diff updates
+  (diff-hl-flydiff-mode)
+  ;; Enable diff-hl globally
+  (global-diff-hl-mode))
+
+;; prot themes fringe fix
+;; (use-package! git-gutter
+;;   :hook (prog-mode . git-gutter-mode)
+;;   :config
+;;   (setq git-gutter:update-interval 0.02)
+;;   (custom-set-variables
+;;  '(git-gutter:modified-sign " ")
+;;  '(git-gutter:added-sign " ")
+;;  '(git-gutter:deleted-sign "_")))
+
 ;; Modeline
 (use-package! modeline)
 
@@ -91,7 +118,7 @@
 ;; (map! :desc "dashboard"
 ;;       "s-d" 'dashboard-open)
 
-(setq doom-modeline-enable-word-count t)
+;; (setq doom-modeline-enable-word-count t)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -173,7 +200,7 @@
 
 ;;; :ui modeline
 ;; An evil mode indicator is redundant with cursor shape
-(setq doom-modeline-modal nil)
+;; (setq doom-modeline-modal nil)
 
 ;;; :editor evil
 ;; Focus new window after splitting

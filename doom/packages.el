@@ -19,6 +19,11 @@
 (package! writeroom-mode :disable t)
 (package! nerd-icons :disable t)
 (package! avy)
+<<<<<<< HEAD
+=======
+(package! git-gutter :disable t)
+(package! git-gutter-fringe :disable t)
+>>>>>>> lenovo
 (package! spacious-padding)
 (package! company :disable t)
 (package! vim-tab-bar :disable t)
