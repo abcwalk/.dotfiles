@@ -15,6 +15,7 @@
 (package! soothe-theme :disable t)
 (package! olivetti :disable t)
 (package! pulsar)
+(package! solaire :disable t)
 (package! evil-snipe :disable t)
 (package! writeroom-mode :disable t)
 (package! nerd-icons :disable t)

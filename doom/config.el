@@ -8,11 +8,6 @@
 (setq user-full-name "Maxim Rozhkov"
       user-mail-address "w79014580859@gmail.com")
 
-;; When I bring up Doom's scratch buffer with SPC x, it's often to play with
-;; elisp or note something down (that isn't worth an entry in my notes). I can
-;; do both in `lisp-interaction-mode'.
-(setq doom-scratch-initial-major-mode 'lisp-interaction-mode)
-
 ;; NOTE refresh modeline git branch
 ;; revert-buffer (SPC b r)
 
@@ -40,22 +35,21 @@
 ;; Must be used *after* the theme is loaded
 
 ;; Theme
-(use-package doom-themes
+(use-package! doom-themes
   :config
   (load-theme 'doom-zenburn t))
-;; (doom-themes-visual-bell-config)
-;; for treemacs users
-;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-;; (doom-themes-treemacs-config)
-;; (doom-themes-org-config))
 
 ;; Font
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16 :weight 'Regular)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16 :weight 'normal)
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 13))
 
-(custom-set-faces!
+;; doom-zenburn theme config
+(custom-theme-set-faces! 'doom-zenburn
   '(default :background "#111111")
-  '(fringe :foreground "#111111"))
+  '(fringe :foreground "#111111")
+  `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
+  `(font-lock-builtin-face :foreground ,(doom-color 'fg))
+  `(highlight-numbers-number :foreground ,(doom-color 'fg)))
 
 ;; Diff-hl
 (use-package! diff-hl
@@ -101,6 +95,33 @@
 ;;  '(git-gutter:added-sign " ")
 ;;  '(git-gutter:deleted-sign "_")))
 
+;; Tabline
+;; (global-tab-line-mode t)
+;; (setq tab-line-new-button-show nil)  ;; do not show add-new button
+;; (setq tab-line-close-button-show nil)  ;; do not show close button
+
+(use-package! intuitive-tab-line
+  :load-path "git/intuitive-tab-line-mode"
+  :custom
+  (tab-line-tabs-function 'intuitive-tab-line-buffers-list)
+  (tab-line-switch-cycling t)
+  :config
+  (global-tab-line-mode 1)
+  ;; (recentf-mode 1)
+  (setq
+   tab-line-new-button-show nil  ;; do not show add-new button
+   tab-line-close-button-show nil  ;; do not show close button
+   tab-line-separator " "  ;; delimitation between tabs
+   ))
+
+  (global-set-key (kbd "s-[") 'tab-line-switch-to-prev-tab)
+  ;; (global-set-key (kbd "C-<iso-lefttab>") 'tab-line-switch-to-prev-tab)
+  (global-set-key (kbd "s-]") 'tab-line-switch-to-next-tab)
+  ;; (global-set-key (kbd "C-<tab>") 'tab-line-switch-to-next-tab)
+  ;; (global-set-key (kbd "C-S-<prior>") 'intuitive-tab-line-shift-tab-left)
+  ;; (global-set-key (kbd "C-S-<next>") 'intuitive-tab-line-shift-tab-right)
+  ;; (global-set-key (kbd "C-S-t") 'recentf-open-most-recent-file)
+
 ;; Modeline
 (use-package! modeline)
 
@@ -108,25 +129,33 @@
 (after! solaire-mode
   (solaire-global-mode -1))
 
-(setq confirm-kill-emacs nil)
+(setq
+ delete-by-moving-to-trash t
+ confirm-kill-emacs nil
+ ;; Disable help mouse-overs for mode-line segments (i.e. :help-echo text).
+ ;; They're generally unhelpful and only add confusing visual clutter.
+ mode-line-default-help-echo nil
+ show-help-function nil
+ ;; When I bring up Doom's scratch buffer with SPC x, it's often to play with
+ ;; elisp or note something down (that isn't worth an entry in my notes). I can
+ ;; do both in `lisp-interaction-mode'.
+ doom-scratch-initial-major-mode 'lisp-interaction-mode
+ ;; Line numbers are pretty slow all around. The performance boost of disabling
+ ;; them outweighs the utility of always keeping them on.
+ display-line-numbers-type nil)
+
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
-;; Line numbers are pretty slow all around. The performance boost of disabling
-;; them outweighs the utility of always keeping them on.
-(setq display-line-numbers-type nil)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
-;; Autocomments
-(setq-hook! 'python-mode-hook comment-line-break-function nil)
-
 ;; Fullscreen
+;; (toggle-frame-maximized)
 ;; (add-to-list 'initial-frame-alist '(maximized . fullscreen))
 (add-to-list 'initial-frame-alist '(maximized))
 (add-hook 'window-setup-hook #'toggle-frame-maximized)
 ;; (add-hook 'window-setup-hook #'toggle-frame-fullscreen)
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
 
 ;; Dired
 (require 'dired)
@@ -151,14 +180,28 @@
 ;;       "M-o" 'treemacs-select-window)
 ;; (map! :desc "counsel-recentf"
 ;;       "C-x r" 'counsel-recentf)
-;; (map! :desc "dired"
-;;       "C-x j" 'dired)
+(map! :desc "dired"
+      "C-x j" 'dired-jump)
 ;; (map! :desc "exit-emacs"
 ;;       "s-x" 'save-buffers-kill-emacs)
 ;; (map! :desc "dashboard"
 ;;       "s-d" 'dashboard-open)
 
 ;; (setq doom-modeline-enable-word-count t)
+
+;; (when (< 26 emacs-major-version)
+;;   (tab-bar-mode 1)                           ;; enable tab bar
+;;   (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
+;;   (setq tab-bar-close-button-show nil)       ;; hide tab close / X button
+;;   (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
+;;   (setq tab-bar-tab-hints nil)                 ;; show tab numbers
+;;   (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator)))
+
+;; (global-set-key (kbd "s-[") 'tab-bar-switch-to-prev-tab)
+;; (global-set-key (kbd "s-]") 'tab-bar-switch-to-next-tab)
+;; (global-set-key (kbd "s-w") 'tab-bar-close-tab)
+
+(setq inhibit-startup-screen nil)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -188,9 +231,6 @@
 ;; Python
 (add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
 
-;; Trash bin
-(setq delete-by-moving-to-trash t)
-
 ;; (use-package! nerd-icons
 ;;   :custom
 ;;   ;; The Nerd Font you want to use in GUI
@@ -215,6 +255,21 @@
 ;;   :config
 ;;   (setq company-format-margin-function  'company-text-icons-margin)
 ;;   (setq company-prefix-length 1))
+
+;; (use-package! company
+;;   :config
+;;   ;; disable auto popup after x seconds
+;;   (setq company-idle-delay nil
+;;         ;; allow code completion inside comments and string
+;;         company-dabbrev-code-everywhere t
+;;         ;; press M-<digit> to select a given number
+;;         company-show-numbers t
+;;         ;; Go back to first item
+;;         company-selection-wrap-around t
+;;         ;; allow code completion matching all buffer
+;;         company-dabbrev-code-other-buffers 'all
+;;         company-dabbrev-other-buffers 'all)
+;;   )
 
 ;; Improve completions
 ;; (after! lsp-mode
@@ -296,26 +351,22 @@ non-coalesced scroll events reach the advised function."
 (advice-add 'mwheel-scroll          :around #'filter-mwheel-always-coalesce)
 (advice-add 'mouse-wheel-text-scale :around #'filter-mwheel-always-coalesce)
 
-;; Horizontal scrolling
-(setq mouse-wheel-tilt-scroll t)
-;; Reversed/Natural scrolling
-(setq mouse-wheel-flip-direction t)
-
-;; Use smaller step for text scaling
-(setq text-scale-mode-step 1.05)
+(setq
+ ;; Horizontal scrolling
+ mouse-wheel-tilt-scroll t
+ ;; Reversed/Natural scrolling
+ mouse-wheel-flip-direction t
+ ;; Use smaller step for text scaling
+ text-scale-mode-step 1.05)
 
 ;;; Selection
-
 ;; (use-package! selection-highlight-mode
 ;;   :config (selection-highlight-mode))
-
 ;; (use-package! undo-fu
 ;;   :custom
 ;;   (global-unset-key (kbd "C-z")))
-
 ;; (map! :desc "undo-fu-only-undo"
 ;;       :map 'override "C-z" 'undo-fu-only-undo)
-
 ;; (map! :desc "undo-fu-only-redo"
 ;;       :map 'override "C-S-z" 'undo-fu-only-redo)
 
@@ -324,7 +375,7 @@ non-coalesced scroll events reach the advised function."
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-magenta)
+  (setq pulsar-face 'pulsar-yellow)
   (setq pulsar-highlight-face 'pulsar-yellow)
 
   (pulsar-global-mode 1)
@@ -345,27 +396,35 @@ non-coalesced scroll events reach the advised function."
 (defun meain/evil-yank-advice (orig-fn beg end &rest args)
   (pulse-momentary-highlight-region beg end)
   (apply orig-fn beg end args))
-
 (advice-add 'evil-yank :around 'meain/evil-yank-advice)
 
 ;; Spacious padding
-(require 'spacious-padding)
 (setq spacious-padding-widths
-      '( :internal-border-width 15
+      '( :internal-border-width 30
          :header-line-width 4
-         :mode-line-width 6
+         ;; :mode-line-width 6
          :tab-width 4
          :right-divider-width 30
          :scroll-bar-width 8
          :fringe-width 8))
-;; (setq spacious-padding-subtle-mode-line
-      ;; `( :mode-line-active 'default))
-         ;; :mode-line-inactive vertical-border))
 (spacious-padding-mode 1)
 (define-key global-map (kbd "<f8>") #'spacious-padding-mode)
 
 ;;Vterm
 (set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
+
+;; Makes *scratch* empty.
+;; (setq initial-scratch-message "")
+
+;; Removes *scratch* from buffer after the mode has been set.
+;; (defun remove-scratch-buffer ()
+;;   (if (get-buffer "*scratch*")
+;;       (kill-buffer "*scratch*")))
+;; (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+
+;; Removes *messages* from the buffer.
+;; (setq-default message-log-max nil)
+;; (kill-buffer "*Messages*")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
