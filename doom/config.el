@@ -13,6 +13,9 @@
 ;; do both in `lisp-interaction-mode'.
 (setq doom-scratch-initial-major-mode 'lisp-interaction-mode)
 
+;; NOTE refresh modeline git branch
+;; revert-buffer (SPC b r)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -42,18 +45,34 @@
 (use-package! diff-hl
   :init
   (custom-set-faces
-   ;; ef-eagle
-  '(diff-hl-change ((t (:foreground "#005200"))))
-  '(diff-hl-insert ((t (:foreground "#553d00"))))
-  '(diff-hl-delete ((t (:foreground "#8f1013")))))
+  '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
+  '(diff-hl-change ((t (:foreground "#ff8f00"))))
+  '(diff-hl-delete ((t (:foreground "#ee6363")))))
   (let* ((width 2)
          (bitmap (vector (1- (expt 2 width)))))
     (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
   (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
   ;; On-the-fly diff updates
   (diff-hl-flydiff-mode)
+  ;; Makes fringe and margin react to mouse clicks to show the corresponding hunk
+  (global-diff-hl-show-hunk-mouse-mode)
   ;; Enable diff-hl globally
   (global-diff-hl-mode))
+
+(use-package! evil-goggles
+  :config
+  (evil-goggles-mode)
+  (setq evil-goggles-pulse t)
+  ;; optionally use diff-mode's faces; as a result, deleted text
+  ;; will be highlighed with `diff-removed` face which is typically
+  ;; some red color (as defined by the color theme)
+  ;; other faces such as `diff-added` will be used for other actions
+  (setq evil-goggles-duration 0.300)
+  (evil-goggles-use-diff-faces))
+
+;; a b c
+;; d e f
+;; g h i
 
 ;; prot themes fringe fix
 ;; (use-package! git-gutter
@@ -299,6 +318,8 @@ non-coalesced scroll events reach the advised function."
 
 (map! :desc "current-line-pulse"
       "C-c l" 'pulsar-pulse-line)
+(map! :desc "current-line-pulse"
+      "C-c h" 'pulsar-highlight-line)
 
 (defun meain/evil-yank-advice (orig-fn beg end &rest args)
   (pulse-momentary-highlight-region beg end)
