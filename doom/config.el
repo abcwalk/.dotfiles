@@ -40,8 +40,19 @@
   (load-theme 'doom-zenburn t))
 
 ;; Font
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 13))
+(require 'battery)
+
+(defvar font-size
+  (if (and battery-status-function
+           (not (string-match-p "N/A"
+                                (battery-format "%B"
+                                                (funcall battery-status-function)))))
+      20
+    16)
+  "Default font size depending on battery mode availability.")
+
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size font-size :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size (- font-size 3)))
 
 ;; doom-zenburn theme config
 (custom-theme-set-faces! 'doom-zenburn
