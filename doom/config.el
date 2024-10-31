@@ -48,7 +48,7 @@
                                 (battery-format "%B"
                                                 (funcall battery-status-function)))))
       20
-    16)
+    20)
   "Default font size depending on battery mode availability.")
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size font-size :weight 'normal)
