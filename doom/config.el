@@ -37,7 +37,7 @@
 ;; Theme
 (use-package! doom-themes
   :config
-  (load-theme 'doom-zenburn t))
+  (load-theme 'ef-eagle t))
 
 ;; Font
 (require 'battery)
@@ -48,11 +48,11 @@
                                 (battery-format "%B"
                                                 (funcall battery-status-function)))))
       20
-    20)
+    22)
   "Default font size depending on battery mode availability.")
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size font-size :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size (- font-size 3)))
+(setq doom-font (font-spec :family "Iosevka Comfy" :size font-size :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "Iosevka Comfy" :size (- font-size 3)))
 
 ;; doom-zenburn theme config
 (custom-theme-set-faces! 'doom-zenburn
@@ -70,14 +70,14 @@
 (use-package! diff-hl
   :init
   ;; Modus and ef fix
-  ;; (custom-set-faces
-  ;; '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
-  ;; '(diff-hl-change((t (:foreground "#ff8f00"))))
-  ;; '(diff-hl-delete ((t (:foreground "#ee6363")))))
-  (let* ((width 2)
-         (bitmap (vector (1- (expt 2 width)))))
-    (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
-  (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
+  (custom-set-faces
+  '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
+  '(diff-hl-change((t (:foreground "#3a81c3"))))
+  '(diff-hl-delete ((t (:foreground "#ee6363")))))
+  ;; (let* ((width 2)
+  ;;        (bitmap (vector (1- (expt 2 width)))))
+  ;;   (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
+  ;; (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
   ;; On-the-fly diff updates
   (diff-hl-flydiff-mode)
   ;; Makes fringe and margin react to mouse clicks to show the corresponding hunk
