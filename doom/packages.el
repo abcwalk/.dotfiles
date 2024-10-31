@@ -23,6 +23,7 @@
 (package! git-gutter :disable t)
 (package! git-gutter-fringe :disable t)
 (package! spacious-padding)
+(package! keycast)
 (package! company :disable t)
 (package! vim-tab-bar :disable t)
 (package! minions :disable t)

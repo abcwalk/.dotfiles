@@ -140,6 +140,23 @@
 ;; Modeline
 (use-package! modeline)
 
+;;; Keycast mode
+(use-package! keycast
+  :after modeline
+  :init
+  (setq keycast-mode-line-format "%2s%k%c%R")
+  (setq keycast-mode-line-insert-after 'prot-modeline-vc-branch)
+  (setq keycast-mode-line-window-predicate 'mode-line-window-selected-p)
+  (setq keycast-mode-line-remove-tail-elements nil)
+  :config
+  (dolist (input '(self-insert-command org-self-insert-command))
+    (add-to-list 'keycast-substitute-alist `(,input "." "Typing…")))
+
+  (dolist (event '( mouse-event-p mouse-movement-p mwheel-scroll handle-select-window
+                    mouse-set-point mouse-drag-region))
+    (add-to-list 'keycast-substitute-alist `(,event nil)))
+  (keycast-mode-line-mode 1))
+
 ;; Solaire
 (after! solaire-mode
   (solaire-global-mode -1))
@@ -417,7 +434,7 @@ non-coalesced scroll events reach the advised function."
 (setq spacious-padding-widths
       '( :internal-border-width 30
          :header-line-width 4
-         ;; :mode-line-width 6
+         :mode-line-width 6
          :tab-width 4
          :right-divider-width 30
          :scroll-bar-width 8
