@@ -262,7 +262,10 @@
 ;;   (run-at-time nil (* 5 60) 'recentf-save-list))
 
 ;; Python
-(add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
+;; (add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
+
+  (use-package! flymake-ruff
+    :hook (python-mode . flymake-ruff-load))
 
 ;; (use-package! nerd-icons
 ;;   :custom
