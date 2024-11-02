@@ -115,23 +115,24 @@
 ;; (setq tab-line-new-button-show nil)  ;; do not show add-new button
 ;; (setq tab-line-close-button-show nil)  ;; do not show close button
 
-(use-package! intuitive-tab-line
-  :load-path "git/intuitive-tab-line-mode"
-  :custom
-  (tab-line-tabs-function 'intuitive-tab-line-buffers-list)
-  (tab-line-switch-cycling t)
-  :config
-  (global-tab-line-mode 1)
-  ;; (recentf-mode 1)
-  (setq
-   tab-line-new-button-show nil  ;; do not show add-new button
-   tab-line-close-button-show nil  ;; do not show close button
-   tab-line-separator " "  ;; delimitation between tabs
-   ))
+;; (use-package! intuitive-tab-line
+;;   :load-path "git/intuitive-tab-line-mode"
+;;   :custom
+;;   (tab-line-tabs-function 'intuitive-tab-line-buffers-list)
+;;   (tab-line-switch-cycling t)
+;;   :config
+;;   (global-tab-line-mode 1)
+;;   ;; (recentf-mode 1)
+;;   (setq
+;;    tab-line-new-button-show nil  ;; do not show add-new button
+;;    tab-line-close-button-show nil  ;; do not show close button
+;;    tab-line-separator " "  ;; delimitation between tabs
+;;    ))
 
-  (global-set-key (kbd "M-[") 'tab-line-switch-to-prev-tab)
+  ;; (global-set-key (kbd "M-[") 'tab-line-switch-to-prev-tab)
+  ;; (global-set-key (kbd "M-]") 'tab-line-switch-to-next-tab)
+
   ;; (global-set-key (kbd "C-<iso-lefttab>") 'tab-line-switch-to-prev-tab)
-  (global-set-key (kbd "M-]") 'tab-line-switch-to-next-tab)
   ;; (global-set-key (kbd "C-<tab>") 'tab-line-switch-to-next-tab)
   ;; (global-set-key (kbd "C-S-<prior>") 'intuitive-tab-line-shift-tab-left)
   ;; (global-set-key (kbd "C-S-<next>") 'intuitive-tab-line-shift-tab-right)
@@ -261,7 +262,10 @@
 ;;   (run-at-time nil (* 5 60) 'recentf-save-list))
 
 ;; Python
-(add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
+;; (add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
+
+  (use-package! flymake-ruff
+    :hook (python-mode . flymake-ruff-load))
 
 ;; (use-package! nerd-icons
 ;;   :custom

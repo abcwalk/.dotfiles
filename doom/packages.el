@@ -9,6 +9,7 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)
 
+(package! flymake-ruff)
 (package! zenburn-theme)
 (package! ef-themes)
 (package! standard-themes :disable t)
