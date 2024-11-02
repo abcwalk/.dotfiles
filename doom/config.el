@@ -37,7 +37,7 @@
 ;; Theme
 (use-package! doom-themes
   :config
-  (load-theme 'ef-eagle t))
+  (load-theme 'doom-zenburn t))
 
 ;; Font
 (require 'battery)
@@ -48,36 +48,53 @@
                                 (battery-format "%B"
                                                 (funcall battery-status-function)))))
       20
-    22)
+    18)
   "Default font size depending on battery mode availability.")
 
-(setq doom-font (font-spec :family "Iosevka Comfy" :size font-size :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "Iosevka Comfy" :size (- font-size 3)))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size font-size :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size (- font-size 3)))
 
 ;; doom-zenburn theme config
 (custom-theme-set-faces! 'doom-zenburn
-  '(default :background "#111111")
-  '(fringe :background "#111111")
-  '(whitespace-tab :background "#181818")
-  '(magit-diff-added :background "#454845" :foreground "#4E6B4E")
-  '(magit-diff-removed :background "#3A3A3A" :foreground "#8B5B5B")
-  `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
-  `(font-lock-builtin-face :foreground ,(doom-color 'fg))
-  `(highlight-numbers-number :foreground ,(doom-color 'fg))
-  `(dired-directory :foreground ,(doom-color 'green)))
+  (if (display-graphic-p)
+      (progn
+        (custom-theme-set-faces! 'doom-zenburn
+          '(default :background "#111111")
+          '(magit-diff-added :background "#454845" :foreground "#4E6B4E")
+          '(fringe :background "#111111")
+          '(magit-diff-removed :backGround "#3A3A3A" :foreground "#8B5B5B")))
+    (progn
+      (custom-theme-set-faces! 'doom-zenburn
+        '(default :background nil)
+        '(magit-diff-context :background nil)
+        '(magit-diff-context-highlight :background nil)
+        '(diff-refine-added :background nil :foreground "#7F9F7F")
+        '(diff-refine-removed :background nil :foreground "#CC9393")
+        '(magit-diff-added :background nil :foreground "#7F9F7F")
+        '(magit-diff-added-highlight :background nil :foreground "#7F9F7F" :weight bold)
+        '(magit-diff-removed-highlight :background nil :foreground "#CC9393" :weight bold)
+        '(magit-diff-removed :background nil :foreground "#CC9393")))
+    '(whitespace-tab :background "#181818")
+    `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
+    `(font-lock-builtin-face :foreground ,(doom-color 'fg))
+    `(highlight-numbers-number :foreground ,(doom-color 'fg))
+    `(dired-directory :foreground ,(doom-color 'green))))
+
 
 ;; Diff-hl
 (use-package! diff-hl
   :init
   ;; Modus and ef fix
   (custom-set-faces
-  '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
-  '(diff-hl-change((t (:foreground "#3a81c3"))))
-  '(diff-hl-delete ((t (:foreground "#ee6363")))))
-  ;; (let* ((width 2)
-  ;;        (bitmap (vector (1- (expt 2 width)))))
-  ;;   (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
-  ;; (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
+   '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
+   '(diff-hl-change((t (:foreground "#3a81c3"))))
+   '(diff-hl-delete ((t (:foreground "#ee6363")))))
+  (unless (display-graphic-p)
+    (let* ((width 2)
+           (bitmap (vector (1- (expt 2 width)))))
+      (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
+    (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
+    (xterm-mouse-mode 1))
   ;; On-the-fly diff updates
   (diff-hl-flydiff-mode)
   ;; Makes fringe and margin react to mouse clicks to show the corresponding hunk
@@ -261,6 +278,17 @@
 ;;   (setq recentf-show-file-shortcuts-flag nil)
 ;;   (run-at-time nil (* 5 60) 'recentf-save-list))
 
+(use-package recentf
+  :bind ("C-x C-r" . recentf-open-files)
+  :config
+  (setq recentf-max-menu-items 15
+        recentf-max-saved-items 100)
+  :hook (after-init . recentf-mode))
+
+(use-package init-open-recentf
+      :after recentf
+      :config (init-open-recentf))
+
 ;; Python
 ;; (add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
 
@@ -406,45 +434,46 @@ non-coalesced scroll events reach the advised function."
 ;; (map! :desc "undo-fu-only-redo"
 ;;       :map 'override "C-S-z" 'undo-fu-only-redo)
 
-(use-package! pulsar
-  :config
-  (setq pulsar-pulse t)
-  (setq pulsar-delay 0.055)
-  (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-yellow)
-  (setq pulsar-highlight-face 'pulsar-yellow)
+(when (display-graphic-p)
+  (use-package! pulsar
+    :config
+    (setq pulsar-pulse t)
+    (setq pulsar-delay 0.055)
+    (setq pulsar-iterations 10)
+    (setq pulsar-face 'pulsar-yellow)
+    (setq pulsar-highlight-face 'pulsar-yellow)
 
-  (pulsar-global-mode 1)
+    (pulsar-global-mode 1)
 
-  (add-hook 'next-error-hook 'pulsar-pulse-line-red)
-  (add-hook 'flycheck-next-error 'pulsar-pulse-line-red)
-  (add-hook 'flycheck-previous-error 'pulsar-pulse-line-red)
-  (add-hook 'minibuffer-setup-hook 'pulsar-pulse-line-red)
-  (add-hook 'minibuffer-setup-hook 'pulsar-pulse-line)
-  (add-hook 'imenu-after-jump-hook 'pulsar-recenter-top)
-  (add-hook 'imenu-after-jump-hook 'pulsar-reveal-entry))
+    (add-hook 'next-error-hook 'pulsar-pulse-line-red)
+    (add-hook 'flycheck-next-error 'pulsar-pulse-line-red)
+    (add-hook 'flycheck-previous-error 'pulsar-pulse-line-red)
+    (add-hook 'minibuffer-setup-hook 'pulsar-pulse-line-red)
+    (add-hook 'minibuffer-setup-hook 'pulsar-pulse-line)
+    (add-hook 'imenu-after-jump-hook 'pulsar-recenter-top)
+    (add-hook 'imenu-after-jump-hook 'pulsar-reveal-entry))
 
-(map! :desc "current-line-pulse"
-      "C-c l" 'pulsar-pulse-line)
-(map! :desc "current-line-pulse"
-      "C-c h" 'pulsar-highlight-line)
+  (map! :desc "current-line-pulse"
+        "C-c l" 'pulsar-pulse-line)
+  (map! :desc "current-line-pulse"
+        "C-c h" 'pulsar-highlight-line)
 
-(defun meain/evil-yank-advice (orig-fn beg end &rest args)
-  (pulse-momentary-highlight-region beg end)
-  (apply orig-fn beg end args))
-(advice-add 'evil-yank :around 'meain/evil-yank-advice)
+  (defun meain/evil-yank-advice (orig-fn beg end &rest args)
+    (pulse-momentary-highlight-region beg end)
+    (apply orig-fn beg end args))
+  (advice-add 'evil-yank :around 'meain/evil-yank-advice)
 
-;; Spacious padding
-(setq spacious-padding-widths
-      '( :internal-border-width 30
-         :header-line-width 4
-         :mode-line-width 6
-         :tab-width 4
-         :right-divider-width 30
-         :scroll-bar-width 8
-         :fringe-width 8))
-(spacious-padding-mode 1)
-(define-key global-map (kbd "<f8>") #'spacious-padding-mode)
+  ;; Spacious padding
+  (setq spacious-padding-widths
+        '( :internal-border-width 30
+           :header-line-width 4
+           :mode-line-width 6
+           :tab-width 4
+           :right-divider-width 30
+           :scroll-bar-width 8
+           :fringe-width 8))
+  (spacious-padding-mode 1)
+  (define-key global-map (kbd "<f8>") #'spacious-padding-mode))
 
 ;;Vterm
 (set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
