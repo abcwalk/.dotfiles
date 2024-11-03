@@ -58,8 +58,11 @@
 (custom-theme-set-faces! 'doom-zenburn
   (if (display-graphic-p)
       (progn
+        (set-frame-parameter (selected-frame) 'alpha '(85 85))
+        (add-to-list 'default-frame-alist '(alpha 85 85))
         (custom-theme-set-faces! 'doom-zenburn
-          '(default :background "#111111")
+          '(default :background "black")
+          ;; '(default :background "#111111")
           '(magit-diff-added :background "#454845" :foreground "#4E6B4E")
           '(fringe :background "#111111")
           '(magit-diff-removed :backGround "#3A3A3A" :foreground "#8B5B5B")))
@@ -67,6 +70,7 @@
       (custom-theme-set-faces! 'doom-zenburn
         '(default :background nil)
         '(magit-diff-context :background nil)
+        '(lsp-face-highlight-read :background nil)
         '(magit-diff-context-highlight :background nil)
         '(diff-refine-added :background nil :foreground "#7F9F7F")
         '(diff-refine-removed :background nil :foreground "#CC9393")
@@ -373,7 +377,7 @@
 ;;; :tools lsp
 ;; Disable invasive lsp-mode features
 (after! lsp-mode
-  (setq lsp-enable-symbol-highlighting t
+  (setq lsp-enable-symbol-highlighting nil
         lsp-headerline-breadcrumb-enable nil
         ;; If an LSP server isn't present when I start a prog-mode buffer, you
         ;; don't need to tell me. I know. On some machines I don't care to have
