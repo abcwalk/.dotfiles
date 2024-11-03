@@ -219,39 +219,32 @@
 (global-set-key (kbd "C-j") (kbd "<down>"))
 (global-set-key (kbd "C-k") (kbd "<up>"))
 
+(defun my-evil-force-normal-and-move (move-fn)
+  "Force normal state and execute the given move function."
+  (interactive)
+  (evil-ex-nohighlight)
+  (funcall move-fn nil))
+
+(map! :n "l" (lambda () (interactive) (my-evil-force-normal-and-move 'right-char)))
+(map! :n "h" (lambda () (interactive) (my-evil-force-normal-and-move 'left-char)))
+(map! :n "j" (lambda () (interactive) (my-evil-force-normal-and-move 'next-line)))
+(map! :n "k" (lambda () (interactive) (my-evil-force-normal-and-move 'previous-line)))
+(map! :n "w" (lambda () (interactive) (my-evil-force-normal-and-move 'evil-forward-word-begin)))
+(map! :n "e" (lambda () (interactive) (my-evil-force-normal-and-move 'evil-forward-word-end)))
+(map! :n "A" (lambda () (interactive) (my-evil-force-normal-and-move 'evil-append-line)))
+(map! :n "I" (lambda () (interactive) (my-evil-force-normal-and-move 'evil-insert-line)))
+(map! :n "0" (lambda () (interactive) (my-evil-force-normal-and-move 'evil-beggining-of-line)))
+(map! :n "<right>" (lambda () (interactive) (my-evil-force-normal-and-move 'right-char)))
+(map! :n "<left>" (lambda () (interactive) (my-evil-force-normal-and-move 'left-char)))
+(map! :n "<down>" (lambda () (interactive) (my-evil-force-normal-and-move 'next-line)))
+(map! :n "<up>" (lambda () (interactive) (my-evil-force-normal-and-move 'previous-line)))
+
+(map! :n "SPC r" 'counsel-recentf)
 (map! :n "s" 'evil-avy-goto-char-2)
 (map! :desc "save-buffer"
       "C-s" 'save-buffer)
-;; (map! :desc "swiper"
-;;       "C-f" 'swiper-isearch)
-;; (map! :desc "avy-goto-char-2"
-;;       :map 'override  "C-\\" 'avy-goto-char-2)
-;; (map! :desc "treemacs-select-window"
-;;       "M-o" 'treemacs-select-window)
-;; (map! :desc "counsel-recentf"
-;;       "C-x r" 'counsel-recentf)
 (map! :desc "dired"
       "C-x j" 'dired-jump)
-;; (map! :desc "exit-emacs"
-;;       "s-x" 'save-buffers-kill-emacs)
-;; (map! :desc "dashboard"
-;;       "s-d" 'dashboard-open)
-
-;; (setq doom-modeline-enable-word-count t)
-
-;; (when (< 26 emacs-major-version)
-;;   (tab-bar-mode 1)                           ;; enable tab bar
-;;   (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
-;;   (setq tab-bar-close-button-show nil)       ;; hide tab close / X button
-;;   (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
-;;   (setq tab-bar-tab-hints nil)                 ;; show tab numbers
-;;   (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator)))
-
-;; (global-set-key (kbd "s-[") 'tab-bar-switch-to-prev-tab)
-;; (global-set-key (kbd "s-]") 'tab-bar-switch-to-next-tab)
-;; (global-set-key (kbd "s-w") 'tab-bar-close-tab)
-
-(setq inhibit-startup-screen nil)
 
 ;; Move line up/down
 (defun move-line-up ()
@@ -269,6 +262,11 @@
       "<M-up>" #'move-line-up)
 (map! :desc "move-line-down"
       "<M-down>" #'move-line-down)
+
+(map! :desc "append-empty-line-above"
+      "<S-up>" (lambda () (interactive)(beginning-of-line)(open-line 1)))
+(map! :desc "append-empty-line-below"
+      "<S-down>" (lambda () (interactive)(end-of-line)(newline)))
 
 ;; Recentf
 ;; (use-package! recentf
@@ -356,6 +354,8 @@
 ;; rarely. So opt for manual completion:
 (after! corfu
   (setq corfu-auto nil))
+
+;; Ivy
 
 ;;; :ui modeline
 ;; An evil mode indicator is redundant with cursor shape
