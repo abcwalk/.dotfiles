@@ -159,21 +159,21 @@
 (use-package! modeline)
 
 ;;; Keycast mode
-(use-package! keycast
-  :after modeline
-  :init
-  (setq keycast-mode-line-format "%2s%k%c%R")
-  (setq keycast-mode-line-insert-after 'prot-modeline-vc-branch)
-  (setq keycast-mode-line-window-predicate 'mode-line-window-selected-p)
-  (setq keycast-mode-line-remove-tail-elements nil)
-  :config
-  (dolist (input '(self-insert-command org-self-insert-command))
-    (add-to-list 'keycast-substitute-alist `(,input "." "Typing…")))
+;; (use-package! keycast
+;;   :after modeline
+;;   :init
+;;   (setq keycast-mode-line-format "%2s%k%c%R")
+;;   (setq keycast-mode-line-insert-after 'prot-modeline-vc-branch)
+;;   (setq keycast-mode-line-window-predicate 'mode-line-window-selected-p)
+;;   (setq keycast-mode-line-remove-tail-elements nil)
+;;   :config
+;;   (dolist (input '(self-insert-command org-self-insert-command))
+;;     (add-to-list 'keycast-substitute-alist `(,input "." "Typing…")))
 
-  (dolist (event '( mouse-event-p mouse-movement-p mwheel-scroll handle-select-window
-                    mouse-set-point mouse-drag-region))
-    (add-to-list 'keycast-substitute-alist `(,event nil)))
-  (keycast-mode-line-mode 1))
+;;   (dolist (event '( mouse-event-p mouse-movement-p mwheel-scroll handle-select-window
+;;                     mouse-set-point mouse-drag-region))
+;;     (add-to-list 'keycast-substitute-alist `(,event nil)))
+;;   (keycast-mode-line-mode 1))
 
 ;; Solaire
 (after! solaire-mode
@@ -276,14 +276,14 @@
 ;;   (setq recentf-show-file-shortcuts-flag nil)
 ;;   (run-at-time nil (* 5 60) 'recentf-save-list))
 
-(use-package recentf
+(use-package! recentf
   :bind ("C-x C-r" . recentf-open-files)
   :config
   (setq recentf-max-menu-items 15
-        recentf-max-saved-items 100)
+        recentf-max-saved-items 50)
   :hook (after-init . recentf-mode))
 
-(use-package init-open-recentf
+(use-package! init-open-recentf
       :after recentf
       :config (init-open-recentf))
 
