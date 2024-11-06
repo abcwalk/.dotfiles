@@ -58,10 +58,10 @@
 (custom-theme-set-faces! 'doom-zenburn
   (if (display-graphic-p)
       (progn
-        (set-frame-parameter (selected-frame) 'alpha '(85 85))
-        (add-to-list 'default-frame-alist '(alpha 85 85))
+        ;; (set-frame-parameter (selected-frame) 'alpha '(85 85))
+        ;; (add-to-list 'default-frame-alist '(alpha 85 85))
         (custom-theme-set-faces! 'doom-zenburn
-          '(default :background "black")
+          '(default :background "#111111")
           '(whitespace-tab :background "#333333")
           `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
           `(font-lock-builtin-face :foreground ,(doom-color 'fg))
