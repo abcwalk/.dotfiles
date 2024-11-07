@@ -476,7 +476,8 @@ non-coalesced scroll events reach the advised function."
   (define-key global-map (kbd "<f8>") #'spacious-padding-mode))
 
 ;;Vterm
-(set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
+(after! vterm
+  (set-popup-rule! "*doom:vterm-popup:*" :size 0.4 :vslot -4 :select t :quit nil :ttl 0 :side 'right))
 
 ;; Makes *scratch* empty.
 ;; (setq initial-scratch-message "")
