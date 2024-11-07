@@ -1,0 +1,33 @@
+[metadata]
+name = "Doom Zenburn"
+
+[colors]
+foreground = "#DCDCDC"
+background = "#111111"
+cursor_bg = "#CC9393"
+cursor_border = "#CC9393"
+cursor_fg = "#383838"
+selection_bg = "#4F4F4F"
+selection_fg = "#DCDCDC"
+
+ansi = [
+    "#3F3F3F",
+    "#CC9393",
+    "#7F9F7F",
+    "#DFAF8F",
+    "#8CD0D3",
+    "#DC8CC3",
+    "#93E0E3",
+    "#DCDCDC"
+]
+
+brights = [
+    "#494949",
+    "#8C5353",
+    "#AFD8AF",
+    "#E0CF9F",
+    "#71AED7",
+    "#CC8BC9",
+    "#47BEA9",
+    "#FFFFEF"
+]
