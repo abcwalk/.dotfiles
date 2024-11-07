@@ -62,7 +62,7 @@
         ;; (add-to-list 'default-frame-alist '(alpha 85 85))
         (custom-theme-set-faces! 'doom-zenburn
           '(default :background "#111111")
-          '(whitespace-tab :background "#333333")
+          '(whitespace-tab :background "#181818")
           `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
           `(font-lock-builtin-face :foreground ,(doom-color 'fg))
           `(highlight-numbers-number :foreground ,(doom-color 'fg))
