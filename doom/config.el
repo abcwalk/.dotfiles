@@ -63,6 +63,7 @@
         (custom-theme-set-faces! 'doom-zenburn
           '(default :background "#111111")
           '(whitespace-tab :background "#181818")
+          '(bookmark-face :background "#111111")
           `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
           `(font-lock-builtin-face :foreground ,(doom-color 'fg))
           `(highlight-numbers-number :foreground ,(doom-color 'fg))
