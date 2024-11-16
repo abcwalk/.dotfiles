@@ -56,7 +56,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
-config.color_scheme = "Doom Zenburn"
+config.color_scheme = "Gruber (base16)"
 
 -- config.window_background_opacity = 0.90
 

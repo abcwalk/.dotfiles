@@ -37,7 +37,32 @@
 ;; Theme
 (use-package! doom-themes
   :config
-  (load-theme 'doom-zenburn t))
+  (load-theme 'doom-zenburn t)
+  (custom-theme-set-faces! 'doom-zenburn
+    (if (display-graphic-p)
+        (progn
+          ;; (set-frame-parameter (selected-frame) 'alpha '(85 85))
+          ;; (add-to-list 'default-frame-alist '(alpha 85 85))
+          (custom-theme-set-faces! 'doom-zenburn
+            '(default :background "#111111")
+            '(whitespace-tab :background "#181818")
+            '(bookmark-face :background "#111111")
+            `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
+            `(font-lock-builtin-face :foreground ,(doom-color 'fg))
+            `(highlight-numbers-number :foreground ,(doom-color 'fg))
+            `(dired-directory :foreground ,(doom-color 'green))))
+      (progn
+        (custom-theme-set-faces! 'doom-zenburn
+          '(default :background nil)
+          '(magit-diff-context :background nil)
+          '(lsp-face-highlight-read :background nil)
+          '(magit-diff-context-highlight :background nil)
+          '(diff-refine-added :background nil :foreground "#7F9F7F")
+          '(diff-refine-removed :background nil :foreground "#CC9393")
+          '(magit-diff-added :background nil :foreground "#7F9F7F")
+          '(magit-diff-added-highlight :background nil :foreground "#7F9F7F" :weight bold)
+          '(magit-diff-removed-highlight :background nil :foreground "#CC9393" :weight bold)
+          '(magit-diff-removed :background nil :foreground "#CC9393"))))))
 
 ;; Font
 (require 'battery)
@@ -55,31 +80,6 @@
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size (- font-size 3)))
 
 ;; doom-zenburn theme config
-(custom-theme-set-faces! 'doom-zenburn
-  (if (display-graphic-p)
-      (progn
-        ;; (set-frame-parameter (selected-frame) 'alpha '(85 85))
-        ;; (add-to-list 'default-frame-alist '(alpha 85 85))
-        (custom-theme-set-faces! 'doom-zenburn
-          '(default :background "#111111")
-          '(whitespace-tab :background "#181818")
-          '(bookmark-face :background "#111111")
-          `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
-          `(font-lock-builtin-face :foreground ,(doom-color 'fg))
-          `(highlight-numbers-number :foreground ,(doom-color 'fg))
-          `(dired-directory :foreground ,(doom-color 'green))))
-        (progn
-          (custom-theme-set-faces! 'doom-zenburn
-            '(default :background nil)
-            '(magit-diff-context :background nil)
-            '(lsp-face-highlight-read :background nil)
-            '(magit-diff-context-highlight :background nil)
-            '(diff-refine-added :background nil :foreground "#7F9F7F")
-            '(diff-refine-removed :background nil :foreground "#CC9393")
-            '(magit-diff-added :background nil :foreground "#7F9F7F")
-            '(magit-diff-added-highlight :background nil :foreground "#7F9F7F" :weight bold)
-            '(magit-diff-removed-highlight :background nil :foreground "#CC9393" :weight bold)
-            '(magit-diff-removed :background nil :foreground "#CC9393")))))
 
 
 ;; Diff-hl
