@@ -240,8 +240,9 @@
 (map! :n "<down>" (lambda () (interactive) (my-evil-force-normal-and-move 'next-line)))
 (map! :n "<up>" (lambda () (interactive) (my-evil-force-normal-and-move 'previous-line)))
 
-(map! :n "SPC r" 'counsel-recentf)
+(map! :n "SPC TAB" 'ivy-switch-buffer)
 (map! :n "s" 'evil-avy-goto-char-2)
+(map! :n "SPC r" 'counsel-recentf)
 (map! :desc "save-buffer"
       "C-s" 'save-buffer)
 (map! :desc "dired"
