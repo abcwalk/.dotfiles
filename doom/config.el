@@ -37,24 +37,29 @@
 ;; Theme
 (use-package! doom-themes
   :config
-  (load-theme 'doom-zenburn t)
-  (custom-theme-set-faces! 'doom-zenburn
-    '(default :background "#111111")
-    '(whitespace-tab :background "#181818")
-    '(bookmark-face :background "#111111")
+  (load-theme 'doom-zenburn t))
+
+(defvar dark-color-0 "#111111")
+(defvar dark-color-1 "#181818")
+(defvar magit-added-color "#7F9F7F")
+(defvar magit-removed-color "#CC9393")
+
+(custom-theme-set-faces! 'doom-zenburn
+    `(default :background ,dark-color-0)
+    `(whitespace-tab :background ,dark-color-1)
+    `(bookmark-face :background ,dark-color-0)
     `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
     `(font-lock-builtin-face :foreground ,(doom-color 'fg))
     `(highlight-numbers-number :foreground ,(doom-color 'fg))
     `(dired-directory :foreground ,(doom-color 'green))
-    '(magit-diff-context :background "#181818")
-    '(magit-diff-context-highlight :background "#181818")
-    '(magit-diff-added :background nil :foreground "#7F9F7F" :weight bold)
-    '(magit-diff-added-highlight :background nil :foreground "#7F9F7F" :weight bold)
-    '(magit-diff-removed :background nil :foreground "#CC9393" :weight bold)
-    '(magit-diff-removed-highlight :background nil :foreground "#CC9393" :weight bold)
-    '(diff-refine-removed :background nil :foreground "#CC9393" :weight bold)
-    '(diff-refine-added :background nil :foreground "#7F9F7F" :weight bold)))
-
+    `(magit-diff-context :background ,dark-color-1)
+    `(magit-diff-context-highlight :background ,dark-color-1)
+    `(magit-diff-added :background nil :foreground ,magit-added-color :weight bold)
+    `(magit-diff-added-highlight :background nil :foreground ,magit-added-color :weight bold)
+    `(magit-diff-removed :background nil :foreground ,magit-removed-color :weight bold)
+    `(magit-diff-removed-highlight :background nil :foreground ,magit-removed-color :weight bold)
+    `(diff-refine-removed :background nil :foreground ,magit-removed-color :weight bold)
+    `(diff-refine-added :background nil :foreground ,magit-added-color :weight bold))
 ;; Font
 (require 'battery)
 
