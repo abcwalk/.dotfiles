@@ -43,6 +43,8 @@
 (defvar dark-color-1 "#181818")
 (defvar magit-added-color "#7F9F7F")
 (defvar magit-removed-color "#CC9393")
+(defvar diff-refine-added-color "#2E3637")  ; GitHub
+(defvar diff-refine-removed-color "#3E3b40") ; Github
 
 (custom-theme-set-faces! 'doom-zenburn
     `(default :background ,dark-color-0)
@@ -58,8 +60,9 @@
     `(magit-diff-added-highlight :background nil :foreground ,magit-added-color :weight bold)
     `(magit-diff-removed :background nil :foreground ,magit-removed-color :weight bold)
     `(magit-diff-removed-highlight :background nil :foreground ,magit-removed-color :weight bold)
-    `(diff-refine-removed :background nil :foreground ,magit-removed-color :weight bold)
-    `(diff-refine-added :background nil :foreground ,magit-added-color :weight bold))
+    `(diff-refine-removed :background ,diff-refine-removed-color :weight bold)
+    `(diff-refine-added :background ,diff-refine-added-color :weight bold))
+
 ;; Font
 (require 'battery)
 
