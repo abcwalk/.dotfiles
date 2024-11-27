@@ -54,6 +54,7 @@
     `(font-lock-builtin-face :foreground ,(doom-color 'fg))
     `(highlight-numbers-number :foreground ,(doom-color 'fg))
     `(dired-directory :foreground ,(doom-color 'green))
+    `(dired-flagged :background ,diff-refine-removed-color :foreground ,magit-removed-color)
     `(magit-diff-context :background ,dark-color-0)
     `(magit-diff-context-highlight :background ,dark-color-1)
     `(magit-diff-added :background nil :foreground ,magit-added-color :weight bold)
