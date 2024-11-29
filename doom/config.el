@@ -43,12 +43,17 @@
 (defvar dark-color-1 "#181818")
 (defvar magit-added-color "#7F9F7F")
 (defvar magit-removed-color "#CC9393")
-(defvar diff-refine-added-color "#2E3637")  ; GitHub
+(defvar diff-refine-added-color "#2E3637")   ; GitHub
 (defvar diff-refine-removed-color "#3E3b40") ; Github
+
+(setq window-divider-default-right-width 4
+      window-divider-default-bottom-width 4)
 
 (custom-theme-set-faces! 'doom-zenburn
     `(default :background ,dark-color-0)
     `(whitespace-tab :background ,dark-color-1)
+    `(popup-face :background ,dark-color-0)
+    `(popup-menu-face :background ,dark-color-0)
     `(bookmark-face :background ,dark-color-0)
     `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
     `(font-lock-builtin-face :foreground ,(doom-color 'fg))
@@ -477,9 +482,6 @@ non-coalesced scroll events reach the advised function."
   (spacious-padding-mode 1)
   (define-key global-map (kbd "<f8>") #'spacious-padding-mode))
 
-;;Vterm
-(after! vterm
-  (set-popup-rule! "*doom:vterm-popup:*" :size 0.4 :vslot -4 :select t :quit nil :ttl 0 :side 'right))
 
 ;; Makes *scratch* empty.
 ;; (setq initial-scratch-message "")
