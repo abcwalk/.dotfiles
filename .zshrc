@@ -119,7 +119,6 @@ fi
 alias n="nvim"
 alias nn="nvim -c 'Telescope oldfiles'"
 alias e="emacs -nw"
-alias youtube-dl='python3 /usr/local/bin/youtube-dl'
 
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 export EDITOR='/usr/local/bin/emacs'
@@ -146,12 +145,6 @@ export PATH=$JMETER_HOME/bin:$PATH
 export PATH="$HOME/.local/bin/fd:$PATH"
 export PATH="/usr/libexec/imv:$PATH"
 export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
-
-# Rubackup
-PATH=$PATH:/opt/rubackup/bin
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rubackup/lib
-export PATH
-export LD_LIBRARY_PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$PATH:/opt/nvim-linux64/bin"
