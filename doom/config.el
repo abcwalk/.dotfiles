@@ -389,6 +389,7 @@
         lsp-completion-provider :none))
 (after! lsp-ui
   (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
+        lsp-eldoc-enable-hover nil
         lsp-ui-doc-enable nil))     ; redundant with K
 
 ;;; :ui doom-dashboard
