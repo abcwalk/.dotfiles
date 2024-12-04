@@ -265,6 +265,9 @@
   (transpose-lines 1)
   (forward-line -1))
 
+(map! :desc "find-selected-in-project"
+      "<f12>" #'+default/search-project-for-symbol-at-point)
+
 (map! :desc "move-line-up"
       "<M-up>" #'move-line-up)
 (map! :desc "move-line-down"
