@@ -529,17 +529,17 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
-    -- {
-    --     'behemothbucket/alabaster.nvim',
-    --     lazy = false,
-    --     branch = 'custom', -- main | custom
-    --     priority = 1000,
-    --     config = function()
-    --         vim.g.alabaster_dim_comments = true
-    --         vim.g.alabaster_floatborder = true
-    --         vim.cmd('colorscheme alabaster')
-    --     end,
-    -- },
+    {
+        'behemothbucket/alabaster.nvim',
+        lazy = false,
+        branch = 'custom', -- main | custom
+        priority = 1000,
+        config = function()
+            vim.g.alabaster_dim_comments = true
+            vim.g.alabaster_floatborder = true
+            vim.cmd('colorscheme alabaster')
+        end,
+    },
     -- {
     --     'alvarosevilla95/luatab.nvim',
     --     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -648,47 +648,47 @@ local plugins = {
     --     end,
     -- },
     -- { 'EdenEast/nightfox.nvim', lazy = false, config = load_config('ui.nightfox') },
-    {
-        'NTBBloodbath/doom-one.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            -- Add color to cursor
-            vim.g.doom_one_cursor_coloring = true
-            -- Set :terminal colors
-            vim.g.doom_one_terminal_colors = true
-            -- Enable italic comments
-            vim.g.doom_one_italic_comments = false
-            -- Enable TS support
-            vim.g.doom_one_enable_treesitter = true
-            -- Color whole diagnostic text or only underline
-            vim.g.doom_one_diagnostics_text_color = false
-            -- Enable transparent background
-            vim.g.doom_one_transparent_background = false
-
-            -- Pumblend transparency
-            vim.g.doom_one_pumblend_enable = false
-            -- vim.g.doom_one_pumblend_transparency = 20
-
-            -- Plugins integration
-            -- vim.g.doom_one_plugin_neorg = true
-            -- vim.g.doom_one_plugin_barbar = false
-            vim.g.doom_one_plugin_telescope = true
-            -- vim.g.doom_one_plugin_neogit = true
-            -- vim.g.doom_one_plugin_nvim_tree = true
-            -- vim.g.doom_one_plugin_dashboard = true
-            -- vim.g.doom_one_plugin_startify = true
-            vim.g.doom_one_plugin_whichkey = true
-            vim.g.doom_one_plugin_indent_blankline = true
-            vim.g.doom_one_plugin_vim_illuminate = true
-            vim.g.doom_one_plugin_lspsaga = true
-            vim.o.background = 'dark'
-            vim.cmd('colorscheme doom-one')
-            vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
-            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
-            vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff6c6b' })
-        end,
-    },
+    -- {
+    --     'NTBBloodbath/doom-one.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         -- Add color to cursor
+    --         vim.g.doom_one_cursor_coloring = true
+    --         -- Set :terminal colors
+    --         vim.g.doom_one_terminal_colors = true
+    --         -- Enable italic comments
+    --         vim.g.doom_one_italic_comments = false
+    --         -- Enable TS support
+    --         vim.g.doom_one_enable_treesitter = true
+    --         -- Color whole diagnostic text or only underline
+    --         vim.g.doom_one_diagnostics_text_color = false
+    --         -- Enable transparent background
+    --         vim.g.doom_one_transparent_background = false
+    --
+    --         -- Pumblend transparency
+    --         vim.g.doom_one_pumblend_enable = false
+    --         -- vim.g.doom_one_pumblend_transparency = 20
+    --
+    --         -- Plugins integration
+    --         -- vim.g.doom_one_plugin_neorg = true
+    --         -- vim.g.doom_one_plugin_barbar = false
+    --         vim.g.doom_one_plugin_telescope = true
+    --         -- vim.g.doom_one_plugin_neogit = true
+    --         -- vim.g.doom_one_plugin_nvim_tree = true
+    --         -- vim.g.doom_one_plugin_dashboard = true
+    --         -- vim.g.doom_one_plugin_startify = true
+    --         vim.g.doom_one_plugin_whichkey = true
+    --         vim.g.doom_one_plugin_indent_blankline = true
+    --         vim.g.doom_one_plugin_vim_illuminate = true
+    --         vim.g.doom_one_plugin_lspsaga = true
+    --         vim.o.background = 'dark'
+    --         vim.cmd('colorscheme doom-one')
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
+    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
+    --         vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff6c6b' })
+    --     end,
+    -- },
     {
         'goolord/alpha-nvim',
         dependencies = { 'echasnovski/mini.icons' },
@@ -721,7 +721,7 @@ local plugins = {
             --- auto update the highlight style on colorscheme change
             vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
                 pattern = { '*' },
-                callback = function(ev)
+                callback = function(v)
                     vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
                     vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
                     vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
