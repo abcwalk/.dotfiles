@@ -541,6 +541,17 @@ local plugins = {
         end,
     },
     -- {
+    --     'cpwrs/americano.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('americano').setup({
+    --         terminal = true,
+    --       })
+    --       vim.cmd('colorscheme americano')
+    --     end,
+    -- },
+    -- {
     --     'alvarosevilla95/luatab.nvim',
     --     dependencies = { 'nvim-tree/nvim-web-devicons' },
     --     lazy = false,
