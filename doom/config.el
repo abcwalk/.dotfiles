@@ -50,6 +50,7 @@
       window-divider-default-bottom-width 4)
 
 (custom-theme-set-faces! 'doom-zenburn
+<<<<<<< HEAD
   `(default :background ,(if (display-graphic-p) dark-color-0 nil))
   `(whitespace-tab :background ,dark-color-1)
   `(popup-face :background ,dark-color-0)
@@ -75,6 +76,26 @@
 ;; Настройки не для графического режима
 (unless (display-graphic-p)
   (modify-all-frames-parameters '((alpha-background . 70) (tool-bar-lines . 0))))
+=======
+    `(default :background ,dark-color-0)
+    `(whitespace-tab :background ,dark-color-1)
+    `(popup-face :background ,dark-color-0)
+    `(popup-menu-face :background ,dark-color-0)
+    `(bookmark-face :background ,dark-color-0)
+    `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
+    `(font-lock-builtin-face :foreground ,(doom-color 'fg))
+    `(highlight-numbers-number :foreground ,(doom-color 'fg))
+    `(dired-directory :foreground ,(doom-color 'green))
+    `(dired-flagged :background ,diff-refine-removed-color :foreground ,magit-removed-color)
+    `(magit-diff-context :background ,dark-color-0)
+    `(magit-diff-context-highlight :background ,dark-color-1)
+    `(magit-diff-added :background unspecified :foreground ,magit-added-color :weight bold)
+    `(magit-diff-added-highlight :background unspecified :foreground ,magit-added-color :weight bold)
+    `(magit-diff-removed :background unspecified :foreground ,magit-removed-color :weight bold)
+    `(magit-diff-removed-highlight :background unspecified :foreground ,magit-removed-color :weight bold)
+    `(diff-refine-removed :background ,diff-refine-removed-color :weight bold)
+    `(diff-refine-added :background ,diff-refine-added-color :weight bold))
+>>>>>>> a427702 (emacs: filewatcher, highlghts)
 
 ;; Font
 (require 'battery)
@@ -391,20 +412,37 @@
 (after! lsp-mode
   (setq lsp-enable-symbol-highlighting nil
         lsp-headerline-breadcrumb-enable nil
-        ;; If an LSP server isn't present when I start a prog-mode buffer, you
-        ;; don't need to tell me. I know. On some machines I don't care to have
-        ;; a whole development environment for some ecosystems.
         lsp-enable-suggest-server-download nil
-        lsp-completion-provider :none))
+        lsp-file-watch-threshold 4000
+        lsp-completion-provider :none)
+  (dolist (dir '("[/\\\\]\\.ccls-cache\\'"
+                 "[/\\\\]\\.cache\\'"
+                 "[/\\\\]\\.clwb\\'"
+                 "[/\\\\]third_party\\'"
+                 "[/\\\\]third-party\\'"
+                 "[/\\\\]buildtools\\'"
+                 "[/\\\\]out\\'"
+                 "[/\\\\]build\\'"
+                 "[/\\\\]__pycache__\\'"
+                 "[/\\\\]\\.mypy_cache\\'"
+                 "[/\\\\]\\.pytest_cache\\'"
+                 "[/\\\\].venv]]'"
+                 "[/\\\\]venv]]'"
+                 ))
+    (push dir lsp-file-watch-ignored-directories)))
+
 (after! lsp-ui
-  (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
-        lsp-eldoc-enable-hover nil
-        lsp-ui-doc-enable nil))     ; redundant with K
+  (setq lsp-ui-doc-enable nil
+        lsp-lens-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-max-height 15
+        lsp-ui-doc-max-width 100))
 
 ;;; :ui doom-dashboard
-(setq fancy-splash-image (file-name-concat doom-user-dir "splash.png"))
+;; (setq fancy-splash-image (file-name-concat doom-user-dir "splash.png"))
 ;; Hide the menu for as minimalistic a startup screen as possible.
-(setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
+;; (setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
 
 ;; Scrolling
 
