@@ -1,3 +1,7 @@
+1. [Emacs](#emacs)
+2. [Neovim](#neovim)
+
+
 ## Emacs
 
 ### Magit
