@@ -374,6 +374,10 @@
   (setq magit-delta-default-light-theme "GitHub")
   )
 
+(use-package! magit-todos
+  :after magit
+  :config (magit-todos-mode 1))
+
 ;; Ivy
 
 ;;; :ui modeline
