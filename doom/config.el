@@ -50,8 +50,7 @@
       window-divider-default-bottom-width 4)
 
 (custom-theme-set-faces! 'doom-zenburn
-<<<<<<< HEAD
-  `(default :background ,(if (display-graphic-p) dark-color-0 nil))
+  `(default :background ,dark-color-0)
   `(whitespace-tab :background ,dark-color-1)
   `(popup-face :background ,dark-color-0)
   `(popup-menu-face :background ,dark-color-0)
@@ -59,43 +58,17 @@
   `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
   `(font-lock-builtin-face :foreground ,(doom-color 'fg))
   `(highlight-numbers-number :foreground ,(doom-color 'fg))
-  ;; Цвета для dired
   `(dired-directory :foreground ,(doom-color 'green))
   `(dired-flagged :background ,diff-refine-removed-color :foreground ,magit-removed-color)
-  ;; Цвета для magit
   `(magit-diff-context :background ,dark-color-0)
   `(magit-diff-context-highlight :background ,dark-color-1)
-  `(magit-diff-added :background nil :foreground ,magit-added-color :weight bold)
-  `(magit-diff-added-highlight :background nil :foreground ,magit-added-color :weight bold)
-  `(magit-diff-removed :background nil :foreground ,magit-removed-color :weight bold)
-  `(magit-diff-removed-highlight :background nil :foreground ,magit-removed-color :weight bold)
-  ;; Цвета для diff
-  `(diff-refine-removed :background ,diff-refine-removed-color :weight bold)
-  `(diff-refine-added :background ,diff-refine-added-color :weight bold))
-
-;; Настройки не для графического режима
-(unless (display-graphic-p)
-  (modify-all-frames-parameters '((alpha-background . 70) (tool-bar-lines . 0))))
-=======
-    `(default :background ,dark-color-0)
-    `(whitespace-tab :background ,dark-color-1)
-    `(popup-face :background ,dark-color-0)
-    `(popup-menu-face :background ,dark-color-0)
-    `(bookmark-face :background ,dark-color-0)
-    `(font-lock-keyword-face :foreground ,(doom-color 'yellow))
-    `(font-lock-builtin-face :foreground ,(doom-color 'fg))
-    `(highlight-numbers-number :foreground ,(doom-color 'fg))
-    `(dired-directory :foreground ,(doom-color 'green))
-    `(dired-flagged :background ,diff-refine-removed-color :foreground ,magit-removed-color)
-    `(magit-diff-context :background ,dark-color-0)
-    `(magit-diff-context-highlight :background ,dark-color-1)
-    `(magit-diff-added :background unspecified :foreground ,magit-added-color :weight bold)
-    `(magit-diff-added-highlight :background unspecified :foreground ,magit-added-color :weight bold)
-    `(magit-diff-removed :background unspecified :foreground ,magit-removed-color :weight bold)
-    `(magit-diff-removed-highlight :background unspecified :foreground ,magit-removed-color :weight bold)
-    `(diff-refine-removed :background ,diff-refine-removed-color :weight bold)
-    `(diff-refine-added :background ,diff-refine-added-color :weight bold))
->>>>>>> a427702 (emacs: filewatcher, highlghts)
+  ;; `(magit-diff-added :background unspecified :foreground ,magit-added-color :weight bold)
+  ;; `(magit-diff-added-highlight :background unspecified :foreground ,magit-added-color :weight bold)
+  ;; `(magit-diff-removed :background unspecified :foreground ,magit-removed-color :weight bold)
+  ;; `(magit-diff-removed-highlight :background unspecified :foreground ,magit-removed-color :weight bold)
+  ;; `(diff-refine-removed :background ,diff-refine-removed-color :weight bold)
+  ;; `(diff-refine-added :background ,diff-refine-added-color :weight bold))
+  )
 
 ;; Font
 (require 'battery)
@@ -391,6 +364,15 @@
 ;; rarely. So opt for manual completion:
 (after! corfu
   (setq corfu-auto nil))
+
+(use-package! magit-delta
+  :after magit
+  :init
+  (when (executable-find "delta")
+    (add-hook! magit-mode #'magit-delta-mode))
+  :config
+  (setq magit-delta-default-light-theme "GitHub")
+  )
 
 ;; Ivy
 

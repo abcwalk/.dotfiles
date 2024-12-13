@@ -16,6 +16,8 @@
 (package! soothe-theme :disable t)
 (package! olivetti :disable t)
 (package! pulsar)
+(package! magit-todos)
+(package! magit-delta)
 (package! solaire :disable t)
 (package! evil-snipe :disable t)
 (package! writeroom-mode :disable t)
