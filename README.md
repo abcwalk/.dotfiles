@@ -5,4 +5,4 @@
 - magit-delta
 - magit-todos
 
-![изображение](https://github.com/user-attachments/assets/57a05ef0-497a-4278-9a44-ef0a6762f75c)
+![изображение](https://github.com/user-attachments/assets/6a93ad9b-b90e-43f6-9dec-e9a2aed55b62)
