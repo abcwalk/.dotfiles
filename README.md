@@ -1,8 +1,9 @@
-1. [Emacs](#emacs)
+1. [DoomEmacs](#emacs)
 2. [Neovim](#neovim)
+3. [Wezterm](#wezterm)
+4. [Tmux](#tmux)
 
-
-## Emacs
+## DoomEmacs
 
 ### Magit
 
