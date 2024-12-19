@@ -297,11 +297,8 @@
       :after recentf
       :config (init-open-recentf))
 
-;; Python
-;; (add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
-
-  (use-package! flymake-ruff
-    :hook (python-mode . flymake-ruff-load))
+;; sudo pip install pylint
+(add-hook 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-pylint)))
 
 ;; (use-package! nerd-icons
 ;;   :custom
