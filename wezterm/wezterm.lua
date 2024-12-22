@@ -62,6 +62,7 @@ config.color_scheme = "Alabaster Dark"
 
 -- local font = "IosevkaTerm Nerd Font"
 local font = "JetBrainsMono Nerd Font"
+-- local font = "Roboto Mono"
 config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
