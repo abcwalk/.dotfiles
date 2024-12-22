@@ -1342,7 +1342,16 @@ local plugins = {
         },
         lazy = false,
         config = function()
-            require('neogit').setup({})
+            require('neogit').setup({
+                disable_context_highlighting = true,
+                mappings = {
+                    popup = {
+                        ['P'] = 'PushPopup',
+                        ['p'] = 'PushPopup',
+                        ['F'] = 'PullPopup',
+                    },
+                },
+            })
         end,
     },
     {
@@ -1424,6 +1433,13 @@ local plugins = {
         keys = {
             {
                 '<Tab><Tab>',
+                function()
+                    require('snipe').open_buffer_menu()
+                end,
+                desc = 'Open Snipe buffer menu',
+            },
+            {
+                '<leader><Tab>',
                 function()
                     require('snipe').open_buffer_menu()
                 end,

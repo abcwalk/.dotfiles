@@ -184,13 +184,14 @@ map('n', '<Bslash><Bslash>', '<cmd>Telescope live_grep<CR>', { noremap = true, s
 map('n', '<C-f>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true, nowait = true })
 -- map('n', '<C-w>', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true, nowait = true })
 map('n', '<leader>p', '<cmd>Telescope projects theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
-map('n', '<Tab><Tab>', '<cmd>Telescope buffers theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
+-- map('n', '<Tab><Tab>', '<cmd>Telescope buffers theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
 
 --Source current file
 map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
 -- Neogit
 map('n', '<C-g>', '<cmd>Neogit<CR>', { noremap = true, silent = true })
+map('n', '<leader>gg', '<cmd>Neogit<CR>', { noremap = true, silent = true })
 
 --Tab navigation
 map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
@@ -303,14 +304,14 @@ map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true
 map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { noremap = true, silent = true })
 
 map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre"
+    desc = 'Toggle Spectre',
 })
 map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word"
+    desc = 'Search current word',
 })
 map('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-    desc = "Search current word"
+    desc = 'Search current word',
 })
 map('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = "Search on current file"
+    desc = 'Search on current file',
 })
