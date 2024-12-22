@@ -78,7 +78,7 @@
            (not (string-match-p "N/A"
                                 (battery-format "%B"
                                                 (funcall battery-status-function)))))
-      20
+      26
     18)
   "Default font size depending on battery mode availability.")
 
