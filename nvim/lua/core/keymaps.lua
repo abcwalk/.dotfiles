@@ -56,6 +56,10 @@ map('n', '<C-Bslash>', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 --Oil
 map('n', '<Bslash>f', ':Oil .<CR>', { noremap = true, silent = true })
+map('n', '<C-x>j', ':Oil .<CR>', { noremap = true, silent = true })
+
+-- Cmdline
+map('n', '<M-x>', ':', { noremap = true, silent = true })
 
 --- Neotree
 -- map('n', '<Bslash>f', ':Neotree<CR>', { noremap = true, silent = true })
@@ -190,8 +194,8 @@ map('n', '<leader>p', '<cmd>Telescope projects theme=ivy<CR>', { noremap = true,
 map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
 
 -- Neogit
-map('n', '<C-g>', '<cmd>Neogit<CR>', { noremap = true, silent = true })
 map('n', '<leader>gg', '<cmd>Neogit<CR>', { noremap = true, silent = true })
+map('n', '<C-x>g', '<cmd>Neogit<CR>', { noremap = true, silent = true })
 
 --Tab navigation
 map('n', '<A-Left>', ':bprevious<CR>', { silent = true })

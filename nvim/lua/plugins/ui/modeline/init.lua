@@ -8,12 +8,13 @@ end
 local function default()
     local comps = {
         -- p.mode(),
-        p.encoding(),
-        p.eol(),
-        [[%{(&modified&&&readonly?'%*':(&modified?'**':(&readonly?'%%':'--')))}- T%{tabpagenr()}  ]],
+        -- p.encoding(),
+        -- p.eol(),
+        -- [[%{(&modified&&&readonly?'%*':(&modified?'**':(&readonly?'%%':'--')))}- T%{tabpagenr()}  ]],
         p.fileinfo(),
         -- '   %P   (L%l,C%c)  ',
-        '   (L%l,C%c)  ',
+        -- '   (L%l,C%c)  ',
+        '  ',
         p.gitinfo(),
         ' %=',
         [[ %{!empty(bufname()) ? '(' : ''}]],
@@ -22,7 +23,7 @@ local function default()
         [[%{!empty(bufname()) ? ')' : ''}]],
         p.progress(),
         p.lsp(),
-        '%=%=',
+        -- '%=%=',
     }
     local e, pieces = {}, {}
     iter(ipairs(comps)):map(function(key, item)

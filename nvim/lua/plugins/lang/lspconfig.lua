@@ -168,6 +168,7 @@ vim.list_extend(ensure_installed, {
     'gofumpt',
     'goimports',
     'eslint_d',
+    'taplo',
     'golines',
     'golangci-lint',
     'goimports-reviser',
