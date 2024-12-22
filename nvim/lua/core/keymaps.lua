@@ -302,16 +302,15 @@ map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true
 -- Lspsaga outline
 map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { noremap = true, silent = true })
 
--- Specte
 map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = 'Toggle Spectre',
+    desc = "Toggle Spectre"
 })
 map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = 'Search current word',
+    desc = "Search current word"
 })
 map('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-    desc = 'Search current word',
+    desc = "Search current word"
 })
 map('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = 'Search on current file',
+    desc = "Search on current file"
 })

@@ -9,10 +9,6 @@ end
 --     'sql',
 -- }
 
-local ignored_file = {
-    'python',
-}
-
 conform.setup({
     formatters_by_ft = {
         lua = { 'stylua' },
@@ -23,13 +19,20 @@ conform.setup({
             'golines',
         },
         sql = { 'sqlfmt' },
-        -- python = function(bufnr)
-        --     if require('conform').get_formatter_info('ruff_format', bufnr).available then
-        --         return { 'ruff_format', 'ruff_organize_imports', 'ruff_fix' }
-        --     else
-        --         return { 'isort', 'black' }
-        --     end
-        -- end,
+        python = function(bufnr)
+            if require('conform').get_formatter_info('ruff_format', bufnr).available then
+                return {
+                    -- 'ruff_format',
+                    'ruff_organize_imports',
+                    'ruff_fix',
+                }
+            else
+                return {
+                    'isort',
+                    -- 'black'
+                }
+            end
+        end,
         css = { 'prettier' },
         svelte = { 'prettier' },
         c = { 'clang-format' },
@@ -64,17 +67,17 @@ conform.setup({
             }),
         },
     },
-    format_on_save = function(bufnr)
-        -- Disable with a global or buffer-local variable
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat or i[vim.bo[bufnr].filetype] then
-            return
-        end
-        return { timeout_ms = 500, lsp_format = 'fallback' }
-    end,
-    -- format_on_save = {
-    --     timeout_ms = 500,
-    --     lsp_format = 'fallback',
-    -- },
+    -- format_on_save = function(bufnr)
+    --     -- Disable with a global or buffer-local variable
+    --     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat or i[vim.bo[bufnr].filetype] then
+    --         return
+    --     end
+    --     return { timeout_ms = 500, lsp_format = 'fallback' }
+    -- end,
+    format_on_save = {
+        timeout_ms = 500,
+        lsp_format = 'fallback',
+    },
     -- format_on_save = function(bufnr)
     --     if slow_format_filetypes[vim.bo[bufnr].filetype] then
     --         return
@@ -94,22 +97,4 @@ conform.setup({
     --     return { lsp_fallback = true }
     -- end,
     notify_on_error = false,
-})
-
-vim.api.nvim_create_user_command('FormatDisable', function(args)
-    if args.bang then
-        -- FormatDisable! will disable formatting just for this buffer
-        vim.b.disable_autoformat = true
-    else
-        vim.g.disable_autoformat = true
-    end
-end, {
-    desc = 'Disable autoformat-on-save',
-    bang = true,
-})
-vim.api.nvim_create_user_command('FormatEnable', function()
-    vim.b.disable_autoformat = false
-    vim.g.disable_autoformat = false
-end, {
-    desc = 'Re-enable autoformat-on-save',
 })

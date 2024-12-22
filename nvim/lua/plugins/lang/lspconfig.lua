@@ -82,38 +82,55 @@ local servers = {
             },
         },
     },
-    basedpyright = {
-        settings = {
-            basedpyright = {
-                disableOrganizeImports = true,
-                analysis = {
-                    diagnosticMode = 'openFilesOnly',
-                    typeCheckingMode = 'standard',
-                    autoSearchPaths = true,
-                    exclude = {
-                        '/.cache',
-                        '/.mypy_cache',
-                        '/.pytest_cache',
-                        '/.ruff_cache',
-                        '/.venv',
-                        '/pycache',
-                        '/dist',
-                        '/node_modules',
-                    },
-                    -- ignore = { '*' },
-                },
-            },
-        },
-    },
-    ruff = {
-        init_options = {
-            settings = {
-                lint = {
-                    enable = false,
-                },
-            },
-        },
-    },
+    -- jedi_language_server = {},
+    pylsp = {},
+    -- basedpyright = {
+    --     settings = {
+    --         basedpyright = {
+    --             disableOrganizeImports = true,
+    --             analysis = {
+    --                 diagnosticMode = 'openFilesOnly',
+    --                 typeCheckingMode = 'standard',
+    --                 autoSearchPaths = true,
+    --                 exclude = {
+    --                     '/.cache',
+    --                     '/.mypy_cache',
+    --                     '/.pytest_cache',
+    --                     '/.ruff_cache',
+    --                     '/.venv',
+    --                     '/pycache',
+    --                     '/dist',
+    --                     '/node_modules',
+    --                 },
+    --                 -- ignore = { '*' },
+    --             },
+    --         },
+    --     },
+    -- },
+    -- pyright = {
+    --     settings = {
+    --         pyright = {
+    --             autoImportCompletion = true,
+    --         },
+    --         python = {
+    --             analysis = {
+    --                 autoSearchPaths = true,
+    --                 -- diagnosticMode = 'openFilesOnly',
+    --                 useLibraryCodeForTypes = true,
+    --                 typeCheckingMode = 'off'
+    --             }
+    --         }
+    --     }
+    -- },
+    -- ruff = {
+    --     init_options = {
+    --         settings = {
+    --             lint = {
+    --                 enable = false,
+    --             },
+    --         },
+    --     },
+    -- },
     ts_ls = {},
     bashls = {},
 }
@@ -129,17 +146,19 @@ require('mason').setup({
 
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
-    'basedpyright',
+    'pylint',
+    'pylsp',
+    -- 'jedi_language_server',
+    -- 'basedpyright',
+    -- 'pyright',
+    -- 'ruff-lsp',
+    -- 'ruff',
+    'black',
     'ts_ls',
     'bashls',
     'jsonls',
     'lua_ls',
-    -- 'pyright',
     'stylua',
-    -- 'black',
-    'ruff',
-    -- 'ruff-lsp',
-    'pylint',
     -- 'flake8',
     'hadolint',
     'vale',
