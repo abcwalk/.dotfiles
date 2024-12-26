@@ -13,7 +13,7 @@ local function default()
         -- [[%{(&modified&&&readonly?'%*':(&modified?'**':(&readonly?'%%':'--')))}- T%{tabpagenr()}  ]],
         p.fileinfo(),
         -- '   %P   (L%l,C%c)  ',
-        -- '   (L%l,C%c)  ',
+        '   (L%l,C%c)  ',
         '  ',
         p.gitinfo(),
         ' %=',

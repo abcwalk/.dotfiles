@@ -83,7 +83,23 @@ local servers = {
         },
     },
     -- jedi_language_server = {},
-    pylsp = {},
+    pylsp = {
+        settings = {
+            pylsp = {
+                plugins = {
+                    pycodestyle = { enabled = false },
+                    -- pylint = { enabled = true },
+                    black = { enabled = false },
+                    -- autopep8 = { enabled = false },
+                    -- yapf = { enabled = false },
+                    pyflakes = { enabled = false },
+                    pylsp_mypy = { enabled = true },
+                    -- jedi_completion = { fuzzy = true },
+                    -- pyls_isort = { enabled = true },
+                },
+            },
+        },
+    },
     -- basedpyright = {
     --     settings = {
     --         basedpyright = {
@@ -126,7 +142,7 @@ local servers = {
     --     init_options = {
     --         settings = {
     --             lint = {
-    --                 enable = false,
+    --                 enable = true,
     --             },
     --         },
     --     },
@@ -168,7 +184,7 @@ vim.list_extend(ensure_installed, {
     'gofumpt',
     'goimports',
     'eslint_d',
-    'taplo',
+    -- 'taplo',
     'golines',
     'golangci-lint',
     'goimports-reviser',

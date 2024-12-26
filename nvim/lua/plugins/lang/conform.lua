@@ -19,20 +19,27 @@ conform.setup({
             'golines',
         },
         sql = { 'sqlfmt' },
-        python = function(bufnr)
-            if require('conform').get_formatter_info('ruff_format', bufnr).available then
-                return {
-                    -- 'ruff_format',
-                    'ruff_organize_imports',
-                    'ruff_fix',
-                }
-            else
-                return {
-                    'isort',
-                    -- 'black'
-                }
-            end
-        end,
+        python = {
+            'ruff_format',
+            'ruff_organize_imports',
+            'ruff_fix',
+            -- 'isort',
+            -- 'black',
+        },
+        -- python = function(bufnr)
+        --     if require('conform').get_formatter_info('ruff_format', bufnr).available then
+        --         return {
+        --             -- 'ruff_format',
+        --             'ruff_organize_imports',
+        --             'ruff_fix',
+        --         }
+        --     else
+        --         return {
+        --             'isort',
+        --             'black',
+        --         }
+        --     end
+        -- end,
         css = { 'prettier' },
         svelte = { 'prettier' },
         c = { 'clang-format' },
@@ -60,6 +67,13 @@ conform.setup({
                 '-',
             },
             stdin = true,
+            cwd = require('conform.util').root_file({
+                'pyproject.toml',
+                'ruff.toml',
+                '.ruff.toml',
+            }),
+        },
+        ruff_format = {
             cwd = require('conform.util').root_file({
                 'pyproject.toml',
                 'ruff.toml',

@@ -7,7 +7,10 @@ lint.linters_by_ft = {
     -- markdown = { 'markdownlint' },
     yaml = { 'yamllint' },
     -- go = { 'golangcilint' },
-    python = { 'pylint' },
+    python = {
+        'pylint',
+        -- 'ruff',
+    },
     javascript = { 'eslint_d' },
     dockerfile = { 'hadolint' },
     bash = { 'shellcheck' },

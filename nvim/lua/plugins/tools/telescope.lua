@@ -12,6 +12,14 @@ telescope.setup({
     --         codeactions = false,
     --     },
     -- },
+    defaults = {
+        file_ignore_patterns = {
+            'node_modules',
+            'venv',
+            '.venv',
+            '__pycache__',
+        },
+    },
     pickers = {
         find_files = {
             theme = 'ivy',
