@@ -64,3 +64,18 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
         require('lint').try_lint()
     end,
 })
+
+-- Set pylint to work in virtualenv
+-- require('lint').linters.pylint.cmd = 'python'
+-- require('lint').linters.pylint.args = {
+--     '-m',
+--     'pylint',
+--     '-f',
+--     'json',
+--     '--init-hook',
+--     "import sys; sys.path.insert(0, './modules')",
+--     '--from-stdin',
+--     function()
+--         return vim.api.nvim_buf_get_name(0)
+--     end,
+-- }

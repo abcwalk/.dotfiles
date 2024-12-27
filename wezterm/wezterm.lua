@@ -67,6 +67,8 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(elements))
 end)
 
+config.max_fps = 120
+
 config.color_scheme = "Alabaster Dark"
 
 -- config.window_background_opacity = 0.90
@@ -109,7 +111,7 @@ config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
 config.use_fancy_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
 
 -- Solarized Dark (Patched)
 -- config.colors = {
@@ -197,8 +199,6 @@ config.keys = {
 		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 }
-
-config.warn_about_missing_glyphs = false
 
 config.mouse_bindings = mouse_bindings
 config.inactive_pane_hsb = {

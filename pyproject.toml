@@ -33,8 +33,8 @@ exclude = [
 line-length = 120
 indent-width = 4
 
-# Assume Python 3.9
-target-version = "py39"
+# Assume Python 3.x
+target-version = "py310"
 
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
@@ -81,7 +81,6 @@ docstring-code-line-length = "dynamic"
 max-line-length = 120
 
 [tool.pylint.MASTER]
-
 # A comma-separated list of package or module names from where C extensions may
 # be loaded. Extensions are loading into the active Python interpreter and may
 # run arbitrary code.
@@ -128,7 +127,6 @@ unsafe-load-any-extension = 'no'
 
 
 [tool.pylint."MESSAGES CONTROL"]
-
 # Only show warnings with the listed confidence levels. Leave empty to show
 # all. Valid levels: HIGH, INFERENCE, INFERENCE_FAILURE, UNDEFINED.
 confidence = ''
@@ -229,7 +227,6 @@ disable = '''print-statement,
 '''
 
 [tool.pylint.FORMAT]
-
 # Expected format of line ending, e.g. empty (any line ending), LF or CRLF.
 expected-line-ending-format = ''
 

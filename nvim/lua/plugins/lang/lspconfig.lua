@@ -149,6 +149,7 @@ local servers = {
     -- },
     ts_ls = {},
     bashls = {},
+    zls = {},
 }
 
 require('mason').setup({
@@ -162,7 +163,7 @@ require('mason').setup({
 
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
-    'pylint',
+    -- 'pylint',
     'pylsp',
     -- 'jedi_language_server',
     -- 'basedpyright',

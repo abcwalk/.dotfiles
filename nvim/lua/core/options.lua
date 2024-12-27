@@ -112,6 +112,7 @@ local namespace = vim.api.nvim_create_namespace('iqf')
 
 local options = {
     ai = true,
+    -- autochdir = true, -- DEPRECATED
     autoindent = true,
     autowrite = true,
     autoread = true,

@@ -1,5 +1,13 @@
 local api = vim.api
 
+-- autochdir
+vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = '*',
+    callback = function()
+        vim.cmd('silent! lcd ' .. vim.fn.expand('%:p:h'))
+    end,
+})
+
 --Remember last cursor position
 api.nvim_create_autocmd('BufRead', {
     callback = function(opts)
@@ -148,19 +156,19 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Toggle diagnostic dependent of insert mode
-vim.api.nvim_create_autocmd('InsertEnter', {
-    desc = 'Hide diagnostic messages in insert mode',
-    callback = function()
-        vim.diagnostic.disable()
-    end,
-})
-
-vim.api.nvim_create_autocmd('InsertLeave', {
-    desc = 'Show diagnostic messages in normal mode',
-    callback = function()
-        vim.diagnostic.enable()
-    end,
-})
+-- vim.api.nvim_create_autocmd('InsertEnter', {
+--     desc = 'Hide diagnostic messages in insert mode',
+--     callback = function()
+--         vim.diagnostic.disable()
+--     end,
+-- })
+--
+-- vim.api.nvim_create_autocmd('InsertLeave', {
+--     desc = 'Show diagnostic messages in normal mode',
+--     callback = function()
+--         vim.diagnostic.enable()
+--     end,
+-- })
 
 -- Delete [No Name] buffers
 vim.api.nvim_create_autocmd('BufHidden', {

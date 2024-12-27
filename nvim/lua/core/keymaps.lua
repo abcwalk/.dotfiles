@@ -58,8 +58,8 @@ map('n', '<C-Bslash>', ':ToggleTerm<CR>', { noremap = true, silent = true })
 map('n', '<Bslash>f', ':Oil .<CR>', { noremap = true, silent = true })
 map('n', '<C-x>j', ':Oil .<CR>', { noremap = true, silent = true })
 
--- Cmdline
-map('n', '<M-x>', ':', { noremap = true, silent = true })
+-- Noice
+-- map('n', '<M-x>', ':Noice<CR>', { noremap = true, silent = true })
 
 --- Neotree
 -- map('n', '<Bslash>f', ':Neotree<CR>', { noremap = true, silent = true })
@@ -185,7 +185,7 @@ map('n', '<F3>', ':Oil ~/.config/nvim/lua<CR>', { noremap = true, silent = true 
 
 -- Telescope
 map('n', '<Bslash><Bslash>', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true, nowait = true })
-map('n', '<C-f>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true, nowait = true })
+map('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true, nowait = true })
 -- map('n', '<C-w>', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true, nowait = true })
 map('n', '<leader>p', '<cmd>Telescope projects theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
 -- map('n', '<Tab><Tab>', '<cmd>Telescope buffers theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
@@ -223,7 +223,7 @@ map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { nor
 
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map('n', '<leader><leader>', '<cmd>lcd %:p:h<CR><cmd>pwd<CR>', { noremap = true, silent = false })
+-- map('n', '<leader><leader>', '<cmd>lcd %:p:h<CR><cmd>pwd<CR>', { noremap = true, silent = false })
 
 -- Copy entire buffer.
 map('n', '<leader>y', "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
