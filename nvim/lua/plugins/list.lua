@@ -1424,7 +1424,11 @@ local plugins = {
             })
         end,
     },
-
+    {
+        'wurli/visimatch.nvim',
+        opts = {},
+        lazy = false,
+    },
     -- {
     --     'stevanmilic/nvim-lspimport',
     --     lazy = false,
@@ -1459,6 +1463,48 @@ local plugins = {
     --   config = load_config('lang.copilot'),
     --   event = 'InsertEnter',
     -- },
+    -- minimal installation
+    -- {
+    --     'Hashino/doing.nvim',
+    --     cmd = 'Do',
+    --     keys = {
+    --         {
+    --             '<leader>ta',
+    --             function()
+    --                 require('doing').add()
+    --             end,
+    --             { desc = '[D]oing: [A]dd' },
+    --         },
+    --         {
+    --             '<leader>tn',
+    --             function()
+    --                 require('doing').done()
+    --             end,
+    --             {},
+    --         },
+    --         {
+    --             '<leader>te',
+    --             function()
+    --                 require('doing').edit()
+    --             end,
+    --             {},
+    --         },
+    --         {
+    --             '<leader>tt',
+    --             function()
+    --                 require('doing').toggle()
+    --             end,
+    --             {},
+    --         },
+    --     },
+    -- },
+    {
+        'rachartier/tiny-glimmer.nvim',
+        event = 'TextYankPost',
+        opts = {
+            transparency_color = '#000000',
+        },
+    },
     {
         'folke/which-key.nvim',
         event = 'VeryLazy',

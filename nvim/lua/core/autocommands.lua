@@ -1,12 +1,12 @@
 local api = vim.api
 
 -- autochdir
-vim.api.nvim_create_autocmd('BufEnter', {
-    pattern = '*',
-    callback = function()
-        vim.cmd('silent! lcd ' .. vim.fn.expand('%:p:h'))
-    end,
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--     pattern = '*',
+--     callback = function()
+--         vim.cmd('silent! lcd ' .. vim.fn.expand('%:p:h'))
+--     end,
+-- })
 
 --Remember last cursor position
 api.nvim_create_autocmd('BufRead', {
@@ -104,13 +104,13 @@ api.nvim_create_autocmd('BufRead', {
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
+-- api.nvim_create_autocmd('TextYankPost', {
+--     desc = 'Highlight when yanking (copying) text',
+--     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+--     callback = function()
+--         vim.highlight.on_yank()
+--     end,
+-- })
 
 --Disable autocomments
 vim.api.nvim_create_autocmd('BufEnter', {
