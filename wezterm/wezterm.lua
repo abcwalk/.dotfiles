@@ -80,7 +80,7 @@ config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
 })
-config.font_size = 14
+config.font_size = 13
 
 config.window_frame = {
 	font = wezterm.font({ family = font }),
@@ -111,7 +111,7 @@ config.default_cursor_style = "SteadyBlock"
 config.launch_menu = launch_menu
 config.show_new_tab_button_in_tab_bar = false
 config.use_fancy_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = false
+config.hide_tab_bar_if_only_one_tab = true
 
 -- Solarized Dark (Patched)
 -- config.colors = {
@@ -201,6 +201,7 @@ config.keys = {
 }
 
 config.mouse_bindings = mouse_bindings
+config.mouse_wheel_scrolls_tabs = false
 config.inactive_pane_hsb = {
 	saturation = 0.9,
 	brightness = 0.80,
