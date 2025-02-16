@@ -12,6 +12,7 @@ end
 conform.setup({
     formatters_by_ft = {
         lua = { 'stylua' },
+        fortran = { 'fprettify' },
         go = {
             'goimports',
             'gofumpt',

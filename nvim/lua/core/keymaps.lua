@@ -203,7 +203,7 @@ map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
 -- map('n', '<A-d>', '<cmd>bprevious <bar> bdelete #<cr>', { silent = true })
 -- map('n', '<A-q>', ':wqa<CR>', { silent = true })
-map('n', '<C-s>', ':w<CR>')
+map('n', '<C-s>', ':w<CR>', { silent = true })
 -- map('n', '<A-w>', ':q<CR>', { silent = true })
 map('n', '<A-q>', ':bdelete<CR>', { silent = true })
 map('n', '<A-c>', ':bd<CR>', { silent = true })
@@ -299,7 +299,9 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- map('n', '<leader>s', '<cmd>Startify<CR>', { noremap = true, silent = true, nowait = true })
 
 -- Reload buffers
--- map('n', '<C-r>', '<cmd>bufdo e<CR><cmd>echo "Buffers reloaded"<CR>', { noremap = true, silent = true })
+-- map('n', '<leader>e', '<cmd>bufdo e<CR><cmd>echo "Buffers reloaded"<CR>', { noremap = true, silent = true })
+-- Reload buffer
+map('n', '<leader>e', '<cmd>e<CR><cmd>echo "Buffer reloaded"<CR>', { noremap = true, silent = true })
 
 -- Recent files
 map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
