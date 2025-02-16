@@ -119,6 +119,7 @@ fi
 alias n="nvim"
 alias nn="nvim -c 'Telescope oldfiles'"
 alias e="emacs -nw"
+alias t="thunar ."
 
 export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 export EDITOR='/usr/local/bin/emacs'
@@ -155,3 +156,9 @@ export NVM_DIR="$HOME/.nvm"
 . "$HOME/.cargo/env"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"
+if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
+PATH=$PATH:/opt/rubackup/bin
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rubackup/lib
+export PATH
+export LD_LIBRARY_PATH
