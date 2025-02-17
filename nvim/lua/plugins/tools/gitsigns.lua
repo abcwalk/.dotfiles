@@ -4,18 +4,20 @@ if not status_ok then
 end
 
 gitsigns.setup({
-    -- ┃
     signs = {
-        -- add = { text = '+' },
-        -- change = { text = '~' },
-        -- topdelete = { text = '-' },
-        -- delete = { text = '-' },
-        -- changedelete = { text = '~' },
-        add = { text = '┃' },
-        change = { text = '┃' },
-        topdelete = { text = '┃' },
-        delete = { text = '┃' },
-        changedelete = { text = '┃' },
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '▎' },
+        untracked = { text = '▎' },
+    },
+    signs_staged = {
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '▎' },
     },
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -27,26 +29,16 @@ gitsigns.setup({
     },
     auto_attach = true,
     attach_to_untracked = false,
-    current_line_blame = false,
-    -- current_line_blame_opts = {
-    -- virt_text = false,
-    -- virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-    -- delay = 1000,
-    -- ignore_whitespace = false,
-    -- },
     current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
     sign_priority = 6,
     update_debounce = 100,
     status_formatter = nil,
     max_file_length = 40000,
     preview_config = {
-        border = 'single',
+        border = 'rounded',
         style = 'minimal',
         relative = 'cursor',
         row = 0,
         col = 1,
     },
-    -- yadm = {
-    --     enable = false,
-    -- },
 })

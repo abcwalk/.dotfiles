@@ -3,12 +3,31 @@ if not status_ok then
     return
 end
 
+-- local kanagawa_paper = require('lualine.themes.kanagawa-paper')
+
+-- LSP clients attached to buffer
+local clients_lsp = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    local clients = vim.lsp.buf_get_clients(bufnr)
+    if next(clients) == nil then
+        return ''
+    end
+
+    local c = {}
+    for _, client in pairs(clients) do
+        table.insert(c, client.name)
+    end
+    return '\u{f085}  ' .. table.concat(c, '|')
+end
+
 lualine.setup({
     options = {
         globalstatus = true,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         always_divide_middle = true,
+        -- theme = kanagawa_paper,
     },
     sections = {
         lualine_a = {
@@ -45,7 +64,14 @@ lualine.setup({
                     end
                 end,
             },
-            'branch',
+            {
+                'branch',
+                icons_enabled = true,
+                icon = '',
+                on_click = function()
+                    vim.cmd('Neogit')
+                end,
+            },
             -- "diff",
         },
         lualine_c = {
@@ -89,8 +115,12 @@ lualine.setup({
                         return filePath .. ' ' .. (rest or '')
                     end
                 end,
-                color = function(_)
-                    return vim.b.custom_git_status_hl or 'Custom_TabSel'
+                -- color = function(_)
+                --     return vim.b.custom_git_status_hl or 'Custom_TabSel'
+                -- end,
+                on_click = function()
+                    local parent_dir = vim.fn.expand('%:p:h')
+                    vim.cmd('Oil ' .. parent_dir)
                 end,
             },
             {
@@ -133,30 +163,36 @@ lualine.setup({
         },
         lualine_z = {
             {
-                'mode',
-                fmt = function(mode)
-                    local modes = {
-                        ['NORMAL'] = 'NORM',
-                        ['O-PENDING'] = 'OPND',
-                        ['VISUAL'] = 'VISU',
-                        ['V-LINE'] = 'VISL',
-                        ['V-BLOCK'] = 'VISB',
-                        ['SELECT'] = 'SELE',
-                        ['S-LINE'] = 'SELL',
-                        ['S-BLOCK'] = 'SELB',
-                        ['INSERT'] = 'INSE',
-                        ['REPLACE'] = 'RPLC',
-                        ['V-REPLACE'] = 'VRPL',
-                        ['COMMAND'] = 'COMM',
-                        ['EX'] = 'ExEC',
-                        ['MORE'] = 'MORE',
-                        ['CONFIRM'] = 'CONF',
-                        ['SHELL'] = 'SHEL',
-                        ['TERMINAL'] = 'TERM',
-                    }
-                    return modes[mode] or mode
+                clients_lsp,
+                on_click = function()
+                    vim.cmd('LspInfo')
                 end,
             },
+            --         {
+            --             'mode',
+            --             fmt = function(mode)
+            --                 local modes = {
+            --                     ['NORMAL'] = 'NORM',
+            --                     ['O-PENDING'] = 'OPND',
+            --                     ['VISUAL'] = 'VISU',
+            --                     ['V-LINE'] = 'VISL',
+            --                     ['V-BLOCK'] = 'VISB',
+            --                     ['SELECT'] = 'SELE',
+            --                     ['S-LINE'] = 'SELL',
+            --                     ['S-BLOCK'] = 'SELB',
+            --                     ['INSERT'] = 'INSE',
+            --                     ['REPLACE'] = 'RPLC',
+            --                     ['V-REPLACE'] = 'VRPL',
+            --                     ['COMMAND'] = 'COMM',
+            --                     ['EX'] = 'ExEC',
+            --                     ['MORE'] = 'MORE',
+            --                     ['CONFIRM'] = 'CONF',
+            --                     ['SHELL'] = 'SHEL',
+            --                     ['TERMINAL'] = 'TERM',
+            --                 }
+            --                 return modes[mode] or mode
+            --             end,
+            --         },
         },
     },
     inactive_sections = {

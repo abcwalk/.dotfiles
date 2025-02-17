@@ -61,7 +61,7 @@ cmp.setup({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         -- ['<C-y>'] = cmp.config.disable,
-        ['<C-e>'] = cmp.mapping({
+        ['<C-c>'] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),

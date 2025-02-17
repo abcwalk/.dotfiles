@@ -41,6 +41,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
 local servers = {
     yamlls = {
         settings = {
@@ -147,7 +150,6 @@ local servers = {
     ts_ls = {},
     bashls = {},
     zls = {},
-    fortls = {},
 }
 
 require('mason').setup({
@@ -197,29 +199,15 @@ vim.list_extend(ensure_installed, {
 })
 require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-config = function(_, opts)
-    local lspconfig = require('lspconfig')
-    for server, config in pairs(servers) do
-      -- passing config.capabilities to blink.cmp merges with the capabilities in your
-      -- `opts[server].capabilities, if you've defined it
-      config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-      lspconfig[server].setup(config)
-    end
-  end
-
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
--- require('mason-lspconfig').setup({
---     handlers = {
---         function(server_name)
---             local server = servers[server_name] or {}
---             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
---             require('lspconfig')[server_name].setup(server)
---         end,
---     },
--- })
-
+require('mason-lspconfig').setup({
+    handlers = {
+        function(server_name)
+            local server = servers[server_name] or {}
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
+        end,
+    },
+})
 
 --- Signature Help
 -- local cfg = {

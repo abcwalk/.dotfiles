@@ -392,12 +392,6 @@ local plugins = {
 
     -- UI
     -- {
-    --     'rebelot/kanagawa.nvim',
-    --     config = load_config('ui.kanagawa'),
-    --     lazy = false,
-    --     priority = 1000,
-    -- },
-    -- {
     --     'bluz71/vim-moonfly-colors',
     --     name = 'moonfly',
     --     lazy = false,
@@ -435,19 +429,56 @@ local plugins = {
     --     lazy = false,
     --     priority = 1000,
     -- },
-    {
-        'nickkadutskyi/jb.nvim',
-        lazy = false,
-        priority = 1000,
-        opts = {},
-        config = function()
-            -- require("jb").setup({transparent = true})
-            vim.cmd('colorscheme jb')
-            -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
-            vim.api.nvim_set_hl(0, 'Float', { bg = 'none' })
-            vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
-        end,
-    },
+    -- {
+    --     'nickkadutskyi/jb.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function()
+    --         -- require("jb").setup({transparent = true})
+    --         vim.cmd('colorscheme jb')
+    --         -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
+    --         vim.api.nvim_set_hl(0, 'Float', { bg = 'none' })
+    --         vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
+    --     end,
+    -- },
+    -- {
+    --     'thesimonho/kanagawa-paper.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function()
+    --         require('kanagawa-paper').setup({
+    --             undercurl = true,
+    --             transparent = false,
+    --             gutter = false,
+    --             dimInactive = true, -- disabled when transparent
+    --             terminalColors = true,
+    --             commentStyle = { italic = true },
+    --             functionStyle = { italic = false },
+    --             keywordStyle = { italic = false, bold = false },
+    --             statementStyle = { italic = false, bold = false },
+    --             typeStyle = { italic = false },
+    --             colors = { theme = {}, palette = {} }, -- override default palette and theme colors
+    --             overrides = function() -- override highlight groups
+    --                 return {
+    --                     Pmenu = { bg = 'none' },
+    --                     FloatBorder = { fg = 'none' },
+    --                 }
+    --             end,
+    --         })
+    --         vim.cmd('colorscheme kanagawa-paper')
+    --     end,
+    -- },
+    -- {
+    --     'rjshkhr/shadow.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.opt.termguicolors = true
+    --         vim.cmd.colorscheme('shadow')
+    --     end,
+    -- },
     -- {
     --     'svrana/neosolarized.nvim',
     --     lazy = false,
@@ -560,6 +591,18 @@ local plugins = {
     --         vim.cmd('colorscheme jellybeans-nvim')
     --     end,
     -- },
+    {
+        'p00f/alabaster.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.g.alabaster_dim_comments = true
+            vim.g.alabaster_floatborder = true
+            vim.cmd('colorscheme alabaster')
+            vim.api.nvim_set_hl(0, 'OilVcsStatusModified', { bg = 'none', fg = '#e3b341' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { bg = 'none', fg = '#cc8bc9' })
+        end,
+    },
     -- {
     --     'behemothbucket/alabaster.nvim',
     --     lazy = false,
@@ -971,22 +1014,22 @@ local plugins = {
     --     lazy = false,
     --     event = 'InsertEnter',
     -- },
-    -- {
-    --     'xzbdmw/nvim-cmp',
-    --     dependencies = {
-    --         'neovim/nvim-lspconfig',
-    --         'hrsh7th/cmp-nvim-lsp',
-    --         'hrsh7th/cmp-buffer',
-    --         'hrsh7th/cmp-path',
-    --         'hrsh7th/cmp-cmdline',
-    --         'hrsh7th/nvim-cmp',
-    --         'L3MON4D3/LuaSnip',
-    --         'saadparwaiz1/cmp_luasnip',
-    --     },
-    --     lazy = false,
-    --     event = 'InsertEnter',
-    --     config = load_config('lang.cmp'),
-    -- },
+    {
+        'xzbdmw/nvim-cmp',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/nvim-cmp',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+        },
+        lazy = false,
+        event = 'InsertEnter',
+        config = load_config('lang.cmp'),
+    },
     -- {
     --     'L3MON4D3/LuaSnip',
     --     version = 'v2.*',
@@ -1215,98 +1258,98 @@ local plugins = {
     --     end,
     -- },
 
-    {
-        'saghen/blink.cmp',
-        -- optional: provides snippets for the snippet source
-        dependencies = 'rafamadriz/friendly-snippets',
-
-        -- use a release tag to download pre-built binaries
-        version = '*',
-        -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-        -- build = 'cargo build --release',
-        -- If you use nix, you can build from source using latest nightly rust with:
-        -- build = 'nix run .#build-plugin',
-
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            -- 'default' for mappings similar to built-in completion
-            -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-            -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-            -- See the full "keymap" documentation for information on defining your own keymap.
-            keymap = {
-                preset = 'none',
-                ['<CR>'] = { 'accept', 'fallback' },
-                ['<Tab>'] = { 'select_next', 'fallback' },
-                ['<S-Tab>'] = { 'select_prev', 'fallback' },
-                ['<Up>'] = { 'select_prev', 'fallback' },
-                ['<Down>'] = { 'select_next', 'fallback' },
-                ['<C-p>'] = { 'select_prev', 'fallback' },
-                ['<C-n>'] = { 'select_next', 'fallback' },
-                ['<C-e>'] = { 'hide' },
-                ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-                ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
-            },
-
-            completion = {
-                accept = {
-                    create_undo_point = true,
-                    auto_brackets = {
-                        enabled = true,
-                        default_brackets = { '(', ')', '{', '}', '[', ']' },
-                        kind_resolution = {
-                            enabled = true,
-                        },
-                        semantic_token_resolution = {
-                            enabled = true,
-                        },
-                    },
-                },
-                menu = {
-                    border = 'rounded',
-                    auto_show = function(ctx)
-                        return not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
-                    end,
-                },
-                list = {
-                    selection = {
-                        preselect = function(ctx)
-                            return ctx.mode ~= 'cmdline'
-                        end,
-                        auto_insert = true,
-                    },
-                },
-                documentation = { window = { border = 'single' } },
-                ghost_text = {
-                    enabled = true,
-                    -- Show the ghost text when an item has been selected
-                    show_with_selection = true,
-                    -- Show the ghost text when no item has been selected, defaulting to the first item
-                    show_without_selection = true,
-                },
-            },
-            signature = { window = { border = 'rounded' } },
-
-            appearance = {
-                -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-                -- Useful for when your theme doesn't support blink.cmp
-                -- Will be removed in a future release
-                use_nvim_cmp_as_default = false,
-                -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-                -- Adjusts spacing to ensure icons are aligned
-                nerd_font_variant = 'mono',
-            },
-
-            -- Displays a preview of the selected item on the current line
-
-            -- Default list of enabled providers defined so that you can extend it
-            -- elsewhere in your config, without redefining it, due to `opts_extend`
-            sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer' },
-            },
-        },
-        opts_extend = { 'sources.default' },
-    },
+    -- {
+    --     'saghen/blink.cmp',
+    --     -- optional: provides snippets for the snippet source
+    --     dependencies = 'rafamadriz/friendly-snippets',
+    --
+    --     -- use a release tag to download pre-built binaries
+    --     version = '*',
+    --     -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    --     -- build = 'cargo build --release',
+    --     -- If you use nix, you can build from source using latest nightly rust with:
+    --     -- build = 'nix run .#build-plugin',
+    --
+    --     ---@module 'blink.cmp'
+    --     ---@type blink.cmp.Config
+    --     opts = {
+    --         -- 'default' for mappings similar to built-in completion
+    --         -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+    --         -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+    --         -- See the full "keymap" documentation for information on defining your own keymap.
+    --         keymap = {
+    --             preset = 'none',
+    --             ['<CR>'] = { 'accept', 'fallback' },
+    --             ['<Tab>'] = { 'select_next', 'fallback' },
+    --             ['<S-Tab>'] = { 'select_prev', 'fallback' },
+    --             ['<Up>'] = { 'select_prev', 'fallback' },
+    --             ['<Down>'] = { 'select_next', 'fallback' },
+    --             ['<C-p>'] = { 'select_prev', 'fallback' },
+    --             ['<C-n>'] = { 'select_next', 'fallback' },
+    --             ['<C-c>'] = { 'hide' },
+    --             ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+    --             ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+    --         },
+    --
+    --         completion = {
+    --             accept = {
+    --                 create_undo_point = true,
+    --                 auto_brackets = {
+    --                     enabled = true,
+    --                     default_brackets = { '(', ')', '{', '}', '[', ']' },
+    --                     kind_resolution = {
+    --                         enabled = true,
+    --                     },
+    --                     semantic_token_resolution = {
+    --                         enabled = true,
+    --                     },
+    --                 },
+    --             },
+    --             menu = {
+    --                 border = 'rounded',
+    --                 auto_show = function(ctx)
+    --                     return not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+    --                 end,
+    --             },
+    --             list = {
+    --                 selection = {
+    --                     preselect = function(ctx)
+    --                         return ctx.mode ~= 'cmdline'
+    --                     end,
+    --                     auto_insert = true,
+    --                 },
+    --             },
+    --             documentation = { window = { border = 'single' } },
+    --             ghost_text = {
+    --                 enabled = true,
+    --                 -- Show the ghost text when an item has been selected
+    --                 show_with_selection = true,
+    --                 -- Show the ghost text when no item has been selected, defaulting to the first item
+    --                 show_without_selection = true,
+    --             },
+    --         },
+    --         signature = { window = { border = 'rounded' } },
+    --
+    --         appearance = {
+    --             -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+    --             -- Useful for when your theme doesn't support blink.cmp
+    --             -- Will be removed in a future release
+    --             use_nvim_cmp_as_default = false,
+    --             -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+    --             -- Adjusts spacing to ensure icons are aligned
+    --             nerd_font_variant = 'mono',
+    --         },
+    --
+    --         -- Displays a preview of the selected item on the current line
+    --
+    --         -- Default list of enabled providers defined so that you can extend it
+    --         -- elsewhere in your config, without redefining it, due to `opts_extend`
+    --         sources = {
+    --             default = { 'lsp', 'path', 'snippets', 'buffer' },
+    --         },
+    --     },
+    --     opts_extend = { 'sources.default' },
+    -- },
     {
         'neovim/nvim-lspconfig',
         dependencies = {
@@ -1314,7 +1357,7 @@ local plugins = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
             'WhoIsSethDaniel/mason-tool-installer.nvim',
-            'saghen/blink.cmp',
+            -- 'saghen/blink.cmp',
 
             -- Useful status updates for LSP.
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -1622,12 +1665,49 @@ local plugins = {
     --             {},
     --         },
     --     },
+    --     },
     -- },
     {
         'rachartier/tiny-glimmer.nvim',
-        event = 'TextYankPost',
+        event = 'VeryLazy',
         opts = {
-            transparency_color = '#000000',
+            overwrite = {
+                yank = {
+                    enabled = true,
+                    default_animation = 'fade',
+                },
+                search = {
+                    enabled = false,
+                    default_animation = 'pulse',
+                    next_mapping = 'nzzzv',
+                    prev_mapping = 'Nzzzv',
+                },
+                paste = {
+                    enabled = true,
+                    default_animation = 'reverse_fade',
+                    -- paste_mapping = 'p',
+                    -- Paste_mapping = 'P',
+                },
+                undo = {
+                    enabled = true,
+                    default_animation = {
+                        name = 'fade',
+                        settings = {
+                            from_color = 'DiffDelete',
+                        },
+                    },
+                },
+                redo = {
+                    enabled = false,
+                    default_animation = {
+                        name = 'fade',
+                        settings = {
+                            from_color = 'DiffAdd',
+                        },
+                    },
+                },
+                -- transparency_color = '#000000',
+            },
         },
     },
     {
@@ -1649,36 +1729,58 @@ local plugins = {
             },
         },
     },
+    -- {
+    --     'leath-dub/snipe.nvim',
+    --     lazy = false,
+    --     keys = {
+    --         {
+    --             '<Tab><Tab>',
+    --             function()
+    --                 require('snipe').open_buffer_menu()
+    --             end,
+    --             desc = 'Open Snipe buffer menu',
+    --         },
+    --         {
+    --             '<leader><Tab>',
+    --             function()
+    --                 require('snipe').open_buffer_menu()
+    --             end,
+    --             desc = 'Open Snipe buffer menu',
+    --         },
+    --     },
+    --     config = function()
+    --         require('snipe').setup({
+    --             ui = {
+    --                 position = 'cursor',
+    --             },
+    --             -- The default sort used for the buffers
+    --             -- Can be any of "last", (sort buffers by last accessed) "default" (sort buffers by its number)
+    --             sort = 'last',
+    --             -- Limit the width of path buffer names
+    --             -- /my/long/path/is/really/annoying will be is/really/annoying (max of 3)
+    --             -- max_path_width = 3,
+    --         })
+    --     end,
+    -- },
     {
-        'leath-dub/snipe.nvim',
+        'voxelprismatic/rabbit.nvim',
         lazy = false,
-        keys = {
-            {
-                '<Tab><Tab>',
-                function()
-                    require('snipe').open_buffer_menu()
-                end,
-                desc = 'Open Snipe buffer menu',
-            },
-            {
-                '<leader><Tab>',
-                function()
-                    require('snipe').open_buffer_menu()
-                end,
-                desc = 'Open Snipe buffer menu',
-            },
-        },
         config = function()
-            require('snipe').setup({
-                ui = {
-                    position = 'cursor',
+            require('rabbit').setup({
+                window = {
+                    width = 36,
+                    height = 16,
+                    float = 'center',
                 },
-                -- The default sort used for the buffers
-                -- Can be any of "last", (sort buffers by last accessed) "default" (sort buffers by its number)
-                sort = 'last',
-                -- Limit the width of path buffer names
-                -- /my/long/path/is/really/annoying will be is/really/annoying (max of 3)
-                -- max_path_width = 3,
+                default_keys = {
+                    close = { '<Esc>', 'q', '<leader>' },
+                    select = { '<CR>' },
+                    open = { '<Tab><Tab>' },
+                    file_add = { 'a' },
+                    file_del = { '<Del>' },
+                    group = { 'A' },
+                    group_up = { '-' },
+                },
             })
         end,
     },

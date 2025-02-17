@@ -191,7 +191,7 @@ map('n', '<leader>p', '<cmd>Telescope projects theme=ivy<CR>', { noremap = true,
 -- map('n', '<Tab><Tab>', '<cmd>Telescope buffers theme=ivy<CR>', { noremap = true, silent = true, nowait = true })
 
 --Source current file
-map('n', '<leader>ss', "<cmd>w | so%<CR><cmd>echo 'Sourced'<cr>", { noremap = true, nowait = true })
+map('n', '<leader>ss', '<cmd>so%<CR>', { noremap = true })
 
 -- Neogit
 map('n', '<leader>gg', '<cmd>Neogit<CR>', { noremap = true, silent = true })
@@ -203,7 +203,7 @@ map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
 -- map('n', '<A-d>', '<cmd>bprevious <bar> bdelete #<cr>', { silent = true })
 -- map('n', '<A-q>', ':wqa<CR>', { silent = true })
-map('n', '<C-s>', ':w<CR>', { silent = true })
+map('n', '<C-s>', ':silent w<CR>', { silent = true })
 -- map('n', '<A-w>', ':q<CR>', { silent = true })
 map('n', '<A-q>', ':bdelete<CR>', { silent = true })
 map('n', '<A-c>', ':bd<CR>', { silent = true })
@@ -223,10 +223,10 @@ map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { nor
 
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
--- map('n', '<leader><leader>', '<cmd>lcd %:p:h<CR><cmd>pwd<CR>', { noremap = true, silent = false })
+map('n', '<leader>.', '<cmd>lcd %:p:h<CR>', { noremap = true, silent = true })
 
 -- Copy entire buffer.
-map('n', '<leader>y', "<cmd>%yank<cr><cmd>echo 'Copied all lines'<CR>")
+map('n', '<leader>y', '<cmd>%yank<cr>', { noremap = true, silent = true })
 
 -- Redo
 map('n', 'U', '<C-r>', { noremap = true })
@@ -301,7 +301,7 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- Reload buffers
 -- map('n', '<leader>e', '<cmd>bufdo e<CR><cmd>echo "Buffers reloaded"<CR>', { noremap = true, silent = true })
 -- Reload buffer
-map('n', '<leader>e', '<cmd>e<CR><cmd>echo "Buffer reloaded"<CR>', { noremap = true, silent = true })
+map('n', '<leader>e', '<cmd>e<CR>', { noremap = true, silent = true })
 
 -- Recent files
 map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
