@@ -139,6 +139,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/rubackup/rbdeployer/deploy:$PATH"
 
 export JAVA_HOME="/usr/bin/java"
 export JMETER_HOME="$HOME/apache-jmeter/"
@@ -162,3 +163,5 @@ PATH=$PATH:/opt/rubackup/bin
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rubackup/lib
 export PATH
 export LD_LIBRARY_PATH
+
+. "$HOME/.local/bin/env"

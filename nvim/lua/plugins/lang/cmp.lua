@@ -8,7 +8,7 @@ if not snip_status_ok then
     return
 end
 
-require('luasnip.loaders.from_snipmate').lazy_load({ paths = vim.fn.stdpath('config') .. '/snippets' })
+-- require('luasnip.loaders.from_snipmate').lazy_load({ paths = vim.fn.stdpath('config') .. '/snippets' })
 
 cmp.setup({
     snippet = {
@@ -52,6 +52,9 @@ cmp.setup({
             return kind
         end,
     },
+    completion = {
+        completeopt = 'menu,menuone,noinsert',
+    },
     mapping = cmp.mapping.preset.insert({
         ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<C-j>'] = cmp.mapping.select_next_item(),
@@ -65,10 +68,10 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        -- ['<CR>'] = cmp.mapping.confirm({
-        --     behavior = cmp.ConfirmBehavior.Insert,
-        --     select = false,
-        -- }),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -126,8 +129,8 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        -- { name = 'vsnip' }, -- For vsnip users.
         { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'vsnip' }, -- For vsnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
     }, {

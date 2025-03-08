@@ -18,12 +18,6 @@ local plugins = {
             require('auto-hlsearch').setup()
         end,
     },
-    -- {
-    --     'behemothbucket/cyberdream.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = load_config('ui.cyberdream'),
-    -- },
     {
         'kdheepak/lazygit.nvim',
         cmd = {
@@ -323,13 +317,13 @@ local plugins = {
     --     'vidocqh/auto-indent.nvim',
     --     lazy = false,
     -- },
-    {
-        'FabijanZulj/blame.nvim',
-        lazy = false,
-        config = function()
-            require('blame').setup()
-        end,
-    },
+    -- {
+    --     'FabijanZulj/blame.nvim',
+    --     lazy = false,
+    --     config = function()
+    --         require('blame').setup()
+    --     end,
+    -- },
     -- {
     --     'echasnovski/mini.indentscope',
     --     lazy = false,
@@ -384,6 +378,17 @@ local plugins = {
         cmd = 'Spectre',
     },
     -- {
+    -- 'MagicDuck/grug-far.nvim',
+    -- lazy = false,
+    -- config = function()
+    --   require('grug-far').setup({
+    --       keymaps = {
+    --             close = { n = 'q' },
+    --       }
+    --   });
+    -- end
+    -- },
+    -- {
     --     'lukas-reineke/indent-blankline.nvim',
     --     event = { 'BufReadPost', 'BufNewFile' },
     --     main = 'ibl',
@@ -420,14 +425,39 @@ local plugins = {
     --     'oonamo/ef-themes.nvim',
     --     config = function()
     --         require('ef-themes').setup({
-    --             styles = {
-    --                 pmenu = { bg = 'none' },
-    --             },
+    --             transparent = false,
+    --             on_highlights = function(highlights, colors, name)
+    --                 return {
+    --                     FloatBorder = { bg = 'none' },
+    --                     Pmenu = { bg = 'none' },
+    --                 }
+    --             end,
     --         })
     --         vim.cmd.colorscheme('ef-symbiosis')
     --     end,
     --     lazy = false,
     --     priority = 1000,
+    -- },
+    -- {
+    --     'folke/tokyonight.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('tokyonight').setup({
+    --             styles = {
+    --                 -- Style to be applied to different syntax groups
+    --                 -- Value is any valid attr-list value for `:help nvim_set_hl`
+    --                 comments = { italic = true },
+    --                 keywords = { italic = false },
+    --                 functions = {},
+    --                 variables = {},
+    --                 -- Background styles. Can be "dark", "transparent" or "normal"
+    --                 sidebars = 'dark', -- style for sidebars, see below
+    --                 floats = 'dark', -- style for floating windows
+    --             },
+    --         })
+    --         vim.cmd('colorscheme tokyonight-night')
+    --     end,
     -- },
     -- {
     --     'nickkadutskyi/jb.nvim',
@@ -601,8 +631,40 @@ local plugins = {
             vim.cmd('colorscheme alabaster')
             vim.api.nvim_set_hl(0, 'OilVcsStatusModified', { bg = 'none', fg = '#e3b341' })
             vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { bg = 'none', fg = '#cc8bc9' })
+            vim.api.nvim_set_hl(0, 'OilVcsStatusDeleted', { bg = 'none', fg = '#f85149' })
         end,
     },
+    -- {
+    --     'chrishrb/gx.nvim',
+    --     keys = { { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' } } },
+    --     cmd = { 'Browse' },
+    --     init = function()
+    --         vim.g.netrw_nogx = 1 -- disable netrw gx
+    --     end,
+    --     dependencies = { 'nvim-lua/plenary.nvim' }, -- Required for Neovim < 0.10.0
+    --     config = true, -- default settings
+    -- },
+    -- {
+    --     'shadowy-pycoder/vscode-gruber.nvim',
+    --     dependencies = { 'rktjmp/lush.nvim' },
+    --     name = 'vscode-gruber',
+    --     branch = 'main',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme vscode-gruber')
+    --     end,
+    -- },
+    -- {
+    --     'rockyzhang24/arctic.nvim',
+    --     branch = 'v2',
+    --     dependencies = { 'rktjmp/lush.nvim' },
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme vscode-gruber')
+    --     end,
+    -- },
     -- {
     --     'behemothbucket/alabaster.nvim',
     --     lazy = false,
@@ -657,9 +719,39 @@ local plugins = {
     --             -- ...
     --         })
     --         vim.o.background = 'dark'
-    --         vim.cmd('colorscheme github_dark_default')
+    --         vim.cmd('colorscheme github_dark_tritanopia') -- more muted colors
     --     end,
     -- },
+    -- {
+    --     'ribru17/bamboo.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('bamboo').setup({
+    --             style = 'multiplex', -- Choose between 'vulgaris' (regular), 'multiplex' (greener), and 'light'
+    --             code_style = {
+    --                 comments = { italic = false },
+    --                 conditionals = { italic = false },
+    --                 keywords = {},
+    --                 functions = {},
+    --                 namespaces = { italic = false },
+    --                 parameters = { italic = false },
+    --                 strings = {},
+    --                 variables = {},
+    --             },
+    --         })
+    --         require('bamboo').load()
+    --     end,
+    -- },
+    -- {
+    --     'samharju/serene.nvim',
+    --     lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    --     priority = 1000, -- make sure to load this before all the other start plugins
+    --     config = function()
+    --         vim.cmd.colorscheme('serene')
+    --     end,
+    -- },
+    -- Lazy
     -- {
     --     'phha/zenburn.nvim',
     --     lazy = false,
@@ -669,13 +761,13 @@ local plugins = {
     --         vim.cmd('colorscheme zenburn')
     --     end,
     -- },
-    {
-        'andymass/vim-matchup',
-        lazy = false,
-        config = function()
-            vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-        end,
-    },
+    -- {
+    --     'andymass/vim-matchup',
+    --     lazy = false,
+    --     config = function()
+    --         vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+    --     end,
+    -- },
     --     'yorickpeterse/nvim-grey',
     --     lazy = false,
     --     priority = 1000,
@@ -764,13 +856,13 @@ local plugins = {
     --         -- vim.g.doom_one_plugin_dashboard = true
     --         -- vim.g.doom_one_plugin_startify = true
     --         vim.g.doom_one_plugin_whichkey = true
-    --         vim.g.doom_one_plugin_indent_blankline = true
-    --         vim.g.doom_one_plugin_vim_illuminate = true
+    --         -- vim.g.doom_one_plugin_indent_blankline = false
+    --         -- vim.g.doom_one_plugin_vim_illuminate = false
     --         vim.g.doom_one_plugin_lspsaga = true
     --         vim.o.background = 'dark'
     --         vim.cmd('colorscheme doom-one')
     --         vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'None' })
-    --         vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
+    --         -- vim.api.nvim_set_hl(0, 'OilVcsStatusUntracked', { fg = 'NvimDarkCyan' })
     --         vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff6c6b' })
     --     end,
     -- },
@@ -1014,6 +1106,7 @@ local plugins = {
     --     lazy = false,
     --     event = 'InsertEnter',
     -- },
+    { 'L3MON4D3/LuaSnip' },
     {
         'xzbdmw/nvim-cmp',
         dependencies = {
@@ -1023,20 +1116,13 @@ local plugins = {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             'hrsh7th/nvim-cmp',
-            'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
         },
         lazy = false,
         event = 'InsertEnter',
         config = load_config('lang.cmp'),
     },
-    -- {
-    --     'L3MON4D3/LuaSnip',
-    --     version = 'v2.*',
-    --     dependencies = { 'rafamadriz/friendly-snippets' },
-    --     build = 'make install_jsregexp',
-    --     event = 'InsertEnter',
-    -- },
+    { 'saadparwaiz1/cmp_luasnip' },
     -- Tresitter
     {
         'nvim-treesitter/nvim-treesitter',
@@ -1171,23 +1257,23 @@ local plugins = {
     --     config = load_config('lang.swenv'),
     -- },
 
-    {
-        'linux-cultist/venv-selector.nvim',
-        dependencies = {
-            'neovim/nvim-lspconfig',
-            'mfussenegger/nvim-dap',
-            'mfussenegger/nvim-dap-python', --optional
-            { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
-        },
-        lazy = false,
-        branch = 'regexp', -- This is the regexp branch, use this for the new version
-        config = function()
-            require('venv-selector').setup()
-        end,
-        keys = {
-            { ',v', '<cmd>VenvSelect<cr>' },
-        },
-    },
+    -- {
+    --     'linux-cultist/venv-selector.nvim',
+    --     dependencies = {
+    --         'neovim/nvim-lspconfig',
+    --         'mfussenegger/nvim-dap',
+    --         'mfussenegger/nvim-dap-python', --optional
+    --         { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+    --     },
+    --     lazy = false,
+    --     branch = 'regexp', -- This is the regexp branch, use this for the new version
+    --     config = function()
+    --         require('venv-selector').setup()
+    --     end,
+    --     keys = {
+    --         { ',v', '<cmd>VenvSelect<cr>' },
+    --     },
+    -- },
     {
         'echasnovski/mini.misc',
         version = '*',
@@ -1674,16 +1760,27 @@ local plugins = {
             overwrite = {
                 yank = {
                     enabled = true,
-                    default_animation = 'fade',
+                    default_animation = {
+                        name = 'fade',
+                        settings = {
+                            -- from_color = 'DiffChange',
+                            min_duration = 1000,
+                        },
+                    },
                 },
                 search = {
                     enabled = false,
-                    default_animation = 'pulse',
                     next_mapping = 'nzzzv',
                     prev_mapping = 'Nzzzv',
+                    default_animation = {
+                        name = 'pulse',
+                        settings = {
+                            min_duration = 1000,
+                        },
+                    },
                 },
                 paste = {
-                    enabled = true,
+                    enabled = false,
                     default_animation = 'reverse_fade',
                     -- paste_mapping = 'p',
                     -- Paste_mapping = 'P',
@@ -1694,6 +1791,7 @@ local plugins = {
                         name = 'fade',
                         settings = {
                             from_color = 'DiffDelete',
+                            min_duration = 1000,
                         },
                     },
                 },
@@ -1729,61 +1827,61 @@ local plugins = {
             },
         },
     },
-    -- {
-    --     'leath-dub/snipe.nvim',
-    --     lazy = false,
-    --     keys = {
-    --         {
-    --             '<Tab><Tab>',
-    --             function()
-    --                 require('snipe').open_buffer_menu()
-    --             end,
-    --             desc = 'Open Snipe buffer menu',
-    --         },
-    --         {
-    --             '<leader><Tab>',
-    --             function()
-    --                 require('snipe').open_buffer_menu()
-    --             end,
-    --             desc = 'Open Snipe buffer menu',
-    --         },
-    --     },
-    --     config = function()
-    --         require('snipe').setup({
-    --             ui = {
-    --                 position = 'cursor',
-    --             },
-    --             -- The default sort used for the buffers
-    --             -- Can be any of "last", (sort buffers by last accessed) "default" (sort buffers by its number)
-    --             sort = 'last',
-    --             -- Limit the width of path buffer names
-    --             -- /my/long/path/is/really/annoying will be is/really/annoying (max of 3)
-    --             -- max_path_width = 3,
-    --         })
-    --     end,
-    -- },
     {
-        'voxelprismatic/rabbit.nvim',
+        'leath-dub/snipe.nvim',
         lazy = false,
+        keys = {
+            {
+                '<Tab><Tab>',
+                function()
+                    require('snipe').open_buffer_menu()
+                end,
+                desc = 'Open Snipe buffer menu',
+            },
+            {
+                '<leader><Tab>',
+                function()
+                    require('snipe').open_buffer_menu()
+                end,
+                desc = 'Open Snipe buffer menu',
+            },
+        },
         config = function()
-            require('rabbit').setup({
-                window = {
-                    width = 36,
-                    height = 16,
-                    float = 'center',
+            require('snipe').setup({
+                ui = {
+                    position = 'cursor',
                 },
-                default_keys = {
-                    close = { '<Esc>', 'q', '<leader>' },
-                    select = { '<CR>' },
-                    open = { '<Tab><Tab>' },
-                    file_add = { 'a' },
-                    file_del = { '<Del>' },
-                    group = { 'A' },
-                    group_up = { '-' },
-                },
+                -- The default sort used for the buffers
+                -- Can be any of "last", (sort buffers by last accessed) "default" (sort buffers by its number)
+                sort = 'last',
+                -- Limit the width of path buffer names
+                -- /my/long/path/is/really/annoying will be is/really/annoying (max of 3)
+                -- max_path_width = 3,
             })
         end,
     },
+    -- {
+    --     'voxelprismatic/rabbit.nvim',
+    --     lazy = false,
+    --     config = function()
+    --         require('rabbit').setup({
+    --             window = {
+    --                 width = 36,
+    --                 height = 16,
+    --                 float = 'center',
+    --             },
+    --             default_keys = {
+    --                 close = { '<Esc>', 'q', '<leader>' },
+    --                 select = { '<CR>' },
+    --                 open = { '<Tab><Tab>' },
+    --                 file_add = { 'a' },
+    --                 file_del = { '<Del>' },
+    --                 group = { 'A' },
+    --                 group_up = { '-' },
+    --             },
+    --         })
+    --     end,
+    -- },
 
     -- Telescope
     {

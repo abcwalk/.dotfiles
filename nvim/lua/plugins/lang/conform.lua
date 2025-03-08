@@ -12,7 +12,7 @@ local slow_format_filetypes = {
 conform.setup({
     formatters_by_ft = {
         lua = { 'stylua' },
-        fortran = { 'fprettify' },
+        -- fortran = { 'fprettify' },
         go = {
             'goimports',
             'gofumpt',
@@ -20,27 +20,14 @@ conform.setup({
             'golines',
         },
         sql = { 'sqlfmt' },
-        -- python = {
-        --     'ruff_format',
-        --     'ruff_organize_imports',
-        --     'ruff_fix',
-        --     -- 'isort',
-        --     -- 'black',
-        -- },
-        -- python = function(bufnr)
-        --     if require('conform').get_formatter_info('ruff_format', bufnr).available then
-        --         return {
-        --             -- 'ruff_format',
-        --             'ruff_organize_imports',
-        --             'ruff_fix',
-        --         }
-        --     else
-        --         return {
-        --             'isort',
-        --             'black',
-        --         }
-        --     end
-        -- end,
+        python = {
+            -- 'ruff_format',
+            -- 'ruff_organize_imports',
+            -- 'ruff_fix',
+            'autopep8',
+            'isort',
+            -- 'black',
+        },
         css = { 'prettier' },
         svelte = { 'prettier' },
         c = { 'clang-format' },
@@ -55,62 +42,50 @@ conform.setup({
         ['_'] = { 'trim_whitespace' },
     },
     formatters = {
-        ruff_organize_imports = {
-            command = 'ruff',
-            args = {
-                'check',
-                '--force-exclude',
-                '--select=I001',
-                '--fix',
-                '--exit-zero',
-                '--stdin-filename',
-                '$FILENAME',
-                '-',
-            },
+        --[[ RuBackup ]]
+        autopep8 = {
+            command = 'autopep8',
+            args = { '--in-place', '--max-line-length=120', '$FILENAME' },
+            stdin = false,
+        },
+        isort = {
+            command = 'isort',
+            args = { '--line-length=120', '-' },
             stdin = true,
-            cwd = require('conform.util').root_file({
-                'pyproject.toml',
-                'ruff.toml',
-                '.ruff.toml',
-            }),
         },
-        ruff_format = {
-            cwd = require('conform.util').root_file({
-                'pyproject.toml',
-                'ruff.toml',
-                '.ruff.toml',
-            }),
-        },
+        -- ruff_organize_imports = {
+        --     command = 'ruff',
+        --     args = {
+        --         'check',
+        --         '--force-exclude',
+        --         '--select=I001',
+        --         '--fix',
+        --         '--exit-zero',
+        --         '--stdin-filename',
+        --         '$FILENAME',
+        --         '-',
+        --     },
+        --     stdin = true,
+        --     cwd = require('conform.util').root_file({
+        --         'pyproject.toml',
+        --         'ruff.toml',
+        --         '.ruff.toml',
+        --     }),
+        -- },
+        -- ruff_format = {
+        --     cwd = require('conform.util').root_file({
+        --         'pyproject.toml',
+        --         'ruff.toml',
+        --         '.ruff.toml',
+        --     }),
+        -- },
     },
-    -- format_on_save = function(bufnr)
-    --     -- Disable with a global or buffer-local variable
-    --     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-    --         return
-    --     end
-    --     return { timeout_ms = 500, lsp_format = 'fallback' }
-    -- end,
-    -- format_on_save = {
-    --     timeout_ms = 500,
-    --     lsp_format = 'fallback',
-    -- },
-    format_on_save = function(bufnr)
-        if slow_format_filetypes[vim.bo[bufnr].filetype] then
+    format_after_save = function(bufnr)
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
         end
-        local function on_format(err)
-            if err and err:match('timeout$') then
-                slow_format_filetypes[vim.bo[bufnr].filetype] = true
-            end
-        end
-
-        return { timeout_ms = 200, lsp_fallback = true }, on_format
+        return { lsp_format = 'fallback' }
     end,
-    -- format_after_save = function(bufnr)
-    --     if not slow_format_filetypes[vim.bo[bufnr].filetype] then
-    --         return
-    --     end
-    --     return { lsp_fallback = true }
-    -- end,
     notify_on_error = false,
 })
 
@@ -131,3 +106,13 @@ vim.api.nvim_create_user_command('FormatEnable', function()
 end, {
     desc = 'Re-enable autoformat-on-save',
 })
+
+vim.keymap.set('n', '<leader>cd', function()
+    vim.cmd('FormatDisable')
+    vim.cmd('echo "Autoformat disabled"')
+end, { desc = 'Disable autoformat' })
+
+vim.keymap.set('n', '<leader>ce', function()
+    vim.cmd('FormatEnable')
+    vim.cmd('echo "Autoformat enabled"')
+end, { desc = 'Enable autoformat' })

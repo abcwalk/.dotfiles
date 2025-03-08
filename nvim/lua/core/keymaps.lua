@@ -117,8 +117,19 @@ map('n', '<C-x>j', ':Oil .<CR>', { noremap = true, silent = true })
 map('n', '<leader>tt', ':ToggleCheckbox<CR>', { noremap = true, silent = true })
 
 --Gitsigns toggle
-map('n', '<leader>gs', ':Gitsigns toggle_signs<CR>', { noremap = true, silent = true })
-
+map('n', '<leader>gs', ':Gitsigns toggle_signs<CR>', { noremap = true, silent = false }, { desc = 'Toggle git signs' })
+map('n', '<leader>gb', ':Gitsigns blame<CR>', { noremap = true, silent = false }, { desc = 'Blame' })
+map('n', '<C-,>', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = false }, { desc = 'Prev hunk]' })
+map('n', '<C-.>', ':Gitsigns next_hunk<CR>', { noremap = true, silent = false }, { desc = 'Next hunk]' })
+map('n', '<leader>gr', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = false }, { desc = 'Reset hunk]' })
+map('n', '<leader>g.', ':Gitsigns reset_buffer<CR>', { noremap = true, silent = false }, { desc = 'Reset hunk]' })
+map(
+    'n',
+    '<leader>gp',
+    ':Gitsigns preview_hunk_inline<CR>',
+    { noremap = true, silent = false },
+    { desc = 'Preview hunk inline]' }
+)
 --Floaterm
 -- map("n", "<Bslash>t", ":FloatermToggle<CR>", { silent = true })
 -- map("n", "<F5>", "<cmd>w<CR><cmd>echo 'Saved'<CR><cmd>FloatermNew! node %<CR>", { noremap = true, silent = true })
@@ -170,13 +181,6 @@ map('t', 'kk', '<C-Bslash><C-n>', { nowait = true })
 map('t', 'kk', '<C-Bslash><C-n>', { nowait = true })
 map('t', '<Esc>', '<C-Bslash><C-n>', { nowait = true })
 
---Open URL in browser (Windows)
--- vnoremap <silent> <C-F5> :<C-U>let old_reg=@"<CR>gvy:silent!!cmd /cstart <C-R><C-R>"<CR><CR>:let @"=old_reg<CR>
-map('n', 'gx', ':silent !xdg-open <cfile><CR>', { noremap = true, silent = true }) -- Not work properly
-
--- Linux https://www.reddit.com/r/neovim/comments/ro6oye/comment/hq2o7rc/?utm_source=share&utm_medium=web2x&context=3
--- map("n", "gx", ":execute '!xdg-open ' .. shellescape(expand('<cfile>'), v:true)", { noremap = true, silent = true })
-
 --Plugins file
 map('n', '<F3>', ':Oil ~/.config/nvim/lua<CR>', { noremap = true, silent = true })
 
@@ -202,10 +206,10 @@ map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
 map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
 -- map('n', '<A-d>', '<cmd>bprevious <bar> bdelete #<cr>', { silent = true })
--- map('n', '<A-q>', ':wqa<CR>', { silent = true })
-map('n', '<C-s>', ':silent w<CR>', { silent = true })
+map('n', '<A-q>', ':wqa<CR>', { silent = true })
+map('n', '<C-s>', ':silent w<CR><cmd>echo "Buffer saved"<CR>', { noremap = true, silent = true })
 -- map('n', '<A-w>', ':q<CR>', { silent = true })
-map('n', '<A-q>', ':bdelete<CR>', { silent = true })
+-- map('n', '<A-q>', ':bdelete<CR>', { silent = true })
 map('n', '<A-c>', ':bd<CR>', { silent = true })
 -- map("n", "<A-d>", ":w <Bar> bdelete<CR>", { silent = true })
 
@@ -258,6 +262,7 @@ vim.keymap.set('i', '<C-c>', '<Esc>')
 
 -- greatest remap ever
 vim.keymap.set('x', 'p', [["_dP]])
+map('n', 'p', '<cmd>pu<CR>')
 
 -- map('n', '<F5>', function()
 --   cmd("silent w")
@@ -301,7 +306,7 @@ vim.keymap.set('x', 'p', [["_dP]])
 -- Reload buffers
 -- map('n', '<leader>e', '<cmd>bufdo e<CR><cmd>echo "Buffers reloaded"<CR>', { noremap = true, silent = true })
 -- Reload buffer
-map('n', '<leader>e', '<cmd>e<CR>', { noremap = true, silent = true })
+map('n', '<leader>e', '<cmd>e<CR><cmd>echo "Buffer reloaded"<CR>', { noremap = true, silent = true })
 
 -- Recent files
 map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
@@ -309,15 +314,27 @@ map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true
 -- Lspsaga outline
 map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { noremap = true, silent = true })
 
-map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+-- Spectre
+map('n', '<leader>,,', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = 'Toggle Spectre',
 })
-map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+map('n', '<leader>,w', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
     desc = 'Search current word',
 })
-map('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-    desc = 'Search current word',
-})
-map('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+map('n', '<leader>,f', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
     desc = 'Search on current file',
 })
+map('v', '<leader>,w', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = 'Search current word [visual]',
+})
+
+-- Grug-far
+-- map('n', '<leader>,', '<cmd>lua require("grug-far").open({ windowCreationCommand = "tab split"})<CR>', {
+--     desc = 'Toggle Grug-far',
+-- })
+-- map('n', '<leader>,w', '<cmd>:lua require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>")}, windowCreationCommand = "tab split" })<CR>', {
+--     desc = 'Grug-far search current word',
+-- })
+-- map('v', '<leader>,w', '<cmd>lua require("grug-far").with_visual_selection({ prefills = { paths = vim.fn.expand("%")}, windowCreationCommand = "tab split" })<CR>', {
+--     desc = 'Grug-far visual selection search only current file',
+-- })

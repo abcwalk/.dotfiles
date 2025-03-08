@@ -5,9 +5,9 @@ end
 
 spectre.setup({
   color_devicons = true,
-  open_cmd = 'vnew',
+  open_cmd = 'tabnew',
   live_update = false, -- auto execute search again when you write to any file in vim
-  lnum_for_results = true, -- show line number for search/replace results
+  lnum_for_results = false, -- show line number for search/replace results
   line_sep_start = '┌-----------------------------------------',
   result_padding = '¦  ',
   line_sep       = '└-----------------------------------------',
@@ -32,11 +32,11 @@ spectre.setup({
   --       cmd = "<cmd>lua require('spectre').toggle_line()<CR>",
   --       desc = "toggle item"
   --   },
-  --   ['enter_file'] = {
-  --       map = "<cr>",
-  --       cmd = "<cmd>lua require('spectre.actions').select_entry()<CR>",
-  --       desc = "open file"
-  --   },
+       ['enter_file'] = {
+           map = "<cr>",
+           cmd = "<cmd>lua require('spectre.actions').select_entry()<CR><cmd>bd|e#<CR>",
+           desc = "open file and close previous buffer"
+       },
   --   ['send_to_qf'] = {
   --       map = "<leader>q",
   --       cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",

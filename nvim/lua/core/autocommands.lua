@@ -8,6 +8,14 @@ local api = vim.api
 --     end,
 -- })
 
+-- api.nvim_create_autocmd('FileType', {
+--   group = vim.api.nvim_create_augroup('grug-far-keybindings', { clear = true }),
+--   pattern = { 'grug-far' },
+--   callback = function()
+--     vim.api.nvim_buf_set_keymap(0, 'n', '<C-enter>', '<localleader>o<localleader>q', {})
+--   end,
+-- })
+
 --Remember last cursor position
 api.nvim_create_autocmd('BufRead', {
     callback = function(opts)
@@ -148,6 +156,7 @@ vim.api.nvim_create_autocmd('FileType', {
         'checkhealth',
         'neomap-summary',
         'neomap-output-panel',
+        '[no name]',
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
@@ -322,9 +331,9 @@ vim.api.nvim_create_autocmd('BufHidden', {
 -- })
 
 -- Or, you can disable all semantic highlights by clearing all the groups
-for _, group in ipairs(vim.fn.getcompletion('@lsp', 'highlight')) do
-    vim.api.nvim_set_hl(0, group, {})
-end
+-- for _, group in ipairs(vim.fn.getcompletion('@lsp', 'highlight')) do
+--     vim.api.nvim_set_hl(0, group, {})
+-- end
 
 --Toggle-checkbox Markdown
 local checked_character = 'x'

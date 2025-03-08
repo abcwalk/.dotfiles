@@ -83,61 +83,46 @@ local servers = {
         },
     },
     -- jedi_language_server = {},
-    pylsp = {
-        settings = {
-            pylsp = {
-                plugins = {
-                    pycodestyle = { enabled = false },
-                    -- pylint = { enabled = true },
-                    black = { enabled = false },
-                    -- autopep8 = { enabled = false },
-                    -- yapf = { enabled = false },
-                    pyflakes = { enabled = false },
-                    pylsp_mypy = { enabled = true },
-                    -- jedi_completion = { fuzzy = true },
-                    -- pyls_isort = { enabled = true },
-                },
-            },
-        },
-    },
-    -- basedpyright = {
+    -- pylsp = {
     --     settings = {
-    --         basedpyright = {
-    --             disableOrganizeImports = true,
-    --             analysis = {
-    --                 diagnosticMode = 'openFilesOnly',
-    --                 typeCheckingMode = 'standard',
-    --                 autoSearchPaths = true,
-    --                 exclude = {
-    --                     '/.cache',
-    --                     '/.mypy_cache',
-    --                     '/.pytest_cache',
-    --                     '/.ruff_cache',
-    --                     '/.venv',
-    --                     '/pycache',
-    --                     '/dist',
-    --                     '/node_modules',
-    --                 },
-    --                 -- ignore = { '*' },
+    --         pylsp = {
+    --             plugins = {
+    --                 pycodestyle = { enabled = false },
+    --                 pylint = { enabled = false },
+    --                 black = { enabled = false },
+    --                 autopep8 = { enabled = false },
+    --                 yapf = { enabled = false },
+    --                 pyflakes = { enabled = false },
+    --                 pylsp_mypy = { enabled = false },
+    --                 jedi_completion = { fuzzy = false },
+    --                 pyls_isort = { enabled = false },
     --             },
     --         },
     --     },
     -- },
-    -- pyright = {
-    --     settings = {
-    --         pyright = {
-    --             autoImportCompletion = true,
-    --         },
-    --         python = {
-    --             analysis = {
-    --                 autoSearchPaths = true,
-    --                 -- diagnosticMode = 'openFilesOnly',
-    --                 useLibraryCodeForTypes = true,
-    --                 typeCheckingMode = 'off'
-    --             }
-    --         }
-    --     }
-    -- },
+    basedpyright = {
+        settings = {
+            basedpyright = {
+                disableOrganizeImports = true,
+                analysis = {
+                    diagnosticMode = 'openFilesOnly',
+                    typeCheckingMode = 'off',
+                    autoSearchPaths = true,
+                    exclude = {
+                        '/.cache',
+                        '/.mypy_cache',
+                        '/.pytest_cache',
+                        '/.ruff_cache',
+                        '/.venv',
+                        '/venv',
+                        '/pycache',
+                        '/dist',
+                        '/node_modules',
+                    },
+                },
+            },
+        },
+    },
     -- ruff = {
     --     init_options = {
     --         settings = {
@@ -163,14 +148,15 @@ require('mason').setup({
 
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
+    'autopep8',
     -- 'pylint',
-    'pylsp',
+    -- 'pylsp',
     -- 'jedi_language_server',
-    -- 'basedpyright',
+    'basedpyright',
     -- 'pyright',
     -- 'ruff-lsp',
     -- 'ruff',
-    'black',
+    -- 'black',
     'ts_ls',
     'bashls',
     'jsonls',
@@ -192,7 +178,7 @@ vim.list_extend(ensure_installed, {
     'prettierd',
     -- 'gomaps',
     'impl',
-    -- 'isort',
+    'isort',
     'shellcheck',
     'shfmt',
     'yamllint',

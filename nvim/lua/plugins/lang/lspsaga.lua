@@ -75,14 +75,14 @@ saga.setup({
             quit = { '<C-c>', '<ESC>' },
         },
     },
-    code_action = {
-        num_shortcut = true,
-        show_server_name = true,
-        keys = {
-            quit = 'q',
-            exec = '<CR>',
-        },
-    },
+    -- code_action = {
+    --     num_shortcut = true,
+    --     show_server_name = true,
+    --     keys = {
+    --         quit = 'q',
+    --         exec = '<CR>',
+    --     },
+    -- },
     ui = {
         theme = 'round',
         border = 'rounded',

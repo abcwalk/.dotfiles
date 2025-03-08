@@ -80,7 +80,7 @@ config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
 })
-config.font_size = 13
+config.font_size = 12
 
 config.window_frame = {
 	font = wezterm.font({ family = font }),
@@ -149,6 +149,16 @@ config.colors = {
 	},
 }
 
+-- Github Dark
+-- config.colors = {
+-- 	tab_bar = {
+-- 		background = "#04070d",
+-- 		active_tab = { fg_color = "#79c0ff", bg_color = "#04070d" },
+-- 		inactive_tab = { fg_color = "#8b949e", bg_color = "#04070d" },
+-- 		inactive_tab_hover = { fg_color = "#8b949e", bg_color = "#04070d" },
+-- 	},
+-- }
+
 config.window_close_confirmation = "NeverPrompt"
 config.enable_scroll_bar = false
 config.audible_bell = "Disabled"
@@ -207,8 +217,8 @@ config.inactive_pane_hsb = {
 	brightness = 0.80,
 }
 
-local home = os.getenv("HOME") or os.getenv("USERPROFILE")
-config.window_background_image = home .. "/.dotfiles/wezterm/castle.jpg"
+-- local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+-- config.window_background_image = home .. "/.dotfiles/wezterm/castle.jpg"
 
 config.window_background_image_hsb = {
 	-- Darken the background image by reducing it to 1/3rd
