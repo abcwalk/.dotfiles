@@ -223,7 +223,7 @@ disable = '''print-statement,
         missing-class-docstring,
         missing-function-docstring,
         W,
-        R0201,
+        R0201
 '''
 
 [tool.pylint.FORMAT]
@@ -253,3 +253,28 @@ single-line-class-stmt = 'no'
 # Allow the body of an if to be on the same line as the test if there is no
 # else.
 single-line-if-stmt = 'no'
+
+[tool.basedpyright]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    '/.cache',
+    '/.mypy_cache',
+    '/.pytest_cache',
+    '/.ruff_cache',
+    '/.venv',
+    '/venv',
+    '/pycache',
+    '/dist',
+    '/node_modules',
+
+]
+
+reportMissingImports = "error"
+pythonPlatform = "Linux"
+
+executionEnvironments = [
+  { root = "." }
+]
+
+typeCheckingMode = "basic"

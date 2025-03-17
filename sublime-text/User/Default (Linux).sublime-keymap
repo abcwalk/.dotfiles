@@ -1,0 +1,128 @@
+[
+    // {
+    //     "keys": [
+    //         "ctrl+b"
+    //     ],
+    //     "command": "goto_definition"
+    // },
+    // {
+    //     "keys": [
+    //         "ctrl+c"
+    //     ],
+    //     "command": "expand_selection",
+    //     "args": {
+    //         "to": "line"
+    //     }
+    // },
+    {
+        "keys": [
+            "alt+`"
+        ],
+        "command": "toggle_terminus_panel"
+    },
+    {
+        "keys": [
+            "ctrl+alt+t"
+        ],
+        "command": "terminus_open",
+        "args": {
+            "cwd": "${file_path:${folder}}"
+        }
+    },
+    {
+        "keys": [
+            "ctrl+'"
+        ],
+        "command": "pytest_toggle_panel"
+    },
+    {
+        "keys": [
+            "ctrl+alt+'"
+        ],
+        "command": "pytest_toggle_phantoms"
+    },
+    {
+        "keys": [
+            "ctrl+b"
+        ],
+        "command": "lsp_symbol_definition",
+        "args": {
+            "side_by_side": false,
+            "force_group": true,
+            "fallback": false,
+            "group": -1
+        },
+        "context": [
+            {
+                "key": "lsp.session_with_capability",
+                "operand": "definitionProvider"
+            },
+            {
+                "key": "auto_complete_visible",
+                "operand": false
+            }
+        ]
+    },
+    {
+        "keys": [
+            "ctrl+o"
+        ],
+        "command": "jump_back"
+    },
+    {
+        "keys": [
+            "ctrl+up"
+        ],
+        "command": "swap_line_up"
+    },
+    {
+        "keys": [
+            "ctrl+down"
+        ],
+        "command": "swap_line_down"
+    },
+    // {
+    //     "keys": [
+    //         "ctrl+s"
+    //     ],
+    //     "command": "auto_pep8",
+    //     "args": {
+    //         "preview": false
+    //     },
+    //     "context": [
+    //         {
+    //             "key": "selector",
+    //             "operator": "equal",
+    //             "operand": "source.python",
+    //             "match_all": true
+    //         }
+    //     ]
+    // }
+    // {
+    // "keys": ["ctrl+b"],
+    // "command": "goto_definition",
+    // "context":
+    // 	[
+    //     	{ "key": "setting.command_mode", "operand": true },
+    //     	{ "key": "setting.is_widget", "operand": false }
+    // 	]
+    // },
+    // { 
+    // "keys": ["ctrl+o"],
+    // "command": "jump_back",
+    // "context":
+    // 	[
+    //     	{ "key": "setting.command_mode", "operand": true },
+    //     	{ "key": "setting.is_widget", "operand": false }
+    // 	]
+    //  },
+    // {
+    // "keys": ["j", "j"],
+    // "command": "exit_insert_mode",
+    // "context":
+    // 	[
+    //     	{ "key": "setting.command_mode", "operand": false },
+    //     	{ "key": "setting.is_widget", "operand": false }
+    // 	]
+    // }
+]

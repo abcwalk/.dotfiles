@@ -312,7 +312,7 @@ map('n', '<leader>e', '<cmd>e<CR><cmd>echo "Buffer reloaded"<CR>', { noremap = t
 map('n', '<C-r>', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
 
 -- Lspsaga outline
-map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { noremap = true, silent = true })
+-- map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { noremap = true, silent = true })
 
 -- Spectre
 map('n', '<leader>,,', '<cmd>lua require("spectre").toggle()<CR>', {

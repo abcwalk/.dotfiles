@@ -1,0 +1,26 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Alabaster Color Scheme",
+		"AutoPEP8",
+		"isort",
+		"Jinja2",
+		"LSP",
+		"LSP-basedpyright",
+		"LSP-file-watcher-chokidar",
+		"LSP-json",
+		"Package Control",
+		"PyTest",
+		"SublimeLinter",
+		"SublimeLinter-pylint",
+		"Terminus",
+	],
+	"repositories":
+	[
+		"https://github.com/antal-bukos/sublimetext3_jinja2_syntax"
+	],
+}

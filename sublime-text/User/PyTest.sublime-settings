@@ -1,0 +1,9 @@
+{
+	"pytest": [
+		"./.venv/bin/python3",
+		"-m",
+		"pytest"
+	],
+	"open_panel_on_failures": true,
+	"mode": "manual"
+}

@@ -15,24 +15,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('i', '<c-s>', function()
             vim.lsp.buf.signature_help()
         end, { buffer = true })
+
         vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers['signature_help'], {
             border = 'single',
             close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
         })
 
-        map('<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
-        map('<leader>d', '<cmd>Lspsaga finder def<CR>')
-        map('<leader>i', '<cmd>Lspsaga finder imp<CR>')
-        map('<leader>r', '<cmd>Lspsaga finder ref<CR>')
-        map('K', '<cmd>Lspsaga hover_doc<CR>')
-        map('<leader>ca', '<cmd>Lspsaga code_action<CR>')
-        map('gD', '<cmd>Lspsaga peek_definition<CR>')
-        map('gT', '<cmd>Lspsaga peek_type_definition<CR>')
-        map('gd', '<cmd>Lspsaga goto_definition<CR>')
-        map('<leader>q', '<cmd>Lspsaga show_workspace_diagnostics<CR>')
-        map('<M-l>o', '<cmd>Lspsaga outline<CR>')
-        map('<A-d>', '<cmd>Lspsaga term_toggle<CR>')
-        map('<F2>', '<cmd>Lspsaga rename<CR>')
+        -- Lspsaga
+        -- map('<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
+        -- map('<leader>d', '<cmd>Lspsaga finder def<CR>')
+        -- map('<leader>i', '<cmd>Lspsaga finder imp<CR>')
+        -- map('<leader>r', '<cmd>Lspsaga finder ref<CR>')
+        -- map('K', '<cmd>Lspsaga hover_doc<CR>')
+        -- map('<leader>ca', '<cmd>Lspsaga code_action<CR>')
+        -- map('gD', '<cmd>Lspsaga peek_definition<CR>')
+        -- map('gT', '<cmd>Lspsaga peek_type_definition<CR>')
+        -- map('gd', '<cmd>Lspsaga goto_definition<CR>')
+        -- map('<leader>q', '<cmd>Lspsaga show_workspace_diagnostics<CR>')
+        -- map('<M-l>o', '<cmd>Lspsaga outline<CR>')
+        -- map('<A-d>', '<cmd>Lspsaga term_toggle<CR>')
+        -- map('<F2>', '<cmd>Lspsaga rename<CR>')
 
         if client.name == 'ruff' then
             -- Disable hover in favor of Pyright/basedpyright
@@ -132,9 +134,9 @@ local servers = {
     --         },
     --     },
     -- },
-    ts_ls = {},
+    -- ts_ls = {},
     bashls = {},
-    zls = {},
+    -- zls = {},
 }
 
 require('mason').setup({
@@ -157,27 +159,27 @@ vim.list_extend(ensure_installed, {
     -- 'ruff-lsp',
     -- 'ruff',
     -- 'black',
-    'ts_ls',
+    -- 'ts_ls',
     'bashls',
-    'jsonls',
+    -- 'jsonls',
     'lua_ls',
     'stylua',
     -- 'flake8',
     'hadolint',
-    'vale',
+    -- 'vale',
     'markdownlint',
     'sqlfmt',
-    'gopls',
-    'gofumpt',
-    'goimports',
-    'eslint_d',
+    -- 'gopls',
+    -- 'gofumpt',
+    -- 'goimports',
+    -- 'eslint_d',
     -- 'taplo',
-    'golines',
-    'golangci-lint',
-    'goimports-reviser',
-    'prettierd',
+    -- 'golines',
+    -- 'golangci-lint',
+    -- 'goimports-reviser',
+    -- 'prettierd',
     -- 'gomaps',
-    'impl',
+    -- 'impl',
     'isort',
     'shellcheck',
     'shfmt',
@@ -219,7 +221,7 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 
 vim.diagnostic.config({
     virtual_text = false,
-    update_in_insert = false,
+    update_in_insert = true,
     underline = false,
     severity_sort = true,
     float = {

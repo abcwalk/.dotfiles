@@ -37,7 +37,7 @@
 ;; Theme
 (use-package! doom-themes
   :config
-  (load-theme 'doom-one t))  ; doom-zenburn :)
+  (load-theme 'doom-zenburn))  ; doom-zenburn :)
 
 (defvar dark-color-0 "#111111")
 (defvar dark-color-1 "#181818")
@@ -88,25 +88,25 @@
 ;; doom-zenburn theme config
 
 ;; Diff-hl
-;; (use-package! diff-hl
-;;   :init
-;;   ;; Modus and ef fix
-;;   (custom-set-faces
-;;    '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
-;;    '(diff-hl-change((t (:foreground "#3a81c3"))))
-;;    '(diff-hl-delete ((t (:foreground "#ee6363")))))
-;;   (unless (display-graphic-p)
-;;     (let* ((width 2)
-;;            (bitmap (vector (1- (expt 2 width)))))
-;;       (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
-;;     (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
-;;     (xterm-mouse-mode 1))
-;;   ;; On-the-fly diff updates
-;;   (diff-hl-flydiff-mode)
-;;   ;; Makes fringe and margin react to mouse clicks to show the corresponding hunk
-;;   (global-diff-hl-show-hunk-mouse-mode)
-;;   ;; Enable diff-hl globally
-;;   (global-diff-hl-mode))
+(use-package! diff-hl
+  :init
+  ;; Modus and ef fix
+  (custom-set-faces
+   '(diff-hl-insert ((t (:foreground "#7ccd7c"))))
+   '(diff-hl-change((t (:foreground "#3a81c3"))))
+   '(diff-hl-delete ((t (:foreground "#ee6363")))))
+  (unless (display-graphic-p)
+    (let* ((width 2)
+           (bitmap (vector (1- (expt 2 width)))))
+      (define-fringe-bitmap 'my:diff-hl-bitmap bitmap 1 width '(top t)))
+    (setq diff-hl-fringe-bmp-function (lambda (type pos) 'my:diff-hl-bitmap))
+    (xterm-mouse-mode 1))
+  ;; On-the-fly diff updates
+  (diff-hl-flydiff-mode)
+  ;; Makes fringe and margin react to mouse clicks to show the corresponding hunk
+  (global-diff-hl-show-hunk-mouse-mode)
+  ;; Enable diff-hl globally
+  (global-diff-hl-mode))
 
 (use-package! evil-goggles
   :config

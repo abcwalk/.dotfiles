@@ -1,0 +1,27 @@
+{
+	"linters": {
+		"pylint": {
+			"disable": false,
+			"working_dir": ".",
+			"args": [
+				"--disable",
+				"missing-module-docstring",
+				"--disable",
+				"too-many-arguments",
+				"--disable",
+				"too-many-positional-arguments",
+				"--disable",
+				"too-many-locals",
+				"--max-module-lines",
+				"1200",
+				"--max-line-length",
+				"120",
+			]
+		}
+	},
+	"styles": [
+		{
+			"mark_style": "none",
+		}
+	]
+}

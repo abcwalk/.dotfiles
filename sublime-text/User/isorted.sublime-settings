@@ -1,0 +1,5 @@
+// isorted settings - User
+{
+	"isort_command": "isort",
+	"isort_on_save": true,
+}

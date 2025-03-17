@@ -1,0 +1,34 @@
+{
+    "manifest_version": 2,
+    "version": "1.0",
+    "name": "Alabaster Dark",
+    "theme": {
+        "colors": {
+            "toolbar": "#0E1415",
+            "toolbar_text": "#CECECE",
+            "frame": "#0E1415",
+            "tab_background_text": "#CECECE",
+            "toolbar_field": "#0E1415",
+            "toolbar_field_text": "#CECECE",
+            "tab_line": "#CC8BC9",
+            "popup": "#0E1415",
+            "popup_text": "#CECECE",
+            "button_background_active": "#CC8BC9",
+            "button_background_hover": "#CC8BC9",
+            "icons_attention": "#CC8BC9",
+            "ntp_background": "#0E1415",
+            "ntp_text": "#CECECE",
+            "popup_border": "#A8FFC7",
+            "popup_highlight": "#A8FFC7",
+            "tab_loading": "#CC8BC9",
+            "tab_text": "#CECECE",
+            "toolbar_bottom_separator": "#1A2325",
+            "toolbar_field_border_focus": "#A8FFC7",
+            "toolbar_field_border": "#1A2325",
+            "toolbar_field_focus": "#0E1415",
+            "toolbar_field_highlight": "#A8FFC7",
+            "toolbar_field_text_focus": "#CECECE",
+            "toolbar_top_separator": "#1A2325"
+        }
+    }
+}

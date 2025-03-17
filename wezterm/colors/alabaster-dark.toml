@@ -3,7 +3,7 @@ name = "Alabaster Dark"
 
 [colors]
 foreground = "#cecece"
-background = "#0e1415"  # original
+background = "#0e1415"
 # background = "#0a1014"  # darker?
 cursor_bg = "#cd974b"
 cursor_border = "#cd974b"

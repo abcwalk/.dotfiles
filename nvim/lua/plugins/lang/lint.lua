@@ -15,7 +15,7 @@ lint.linters_by_ft = {
     javascript = { 'eslint_d' },
     dockerfile = { 'hadolint' },
     bash = { 'shellcheck' },
-    json = { 'jsonlint' },
+    -- json = { 'jsonlint' },
 }
 
 --[[ Pylint ]]

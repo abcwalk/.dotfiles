@@ -635,6 +635,17 @@ local plugins = {
         end,
     },
     -- {
+    --     'behemothbucket/alabaster.nvim',
+    --     lazy = false,
+    --     branch = 'custom', -- main | custom
+    --     priority = 1000,
+    --     config = function()
+    --         vim.g.alabaster_dim_comments = true
+    --         vim.g.alabaster_floatborder = true
+    --         vim.cmd('colorscheme alabaster')
+    --     end,
+    -- },
+    -- {
     --     'chrishrb/gx.nvim',
     --     keys = { { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' } } },
     --     cmd = { 'Browse' },
@@ -663,17 +674,6 @@ local plugins = {
     --     priority = 1000,
     --     config = function()
     --         vim.cmd('colorscheme vscode-gruber')
-    --     end,
-    -- },
-    -- {
-    --     'behemothbucket/alabaster.nvim',
-    --     lazy = false,
-    --     branch = 'custom', -- main | custom
-    --     priority = 1000,
-    --     config = function()
-    --         vim.g.alabaster_dim_comments = true
-    --         vim.g.alabaster_floatborder = true
-    --         vim.cmd('colorscheme alabaster')
     --     end,
     -- },
     -- {
@@ -1315,11 +1315,11 @@ local plugins = {
     --     config = load_config('lang.lsp-zero'),
     --     event = { 'BufReadPre', 'BufNewFile' },
     -- },
-    {
-        'nvimdev/lspsaga.nvim',
-        config = load_config('lang.lspsaga'),
-        event = 'LspAttach',
-    },
+    -- {
+    --     'nvimdev/lspsaga.nvim',
+    --     config = load_config('lang.lspsaga'),
+    --     event = 'LspAttach',
+    -- },
     -- {
     --     'zbirenbaum/neodim',
     --     event = 'LspAttach',
@@ -1756,18 +1756,21 @@ local plugins = {
     {
         'rachartier/tiny-glimmer.nvim',
         event = 'VeryLazy',
+        priority = 10,
         opts = {
+            enabled = true,
+            refresh_interval_ms = 8,
             overwrite = {
-                yank = {
-                    enabled = true,
-                    default_animation = {
-                        name = 'fade',
-                        settings = {
-                            -- from_color = 'DiffChange',
-                            min_duration = 1000,
-                        },
-                    },
-                },
+                -- yank = {
+                -- enabled = true,
+                -- default_animation = {
+                --     name = 'fade',
+                --     settings = {
+                --         -- from_color = 'DiffChange',
+                --         min_duration = 1000,
+                --     },
+                -- },
+                -- },
                 search = {
                     enabled = false,
                     next_mapping = 'nzzzv',
