@@ -8,7 +8,7 @@
 	// "vintage_start_in_command_mode": false
 	"dark_theme": "Adaptive.sublime-theme",
 	"light_theme": "Default Dark.sublime-theme",
-	"font_size": 12,
+	"font_size": 11,
 	"index_files": true,
 	"trim_trailing_white_space_on_save": "all",
 	"rulers": [

@@ -27,7 +27,7 @@ local plugins = {
             'LazyGitFilter',
             'LazyGitFilterCurrentFile',
         },
-        -- optional for floating window border decoration
+        -- optional for floating window order decoration
         dependencies = {
             'nvim-lua/plenary.nvim',
         },
