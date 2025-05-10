@@ -80,7 +80,7 @@ config.font = wezterm.font({
 	family = font,
 	weight = "Regular",
 })
-config.font_size = 12
+config.font_size = 14
 
 config.window_frame = {
 	font = wezterm.font({ family = font }),

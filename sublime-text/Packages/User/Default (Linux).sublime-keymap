@@ -1,0 +1,54 @@
+[
+	{
+		"keys": [
+			"j",
+			"j"
+		],
+		"command": "exit_insert_mode",
+		"context": [
+			{
+				"key": "setting.command_mode",
+				"operand": false
+			},
+			{
+				"key": "setting.is_widget",
+				"operand": false
+			}
+		]
+	},
+	{
+		"keys": [
+			"ctrl+\\"
+		],
+		"command": "toggle_terminus_panel"
+	},
+	{
+		"keys": [
+			"ctrl+alt+t"
+		],
+		"command": "terminus_open",
+		"args": {
+			"cwd": "${file_path:${folder}}"
+		}
+	},
+	{
+		"keys": [
+			"ctrl+r"
+		],
+		"command": "show_panel",
+		"args": {
+			"panel": "replace",
+			"reverse": false
+		}
+	},
+	{
+		"keys": [
+			"ctrl+h"
+		],
+		"command": "show_overlay",
+		"args": {
+			"overlay": "goto",
+			"text": "@"
+		}
+	},
+]

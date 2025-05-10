@@ -1,0 +1,31 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"Alabaster Color Scheme",
+		"AutoPEP8",
+		"Dockerfile Syntax Highlighting",
+		"FileIcons Mono",
+		"isort",
+		"LSP",
+		"LSP-basedpyright",
+		"LSP-json",
+		"MarkdownPreview",
+		"Package Control",
+		"Sesame",
+		"SideBarTools",
+		"SublimeLinter",
+		"SublimeLinter-annotations",
+		"SublimeLinter-pylint",
+		"Terminus",
+		"Theme - Cobalt2",
+	],
+	"repositories":
+	[
+		"https://github.com/Prikaz98/sublime-scheme-mindre"
+	],
+}

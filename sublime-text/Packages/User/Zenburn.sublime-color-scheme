@@ -1,0 +1,339 @@
+{
+    "author": "Colin Thomas-Arnold and William D. Neumann",
+    "name": "zenburn",
+    "variables": {},
+    "globals": {
+        "background": "#1e1e1e",
+        "caret": "#D6D6D6",
+        "foreground": "#DEDEDE",
+        "invisibles": "#A5A5A552",
+        "line_highlight": "#303030",
+        "selection": "#8383839C"
+    },
+    "rules": [
+        {
+            "name": "Comment",
+            "scope": "comment",
+            "foreground": "#808080",
+            "font_style": "italic"
+        },
+        {
+            "name": "preprocessor",
+            "scope": "meta.preprocessor.c",
+            "foreground": "#FD8003",
+            "font_style": ""
+        },
+        {
+            "name": "phpdoc",
+            "scope": "keyword.other.phpdoc",
+            "foreground": "#568E4D",
+            "font_style": ""
+        },
+        {
+            "name": "comment punctuation (/*, #, //)",
+            "scope": "punctuation.definition.comment",
+            "foreground": "#808080",
+            "font_style": "italic"
+        },
+        {
+            "name": "Directive",
+            "scope": "keyword.other.directive",
+            "foreground": "#DEDEDE",
+            "font_style": "bold"
+        },
+        {
+            "name": "Line-number directives",
+            "scope": "keyword.other.directive.line-number",
+            "foreground": null,
+            "font_style": "underline"
+        },
+        {
+            "name": "Characters",
+            "scope": "constant.character",
+            "foreground": "#FF8080",
+            "font_style": ""
+        },
+        {
+            "name": "String",
+            "scope": "string, string.unquoted",
+            "foreground": "#D68686",
+            "font_style": ""
+        },
+        {
+            "name": "Heredoc",
+            "scope": "string.unquoted.heredoc",
+            "foreground": "#D6D6D6",
+            "font_style": ""
+        },
+        {
+            "name": "Number",
+            "scope": "constant.numeric",
+            "foreground": "#87D6D5",
+            "font_style": ""
+        },
+        {
+            "name": "Built-in constant",
+            "scope": "constant.language, support.constant.core",
+            "foreground": "#D6D6AE",
+            "font_style": "bold"
+        },
+        {
+            "name": "User-defined constant",
+            "scope": "constant.character, constant.other, support.constant",
+            "foreground": "#CC9495",
+            "font_style": ""
+        },
+        {
+            "name": "Language Keyword",
+            "scope": "keyword",
+            "foreground": "#FED6AF",
+            "font_style": ""
+        },
+        {
+            "name": "Language Control Keyword",
+            "scope": "keyword.control , meta.selector.css , entity.other.attribute-name",
+            "foreground": "#FED6AF",
+            "font_style": ""
+        },
+        {
+            "name": "Module Keyword",
+            "scope": "entity.name.module,support.other.module",
+            "foreground": "#FF8000",
+            "font_style": "bold"
+        },
+        {
+            "name": "Operators",
+            "scope": "keyword.operator , punctuation - punctuation.definition.comment",
+            "foreground": "#FEFED6",
+            "font_style": ""
+        },
+        {
+            "name": "Floating-point infix operators",
+            "scope": "source.ocaml keyword.operator.symbol.infix.floating-point",
+            "foreground": null,
+            "font_style": "underline"
+        },
+        {
+            "name": "Floating-point prefix operators",
+            "scope": "source.ocaml keyword.operator.symbol.prefix.floating-point",
+            "foreground": null,
+            "font_style": "underline"
+        },
+        {
+            "name": "Storage Types",
+            "scope": "storage.type , storage.modifier , support.type",
+            "foreground": "#FFFB9D",
+            "font_style": ""
+        },
+        {
+            "name": "Variant Types",
+            "scope": "entity.name.class.variant",
+            "foreground": "#4080A0",
+            "font_style": ""
+        },
+        {
+            "name": "Storage",
+            "scope": "storage",
+            "foreground": null,
+            "font_style": ""
+        },
+        {
+            "name": "Type name",
+            "scope": "entity.name.type , entity.other",
+            "foreground": "#D6D6D6",
+            "font_style": ""
+        },
+        {
+            "name": "Inherited class",
+            "scope": "entity.other.inherited-class",
+            "foreground": "#D78D1B",
+            "font_style": ""
+        },
+        {
+            "name": "Type name",
+            "scope": "storage.type.user-defined , meta.property-list",
+            "foreground": "#FFE000",
+            "font_style": ""
+        },
+        {
+            "name": "Class type name",
+            "scope": "entity.name.type , entity.name.type.class , entity.other.attribute-name.class.css , support.class",
+            "foreground": "#F4A020",
+            "font_style": ""
+        },
+        {
+            "name": "Function argument",
+            "scope": "variable.parameter",
+            "foreground": null,
+            "font_style": ""
+        },
+        {
+            "name": "Invalid",
+            "scope": "invalid",
+            "foreground": "#FF5274",
+            "font_style": "bold italic underline"
+        },
+        {
+            "name": "html attribute",
+            "scope": "entity.other.attribute-name.html",
+            "foreground": "#D6D7AF",
+            "font_style": "bold"
+        },
+        {
+            "name": "html entity",
+            "scope": "entity.name.tag",
+            "foreground": "#D6D7AF",
+            "font_style": ""
+        },
+        {
+            "name": "<?php",
+            "scope": "punctuation.section.embedded.begin.php,punctuation.section.embedded.end.php",
+            "foreground": "#898989",
+            "font_style": ""
+        },
+        {
+            "name": "variable",
+            "scope": "variable, variable.parameter, variable.other",
+            "foreground": "#FED6AF",
+            "font_style": ""
+        },
+        {
+            "name": "php function",
+            "scope": "support.function.construct",
+            "foreground": "#FED6AF",
+            "font_style": ""
+        },
+        {
+            "name": "$variable prefix",
+            "scope": "punctuation.definition.variable",
+            "foreground": "#FEFED6",
+            "font_style": ""
+        },
+        {
+            "name": "function/method",
+            "scope": "support.function,meta.function-call",
+            "foreground": "#FFFD87",
+            "font_style": ""
+        },
+        {
+            "name": "built-in function",
+            "scope": "support.function",
+            "foreground": "#C7BA18",
+            "font_style": ""
+        },
+        {
+            "name": "braces",
+            "scope": "meta.brace",
+            "foreground": "#78CECC80",
+            "font_style": ""
+        },
+        {
+            "name": "string begin",
+            "scope": "punctuation.definition.string.begin,punctuation.definition.string.end",
+            "foreground": "#D6D6D680",
+            "font_style": ""
+        },
+        {
+            "name": "html tag begin/end",
+            "scope": "punctuation.definition.tag.begin.html,punctuation.definition.tag.end.html,meta.tag.structure.any.html",
+            "foreground": "#FED5AE94",
+            "font_style": "bold"
+        },
+        {
+            "name": "yaml entity",
+            "scope": "entity.name.tag.yaml",
+            "foreground": "#FED6AF",
+            "font_style": "bold"
+        },
+        {
+            "name": "unquoted yaml string",
+            "scope": "punctuation.definition.entry",
+            "foreground": "#D6D6D6",
+            "font_style": ""
+        },
+        {
+            "name": "SQL",
+            "scope": "keyword.other.DML.sql, keyword.other.data-integrity.sql",
+            "foreground": "#B7B7B7",
+            "font_style": "bold"
+        },
+        {
+            "name": "other SQL",
+            "scope": "source.sql, constant.other.database-name.sql, constant.other.table-name.sql, keyword.operator.star",
+            "foreground": "#95BFF3",
+            "font_style": "bold"
+        },
+        {
+            "name": "diff",
+            "scope": "source.diff",
+            "foreground": "#FFFFFF",
+            "font_style": ""
+        },
+        {
+            "name": "diff.toc",
+            "scope": "source.diff meta.diff.comment, source.diff meta.toc-list.comment.diff",
+            "foreground": "#FFFFFF",
+            "font_style": ""
+        },
+        {
+            "name": "diff from-file",
+            "scope": "meta.diff.header.from-file",
+            "foreground": "#CA7172",
+            "font_style": "bold"
+        },
+        {
+            "name": "diff to-file",
+            "scope": "meta.diff.header.to-file",
+            "foreground": "#60B38A",
+            "font_style": "bold"
+        },
+        {
+            "name": "diff range",
+            "scope": "meta.diff.range.unified",
+            "foreground": "#8CD0D3",
+            "font_style": ""
+        },
+        {
+            "name": "diff inserted",
+            "scope": "markup.inserted.diff",
+            "foreground": "#60B38A",
+            "font_style": ""
+        },
+        {
+            "name": "diff deleted",
+            "scope": "markup.deleted.diff",
+            "foreground": "#CA7172",
+            "font_style": ""
+        },
+        {
+            "name": "regex",
+            "scope": "string.regexp",
+            "foreground": "#C76F41",
+            "font_style": ""
+        },
+        {
+            "name": "regex - repitition",
+            "scope": "string.regexp.arbitrary-repitition",
+            "foreground": "#9E6A5F",
+            "font_style": ""
+        },
+        {
+            "name": "regex - repitition {}",
+            "scope": "punctuation.definition.arbitrary-repitition",
+            "foreground": "#FFFFFF5E",
+            "font_style": ""
+        },
+        {
+            "name": "regex - character class",
+            "scope": "string.regexp.character-class",
+            "foreground": "#CB8E81",
+            "font_style": ""
+        },
+        {
+            "name": "regex - character class []",
+            "scope": "punctuation.definition.character-class",
+            "foreground": "#FFFFFF5E",
+            "font_style": ""
+        }
+    ]
+}

@@ -635,6 +635,32 @@ local plugins = {
         end,
     },
     -- {
+    --     'metalelf0/black-metal-theme-neovim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('black-metal').setup({
+    --             theme = 'emperor',
+    --             plugin = {
+    --                 lualine = {
+    --                     -- Bold lualine_a sections
+    --                     bold = true,
+    --                     -- Don't set section/component backgrounds. Recommended to not set
+    --                     -- section/component separators.
+    --                     plain = true,
+    --                 },
+    --                 cmp = { -- works for nvim.cmp and blink.nvim
+    --                     -- Don't highlight lsp-kind items. Only the current selection will be highlighted.
+    --                     plain = true,
+    --                     -- Reverse lsp-kind items' highlights in blink/cmp menu.
+    --                     reverse = true,
+    --                 },
+    --             },
+    --         })
+    --         require('black-metal').load()
+    --     end,
+    -- },
+    -- {
     --     'behemothbucket/alabaster.nvim',
     --     lazy = false,
     --     branch = 'custom', -- main | custom
@@ -1315,11 +1341,11 @@ local plugins = {
     --     config = load_config('lang.lsp-zero'),
     --     event = { 'BufReadPre', 'BufNewFile' },
     -- },
-    -- {
-    --     'nvimdev/lspsaga.nvim',
-    --     config = load_config('lang.lspsaga'),
-    --     event = 'LspAttach',
-    -- },
+    {
+        'nvimdev/lspsaga.nvim',
+        config = load_config('lang.lspsaga'),
+        event = 'LspAttach',
+    },
     -- {
     --     'zbirenbaum/neodim',
     --     event = 'LspAttach',

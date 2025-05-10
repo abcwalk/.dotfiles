@@ -1,0 +1,5 @@
+// isorted settings - User
+{
+	"isort_command": "./.venv/bin/isort",
+	"isort_on_save": false,
+}

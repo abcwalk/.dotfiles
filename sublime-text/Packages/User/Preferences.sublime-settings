@@ -1,0 +1,20 @@
+{
+	"ignored_packages": [
+		"Vintage",
+	],
+	// "vintage_start_in_command_mode": true,
+	"theme": "Adaptive.sublime-theme",
+	"color_scheme": "Alabaster Dark.sublime-color-scheme",
+	"font_size": 13,
+	"font_face": "JetBrainsMono Nerd Font",
+	"index_files": true,
+	"rulers": [
+		[
+			120,
+			"solid",
+			1
+		]
+	],
+	"save_on_focus_lost": true,
+	"auto_complete_preserve_order": "some",
+}

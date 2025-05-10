@@ -22,19 +22,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
         })
 
         -- Lspsaga
-        -- map('<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
-        -- map('<leader>d', '<cmd>Lspsaga finder def<CR>')
-        -- map('<leader>i', '<cmd>Lspsaga finder imp<CR>')
-        -- map('<leader>r', '<cmd>Lspsaga finder ref<CR>')
-        -- map('K', '<cmd>Lspsaga hover_doc<CR>')
-        -- map('<leader>ca', '<cmd>Lspsaga code_action<CR>')
-        -- map('gD', '<cmd>Lspsaga peek_definition<CR>')
-        -- map('gT', '<cmd>Lspsaga peek_type_definition<CR>')
-        -- map('gd', '<cmd>Lspsaga goto_definition<CR>')
-        -- map('<leader>q', '<cmd>Lspsaga show_workspace_diagnostics<CR>')
-        -- map('<M-l>o', '<cmd>Lspsaga outline<CR>')
-        -- map('<A-d>', '<cmd>Lspsaga term_toggle<CR>')
-        -- map('<F2>', '<cmd>Lspsaga rename<CR>')
+        map('<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>')
+        map('<leader>d', '<cmd>Lspsaga finder def<CR>')
+        map('<leader>i', '<cmd>Lspsaga finder imp<CR>')
+        map('<leader>r', '<cmd>Lspsaga finder ref<CR>')
+        map('K', '<cmd>Lspsaga hover_doc<CR>')
+        map('<leader>ca', '<cmd>Lspsaga code_action<CR>')
+        map('gD', '<cmd>Lspsaga peek_definition<CR>')
+        map('gT', '<cmd>Lspsaga peek_type_definition<CR>')
+        map('gd', '<cmd>Lspsaga goto_definition<CR>')
+        map('<leader>q', '<cmd>Lspsaga show_workspace_diagnostics<CR>')
+        map('<M-l>o', '<cmd>Lspsaga outline<CR>')
+        map('<A-d>', '<cmd>Lspsaga term_toggle<CR>')
+        map('<F2>', '<cmd>Lspsaga rename<CR>')
 
         if client.name == 'ruff' then
             -- Disable hover in favor of Pyright/basedpyright
@@ -151,7 +151,7 @@ require('mason').setup({
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
     'autopep8',
-    -- 'pylint',
+    'pylint',
     -- 'pylsp',
     -- 'jedi_language_server',
     'basedpyright',
