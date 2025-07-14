@@ -43,7 +43,7 @@ wezterm.on("update-right-status", function(window, pane)
 	-- local text_fg = "#673ab7"
 
 	-- Alabaster text_fg color
-	local text_fg = "71ade7"
+	-- local text_fg = "71ade7"
 
 	local elements = {}
 	local num_cells = 0
@@ -70,7 +70,7 @@ end)
 config.max_fps = 120
 
 -- config.color_scheme = "Alabaster Dark"
-config.color_scheme = "Selenized Light (Gogh)"
+config.color_scheme = "Selenized Light Custom"
 
 -- config.window_background_opacity = 0.90
 

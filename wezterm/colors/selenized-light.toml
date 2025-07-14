@@ -1,35 +1,32 @@
-# Solarized Dark Theme
-[colors]
-background = "#002B36"  # base03 (background dark)
-foreground = "#839496"  # base00 (foreground dark)
-cursor_bg = "#839496"   # base00
-cursor_fg = "#FDF6E3"   # base3
-cursor_border = "#839496"  # base00
-selection_bg = "#073642"  # base02 (background highlight dark)
-selection_fg = "#EEE8D5"  # base2
-scrollbar_thumb = "#657B83"  # base1
-split = "#657B83"  # base1
+[metadata]
+name = "Selenized Light Custom"
+origin_url = ""
 
+[colors]
+background = "#fbf3db"
+foreground = "#53676d"
+cursor_bg = "#53676d"
+cursor_fg = "#d6d0c4"
+cursor_border = "#53676d"
+selection_bg = "#d5cdb6"
+selection_fg = "#333333"
 ansi = [
-  "#073642",  # base02 (black)
-  "#DC322F",  # red
-  "#859900",  # green
-  "#CF9A6B",  # yellow
-  "#268BD2",  # blue
-  "#D33682",  # magenta
-  "#2AA198",  # cyan
-  "#EEE8D5",  # base2 (white)
+  "#d6d0c4",
+  "#d2212d",
+  "#489100",
+  "#ad8900",
+  "#0072d4",
+  "#ca4898",
+  "#009c8f",
+  "#909995",
 ]
 brights = [
-  "#657B83",  # base1 (bright black)
-  "#CB4B16",  # bright red
-  "#859900",  # bright green
-  "#CF9A6B",  # bright yellow
-  "#6C71C4",  # bright blue
-  "#D33682",  # bright magenta
-  "#2AA198",  # bright cyan
-  "#FDF6E3",  # base3 (bright white)
+  "#909995",
+  "#cc1729",
+  "#428b00",
+  "#a78300",
+  "#006dce",
+  "#c44392",
+  "#00978a",
+  "#3a4d53",
 ]
-
-compose_cursor = "#B58900"  # yellow
-visual_bell = "#B58900"  # yellow
