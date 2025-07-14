@@ -164,3 +164,6 @@ PATH=$PATH:/opt/rubackup/bin
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rubackup/lib
 export PATH
 export LD_LIBRARY_PATH
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+export GOROOT=/usr/local/go
+export GOPATH='/home/rozhkov_m/go'

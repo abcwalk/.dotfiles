@@ -25,6 +25,7 @@ lualine.setup({
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         always_divide_middle = true,
+        theme = require('lualine.themes.solarized'),
     },
     sections = {
         lualine_a = {},

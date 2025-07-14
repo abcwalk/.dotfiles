@@ -69,7 +69,8 @@ end)
 
 config.max_fps = 120
 
-config.color_scheme = "Alabaster Dark"
+-- config.color_scheme = "Alabaster Dark"
+config.color_scheme = "Selenized Light (Gogh)"
 
 -- config.window_background_opacity = 0.90
 
@@ -140,14 +141,14 @@ config.hide_tab_bar_if_only_one_tab = true
 -- }
 
 -- Alabaster Dark
-config.colors = {
-	tab_bar = {
-		background = "#0e1415",
-		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
-		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#0e1415" },
-		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#202829" },
-	},
-}
+-- config.colors = {
+-- 	tab_bar = {
+-- 		background = "#0e1415",
+-- 		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
+-- 		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#0e1415" },
+-- 		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#202829" },
+-- 	},
+-- }
 
 -- Github Dark
 -- config.colors = {
@@ -244,5 +245,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.default_domain = "WSL:Ubuntu"
 end
 -- x86_64-unknown-linux-gnu
+
+config.default_prog = { "zsh" }
 
 return config
