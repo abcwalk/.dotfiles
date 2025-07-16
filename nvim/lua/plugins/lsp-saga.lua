@@ -1,0 +1,86 @@
+return {
+    'nvimdev/lspsaga.nvim',
+    event = 'LspAttach',
+    config = function()
+        require('lspsaga').setup({
+            outline = {
+                win_position = 'left',
+                win_width = 30,
+                auto_preview = false,
+                detail = true,
+                auto_close = true,
+                close_after_jump = false,
+                layout = 'normal',
+                max_height = 0.5,
+                left_width = 0.3,
+            },
+            preview = {
+                lines_above = 0,
+                lines_below = 10,
+            },
+            scroll_preview = {
+                scroll_down = '<C-f>',
+                scroll_up = '<C-b>',
+            },
+            finder = {
+                default = 'tyd+ref+imp+def',
+                keys = {
+                    toggle_or_open = '<CR>',
+                    vsplit = '<C-v>',
+                    split = '<C-x>',
+                    quit = 'q',
+                    -- close = 'q',
+                },
+            },
+            lightbulb = {
+                enable = false,
+            },
+            symbol_in_winbar = {
+                enable = false,
+                -- separator = '  ',
+                hide_keyword = false,
+                show_file = true,
+                folder_level = 2,
+            },
+            implement = {
+                enable = true,
+                sign = true,
+                virtual_text = false,
+            },
+            request_timeout = 2500,
+            definition = {
+                keys = {
+                    edit = '<CR>',
+                    vsplit = '<C-v>',
+                    split = '<C-x>',
+                    quit = '<C-c>',
+                },
+            },
+            diagnostic = {
+                on_insert = false,
+                on_insert_follow = false,
+                max_width = 0.4,
+                max_show_width = 0.7,
+                show_code_action = true,
+                jump_num_shortcut = true,
+                keys = {
+                    quit = { 'q', '<ESC>' },
+                    exec_action = 'o',
+                },
+            },
+            rename = {
+                in_select = false,
+                keys = {
+                    quit = { '<C-c>', '<ESC>' },
+                },
+            },
+            ui = {
+                border = 'rounded',
+                code_action = '',
+                diagnostic = '',
+                devicon = true,
+                title = true,
+            },
+        })
+    end,
+}
