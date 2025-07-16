@@ -120,8 +120,9 @@ alias n="nvim"
 alias nn="nvim -c 'Telescope oldfiles'"
 alias e="emacs -nw"
 alias t="thunar ."
+alias sv='source ~/venvs/nta_autotests/bin/activate'
 
-export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
+# export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 export EDITOR='/usr/local/bin/emacs'
 
 # alias m='pgrep -vx tmux > /dev/null && \
@@ -149,8 +150,6 @@ export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
 export PATH=/home/home/go/bin:/usr/local/go/bin:/home/home/.cargo/bin:/usr/libexec/imv:/home/home/.local/bin/fd:/home/home/apache-jmeter//bin:/home/home/go/bin:/usr/local/go/bin:/home/home/.emacs.d/bin:/home/home/.pyenv/bin:/home/home/.local/bin:/home/home/.nvm/versions/node/v22.8.0/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/home/.dotnet/tools
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -162,8 +161,11 @@ ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"
 if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
 PATH=$PATH:/opt/rubackup/bin
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rubackup/lib
-export PATH
 export LD_LIBRARY_PATH
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export GOROOT=/usr/local/go
 export GOPATH='/home/rozhkov_m/go'
+
+. "$HOME/.local/bin/env"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

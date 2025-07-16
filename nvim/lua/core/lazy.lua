@@ -22,7 +22,7 @@ require('lazy').setup({ import = 'plugins' }, {
         notify = false,
     },
     ui = {
-        border = 'rounded',
+--        border = 'rounded',
     },
     performance = {
         rtp = {

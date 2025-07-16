@@ -43,19 +43,5 @@ vim.opt.guifont = 'JetBrainsMono Nerd Font:h17' -- the font used in graphical ne
 vim.opt.title = true -- set the title of window to the value of the titlestring
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 vim.opt.fillchars = { eob = ' ' } -- change the character at the end of buffer
-vim.opt.winborder = 'rounded'
+--vim.opt.winborder = 'rounded'
 vim.opt.background = 'dark'
-
-vim.filetype.add({
-    extension = {
-        env = 'dotenv',
-    },
-    filename = {
-        ['.env'] = 'dotenv',
-        ['env'] = 'dotenv',
-    },
-    pattern = {
-        ['[jt]sconfig.*.json'] = 'jsonc',
-        ['%.env%.[%w_.-]+'] = 'dotenv',
-    },
-})
