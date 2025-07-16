@@ -23,7 +23,13 @@ return {
                     },
                 },
                 keymap = {
-                    ['<C-f>'] = {},
+                    ['<C-c>'] = { 'hide', 'fallback' },
+                    ['<CR>'] = { 'select_and_accept', 'fallback' },
+                    ['<Up>'] = { 'select_prev', 'fallback' },
+                    ['<Down>'] = { 'select_next', 'fallback' },
+                    ['<Tab>'] = { 'select_next', 'fallback' },
+                    ['<S-Tab>'] = { 'select_prev', 'fallback' },
+                    ['<C-k>'] = { 'fallback_to_mappings' },
                 },
                 cmdline = {
                     enabled = false,
@@ -34,7 +40,7 @@ return {
                 },
                 completion = {
                     menu = {
-                        border = nil,
+                        border = 'rounded',
                         scrolloff = 1,
                         scrollbar = false,
                         draw = {
@@ -42,18 +48,17 @@ return {
                                 { 'kind_icon' },
                                 { 'label', 'label_description', gap = 1 },
                                 { 'kind' },
-                                { 'source_name' },
+                                -- { 'source_name' },
                             },
                         },
                     },
                     documentation = {
                         window = {
-                            border = nil,
+                            border = 'rounded',
                             scrollbar = false,
                             winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
                         },
                         auto_show = true,
-                        auto_show_delay_ms = 500,
                     },
                 },
             })

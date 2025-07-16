@@ -1,9 +1,6 @@
 return {
-    dependencies = { 'echasnovski/mini.icons' },
     'stevearc/oil.nvim',
     config = function()
-        require('mini.icons').setup()
-
         require('oil').setup({
             columns = {
                 'icon',

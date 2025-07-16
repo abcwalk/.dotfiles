@@ -1,5 +1,9 @@
 local map = vim.keymap.set
 
+-- Move to diagnostic
+map('n', '<C-[>', vim.diagnostic.goto_prev, { noremap = true, silent = true })
+map('n', '<C-]>', vim.diagnostic.goto_next, { noremap = true, silent = true })
+
 --Oil
 map('n', '<Bslash>f', ':Oil .<CR>', { noremap = true, silent = true })
 map('n', '<C-x>j', ':Oil .<CR>', { noremap = true, silent = true })

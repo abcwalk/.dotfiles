@@ -3,13 +3,6 @@ local api = vim.api
 -- don't auto comment new line
 api.nvim_create_autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
--- Highlight on yank
-api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
-
 -- go to last loc when opening a buffer
 -- this mean that when you open a file, you will be at the last position
 api.nvim_create_autocmd('BufReadPost', {
@@ -39,17 +32,13 @@ api.nvim_create_autocmd(
 )
 
 -- Enable spell checking for certain file types
-api.nvim_create_autocmd(
-    { 'BufRead', 'BufNewFile' },
-    -- { pattern = { "*.txt", "*.md", "*.tex" }, command = [[setlocal spell<cr> setlocal spelllang=en,de<cr>]] }
-    {
-        pattern = { '*.txt', '*.md', '*.tex' },
-        callback = function()
-            vim.opt.spell = true
-            vim.opt.spelllang = 'en'
-        end,
-    }
-)
+api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = { '*.txt', '*.md', '*.tex' },
+    callback = function()
+        vim.opt.spell = true
+        vim.opt.spelllang = 'en'
+    end,
+})
 
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd('FileType', {
@@ -85,22 +74,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        map('gl', vim.diagnostic.open_float, 'Open Diagnostic Float')
-        map('K', vim.lsp.buf.hover, 'Hover Documentation')
-        map('gs', vim.lsp.buf.signature_help, 'Signature Documentation')
-        map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-
-        map('<leader>v', '<cmd>vsplit | lua vim.lsp.buf.definition()<cr>', 'Goto Definition in Vertical Split')
-
         local wk = require('which-key')
         wk.add({
-            { '<leader>la', vim.lsp.buf.code_action, desc = 'Code Action' },
-            { '<leader>lA', vim.lsp.buf.range_code_action, desc = 'Range Code Actions' },
-            { '<leader>ls', vim.lsp.buf.signature_help, desc = 'Display Signature Information' },
-            { '<leader>lr', vim.lsp.buf.rename, desc = 'Rename all references' },
-            { '<leader>lf', vim.lsp.buf.format, desc = 'Format' },
+            { '<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>', desc = 'Lspsaga find' },
+            { '<leader>d', '<cmd>Lspsaga finder def<CR>', desc = 'Lspsaga definition' },
+            { '<leader>i', '<cmd>Lspsaga finder imp<CR>', desc = 'Lspsaga implementation' },
+            { '<leader>r', '<cmd>Lspsaga finder ref<CR>', desc = 'Lspsaga reference' },
+            { 'K', '<cmd>Lspsaga hover_doc<CR>', desc = 'Lspsaga hover' },
+            { '<leader>ca', '<cmd>Lspsaga code_action<CR>', desc = 'Lspsaga code action' },
+            { 'gD', '<cmd>Lspsaga peek_definition<CR>', desc = 'Lspsaga peek definition' },
+            { 'gT', '<cmd>Lspsaga peek_type_definition<CR>', desc = 'Lspsaga peek type' },
+            { 'gd', '<cmd>Lspsaga goto_definition<CR>', desc = 'Lspsaga goto definition' },
+            { '<leader>q', '<cmd>Lspsaga show_workspace_diagnostics<CR>', desc = 'Lspsaga diagnostics' },
+            { '<M-l>o', '<cmd>Lspsaga outline<CR>', desc = 'Lspsaga outline' },
+            { '<A-d>', '<cmd>Lspsaga term_toggle<CR>', desc = 'Lspsaga terminal' },
+            { '<F2>', '<cmd>Lspsaga rename<CR>', desc = 'Lspsaga rename' },
             {
-                '<leader>lc',
+                '<leader>cp',
                 require('config.utils').copy_file_path,
                 desc = 'Copy File Path',
             },
@@ -156,7 +146,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             map('<leader>th', function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-            end, '[T]oggle Inlay [H]ints')
+            end, 'Toggle Inlay Hints')
         end
     end,
 })
@@ -180,5 +170,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         set_hl('FloatFooter', palette.none, palette.none)
         set_hl('FloatTitle', palette.none, palette.none)
         set_hl('NormalFloat', palette.none, palette.none)
+        set_hl('Pmenu', palette.none, palette.none)
     end,
 })

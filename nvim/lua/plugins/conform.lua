@@ -6,6 +6,14 @@ return {
             formatters_by_ft = {
                 lua = { 'stylua' },
                 go = { 'goimports', 'golines', 'gofmt' },
+                python = {
+                    'autopep8',
+                    'isort',
+                },
+                sh = { 'shfmt' },
+                bash = { 'shfmt' },
+                zsh = { 'shfmt' },
+                ['_'] = { 'trim_whitespace' },
             },
             format_on_save = {
                 lsp_fallback = true,

@@ -33,7 +33,7 @@ echo >>$HOME/.zshrc
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>$HOME/.zshrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 sudo apt install build-essential
-brew install gcc
+brew install gcc glow gh
 
 # Node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
@@ -61,10 +61,6 @@ sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
 rm nvim-linux64.tar.gz
 echo 'export PATH="$PATH:/opt/nvim-linux-x86_64/bin"' >>~/.zshrc
 source ~/.zshrc
-
-# LSP
-pip install basedpyright # globally
-brew install lua-language-server
 
 # TODO:
 # - python

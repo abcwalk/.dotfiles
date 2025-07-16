@@ -109,9 +109,7 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="mate ~/.zshrc"
 
 # bindkey '^[[1;5D' backward-word
 # bindkey '^[[1;5C' forward-word
@@ -121,6 +119,7 @@ alias nn="nvim -c 'Telescope oldfiles'"
 alias e="emacs -nw"
 alias t="thunar ."
 alias sv='source ~/venvs/nta_autotests/bin/activate'
+alias l="ll"
 
 # export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
 export EDITOR='/usr/local/bin/emacs'
@@ -137,15 +136,12 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
+
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$PATH"
-export PATH="$HOME/rubackup/rbdeployer/deploy:$PATH"
 
 export JAVA_HOME="/usr/bin/java"
-export JMETER_HOME="$HOME/apache-jmeter/"
-export PATH=$JMETER_HOME/bin:$PATH
 export PATH="$HOME/.local/bin/fd:$PATH"
-export PATH="/usr/libexec/imv:$PATH"
 export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -159,13 +155,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"
 if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
-PATH=$PATH:/opt/rubackup/bin
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rubackup/lib
-export LD_LIBRARY_PATH
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export GOROOT=/usr/local/go
 export GOPATH='/home/rozhkov_m/go'
-
 . "$HOME/.local/bin/env"
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

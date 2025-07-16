@@ -2,6 +2,7 @@ vim.lsp.enable({
     'gopls',
     'lua_ls',
     'basedpyright',
+    'bashls',
 })
 
 vim.diagnostic.config({
