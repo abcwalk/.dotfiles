@@ -71,6 +71,7 @@ config.max_fps = 120
 
 -- config.color_scheme = "Alabaster Dark"
 config.color_scheme = "GruvboxDarkHard"
+config.colors = { background = "#1d2021" }
 
 -- config.window_background_opacity = 0.90
 
