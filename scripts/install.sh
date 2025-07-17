@@ -39,6 +39,7 @@ brew install gcc glow gh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install node
 npm install -g neovim
+npm i -g bash-language-server
 
 # Cargo
 curl https://sh.rustup.rs -sSf | sh

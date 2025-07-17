@@ -15,22 +15,6 @@ api.nvim_create_autocmd('BufReadPost', {
     end,
 })
 
--- auto close brackets
--- this
-api.nvim_create_autocmd('FileType', { pattern = 'man', command = [[nnoremap <buffer><silent> q :quit<CR>]] })
-
--- show cursor line only in active window
-local cursorGrp = api.nvim_create_augroup('CursorLine', { clear = true })
-api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
-    pattern = '*',
-    command = 'set cursorline',
-    group = cursorGrp,
-})
-api.nvim_create_autocmd(
-    { 'InsertEnter', 'WinLeave' },
-    { pattern = '*', command = 'set nocursorline', group = cursorGrp }
-)
-
 -- Enable spell checking for certain file types
 api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     pattern = { '*.txt', '*.md', '*.tex' },
@@ -114,46 +98,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if
-            client
-            and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
-        then
-            -- Disable semantic tokens
-            client.server_capabilities.semanticTokensProvider = nil
-
-            local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-                buffer = event.buf,
-                group = highlight_augroup,
-                callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-                buffer = event.buf,
-                group = highlight_augroup,
-                callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd('LspDetach', {
-                group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
-                callback = function(event2)
-                    vim.lsp.buf.clear_references()
-                    vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = event2.buf })
-                end,
-            })
-        end
+        client.server_capabilities.semanticTokensProvider = nil
 
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             map('<leader>th', function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, 'Toggle Inlay Hints')
         end
-    end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-    callback = function()
-        pcall(vim.treesitter.start)
     end,
 })
 

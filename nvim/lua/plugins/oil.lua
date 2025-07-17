@@ -27,7 +27,8 @@ return {
             -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
             delete_to_trash = true,
             -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
-            default_file_explorer = true,
+            -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
+            default_file_explorer = false,
             -- Restore window options to previous values when leaving an oil buffer
             restore_win_options = true,
             -- Skip the confirmation popup for simple operations
@@ -53,17 +54,6 @@ return {
                 ['`'] = 'actions.cd',
                 ['~'] = 'actions.tcd', -- Like :cd, but only set the directory for the current tab.
                 ['g.'] = 'actions.toggle_hidden',
-                ['gd'] = {
-                    desc = 'Toggle file detail view',
-                    callback = function()
-                        detail = not detail
-                        if detail then
-                            require('oil').set_columns({ 'icon', 'permissions', 'size', 'mtime' })
-                        else
-                            require('oil').set_columns({ 'icon' })
-                        end
-                    end,
-                },
             },
             keymaps_help = {
                 border = 'rounded',

@@ -43,7 +43,7 @@ wezterm.on("update-right-status", function(window, pane)
 	-- local text_fg = "#673ab7"
 
 	-- Alabaster text_fg color
-	-- local text_fg = "71ade7"
+	local text_fg = "71ade7"
 
 	local elements = {}
 	local num_cells = 0
@@ -69,9 +69,9 @@ end)
 
 config.max_fps = 120
 
--- config.color_scheme = "Alabaster Dark"
-config.color_scheme = "GruvboxDarkHard"
-config.colors = { background = "#1d2021" }
+config.color_scheme = "Alabaster Dark"
+-- config.color_scheme = "GruvboxDarkHard"
+-- config.colors = { background = "#1d2021" }
 
 -- config.window_background_opacity = 0.90
 
@@ -142,14 +142,14 @@ config.hide_tab_bar_if_only_one_tab = true
 -- }
 
 -- Alabaster Dark
--- config.colors = {
--- 	tab_bar = {
--- 		background = "#0e1415",
--- 		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
--- 		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#0e1415" },
--- 		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#202829" },
--- 	},
--- }
+config.colors = {
+	tab_bar = {
+		background = "#0e1415",
+		active_tab = { fg_color = "#95cb82", bg_color = "#162022" },
+		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#0e1415" },
+		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#202829" },
+	},
+}
 
 -- Github Dark
 -- config.colors = {

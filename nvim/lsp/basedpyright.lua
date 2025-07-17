@@ -1,13 +1,24 @@
+local blink = require('blink.cmp')
+
 return {
-    cmd = { 'basedpyright' },
+    cmd = { 'basedpyright-langserver', '--stdio' },
     filetypes = { 'python' },
+    root_markers = {
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        'pyrightconfig.json',
+        '.git',
+    },
     settings = {
         basedpyright = {
-            disableOrganizeImports = true,
             analysis = {
-                diagnosticMode = 'openFilesOnly',
-                typeCheckingMode = 'off',
                 autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = 'basic',
+                diagnosticMode = 'openFilesOnly',
                 exclude = {
                     '/.cache',
                     '/.mypy_cache',
@@ -22,4 +33,10 @@ return {
             },
         },
     },
+    capabilities = vim.tbl_deep_extend(
+        'force',
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        blink.get_lsp_capabilities()
+    ),
 }

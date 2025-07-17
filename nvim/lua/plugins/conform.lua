@@ -13,6 +13,7 @@ return {
                 sh = { 'shfmt' },
                 bash = { 'shfmt' },
                 zsh = { 'shfmt' },
+                json = { 'prettier' },
                 ['_'] = { 'trim_whitespace' },
             },
             format_on_save = {

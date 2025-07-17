@@ -24,7 +24,7 @@ return {
                 'stylua',
                 'goimports',
                 -- Note: gofmt comes with Go installation, not managed by Mason
-                -- 'prettier',
+                'prettier',
                 -- 'black',
                 'isort',
 
@@ -42,7 +42,7 @@ return {
                 -- Optional but useful additions
                 -- "markdownlint", -- Markdown linting
                 -- "yamllint",     -- YAML linting
-                -- "jsonlint",     -- JSON linting
+                'jsonlint', -- JSON linting
             },
         },
         config = function(_, opts)
