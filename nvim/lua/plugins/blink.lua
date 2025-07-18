@@ -7,9 +7,6 @@ return {
         },
         version = '*',
         opts = {
-            enabled = function()
-                return vim.bo.buftype ~= 'nofile' and vim.b.completion ~= false
-            end,
             snippets = { preset = 'luasnip' },
             signature = { enabled = true, window = { border = 'rounded' } },
             appearance = {

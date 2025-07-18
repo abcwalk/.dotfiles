@@ -39,4 +39,5 @@ vim.opt.wrap = false -- display lines as one long line
 vim.opt.showcmd = false -- Don't show the command in the last line
 vim.opt.title = true -- set the title of window to the value of the titlestring
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
+vim.opt.winborder = 'rounded'
 vim.opt.background = 'dark'

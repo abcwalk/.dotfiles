@@ -16,6 +16,7 @@ return {
     },
     {
         'behemothbucket/alabaster.nvim',
+        enabled = true,
         branch = 'custom', -- main | custom
         priority = 1000,
         config = function()

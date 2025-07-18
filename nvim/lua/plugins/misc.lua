@@ -135,16 +135,16 @@ return {
             enabled = true,
             refresh_interval_ms = 8,
             overwrite = {
-                -- yank = {
-                -- enabled = true,
-                -- default_animation = {
-                --     name = 'fade',
-                --     settings = {
-                --         -- from_color = 'DiffChange',
-                --         min_duration = 1000,
-                --     },
-                -- },
-                -- },
+                yank = {
+                    enabled = true,
+                    default_animation = {
+                        name = 'fade',
+                        settings = {
+                            -- from_color = 'DiffChange',
+                            min_duration = 1000,
+                        },
+                    },
+                },
                 search = {
                     enabled = false,
                     next_mapping = 'nzzzv',

@@ -1,22 +1,33 @@
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 -- Move to diagnostic
-map('n', '<C-[>', vim.diagnostic.goto_prev, { noremap = true, silent = true })
-map('n', '<C-]>', vim.diagnostic.goto_next, { noremap = true, silent = true })
+map('n', '<C-[>', vim.diagnostic.goto_prev, opts)
+map('n', '<C-]>', vim.diagnostic.goto_next, opts)
 
 --Oil
-map('n', '<Bslash>f', ':Oil .<CR>', { noremap = true, silent = true })
-map('n', '<C-x>j', ':Oil .<CR>', { noremap = true, silent = true })
+map('n', '<Bslash>f', ':Oil .<CR>', opts)
+map('n', '<C-x>j', ':Oil .<CR>', opts)
 
---Mov to start/end of line
+--Move to start/end of line
 map('i', '<C-a>', '<ESC>I')
 map('i', '<C-e>', '<ESC>A')
 
 -- Always use very magic mode for searching
-map('n', '/', [[/\v]])
+-- map('n', '/', [[/\v]])
 
--- Noh
-map('n', '<c-l>', '<cmd>noh<CR>', { noremap = true, silent = true })
+-- Copy filepath
+map('n', '<leader>cp', function()
+    require('config.utils').copy_file_path()
+end, opts)
+
+-- Select all
+map('n', '<C-a>', 'ggVG', { noremap = true, silent = false })
+
+-- copy everything between { and } including the brackets
+-- p puts text after the cursor,
+-- P puts text before the cursor.
+map('n', 'YY', 'va{Vy', opts)
 
 -- Escape -> jj
 map('i', 'jj', '<Esc>', { nowait = true })
@@ -32,13 +43,13 @@ map('t', 'kk', '<C-Bslash><C-n>', { nowait = true })
 map('t', '<Esc>', '<C-Bslash><C-n>', { nowait = true })
 
 -- Neogit
-map('n', '<C-x>g', '<cmd>Neogit<CR>', { noremap = true, silent = true })
+map('n', '<C-x>g', '<cmd>Neogit<CR>', opts)
 
 --Tab navigation
 map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
 map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 map('n', '<A-q>', ':wqa<CR>', { silent = true })
-map('n', '<C-s>', ':silent w<CR><cmd>echo "Buffer saved"<CR>', { noremap = true, silent = true })
+map('n', '<C-s>', ':silent w<CR><cmd>echo "Buffer saved"<CR>', opts)
 map('n', '<A-c>', ':bd<CR>', { silent = true })
 
 --Resize tab
@@ -46,25 +57,27 @@ map('n', '<C-Left>', ':vertical resize -10<CR>', { silent = true })
 map('n', '<C-Right>', ':vertical resize +10<CR>', { silent = true })
 
 --Move lines up and down
-map('n', '<C-Up>', ':m-2<CR>', { noremap = true, silent = true })
-map('n', '<C-Down>', ':m+<CR>', { noremap = true, silent = true })
+map('n', '<C-Up>', ':m-2<CR>', opts)
+map('n', '<C-Down>', ':m+<CR>', opts)
 
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map('n', '<leader>.', '<cmd>lcd %:p:h<CR>', { noremap = true, silent = true })
+map('n', '<leader>.', '<cmd>lcd %:p:h<CR>', opts)
 
 --Add lines above and below
-map('n', '<A-Up>', ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', { noremap = true, silent = true })
-map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', { noremap = true, silent = true })
+map('n', '<A-Up>', ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', opts)
+map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', opts)
 
 -- Change current working directory locally and print cwd after that
-map('n', '<leader>.', '<cmd>lcd %:p:h<CR>', { noremap = true, silent = true })
+map('n', '<leader>.', '<cmd>lcd %:p:h<CR>', opts)
 
 -- Copy entire buffer.
-map('n', '<leader>y', '<cmd>%yank<cr>', { noremap = true, silent = true })
+map('n', '<leader>y', '<cmd>%yank<cr>', opts)
 
 -- Redo
-map('n', 'U', '<C-r>', { noremap = true })
+map('n', 'U', '<C-r>', opts)
+
+map('n', '<Esc>', ':nohlsearch<CR>', opts)
 
 -- Do not move my cursor when joining lines.
 map('n', 'J', function()
@@ -79,9 +92,9 @@ end, {
 -- Unsert semicolon in the end
 map('i', '<A-;>', '<Esc>A;<Esc>i')
 
--- Greatest remap ever
-vim.keymap.set('x', 'p', [["_dP]])
-map('n', 'p', '<cmd>pu<CR>')
+-- paste over currently selected text without yanking it
+map('v', 'p', '"_dp', opts)
+map('v', 'P', '"_dP', opts)
 
 -- Spectre
 map('n', '<leader>,,', '<cmd>lua require("spectre").toggle()<CR>', {

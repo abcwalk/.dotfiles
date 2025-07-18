@@ -26,6 +26,7 @@ return {
                     '/.ruff_cache',
                     '/.venv',
                     '/venv',
+                    '~/venvs',
                     '/pycache',
                     '/dist',
                     '/node_modules',

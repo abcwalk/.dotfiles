@@ -60,33 +60,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         local wk = require('which-key')
         wk.add({
-            { '<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>', desc = 'Lspsaga find' },
-            { '<leader>d', '<cmd>Lspsaga finder def<CR>', desc = 'Lspsaga definition' },
-            { '<leader>i', '<cmd>Lspsaga finder imp<CR>', desc = 'Lspsaga implementation' },
-            { '<leader>r', '<cmd>Lspsaga finder ref<CR>', desc = 'Lspsaga reference' },
-            { 'K', '<cmd>Lspsaga hover_doc<CR>', desc = 'Lspsaga hover' },
-            { '<leader>ca', '<cmd>Lspsaga code_action<CR>', desc = 'Lspsaga code action' },
-            { 'gD', '<cmd>Lspsaga peek_definition<CR>', desc = 'Lspsaga peek definition' },
-            { 'gT', '<cmd>Lspsaga peek_type_definition<CR>', desc = 'Lspsaga peek type' },
-            { 'gd', '<cmd>Lspsaga goto_definition<CR>', desc = 'Lspsaga goto definition' },
-            { '<leader>q', '<cmd>Lspsaga show_workspace_diagnostics<CR>', desc = 'Lspsaga diagnostics' },
-            { '<M-l>o', '<cmd>Lspsaga outline<CR>', desc = 'Lspsaga outline' },
-            { '<A-d>', '<cmd>Lspsaga term_toggle<CR>', desc = 'Lspsaga terminal' },
-            { '<F2>', '<cmd>Lspsaga rename<CR>', desc = 'Lspsaga rename' },
-            {
-                '<leader>cp',
-                require('config.utils').copy_file_path,
-                desc = 'Copy File Path',
-            },
-            { '<leader>Wa', vim.lsp.buf.add_workspace_folder, desc = 'Workspace Add Folder' },
-            { '<leader>Wr', vim.lsp.buf.remove_workspace_folder, desc = 'Workspace Remove Folder' },
-            {
-                '<leader>Wl',
-                function()
-                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end,
-                desc = 'Workspace List Folders',
-            },
+            { 'gd', vim.lsp.buf.definition, desc = 'Go to definition' },
+            { 'gr', vim.lsp.buf.references, desc = 'Go to references' },
+            { 'K', vim.lsp.buf.doc, desc = 'Hover doc' },
+            { '<leader>ca', vim.lsp.buf.code_action, desc = 'Code action' },
+            { '<F2>', vim.lsp.buf.rename, desc = 'Rename' },
         })
 
         local function client_supports_method(client, method, bufnr)
@@ -108,6 +86,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+-- Show diagnostic on hover
+vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+    pattern = '*',
+    callback = function()
+        for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+            if vim.api.nvim_win_get_config(winid).zindex then
+                return
+            end
+        end
+        vim.diagnostic.open_float({
+            scope = 'cursor',
+            focusable = false,
+            close_events = {
+                'CursorMoved',
+                'CursorMovedI',
+                'BufHidden',
+                'InsertCharPre',
+                'WinLeave',
+            },
+        })
+    end,
+})
+
 vim.api.nvim_create_autocmd('ColorScheme', {
     group = vim.api.nvim_create_augroup('custom_highlights_gruvboxmaterial', {}),
     pattern = 'gruvbox-material',
@@ -122,5 +123,11 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         set_hl('FloatTitle', palette.none, palette.none)
         set_hl('NormalFloat', palette.none, palette.none)
         set_hl('Pmenu', palette.none, palette.none)
+    end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function()
+        pcall(vim.treesitter.start)
     end,
 })

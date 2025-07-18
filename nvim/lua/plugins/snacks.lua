@@ -21,6 +21,14 @@ return {
         scroll = { enabled = false },
         statuscolumn = { enabled = true },
         words = { enabled = true },
+        styles = {
+            input = {
+                relative = 'cursor',
+                b = {
+                    completion = false, -- disable blink completions in input
+                },
+            },
+        },
     },
     keys = {
         {
@@ -31,7 +39,7 @@ return {
             desc = 'Smart Find Files',
         },
         {
-            '<C-r>',
+            '<C-e>',
             function()
                 Snacks.picker.recent()
             end,
@@ -43,20 +51,6 @@ return {
                 Snacks.picker.grep()
             end,
             desc = 'Grep',
-        },
-        {
-            '<leader>:',
-            function()
-                Snacks.picker.command_history()
-            end,
-            desc = 'Command History',
-        },
-        {
-            '<leader>n',
-            function()
-                Snacks.picker.notifications()
-            end,
-            desc = 'Notification History',
         },
         {
             '<C-p>',
@@ -72,6 +66,14 @@ return {
             end,
             desc = 'File Explorer',
         },
+        {
+            '<leader>sf',
+            function()
+                Snacks.explorer.reveal()
+            end,
+            desc = 'File Explorer Reveal',
+        },
+
         -- find
         {
             '<leader>b',
@@ -99,13 +101,6 @@ return {
         },
         -- Grep
         {
-            '<leader>st',
-            function()
-                Snacks.picker.grep()
-            end,
-            desc = 'Grep',
-        },
-        {
             '<leader>sw',
             function()
                 Snacks.picker.grep_word()
@@ -115,27 +110,6 @@ return {
         },
         -- search
         {
-            '<leader>s"',
-            function()
-                Snacks.picker.registers()
-            end,
-            desc = 'Registers',
-        },
-        {
-            '<leader>s/',
-            function()
-                Snacks.picker.search_history()
-            end,
-            desc = 'Search History',
-        },
-        {
-            '<leader>sa',
-            function()
-                Snacks.picker.autocmds()
-            end,
-            desc = 'Autocmds',
-        },
-        {
             '<C-f>',
             function()
                 Snacks.picker.lines()
@@ -143,39 +117,11 @@ return {
             desc = 'Buffer Lines',
         },
         {
-            '<leader>sc',
-            function()
-                Snacks.picker.command_history()
-            end,
-            desc = 'Command History',
-        },
-        {
-            '<leader>sC',
-            function()
-                Snacks.picker.commands()
-            end,
-            desc = 'Commands',
-        },
-        {
             '<leader>sd',
             function()
                 Snacks.picker.diagnostics()
             end,
             desc = 'Diagnostics',
-        },
-        {
-            '<leader>sD',
-            function()
-                Snacks.picker.diagnostics_buffer()
-            end,
-            desc = 'Buffer Diagnostics',
-        },
-        {
-            '<leader>sh',
-            function()
-                Snacks.picker.help()
-            end,
-            desc = 'Help Pages',
         },
         {
             '<leader>sH',
@@ -190,13 +136,6 @@ return {
                 Snacks.picker.icons()
             end,
             desc = 'Icons',
-        },
-        {
-            '<leader>sj',
-            function()
-                Snacks.picker.jumps()
-            end,
-            desc = 'Jumps',
         },
         {
             '<leader>sk',
