@@ -14,20 +14,13 @@ map('i', '<C-a>', '<ESC>I')
 map('i', '<C-e>', '<ESC>A')
 
 -- Always use very magic mode for searching
--- map('n', '/', [[/\v]])
-
--- Copy filepath
-map('n', '<leader>cp', function()
-    require('config.utils').copy_file_path()
-end, opts)
+map('n', '/', [[/\v]])
 
 -- Select all
 map('n', '<C-a>', 'ggVG', { noremap = true, silent = false })
 
 -- copy everything between { and } including the brackets
--- p puts text after the cursor,
--- P puts text before the cursor.
-map('n', 'YY', 'va{Vy', opts)
+map('n', 'YY', 'va{y', opts)
 
 -- Escape -> jj
 map('i', 'jj', '<Esc>', { nowait = true })
@@ -49,7 +42,7 @@ map('n', '<C-x>g', '<cmd>Neogit<CR>', opts)
 map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
 map('n', '<A-Right>', ':bnext<CR>', { silent = true })
 map('n', '<A-q>', ':wqa<CR>', { silent = true })
-map('n', '<C-s>', ':silent w<CR><cmd>echo "Buffer saved"<CR>', opts)
+map('n', '<C-s>', ':w<CR>', opts)
 map('n', '<A-c>', ':bd<CR>', { silent = true })
 
 --Resize tab
@@ -60,19 +53,9 @@ map('n', '<C-Right>', ':vertical resize +10<CR>', { silent = true })
 map('n', '<C-Up>', ':m-2<CR>', opts)
 map('n', '<C-Down>', ':m+<CR>', opts)
 
--- Change current working directory locally and print cwd after that,
--- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map('n', '<leader>.', '<cmd>lcd %:p:h<CR>', opts)
-
 --Add lines above and below
 map('n', '<A-Up>', ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', opts)
 map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', opts)
-
--- Change current working directory locally and print cwd after that
-map('n', '<leader>.', '<cmd>lcd %:p:h<CR>', opts)
-
--- Copy entire buffer.
-map('n', '<leader>y', '<cmd>%yank<cr>', opts)
 
 -- Redo
 map('n', 'U', '<C-r>', opts)
@@ -92,9 +75,10 @@ end, {
 -- Unsert semicolon in the end
 map('i', '<A-;>', '<Esc>A;<Esc>i')
 
--- paste over currently selected text without yanking it
-map('v', 'p', '"_dp', opts)
-map('v', 'P', '"_dP', opts)
+-- Insert copied text next line
+map('n', 'p', ':put +<CR>', opts)
+-- Replace text with copied text
+map('v', 'p', '"_dP', opts)
 
 -- Spectre
 map('n', '<leader>,,', '<cmd>lua require("spectre").toggle()<CR>', {

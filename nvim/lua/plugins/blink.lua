@@ -26,8 +26,24 @@ return {
                 ['<CR>'] = { 'select_and_accept', 'fallback' },
                 ['<Up>'] = { 'select_prev', 'fallback' },
                 ['<Down>'] = { 'select_next', 'fallback' },
-                ['<Tab>'] = { 'select_next', 'fallback' },
-                ['<S-Tab>'] = { 'select_prev', 'fallback' },
+                ['<Tab>'] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.snippet_forward()
+                        end
+                    end,
+                    'select_next',
+                    'fallback',
+                },
+                ['<S-Tab>'] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.snippet_backward()
+                        end
+                    end,
+                    'select_prev',
+                    'fallback',
+                },
                 ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
             },
             cmdline = {

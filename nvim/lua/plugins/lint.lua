@@ -5,7 +5,7 @@ return {
         local lint = require('lint')
         lint.linters_by_ft = {
             -- yaml = { 'yamllint' },
-            go = { 'golangcilint' },
+            -- go = { 'golangci-lint' },
             make = { 'checkmake' },
             python = { 'flake8' },
             dockerfile = { 'hadolint' },

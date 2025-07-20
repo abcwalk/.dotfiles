@@ -26,5 +26,24 @@ return {
             end,
             desc = 'Buffer Local Keymaps (which-key)',
         },
+        {
+            '<leader>ca',
+            '<cmd>%yank<cr>',
+            desc = 'Copy entire buffer',
+        },
+        {
+            '<leader>cp',
+            function()
+                local current_file = vim.fn.expand('%:p')
+                vim.fn.setreg('+', current_file)
+                print('Copied to clipboard: ' .. current_file)
+            end,
+            desc = 'Copy file path',
+        },
+        {
+            '<leader>c.',
+            '<cmd>lcd %:p:h<CR>',
+            desc = 'Change current directory to .',
+        },
     },
 }

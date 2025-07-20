@@ -3,10 +3,14 @@ return {
     config = function()
         require('lualine').setup({
             options = {
+                theme = 'auto',
                 globalstatus = true,
                 component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = '' },
                 always_divide_middle = true,
+                disabled_filetypes = {
+                    statusline = { 'alpha', 'NvimTree', 'trouble', 'Outline' },
+                },
             },
             sections = {
                 lualine_a = {},
@@ -22,11 +26,9 @@ return {
                         'filename',
                         path = 4,
                     },
-                },
-                lualine_x = {
-                    { 'lsp_progress' },
                     { 'diagnostics' },
                 },
+                lualine_x = {},
                 lualine_y = {
                     {
                         'location',
@@ -35,6 +37,13 @@ return {
                 lualine_z = {
                     {
                         'lsp_status',
+                        icon = '',
+                        symbols = {
+                            spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+                            done = '✓',
+                            separator = ' ',
+                        },
+                        ignore_lsp = {},
                     },
                 },
             },

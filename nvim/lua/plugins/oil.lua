@@ -24,10 +24,14 @@ return {
                 conceallevel = 3,
                 concealcursor = 'nvic',
             },
+            lsp_file_methods = {
+                autosave_changes = true,
+            },
             -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
             delete_to_trash = true,
             -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
             -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
+
             default_file_explorer = false,
             -- Restore window options to previous values when leaving an oil buffer
             restore_win_options = true,

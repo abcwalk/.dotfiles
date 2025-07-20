@@ -217,13 +217,6 @@ return {
             desc = 'Toggle Zoom',
         },
         {
-            '<leader>n',
-            function()
-                Snacks.notifier.show_history()
-            end,
-            desc = 'Notification History',
-        },
-        {
             'Q',
             function()
                 Snacks.bufdelete()

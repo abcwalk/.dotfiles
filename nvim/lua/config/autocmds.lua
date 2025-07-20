@@ -61,9 +61,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local wk = require('which-key')
         wk.add({
             { 'gd', vim.lsp.buf.definition, desc = 'Go to definition' },
-            { 'gr', vim.lsp.buf.references, desc = 'Go to references' },
+            { 'gr', Snacks.picker.lsp_references, desc = 'Go to references' },
             { 'K', vim.lsp.buf.doc, desc = 'Hover doc' },
-            { '<leader>ca', vim.lsp.buf.code_action, desc = 'Code action' },
+            { '<leader>la', vim.lsp.buf.code_action, desc = 'Code action' },
             { '<F2>', vim.lsp.buf.rename, desc = 'Rename' },
         })
 
@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         client.server_capabilities.semanticTokensProvider = nil
 
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function()
+            map('<leader>li', function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, 'Toggle Inlay Hints')
         end

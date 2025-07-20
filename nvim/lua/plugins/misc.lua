@@ -236,4 +236,43 @@ return {
             })
         end,
     },
+    {
+        'nvchad/showkeys',
+        cmd = 'ShowkeysToggle',
+        opts = {
+            timeout = 1,
+            maxkeys = 6,
+            -- bottom-left, bottom-right, bottom-center, top-left, top-right, top-center
+            position = 'top-right',
+        },
+
+        keys = {
+            {
+                '<leader>ut',
+                function()
+                    vim.cmd('ShowkeysToggle')
+                end,
+                desc = 'Show key presses',
+            },
+        },
+    },
+    {
+        'dmtrKovalenko/caps-word.nvim',
+        lazy = true,
+        opts = {
+            enter_callback = function()
+                vim.notify('On', vim.log.levels.INFO, { title = 'Caps Word:' })
+            end,
+            exit_callback = function()
+                vim.notify('Off', vim.log.levels.INFO, { title = 'Caps Word:' })
+            end,
+        },
+        keys = {
+            {
+                mode = { 'i' },
+                '<C-s>',
+                "<cmd>lua require('caps-word').toggle()<CR>",
+            },
+        },
+    },
 }

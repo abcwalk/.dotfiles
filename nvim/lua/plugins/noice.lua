@@ -2,10 +2,9 @@ return {
     'folke/noice.nvim',
     event = 'VeryLazy',
     enabled = true,
-    opts = {},
     dependencies = {
         'MunifTanjim/nui.nvim',
-        -- "rcarriga/nvim-notify",
+        'rcarriga/nvim-notify',
     },
     config = function()
         require('noice').setup({
@@ -15,8 +14,11 @@ return {
                     ['vim.lsp.util.stylize_markdown'] = true,
                     ['cmp.entry.get_documentation'] = true,
                 },
+                progress = {
+                    enabled = false,
+                },
                 hover = {
-                    silent = true,
+                    enabled = false,
                 },
             },
             presets = {
@@ -26,12 +28,37 @@ return {
                 inc_rename = false, -- enables an input dialog for inc-rename.nvim
                 lsp_doc_border = true, -- add a border to hover docs and signature help
             },
+            -- notify = {
+            --     view = 'mini',
+            -- },
             views = {
-                mini = {
-                    align = 'message-left', -- Align messages to the left
-                    position = { col = 0 },
+                popup = {
+                    scrollbar = false,
                 },
+                cmdline_popup = {
+                    align = 'message-bottom',
+                    position = { col = '50%', row = '80%' },
+                },
+                -- mini = {
+                --     align = 'message-left',
+                --     position = { col = '90%', row = '10%' },
+                --     border = {
+                --         style = 'rounded',
+                --     },
+                --     win_options = {
+                --         winblend = 0,
+                --     },
+                -- },
             },
+            -- routes = {
+            --     {
+            --         filter = {
+            --             event = 'notify',
+            --             find = 'No information available',
+            --         },
+            --         opts = { skip = true },
+            --     },
+            -- },
         })
     end,
 }

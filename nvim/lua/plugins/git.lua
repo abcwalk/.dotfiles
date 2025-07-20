@@ -49,15 +49,7 @@ return {
                 },
 
                 on_attach = function(bufnr)
-                    vim.keymap.set(
-                        'n',
-                        '<leader>H',
-                        require('gitsigns').preview_hunk,
-                        { buffer = bufnr, desc = 'Preview git hunk' }
-                    )
-
                     vim.keymap.set('n', ']]', require('gitsigns').next_hunk, { buffer = bufnr, desc = 'Next git hunk' })
-
                     vim.keymap.set(
                         'n',
                         '[[',
@@ -68,13 +60,6 @@ return {
             })
         end,
         keys = {
-            {
-                '<leader>gk',
-                function()
-                    require('gitsigns').prev_hunk({ navigation_message = false })
-                end,
-                desc = 'Prev Hunk',
-            },
             {
                 '<leader>gb',
                 function()
@@ -104,13 +89,6 @@ return {
                 desc = 'Reset Buffer',
             },
             {
-                '<leader>gj',
-                function()
-                    require('gitsigns').next_hunk({ navigation_message = false })
-                end,
-                desc = 'Next Hunk',
-            },
-            {
                 '<leader>gs',
                 function()
                     require('gitsigns').stage_hunk()
@@ -133,4 +111,5 @@ return {
             },
         },
     },
+    { 'akinsho/git-conflict.nvim', version = '*', config = true },
 }
