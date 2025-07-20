@@ -1,5 +1,5 @@
 local uv = vim.uv
-local THEME = 'cyberdream'
+local THEME = 'naysayer'
 local theme_file_path = vim.fn.expand('$HOME/.theme')
 
 local themes = {
@@ -27,7 +27,7 @@ local themes = {
         repo = 'scottmckendry/cyberdream.nvim',
         config = function()
             require('cyberdream').setup({
-                saturation = 0.90,
+                saturation = 0.7,
                 highlights = {
                     Search = { bg = '#3c4047' },
                 },
@@ -40,7 +40,7 @@ local themes = {
         end,
     },
     ['naysayer'] = {
-        repo = 'RostislavArts/naysayer.nvim',
+        repo = 'abcwalk/naysayer.nvim',
         config = function() end,
     },
 }

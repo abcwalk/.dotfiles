@@ -41,9 +41,9 @@ map('n', '<C-x>g', '<cmd>Neogit<CR>', opts)
 --Tab navigation
 map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
 map('n', '<A-Right>', ':bnext<CR>', { silent = true })
-map('n', '<A-q>', ':wqa<CR>', { silent = true })
-map('n', '<C-s>', ':w<CR>', opts)
-map('n', '<A-c>', ':bd<CR>', { silent = true })
+
+-- Save file
+map('n', '<C-s>', ':silent w<CR>', opts)
 
 --Resize tab
 map('n', '<C-Left>', ':vertical resize -10<CR>', { silent = true })

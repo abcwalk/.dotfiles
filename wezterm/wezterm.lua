@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local act = wezterm.action
 
+local DESKTOP_ENV = (os.getenv("XDG_CURRENT_DESKTOP")):lower() or ""
 local THEME_FILE_PATH = os.getenv("HOME") .. "/.theme"
 local THEME_LIGHT = "Alabaster Light"
 local THEME_DARK = "Alabaster Dark"
@@ -94,25 +95,14 @@ local function set_wezterm_theme()
 	config.colors = theme_config.colors
 end
 
-local function set_gtk_mode(mode)
-	local desktop_env = (os.getenv("XDG_CURRENT_DESKTOP") or "GNOME"):lower()
+local function set_gnome_gtk_mode(mode)
 	local commands = {}
 
-	if desktop_env:find("gnome", 1, true) then
-		local gtk_theme = mode == "light" and "Yaru" or "Yaru-dark"
-		commands = {
-			{ "gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-" .. mode },
-			{ "gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", gtk_theme },
-		}
-	elseif desktop_env:find("cinnamon", 1, true) then
-		local gtk_theme = mode == "light" and "Adwaita" or "Adwaita-dark"
-		commands = {
-			{ "gsettings", "set", "org.cinnamon.desktop.interface", "gtk-theme", gtk_theme },
-		}
-	else
-		wezterm.log_info("Unsupported desktop environment: " .. desktop_env)
-		return
-	end
+	local gtk_theme = mode == "light" and "Yaru" or "Yaru-dark"
+	commands = {
+		{ "gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-" .. mode },
+		{ "gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", gtk_theme },
+	}
 
 	for _, cmd in ipairs(commands) do
 		local success, _, stderr = wezterm.run_child_process(cmd)
@@ -127,7 +117,7 @@ local function toggle_theme()
 	local new_theme = current == "light" and "dark" or "light"
 
 	set_mode_file(new_theme)
-	set_gtk_mode(new_theme)
+	set_gnome_gtk_mode(new_theme)
 	set_wezterm_theme()
 end
 
@@ -185,15 +175,17 @@ config.keys = {
 		action = wezterm.action.ToggleFullScreen,
 	},
 	{
-		key = "w",
-		mods = "CMD",
+		key = "q",
+		mods = "ALT",
 		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 	{
 		key = "8",
 		mods = "ALT",
 		action = wezterm.action_callback(function(_, _)
-			toggle_theme()
+			if DESKTOP_ENV:find("gnome") then
+				toggle_theme()
+			end
 		end),
 	},
 }
@@ -214,7 +206,7 @@ config.audible_bell = "Disabled"
 config.adjust_window_size_when_changing_font_size = false
 config.disable_default_key_bindings = true
 config.mouse_wheel_scrolls_tabs = false
-config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.90 }
+config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.7 }
 config.automatically_reload_config = true
 config.warn_about_missing_glyphs = false
 config.harfbuzz_features = { "ss07", "calt", "liga=0" }

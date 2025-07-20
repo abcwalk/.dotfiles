@@ -26,7 +26,6 @@ return {
                         'filename',
                         path = 4,
                     },
-                    { 'diagnostics' },
                 },
                 lualine_x = {},
                 lualine_y = {

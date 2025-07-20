@@ -20,7 +20,6 @@ fi
 alias zshconfig="nvim ~/.zshrc"
 alias n="nvim"
 alias n.="nvim ."
-alias nn="nvim -c 'Telescope oldfiles'"
 alias e="emacs -nw"
 alias t="thunar ."
 alias sv='source ~/venvs/nta_autotests/bin/activate'
