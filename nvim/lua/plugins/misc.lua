@@ -261,10 +261,10 @@ return {
         lazy = true,
         opts = {
             enter_callback = function()
-                vim.notify('On', vim.log.levels.INFO, { title = 'Caps Word:' })
+                vim.notify('On', vim.log.levels.INFO, { title = 'Caps Word' })
             end,
             exit_callback = function()
-                vim.notify('Off', vim.log.levels.INFO, { title = 'Caps Word:' })
+                vim.notify('Off', vim.log.levels.INFO, { title = 'Caps Word' })
             end,
         },
         keys = {

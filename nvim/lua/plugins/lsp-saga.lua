@@ -1,7 +1,7 @@
 return {
     'nvimdev/lspsaga.nvim',
     event = 'LspAttach',
-    enabled = false,
+    enabled = true,
     config = function()
         require('lspsaga').setup({
             outline = {

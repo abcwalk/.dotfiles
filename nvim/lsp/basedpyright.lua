@@ -12,32 +12,35 @@ return {
         'pyrightconfig.json',
         '.git',
     },
-    settings = {
-        basedpyright = {
-            analysis = {
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = 'basic',
-                diagnosticMode = 'openFilesOnly',
-                exclude = {
-                    '/.cache',
-                    '/.mypy_cache',
-                    '/.pytest_cache',
-                    '/.ruff_cache',
-                    '/.venv',
-                    '/venv',
-                    '~/venvs',
-                    '/pycache',
-                    '/dist',
-                    '/node_modules',
-                },
-            },
-        },
-    },
     capabilities = vim.tbl_deep_extend(
         'force',
         {},
         vim.lsp.protocol.make_client_capabilities(),
         blink.get_lsp_capabilities()
     ),
+    settings = {
+        basedpyright = {
+            disableOrganizeImports = true,
+            analysis = {
+                exclude = {
+                    '**/node_modules',
+                    '**/__pycache__',
+                    '/.cache',
+                    '/.mypy_cache',
+                    '/.pytest_cache',
+                    '/.ruff_cache',
+                    '/pycache',
+                    '/dist',
+                    '/node_modules',
+                    '**.venv**',
+                },
+                extraPaths = { '/home/rozhkov-m-nb/Monorepo/product/nta/tests' },
+                autoImportCompletions = true,
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = 'basic',
+                diagnosticMode = 'openFilesOnly',
+                autoSearchPaths = true,
+            },
+        },
+    },
 }

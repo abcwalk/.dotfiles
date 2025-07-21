@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="lambda-gitster"
+ZSH_THEME="murilasso"
 ZSH_DISABLE_COMPFIX=true
 
 plugins=(git zsh-auto-venv node docker fzf themes kubectl)
@@ -13,6 +13,10 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # ZSH Syntax Highlighting
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Use neovim as the default editor.
+export EDITOR=nvim
+export VISUAL=nvim
+
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
 fi
@@ -22,8 +26,7 @@ alias n="nvim"
 alias n.="nvim ."
 alias e="emacs -nw"
 alias t="thunar ."
-alias sv='source ~/venvs/nta_autotests/bin/activate'
-alias m='cd ~/Monorepo/product/nta/tests/; sv'
+alias m='cd $HOME/Monorepo/product/nta/tests/ && source .venv/bin/activate'
 alias l="ls -la"
 
 export EDITOR='/usr/local/bin/emacs'
@@ -35,6 +38,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export NVM_DIR="$HOME/.nvm"
+export PYTHONPATH="$HOME/Monorepo/product/nta/tests/framework"
 
 # PyEnv setup
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -44,12 +48,9 @@ fi
 # NVM (Node Version Manager)
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
-# Brew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 # FZF
-export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # PATH extensions
 export PATH="$HOME/.emacs.d/bin:$PATH"
@@ -57,3 +58,4 @@ export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="/home/home/.local/bin/fd:$PATH"
 export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 . "$HOME/.cargo/env"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion

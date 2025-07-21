@@ -25,8 +25,6 @@ map('n', 'YY', 'va{y', opts)
 -- Escape -> jj
 map('i', 'jj', '<Esc>', { nowait = true })
 map('i', 'jj', '<Esc>', { nowait = true })
-map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
-map('i', 'kk', '<C-Bslash><C-n>', { nowait = true })
 
 -- Escape terminal
 map('t', 'jj', '<C-Bslash><C-n>', { nowait = true })

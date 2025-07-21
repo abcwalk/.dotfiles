@@ -1,10 +1,10 @@
 # Base
 sudo apt update && sudo apt upgrade
-sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev xclip fzf shellcheck python3-pip zsh shfmt ripgrep unzip fd-find
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev xclip fzf shellcheck python3-pip zsh shfmt ripgrep unzip fd-find copyq flameshot
 
 # Dotfiles
 cd ~
-git clone https://github.com/behemothbucket/.dotfiles.git
+git clone https://github.com/abcwalk/.dotfiles.git
 ln -s ~/.dotfiles/nvim/ ~/.config/nvim
 ln -s ~/.dotfiles/wezterm/ ~/.config/wezterm
 
@@ -14,6 +14,7 @@ sudo ln --symbolic $(which fdfind) /usr/local/bin/fd
 # Ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 rm ~/.zshrc
+ln -s ~/.dotfiles/.zshrc ~/.zshrc
 
 # Zsh plugin
 git clone https://github.com/ikhomutov/zsh-auto-venv "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-auto-venv

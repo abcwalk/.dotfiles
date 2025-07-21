@@ -48,9 +48,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
--- resize neovim split when terminal is resized
-vim.api.nvim_command('autocmd VimResized * wincmd =')
-
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)
@@ -60,7 +57,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         local wk = require('which-key')
         wk.add({
-            { 'gd', vim.lsp.buf.definition, desc = 'Go to definition' },
+            { '<leader>f', '<cmd>Lspsaga finder tyd+ref+imp+def<CR>', desc = 'Lspsaga find' },
+            { '<leader>d', '<cmd>Lspsaga finder def<CR>', desc = 'Lspsaga definition' },
+            { '<leader>r', '<cmd>Lspsaga finder ref<CR>', desc = 'Lspsaga reference' },
+            { 'gd', '<cmd>Lspsaga goto_definition<CR>', desc = 'Lspsaga goto definition' },
             { 'gr', Snacks.picker.lsp_references, desc = 'Go to references' },
             { 'K', vim.lsp.buf.doc, desc = 'Hover doc' },
             { '<leader>la', vim.lsp.buf.code_action, desc = 'Code action' },
@@ -123,11 +123,5 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         set_hl('FloatTitle', palette.none, palette.none)
         set_hl('NormalFloat', palette.none, palette.none)
         set_hl('Pmenu', palette.none, palette.none)
-    end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-    callback = function()
-        pcall(vim.treesitter.start)
     end,
 })

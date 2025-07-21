@@ -36,13 +36,13 @@ return {
                 lualine_z = {
                     {
                         'lsp_status',
-                        icon = '',
-                        symbols = {
-                            spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
-                            done = '✓',
-                            separator = ' ',
-                        },
-                        ignore_lsp = {},
+                    },
+                    {
+                        function()
+                            local venv_path = require('venv-selector').venv()
+                            local venv_name = venv_path:match('([^/]+)$')
+                            return '(' .. venv_name .. ')'
+                        end,
                     },
                 },
             },
