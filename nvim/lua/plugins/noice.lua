@@ -40,29 +40,52 @@ return {
                 --     view = 'mini',
                 -- },
                 views = {
+                    notify = {
+                        scrollbar = false,
+                    },
+                    split = {
+                        enter = true,
+                        scrollbar = false,
+                    },
+                    vsplit = {
+                        scrollbar = false,
+                    },
                     popup = {
                         scrollbar = false,
                     },
-                    -- mini = {
-                    --     align = 'message-left',
-                    --     position = { col = '90%', row = '10%' },
-                    --     border = {
-                    --         style = 'rounded',
-                    --     },
-                    --     win_options = {
-                    --         winblend = 0,
-                    --     },
-                    -- },
+                    mini = {
+                        scrollbar = false,
+                    },
+                    cmdline = {
+                        scrollbar = false,
+                    },
+                    cmdline_popup = {
+                        scrollbar = false,
+                    },
+                    cmdline_output = {
+                        scrollbar = false,
+                    },
+                    messages = {
+                        scrollbar = false,
+                    },
+                    confirm = {
+                        scrollbar = false,
+                    },
+                    hover = {
+                        scrollbar = false,
+                    },
+                    popupmenu = {
+                        scrollbar = false,
+                        win_options = {
+                            winhighlight = {
+                                Normal = 'NormalFloat', -- change to NormalFloat to make it look like other floats
+                                -- FloatBorder = 'NoicePopupmenuBorder', -- border highlight
+                                -- CursorLine = 'NoicePopupmenuSelected', -- used for highlighting the selected item
+                                -- PmenuMatch = 'NoicePopupmenuMatch', -- used to highlight the part of the item that matches the input
+                            },
+                        },
+                    },
                 },
-                -- routes = {
-                --     {
-                --         filter = {
-                --             event = 'notify',
-                --             find = 'No information available',
-                --         },
-                --         opts = { skip = true },
-                --     },
-                -- },
             })
         end,
     },

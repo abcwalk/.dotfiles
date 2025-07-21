@@ -1,11 +1,12 @@
 local uv = vim.uv
-local THEME = 'naysayer'
 local theme_file_path = vim.fn.expand('$HOME/.theme')
+local THEME = 'cobalt'
 
 local themes = {
     ['alabaster'] = {
         repo = 'behemothbucket/alabaster.nvim',
         branch = 'custom',
+        enabled = false,
         config = function()
             vim.g.alabaster_dim_comments = true
             vim.g.alabaster_floatborder = true
@@ -13,6 +14,7 @@ local themes = {
     },
     ['gruvbox-material'] = {
         repo = 'sainnhe/gruvbox-material',
+        enabled = false,
         config = function()
             vim.g.gruvbox_material_transparent_background = 0
             vim.g.gruvbox_material_foreground = 'mix'
@@ -25,6 +27,7 @@ local themes = {
     },
     ['cyberdream'] = {
         repo = 'scottmckendry/cyberdream.nvim',
+        enabled = false,
         config = function()
             require('cyberdream').setup({
                 saturation = 0.7,
@@ -41,7 +44,32 @@ local themes = {
     },
     ['naysayer'] = {
         repo = 'abcwalk/naysayer.nvim',
+        enabled = false,
         config = function() end,
+    },
+    ['cobalt'] = {
+        repo = 'wurli/cobalt.nvim',
+        enabled = true,
+        config = function()
+            require('cobalt').setup({
+                commentStyle = { italic = false },
+                keywordStyle = { italic = false },
+                overrides = function(colors)
+                    return {
+                        NormalFloat = { bg = 'none' },
+                        FloatBorder = { bg = 'none' },
+                        FloatTitle = { bg = 'none' },
+                        BlinkCmpMenuBorder = { link = 'FloatBorder' },
+                        TelescopeBorder = { link = 'FloatBorder' },
+                        NoiceCmdlinePopupBorder = { link = 'FloatBorder' },
+                        DiagnosticSignInfo = { bg = 'none' },
+                        DiagnosticSignWarn = { bg = 'none' },
+                        DiagnosticSignError = { link = 'Constant' },
+                        Function = { fg = '#cccccc' },
+                    }
+                end,
+            })
+        end,
     },
 }
 
@@ -110,10 +138,11 @@ local plugins = {}
 for name, opts in pairs(themes) do
     table.insert(plugins, {
         opts.repo,
+        enabled = opts.enabled,
         branch = opts.branch or nil,
         config = function()
             opts.config()
-            if name == THEME then
+            if opts.enabled then
                 set_colorscheme()
             end
         end,

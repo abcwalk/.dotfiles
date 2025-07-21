@@ -32,8 +32,6 @@ return {
                     {
                         'location',
                     },
-                },
-                lualine_z = {
                     {
                         'lsp_status',
                     },
@@ -45,6 +43,7 @@ return {
                         end,
                     },
                 },
+                lualine_z = {},
             },
         })
     end,
