@@ -3,7 +3,13 @@ return {
     lazy = false,
     branch = 'regexp',
     keys = {
-        { '<leader>v', '<cmd>VenvSelect<cr>' },
+        { ',v', '<cmd>VenvSelect<cr>' },
     },
-    opts = {},
+    opts = {
+        search = {
+            my_venvs = {
+                command = 'fd python3.10 ~/venvs',
+            },
+        },
+    },
 }

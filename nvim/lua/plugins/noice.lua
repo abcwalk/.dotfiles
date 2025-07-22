@@ -1,17 +1,10 @@
 return {
     {
-        'rcarriga/nvim-notify',
-        config = function()
-            require('notify').setup({
-                background_color = { '#142525' },
-            })
-        end,
-    },
-    {
         'folke/noice.nvim',
         event = 'VeryLazy',
         enabled = true,
         dependencies = {
+            'rcarriga/nvim-notify',
             'MunifTanjim/nui.nvim',
         },
         config = function()
@@ -20,13 +13,19 @@ return {
                     override = {
                         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
                         ['vim.lsp.util.stylize_markdown'] = true,
-                        ['cmp.entry.get_documentation'] = true,
+                        ['cmp.entry.get_documentation'] = false,
                     },
                     progress = {
-                        enabled = false,
+                        enabled = true,
                     },
                     hover = {
                         enabled = false,
+                    },
+                    signature = {
+                        enabled = false,
+                        auto_open = {
+                            enabled = false,
+                        },
                     },
                 },
                 presets = {
@@ -36,9 +35,6 @@ return {
                     inc_rename = false, -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = true, -- add a border to hover docs and signature help
                 },
-                -- notify = {
-                --     view = 'mini',
-                -- },
                 views = {
                     notify = {
                         scrollbar = false,

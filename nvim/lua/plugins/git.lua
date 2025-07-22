@@ -62,9 +62,7 @@ return {
         keys = {
             {
                 '<leader>gb',
-                function()
-                    require('gitsigns').blame()
-                end,
+                '<cmd>BlameToggle<CR>',
                 desc = 'Blame',
             },
             {

@@ -1,12 +1,12 @@
 local uv = vim.uv
 local theme_file_path = vim.fn.expand('$HOME/.theme')
-local THEME = 'cobalt'
+local current_theme = ''
 
 local themes = {
     ['alabaster'] = {
         repo = 'behemothbucket/alabaster.nvim',
         branch = 'custom',
-        enabled = false,
+        enabled = true,
         config = function()
             vim.g.alabaster_dim_comments = true
             vim.g.alabaster_floatborder = true
@@ -49,7 +49,7 @@ local themes = {
     },
     ['cobalt'] = {
         repo = 'wurli/cobalt.nvim',
-        enabled = true,
+        enabled = false,
         config = function()
             require('cobalt').setup({
                 commentStyle = { italic = false },
@@ -59,13 +59,18 @@ local themes = {
                         NormalFloat = { bg = 'none' },
                         FloatBorder = { bg = 'none' },
                         FloatTitle = { bg = 'none' },
+                        Function = { fg = colors.palette.AshenGrey },
+                        ['@variable.builtin'] = { italic = false },
+
                         BlinkCmpMenuBorder = { link = 'FloatBorder' },
-                        TelescopeBorder = { link = 'FloatBorder' },
                         NoiceCmdlinePopupBorder = { link = 'FloatBorder' },
                         DiagnosticSignInfo = { bg = 'none' },
                         DiagnosticSignWarn = { bg = 'none' },
                         DiagnosticSignError = { link = 'Constant' },
-                        Function = { fg = '#cccccc' },
+                        DiagnosticFloatingError = { link = 'Constant' },
+                        DiagnosticFloatingWarn = { link = '@keyword.return' },
+                        DiagnosticUnderlineError = { sp = colors.palette.BlushPink },
+                        DiagnosticUnderlineWarn = { sp = colors.palette.PeachSherbet },
                     }
                 end,
             })
@@ -92,7 +97,7 @@ local function set_colorscheme()
         vim.api.nvim_set_option_value('background', 'dark', {})
     end
 
-    vim.cmd('colorscheme ' .. THEME)
+    vim.cmd('colorscheme ' .. current_theme)
 end
 
 local function watch_theme_change()
@@ -138,11 +143,11 @@ local plugins = {}
 for name, opts in pairs(themes) do
     table.insert(plugins, {
         opts.repo,
-        enabled = opts.enabled,
         branch = opts.branch or nil,
         config = function()
             opts.config()
             if opts.enabled then
+                current_theme = name
                 set_colorscheme()
             end
         end,

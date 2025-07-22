@@ -123,7 +123,7 @@ return {
             -- - sd'   - [S]urround [D]elete [']quotes
             -- - sr)'  - [S]urround [R]eplace [)] [']
             require('mini.surround').setup()
-            require('mini.pairs').setup()
+            -- require('mini.pairs').setup()
             require('mini.icons').setup()
         end,
     },
@@ -245,7 +245,6 @@ return {
             -- bottom-left, bottom-right, bottom-center, top-left, top-right, top-center
             position = 'top-right',
         },
-
         keys = {
             {
                 '<leader>ut',
@@ -274,5 +273,12 @@ return {
                 "<cmd>lua require('caps-word').toggle()<CR>",
             },
         },
+    },
+    {
+        'FabijanZulj/blame.nvim',
+        lazy = false,
+        config = function()
+            require('blame').setup({})
+        end,
     },
 }

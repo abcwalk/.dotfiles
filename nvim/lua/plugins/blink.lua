@@ -1,4 +1,10 @@
 return {
+    {
+        'saghen/blink.pairs',
+        version = '*',
+        dependencies = 'saghen/blink.download',
+        opts = {},
+    },
     { 'L3MON4D3/LuaSnip', keys = {} },
     {
         'saghen/blink.cmp',
@@ -44,7 +50,6 @@ return {
                     'select_prev',
                     'fallback',
                 },
-                ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
             },
             cmdline = {
                 enabled = false,
@@ -73,7 +78,7 @@ return {
                         scrollbar = false,
                         winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
                     },
-                    auto_show = true,
+                    auto_show = false,
                 },
             },
         },

@@ -5,9 +5,11 @@ local opts = { noremap = true, silent = true }
 map('n', '<C-[>', vim.diagnostic.goto_prev, opts)
 map('n', '<C-]>', vim.diagnostic.goto_next, opts)
 
---Oil
-map('n', '<Bslash>f', ':Oil .<CR>', opts)
+-- Oil
 map('n', '<C-x>j', ':Oil .<CR>', opts)
+
+-- Fyler
+-- map('n', '<leader>e', '<cmd>Fyler<CR>', opts)
 
 --Move to start/end of line
 map('i', '<C-a>', '<ESC>I')
@@ -29,29 +31,27 @@ map('i', 'jj', '<Esc>', { nowait = true })
 -- Escape terminal
 map('t', 'jj', '<C-Bslash><C-n>', { nowait = true })
 map('t', 'jj', '<C-Bslash><C-n>', { nowait = true })
-map('t', 'kk', '<C-Bslash><C-n>', { nowait = true })
-map('t', 'kk', '<C-Bslash><C-n>', { nowait = true })
 map('t', '<Esc>', '<C-Bslash><C-n>', { nowait = true })
 
 -- Neogit
 map('n', '<C-x>g', '<cmd>Neogit<CR>', opts)
 
---Tab navigation
-map('n', '<A-Left>', ':bprevious<CR>', { silent = true })
-map('n', '<A-Right>', ':bnext<CR>', { silent = true })
+-- Window navigation
+map('n', '<A-Left>', '<C-w>h', opts)
+map('n', '<A-Right>', '<C-w>l', opts)
+
+-- Resize window
+map('n', '<C-Left>', ':vertical resize -10<CR>', { silent = true })
+map('n', '<C-Right>', ':vertical resize +10<CR>', { silent = true })
 
 -- Save file
 map('n', '<C-s>', ':silent w<CR>', opts)
 
---Resize tab
-map('n', '<C-Left>', ':vertical resize -10<CR>', { silent = true })
-map('n', '<C-Right>', ':vertical resize +10<CR>', { silent = true })
-
---Move lines up and down
+-- Move lines up and down
 map('n', '<C-Up>', ':m-2<CR>', opts)
 map('n', '<C-Down>', ':m+<CR>', opts)
 
---Add lines above and below
+-- Add lines above and below
 map('n', '<A-Up>', ':put!=repeat(nr2char(10), v:count1)|silent ""]-<CR>', opts)
 map('n', '<A-Down>', ':put=repeat(nr2char(10), v:count1)|silent ""]+<CR>', opts)
 
