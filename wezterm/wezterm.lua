@@ -197,7 +197,7 @@ config.audible_bell = "Disabled"
 config.adjust_window_size_when_changing_font_size = false
 config.disable_default_key_bindings = true
 config.mouse_wheel_scrolls_tabs = false
-config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.7 }
+config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.9 }
 config.automatically_reload_config = true
 config.warn_about_missing_glyphs = false
 config.harfbuzz_features = { "ss07", "calt", "liga=0" }

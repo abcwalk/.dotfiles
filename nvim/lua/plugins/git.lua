@@ -100,13 +100,6 @@ return {
                 end,
                 desc = 'Undo Stage Hunk',
             },
-            {
-                '<leader>gd',
-                function()
-                    vim.cmd('Gitsigns diffthis HEAD')
-                end,
-                desc = 'Git Diff HEAD',
-            },
         },
     },
     { 'akinsho/git-conflict.nvim', version = '*', config = true },

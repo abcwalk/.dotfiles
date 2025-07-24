@@ -28,6 +28,7 @@ return {
                 'python',
                 'vim',
                 'vimdoc',
+                'regex',
                 'yaml',
             },
             incremental_selection = {

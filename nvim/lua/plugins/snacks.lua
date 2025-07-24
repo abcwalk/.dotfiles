@@ -10,7 +10,7 @@ return {
             auto_close = true,
             jump = { close = true },
         },
-        image = { enabled = true },
+        image = { enabled = false },
         input = {
             enabled = true,
             styles = {
@@ -23,28 +23,64 @@ return {
         },
         notifier = { enabled = true },
         picker = {
+            enabled = true,
+            hidden = true,
+            ignored = true,
             formatters = {
                 file = {
                     truncate = 100,
                 },
             },
-            layout = {
-                preset = 'vertical',
-                layout = {
-                    min_width = 140,
-                    -- { win = 'preview', title = '{preview}', height = 0.4, border = 'top' },
-                },
-            },
-            hidden = true,
-            ignored = true,
-            enabled = true,
             sources = {
-                files = { hidden = true },
-            },
-            smart = {
-                filter = {
-                    paths = {
-                        ['**/build'] = false, -- TODO: dont work
+                smart = {
+                    layout = {
+                        cycle = true,
+                        preset = 'vertical',
+                        layout = {
+                            backdrop = true,
+                            width = 0.6,
+                            min_width = 140,
+                            height = 0.8,
+                            min_height = 30,
+                            box = 'vertical',
+                            border = 'rounded',
+                            title = '{title} {live} {flags}',
+                            title_pos = 'left',
+                            { win = 'input', height = 1, border = 'bottom' },
+                            { win = 'list', border = 'none' },
+                            { win = 'preview', title = nil, height = 0.6, border = 'top' },
+                        },
+                    },
+                    filter = {
+                        paths = {
+                            ['ds'] = false, -- TODO: dont work?
+                        },
+                    },
+                },
+                grep = {
+                    layout = {
+                        cycle = true,
+                        preset = 'vertical',
+                        layout = {
+                            backdrop = true,
+                            width = 0.6,
+                            min_width = 140,
+                            height = 0.8,
+                            min_height = 30,
+                            box = 'vertical',
+                            border = 'rounded',
+                            title = '{title} {live} {flags}',
+                            title_pos = 'left',
+                            { win = 'input', height = 1, border = 'bottom' },
+                            { win = 'list', border = 'none' },
+                            { win = 'preview', title = nil, height = 0.6, border = 'top' },
+                        },
+                    },
+                },
+                git_diff = {
+                    layout = {
+                        cycle = true,
+                        preset = 'sidebar',
                     },
                 },
             },
@@ -247,6 +283,14 @@ return {
                 Snacks.gitbrowse()
             end,
             desc = 'Git Browse',
+            mode = { 'n', 'v' },
+        },
+        {
+            '<leader>gd',
+            function()
+                Snacks.picker.git_diff()
+            end,
+            desc = 'Git Diff',
             mode = { 'n', 'v' },
         },
         {
