@@ -5,31 +5,54 @@ return {
     lazy = false,
     opts = {
         bigfile = { enabled = true },
-        -- dashboard = { enabled = true },
-        explorer = { enabled = true },
+        explorer = {
+            enabled = true,
+            auto_close = true,
+            jump = { close = true },
+        },
         image = { enabled = true },
-        input = { enabled = true },
+        input = {
+            enabled = true,
+            styles = {
+                input = {
+                    b = {
+                        completion = false, -- disable blink completions in input
+                    },
+                },
+            },
+        },
+        notifier = { enabled = true },
         picker = {
+            formatters = {
+                file = {
+                    truncate = 100,
+                },
+            },
+            layout = {
+                preset = 'vertical',
+                layout = {
+                    min_width = 140,
+                    -- { win = 'preview', title = '{preview}', height = 0.4, border = 'top' },
+                },
+            },
             hidden = true,
             ignored = true,
             enabled = true,
             sources = {
                 files = { hidden = true },
             },
-            exclude = { '.git', 'node_modules', 'framework/build' },
+            smart = {
+                filter = {
+                    paths = {
+                        ['**/build'] = false, -- TODO: dont work
+                    },
+                },
+            },
         },
         quickfile = { enabled = true },
         scroll = { enabled = false },
         statuscolumn = { enabled = true },
         words = { enabled = true },
-        styles = {
-            input = {
-                relative = 'cursor',
-                b = {
-                    completion = false, -- disable blink completions in input
-                },
-            },
-        },
     },
     keys = {
         {
@@ -49,7 +72,9 @@ return {
         {
             '<Bslash><Bslash>',
             function()
-                Snacks.picker.grep()
+                Snacks.picker.grep({
+                    exclude = { 'framework/build' },
+                })
             end,
             desc = 'Grep',
         },
@@ -68,7 +93,7 @@ return {
             desc = 'File Explorer',
         },
         {
-            '<leader>sf',
+            '<leader>o',
             function()
                 Snacks.explorer.reveal()
             end,
@@ -167,13 +192,6 @@ return {
             desc = 'Marks',
         },
         {
-            '<leader>sM',
-            function()
-                Snacks.picker.man()
-            end,
-            desc = 'Man Pages',
-        },
-        {
             '<leader>sp',
             function()
                 Snacks.picker.lazy()
@@ -208,7 +226,6 @@ return {
             end,
             desc = 'Colorschemes',
         },
-        -- LSP
         -- Other
         {
             '<leader>z',
@@ -216,20 +233,6 @@ return {
                 Snacks.zen()
             end,
             desc = 'Toggle Zen Mode',
-        },
-        {
-            '<leader>Z',
-            function()
-                Snacks.zen.zoom()
-            end,
-            desc = 'Toggle Zoom',
-        },
-        {
-            'Q',
-            function()
-                Snacks.bufdelete()
-            end,
-            desc = 'Delete Buffer',
         },
         {
             '<leader>cR',
@@ -247,14 +250,7 @@ return {
             mode = { 'n', 'v' },
         },
         {
-            '<leader>un',
-            function()
-                Snacks.notifier.hide()
-            end,
-            desc = 'Dismiss All Notifications',
-        },
-        {
-            '<C-Blash>',
+            '<leader><Bslash>',
             function()
                 Snacks.terminal()
             end,

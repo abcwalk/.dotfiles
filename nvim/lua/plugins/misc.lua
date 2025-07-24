@@ -243,7 +243,7 @@ return {
             timeout = 1,
             maxkeys = 6,
             -- bottom-left, bottom-right, bottom-center, top-left, top-right, top-center
-            position = 'top-right',
+            position = 'bottom-center',
         },
         keys = {
             {
@@ -280,5 +280,14 @@ return {
         config = function()
             require('blame').setup({})
         end,
+    },
+    {
+        'chrisgrieser/nvim-spider',
+        lazy = true,
+        keys = {
+            { 'w', "<cmd>lua require('spider').motion('w')<CR>", mode = { 'n', 'o', 'x' } },
+            { 'e', "<cmd>lua require('spider').motion('e')<CR>", mode = { 'n', 'o', 'x' } },
+            { 'b', "<cmd>lua require('spider').motion('b')<CR>", mode = { 'n', 'o', 'x' } },
+        },
     },
 }

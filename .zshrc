@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="murilasso"
+ZSH_THEME="duck"
 ZSH_DISABLE_COMPFIX=true
 
 plugins=(git zsh-auto-venv node docker fzf themes kubectl)
@@ -26,8 +26,9 @@ alias n="nvim"
 alias n.="nvim ."
 alias e="emacs -nw"
 alias t="thunar ."
-alias m='cd $HOME/Monorepo/product/nta/tests/ && source .venv/bin/activate'
+alias m='cd $HOME/Monorepo/src/product/nta/tests/ && source $HOME/venvs/nta_autotests/bin/activate'
 alias l="ls -la"
+alias b='bat'
 
 export EDITOR='/usr/local/bin/emacs'
 export JAVA_HOME="/usr/bin/java"
@@ -38,7 +39,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export NVM_DIR="$HOME/.nvm"
-export PYTHONPATH="$HOME/Monorepo/product/nta/tests/framework"
+export PYTHONPATH="$HOME/Monorepo/src/product/nta/tests/framework"
 
 # PyEnv setup
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -49,8 +50,8 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
 # FZF
-# export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # PATH extensions
 export PATH="$HOME/.emacs.d/bin:$PATH"

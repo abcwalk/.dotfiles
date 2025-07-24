@@ -4,7 +4,7 @@ return {
     config = function()
         require('spectre').setup({
             color_devicons = true,
-            open_cmd = 'tabnew',
+            open_cmd = 'vnew', -- 'tabnew'
             live_update = false, -- auto execute search again when you write to any file in vim
             lnum_for_results = false, -- show line number for search/replace results
             line_sep_start = '┌-----------------------------------------',

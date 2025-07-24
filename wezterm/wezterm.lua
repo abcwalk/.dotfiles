@@ -25,6 +25,12 @@ local tab_bar_colors = {
 		inactive_tab = { fg_color = "#7d7d7d", bg_color = "#0e1415" },
 		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#202829" },
 	},
+	["cobalt2"] = {
+		background = "#002240",
+		active_tab = { fg_color = "#f0cc09", bg_color = "#001b33" },
+		inactive_tab = { fg_color = "#cccccc", bg_color = "#002240" },
+		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#1a3954" },
+	},
 }
 
 local function ensure_theme_file_exists()
@@ -126,21 +132,6 @@ wezterm.on("gui-startup", function()
 	window:gui_window():maximize()
 	set_wezterm_theme()
 end)
-
--- wezterm.on("update-status", function(window, pane)
--- 	local process_name = pane:get_foreground_process_name()
--- 	if process_name and process_name:find("nvim") then
--- 		window:set_config_overrides({
--- 			colors = {
--- 				background = "#16181a",
--- 			},
--- 		})
--- 	else
--- 		window:set_config_overrides({ get_theme_config() })
--- 	end
---
--- 	wezterm.log_info(window:get_config_overrides())
--- end)
 
 config.keys = {
 	{ key = "Insert", mods = "SHIFT", action = act.PasteFrom("Clipboard") },

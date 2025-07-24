@@ -30,7 +30,7 @@ local themes = {
         enabled = false,
         config = function()
             require('cyberdream').setup({
-                saturation = 0.7,
+                -- saturation = 0.7,
                 highlights = {
                     Search = { bg = '#3c4047' },
                 },

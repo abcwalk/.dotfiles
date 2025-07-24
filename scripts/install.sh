@@ -67,3 +67,6 @@ source ~/.zshrc
 # TODO:
 # - python
 # pip install pynvim
+# copyq, flameshot
+# shortcuts: copyq, flameshot, close active window
+# if gnome then gsettings set org.gnome.desktop.interface clock-show-seconds true

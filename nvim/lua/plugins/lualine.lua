@@ -29,6 +29,7 @@ return {
                                         if
                                             ast_output:match('error: no repository')
                                             or ast_output:match('not a git repository')
+                                            or ast_output:match('fatal:')
                                         then
                                             return ''
                                         else
