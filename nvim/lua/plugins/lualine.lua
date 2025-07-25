@@ -17,12 +17,12 @@ return {
                 lualine_b = {
                     {
                         function()
-                            local handle = io.popen('git rev-parse --abbrev-ref HEAD 2>&1')
+                            local handle = io.popen('git rev-parse --abbrev-ref HEAD 2>/dev/null')
                             if handle then
                                 local output = handle:read('*a')
                                 handle:close()
                                 if output:match('fatal:') then
-                                    local ast_handle = io.popen('ast branch --show-current 2>&1')
+                                    local ast_handle = io.popen('ast branch --show-current 2>/dev/null')
                                     if ast_handle then
                                         local ast_output = ast_handle:read('*a')
                                         ast_handle:close()

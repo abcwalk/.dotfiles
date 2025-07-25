@@ -192,13 +192,6 @@ return {
         },
     },
     {
-        'FabijanZulj/blame.nvim',
-        lazy = false,
-        config = function()
-            require('blame').setup({})
-        end,
-    },
-    {
         'NvChad/nvim-colorizer.lua',
         enabled = true,
         config = function()

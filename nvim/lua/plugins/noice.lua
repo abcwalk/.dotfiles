@@ -4,7 +4,7 @@ return {
         event = 'VeryLazy',
         enabled = true,
         dependencies = {
-            'rcarriga/nvim-notify',
+            -- 'rcarriga/nvim-notify',
             'MunifTanjim/nui.nvim',
         },
         config = function()
@@ -16,7 +16,7 @@ return {
                         ['cmp.entry.get_documentation'] = false,
                     },
                     progress = {
-                        enabled = true,
+                        enabled = false,
                     },
                     hover = {
                         enabled = false,
