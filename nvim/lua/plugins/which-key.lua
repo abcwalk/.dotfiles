@@ -42,7 +42,10 @@ return {
         },
         {
             '<leader>c.',
-            '<cmd>lcd %:p:h<CR>',
+            function()
+                vim.cmd('lcd %:p:h')
+                vim.notify(vim.cmd('pwd'), vim.log.levels.INFO)
+            end,
             desc = 'Change current directory to .',
         },
     },

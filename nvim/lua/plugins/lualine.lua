@@ -48,11 +48,20 @@ return {
                         icons_enabled = true,
                         icon = '',
                     },
-                },
-                lualine_c = {
                     {
                         'filename',
                         path = 4,
+                    },
+                },
+                lualine_c = {
+                    {
+                        function()
+                            local venv_path = require('venv-selector').venv()
+                            local venv_name = venv_path:match('([^/]+)$')
+                            if venv_name and venv_name ~= '' then
+                                return string.format('[venv: %s]', venv_name)
+                            end
+                        end,
                     },
                 },
                 lualine_x = {},
@@ -62,13 +71,6 @@ return {
                     },
                     {
                         'lsp_status',
-                    },
-                    {
-                        function()
-                            local venv_path = require('venv-selector').venv()
-                            local venv_name = venv_path:match('([^/]+)$')
-                            return '(' .. venv_name .. ')'
-                        end,
                     },
                 },
                 lualine_z = {},

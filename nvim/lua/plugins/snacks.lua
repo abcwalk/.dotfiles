@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 return {
     'folke/snacks.nvim',
     priority = 1000,
@@ -33,6 +32,7 @@ return {
             },
             sources = {
                 smart = {
+                    exclude = { 'framework/build' },
                     layout = {
                         cycle = true,
                         preset = 'vertical',
@@ -53,11 +53,12 @@ return {
                     },
                     filter = {
                         paths = {
-                            ['ds'] = false, -- TODO: dont work?
+                            ['*build*'] = false, -- TODO: dont work?
                         },
                     },
                 },
                 grep = {
+                    exclude = { 'framework/build' },
                     layout = {
                         cycle = true,
                         preset = 'vertical',
@@ -81,6 +82,26 @@ return {
                     layout = {
                         cycle = true,
                         preset = 'sidebar',
+                    },
+                },
+                recent = {
+                    layout = {
+                        cycle = true,
+                        preset = 'vertical',
+                        layout = {
+                            backdrop = true,
+                            width = 0.6,
+                            min_width = 140,
+                            height = 0.8,
+                            min_height = 30,
+                            box = 'vertical',
+                            border = 'rounded',
+                            title = '{title} {live} {flags}',
+                            title_pos = 'left',
+                            { win = 'input', height = 1, border = 'bottom' },
+                            { win = 'list', border = 'none' },
+                            { win = 'preview', title = nil, height = 0.6, border = 'top' },
+                        },
                     },
                 },
             },
@@ -109,7 +130,7 @@ return {
             '<Bslash><Bslash>',
             function()
                 Snacks.picker.grep({
-                    exclude = { 'framework/build' },
+                    -- exclude = { 'framework/build' },
                 })
             end,
             desc = 'Grep',
@@ -293,6 +314,15 @@ return {
             desc = 'Git Diff',
             mode = { 'n', 'v' },
         },
+        {
+            '<leader>gS',
+            function()
+                Snacks.picker.git_branches()
+            end,
+            desc = 'Git Branches',
+            mode = { 'n', 'v' },
+        },
+
         {
             '<leader><Bslash>',
             function()

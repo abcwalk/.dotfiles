@@ -129,3 +129,24 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         set_hl('Pmenu', palette.none, palette.none)
     end,
 })
+
+vim.api.nvim_create_user_command('FormatDisable', function(args)
+    if args.bang then
+        -- FormatDisable! will disable formatting just for this buffer
+        vim.b.disable_autoformat = true
+    else
+        vim.g.disable_autoformat = true
+    end
+    vim.notify('Off', vim.log.levels.INFO, { title = 'Conform' })
+end, {
+    desc = 'Disable autoformat-on-save',
+    bang = true,
+})
+
+vim.api.nvim_create_user_command('FormatEnable', function()
+    vim.b.disable_autoformat = false
+    vim.g.disable_autoformat = false
+    vim.notify('On', vim.log.levels.INFO, { title = 'Conform' })
+end, {
+    desc = 'Re-enable autoformat-on-save',
+})
