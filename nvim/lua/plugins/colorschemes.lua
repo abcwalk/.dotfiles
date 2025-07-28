@@ -6,7 +6,7 @@ local themes = {
     ['alabaster'] = {
         repo = 'behemothbucket/alabaster.nvim',
         branch = 'custom',
-        enabled = true,
+        enabled = false,
         config = function()
             vim.g.alabaster_dim_comments = true
             vim.g.alabaster_floatborder = true
@@ -72,6 +72,26 @@ local themes = {
                         DiagnosticUnderlineError = { sp = colors.palette.BlushPink },
                         DiagnosticUnderlineWarn = { sp = colors.palette.PeachSherbet },
                     }
+                end,
+            })
+        end,
+    },
+    ['ef-theme'] = {
+        repo = 'oonamo/ef-themes.nvim',
+        enabled = true,
+        config = function()
+            require('ef-themes').setup({
+                light = 'ef-eagle',
+                dark = 'ef-dream',
+                on_highlights = function(hls, palette, name)
+                    local overrides = {
+                        NormalFloat = { fg = palette.fg_main, bg = 'NONE' },
+                        -- FloatBorder = { fg = palette.fg_main, bg = 'NONE' },
+                        -- BlinkCmpMenuBorder = { link = 'FloatBorder' },
+                        -- NoiceCmdlinePopupBorder = { link = 'FloatBorder' },
+                    }
+
+                    return overrides
                 end,
             })
         end,

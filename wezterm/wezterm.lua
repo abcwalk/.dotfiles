@@ -4,8 +4,8 @@ local act = wezterm.action
 
 local DESKTOP_ENV = (os.getenv("XDG_CURRENT_DESKTOP")):lower() or ""
 local THEME_FILE_PATH = os.getenv("HOME") .. "/.theme"
-local THEME_LIGHT = "Alabaster Light"
-local THEME_DARK = "Alabaster Dark"
+local THEME_LIGHT = "Ef-Eagle"
+local THEME_DARK = "Ef-Dream"
 
 local config = {}
 if wezterm.config_builder then
@@ -80,7 +80,7 @@ local function get_theme_config()
 	local mode = get_mode()
 	local theme_name = mode == "light" and THEME_LIGHT or THEME_DARK
 
-	local bar_colors = tab_bar_colors[theme_name]
+	local bar_colors = tab_bar_colors[theme_name] or {}
 
 	return {
 		color_scheme = theme_name,

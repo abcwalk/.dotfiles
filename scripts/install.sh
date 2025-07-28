@@ -45,6 +45,7 @@ npm i -g bash-language-server
 # Cargo
 curl https://sh.rustup.rs -sSf | sh
 . "$HOME/.cargo/env"
+cargo install ripgrep --features pcre2
 
 # Lua
 sudo apt install lua5.4 liblua5.4-dev

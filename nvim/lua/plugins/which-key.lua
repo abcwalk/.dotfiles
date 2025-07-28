@@ -48,5 +48,13 @@ return {
             end,
             desc = 'Change current directory to .',
         },
+        {
+            '<leader>.',
+            function()
+                require('rip-substitute').sub()
+            end,
+            mode = { 'n', 'x' },
+            desc = ' rip substitute',
+        },
     },
 }

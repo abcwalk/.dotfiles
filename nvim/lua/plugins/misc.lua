@@ -117,8 +117,21 @@ return {
             -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
             -- - sd'   - [S]urround [D]elete [']quotes
             -- - sr)'  - [S]urround [R]eplace [)] [']
-            require('mini.surround').setup()
-            -- require('mini.pairs').setup()
+            require('mini.surround').setup({
+                mappings = {
+                    add = 'ca', -- Add surrounding in Normal and Visual modes
+                    delete = 'cd', -- Delete surrounding
+                    find = 'cf', -- Find surrounding (to the right)
+                    find_left = 'cF', -- Find surrounding (to the left)
+                    highlight = 'ch', -- Highlight surrounding
+                    replace = 'cs', -- Replace surrounding
+                    update_n_lines = 'cn', -- Update `n_lines`
+
+                    suffix_last = 'l', -- Suffix to search with "prev" method
+                    suffix_next = 'n', -- Suffix to search with "next" method
+                },
+            })
+            require('mini.pairs').setup()
             require('mini.icons').setup()
         end,
     },
@@ -277,5 +290,20 @@ return {
             { 'e', "<cmd>lua require('spider').motion('e')<CR>", mode = { 'n', 'o', 'x' } },
             { 'b', "<cmd>lua require('spider').motion('b')<CR>", mode = { 'n', 'o', 'x' } },
         },
+    },
+    {
+        'chrisgrieser/nvim-rip-substitute',
+        cmd = 'RipSubstitute',
+        config = function()
+            require('rip-substitute').setup({
+                popupWin = {
+                    position = 'top',
+                },
+                keymaps = {
+                    abort = '<C-c>',
+                    toggleIgnoreCase = '<C-i>', -- ripgrep's `--ignore-case`
+                },
+            })
+        end,
     },
 }

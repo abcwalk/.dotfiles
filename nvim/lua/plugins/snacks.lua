@@ -53,7 +53,7 @@ return {
                     },
                     filter = {
                         paths = {
-                            ['*build*'] = false, -- TODO: dont work?
+                            ['*build*'] = false,
                         },
                     },
                 },
