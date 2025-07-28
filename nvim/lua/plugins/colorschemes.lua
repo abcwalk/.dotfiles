@@ -83,6 +83,9 @@ local themes = {
             require('ef-themes').setup({
                 light = 'ef-eagle',
                 dark = 'ef-dream',
+                styles = {
+                    comments = { italic = true },
+                },
                 on_highlights = function(hls, palette, name)
                     local overrides = {
                         NormalFloat = { fg = palette.fg_main, bg = 'NONE' },
