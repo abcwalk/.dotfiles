@@ -12,6 +12,13 @@ return {
             bash = { 'shellcheck' },
             json = { 'jsonlint' },
         }
+
+        local flake8 = lint.linters.flake8
+        flake8.args = {
+            '-max-line-length',
+            '120',
+        }
+
         -- Auto-lint on save and text changes
         local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 

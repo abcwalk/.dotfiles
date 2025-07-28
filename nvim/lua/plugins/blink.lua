@@ -11,7 +11,7 @@ return {
         dependencies = {
             'rafamadriz/friendly-snippets',
         },
-        version = '*',
+        version = '1.*',
         opts = {
             snippets = { preset = 'luasnip' },
             signature = { enabled = true, window = { border = 'rounded' } },

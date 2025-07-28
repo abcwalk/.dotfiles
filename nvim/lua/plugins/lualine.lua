@@ -17,33 +17,39 @@ return {
                 lualine_b = {
                     {
                         function()
-                            local handle = io.popen('git rev-parse --abbrev-ref HEAD 2>/dev/null')
-                            if handle then
+                            local function get_branch(cmd, error_patterns)
+                                local handle = io.popen(cmd .. ' 2>/dev/null')
+                                if not handle then
+                                    return ''
+                                end
+
                                 local output = handle:read('*a')
-                                handle:close()
-                                if output:match('fatal:') then
-                                    local ast_handle = io.popen('ast branch --show-current 2>/dev/null')
-                                    if ast_handle then
-                                        local ast_output = ast_handle:read('*a')
-                                        ast_handle:close()
-                                        if
-                                            ast_output:match('error: no repository')
-                                            or ast_output:match('not a git repository')
-                                            or ast_output:match('fatal:')
-                                        then
-                                            return ''
-                                        else
-                                            return ast_output:gsub('%s+', '')
-                                        end
-                                    else
+                                local success, _, code = handle:close()
+
+                                if not success or code ~= 0 then
+                                    return ''
+                                end
+
+                                for _, pattern in ipairs(error_patterns) do
+                                    if output:match(pattern) then
                                         return ''
                                     end
-                                else
-                                    return output:gsub('%s+', '')
                                 end
-                            else
-                                return ''
+
+                                local clean_output = output:gsub('%s+', '')
+                                return clean_output ~= '' and clean_output or ''
                             end
+
+                            local git_branch = get_branch('git rev-parse --abbrev-ref HEAD', { 'fatal:', 'error:' })
+
+                            if git_branch ~= '' then
+                                return git_branch
+                            end
+
+                            return get_branch(
+                                'ast branch --show-current',
+                                { 'fatal:', 'error:', 'not a git repository' }
+                            )
                         end,
                         icons_enabled = true,
                         icon = '',

@@ -123,7 +123,11 @@ local function toggle_theme()
 	local new_theme = current == "light" and "dark" or "light"
 
 	set_mode_file(new_theme)
-	set_gnome_gtk_mode(new_theme)
+
+	if DESKTOP_ENV:find("gnome") then
+		set_gnome_gtk_mode(new_theme)
+	end
+
 	set_wezterm_theme()
 end
 
@@ -174,9 +178,7 @@ config.keys = {
 		key = "8",
 		mods = "ALT",
 		action = wezterm.action_callback(function(_, _)
-			if DESKTOP_ENV:find("gnome") then
-				toggle_theme()
-			end
+			toggle_theme()
 		end),
 	},
 }

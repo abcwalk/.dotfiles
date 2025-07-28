@@ -66,22 +66,17 @@ return {
         config = function()
             require('flash').setup({
                 search = {
-                    multi_window = false,
                     exclude = {
                         'notify',
                         'cmp_menu',
                         'noice',
                         'flash_prompt',
-                        function(win)
-                            -- exclude non-focusable windows
-                            return not vim.api.nvim_win_get_config(win).focusable
-                        end,
                     },
                 },
                 modes = {
-                    search = { enabled = true },
+                    search = { enabled = false },
                     char = {
-                        enabled = false,
+                        enabled = true,
                     },
                 },
             })

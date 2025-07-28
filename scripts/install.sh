@@ -60,7 +60,7 @@ rm -rf luarocks-3.12.2
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 sudo rm -rf /opt/nvim
 sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-rm nvim-linux64.tar.gz
+rm nvim-linux-x86_64.tar.gz
 echo 'export PATH="$PATH:/opt/nvim-linux-x86_64/bin"' >>~/.zshrc
 source ~/.zshrc
 
