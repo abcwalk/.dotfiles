@@ -78,7 +78,7 @@ local themes = {
     },
     ['ef-theme'] = {
         repo = 'oonamo/ef-themes.nvim',
-        enabled = true,
+        enabled = false,
         config = function()
             require('ef-themes').setup({
                 light = 'ef-eagle',
@@ -95,6 +95,20 @@ local themes = {
                     }
 
                     return overrides
+                end,
+            })
+        end,
+    },
+    ['silkcircuit'] = {
+        repo = 'hyperb1iss/silkcircuit-nvim',
+        enabled = true,
+        config = function()
+            require('silkcircuit').setup({
+                variant = 'soft', -- "neon" | "vibrant" | "soft" | "glow"
+                on_highlights = function(highlights, colors)
+                    highlights.FloatBorder = { bg = colors.none }
+                    highlights.Pmenu = { bg = colors.none }
+                    highlights.DiagnosticSignHint = { bg = colors.none }
                 end,
             })
         end,

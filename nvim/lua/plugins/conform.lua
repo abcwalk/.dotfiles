@@ -23,7 +23,7 @@ return {
             formatters = {
                 prettier = {
                     prepend_args = function()
-                        return { '--double-quote' }
+                        return { '--single-quote' }
                     end,
                 },
             },

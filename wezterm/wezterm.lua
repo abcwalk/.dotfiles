@@ -4,8 +4,8 @@ local act = wezterm.action
 
 local DESKTOP_ENV = (os.getenv("XDG_CURRENT_DESKTOP")):lower() or ""
 local THEME_FILE_PATH = os.getenv("HOME") .. "/.theme"
-local THEME_LIGHT = "Ef-Eagle"
-local THEME_DARK = "Ef-Dream"
+local THEME_LIGHT = "Alabaster Light"
+local THEME_DARK = "Alabaster Dark"
 
 local config = {}
 if wezterm.config_builder then
@@ -30,6 +30,12 @@ local tab_bar_colors = {
 		active_tab = { fg_color = "#f0cc09", bg_color = "#001b33" },
 		inactive_tab = { fg_color = "#cccccc", bg_color = "#002240" },
 		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#1a3954" },
+	},
+	["Ef-Eagle"] = {
+		background = "#e4dbc0",
+		active_tab = { fg_color = "#882000", bg_color = "#ecdfba" },
+		inactive_tab = { fg_color = "#231a1f", bg_color = "#e4dbc0" },
+		inactive_tab_hover = { fg_color = "#231a1f", bg_color = "#ddc5af" },
 	},
 }
 
@@ -203,6 +209,7 @@ config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.9 }
 config.automatically_reload_config = true
 config.warn_about_missing_glyphs = false
 config.harfbuzz_features = { "ss07", "calt", "liga=0" }
+-- config.window_background_opacity = 0.9
 config.max_fps = 120
 config.window_frame = {
 	font = wezterm.font("JetBrainsMono Nerd Font"),

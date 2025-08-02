@@ -71,3 +71,4 @@ source ~/.zshrc
 # copyq, flameshot
 # shortcuts: copyq, flameshot, close active window
 # if gnome then gsettings set org.gnome.desktop.interface clock-show-seconds true
+# set org.gnome.desktop.default-applications.terminal exec wezterm

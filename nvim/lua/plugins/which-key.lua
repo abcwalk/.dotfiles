@@ -6,6 +6,9 @@ return {
         win = {
             title = true,
         },
+        triggers = {
+            { '<auto>', mode = 'nso' }, -- without 'x' (visual selection)
+        },
         icons = {
             rules = false,
             breadcrumb = ' ', -- symbol used in the command line area that shows your active key combo

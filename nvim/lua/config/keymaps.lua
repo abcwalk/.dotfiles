@@ -76,7 +76,7 @@ map('i', '<A-;>', '<Esc>A;<Esc>i')
 -- Insert copied text next line
 map('n', 'p', ':put +<CR>', opts)
 -- Replace text with copied text
-map('v', 'p', '"_dP', opts)
+-- map('v', 'p', '"_dP', opts)
 
 -- Spectre
 map('n', '<leader>,,', '<cmd>lua require("spectre").toggle()<CR>', {
