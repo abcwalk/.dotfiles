@@ -17,4 +17,4 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Aporetic Sans Mono" :foundry "UKWN" :slant normal :weight regular :height 143 :width normal))))
  '(mode-line-active ((t (:background "#E5E5D0" :foreground "black" :box (:line-width 6 :color "#E5E5D0" :style nil)))))
- '(mode-line-inactive ((t (:background "#E5E5D0" :foreground "gray50" :box (:line-width 6 :color "#E5E5D0" :style nil))))))
+ '(mode-line-inactive ((t (:background "#EBEBD6" :foreground "gray50" :box (:line-width 6 :color "#EBEBD6" :style nil))))))
