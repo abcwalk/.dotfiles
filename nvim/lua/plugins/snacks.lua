@@ -120,7 +120,7 @@ return {
             desc = 'Smart Find Files',
         },
         {
-            '<C-e>',
+            '<M-e>',
             function()
                 Snacks.picker.recent()
             end,

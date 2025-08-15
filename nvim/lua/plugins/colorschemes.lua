@@ -6,7 +6,7 @@ local themes = {
     ['alabaster'] = {
         repo = 'behemothbucket/alabaster.nvim',
         branch = 'custom',
-        enabled = false,
+        enabled = true,
         config = function()
             vim.g.alabaster_dim_comments = true
             vim.g.alabaster_floatborder = true
@@ -101,7 +101,7 @@ local themes = {
     },
     ['silkcircuit'] = {
         repo = 'hyperb1iss/silkcircuit-nvim',
-        enabled = true,
+        enabled = false,
         config = function()
             require('silkcircuit').setup({
                 variant = 'soft', -- "neon" | "vibrant" | "soft" | "glow"

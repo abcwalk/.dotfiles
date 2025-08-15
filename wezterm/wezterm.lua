@@ -110,7 +110,7 @@ end
 local function set_gnome_gtk_mode(mode)
 	local commands = {}
 
-	local gtk_theme = mode == "light" and "Yaru" or "Yaru-dark"
+	local gtk_theme = mode == "light" and "Yaru-purple" or "Yaru-purple-dark"
 	commands = {
 		{ "gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-" .. mode },
 		{ "gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", gtk_theme },
@@ -190,8 +190,8 @@ config.keys = {
 }
 
 config.default_prog = { "zsh" }
-config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
-config.font_size = 14
+config.font = wezterm.font("Aporetic Sans Mono", { weight = "Regular" })
+config.font_size = 16
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
