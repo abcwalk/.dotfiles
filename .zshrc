@@ -1,9 +1,9 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="duck"
+ZSH_THEME="lambda"
 ZSH_DISABLE_COMPFIX=true
 
-plugins=(git zsh-auto-venv node docker fzf themes kubectl)
+plugins=(git node docker fzf themes kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
