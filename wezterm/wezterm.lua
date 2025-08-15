@@ -31,6 +31,12 @@ local tab_bar_colors = {
 		inactive_tab = { fg_color = "#cccccc", bg_color = "#002240" },
 		inactive_tab_hover = { fg_color = "#7d7d7d", bg_color = "#1a3954" },
 	},
+	["Ef-Eagle"] = {
+		background = "#e4dbc0",
+		active_tab = { fg_color = "#882000", bg_color = "#ecdfba" },
+		inactive_tab = { fg_color = "#231a1f", bg_color = "#e4dbc0" },
+		inactive_tab_hover = { fg_color = "#231a1f", bg_color = "#ddc5af" },
+	},
 }
 
 local function ensure_theme_file_exists()
@@ -80,7 +86,7 @@ local function get_theme_config()
 	local mode = get_mode()
 	local theme_name = mode == "light" and THEME_LIGHT or THEME_DARK
 
-	local bar_colors = tab_bar_colors[theme_name]
+	local bar_colors = tab_bar_colors[theme_name] or {}
 
 	return {
 		color_scheme = theme_name,
@@ -104,7 +110,7 @@ end
 local function set_gnome_gtk_mode(mode)
 	local commands = {}
 
-	local gtk_theme = mode == "light" and "Yaru" or "Yaru-dark"
+	local gtk_theme = mode == "light" and "Yaru-purple" or "Yaru-purple-dark"
 	commands = {
 		{ "gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-" .. mode },
 		{ "gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", gtk_theme },
@@ -184,8 +190,8 @@ config.keys = {
 }
 
 config.default_prog = { "zsh" }
-config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
-config.font_size = 14
+config.font = wezterm.font("Aporetic Sans Mono", { weight = "Regular" })
+config.font_size = 16
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
@@ -203,6 +209,7 @@ config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.9 }
 config.automatically_reload_config = true
 config.warn_about_missing_glyphs = false
 config.harfbuzz_features = { "ss07", "calt", "liga=0" }
+-- config.window_background_opacity = 0.9
 config.max_fps = 120
 config.window_frame = {
 	font = wezterm.font("JetBrainsMono Nerd Font"),

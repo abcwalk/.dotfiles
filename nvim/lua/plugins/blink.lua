@@ -1,10 +1,10 @@
 return {
-    {
-        'saghen/blink.pairs',
-        version = '*',
-        dependencies = 'saghen/blink.download',
-        opts = {},
-    },
+    -- {
+    --     'saghen/blink.pairs',
+    --     version = '*',
+    --     dependencies = 'saghen/blink.download',
+    --     opts = {},
+    -- },
     { 'L3MON4D3/LuaSnip', keys = {} },
     {
         'saghen/blink.cmp',

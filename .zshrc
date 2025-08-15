@@ -50,8 +50,8 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
 # FZF
-export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_DEFAULT_OPTS="--color=bg+:#282828,fg+:#95a99f,gutter:-1"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # PATH extensions
 export PATH="$HOME/.emacs.d/bin:$PATH"

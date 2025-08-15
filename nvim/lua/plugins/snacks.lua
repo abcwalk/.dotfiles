@@ -53,7 +53,7 @@ return {
                     },
                     filter = {
                         paths = {
-                            ['*build*'] = false, -- TODO: dont work?
+                            ['*build*'] = false,
                         },
                     },
                 },
@@ -120,7 +120,7 @@ return {
             desc = 'Smart Find Files',
         },
         {
-            '<C-e>',
+            '<M-e>',
             function()
                 Snacks.picker.recent()
             end,

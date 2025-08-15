@@ -53,3 +53,5 @@ vim.opt.foldtext = vim.lsp.foldtext()
 vim.opt.splitbelow = true
 vim.opt.splitkeep = 'screen'
 vim.opt.splitright = true
+
+-- TODO: tabline

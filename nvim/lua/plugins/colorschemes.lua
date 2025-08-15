@@ -76,6 +76,43 @@ local themes = {
             })
         end,
     },
+    ['ef-theme'] = {
+        repo = 'oonamo/ef-themes.nvim',
+        enabled = false,
+        config = function()
+            require('ef-themes').setup({
+                light = 'ef-eagle',
+                dark = 'ef-dream',
+                styles = {
+                    comments = { italic = true },
+                },
+                on_highlights = function(hls, palette, name)
+                    local overrides = {
+                        NormalFloat = { fg = palette.fg_main, bg = 'NONE' },
+                        -- FloatBorder = { fg = palette.fg_main, bg = 'NONE' },
+                        -- BlinkCmpMenuBorder = { link = 'FloatBorder' },
+                        -- NoiceCmdlinePopupBorder = { link = 'FloatBorder' },
+                    }
+
+                    return overrides
+                end,
+            })
+        end,
+    },
+    ['silkcircuit'] = {
+        repo = 'hyperb1iss/silkcircuit-nvim',
+        enabled = false,
+        config = function()
+            require('silkcircuit').setup({
+                variant = 'soft', -- "neon" | "vibrant" | "soft" | "glow"
+                on_highlights = function(highlights, colors)
+                    highlights.FloatBorder = { bg = colors.none }
+                    highlights.Pmenu = { bg = colors.none }
+                    highlights.DiagnosticSignHint = { bg = colors.none }
+                end,
+            })
+        end,
+    },
 }
 
 local function read_mode_from_file()

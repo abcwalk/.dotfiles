@@ -6,6 +6,9 @@ return {
         win = {
             title = true,
         },
+        triggers = {
+            { '<auto>', mode = 'nso' }, -- without 'x' (visual selection)
+        },
         icons = {
             rules = false,
             breadcrumb = ' ', -- symbol used in the command line area that shows your active key combo
@@ -47,6 +50,14 @@ return {
                 vim.notify(vim.cmd('pwd'), vim.log.levels.INFO)
             end,
             desc = 'Change current directory to .',
+        },
+        {
+            '<leader>.',
+            function()
+                require('rip-substitute').sub()
+            end,
+            mode = { 'n', 'x' },
+            desc = ' rip substitute',
         },
     },
 }

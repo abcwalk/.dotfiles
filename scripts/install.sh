@@ -45,6 +45,7 @@ npm i -g bash-language-server
 # Cargo
 curl https://sh.rustup.rs -sSf | sh
 . "$HOME/.cargo/env"
+cargo install ripgrep --features pcre2
 
 # Lua
 sudo apt install lua5.4 liblua5.4-dev
@@ -70,3 +71,4 @@ source ~/.zshrc
 # copyq, flameshot
 # shortcuts: copyq, flameshot, close active window
 # if gnome then gsettings set org.gnome.desktop.interface clock-show-seconds true
+# set org.gnome.desktop.default-applications.terminal exec wezterm
