@@ -1,5 +1,14 @@
 lazy-lock.json
 undo/
-/.emacs.d/*
+.emacs.d/*
+!.emacs.d/Dockerfile
+!.emacs.d/eshell
+!.emacs.d/lisp
+!.emacs.d/site-list
+!.emacs.d/_config.yml
+!.emacs.d/banner.txt
+!.emacs.d/custom-example.el
+!.emacs.d/early-init.el
+!.emacs.d/init-mini.el
 !.emacs.d/init.el
-!.emacs.d/custom.el
+!.emacs.d/logo.png

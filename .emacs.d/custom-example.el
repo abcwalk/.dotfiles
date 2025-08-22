@@ -3,26 +3,28 @@
 ;;;       Add or change the configurations in custom.el, then restart Emacs.
 ;;;       Put your own configurations in custom-post.el to override default configurations.
 ;;; Code:
+
 ;; (setq centaur-logo nil)                        ; Logo file or nil (official logo)
 ;; (setq centaur-full-name "user name")           ; User full name
 ;; (setq centaur-mail-address "user@email.com")   ; Email address
 ;; (setq centaur-proxy "127.0.0.1:7897")          ; HTTP/HTTPS proxy
 ;; (setq centaur-socks-proxy "127.0.0.1:7897")    ; SOCKS proxy
 ;; (setq centaur-server nil)                      ; Enable `server-mode' or not: t or nil
-;;(setq centaur-icon t)                        ; Display icons or not: t or nil
-(setq centaur-package-archives 'iscas)         ; Package repo: melpa, bfsu, iscas, netease, sjtu, tencent, tuna or ustc
-(setq centaur-theme 'night)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
-;; (setq centaur-completion-style 'minibuffer)      Completion display style: minibuffer or childframe
-(setq centaur-frame-maximized-on-startup t)    ; Maximize frame on startup or not: t or nil
+;; (setq centaur-icon nil)                        ; Display icons or not: t or nil
+;; (setq centaur-package-archives 'melpa)         ; Package repo: melpa, bfsu, iscas, netease, sjtu, tencent, tuna or ustc
+;; (setq centaur-theme 'auto)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
+;; (setq centaur-completion-style 'minibuffer)    ; Completion display style: minibuffer or childframe
+;; (setq centaur-frame-maximized-on-startup t)    ; Maximize frame on startup or not: t or nil
 ;; (setq centaur-dashboard nil)                   ; Display dashboard at startup or not: t or nil
-(setq centaur-lsp 'lsp-mode)                   ; Set LSP client: lsp-mode, eglot or nil
-(setq centaur-lsp-format-on-save t)            ; Auto format buffers on save: t or nil
+;; (setq centaur-lsp 'lsp-mode)                   ; Set LSP client: lsp-mode, eglot or nil
+;; (setq centaur-lsp-format-on-save t)            ; Auto format buffers on save: t or nil
 ;; (setq centaur-lsp-format-on-save-ignore-modes '(c-mode c++-mode python-mode markdown-mode)) ; Ignore format on save for some languages
-(setq centaur-tree-sitter t)                 ; Enable tree-sitter or not: t or nil Only available in 29+.
+;; (setq centaur-tree-sitter nil)                 ; Enable tree-sitter or not: t or nil. Only available in 29+.
 ;; (setq centaur-chinese-calendar t)              ; Support Chinese calendar or not: t or nil
 ;; (setq centaur-player t)                        ; Enable players or not: t or nil
 (setq centaur-prettify-symbols-alist nil)      ; Alist of symbol prettifications. Nil to use font supports ligatures.
 (setq centaur-prettify-org-symbols-alist nil)  ; Alist of symbol prettifications for `org-mode'
+
 ;; For Emacs devel
 ;; (setq package-user-dir (locate-user-emacs-file (format "elpa-%s" emacs-major-version)))
 ;; (setq desktop-base-file-name (format ".emacs-%s.desktop" emacs-major-version))
@@ -33,13 +35,16 @@
   "Setup fonts."
   (when (display-graphic-p)
     ;; Set default font
-    (cl-loop for font in '("JetBrainsMono Nerd Font Mono")
+    (cl-loop for font in '("FiraCode Nerd Font" "CaskaydiaCove Nerd Font"
+                           "Fira Code" "Cascadia Code" "Jetbrains Mono"
+                           "SF Mono" "Menlo" "Hack" "Source Code Pro"
+                           "Monaco" "DejaVu Sans Mono" "Consolas")
              when (font-available-p font)
              return (set-face-attribute 'default nil
                                         :family font
-                                        :height (cond (sys/macp 160)
+                                        :height (cond (sys/macp 130)
                                                       (sys/win32p 110)
-                                                      (t 160))))
+                                                      (t 100))))
 
     ;; Set mode-line font
     ;; (cl-loop for font in '("SF Mono" "Menlo" "SF Pro Display" "Helvetica")
@@ -109,9 +114,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("5c7720c63b729140ed88cf35413f36c728ab7c70f8cd8422d9ee1cedeb618de5"
-     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1" default)))
+ )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

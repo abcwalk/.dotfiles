@@ -1,373 +1,161 @@
-;; Thank you Prot
+;;; init.el --- A Fancy and Fast Emacs Configuration.	-*- lexical-binding: t no-byte-compile: t -*-
 
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(load custom-file :no-error-if-file-is-missing)
+;; Copyright (C) 2006-2025 Vincent Zhang
 
-(set-face-attribute 'default nil
-                    :font "JetBrainsMono Nerd Font"
-                    :height 130    ; Размер: 13pt (130 = 13.0)
-                    :weight 'normal)
+;; Author: Vincent Zhang <seagle0128@gmail.com>
+;; URL: https://github.com/seagle0128/.emacs.d
+;; Version: 8.3.0
+;; Keywords: .emacs.d centaur
 
-(use-package ligature
-  :ensure t
-  :config
-  (ligature-set-ligatures 'prog-mode
-                          '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***"
-                            "|||" "||>" "<||" "<==" "<=~" "<~>" "<~~" "<~"
-                            "<=" "<:" "<|" "<" "==" "=>"
-                            "=/=" ">=>" ">-" ">=" ">>" "-}" "-->" "---" "-~"
-                            "#{" "#[" "#:" "#=" "##" "::" ":#" ":>" ":<"
-                            "$>" "+++" "->" "-<" "-<<" "-<+" "-->" "---" "-~~"
-                            "!!" "!=" "!==" "!#" "!<" "!>" "!~" "!!!"
-                            "&&" "&&&" "&&>" "&&<" "&>" "&<" "&&"
-                            "*>" "*>=" "*<" "*<=" "*=" "***" "*/"
-                            "\\\\" "||" "||>" "|||" "|||>" "||<" "|||<"
-                            "{}" "{|" "|}" "|]" "|>" "|-" "|=" "||-" "|=="
-                            "=>" "===" "!!!" "$$$" "+++" "..." ".*" "::"))
-  ;; Включить глобально
-  (global-ligature-mode t))
+;;
+;;                          `..`
+;;                        ````+ `.`
+;;                    /o:``   :+ ``
+;;                .+//dho......y/..`
+;;                `sdddddhysso+h` ``
+;;                  /ddd+`..` +. .`
+;;                 -hos+    `.:```
+;;               `./dddyo+//osso/:`
+;;             `/o++dddddddddddddod-
+;;            `// -y+:sdddddsddsy.dy
+;;                /o   `..```h+`y+/h+`
+;;                .s       `++``o:  ``
+;;                        `:- `:-
+;;
+;;   CENTAUR EMACS - Enjoy Programming & Writing
 
-;;; Set up the package manager
-(require 'package)
-(package-initialize)
+;; This file is not part of GNU Emacs.
+;;
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 3, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+;; Floor, Boston, MA 02110-1301, USA.
+;;
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;;; Commentary:
+;;
+;; Centaur Emacs - A Fancy and Fast Emacs Configuration.
+;;
 
-(when (< emacs-major-version 29)
-  (unless (package-installed-p 'use-package)
-    (unless package-archive-contents
-      (package-refresh-contents))
-    (package-install 'use-package)))
 
-(add-to-list 'display-buffer-alist
-             '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-               (display-buffer-no-window)
-               (allow-no-window . t)))
+;;; Code:
 
-;;; Tweak the looks of Emacs
-(menu-bar-mode 1)
-(scroll-bar-mode 1)
-(tool-bar-mode -1)
-(save-place-mode 1)
+(when (version< emacs-version "28.1")
+  (error "This requires Emacs 28.1 and above!"))
 
-(electric-pair-mode 1)
-;; (setq electric-pair-pairs
-;;       '(
-;;         (?\" . ?\")
-;;         (?\( . ?\))
-;;         (?\[ . ?\])
-;;         (?\{ . ?\})
-;;         (?' . ')))   ; ← включить одинарные кавычки
+;;
+;; Speed up Startup Process
+;;
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-;; No sound
-(setq visible-bell t)
-(setq ring-bell-function 'ignore)
+;; Optimize Garbage Collection for Startup
+(setq gc-cons-threshold most-positive-fixnum)
 
-;; Recentf
-(recentf-mode 1)
-(setq recentf-max-saved-items 15)
+;; Optimize `auto-mode-alist`
+(setq auto-mode-case-fold nil)
 
-;; Remember to do M-x and run `nerd-icons-install-fonts' to get the
-;; font files.  Then restart Emacs to see the effect.
-(use-package nerd-icons
-  :ensure t)
+(unless (or (daemonp) noninteractive init-file-debug)
+  ;; Temporarily suppress file-handler processing to speed up startup
+  (let ((default-handlers file-name-handler-alist))
+    (setq file-name-handler-alist nil)
+    ;; Recover handlers after startup
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+                (setq file-name-handler-alist
+                      (delete-dups (append file-name-handler-alist default-handlers))))
+              101)))
 
-(use-package nerd-icons-completion
-  :ensure t
-  :after marginalia
-  :config
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+;;
+;; Configure Load Path
+;;
 
-(use-package nerd-icons-corfu
-  :ensure t
-  :after corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+;; Add "lisp" and "site-lisp" to the beginning of `load-path`
+(defun update-load-path (&rest _)
+  "Update the `load-path` to prioritize personal configurations."
+  (dolist (dir '("site-lisp" "lisp"))
+    (push (expand-file-name dir user-emacs-directory) load-path)))
 
-(use-package nerd-icons-dired
-  :ensure t
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+;; Add subdirectories inside "site-lisp" to `load-path`
+(defun add-subdirs-to-load-path (&rest _)
+  "Recursively add subdirectories in `site-lisp` to `load-path`.
 
-;;; Configure the minibuffer and completions
-(use-package vertico
-  :ensure t
-  :hook (after-init . vertico-mode))
+Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
+  (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+    (normal-top-level-add-subdirs-to-load-path)))
 
-(use-package consult
-  :ensure t
-  :bind (("M-e" . consult-recent-file)))
+;; Ensure these functions are called after `package-initialize`
+(advice-add #'package-initialize :after #'update-load-path)
+(advice-add #'package-initialize :after #'add-subdirs-to-load-path)
 
-(use-package marginalia
-  :ensure t
-  :hook (after-init . marginalia-mode))
+;; Initialize load paths explicitly
+(update-load-path)
 
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides
-   '((file (styles basic orderless))
-     (buffer (styles basic orderless))
-     (command (styles basic orderless))
-     (variable (styles basic orderless)))))
+;; Requisites
+(require 'init-const)
+(require 'init-custom)
+(require 'init-funcs)
 
-(use-package embark
-  :ensure t
-  :bind (("C-," . embark-act)   ; C-; для действий
-         ("C-c C-;" . embark-dwim)) ; "сделай то, что я имею в виду"
-  :init
-  (setq prefix-help-command 'embark-prefix-help-command))
+;; Packages
+;; Without this comment Emacs25 adds (package-initialize) here
+(require 'init-package)
 
-(use-package orderless
-  :ensure t
-  :config
-  (setq completion-styles '(orderless basic))
-  (setq completion-category-defaults nil)
-  (setq completion-category-overrides nil))
+;; Preferences
+(require 'init-base)
+(require 'init-hydra)
 
-(use-package savehist
-  :ensure nil ; it is built-in
-  :hook (after-init . savehist-mode))
+(require 'init-ui)
+(require 'init-edit)
+(require 'init-completion)
+(require 'init-snippet)
 
-(use-package corfu
-  :ensure t
-  :hook (after-init . global-corfu-mode)
-  :bind (:map corfu-map ("<tab>" . corfu-complete))
-  :config
-  (setq tab-always-indent 'complete)
-  (setq corfu-preview-current nil)
-  (setq corfu-min-width 20)
+(require 'init-bookmark)
+(require 'init-calendar)
+(require 'init-dashboard)
+(require 'init-dired)
+(require 'init-highlight)
+(require 'init-ibuffer)
+(require 'init-kill-ring)
+(require 'init-workspace)
+(require 'init-window)
+(require 'init-treemacs)
 
-  (setq corfu-popupinfo-delay '(1.25 . 0.5))
-  (corfu-popupinfo-mode 1) ; shows documentation after `corfu-popupinfo-delay'
+(require 'init-eshell)
+(require 'init-shell)
 
-  ;; Sort by input history (no need to modify `corfu-sort-function').
-  (with-eval-after-load 'savehist
-    (corfu-history-mode 1)
-    (add-to-list 'savehist-additional-variables 'corfu-history)))
+(require 'init-markdown)
+(require 'init-org)
+(require 'init-reader)
 
-;;; The file manager (Dired)
-(use-package dired
-  :ensure nil
-  :commands (dired)
-  :hook
-  ((dired-mode . dired-hide-details-mode)
-   (dired-mode . hl-line-mode)
-   (dired-mode . (lambda ()
-                   (define-key dired-mode-map (kbd "DEL") 'dired-up-directory)
-                   (define-key dired-mode-map (kbd "<backspace>") 'dired-up-directory))))
-  :config
-  (setq dired-recursive-copies 'always)
-  (setq dired-recursive-deletes 'always)
-  (setq delete-by-moving-to-trash t)
-  (setq dired-dwim-target t))
+(require 'init-dict)
+(require 'init-docker)
+(require 'init-player)
+(require 'init-utils)
 
-(use-package dired-subtree
-  :ensure t
-  :after dired
-  :bind
-  (:map dired-mode-map
-	("<tab>" . dired-subtree-toggle)
-	("TAB" . dired-subtree-toggle)
-	("<backtab>" . dired-subtree-remove)
-	("S-TAB" . dired-subtree-remove))
-  :config
-  (setq dired-subtree-use-backgrounds nil))
+;; Programming
+(require 'init-vcs)
+(require 'init-check)
+(require 'init-lsp)
+(require 'init-dap)
+(require 'init-ai)
 
-(use-package trashed
-  :ensure t
-  :commands (trashed)
-  :config
-  (setq trashed-action-confirmer 'y-or-n-p)
-  (setq trashed-use-header-line t)
-  (setq trashed-sort-key '("Date deleted" . t))
-  (setq trashed-date-format "%Y-%m-%d %H:%M:%S"))
+(require 'init-prog)
+(require 'init-elisp)
+(require 'init-c)
+(require 'init-go)
+(require 'init-rust)
+(require 'init-python)
+(require 'init-ruby)
+(require 'init-elixir)
+(require 'init-web)
 
-(use-package ef-themes
-  :ensure t
-  :config
-  (load-theme 'ef-eagle :no-confirm))
-
-(setq treesit-language-source-alist
-      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-	(cmake "https://github.com/uyha/tree-sitter-cmake")
-	(c "https://github.com/tree-sitter/tree-sitter-c")
-	(elisp "https://github.com/Wilfred/tree-sitter-elisp")
-	(html "https://github.com/tree-sitter/tree-sitter-html")
-	(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-	(json "https://github.com/tree-sitter/tree-sitter-json")
-	(make "https://github.com/alemuller/tree-sitter-make")
-	(markdown "https://github.com/ikatyang/tree-sitter-markdown")
-	(python "https://github.com/tree-sitter/tree-sitter-python")))
-
-(use-package treesit-auto
-  :ensure t
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
-
-(use-package spacious-padding
-  :ensure t
-  :custom
-  (spacious-padding-widths
-   '(:internal-border-width 15
-			    :header-line-width 4
-			    :mode-line-width 6
-			    :tab-width 4
-			    :right-divider-width 30
-			    :scroll-bar-width 8
-			    :fringe-width 8))
-  (spacious-padding-subtle-frame-lines nil)
-  :config
-  (spacious-padding-mode 1))
-
-(use-package undo-fu
-  :ensure t)
-
-(use-package undo-fu-session
-  :ensure t
-  :hook (after-init . global-undo-fu-session-mode)
-  :custom
-  (undo-fu-session-directory "~/.emacs.d/undo-fu-session/")
-  (undo-fu-session-max-saved 200)  ; максимум 200 шагов на файл
-  (undo-fu-session-incompatible-modes '(pdf-view-mode doc-view-mode))
-  :config
-  (make-directory undo-fu-session-directory t))
-
-(global-set-key (kbd "C-z") 'undo)
-(global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
-
-(use-package pulsar
-  :ensure t
-  :custom
-  (pulsar-pulse t)
-  (pulsar-delay 0.055) 
-  (pulsar-iterations 10)
-  (pulsar-face 'pulsar-green)
-  (pulsar-highlight-face 'pulsar-yellow)
-  :config
-  (pulsar-global-mode 1))
-
-(add-hook 'next-error-hook #'pulsar-pulse-line)
-(add-hook 'kill-line #'pulsar-pulse-line-red)
-
-;; (setq pulsar-pulse-region-functions
-;;       '(
-;;         ;; Базовые команды
-;; 	   kill-region
-;;         copy-region-as-kill
-;;         yank
-;;         yank-pop
-
-;;         ;; Отмена/повтор
-;;         undo
-;;         undo-only  ; если используется
-;;         undo-redo
-	
-;;         ;; Замена и трансформации
-;;         replace-string
-;;         query-replace
-;;         query-replace-regexp
-
-;;         ;; Операции с текстом
-;;         transpose-regions
-;;         rotate-yank-pointer
-
-;; 	;; Другие возможные
-;;         kill-ring-save          ; синоним copy-region-as-kill
-;;         kill-line
-;;         kill-word
-;;         backward-kill-word
-;;         ))
-
-(let ((map global-map)) 
-  (define-key map (kbd "C-x l") #'pulsar-pulse-line)
-  (define-key map (kbd "C-x L") #'pulsar-highlight-line))
-
-;; Autocompletion
-(use-package corfu
-  :ensure t
-  :hook (after-init . global-corfu-mode)
-  :custom
-  (corfu-auto t)                    ; автодополнение при вводе
-  (corfu-auto-delay 0.0)            ; без задержки
-  (corfu-preview-current t)         ; подсветка текущего элемента
-  (corfu-min-width 80)              ; ширина меню
-  (corfu-echo-documentation t)      ; показывать документацию в echo area
-  :config
-  ;; Включить corfu в minibuffer
-  (setq read-extended-command-completion-mode t))
-
-;; (use-package corfu-doc
-;;   :ensure t
-;;   :hook (corfu-mode . corfu-doc-mode)
-;;   :custom
-;;   (corfu-doc-delay 0.3)
-;;   (corfu-doc-max-width 60)
-;;   (corfu-doc-max-height 15))
-
-(use-package corfu-terminal
-  :ensure t)
-
-;; LSP
-;; === Tree-sitter для Python ===
-(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
-
-;; === LSP Mode (база) ===
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-inhibit-message t)
-  (setq lsp-echo-disabled t)
-  (setq lsp-format-on-save nil)
-  (setq lsp-diagnostics-provider :flymake)
-  (setq lsp-completion-provider :capf)
-  :config
-  (lsp-enable-which-key-integration t))
-
-;; === lsp-pyright — для Python ===
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-ts-mode . (lambda ()
-                            (require 'lsp-pyright)
-                            (lsp-deferred)))
-  :custom
-  (lsp-pyright-python-executable-cmd "python")
-  (lsp-pyright-linting "ruff")           ; использовать ruff как линтер
-  (lsp-pyright-typechecking-mode "basic") ; или "strict"
-  (lsp-pyright-formatting-provider "ruff") ; форматировать через ruff
-  ;; (lsp-pyright-organize-imports-provider "ruff") ;
-  )
-
-(use-package lsp-ui
-  :ensure t
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (setq lsp-enable-symbol-highlighting t)
-  (setq lsp-lens-enable t)
-  (setq lsp-headerline-breadcrumb-enable nil)
-  (setq lsp-modeline-code-actions-enable t)
-  (setq lsp-modeline-diagnostics-enable t)
-  (setq lsp-signature-auto-activate t)
-  (setq lsp-ui-sideline-enable t)
-  (setq lsp-ui-doc-enable t)
-  (setq lsp-ui-doc-position 'bottom)
-  (setq lsp-completion-show-detail t)
-  (setq lsp-completion-show-kind t))
-
-(defun my-python-before-save ()
-  "Форматировать и организовать импорты перед сохранением."
-  (when (derived-mode-p 'python-ts-mode)
-    ;; 1. Организовать импорты (ruff + isort)
-    (lsp-organize-imports)
-    ;; 2. Форматировать (ruff format)
-    (lsp-format-buffer)))
-
-(remove-hook 'before-save-hook 'my-python-format-on-save)
-(add-hook 'before-save-hook 'my-python-before-save)
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init.el ends here
