@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="lambda"
+ZSH_THEME="lambda-gitster"
 ZSH_DISABLE_COMPFIX=true
 
 plugins=(git node docker fzf themes kubectl)
