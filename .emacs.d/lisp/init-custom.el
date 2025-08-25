@@ -252,7 +252,8 @@ Native tree-sitter is introduced in 29."
     (">=>"    . ?↣)
     ("&&"     . ?∧)
     ("||"     . ?∨)
-    ("not"    . ?¬))
+    ("not"    . ?¬)
+    )
   "A list of symbol prettifications.
 Nil to use font supports ligatures."
   :group 'centaur

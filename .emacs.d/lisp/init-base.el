@@ -127,9 +127,19 @@
 (use-package saveplace
   :hook (after-init . save-place-mode))
 
+(defun xah-save-all-unsaved ()
+  (interactive)
+  (save-some-buffers t))
+
+(when (>= emacs-major-version 27)
+  (setq after-focus-change-function 'xah-save-all-unsaved)
+  ;; to undo this, run
+  ;; (setq after-focus-change-function 'ignore)
+  )
+
 ;; History
 (use-package recentf
-  :bind (("C-x C-r" . recentf-open-files))
+  :bind (("M-e" . recentf-open-files))
   :hook (after-init . recentf-mode)
   :init (setq recentf-max-saved-items 300
               recentf-exclude
@@ -142,6 +152,7 @@
   (push (expand-file-name recentf-save-file) recentf-exclude)
   (add-to-list 'recentf-filename-handlers #'abbreviate-file-name))
 
+(setq create-lockfiles nil)
 (use-package savehist
   :hook (after-init . savehist-mode)
   :init (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
@@ -212,6 +223,7 @@
       delete-by-moving-to-trash t       ; Deleting files go to OS's trash folder
       make-backup-files nil             ; Forbide to make backup files
       auto-save-default nil             ; Disable auto save
+      show-help-function nil            ; Disable tool tips
 
       uniquify-buffer-name-style 'post-forward-angle-brackets ; Show path if names are same
       adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*"

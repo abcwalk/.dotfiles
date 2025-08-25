@@ -144,7 +144,7 @@ wezterm.on("gui-startup", function()
 end)
 
 config.keys = {
-	{ key = "Insert", mods = "SHIFT", action = act.PasteFrom("Clipboard") },
+	{ key = "y", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 	{
 		key = "t",
 		mods = "SHIFT|CTRL",

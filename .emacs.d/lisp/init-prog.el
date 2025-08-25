@@ -47,7 +47,8 @@
   :hook (prog-mode . prettify-symbols-mode)
   :init
   (setq-default prettify-symbols-alist centaur-prettify-symbols-alist)
-  (setq prettify-symbols-unprettify-at-point 'right-edge))
+  (setq prettify-symbols-unprettify-at-point 'right-edge)
+  )
 
 ;; Tree-sitter support
 (when (centaur-treesit-available-p)

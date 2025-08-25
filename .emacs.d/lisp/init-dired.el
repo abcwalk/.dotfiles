@@ -37,7 +37,8 @@
 (use-package dired
   :ensure nil
   :bind (:map dired-mode-map
-         ("C-c C-p" . wdired-change-to-wdired-mode))
+         ("C-c C-p" . wdired-change-to-wdired-mode)
+         ("DEL" . dired-up-directory))
   :config
   ;; Guess a default target directory
   (setq dired-dwim-target t)

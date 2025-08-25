@@ -173,6 +173,12 @@
   :init
   (setq alert-default-style 'mode-line)
 
+  (setq pomidor-sound-tick nil ; nil to disable, defaults to `(expand-file-name (concat pomidor-dir "tick.wav"))`
+        pomidor-sound-tack nil ;
+        ;; pomidor-sound-overwork (expand-file-name (concat pomidor-dir "overwork.wav"))
+	    ;; pomidor-sound-break-over (expand-file-name (concat (getenv "HOME") "/Music/overwork.wav"))
+        )
+
   (when sys/macp
     (setq pomidor-play-sound-file
           (lambda (file)

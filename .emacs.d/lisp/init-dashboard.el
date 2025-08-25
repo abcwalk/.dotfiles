@@ -80,12 +80,12 @@
     (setq dashboard-banner-logo-title "CENTAUR EMACS - Enjoy Programming & Writing"
           dashboard-startup-banner (or centaur-logo 'official)
           dashboard-page-separator "\n\f\n"
-          dashboard-projects-backend 'project-el
+          dashboard-projects-backend 'projectile
           dashboard-path-style 'truncate-middle
           dashboard-path-max-length 60
           dashboard-center-content t
           dashboard-vertically-center-content t
-          dashboard-show-shortcuts nil
+          dashboard-show-shortcuts t
           dashboard-items '((recents  . 10)
                             (bookmarks . 5)
                             (projects . 5))

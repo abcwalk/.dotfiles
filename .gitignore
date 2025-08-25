@@ -2,7 +2,6 @@ lazy-lock.json
 undo/
 .emacs.d/*
 !.emacs.d/Dockerfile
-!.emacs.d/eshell
 !.emacs.d/lisp
 !.emacs.d/site-list
 !.emacs.d/_config.yml

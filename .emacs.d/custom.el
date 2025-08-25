@@ -11,7 +11,7 @@
 ;; (setq centaur-server nil)                      ; Enable `server-mode' or not: t or nil
 ;;(setq centaur-icon t)                        ; Display icons or not: t or nil
 (setq centaur-package-archives 'iscas)         ; Package repo: melpa, bfsu, iscas, netease, sjtu, tencent, tuna or ustc
-(setq centaur-theme 'night)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
+(setq centaur-theme 'doom-tomorrow-night)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
 ;; (setq centaur-completion-style 'minibuffer)      Completion display style: minibuffer or childframe
 (setq centaur-frame-maximized-on-startup t)    ; Maximize frame on startup or not: t or nil
 ;; (setq centaur-dashboard nil)                   ; Display dashboard at startup or not: t or nil
@@ -22,7 +22,7 @@
 ;; (setq centaur-chinese-calendar t)              ; Support Chinese calendar or not: t or nil
 ;; (setq centaur-player t)                        ; Enable players or not: t or nil
 (setq centaur-prettify-symbols-alist nil)      ; Alist of symbol prettifications. Nil to use font supports ligatures.
-(setq centaur-prettify-org-symbols-alist nil)  ; Alist of symbol prettifications for `org-mode'
+;; (setq centaur-prettify-org-symbols-alist nil)  ; Alist of symbol prettifications for `org-mode'
 ;; For Emacs devel
 ;; (setq package-user-dir (locate-user-emacs-file (format "elpa-%s" emacs-major-version)))
 ;; (setq desktop-base-file-name (format ".emacs-%s.desktop" emacs-major-version))
@@ -109,9 +109,46 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("5c7720c63b729140ed88cf35413f36c728ab7c70f8cd8422d9ee1cedeb618de5"
-     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1" default)))
+ '(package-selected-packages
+   '(ace-pinyin add-node-modules-path aggressive-indent anzu
+		atomic-chrome avy-zap beginend browse-at-remote
+		browse-kill-ring cape cask-mode ccls cmake-mode
+		coffee-mode colorful-mode consult-flyspell consult-lsp
+		consult-yasnippet corfu csv-mode cue-sheet-mode dape
+		dart-mode dashboard default-text-scale devdocs diff-hl
+		diminish dired-git-info dired-quick-sort dired-rsync
+		diredfl disk-usage docker dockerfile-mode
+		doom-modeline doom-themes drag-stuff easy-kill eat
+		eldoc-box elfeed elixir-mode embark-consult esh-help
+		eshell-prompt-extras eshell-z exec-path-from-shell
+		fanyi fish-mode flymake-popon gcmh git-messenger
+		git-modes git-timemachine gnu-elpa-keyring-update
+		go-dlv go-fill-struct go-gen-test go-impl go-tag
+		goggles gotest goto-chg gptel-magit grip-mode gt
+		haml-mode helpful hide-mode-line highlight-defined
+		hungry-delete ialign ibuffer-project iedit inf-ruby
+		link-hint list-environment lsp-java lsp-julia
+		lsp-pyright lsp-sourcekit lsp-ui lua-mode macrostep
+		magit-todos marginalia markdown-toc memory-usage
+		mermaid-mode minions mixed-pitch mwim
+		nerd-icons-completion nerd-icons-corfu
+		nerd-icons-dired nerd-icons-ibuffer nov ob-go
+		ob-mermaid ob-powershell ob-rust olivetti orderless
+		org-fragtog org-mime org-modern org-pomodoro
+		org-preview-html org-rich-yank org-roam-ui
+		org-tree-slide ox-gfm page-break-lines pdf-tools
+		persistent-scratch php-mode pomidor popper powershell
+		pretty-hydra protobuf-mode quickrun rainbow-delimiters
+		region-occurrences-highlighter restclient
+		reveal-in-folder rg ron-mode rspec-mode ruby-refactor
+		rust-mode scala-mode scss-mode smart-region
+		solaire-mode sudo-edit swift-mode symbol-overlay
+		tabspaces toc-org transient-posframe transwin
+		treemacs-magit treemacs-nerd-icons treemacs-tab-bar
+		treesit-auto ultra-scroll v-mode vertico-posframe
+		vimrc-mode vterm-toggle vundo web-mode
+		which-key-posframe xclip xterm-color yaml-mode
+		yard-mode yari yasnippet-capf yasnippet-snippets ztree)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

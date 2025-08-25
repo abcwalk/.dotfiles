@@ -44,10 +44,12 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 # Download and install Node.js
 nvm install 22
 # Verify the Node.js version:
-node -v # Should print "v22.18.0".
+node -v     # Should print "v22.18.0".
 nvm current # Should print "v22.18.0".
 # Verify npm version:
 npm -v # Should print "10.9.3".
+sudo rm -f /usr/bin/node
+sudo rm -f /usr/bin/npm
 sudo ln -s $(which node) /usr/bin/
 sudo ln -s $(which npm) /usr/bin/
 
@@ -81,3 +83,6 @@ source ~/.zshrc
 # shortcuts: copyq, flameshot, close active window
 # if gnome then gsettings set org.gnome.desktop.interface clock-show-seconds true
 # set org.gnome.desktop.default-applications.terminal exec wezterm
+# Ubuntu: disable Super+p (for emacs keybinging)
+# gsettings get org.gnome.mutter.keybindings switch-monitor <- get keybinding
+# gsettings set org.gnome.mutter.keybindings switch-monitor "['<Super><Shift>p']"
