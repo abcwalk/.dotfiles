@@ -116,6 +116,10 @@
        :bind (:map lsp-mode-map
               ("C-M-." . consult-lsp-symbols)))
 
+     (with-eval-after-load 'lsp-mode
+       (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]framework[/\\\\]build\\'")
+       (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]node_modules\\'"))
+
      (with-no-warnings
        ;; Disable `lsp-mode' in `git-timemachine-mode'
        (defun my-lsp--init-if-visible (fn &rest args)

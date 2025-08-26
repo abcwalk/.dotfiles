@@ -39,7 +39,7 @@
                                         :family font
                                         :height (cond (sys/macp 160)
                                                       (sys/win32p 110)
-                                                      (t 160))))
+                                                      (t 150))))
 
     ;; Set mode-line font
     ;; (cl-loop for font in '("SF Mono" "Menlo" "SF Pro Display" "Helvetica")

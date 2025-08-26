@@ -3,7 +3,6 @@
 ;;; Commentary:
 ;;; Code:
 (use-package projectile
-  :ensure t
   :config
   (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
   (global-set-key (kbd "C-p") 'projectile-command-map)

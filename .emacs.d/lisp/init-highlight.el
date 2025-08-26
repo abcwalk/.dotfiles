@@ -157,17 +157,17 @@ FACE defaults to inheriting from default and highlight."
   :hook (after-init . global-region-occurrences-highlighter-mode))
 
 ;; Highlight indentions
-;; (use-package indent-bars
-;;   :custom
-;;   (indent-bars-color '(highlight :face-bg t :blend 0.225))
-;;   (indent-bars-treesit-support centaur-tree-sitter)
-;;   (indent-bars-no-descend-string t)
-;;   (indent-bars-treesit-ignore-blank-lines-types '("module"))
-;;   (indent-bars-prefer-character t)
-;;   (indent-bars-treesit-scope '((python function_definition class_definition for_statement
-;; 				                       if_statement with_statement while_statement)))
-;;   :hook ((prog-mode yaml-mode) . indent-bars-mode)
-;;   :config (require 'indent-bars-ts))
+(use-package indent-bars
+  :custom
+  (indent-bars-color '(highlight :face-bg t :blend 0.225))
+  (indent-bars-treesit-support centaur-tree-sitter)
+  (indent-bars-no-descend-string t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  (indent-bars-prefer-character t)
+  (indent-bars-treesit-scope '((python function_definition class_definition for_statement
+				                       if_statement with_statement while_statement)))
+  :hook ((prog-mode yaml-mode) . indent-bars-mode)
+  :config (require 'indent-bars-ts))
 
 ;; Colorize color names in buffers
 (use-package colorful-mode

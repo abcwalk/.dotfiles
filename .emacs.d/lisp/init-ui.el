@@ -132,6 +132,8 @@
         doom-modeline-minor-modes t)
   :bind (:map doom-modeline-mode-map
          ("C-<f6>" . doom-modeline-hydra/body))
+  :config
+  (setq doom-modeline-project-detection 'relative-from-project)
   :pretty-hydra
   ((:title (pretty-hydra-title "Mode Line" 'sucicon "nf-custom-emacs" :face 'nerd-icons-purple)
     :color amaranth :quit-key ("q" "C-g"))
