@@ -8,9 +8,25 @@
 ;;; Code:
 
 ;; Vterm
-(use-package eshell
-  :bind (("C-x /" . vterm-toggle)
-         ("C-x ." . vterm-toggle-cd)))
+(use-package vterm)
+(use-package vterm-toggle)
+
+(defun my/vterm-toggle-project-root ()
+  "Open vterm в in project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (vterm-toggle)))
+
+(defun my/vterm-toggle-here ()
+  "Open vterm in current buffer dir."
+  (interactive)
+  (let ((default-directory (if (buffer-file-name)
+                               (file-name-directory (buffer-file-name))
+                             (expand-file-name default-directory))))
+    (vterm-toggle)))
+
+(global-set-key (kbd "C-x /") 'my/vterm-toggle-project-root)
+(global-set-key (kbd "C-x .") 'my/vterm-toggle-here)
 
 (provide 'init-vterm)
 

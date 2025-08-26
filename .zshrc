@@ -39,12 +39,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export NVM_DIR="$HOME/.nvm"
-export PYTHONPATH="$HOME/Monorepo/src/product/nta/tests/framework"
-
-# PyEnv setup
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+export PYTHONPATH="$HOME/Monorepo/src/product/nta/tests/"
 
 # NVM (Node Version Manager)
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
@@ -63,3 +58,7 @@ export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

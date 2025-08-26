@@ -4,8 +4,8 @@ local act = wezterm.action
 
 local DESKTOP_ENV = (os.getenv("XDG_CURRENT_DESKTOP")):lower() or ""
 local THEME_FILE_PATH = os.getenv("HOME") .. "/.theme"
-local THEME_LIGHT = "Alabaster Light"
-local THEME_DARK = "Alabaster Dark"
+local THEME_LIGHT = "Tomorrow"
+local THEME_DARK = "Tomorrow 2"
 
 local config = {}
 if wezterm.config_builder then
@@ -144,7 +144,7 @@ wezterm.on("gui-startup", function()
 end)
 
 config.keys = {
-	{ key = "y", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+	{ key = "Insert", mods = "SHIFT", action = act.PasteFrom("Clipboard") },
 	{
 		key = "t",
 		mods = "SHIFT|CTRL",
@@ -190,7 +190,7 @@ config.keys = {
 }
 
 config.default_prog = { "zsh" }
-config.font = wezterm.font("Aporetic Sans Mono", { weight = "Regular" })
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 16
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false

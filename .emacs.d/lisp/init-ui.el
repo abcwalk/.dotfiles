@@ -321,7 +321,7 @@
   :bind (:map default-text-scale-mode-map
          ("s-="   . default-text-scale-increase)
          ("s--"   . default-text-scale-decrease)
-         ("s-0"   . default-text-scale-reset)
+         ("C-0"   . default-text-scale-reset)
          ("C-s-=" . default-text-scale-increase)
          ("C-s--" . default-text-scale-decrease)
          ("C-s-0" . default-text-scale-reset)))

@@ -94,13 +94,17 @@
                  lsp-semantic-tokens-enable t
                  lsp-progress-spinner-type 'progress-bar-filled
 
-                 lsp-enable-file-watchers nil
+                 lsp-enable-file-watchers t
+                 lsp-file-watch-threshold 2000
+
                  lsp-enable-folding nil
                  lsp-enable-symbol-highlighting nil
                  lsp-enable-text-document-color nil
 
                  lsp-enable-indentation nil
                  lsp-enable-on-type-formatting nil
+
+                 lsp-headerline-breadcrumb-enable nil
 
                  ;; For diagnostics
                  lsp-diagnostics-disabled-modes '(markdown-mode gfm-mode)
@@ -491,16 +495,19 @@
      :functions lsp-pyright-format-buffer
      :hook (((python-mode python-ts-mode) . (lambda ()
                                               (require 'lsp-pyright)
-                                              (add-hook 'after-save-hook #'lsp-pyright-format-buffer t t))))
+                                              (add-hook 'after-save-hook #'ruff-fix-and-format t t))))
      :init
      (when (executable-find "python3")
        (setq lsp-pyright-python-executable-cmd "python3"))
-
-     (defun lsp-pyright-format-buffer ()
-       "Use `yapf' to format the buffer."
+     :config
+     (defun ruff-fix-and-format ()
+       "Запустить ruff --fix для импортов и ruff format."
        (interactive)
-       (when (and (executable-find "yapf") buffer-file-name)
-         (call-process "yapf" nil nil nil "-i" buffer-file-name))))
+       (when (and (executable-find "ruff") buffer-file-name)
+         ;; Сортировка и исправление импортов
+         (call-process "ruff" nil nil nil "check" "--fix" "--select=I" buffer-file-name)
+         ;; Форматирование кода
+         (call-process "ruff" nil nil nil "format" buffer-file-name))))
 
    ;; C/C++/Objective-C
    (use-package ccls
@@ -546,7 +553,7 @@
              ('lsp-mode
               (when (fboundp 'lsp-deferred)
                 ;; Avoid headerline conflicts
-                (setq-local lsp-headerline-breadcrumb-enable nil)
+                ;; (setq-local lsp-headerline-breadcrumb-enable nil)
                 (lsp-deferred)))
              (_
               (user-error "LSP:: invalid `centaur-lsp' type"))))

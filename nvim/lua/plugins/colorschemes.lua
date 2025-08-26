@@ -6,7 +6,7 @@ local themes = {
     ['alabaster'] = {
         repo = 'behemothbucket/alabaster.nvim',
         branch = 'custom',
-        enabled = true,
+        enabled = false,
         config = function()
             vim.g.alabaster_dim_comments = true
             vim.g.alabaster_floatborder = true
@@ -112,6 +112,11 @@ local themes = {
                 end,
             })
         end,
+    },
+    ['tairiki'] = {
+        repo = 'deparr/tairiki.nvim',
+        enabled = true,
+        config = function() end,
     },
 }
 
