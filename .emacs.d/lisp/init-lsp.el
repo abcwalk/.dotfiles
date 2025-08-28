@@ -492,22 +492,16 @@
 
    ;; Python
    (use-package lsp-pyright
-     :functions lsp-pyright-format-buffer
-     :hook (((python-mode python-ts-mode) . (lambda ()
-                                              (require 'lsp-pyright)
-                                              (add-hook 'after-save-hook #'ruff-fix-and-format t t))))
-     :init
-     (when (executable-find "python3")
-       (setq lsp-pyright-python-executable-cmd "python3"))
+     :ensure t
+     :hook (python-ts-mode . (lambda ()
+                               (require 'lsp-pyright)
+                               (lsp-deferred)))
      :config
-     (defun ruff-fix-and-format ()
-       "Запустить ruff --fix для импортов и ruff format."
-       (interactive)
-       (when (and (executable-find "ruff") buffer-file-name)
-         ;; Сортировка и исправление импортов
-         (call-process "ruff" nil nil nil "check" "--fix" "--select=I" buffer-file-name)
-         ;; Форматирование кода
-         (call-process "ruff" nil nil nil "format" buffer-file-name))))
+     ;; Использовать ruff как форматтер и для организации импортов
+     (setq lsp-pyright-formatting-provider "ruff")
+     (setq lsp-pyright-linting "ruff")
+     (setq lsp-pyright-organize-imports-provider "ruff") ; если поддерживается
+     )
 
    ;; C/C++/Objective-C
    (use-package ccls

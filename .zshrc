@@ -26,7 +26,7 @@ alias n="nvim"
 alias n.="nvim ."
 alias e="emacs -nw"
 alias t="thunar ."
-alias m='cd $HOME/Monorepo/src/product/nta/tests/ && source $HOME/venvs/nta_autotests/bin/activate'
+alias m='cd $HOME/Monorepo/src/product/nta/tests/ && source .venv/bin/activate'
 alias l="ls -la"
 alias b='bat'
 

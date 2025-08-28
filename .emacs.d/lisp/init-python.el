@@ -30,50 +30,47 @@
 
 ;;; Code:
 
-(setenv "PYENV_ROOT" (concat (getenv "HOME") "/.pyenv"))
-(setenv "PYENV_SHELL" "zsh")
+;; (setenv "PYENV_ROOT" (concat (getenv "HOME") "/.pyenv"))
+;; (setenv "PYENV_SHELL" "zsh")
 
-(let ((pyenv-bin (concat (getenv "HOME") "/.pyenv/bin")))
-  (when (file-directory-p pyenv-bin)
-    (setenv "PATH" (concat pyenv-bin ":" (getenv "PATH")))))
+;; (let ((pyenv-bin (concat (getenv "HOME") "/.pyenv/bin")))
+;;   (when (file-directory-p pyenv-bin)
+;;     (setenv "PATH" (concat pyenv-bin ":" (getenv "PATH")))))
 
 ;; Python Mode
 ;; Install: pip install pyflakes autopep8
 (use-package python
   :ensure nil
-  :functions exec-path-from-shell-copy-env
   :hook (inferior-python-mode . (lambda ()
                                   (process-query-on-exit-flag
                                    (get-process "Python"))))
   :init
   (setq python-shell-completion-native-enable nil)
-
   :config
   (defun my-python-setup-project-env ()
     (when-let ((root (projectile-project-root)))
-      (let ((venv-python (expand-file-name ".venv/bin/python3.12" root))
+      (let ((venv-python (expand-file-name ".venv/bin/python3" root))
             (framework-path (expand-file-name "framework" root)))
-        (when (file-exists-p venv-python)
+        (when (and (file-exists-p venv-python)
+                   (file-directory-p framework-path))
           (setq-local python-shell-interpreter venv-python)
-          (setenv "PYTHONPATH"
-                  (concat (file-truename root) ":" (file-truename framework-path)))
-          (message "PYTHON :: venv activated: %s" venv-python)))))
-
+          (setenv "PYTHONPATH" (file-truename framework-path))
+          (message "PYTHON :: venv and PYTHONPATH activated: %s" venv-python)))))
   (add-hook 'python-mode-hook 'my-python-setup-project-env)
   (add-hook 'python-ts-mode-hook 'my-python-setup-project-env))
 
-(use-package pyvenv
-  :config
-  ;;  :diminish
-  (setq pyvenv-mode-line-indicator '(pyenv-mode-version-name ("[pyenv:" pyenv-mode-version-name "] ")))
+;; (use-package pyvenv
+;;   :config
+;;   ;;  :diminish
+;;   (setq pyvenv-mode-line-indicator '(pyenv-mode-version-name ("[pyenv:" pyenv-mode-version-name "] ")))
 
-  (defun projectile-pyenv-mode-set ()
-    (let ((project-name (projectile-project-name)))
-      (when (member project-name (pyenv-mode-versions))
-        (pyenv-mode-set project-name))))
+;;   (defun projectile-pyenv-mode-set ()
+;;     (let ((project-name (projectile-project-name)))
+;;       (when (member project-name (pyenv-mode-versions))
+;;         (pyenv-mode-set project-name))))
 
-  (add-hook 'projectile-after-switch-project-hook 'projectile-pyenv-mode-set)
-  (pyenv-mode t))
+;;   (add-hook 'projectile-after-switch-project-hook 'projectile-pyenv-mode-set)
+;;   (pyenv-mode t))
 
 (provide 'init-python)
 
