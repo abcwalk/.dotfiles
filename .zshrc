@@ -27,7 +27,7 @@ alias n.="nvim ."
 alias e="emacs -nw"
 alias t="thunar ."
 alias m='cd $HOME/Monorepo/src/product/nta/tests/ && source .venv/bin/activate'
-alias l="ls -la"
+alias l="ls -lah"
 alias b='bat'
 
 export EDITOR='/usr/local/bin/emacs'
@@ -39,7 +39,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export NVM_DIR="$HOME/.nvm"
-export PYTHONPATH="$HOME/Monorepo/src/product/nta/tests/"
+export PYTHONPATH="$HOME/Monorepo/src/product/nta/tests/:/home/rozhkov-m-nb/Documents/kata/build/azure_pipelines/_integration"
 
 # NVM (Node Version Manager)
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"

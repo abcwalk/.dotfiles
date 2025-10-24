@@ -141,9 +141,14 @@
                 treesit-auto ultra-scroll v-mode vertico-posframe vimrc-mode
                 vterm-toggle vundo web-mode which-key-posframe xclip xterm-color
                 yaml-mode yard-mode yari yasnippet-capf yasnippet-snippets ztree))
+ '(send-mail-function 'mailclient-send-it)
  '(warning-suppress-types '((lsp-mode))))
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(markdown-code-face ((t (:background nil)))))
 
 ;;; custom.el ends here

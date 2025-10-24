@@ -4,8 +4,8 @@ local act = wezterm.action
 
 local DESKTOP_ENV = (os.getenv("XDG_CURRENT_DESKTOP")):lower() or ""
 local THEME_FILE_PATH = os.getenv("HOME") .. "/.theme"
-local THEME_LIGHT = "Tomorrow"
-local THEME_DARK = "Tomorrow 2"
+local THEME_LIGHT = "Alabaster Light"
+local THEME_DARK = "Alabaster Dark"
 
 local config = {}
 if wezterm.config_builder then

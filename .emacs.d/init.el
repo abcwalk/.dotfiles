@@ -117,6 +117,8 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-completion)
 (require 'init-snippet)
 
+(require 'init-projectile)
+
 (require 'init-bookmark)
 (require 'init-calendar)
 (require 'init-dashboard)
@@ -131,7 +133,6 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-eshell)
 (require 'init-shell)
 (require 'init-vterm)
-(require 'init-projectile)
 
 (require 'init-markdown)
 (require 'init-org)

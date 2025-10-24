@@ -56,8 +56,7 @@
           (setq-local python-shell-interpreter venv-python)
           (setenv "PYTHONPATH" (file-truename framework-path))
           (message "PYTHON :: venv and PYTHONPATH activated: %s" venv-python)))))
-  (add-hook 'python-mode-hook 'my-python-setup-project-env)
-  (add-hook 'python-ts-mode-hook 'my-python-setup-project-env))
+  (add-hook 'python-mode-hook 'my-python-setup-project-env))
 
 ;; (use-package pyvenv
 ;;   :config

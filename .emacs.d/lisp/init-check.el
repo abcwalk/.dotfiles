@@ -33,11 +33,14 @@
 (use-package flymake
   :diminish
   :functions my-elisp-flymake-byte-compile
-  :bind ("C-c f" . flymake-show-buffer-diagnostics)
+  :bind (("C-c f" . flymake-show-buffer-diagnostics)
+         ("M-["  . flymake-goto-prev-error)
+         ("M-]"  . flymake-goto-next-error))
   :hook (prog-mode . flymake-mode)
-  :init (setq flymake-no-changes-timeout nil
-              flymake-fringe-indicator-position 'right-fringe
-              flymake-margin-indicator-position 'right-margin)
+  :init
+  (setq flymake-no-changes-timeout nil
+        flymake-fringe-indicator-position 'right-fringe
+        flymake-margin-indicator-position 'right-margin)
   :config
   ;; Check elisp with `load-path'
   (defun my-elisp-flymake-byte-compile (fn &rest args)
@@ -54,6 +57,9 @@
   (flymake-popon-posframe-border ((t :foreground ,(face-background 'posframe-border nil t))))
   :hook (flymake-mode . flymake-popon-mode)
   :init (setq flymake-popon-width 80))
+
+(use-package flymake-ruff
+  :hook (python-mode . flymake-ruff-load))
 
 (provide 'init-check)
 

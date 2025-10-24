@@ -130,6 +130,8 @@
   :init
   (setq doom-modeline-icon centaur-icon
         doom-modeline-minor-modes t)
+  :config
+  (setq doom-modeline-env-python t)
   :bind (:map doom-modeline-mode-map
          ("C-<f6>" . doom-modeline-hydra/body))
   :pretty-hydra

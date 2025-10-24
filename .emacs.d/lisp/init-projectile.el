@@ -10,9 +10,12 @@
   (projectile-mode +1))
 
 (defun my-set-buffer-directory-to-project-root ()
-  "Set 'default-directory' to 'projectile-project-root'."
-  (when-let ((root (projectile-project-root)))
-    (setq-local default-directory root)))
+  "Set 'default-directory' to 'projectile-project-root' outside of scratch."
+  (unless (equal (buffer-name) "*scratch*")
+    (when (and (fboundp 'projectile-project-root)
+               (featurep 'projectile))
+      (when-let ((root (projectile-project-root)))
+        (setq-local default-directory root)))))
 
 (add-hook 'prog-mode-hook 'my-set-buffer-directory-to-project-root)
 
