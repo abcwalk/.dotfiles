@@ -1,0 +1,33 @@
+[colors]
+foreground = "#e0e0e0"
+background = "#121212"
+cursor_fg = "#121212"
+cursor_bg = "#e0e0e0"
+selection_fg = "#e0e0e0"
+selection_bg = "#323232"
+
+ansi = [
+  "#222222",
+  "#b9a0a0",
+  "#a0b9a0",
+  "#b9b0a0",
+  "#a0a0b9",
+  "#b0a0b9",
+  "#a0b0b0",
+  "#b2b2b2",
+]
+
+brights = [
+  "#323232",
+  "#b9a0a0",
+  "#a0b9a0",
+  "#b9b0a0",
+  "#a0a0b9",
+  "#b0a0b9",
+  "#a0b0b0",
+  "#d0d0d0",
+]
+
+[metadata]
+name = "zen"
+author = "nendix"

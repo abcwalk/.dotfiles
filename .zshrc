@@ -62,3 +62,7 @@ export NVM_DIR="$HOME/.nvm"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# AsyncAPI CLI Autocomplete
+
+ASYNCAPI_AC_ZSH_SETUP_PATH=/home/rozhkov-m-nb/.cache/@asyncapi/cli/autocomplete/zsh_setup && test -f $ASYNCAPI_AC_ZSH_SETUP_PATH && source $ASYNCAPI_AC_ZSH_SETUP_PATH # asyncapi autocomplete setup
