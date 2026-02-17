@@ -145,6 +145,7 @@ end)
 
 config.keys = {
 	{ key = "Insert", mods = "SHIFT", action = act.PasteFrom("Clipboard") },
+	{ key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("PrimarySelection") },
 	{
 		key = "t",
 		mods = "SHIFT|CTRL",
@@ -197,7 +198,7 @@ config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
 config.window_padding = { top = 30, bottom = 30, left = 30, right = 30 }
-config.window_decorations = "NONE"
+-- config.window_decorations = "NONE"
 config.default_cursor_style = "SteadyBlock"
 config.window_close_confirmation = "NeverPrompt"
 config.enable_scroll_bar = false
