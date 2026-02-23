@@ -19,6 +19,7 @@ return {
                 -- 'css-lsp', -- CSS LSP
                 -- 'vue-language-server', -- Vue LSP
                 'basedpyright', -- Python
+                'ruff', -- Python
 
                 -- Formatters (for conform.nvim and general use)
                 'stylua',

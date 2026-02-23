@@ -7,17 +7,17 @@ return {
             -- yaml = { 'yamllint' },
             -- go = { 'golangci-lint' },
             make = { 'checkmake' },
-            python = { 'flake8' },
+            python = { 'ruff' },
             dockerfile = { 'hadolint' },
             bash = { 'shellcheck' },
             json = { 'jsonlint' },
         }
 
-        local flake8 = lint.linters.flake8
-        flake8.args = {
-            '-max-line-length',
-            '120',
-        }
+        -- local flake8 = lint.linters.flake8
+        -- flake8.args = {
+        --     '-max-line-length',
+        --     '120',
+        -- }
 
         -- Auto-lint on save and text changes
         local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

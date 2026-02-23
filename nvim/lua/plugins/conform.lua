@@ -6,13 +6,7 @@ return {
             formatters_by_ft = {
                 lua = { 'stylua' },
                 go = { 'goimports', 'golines', 'gofmt' },
-                python = function(bufnr)
-                    if require('conform').get_formatter_info('ruff_format', bufnr).available then
-                        return { 'ruff_organize_imports' }
-                    else
-                        return { 'isort', 'autopep8' }
-                    end
-                end,
+                python = { 'ruff_organize_imports', 'ruff_format' },
                 sh = { 'shfmt' },
                 bash = { 'shfmt' },
                 zsh = { 'shfmt' },
