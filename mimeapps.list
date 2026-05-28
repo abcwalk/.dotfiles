@@ -1,0 +1,35 @@
+[Default Applications]
+text/html=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/about=firefox.desktop
+x-scheme-handler/unknown=firefox.desktop
+application/xhtml+xml=firefox.desktop
+text/plain=code_code.desktop
+application/x-shellscript=code_code.desktop
+application/json=code_code.desktop
+text/x-log=code_code.desktop
+text/markdown=code_code.desktop
+text/x-python=code_code.desktop
+text/x-tex=code_code.desktop
+text/x-yaml=code_code.desktop
+text/x-csrc=code_code.desktop
+text/x-chdr=code_code.desktop
+text/x-c++src=code_code.desktop
+text/x-java=code_code.desktop
+application/javascript=code_code.desktop
+application/xml=code_code.desktop
+application/toml=code_code.desktop
+
+[Added Associations]
+application/x-shellscript=code_code.desktop;
+application/json=code_code.desktop;
+x-scheme-handler/http=firefox.desktop;
+text/html=firefox.desktop;
+application/xhtml+xml=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+text/x-log=code_code.desktop;
+text/plain=code_code.desktop;
+text/markdown=code_code.desktop;
+text/x-python=code_code.desktop;
+text/x-yaml=code_code.desktop;
