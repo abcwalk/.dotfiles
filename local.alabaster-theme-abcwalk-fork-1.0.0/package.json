@@ -1,0 +1,32 @@
+{
+	"name": "alabaster-theme-abcwalk-fork",
+	"displayName": "Alabaster Theme (abcwalk fork)",
+	"publisher": "local",
+	"description": "Кастомная тема на основе alabaster.nvim",
+	"version": "1.0.0",
+	"engines": {
+		"vscode": "^1.60.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "Alabaster Dark (abcwalk fork)",
+				"uiTheme": "vs-dark",
+				"path": "./themes/alabaster-dark.json"
+			},
+			{
+				"label": "Alabaster Light (abcwalk fork)",
+				"uiTheme": "vs",
+				"path": "./themes/alabaster-light.json"
+			}
+		]
+	},
+	"__metadata": {
+		"installedTimestamp": 1779710134615,
+		"targetPlatform": "undefined",
+		"size": 9806
+	}
+}

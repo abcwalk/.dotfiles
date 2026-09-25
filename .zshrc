@@ -26,9 +26,10 @@ alias n="nvim"
 alias n.="nvim ."
 alias e="emacs -nw"
 alias t="thunar ."
-alias m='cd $HOME/Monorepo/src/product/osmp/app/edr/agentserver_tests/ && source /home/rozhkov-m-nb/Monorepo/src/product/osmp/app/edr/agentserver_tests/.venv/bin/activate'
+alias mn='cd $HOME/Monorepo/src/product/nta/tests && source $HOME/Monorepo/src/product/nta/tests/.venv/bin/activate'
+alias mr='cd $HOME/Monorepo/src/product/osmp/app/edr/agentserver_tests && source $HOME/Monorepo/src/product/osmp/app/edr/agentserver_tests/.venv/bin/activate'
 alias mvd='cd ~/Downloads'
-alias l="ls -lah"
+alias l="ls -laht"
 
 export EDITOR='/usr/local/bin/emacs'
 export JAVA_HOME="/usr/bin/java"

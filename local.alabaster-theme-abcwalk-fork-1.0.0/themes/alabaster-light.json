@@ -1,0 +1,108 @@
+{
+  "name": "Alabaster Light (abcwalk fork)",
+  "type": "light",
+  "colors": {
+    "editor.background": "#f7f7f7",
+    "editor.foreground": "#000000",
+    "editorCursor.foreground": "#ffbc5d",
+    "editor.selectionBackground": "#bfdbfe",
+    "editor.lineHighlightBackground": "#E2EEEE",
+    "editorLineNumber.foreground": "#7d7c7c",
+    "editorLineNumber.activeForeground": "#325cc0",
+    "sideBar.background": "#e7e7e7",
+    "activityBar.background": "#f7f7f7",
+    "statusBar.background": "#c9c9c9",
+    "statusBar.foreground": "#000000",
+    "editorGroupHeader.tabsBackground": "#dedede",
+    "editorGroupHeader.tabsBorder": "#d0d0d0",
+    "editorGroupHeader.border": "#d0d0d0",
+    "tab.activeBackground": "#f7f7f7",
+    "tab.activeForeground": "#000000",
+    "tab.inactiveBackground": "#e4e4e4",
+    "tab.inactiveForeground": "#6e6e6e",
+    "tab.hoverBackground": "#d8d8d8",
+    "tab.hoverForeground": "#000000",
+    "tab.border": "#d0d0d0",
+    "tab.activeBorderTop": "#325cc0",
+    "editorSuggestWidget.background": "#e7e7e7",
+    "editorSuggestWidget.selectedBackground": "#c7c7c7",
+    "list.activeSelectionBackground": "#c7c7c7",
+    "list.hoverBackground": "#dddddd",
+    "terminal.background": "#f7f7f7",
+    "terminal.foreground": "#000000",
+    "editorIndentGuide.background": "#abbdc0"
+  },
+  "tokenColors": [
+    {
+      "name": "Default Text (Keywords, Variables, Types, Operators)",
+      "scope": [
+        "keyword",
+        "keyword.operator",
+        "storage",
+        "variable",
+        "entity.name.namespace",
+        "entity.name.type",
+        "support.type",
+        "support.variable"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Punctuation & Brackets - Dimmed",
+      "scope": [
+        "punctuation",
+        "meta.brace",
+        "punctuation.section"
+      ],
+      "settings": {
+        "foreground": "#777777"
+      }
+    },
+    {
+      "name": "Strings",
+      "scope": [
+        "string"
+      ],
+      "settings": {
+        "foreground": "#448c27"
+      }
+    },
+    {
+      "name": "Constants, Numbers, Booleans",
+      "scope": [
+        "constant",
+        "support.constant",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "#7a3e9d"
+      }
+    },
+    {
+      "name": "Definitions (Functions, Methods, Classes)",
+      "scope": [
+        "entity.name.function",
+        "support.function",
+        "entity.name.type.class",
+        "entity.name.type.struct",
+        "entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#325cc0"
+      }
+    },
+    {
+      "name": "Comments",
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#aa3731"
+      }
+    }
+  ]
+}
